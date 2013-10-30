@@ -7,9 +7,14 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
+
+
 gem 'cancan'
+gem 'carrierwave'
 gem 'compass-rails', '~> 2.0.alpha.0'
+gem 'devise'
 gem 'figaro'
+gem 'formtastic'
 gem 'haml-rails'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
@@ -17,6 +22,7 @@ gem 'pg'
 gem 'rolify'
 gem 'unicorn'
 gem 'zurb-foundation'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]

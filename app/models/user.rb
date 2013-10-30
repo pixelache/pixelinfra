@@ -1,7 +1,11 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable, :omniauthable,
+         :recoverable, :rememberable, :trackable, :validatable
   rolify
-  attr_accessible :role_ids, :as => :admin
-  attr_accessible :provider, :uid, :name, :email
+  # attr_accessible :role_ids, :as => :admin
+  # attr_accessible :provider, :uid, :name, :email
   validates_presence_of :name
 
   def self.create_with_omniauth(auth)
