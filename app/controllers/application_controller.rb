@@ -1,39 +1,24 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_user
-  helper_method :user_signed_in?
-  helper_method :correct_user?
-  # before_filter :determine_site
+  theme :determine_site
+  before_filter :configure_permitted_parameters, if: :devise_controller?
   
   private
-    def current_user
-      begin
-        @current_user ||= User.find(session[:user_id]) if session[:user_id]
-      rescue Exception => e
-        nil
-      end
-    end
 
-    def user_signed_in?
-      return true if current_user
-    end
-
-    def correct_user?
-      @user = User.find(params[:id])
-      unless current_user == @user
-        redirect_to root_url, :alert => "Access denied."
-      end
-    end
-
-    def authenticate_user!
-      if !current_user
-        redirect_to root_url, :alert => 'You need to sign in for access to this page.'
-      end
-    end
-
+  def determine_site
+    'pixelache'
+  end
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message
   end
+  
+  protected
 
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:email, :password, :remember_token, :remember_created_at, :sign_in_count) }
+    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:name, :username, :email,  authentications_attributes: [:id, :provider, :username ] )}    
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :name, :username, :password_confirmation, authentications_attributes: [:id, :provider, :username ] ) }
+  end
+  
 end

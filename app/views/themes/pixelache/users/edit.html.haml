@@ -1,0 +1,14 @@
+= semantic_nested_form_for @user, :html => {:multipart => true} do |f|
+  .row
+    .small-6.columns= f.input :name
+  .row
+    .small-6.columns= f.input :username
+  .row
+    .small-6.columns= f.input :email
+  = f.fields_for :authentications do |ff|
+    .row
+      .small-6.columns= ff.input :provider, :as => :select, :collection => [ ['Facebook', 'facebook'], ['Google', 'google_oauth2'], ['Twitter', 'twitter']]
+    .row
+      .small-6.columns= ff.input :username
+  = f.link_to_add 'Add another authentication method', :authentications
+  = f.submit "Save", :class => [:button]

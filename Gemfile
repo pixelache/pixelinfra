@@ -18,7 +18,7 @@ gem 'devise'
 gem 'figaro'
 gem 'formtastic'
 gem 'friendly_id', '~> 5.0.0'
-gem 'globalize3', github: 'svenfuchs/globalize3', branch: 'rails4'
+gem 'globalize3' #, github: 'svenfuchs/globalize3', branch: 'rails4'
 gem 'haml-rails'
 gem 'has_scope'
 gem 'http_accept_language'
@@ -58,6 +58,7 @@ group :development, :test do
   gem 'rspec-rails'
 end
 group :test do
+  gem 'faker'
   gem 'capybara'
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'

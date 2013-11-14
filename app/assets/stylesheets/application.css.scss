@@ -36,3 +36,17 @@ ul.nav li {
   background-color: #FCC;
   border: solid 1px #C66;
 }
+
+form {
+  li {
+    list-style-type: none;
+  }
+  
+  .label {
+    float: left;
+    text-align: right;
+    margin-right: 10px;
+    background-color: inherit;
+    color: #666;
+  }
+}

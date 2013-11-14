@@ -1,1 +1,8 @@
-= link_to "App_Name", root_path, :class => 'brand'
+- if current_user
+  = "Logged in as #{current_user.username}"
+  |
+  = link_to 'Edit your profile', edit_user_registration_path(current_user)
+  |
+  = link_to 'Sign out', '/signout'
+- else
+  = link_to 'Login', new_user_session_path

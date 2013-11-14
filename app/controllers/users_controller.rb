@@ -1,13 +1,19 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :correct_user?, :except => [:index]
+
 
   def index
     @users = User.all
   end
 
-    def edit
+  def edit
     @user = User.find(params[:id])
+    if @user != current_user
+      unless can? :manage, @user
+        flash[:error] = 'You cannot edit another user.'
+        redirect_to '/'
+      end
+    end
   end
   
   def update
@@ -20,8 +26,14 @@ class UsersController < ApplicationController
   end
 
 
-def show
+  def show
     @user = User.find(params[:id])
+  end
+  
+  protected
+  
+  def permitted_params
+    params.require(:user).permit(authentications_attributes: [:id, :provider, :username ] )
   end
 
 end

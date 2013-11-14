@@ -1,9 +1,19 @@
 Pixelinfra::Application.routes.draw do
-  devise_for :users
-  root :to => "home#index"
-  resources :users, :only => [:index, :show, :edit, :update ]
-  get '/auth/:provider/callback' => 'sessions#create'
+  devise_for :users , :controllers => {:registrations => "registrations"}
+
+  
+  namespace :admin do
+    resources :users
+  end
+  
+  resources :users
+  
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout
   get '/auth/failure' => 'sessions#failure'
+
+  match 'auth/:provider/callback' => 'authentications#create', :via => :get
+  match '/oauth/authenticate' => 'authentications#create', :via => :get
+  resources :authentications
+  root :to => "home#index"
 end

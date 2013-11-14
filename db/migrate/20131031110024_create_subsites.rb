@@ -7,12 +7,12 @@ class CreateSubsites < ActiveRecord::Migration
 
       t.timestamps
     end
-    create_sites
+    create_sites 
   end
   
-  def self.create_sites
-    Site.create!(name: 'pixelache', description: 'Pixelache Helsinki', subdomain: 'www')
-    Site.create!(name: 'olsof', description: 'Open Learning Steps and Open-Sourcing Festivals', subdomain: 'olsof')
+  def create_sites
+    Subsite.create!(name: 'pixelache', description: 'Pixelache Helsinki', subdomain: 'www')
+    Subsite.create!(name: 'olsof', description: 'Open Learning Steps and Open-Sourcing Festivals', subdomain: 'olsof')
   end
   
 end

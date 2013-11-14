@@ -8,21 +8,11 @@ GIT
 
 GIT
   remote: git://github.com/josevalim/inherited_resources.git
-  revision: cf9c44845c6af46739978fdca8ed06ea840d01a1
+  revision: 3c316911ff433ef690e8093d29e122ce0b7f1001
   specs:
     inherited_resources (1.4.1)
       has_scope (~> 0.6.0.rc)
       responders (~> 1.0.0.rc)
-
-GIT
-  remote: git://github.com/svenfuchs/globalize3.git
-  revision: 82b3b36308677745b261bd147dda00ed4560a25d
-  branch: rails4
-  specs:
-    globalize3 (0.3.0)
-      activemodel (>= 4.0.0)
-      activerecord (>= 4.0.0)
-      paper_trail (~> 3.0.0.beta)
 
 GEM
   remote: https://rubygems.org/
@@ -75,7 +65,7 @@ GEM
     celluloid (0.15.2)
       timers (~> 1.1.0)
     chunky_png (1.2.9)
-    coderay (1.0.9)
+    coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -91,26 +81,28 @@ GEM
       compass (>= 0.12.2, < 0.14)
     database_cleaner (1.0.1)
     debug_inspector (0.0.2)
-    devise (3.1.1)
+    devise (3.2.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    diff-lcs (1.2.4)
+    diff-lcs (1.2.5)
     email_spec (1.5.0)
       launchy (~> 2.1)
       mail (~> 2.2)
     erubis (2.7.0)
     execjs (2.0.2)
-    factory_girl (4.2.0)
+    factory_girl (4.3.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.2.1)
-      factory_girl (~> 4.2.0)
+    factory_girl_rails (4.3.0)
+      factory_girl (~> 4.3.0)
       railties (>= 3.0.0)
+    faker (1.2.0)
+      i18n (~> 0.5)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
-    ffi (1.9.2)
+    ffi (1.9.3)
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
@@ -120,7 +112,10 @@ GEM
     friendly_id (5.0.1)
       activerecord (~> 4.0.0)
     fssm (0.2.10)
-    guard (2.2.2)
+    globalize3 (0.1.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+    guard (2.2.3)
       formatador (>= 0.2.4)
       listen (~> 2.1)
       lumberjack (~> 1.0)
@@ -131,10 +126,10 @@ GEM
       guard (~> 2.2)
     guard-rails (0.4.7)
       guard (>= 0.2.2)
-    guard-rspec (4.0.3)
+    guard-rspec (4.0.4)
       guard (>= 2.1.1)
       rspec (~> 2.14)
-    haml (4.0.3)
+    haml (4.1.0.alpha.2)
       tilt
     haml-rails (0.4)
       actionpack (>= 3.1, < 4.1)
@@ -173,7 +168,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.8.1)
-    launchy (2.3.0)
+    launchy (2.4.0)
       addressable (~> 2.3)
     letter_opener (1.1.2)
       launchy (~> 2.2)
@@ -211,7 +206,7 @@ GEM
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
-    omniauth-facebook (1.4.1)
+    omniauth-facebook (1.5.0)
       omniauth-oauth2 (~> 1.1.0)
     omniauth-google-oauth2 (0.2.1)
       omniauth (~> 1.0)
@@ -225,14 +220,11 @@ GEM
     omniauth-twitter (1.0.1)
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
-    orm_adapter (0.4.0)
-    paper_trail (3.0.0.rc1)
-      activerecord (>= 3.0, < 5.0)
-      activesupport (>= 3.0, < 5.0)
+    orm_adapter (0.5.0)
     pg (0.17.0)
     polyglot (0.3.3)
-    pry (0.9.12.2)
-      coderay (~> 1.0.5)
+    pry (0.9.12.3)
+      coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
     quiet_assets (1.0.2)
@@ -270,7 +262,7 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     rspec-core (2.14.7)
-    rspec-expectations (2.14.3)
+    rspec-expectations (2.14.4)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.4)
     rspec-rails (2.14.0)
@@ -288,7 +280,7 @@ GEM
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
     sexp_processor (4.4.0)
-    slop (3.4.6)
+    slop (3.4.7)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -311,10 +303,10 @@ GEM
     turbolinks (1.3.0)
       coffee-rails
     tzinfo (0.3.38)
-    uglifier (2.3.0)
+    uglifier (2.3.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (4.6.3)
+    unicorn (4.7.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -346,10 +338,11 @@ DEPENDENCIES
   devise
   email_spec
   factory_girl_rails
+  faker
   figaro
   formtastic
   friendly_id (~> 5.0.0)
-  globalize3!
+  globalize3
   guard-bundler
   guard-rails
   guard-rspec
