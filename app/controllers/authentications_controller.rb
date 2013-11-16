@@ -26,8 +26,13 @@ class AuthenticationsController < ApplicationController
     else
       user = User.new
       user.apply_omniauth(omniauth)
-      logger.warn(omniauth.inspect)
       if user.email?
+        if existing_user = User.find_by(:email => user.email)
+          user = existing_user
+          if user.authentications.where(:provider => omniauth['provider']).empty?
+            user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'], :username => (omniauth['info']['nickname'].blank? ? omniauth['info']['email'] : omniauth['info']['nickname']))
+          end
+        end
           user.save!
           flash[:notice] = "Signed in successfully with " +  omniauth['provider']
           sign_in_and_redirect(:user, user)

@@ -1,0 +1,9 @@
+= semantic_form_for [:admin, @subsite], :html => {:class => "custom"} do |f|
+  .row
+    .small-6.columns= f.input :name
+  .row
+    .small-6.columns= f.input :description
+  .row
+    .small-6.columns= f.input :subdomain
+  .row
+    .small-6.columns= f.submit 'Save'

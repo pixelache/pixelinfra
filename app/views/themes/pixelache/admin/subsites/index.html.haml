@@ -1,0 +1,18 @@
+.row
+  %h3 Site configuration
+  .small-8.columns
+    %table.table.table-condensed
+      %thead
+        %tr
+          %th Name
+          %th Description
+          %th Subdomain
+          %th{:colspan => 2}
+      %tbody
+        - @subsites.each do |ss|
+          %tr
+            %td= ss.name
+            %td= ss.description
+            %td= ss.subdomain
+            %td= link_to 'Edit', edit_admin_subsite_path(ss)
+            %td= link_to 'Delete', [:admin, ss], :method => :delete, :data => {:confirm => 'Are you certain?'}

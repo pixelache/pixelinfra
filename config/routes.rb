@@ -4,6 +4,8 @@ Pixelinfra::Application.routes.draw do
   
   namespace :admin do
     resources :users
+    resources :subsites
+    resources :events
   end
   
   resources :users

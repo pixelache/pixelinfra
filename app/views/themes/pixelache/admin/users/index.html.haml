@@ -1,22 +1,23 @@
-%h3 Users
-.span8
-  %table.table.table-condensed
-    %thead
-      %tr
-        %th Username
-        %th Email
-        %th Registered
-        %th Role
-        %th
-        %th
-    %tbody
-      - @users.each do |user|
+.row
+  .small-10.columns
+    %h3 Users
+    %table.table.table-condensed
+      %thead
         %tr
-          %td= link_to user.name, [:admin,  user]
-          %td= user.email
-          %td= user.created_at.to_date
-          %td= user.roles.first.name.titleize unless user.roles.first.nil?
-          %td
-            %a.btn.btn-mini{"data-toggle" => "modal", "data-reveal-id" => "role-options-#{user.id}", :type => "button"} Details / edit
-            = render user
-          %td= link_to("Delete user", admin_user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user
+          %th Username
+          %th Email
+          %th Registered
+          %th Role
+          %th
+          %th
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= link_to user.name, [:admin,  user]
+            %td= user.email
+            %td= user.created_at.to_date
+            %td= user.roles.map{|x| x.name.titleize}.join(', ') unless user.roles.empty?
+            %td
+              %a.btn.btn-mini{"data-toggle" => "modal", "data-reveal-id" => "role-options-#{user.id}", :type => "button"} Details / edit
+              = render user
+            %td= link_to("Delete user", admin_user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user

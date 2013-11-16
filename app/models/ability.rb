@@ -5,8 +5,12 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.has_role? :goddess
       can :manage, :all
+    elsif user.has_role? :olsof_staff
+      can :manage, Event, :subsite => {:name => 'olsof' }
     end
-    # Define abilities for the passed in user here. For example:
+    
+    
+        # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
     #   if user.admin?

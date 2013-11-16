@@ -6,13 +6,7 @@
   = link_to 'Sign out', '/signout'
 - else
   = link_to 'Login', new_user_session_path
-  
-- if can? :manage, Subsite
-  |
-  = link_to 'Site configuration', admin_subsites_path
-- if can? :manage, User
-  |
-  = link_to 'Users', admin_users_path
+
 - if can? :manage, Event
   |
   = link_to 'Events', admin_events_path
