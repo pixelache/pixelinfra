@@ -1,0 +1,27 @@
+= semantic_form_for [:admin, place], :html => {:class => "custom" } do |f|
+  .row
+    .small-10.columns.section-container.tabs{"data-section" => "tabs"}
+      - I18n.available_locales.each_with_index do |locale, i|
+        %section{:class => (i == 0 ? :active : false)}
+          %p.title{"data-section-title" => locale}= link_to locale, '#'
+          .content{"data-section-content" => ""}
+            = f.globalize_fields_for locale do |en|
+              %b= "Name in #{locale}"
+              = en.text_field :name
+   
+  .row
+    .small-6.columns= f.input :address1
+  .row
+    .small-6.columns= f.input :address2
+  .row
+    .small-6.columns= f.input :city
+    %label Country
+    .small-3.columns= f.input :country
+    .small-2.columns= f.input :postcode
+  .row
+    .small-6.columns= f.input :latitude, :hint => 'We\'ll attempt to fill this automatically'
+  .row
+    .small-6.columns= f.input :longitude, :hint => 'We\'ll attempt to fill this automatically'
+  .row
+    .small-4.columns
+      = f.submit 'Save', :class => [:button, :small, :round]

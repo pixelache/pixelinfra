@@ -1,13 +1,20 @@
 Pixelinfra::Application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   devise_for :users , :controllers => {:registrations => "registrations"}
 
   
   namespace :admin do
-    resources :users
+    resources :events do
+      get :autocomplete_place_name, :on => :collection
+    end
+    resources :pages
+    resources :places
     resources :subsites
-    resources :events
+    resources :users    
   end
   
+  resources :events
+  resources :pages
   resources :users
   
   get '/signin' => 'sessions#new', :as => :signin

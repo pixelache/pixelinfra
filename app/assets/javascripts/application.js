@@ -12,9 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.core
+//= require jquery.ui.autocomplete
 //= require foundation
 //= require jquery_nested_form
 //= require turbolinks
+//= require ckeditor/init
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(function(){ $(document).foundation(); 
+  $('.datetime_picker').fdatetimepicker({
+      format: 'yyyy-mm-dd hh:ii'
+  });
+});

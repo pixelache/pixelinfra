@@ -15,6 +15,24 @@
         = render 'layouts/navigation'
         = render 'layouts/messages'
       #main{:role => "main"}
-        = yield
+        .large-9.push-3.columns= yield
+        .large-3.pull-9.columns
+          .section-container.accordion{"data-section" => "accordion", "data-section-small-style" => true}
+            %section
+              %p.title Pages
+              .content      
+                %ul.side-nav
+                  - Page.by_site(@site.id).published.each do |page|
+                    %li= link_to page.name, page
+            %section
+              %p.title Events
+              .content
+                %ul.side-nav
+                  - Event.by_site(@site.id).published.each do |event|
+                    %li
+                      .title= link_to event.name, event
+                      .metadata
+                        = l event.start_at, :format => :long
+        
       %footer
     / ! end of #container

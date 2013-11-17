@@ -10,3 +10,6 @@
 - if can? :manage, Event
   |
   = link_to 'Events', admin_events_path
+- if can? :manage, Page
+  |
+  = link_to 'Pages', admin_pages_path

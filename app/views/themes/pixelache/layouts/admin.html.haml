@@ -5,6 +5,7 @@
       %title= content_for?(:title) ? yield(:title) : "Pixelinfra"
       %meta{:content => content_for?(:description) ? yield(:description) : "Pixelinfra", :name => "description"}
         = stylesheet_link_tag "application", :media => "all"
+        = stylesheet_link_tag "cms", :media => "all"
         = javascript_include_tag "application"
         = csrf_meta_tags
         = yield(:head)

@@ -1,0 +1,10 @@
+%tr
+  %td= event.name
+  %td= event.subsite.name
+  %td= event.start_at.strftime('%d %B %Y')
+  %td= event.published == true ? 'yes' : 'no'
+  %td.actions
+    = link_to 'Edit', edit_admin_event_path(event)
+    - if can? :destroy, event
+      |
+      = link_to 'Delete', [:admin, event], :method => :delete, :data => {:confirm => "Are you sure?"}

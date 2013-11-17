@@ -1,0 +1,23 @@
+= semantic_form_for [:admin, @page], :html => {:class => "custom", :multipart => true} do |f|
+  .row
+    %label Which site:
+    .small-6.columns= f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
+  .row
+    .section-container.tabs{"data-section" => "tabs"}
+      - I18n.available_locales.each_with_index do |locale, i|
+        %section{:class => (i == 0 ? :active : false)}
+          %p.title{"data-section-title" => t(:locale_name, :locale => locale)}= link_to t(:locale_name, :locale => locale), '#'
+          .content{"data-section-content" => ""}
+            = f.globalize_fields_for locale do |en|
+              .row
+                .small-12.columns
+                  %b= "Name of page in #{t :locale_name, :locale => locale}"
+                  = en.text_field :name  
+              .row
+                .small-12.columns
+                  %b= "Page content in #{t :locale_name, :locale => locale}"
+                  = en.cktext_area :body
+  .row
+    .small-3.columns= f.input :published
+  .row
+    .small-2.columns= f.submit 'Save'

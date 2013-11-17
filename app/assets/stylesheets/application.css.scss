@@ -10,8 +10,9 @@
  *
  *= require_self
  *= require foundation_and_overrides
- *= require_tree .
 */
+
+@import "font-awesome";
 .brand {
   float: left;
   padding-right: 8px;
@@ -35,18 +36,4 @@ ul.nav li {
 #flash_alert {
   background-color: #FCC;
   border: solid 1px #C66;
-}
-
-form {
-  li {
-    list-style-type: none;
-  }
-  
-  .label {
-    float: left;
-    text-align: right;
-    margin-right: 10px;
-    background-color: inherit;
-    color: #666;
-  }
 }

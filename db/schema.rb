@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131116094447) do
+ActiveRecord::Schema.define(version: 20131117202041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,22 @@ ActiveRecord::Schema.define(version: 20131116094447) do
 
   add_index "authentications", ["user_id", "provider", "uid"], name: "index_authentications_on_user_id_and_provider_and_uid", unique: true, using: :btree
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
+
+  create_table "ckeditor_assets", force: true do |t|
+    t.string   "data_file_name",               null: false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
   create_table "event_translations", force: true do |t|
     t.integer  "event_id",    null: false
@@ -58,6 +74,7 @@ ActiveRecord::Schema.define(version: 20131116094447) do
     t.string   "cost_alternate_reason"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   add_index "events", ["place_id"], name: "index_events_on_place_id", using: :btree
@@ -75,6 +92,26 @@ ActiveRecord::Schema.define(version: 20131116094447) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "page_translations", force: true do |t|
+    t.integer  "page_id",    null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.text     "body"
+  end
+
+  add_index "page_translations", ["locale"], name: "index_page_translations_on_locale", using: :btree
+  add_index "page_translations", ["page_id"], name: "index_page_translations_on_page_id", using: :btree
+
+  create_table "pages", force: true do |t|
+    t.text     "slug"
+    t.integer  "subsite_id"
+    t.boolean  "published"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "place_translations", force: true do |t|
     t.integer  "place_id",   null: false
@@ -97,6 +134,7 @@ ActiveRecord::Schema.define(version: 20131116094447) do
     t.decimal  "longitude",  precision: 10, scale: 6
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   create_table "roles", force: true do |t|

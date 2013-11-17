@@ -7,6 +7,10 @@ class Ability
       can :manage, :all
     elsif user.has_role? :olsof_staff
       can :manage, Event, :subsite => {:name => 'olsof' }
+      can :manage, Page, :subsite => {:name => 'olsof' }
+      can :read, Subsite, :name => 'olsof'
+      can :create, Event
+      can :create, Page
     end
     
     

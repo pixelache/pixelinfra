@@ -1,0 +1,44 @@
+= semantic_nested_form_for [:admin, @event], :html => {:class => "custom", :multipart => true} do |f|
+  .row
+    %label Which site:
+    .small-6.columns= f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
+  .row
+    .small-6.columns= f.input :place_name, :as => :autocomplete, :url =>  autocomplete_place_name_admin_events_path, :input_html => { :id_element => '#event_place_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Where?", :hint => raw("If it's a place not already the database, <a href=\"/admin/places/new\" target=\"_blank\">create it first.</a>")
+    .small-6.columns= f.input :place_id, :as => :hidden
+  .row
+    .small-4.columns= f.input :start_at, :as => :string, :input_html => {:class => "datetime_picker"}
+    .small-4.columns= f.input :end_at, :as => :string, :input_html => {:class => "datetime_picker"}
+
+  .row
+    .section-container.tabs{"data-section" => "tabs"}
+      - I18n.available_locales.each_with_index do |locale, i|
+        %section{:class => (i == 0 ? :active : false)}
+          %p.title{"data-section-title" => t(:locale_name, :locale => locale)}= link_to t(:locale_name, :locale => locale), '#'
+          .content{"data-section-content" => ""}
+            = f.globalize_fields_for locale do |en|
+              .row
+                .small-12.columns
+                  %b= "Name of event in #{t :locale_name, :locale => locale}"
+                  = en.text_field :name  
+              .row
+                .small-12.columns
+                  %b= "Description of event in #{t :locale_name, :locale => locale}"
+                  = en.cktext_area :description
+              .row
+                .small-6.columns
+                  %b= "Notes or other metadata in #{t :locale_name, :locale => locale}"
+                  = en.text_area :notes
+  .row
+    .small-6.columns= f.input :image
+    .small-6.columns= f.input :facebook_link
+  .row
+    .small-2.columns= f.input :cost
+  .row
+    .small-2.columns= f.input :cost_alternate
+    .small-6.columns= f.input :cost_alternate_reason
+  .row
+    .small-4.columns= f.input :published
+    
+    
+  .row
+    .small-7.columns= f.submit "Save", :class => [:button, :small, :round]

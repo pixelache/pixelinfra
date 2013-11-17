@@ -1,0 +1,14 @@
+.row
+  .small-10.columns
+    %h2 Pages
+    
+    %table.table.table-condensed
+      %thead
+        %tr
+          %th Name
+          %th Site
+          %th{:colspan => 2}
+      %tbody
+        - @pages.each do |page|
+          = render :partial => 'page', :locals => {:page => page}
+    %p= link_to 'Enter new page', new_admin_page_path

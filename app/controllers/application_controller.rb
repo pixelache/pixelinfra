@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   private
 
   def determine_site
-    request.host =~ /^olsof/ ? 'olsof' : 'pixelache'
+    @site = Subsite.find_by(:name => (request.host =~ /^olsof/ ? 'olsof' : 'pixelache'))
+    @site.name
   end
 
   rescue_from CanCan::AccessDenied do |exception|
