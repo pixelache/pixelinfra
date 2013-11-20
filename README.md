@@ -24,7 +24,7 @@ This application uses PostgreSQL with ActiveRecord.
 * Template Engine: Haml
 * Testing Framework: RSpec and Factory Girl
 * Front-end Framework: Zurb Foundation
-* Form Builder: None
+* Form Builder: Formtastic
 * Authentication: OmniAuth
 * Authorization: CanCan
 
