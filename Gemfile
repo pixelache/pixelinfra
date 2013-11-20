@@ -45,6 +45,7 @@ gem 'rolify'
 gem 'themes_for_rails', github: 'boxcar21/themes_for_rails', branch: 'master'
 gem 'truncate_html'
 gem 'unicorn'
+gem 'unf' 
 gem 'vimeo'
 gem 'zurb-foundation'
 
