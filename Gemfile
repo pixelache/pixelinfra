@@ -11,7 +11,8 @@ gem 'jquery-ui-rails'
 gem 'jquery-ui-themes'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
-
+gem 'execjs', :group => :production
+gem 'therubyracer', :group => :production
 
 gem 'cancan'
 gem 'carrierwave'
