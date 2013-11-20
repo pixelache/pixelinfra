@@ -11,7 +11,7 @@ class Ability
       can :read, Subsite, :name => 'olsof'
       can :create, Event
       can :create, Page
-      can :create, Place
+      can :manage, Place
     end
     
     
