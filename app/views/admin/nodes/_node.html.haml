@@ -1,0 +1,9 @@
+%tr
+  %td= node.name
+  %td= link_to node.website, node.website
+  %td.actions
+    - if can? :edit, Node
+      = link_to 'Edit', edit_admin_node_path(node)
+    - if can? :destroy, Node
+      |
+      = link_to 'Destroy', [:admin, node], :method => :delete, :data => {:confirm => "Are you sure?"}

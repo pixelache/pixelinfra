@@ -1,0 +1,14 @@
+.row
+  .small-10.columns
+    %h2 Nodes
+    
+    %table.table.table-condensed
+      %thead
+        %tr
+          %th Name
+          %th Website
+          %th{:colspan => 2}
+      %tbody
+        - @nodes.each do |node|
+          = render :partial => 'node', :locals => {:node => node}
+    %p= link_to 'Enter new node', new_admin_node_path

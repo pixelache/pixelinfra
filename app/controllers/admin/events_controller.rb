@@ -15,6 +15,9 @@ class Admin::EventsController < Admin::BaseController
     destroy! { admin_events_path }
   end
   
+  def edit
+    @event = Event.friendly.find(params[:id])
+  end
   protected
   
   def permitted_params

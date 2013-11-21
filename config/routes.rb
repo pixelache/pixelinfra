@@ -7,6 +7,7 @@ Pixelinfra::Application.routes.draw do
     resources :events do
       get :autocomplete_place_name, :on => :collection
     end
+    resources :nodes
     resources :pages
     resources :places
     resources :subsites

@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   belongs_to :place
   belongs_to :subsite
   extend FriendlyId
-  friendly_id :name_en, :use => :history
+  friendly_id :name_en, :use => [:finders, :history]
   has_paper_trail
   mount_uploader :image, ImageUploader
   resourcify
@@ -10,7 +10,7 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? && x['description'].blank? }
   attr_accessor  :place_name
   before_save :update_image_attributes
-  validates_presence_of :subsite_id, :place_id
+  validates_presence_of :subsite_id, :place_id, :start_at
 
   scope :published, -> () { where(published: true) }
   scope :by_site, -> (x) { includes(:subsite).where(:subsite_id => x) }

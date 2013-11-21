@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131117202041) do
+ActiveRecord::Schema.define(version: 20131121110902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,14 +67,18 @@ ActiveRecord::Schema.define(version: 20131117202041) do
     t.integer  "image_width"
     t.integer  "image_height"
     t.string   "image_content_type"
-    t.integer  "image_size",            limit: 8
-    t.integer  "facebook_link",         limit: 8
+    t.integer  "image_size",                   limit: 8
+    t.integer  "facebook_link",                limit: 8
     t.float    "cost"
     t.float    "cost_alternate"
     t.string   "cost_alternate_reason"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.string   "facilitator_name"
+    t.string   "facilitator_url"
+    t.string   "facilitator_organisation"
+    t.string   "facilitator_organisation_url"
   end
 
   add_index "events", ["place_id"], name: "index_events_on_place_id", using: :btree
@@ -92,6 +96,32 @@ ActiveRecord::Schema.define(version: 20131117202041) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "node_translations", force: true do |t|
+    t.integer  "node_id",     null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+  end
+
+  add_index "node_translations", ["locale"], name: "index_node_translations_on_locale", using: :btree
+  add_index "node_translations", ["node_id"], name: "index_node_translations_on_node_id", using: :btree
+
+  create_table "nodes", force: true do |t|
+    t.string   "name"
+    t.string   "website"
+    t.string   "city"
+    t.string   "country"
+    t.string   "slug"
+    t.string   "logo"
+    t.string   "logo_content_type"
+    t.integer  "logo_height"
+    t.integer  "logo_width"
+    t.integer  "logo_size",         limit: 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "page_translations", force: true do |t|
     t.integer  "page_id",    null: false
