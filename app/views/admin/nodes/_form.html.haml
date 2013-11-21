@@ -20,7 +20,7 @@
   .row
     .small-6.columns
       - if f.object.logo?
-        = image_tag f.object.logo.url(:thumb)
+        = image_tag f.object.logo.url(:logo)
       = f.input :logo
   .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]
