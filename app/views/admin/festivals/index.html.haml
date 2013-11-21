@@ -1,0 +1,15 @@
+.row
+  .small-10.columns
+    %h2 Festivals
+    
+    %table.table.table-condensed
+      %thead
+        %tr
+          %th Name
+          %th Host
+          %th Dates
+          %th{:colspan => 2}
+      %tbody
+        - @festivals.each do |festival|
+          = render :partial => 'festival', :locals => {:festival => festival}
+    %p= link_to 'Enter new festival', new_admin_festival_path

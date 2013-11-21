@@ -22,3 +22,13 @@
 - if can? :manage, Page
   |
   = link_to 'Pages', admin_pages_path  
+- if can? :manage, Node
+  |
+  = link_to "Nodes", admin_nodes_path
+- if can? :manage, Festival
+  |
+  = link_to "Festival", admin_festivals_path  
+- if can? :manage, Project
+  |
+  = link_to 'Project', admin_projects_path
+  

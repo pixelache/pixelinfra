@@ -1,7 +1,6 @@
 class Admin::NodesController < Admin::BaseController
   autocomplete :place, :name
   
-
   
   def create
     create! { admin_nodes_path }
@@ -15,9 +14,7 @@ class Admin::NodesController < Admin::BaseController
     destroy! { admin_nodes_path }
   end
   
-  def edit
-    @node = Node.friendly.find(params[:id])
-  end
+ 
   
   protected
   

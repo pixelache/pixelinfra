@@ -1,8 +1,10 @@
 class Event < ActiveRecord::Base
+  belongs_to :festival
+  belongs_to :project
   belongs_to :place
   belongs_to :subsite
   extend FriendlyId
-  friendly_id :name_en, :use => [:finders, :history]
+  friendly_id :name_en, :use => [:finders,  :slugged, :history]
   has_paper_trail
   mount_uploader :image, ImageUploader
   resourcify

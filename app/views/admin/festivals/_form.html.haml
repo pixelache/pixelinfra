@@ -1,0 +1,13 @@
+= semantic_form_for [:admin, @festival], :html => {:class => "custom", :multipart => true} do |f|
+  .row
+    .small-6.columns= f.input :node, :include_blank => false
+  .row
+    .small-6.columns= f.input :name
+  .row
+    .small-6.columns= f.input :website
+  .row
+    .small-6.columns= f.input :start_at, :as => :string, :input_html => {:class => "datetime_picker"}
+    .small-6.columns= f.input :end_at, :as => :string, :input_html => {:class => "datetime_picker"}
+
+  .row
+    .small-2.columns= f.submit 'Save', :class => [:button, :round]

@@ -7,9 +7,20 @@
 - else
   = link_to 'Login', 'http://auth.pixelache.ac/users/sign_in'
 
+- if can? :manage, Node
+  |
+  = link_to "Nodes", admin_nodes_path
+- if can? :manage, Festival
+  |
+  = link_to "Festival", admin_festivals_path  
+    
 - if can? :manage, Event
   |
   = link_to 'Events', admin_events_path
 - if can? :manage, Page
   |
   = link_to 'Pages', admin_pages_path
+- if can? :manage, Project
+  |
+  = link_to 'Project', admin_projects_path
+    

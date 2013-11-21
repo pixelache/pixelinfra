@@ -10,8 +10,11 @@ class Ability
       can :manage, Page, :subsite => {:name => 'olsof' }
       can :read, Subsite, :name => 'olsof'
       can :create, Event
+      can :manage, Node
       can :create, Page
       can :manage, Place
+      can :manage, Festival
+      can :manage, Project
     end
     
     

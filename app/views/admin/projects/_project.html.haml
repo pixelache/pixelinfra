@@ -1,0 +1,8 @@
+%tr
+  %td= project.name
+  %td.actions
+    - if can? :edit, Project
+      = link_to 'Edit', edit_admin_project_path(project)
+    - if can? :destroy, Project
+      |
+      = link_to 'Destroy', [:admin, project], :method => :delete, :data => {:confirm => "Are you sure?"}

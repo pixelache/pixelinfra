@@ -16,7 +16,6 @@
 //= require jquery.ui.autocomplete
 //= require foundation
 //= require jquery_nested_form
-//= require turbolinks
 //= require ckeditor/init
 //= require_tree .
 

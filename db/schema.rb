@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131121110902) do
+ActiveRecord::Schema.define(version: 20131121142103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,10 +79,23 @@ ActiveRecord::Schema.define(version: 20131121110902) do
     t.string   "facilitator_url"
     t.string   "facilitator_organisation"
     t.string   "facilitator_organisation_url"
+    t.integer  "project_id"
+    t.integer  "festival_id"
   end
 
   add_index "events", ["place_id"], name: "index_events_on_place_id", using: :btree
   add_index "events", ["subsite_id"], name: "index_events_on_subsite_id", using: :btree
+
+  create_table "festivals", force: true do |t|
+    t.string   "name"
+    t.date     "start_at"
+    t.date     "end_at"
+    t.string   "website"
+    t.string   "slug"
+    t.integer  "node_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -165,6 +178,34 @@ ActiveRecord::Schema.define(version: 20131121110902) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+  end
+
+  create_table "project_hierarchies", id: false, force: true do |t|
+    t.integer "ancestor_id",   null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations",   null: false
+  end
+
+  add_index "project_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "project_anc_desc_udx", unique: true, using: :btree
+  add_index "project_hierarchies", ["descendant_id"], name: "project_desc_idx", using: :btree
+
+  create_table "project_translations", force: true do |t|
+    t.integer  "project_id",  null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+  end
+
+  add_index "project_translations", ["locale"], name: "index_project_translations_on_locale", using: :btree
+  add_index "project_translations", ["project_id"], name: "index_project_translations_on_project_id", using: :btree
+
+  create_table "projects", force: true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "roles", force: true do |t|
