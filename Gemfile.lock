@@ -15,6 +15,15 @@ GIT
       rails (>= 3.0)
 
 GIT
+  remote: git://github.com/galetahub/ckeditor.git
+  revision: 6ac7f1eb21cbf439fabeccc63ea804fd8589d68a
+  branch: master
+  specs:
+    ckeditor (4.0.6)
+      mime-types
+      orm_adapter
+
+GIT
   remote: git://github.com/globalize/globalize.git
   revision: e3676a2dd1133475cab0dd6e1ade672420bfa3e0
   branch: master
@@ -83,9 +92,6 @@ GEM
     celluloid (0.15.2)
       timers (~> 1.1.0)
     chunky_png (1.2.9)
-    ckeditor (4.0.6)
-      mime-types
-      orm_adapter
     closure_tree (4.2.9)
       activerecord (>= 3.0.0)
       with_advisory_lock (>= 0.0.9)
@@ -388,7 +394,7 @@ DEPENDENCIES
   cancan
   capybara
   carrierwave
-  ckeditor
+  ckeditor!
   closure_tree
   coffee-rails (~> 4.0.0)
   compass-rails (~> 2.0.alpha.0)

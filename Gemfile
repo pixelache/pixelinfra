@@ -16,7 +16,7 @@ gem 'therubyracer', :group => :production
 gem 'cancan'
 gem 'carrierwave'
 gem 'closure_tree'
-gem 'ckeditor'
+gem 'ckeditor', github: 'galetahub/ckeditor', branch: 'master'
 gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'country_select'
 gem 'devise'

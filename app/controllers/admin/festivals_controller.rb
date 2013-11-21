@@ -18,7 +18,7 @@ class Admin::FestivalsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:festival => [:name, :website, :start_at, :festival_id, :end_at, :slug] )
+    params.permit(:festival => [:name, :website, :start_at, :node_id, :festival_id, :end_at, :slug] )
   end
     
 end 
