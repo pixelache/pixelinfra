@@ -5,17 +5,17 @@
     .small-6.columns
       %label Is this a sub-project of another project?
       = f.input :parent, :collection => Project.roots
-  .row
-    .section-container.tabs{"data-section" => "tabs"}
-      - I18n.available_locales.each_with_index do |locale, i|
-        %section{:class => (i == 0 ? :active : false)}
-          %p.title{"data-section-title" => t(:locale_name, :locale => locale)}= link_to t(:locale_name, :locale => locale), '#'
-          .content{"data-section-content" => ""}
-            = f.globalize_fields_for locale do |en|
-              .row
-                .small-12.columns
-                  %b= "Page content in #{t :locale_name, :locale => locale}"
-                  = en.cktext_area :description
+  / .row
+  /   .section-container.tabs{"data-section" => "tabs"}
+  /     - I18n.available_locales.each_with_index do |locale, i|
+  /       %section{:class => (i == 0 ? :active : false)}
+  /         %p.title{"data-section-title" => t(:locale_name, :locale => locale)}= link_to t(:locale_name, :locale => locale), '#'
+  /         .content{"data-section-content" => ""}
+  /           = f.globalize_fields_for locale do |en|
+  /             .row
+  /               .small-12.columns
+  /                 %b= "Page content in #{t :locale_name, :locale => locale}"
+  /                 = en.cktext_area :description
 
   .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]
