@@ -55,9 +55,9 @@ end
 
 after "deploy", "deploy:migrate"
 
-# desc 'copy ckeditor nondigest assets'
-# task :copy_nondigest_assets, roles: :app do
-#   run "cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} ckeditor:copy_nondigest_assets"
-# end
-#after 'deploy:assets:precompile', 'copy_nondigest_assets'
+desc 'copy ckeditor nondigest assets'
+task :copy_nondigest_assets, roles: :app do
+  run "cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} ckeditor:copy_nondigest_assets"
+end
+after 'deploy:assets:precompile', 'copy_nondigest_assets'
 
