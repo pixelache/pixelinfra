@@ -1,14 +1,15 @@
 class Event < ActiveRecord::Base
+  translates :name, :description, :notes, :fallbacks_for_empty_translations => true
   belongs_to :festival
   belongs_to :project
   belongs_to :place
   belongs_to :subsite
   extend FriendlyId
-  friendly_id :name_en, :use => [:finders,  :slugged, :history]
+  friendly_id :name_en , :use => [ :slugged, :finders ] # :history]
   has_paper_trail
   mount_uploader :image, ImageUploader
   resourcify
-  translates :name, :description, :notes, :fallbacks_for_empty_translations => true
+
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? && x['description'].blank? }
   attr_accessor  :place_name
   before_save :update_image_attributes
@@ -19,6 +20,10 @@ class Event < ActiveRecord::Base
   
   def name_en
     self.name(:en)
+  end
+  
+  def place_name
+    place.blank? ? nil : place.name
   end
   
   def update_image_attributes

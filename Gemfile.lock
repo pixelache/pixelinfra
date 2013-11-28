@@ -155,6 +155,8 @@ GEM
       actionpack (>= 3.0)
     friendly_id (5.0.1)
       activerecord (~> 4.0.0)
+    friendly_id-globalize (1.0.0.alpha1)
+      friendly_id (>= 5.0.0.beta4, < 6.0)
     fssm (0.2.10)
     geocoder (1.1.8)
     guard (2.2.3)
@@ -409,7 +411,8 @@ DEPENDENCIES
   fog
   font-awesome-rails
   formtastic (~> 2.3.0.rc2)
-  friendly_id (~> 5.0.0)
+  friendly_id (= 5.0.1)
+  friendly_id-globalize
   geocoder
   globalize!
   guard-bundler

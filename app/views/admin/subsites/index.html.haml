@@ -16,3 +16,6 @@
             %td= ss.subdomain
             %td= link_to 'Edit', edit_admin_subsite_path(ss)
             %td= link_to 'Delete', [:admin, ss], :method => :delete, :data => {:confirm => 'Are you certain?'}
+.row
+  .columns
+    %p= link_to 'Create new site', new_admin_subsite_path

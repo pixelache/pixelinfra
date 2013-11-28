@@ -1,7 +1,10 @@
 class Admin::EventsController < Admin::BaseController
   autocomplete :place, :name
   
-
+  def edit
+    @event = Event.friendly.find(params[:id])
+    super
+  end
   
   def create
     create! { admin_events_path }
