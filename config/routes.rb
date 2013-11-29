@@ -1,7 +1,7 @@
 Pixelinfra::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   devise_for :users , :controllers => {:registrations => "registrations"}
-
+  themes_for_rails
   
   namespace :admin do
     resources :events do
@@ -21,6 +21,7 @@ Pixelinfra::Application.routes.draw do
   resources :events
   resources :pages
   resources :users
+  resources :nodes
   
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout

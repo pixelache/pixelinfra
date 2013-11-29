@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      %title= content_for?(:title) ? yield(:title) : "OLSOF"
+      %title= content_for?(:title) ? yield(:title) : "Open Learning Steps and Open-sourcing Festivals"
       %meta{:content => content_for?(:description) ? yield(:description) : "OLSOF project", :name => "description"}
       = stylesheet_link_tag "application", :media => "all"
      
@@ -20,28 +20,37 @@
         = render 'layouts/messages'
         .row
           .small-12.columns
-            %h1 Open Learning Steps and Open-sourcing Festivals 
+            %h1= link_to 'Open Learning Steps and Open-sourcing Festivals', '/'
       #main{:role => "main"}
-        .large-9.push-3.columns= yield
-        .large-3.pull-9.columns
-          .section-container.accordion{"data-section" => "accordion", "data-section-small-style" => true}
-            %section
-              %p.title Pages
-              .content      
-                %ul.side-nav
-                  - Page.by_site(@site.id).published.each do |page|
-                    %li= link_to page.name, page
-            %section
-              %p.title Events
-              .content
-                %ul.side-nav
-                  - Event.by_site(@site.id).published.each do |event|
-                    %li
-                      .title= link_to event.name, event
-                      .metadata
-                        = l event.start_at, :format => :long
+        .row
+          .large-9.push-3.columns= yield
+          .large-3.pull-9.columns
+            %dl.accordion{"data-accordion" => ""}
+              %dd
+                = link_to 'Partners', '#partners'
+                #partners.content.active
+                  %ul.side-nav
+                    - @site.nodes.uniq.each do |node|
+                      %li= link_to node.name, node
+              %dd
+                = link_to 'Info', '#pages'
+                #pages.content
+                  %ul.side-nav
+                    - Page.by_site(@site.id).published.each do |page|
+                      %li= link_to page.name, page
+              %dd  
+                = link_to 'Events', '#events'
+                #events.content
+                  %ul.side-nav
+                    - @site.events.published.each do |event|
+                      %li
+                        .title= link_to event.name, event
+                        .metadata
+                          = l event.start_at, :format => :long
         
-      %footer
-        - @site.nodes.each do |node|
-          = image_tag node.logo.url
+        .olsof-footer
+          .row
+            - @site.nodes.uniq.each do |node|
+              .small-2.columns= link_to image_tag(node.logo.url(:logo).gsub(/development/, 'production'), :width => 130), node.website
+            .small-2.columns= theme_image_tag 'grundtvig_logo_english.jpg'
     / ! end of #container
