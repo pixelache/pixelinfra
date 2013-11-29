@@ -20,6 +20,9 @@ db/*.sqlite3
 /log/*
 /tmp/*
 
+pixelinfra.sql
+sync_db
+
 # various artifacts
 **.war
 *.rbc
@@ -39,6 +42,7 @@ db/*.sqlite3
 /doc/specs.html
 /public/cache
 /public/uploads/*
+/public/assets/*
 /public/stylesheets/compiled
 /public/system/*
 /spec/tmp/*

@@ -7,6 +7,8 @@ class Node < ActiveRecord::Base
   friendly_id :name, :use => :finders
   before_save :update_image_attributes
   
+  has_and_belongs_to_many :subsites
+  
   def update_image_attributes
     if logo.present?
       self.logo_content_type = logo.file.content_type

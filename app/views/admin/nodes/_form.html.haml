@@ -1,5 +1,8 @@
 = semantic_form_for [:admin, @node], :html => {:class => "custom", :multipart => true} do |f|
   .row
+    %label Which site:
+    .small-6.columns= f.input :subsites,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
+  .row
     .small-6.columns= f.input :name
   .row
     .small-6.columns= f.input :website
