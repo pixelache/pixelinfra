@@ -1,0 +1,11 @@
+.post
+  %h2= @post.title
+  .metadata= "posted at #{l @post.published_at, :format => :long} by #{@post.creator.name}"
+
+  - if @post.image?
+    - if @post.image_width >= 800
+      = image_tag @post.image.url(:standard)
+    - else
+      = image_tag @post.image.url
+
+  = raw @post.body

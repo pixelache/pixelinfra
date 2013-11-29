@@ -1,8 +1,15 @@
-%h1= @event.name
+.event
+  %h1= @event.name
+  - unless @event.facilitator_name.blank?
+    .event_hosts= link_to_unless(@event.facilitator_url.blank?, @event.facilitator_name, @event.facilitator_url)
 
-%h3
-  = l @event.start_at, :format => :long
-  - unless @event.end_at.blank? ||| @event.end_at == @event.start_at
-    = " - #{l @event.end_at, :format => :long}"
+
+  - unless @event.festival.blank?
+    %h5= raw "at: #{ link_to @event.festival.name, @event.festival}"
+
+  .metadata
+    = l @event.start_at, :format => :long
+    - unless @event.end_at.blank? || @event.end_at == @event.start_at
+      = " - #{l @event.end_at, :format => :long}"
     
-= raw @event.description
+  = raw @event.description

@@ -1,0 +1,15 @@
+.row
+  .small-10.columns
+    %h2 Posts
+    
+    %table.table.table-condensed
+      %thead
+        %tr
+          %th Title
+          %th Site
+          %th Published?
+          %th{:colspan => 2}
+      %tbody
+        - @posts.each do |post|
+          = render :partial => 'post', :locals => {:post => post}
+    %p= link_to 'Enter new post', new_admin_post_path

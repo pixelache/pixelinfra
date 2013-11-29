@@ -11,17 +11,21 @@ Pixelinfra::Application.routes.draw do
     resources :nodes
     resources :pages
     resources :places
+    resources :posts
     resources :projects
     resources :subsites do
       resources :pages
+      resources :posts
     end
     resources :users    
   end
   
   resources :events
+  resources :festivals
   resources :pages
   resources :users
   resources :nodes
+  resources :posts
   
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout

@@ -22,7 +22,7 @@ class Admin::PagesController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:page => [:published, :slug, :subsite_id, translations_attributes: [:id, :locale, :name, :body]])
+    params.permit(:page => [:published, :slug, :subsite_id, subsite_ids: [], translations_attributes: [:id, :locale, :name, :body]])
   end
   
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131129150043) do
+ActiveRecord::Schema.define(version: 20131129190016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,6 +184,38 @@ ActiveRecord::Schema.define(version: 20131129150043) do
     t.datetime "updated_at"
     t.string   "slug"
   end
+
+  create_table "post_translations", force: true do |t|
+    t.integer  "post_id",    null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.text     "body"
+    t.text     "excerpt"
+  end
+
+  add_index "post_translations", ["locale"], name: "index_post_translations_on_locale", using: :btree
+  add_index "post_translations", ["post_id"], name: "index_post_translations_on_post_id", using: :btree
+
+  create_table "posts", force: true do |t|
+    t.string   "slug"
+    t.integer  "subsite_id"
+    t.boolean  "published"
+    t.integer  "creator_id"
+    t.integer  "last_modified_id"
+    t.datetime "published_at"
+    t.integer  "wordpress_id"
+    t.string   "image"
+    t.integer  "image_width"
+    t.integer  "image_height"
+    t.string   "image_content_type"
+    t.integer  "image_size",         limit: 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["subsite_id"], name: "index_posts_on_subsite_id", using: :btree
 
   create_table "project_hierarchies", id: false, force: true do |t|
     t.integer "ancestor_id",   null: false

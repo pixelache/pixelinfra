@@ -1,0 +1,14 @@
+.festival
+  %h1= @festival.name
+  .metadata
+    = l @festival.start_at, :format => :long
+    - unless @festival.end_at.blank? || @festival.end_at == @festival.start_at
+      = " - #{l @festival.end_at, :format => :long}"
+  
+  %h3= link_to @festival.website, @festival.website
+  
+  - unless @festival.events.empty?
+    %h2 Events:
+    %ul
+      - @festival.events.published.each do |event|
+        %li= link_to event.name, event

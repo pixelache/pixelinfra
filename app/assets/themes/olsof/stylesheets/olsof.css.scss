@@ -20,6 +20,18 @@ ul.side-nav {
     a:hover {
       color: #0303df;
     }
+    .date {
+      font-size: 13px;
+    }
+  }
+}
+
+.event {
+  .metadata {
+    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-weight: 200;
+    font-size: 13px;
+    margin-bottom: 5px;    
   }
 }
 .home_text {
@@ -33,4 +45,13 @@ ul.side-nav {
   border-top: 3px solid #d0d0d0;
   background-color: white;
 
+}
+
+.post {
+  .metadata {
+    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-weight: 200;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
 }

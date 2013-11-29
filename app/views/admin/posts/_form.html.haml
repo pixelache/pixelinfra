@@ -1,0 +1,34 @@
+= semantic_form_for [:admin, @post], :html => {:class => "custom", :multipart => true} do |f|
+  .row
+    %label Which site:
+    .small-6.columns= f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
+  .row
+    %dl.tabs{"data-tab" => ""}
+      - I18n.available_locales.each_with_index do |locale, i|
+        %dd{:class => (i == 0 ? :active : false)}
+          = link_to t(:locale_name, :locale => locale), "##{locale}"
+    .tabs-content
+      - I18n.available_locales.each_with_index do |locale, i|
+        .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+          = f.globalize_fields_for locale do |en|
+            .row
+              .small-12.columns
+                %b= "Title of post in #{t :locale_name, :locale => locale}"
+                = en.text_field :title  
+            .row
+              .small-12.columns
+                %b= "Content in #{t :locale_name, :locale => locale}"
+                = en.cktext_area :body
+            .row
+              .small-6.columns
+                %b= "Optional excerpt in #{t :locale_name, :locale => locale}"
+                = en.text_area :excerpt                
+  .row
+    .small-6.columns= f.input :image, :hint => 'An image/icon to represent this event.'
+    = f.input :creator_id, :as => :hidden
+    = f.input :last_modified_id, :as => :hidden, :value => current_user.id
+  .row
+    .small-3.columns= f.input :published
+    .small-3.columns= f.input :published_at, :as => :string, :input_html => {:class => "datetime_picker"}
+  .row
+    .small-2.columns= f.submit 'Save', :class => [:button, :round]

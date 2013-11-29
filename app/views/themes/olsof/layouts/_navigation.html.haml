@@ -23,4 +23,8 @@
 - if can? :manage, Project
   |
   = link_to 'Projects', admin_projects_path
+- if can? :manage, Post
+  |
+  = link_to 'Posts', admin_posts_path
+    
     

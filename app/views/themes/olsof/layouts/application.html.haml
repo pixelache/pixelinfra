@@ -47,7 +47,14 @@
                         .title= link_to event.name, event
                         .metadata
                           = l event.start_at, :format => :long
-        
+              %dd
+                = link_to 'Latest news', '#posts'
+                #posts.content.active
+                  %ul.side-nav
+                    - @site.posts.published.order('published_at DESC').limit(5).each do |p|
+                      %li
+                        .title= link_to p.title, p
+                        .date= l p.published_at, :format => :short
         .olsof-footer
           .row
             - @site.nodes.uniq.each do |node|

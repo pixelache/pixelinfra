@@ -1,0 +1,15 @@
+%tr
+  %td= post.title
+  %td= post.subsite.name
+  %td
+    - if post.published == true
+      = l post.published_at, :format => :short
+    - else
+      no
+      
+  %td.actions
+    - if can? :edit, Post
+      = link_to 'Edit', edit_admin_subsite_post_path(post.subsite, post)
+    - if can? :destroy, Post
+      |
+      = link_to 'Destroy', "/admin/subsites/#{post.subsite.id}/posts/#{post.slug.to_s}", :method => :delete, :data => {:confirm => "Are you sure?"}

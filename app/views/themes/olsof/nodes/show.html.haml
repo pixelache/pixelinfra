@@ -1,3 +1,7 @@
 = image_tag @node.logo.url.gsub(/development/, 'production')
 
+%h5= "#{@node.city}, #{@node.country}"
+
 = raw @node.description
+
+%h4= link_to @node.website, @node.website , :target => :_blank

@@ -3,7 +3,7 @@ class PagesController < InheritedResources::Base
   actions :index, :show
   
   def show
-    @page = Page.friendly.find(params[:id])
+    @page = @site.pages.published.find(params[:id])
   end
   
 end
