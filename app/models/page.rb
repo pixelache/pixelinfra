@@ -1,10 +1,11 @@
 class Page < ActiveRecord::Base
+  translates :name, :body, :fallbacks_for_empty_translations => true
   belongs_to :subsite
   extend FriendlyId
-  friendly_id :name_en, :use => [:history, :finders]
+  friendly_id :name_en, :use => [ :slugged, :finders, :scoped], :scope => :subsite
   has_paper_trail
   resourcify
-  translates :name, :body, :fallbacks_for_empty_translations => true
+  
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? && x['body'].blank? }
 
   validates_presence_of :subsite_id

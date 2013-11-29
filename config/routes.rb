@@ -12,7 +12,9 @@ Pixelinfra::Application.routes.draw do
     resources :pages
     resources :places
     resources :projects
-    resources :subsites
+    resources :subsites do
+      resources :pages
+    end
     resources :users    
   end
   

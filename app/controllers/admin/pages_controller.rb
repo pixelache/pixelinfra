@@ -4,7 +4,18 @@ class Admin::PagesController < Admin::BaseController
     create! { admin_pages_path }
   end
   
+  
+  def destroy
+    @page = Subsite.find(params[:subsite_id]).pages.find(params[:id])
+    destroy! { admin_pages_path }
+  end
+  
+  def edit
+    @page = Subsite.find(params[:subsite_id]).pages.find(params[:id])
+  end
+  
   def update
+    @page = Subsite.find(params[:page][:subsite_id]).pages.find(params[:id])
     update! { admin_pages_path }
   end
   

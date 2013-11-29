@@ -3,7 +3,7 @@
   %td= page.subsite.name
   %td.actions
     - if can? :edit, Page
-      = link_to 'Edit', edit_admin_page_path(page)
+      = link_to 'Edit', edit_admin_subsite_page_path(page.subsite, page)
     - if can? :destroy, Page
       |
-      = link_to 'Destroy', [:admin, page], :method => :delete, :data => {:confirm => "Are you sure?"}
+      = link_to 'Destroy', "/admin/subsites/#{page.subsite.id}/pages/#{page.slug.to_s}", :method => :delete, :data => {:confirm => "Are you sure?"}
