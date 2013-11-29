@@ -1,14 +1,16 @@
 = semantic_form_for [:admin, place], :html => {:class => "custom" } do |f|
   .row
-    .small-10.columns.section-container.tabs{"data-section" => "tabs"}
+    %dl.tabs{"data-tab" => ""}
       - I18n.available_locales.each_with_index do |locale, i|
-        %section{:class => (i == 0 ? :active : false)}
-          %p.title{"data-section-title" => locale}= link_to locale, '#'
-          .content{"data-section-content" => ""}
-            = f.globalize_fields_for locale do |en|
-              %b= "Name in #{locale}"
-              = en.text_field :name
-   
+        %dd{:class => (i == 0 ? :active : false)}
+          = link_to t(:locale_name, :locale => locale), "##{locale}#{place.id.to_s}"
+    .tabs-content
+      - I18n.available_locales.each_with_index do |locale, i|
+        .content{:class => (i == 0 ? :active : false), :id => "#{locale}#{place.id.to_s}"}
+          = f.globalize_fields_for locale do |en|
+            %b= "Name in #{t :locale_name, :locale => locale}"
+            = en.text_field :name
+ 
   .row
     .small-6.columns= f.input :address1
   .row

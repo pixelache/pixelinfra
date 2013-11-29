@@ -10,16 +10,18 @@
     .small-6.columns= f.input :city
     .small-6.columns= f.input :country
   .row
-    .section-container.tabs{"data-section" => "tabs"}
+    %dl.tabs{"data-tab" => ""}
       - I18n.available_locales.each_with_index do |locale, i|
-        %section{:class => (i == 0 ? :active : false)}
-          %p.title{"data-section-title" => t(:locale_name, :locale => locale)}= link_to t(:locale_name, :locale => locale), '#'
-          .content{"data-section-content" => ""}
-            = f.globalize_fields_for locale do |en|
-              .row
-                .small-12.columns
-                  %b= "Page content in #{t :locale_name, :locale => locale}"
-                  = en.cktext_area :description
+        %dd{:class => (i == 0 ? :active : false)}
+          = link_to t(:locale_name, :locale => locale), "##{locale}"
+    .tabs-content
+      - I18n.available_locales.each_with_index do |locale, i|
+        .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+          = f.globalize_fields_for locale do |en|
+            .row
+              .small-12.columns
+                %b= "Page content in #{t :locale_name, :locale => locale}"
+                = en.cktext_area :description
   .row
     .small-6.columns
       - if f.object.logo?

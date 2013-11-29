@@ -25,3 +25,5 @@ $(function(){ $(document).foundation();
       format: 'yyyy-mm-dd hh:ii'
   });
 });
+
+$(function(){ $(document).foundation(); });

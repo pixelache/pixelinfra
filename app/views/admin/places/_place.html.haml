@@ -3,7 +3,7 @@
   %td= place.address
   %td.actions
     %a.btn.btn-mini{"data-toggle" => "modal", "data-reveal-id" => "place-options-#{place.id}", :type => "button"} Edit
-    .reveal-modal{:id => "place-options-#{place.id}"}
+    .reveal-modal{:id => "place-options-#{place.id}", "data-reveal" => ""}
 
       .modal-header
         %a.close{"data-dismiss" => "modal" , :class => "close-reveal-modal"} &#215;

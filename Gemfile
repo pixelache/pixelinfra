@@ -24,6 +24,7 @@ gem 'figaro'
 gem 'fog'
 gem 'font-awesome-rails'
 gem 'formtastic', '~> 2.3.0.rc2'
+gem 'foundation-rails'
 gem 'friendly_id' , '5.0.1'
 gem 'friendly_id-globalize'
 gem 'geocoder'
@@ -48,7 +49,7 @@ gem 'truncate_html'
 gem 'unicorn'
 gem 'unf' 
 gem 'vimeo'
-gem 'zurb-foundation'
+
 
 group :development do
   gem 'better_errors'
