@@ -48,7 +48,10 @@
         .small-6.columns= f.input :facilitator_organisation
         .small-6.columns= f.input :facilitator_organisation_url
   .row
-    .small-6.columns= f.input :image, :hint => 'An image/icon to represent this event.'
+    .small-6.columns
+      - if f.object.image?
+        = image_tag f.object.image.url(:thumb)
+      = f.input :image, :hint => 'An image/icon to represent this event.'
     .small-6.columns= f.input :facebook_link, :hint => 'URL to the Facebook Event page'
   .row
     .small-2.columns= f.input :cost
