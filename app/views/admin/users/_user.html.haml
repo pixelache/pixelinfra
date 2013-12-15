@@ -1,4 +1,4 @@
-.reveal-modal{:id => "role-options-#{user.id}"}
+.reveal-modal{:id => "role-options-#{user.id}", "data-reveal" => ""}
   = form_for [:admin, user], :url => admin_user_path(user), :html => {:method => :put, :class => 'form-horizontal' } do |f|
     .modal-header
       %h3 Authentications
@@ -8,9 +8,9 @@
     
     .modal-header
       %a.close{"data-dismiss" => "modal" , :class => "close-reveal-modal"} &#215;
-      %h3 Change Role
+      %h4 Change Role
     .modal-body
       = f.select :role_ids,  Role.all.map{|x| [x.name, x.id]}, {}, {:multiple => true} #, :id, :name #, checked: user.role_ids.first
     .modal-footer
       = f.submit "Change Role", :class => "btn"
-      %a.btn{"data-dismiss" => "modal", :href => "#"} &#215;
+      %a.btn{"data-dismiss" => "modal", :class => "close-reveal-modal", :href => "#"} &#215;
