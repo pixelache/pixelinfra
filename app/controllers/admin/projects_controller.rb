@@ -18,7 +18,7 @@ class Admin::ProjectsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:project => [:name, :slug,  translations_attributes: [:description, :id, :locale]])
+    params.permit(:project => [:name, :slug, :parent_id,  translations_attributes: [:description, :id, :locale]])
   end
     
 end 
