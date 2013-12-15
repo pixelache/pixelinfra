@@ -21,6 +21,18 @@ header {
 }
 
 form {
+  dl.tabs {
+    
+    dd {
+      border-top: 1px dotted #333;
+      border-right: 1px dotted #333;
+      border-left: 1px dotted #333;
+    }
+  }
+  .tabs-content {
+    border: 1px dotted #333;
+    padding-left: 10px;
+  }
   li {
     list-style-type: none;
   }
