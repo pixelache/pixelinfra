@@ -1,0 +1,16 @@
+.row
+  .small-10.columns
+    %h2 Etherpads
+    
+    %p Note: Etherpads are synchronised every 20 minutes. If you create a new pad it may take up to 20 minutes to appear in this list.
+    %table.table.table-condensed
+      %thead
+        %tr
+          %th Name
+          %th Site
+          %th Projects
+          %th{:colspan => 2}
+      %tbody
+        - @etherpads.each do |pad|
+          = render :partial => 'etherpad', :locals => {:etherpad => pad}
+    %p= link_to 'Create new Etherpad', 'http://pad.pixelache.ac/'

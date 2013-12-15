@@ -123,6 +123,8 @@ GEM
       launchy (~> 2.1)
       mail (~> 2.2)
     erubis (2.7.0)
+    etherpad-lite (0.3.0)
+      rest-client (>= 1.6)
     excon (0.28.0)
     execjs (2.0.2)
     factory_girl (4.3.0)
@@ -316,6 +318,8 @@ GEM
     ref (1.0.5)
     responders (1.0.0)
       railties (>= 3.2, < 5)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rolify (3.2.0)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -405,6 +409,7 @@ DEPENDENCIES
   database_cleaner (= 1.0.1)
   devise
   email_spec
+  etherpad-lite
   execjs
   factory_girl_rails
   faker

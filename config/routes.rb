@@ -4,6 +4,7 @@ Pixelinfra::Application.routes.draw do
   themes_for_rails
   
   namespace :admin do
+    resources :etherpads
     resources :events do
       get :autocomplete_place_name, :on => :collection
     end
@@ -21,6 +22,7 @@ Pixelinfra::Application.routes.draw do
   end
   
   resources :events
+
   resources :festivals
   resources :pages
   resources :users

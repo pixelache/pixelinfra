@@ -1,0 +1,9 @@
+= semantic_form_for [:admin, @etherpad], :html => {:class => "custom" } do |f|
+  .row
+    .small-9.columns
+      %h2= @etherpad.name
+  .row
+    .small-3.columns= f.input :subsites
+  .row
+    .small-3.columns= f.input :projects
+  = f.submit 'Save', :class => [:button, :small, :round]
