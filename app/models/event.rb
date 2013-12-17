@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   belongs_to :project
   belongs_to :place
   belongs_to :subsite
+  has_many :photos, as: :item
   extend FriendlyId
   friendly_id :name_en , :use => [ :slugged, :finders ] # :history]
   has_paper_trail

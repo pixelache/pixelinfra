@@ -1,4 +1,5 @@
 class Admin::PagesController < Admin::BaseController
+  has_scope :page, :default => 1
   
   def create
     create! { admin_pages_path }

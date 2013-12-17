@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'execjs', :group => :production
 gem 'therubyracer', :group => :production
 
+gem 'acts-as-taggable-on'
 gem 'cancan'
 gem 'carrierwave'
 gem 'closure_tree'
@@ -31,6 +32,7 @@ gem 'friendly_id-globalize'
 gem 'geocoder'
 gem 'globalize', github: 'globalize/globalize', branch: 'master'
 gem 'haml-rails'
+gem 'handles_sortable_columns'
 gem 'has_scope'
 gem 'http_accept_language'
 gem 'inherited_resources', github: 'josevalim/inherited_resources'

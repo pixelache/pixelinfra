@@ -45,6 +45,7 @@ sync_db
 /public/assets/*
 /public/stylesheets/compiled
 /public/system/*
+/lib/assets/published*
 /spec/tmp/*
 /cache
 /capybara*

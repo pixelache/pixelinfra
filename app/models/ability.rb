@@ -17,6 +17,7 @@ class Ability
       can :manage, Place
       can :manage, Festival
       can :manage, Project
+
     end
     
     

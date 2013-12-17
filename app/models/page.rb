@@ -1,4 +1,5 @@
 class Page < ActiveRecord::Base
+  acts_as_tree
   translates :name, :body, :fallbacks_for_empty_translations => true
   belongs_to :subsite
   extend FriendlyId

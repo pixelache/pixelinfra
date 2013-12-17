@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215191508) do
+ActiveRecord::Schema.define(version: 20131217131207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,6 +160,15 @@ ActiveRecord::Schema.define(version: 20131215191508) do
     t.integer "subsite_id"
   end
 
+  create_table "page_hierarchies", id: false, force: true do |t|
+    t.integer "ancestor_id",   null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations",   null: false
+  end
+
+  add_index "page_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "page_anc_desc_udx", unique: true, using: :btree
+  add_index "page_hierarchies", ["descendant_id"], name: "page_desc_idx", using: :btree
+
   create_table "page_translations", force: true do |t|
     t.integer  "page_id",    null: false
     t.string   "locale",     null: false
@@ -178,7 +187,25 @@ ActiveRecord::Schema.define(version: 20131215191508) do
     t.boolean  "published"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_id"
+    t.integer  "wordpress_id"
+    t.string   "wordpress_author"
   end
+
+  create_table "photos", force: true do |t|
+    t.string   "filename"
+    t.integer  "filename_width"
+    t.integer  "filename_height"
+    t.string   "filename_content_type"
+    t.integer  "filename_size",         limit: 8
+    t.integer  "wordpress_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "item_type"
+    t.integer  "item_id"
+  end
+
+  add_index "photos", ["item_type", "item_id"], name: "index_photos_on_item_type_and_item_id", using: :btree
 
   create_table "place_translations", force: true do |t|
     t.integer  "place_id",   null: false
@@ -202,6 +229,14 @@ ActiveRecord::Schema.define(version: 20131215191508) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+  end
+
+  create_table "post_categories", force: true do |t|
+    t.string   "name"
+    t.integer  "wordpress_id"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "post_translations", force: true do |t|
@@ -232,9 +267,15 @@ ActiveRecord::Schema.define(version: 20131215191508) do
     t.integer  "image_size",         limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "wordpress_author"
   end
 
   add_index "posts", ["subsite_id"], name: "index_posts_on_subsite_id", using: :btree
+
+  create_table "posts_post_categories", id: false, force: true do |t|
+    t.integer "post_id"
+    t.integer "post_category_id"
+  end
 
   create_table "project_hierarchies", id: false, force: true do |t|
     t.integer "ancestor_id",   null: false
@@ -281,6 +322,23 @@ ActiveRecord::Schema.define(version: 20131215191508) do
     t.string   "subdomain"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string "name"
   end
 
   create_table "users", force: true do |t|
