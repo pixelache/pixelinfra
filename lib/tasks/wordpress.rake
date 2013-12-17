@@ -241,6 +241,7 @@ namespace :wordpress do
     data = File.read xml
     hash = Hash.from_xml data
     cats = PostCategory.all.map{|x| [x.name, x.id] }
+    Post.paper_trail_off
     hash['rss']['channel']['item'].each do |p|
       next unless p['post_type'] == 'post'
       next unless Post.find_by(:wordpress_id => p['post_id']).nil?
