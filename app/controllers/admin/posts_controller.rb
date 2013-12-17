@@ -1,5 +1,6 @@
 class Admin::PostsController < Admin::BaseController
   has_scope :page, :default => 1
+  handles_sortable_columns
   
   def create
     create! { admin_posts_path }
@@ -14,6 +15,25 @@ class Admin::PostsController < Admin::BaseController
   def edit
     @post = Subsite.find(params[:subsite_id]).posts.find(params[:id])
   end
+  
+  def index
+    order = sortable_column_order do |column, direction|
+      case column
+      when "id"
+        "id #{direction}"
+      when "title"
+        "LOWER(slug) #{direction}"
+      when "published"
+        "published #{direction}, published_at #{direction}"
+      when "site"
+        "subsites.name #{direction}"
+      else
+        "updated_at DESC"
+      end
+    end
+    @posts = apply_scopes(Post).includes(:subsite).order(order).page(params[:page]).per(30)
+  end
+  
   
   def update
     @post = Subsite.find(params[:post][:subsite_id]).posts.find(params[:id])

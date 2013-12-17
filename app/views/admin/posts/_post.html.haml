@@ -4,7 +4,7 @@
   %td= post.subsite.name
   %td
     - if post.published == true
-      = l post.published_at, :format => :short
+      = l post.published_at, :format => :long
     - else
       no
       

@@ -6,9 +6,9 @@
       %thead
         %tr
           %th
-          %th Title
-          %th Site
-          %th Published?
+          %th= sortable_column "Title"
+          %th= sortable_column "Site"
+          %th= sortable_column "Published"
           %th{:colspan => 2}
       %tbody
         - @posts.each do |post|

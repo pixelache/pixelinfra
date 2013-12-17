@@ -243,6 +243,7 @@ namespace :wordpress do
     cats = PostCategory.all.map{|x| [x.name, x.id] }
     hash['rss']['channel']['item'].each do |p|
       next unless p['post_type'] == 'post'
+      next unless Post.find_by(:wordpress_id => p['post_id']).nil?
       # author = User.find_by_username(p['creator'])
       article = Post.create(
         title: p['title'],
