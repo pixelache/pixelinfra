@@ -13,6 +13,7 @@ class Post < ActiveRecord::Base
   resourcify
 
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['title'].blank? && x['body'].blank? }
+  accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }
   before_save :update_image_attributes
   before_save :check_published
   validates_presence_of :subsite_id

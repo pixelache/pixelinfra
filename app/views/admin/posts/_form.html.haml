@@ -1,7 +1,9 @@
-= semantic_form_for [:admin, @post], :html => {:class => "custom", :multipart => true} do |f|
+= semantic_nested_form_for [:admin, @post], :html => {:class => "custom", :multipart => true} do |f|
   .row
     %label Which site:
     .small-6.columns= f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
+  .row
+    .small-6.columns= f.input :post_categories
   .row
     %dl.tabs{"data-tab" => ""}
       - I18n.available_locales.each_with_index do |locale, i|
@@ -24,9 +26,24 @@
                 %b= "Optional excerpt in #{t :locale_name, :locale => locale}"
                 = en.text_area :excerpt                
   .row
-    .small-6.columns= f.input :image, :hint => 'An image/icon to represent this event.'
+    .small-6.columns
+      - if f.object.image?
+        = image_tag f.object.image.url(:thumb)
+      = f.input :image, :hint => 'An image/icon to represent this event.'
     = f.input :creator_id, :as => :hidden
     = f.input :last_modified_id, :as => :hidden, :value => current_user.id
+  .row
+    .small-12.columns
+      %label Additional images
+      .row
+        = f.semantic_fields_for :photos do |ff|
+
+          .small-3.columns
+            - if ff.object.filename?
+              = image_tag ff.object.filename.url(:thumb)
+            = ff.input :filename
+        
+      = f.link_to_add 'Add a photo', :photos
   .row
     .small-3.columns= f.input :published
     .small-3.columns= f.input :published_at, :as => :string, :input_html => {:class => "datetime_picker"}

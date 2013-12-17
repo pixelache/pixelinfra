@@ -37,7 +37,6 @@ def get_thumbnail_image(post)
   thumb = 0
   if post['postmeta'].class != Hash
     post['postmeta'].each do |h|
-      puts h['meta_key']
       if h["meta_key"] == "_thumbnail_id"
         thumb = h["meta_value"]
       end
@@ -210,6 +209,33 @@ namespace :wordpress do
     end
   end
   
+  task :associate_secondary_images => :environment do 
+    xml = @cache_dir + 'published.xml'
+    data = File.read xml
+    hash = Hash.from_xml data
+    
+    # to be run after importing attachments and posts, so primary images should be
+    # deleted from the photos table, leaving only secondary images
+    hash['rss']['channel']['item'].each do |i|
+      next unless i['post_type'] == 'attachment'
+
+      # get entry in photo table
+      photo_entry = Photo.find_by(:wordpress_id => i['post_id'])
+      next if photo_entry.nil?  # we deleted it as it's a primary image post
+      # check for existence of parent post
+      parent_post = Post.find_by(:wordpress_id => i['post_parent'])
+      next if parent_post.nil?
+      if parent_post.photos.include?(photo_entry)
+        # it's already here so don't put it twice
+        next
+      else
+        parent_post.photos << photo_entry
+        parent_post.save!
+      end
+
+    end
+  end 
+  
   task :posts => :environment do
     xml = @cache_dir + 'published.xml'
     data = File.read xml
@@ -226,7 +252,7 @@ namespace :wordpress do
         wordpress_id: p['post_id'],
         wordpress_author: p['creator'],
         subsite_id: 1, 
-        published: p['status'] == 'published' ? true : false,
+        published: p['status'] == 'draft' ? false : true,
         tag_list: get_tags(p)
       )
       ti = get_thumbnail_image(p)
@@ -237,7 +263,6 @@ namespace :wordpress do
       end
       article.post_category_ids =  p['category'].blank? ? false : ( p['category'].class == Array ? p['category'].map{|x| cats.find{|y| y.first == x }.last } : [cats.find{|y| y.first == p['category']}.last] ) rescue []
       article.save!
-
     end
   end
 

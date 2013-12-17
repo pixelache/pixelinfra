@@ -1,4 +1,5 @@
 class Admin::PostsController < Admin::BaseController
+  has_scope :page, :default => 1
   
   def create
     create! { admin_posts_path }
@@ -22,7 +23,7 @@ class Admin::PostsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:post => [:published, :slug, :subsite_id, :creator_id, :last_modified_id, :wordpress_id, :published_at, :image, :image_width, :image_height, :image_content_type, :image_size, translations_attributes: [:id, :locale, :title, :body, :excerpt]])
+    params.permit(:post => [:published, :slug, :subsite_id, :creator_id, :last_modified_id, :wordpress_id, :published_at, :image, :image_width, :image_height, :image_content_type, :image_size, translations_attributes: [:id, :locale, :title, :body, :excerpt], photos_attributes: [:id, :filename]])
   end
   
 end
