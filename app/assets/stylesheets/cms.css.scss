@@ -50,3 +50,15 @@ form {
     color: #666;
   }
 }
+
+table.pages {
+  td {
+    span.small {
+      font-size: 9px;
+      text-transform: uppercase;
+    }
+  }
+  tr.child {
+    display: none;
+  }
+}

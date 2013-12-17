@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
   belongs_to :last_modified, :class_name => 'User'
   extend FriendlyId
   friendly_id :title_en , :use => [ :slugged, :finders, :scoped], :scope => :subsite
-  has_and_belongs_to_many :post_categories
+  has_and_belongs_to_many :post_categories, join_table: :posts_post_categories
   has_many :photos, as: :item
   has_paper_trail
   mount_uploader :image, ImageUploader

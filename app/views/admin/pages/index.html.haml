@@ -3,15 +3,17 @@
     %h2 Pages
     
     = paginate @pages
-    %table.table.table-condensed
+    %table.table.table-condensed.pages
       %thead
         %tr
           %th Name
+          %th When?
+          %th Published?
           %th Site
           %th{:colspan => 2}
       %tbody
         - @pages.each do |page|
-          = render :partial => 'page', :locals => {:page => page}
+          = render :partial => 'page', :locals => {:page => page, :classpassed => nil}
     = paginate @pages
     %p= link_to 'Enter new page', new_admin_page_path
     

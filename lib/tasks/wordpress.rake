@@ -35,12 +35,14 @@ def get_thumbnail_image(post)
 
   # look for thumbnail if exists
   thumb = 0
-  post['postmeta'].each do |h|
-    if h["meta_key"] == "_thumbnail_id"
-      thumb = h["meta_value"]
+  if post['postmeta'].class != Hash
+    post['postmeta'].each do |h|
+      puts h['meta_key']
+      if h["meta_key"] == "_thumbnail_id"
+        thumb = h["meta_value"]
+      end
     end
   end
-
   if thumb != 0
     master_image = Photo.find_by(:wordpress_id => thumb)
     unless master_image.nil? 
@@ -164,7 +166,11 @@ namespace :wordpress do
     hash['rss']['channel']['item'].each do |i|
       next unless i['post_type'] == 'attachment'
       unless i['attachment_url'].blank?
-        Photo.create(:remote_filename_url => i['attachment_url'], :wordpress_id => i['post_id'] )
+        if Photo.find_by(:wordpress_id => i['post_id'])
+          puts "already found with wordpress id #{i['post_id']}"
+        else
+          Photo.create(:remote_filename_url => i['attachment_url'], :wordpress_id => i['post_id'] ) rescue next
+        end
       end
     end
   end    
@@ -205,33 +211,34 @@ namespace :wordpress do
   end
   
   task :posts => :environment do
-    cache = @cache_dir + 'posts.cache.rb'
-    posts = File.open(cache, "rb") { |io| Marshal.load(io) }
+    xml = @cache_dir + 'published.xml'
+    data = File.read xml
+    hash = Hash.from_xml data
     cats = PostCategory.all.map{|x| [x.name, x.id] }
-    posts.each do |p|
+    hash['rss']['channel']['item'].each do |p|
       next unless p['post_type'] == 'post'
       # author = User.find_by_username(p['creator'])
       article = Post.create(
         title: p['title'],
-        content: get_formated_content(p),
+        body: get_formated_content(p),
         excerpt: get_formatted_excerpt(p),
         published_at: p['pubDate'],
         wordpress_id: p['post_id'],
         wordpress_author: p['creator'],
         subsite_id: 1, 
         published: p['status'] == 'published' ? true : false,
-        post_category_ids: p['category'].map{|x| cats.find{|y| y.first == x }.last },
         tag_list: get_tags(p)
       )
       ti = get_thumbnail_image(p)
       if ti
         photo = Photo.find(ti)
-        article.remote_image_url = photo.url
+        article.remote_image_url = photo.filename.url
         photo.destroy
-        article.save!
       end
+      article.post_category_ids =  p['category'].blank? ? false : ( p['category'].class == Array ? p['category'].map{|x| cats.find{|y| y.first == x }.last } : [cats.find{|y| y.first == p['category']}.last] ) rescue []
+      article.save!
+
     end
-    puts Article.count
   end
 
 end

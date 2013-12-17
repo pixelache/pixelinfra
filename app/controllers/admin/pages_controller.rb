@@ -15,6 +15,10 @@ class Admin::PagesController < Admin::BaseController
     @page = Subsite.find(params[:subsite_id]).pages.find(params[:id])
   end
   
+  def index
+    @pages = Page.roots.order(:slug).page(params[:page]).per(20)
+  end
+  
   def update
     @page = Subsite.find(params[:page][:subsite_id]).pages.find(params[:id])
     update! { admin_pages_path }
