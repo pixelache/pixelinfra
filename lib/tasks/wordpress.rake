@@ -116,7 +116,7 @@ def get_tags(post)
     bits.each { |b| tags.push b }
     tag
   end
-  tags.push('wp-import')
+  # tags.push('wp-import')
 end
 
 # --------------------------------------------------------------------
@@ -264,7 +264,7 @@ namespace :wordpress do
         photo.destroy
       end
       article.post_category_ids =  p['category'].blank? ? false : ( p['category'].class == Array ? p['category'].map{|x| cats.find{|y| y.first == x }.last } : [cats.find{|y| y.first == p['category']}.last] ) rescue []
-      article.save!
+      article.save(validate: false)
     end
   end
 
