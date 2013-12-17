@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131217131207) do
+ActiveRecord::Schema.define(version: 20131217205210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 20131217131207) do
     t.integer  "parent_id"
     t.integer  "wordpress_id"
     t.string   "wordpress_author"
+    t.string   "wordpress_scope"
   end
 
   create_table "photos", force: true do |t|
@@ -203,6 +204,7 @@ ActiveRecord::Schema.define(version: 20131217131207) do
     t.datetime "updated_at"
     t.string   "item_type"
     t.integer  "item_id"
+    t.string   "wordpress_scope"
   end
 
   add_index "photos", ["item_type", "item_id"], name: "index_photos_on_item_type_and_item_id", using: :btree
@@ -268,6 +270,7 @@ ActiveRecord::Schema.define(version: 20131217131207) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "wordpress_author"
+    t.string   "wordpress_scope"
   end
 
   add_index "posts", ["subsite_id"], name: "index_posts_on_subsite_id", using: :btree

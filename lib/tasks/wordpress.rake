@@ -1,4 +1,5 @@
 @cache_dir = 'lib/assets/'
+@scope = '2009'
 
 def hash_from_cache
   xml = @cache_dir + 'published.xml'
@@ -165,10 +166,10 @@ namespace :wordpress do
     hash['rss']['channel']['item'].each do |i|
       next unless i['post_type'] == 'attachment'
       unless i['attachment_url'].blank?
-        if Photo.find_by(:wordpress_id => i['post_id'])
+        if Photo.find_by(:wordpress_id => i['post_id'], :wordpress_scope => @scope)
           puts "already found with wordpress id #{i['post_id']}"
         else
-          Photo.create(:remote_filename_url => i['attachment_url'], :wordpress_id => i['post_id'] ) rescue next
+          Photo.create(:remote_filename_url => i['attachment_url'], :wordpress_id => i['post_id'], :wordpress_scope => @scope ) rescue next
         end
       end
     end
@@ -182,8 +183,8 @@ namespace :wordpress do
       next unless p['post_type'] == 'page'
       next if p['post_parent'] == "0"
       # get page in new database
-      new_db = Page.find_by(:wordpress_id => p['post_id'])
-      new_db.parent = Page.find_by(:wordpress_id => p['post_parent'])
+      new_db = Page.find_by(:wordpress_id => p['post_id'], :wordpress_scope => @scope)
+      new_db.parent = Page.find_by(:wordpress_id => p['post_parent'], :wordpress_scope => @scope)
       new_db.save
     end
   end
@@ -197,10 +198,11 @@ namespace :wordpress do
       page = Page.create(
         name: p['title'],
         subsite_id: 1,
-        published: p['status'] == 'published' ? true : false,
+        published: p['status'] == 'draft' ? false : true,
         body: get_formated_content(p),
         wordpress_id: p['post_id'],
         wordpress_author: p['post_creator'],
+        wordpress_scope: @scope,
         created_at: p['pubDate'],
         updated_at: p['pubDate'], 
         slug: p['post_name']

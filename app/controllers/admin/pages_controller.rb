@@ -1,5 +1,6 @@
 class Admin::PagesController < Admin::BaseController
   has_scope :page, :default => 1
+  handles_sortable_columns
   
   def create
     create! { admin_pages_path }
@@ -16,7 +17,21 @@ class Admin::PagesController < Admin::BaseController
   end
   
   def index
-    @pages = Page.roots.order(:slug).page(params[:page]).per(20)
+    order = sortable_column_order do |column, direction|
+      case column
+      when "id"
+        "id #{direction}"
+      when "when"
+        "updated_at #{direction}"
+      when "published"
+        "published #{direction}, updated_at #{direction}"
+      when "site"
+        "subsites.name #{direction}"
+      else
+        "updated_at DESC"
+      end
+    end
+    @pages = Page.roots.includes(:subsite).order(order).page(params[:page]).per(20)
   end
   
   def update

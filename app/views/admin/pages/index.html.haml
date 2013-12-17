@@ -6,10 +6,10 @@
     %table.table.table-condensed.pages
       %thead
         %tr
-          %th Name
-          %th When?
-          %th Published?
-          %th Site
+          %th= sortable_column "Name"
+          %th= sortable_column "When"
+          %th= sortable_column "Published"
+          %th= sortable_column "Site"
           %th{:colspan => 2}
       %tbody
         - @pages.each do |page|

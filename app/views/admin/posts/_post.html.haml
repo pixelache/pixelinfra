@@ -1,6 +1,12 @@
 %tr
   %td= image_tag post.image.url(:thumb), :width => 40
-  %td= post.title
+  %td
+    = post.title
+    .small
+      = post.wordpress_author
+      - unless post.photos.empty?
+        &sdot;
+        = pluralize(post.photos.size, 'photo') + " attached"
   %td= post.subsite.name
   %td
     - if post.published == true
