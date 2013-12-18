@@ -36,7 +36,7 @@ def get_thumbnail_image(post)
 
   # look for thumbnail if exists
   thumb = 0
-  if post['postmeta'].class != Hash
+  if post['postmeta'].class != Hash && !post['postmeta'].nil?
     post['postmeta'].each do |h|
       if h["meta_key"] == "_thumbnail_id"
         thumb = h["meta_value"]
