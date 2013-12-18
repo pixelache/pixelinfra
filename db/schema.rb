@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131217205210) do
+ActiveRecord::Schema.define(version: 20131218111955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -271,6 +271,9 @@ ActiveRecord::Schema.define(version: 20131217205210) do
     t.datetime "updated_at"
     t.string   "wordpress_author"
     t.string   "wordpress_scope"
+    t.integer  "event_id"
+    t.integer  "project_id"
+    t.integer  "festival_id"
   end
 
   add_index "posts", ["subsite_id"], name: "index_posts_on_subsite_id", using: :btree

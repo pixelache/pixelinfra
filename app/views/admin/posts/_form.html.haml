@@ -3,10 +3,12 @@
     %label Which site:
     .small-6.columns= f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
   .row
-    - if f.object.wordpress_scope
-      .small-6.columns
+    .small-6.columns
+      - if f.object.wordpress_scope
         %label Historical info: belongs to scope
         = f.object.wordpress_scope
+      %label Database ID:
+      = f.object.id.to_s
     .small-6.columns= f.input :post_categories
   .row
     %dl.tabs{"data-tab" => ""}
@@ -48,6 +50,21 @@
             = ff.input :filename
         
       = f.link_to_add 'Add a photo', :photos
+  .row
+    .small-6.columns
+      %h5 Connected to an event?
+      = f.input :event_name, :as => :autocomplete, :url =>  autocomplete_event_name_admin_posts_path, :input_html => { :id_element => '#post_event_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the event name", :hint => raw("(If the event is not already the database, <a href=\"/admin/events/new\" target=\"_blank\">create it first.</a>)")
+    .small-6.columns= f.input :event_id, :as => :hidden
+  .row
+    .small-6.columns
+      %h5 Connected to a project?
+      = f.input :project_name, :as => :autocomplete, :url =>  autocomplete_project_name_admin_posts_path, :input_html => { :id_element => '#post_project_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the project name", :hint => raw("(If the project is not already the database, <a href=\"/admin/events/new\" target=\"_blank\">create it first.</a>)")
+    .small-6.columns= f.input :project_id, :as => :hidden
+  .row
+    .small-6.columns
+      %h5 Connected to a festival?
+      = f.input :festival_name, :as => :autocomplete, :url =>  autocomplete_festival_name_admin_posts_path, :input_html => { :id_element => '#post_festival_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the festival name", :hint => raw("(If this is related to a specific event that is part of a festival, you should just populate the event relation above, no need for the festival as a whole.)")
+    .small-6.columns= f.input :festival_id, :as => :hidden    
   .row
     .small-6.columns= f.input :tag_list
   .row

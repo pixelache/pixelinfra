@@ -14,4 +14,14 @@
       %h5 Photos
       - @post.photos.each do |photo|
         = link_to image_tag(photo.filename.url(:box)), photo.filename.url, :target => :_blank
-    
+    - unless @post.event.blank?
+      %h5 Event
+      = @post.event.name
+    - unless @post.project.blank?
+      %h5 Project
+      = @post.project.name      
+    - unless @post.festival.blank?
+      %h5 Festival
+      = @post.festival.name
+    - if can? :edit, @post
+      = link_to 'Edit this post', edit_admin_subsite_post_path(@post.subsite, @post)

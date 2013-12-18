@@ -23,6 +23,10 @@ class Event < ActiveRecord::Base
     self.name(:en)
   end
   
+  def event_with_date
+    self.name + " (#{self.start_at.strftime("%d.%m.%Y")})"
+  end
+  
   def place_name
     place.blank? ? nil : place.name
   end

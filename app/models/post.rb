@@ -2,6 +2,9 @@ class Post < ActiveRecord::Base
   acts_as_taggable
   translates :title, :body, :excerpt, :fallbacks_for_empty_translations => true
   belongs_to :subsite
+  belongs_to :event
+  belongs_to :festival
+  belongs_to :project
   belongs_to :creator, :class_name => 'User'
   belongs_to :last_modified, :class_name => 'User'
   extend FriendlyId
@@ -18,6 +21,8 @@ class Post < ActiveRecord::Base
   before_save :check_published
   validates_presence_of :subsite_id
 
+  attr_accessor  :event_name, :project_name, :festival_name
+  
   scope :published, -> () { where(published: true) }
   scope :by_site, -> (x) { includes(:subsite).where(:subsite_id => x) }
   
@@ -46,11 +51,11 @@ class Post < ActiveRecord::Base
     
   def update_image_attributes
     if image.present?
-      self.image_content_type = image.file.content_type
-      self.image_size = image.file.size
-      self.image_width, self.image_height = `identify -format "%wx%h" #{image.file.path}`.split(/x/)
-      # if you also need to store the original filename:
-      # self.original_filename = image.file.filename
+      if image.file.exists?
+        self.image_content_type = image.file.content_type
+        self.image_size = image.file.size
+        self.image_width, self.image_height = `identify -format "%wx%h" #{image.file.path}`.split(/x/)
+      end
     end
   end
   

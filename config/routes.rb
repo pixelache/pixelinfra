@@ -12,7 +12,11 @@ Pixelinfra::Application.routes.draw do
     resources :nodes
     resources :pages
     resources :places
-    resources :posts
+    resources :posts do
+      get :autocomplete_event_name, :on => :collection
+      get :autocomplete_festival_name, :on => :collection
+      get :autocomplete_project_name, :on => :collection            
+    end
     resources :projects
     resources :subsites do
       resources :pages
