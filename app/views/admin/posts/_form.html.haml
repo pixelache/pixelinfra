@@ -3,6 +3,10 @@
     %label Which site:
     .small-6.columns= f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
   .row
+    - if f.object.wordpress_scope
+      .small-6.columns
+        %label Historical info: belongs to scope
+        = f.object.wordpress_scope
     .small-6.columns= f.input :post_categories
   .row
     %dl.tabs{"data-tab" => ""}
@@ -44,6 +48,8 @@
             = ff.input :filename
         
       = f.link_to_add 'Add a photo', :photos
+  .row
+    .small-6.columns= f.input :tag_list
   .row
     .small-3.columns= f.input :published
     .small-3.columns= f.input :published_at, :as => :string, :input_html => {:class => "datetime_picker"}

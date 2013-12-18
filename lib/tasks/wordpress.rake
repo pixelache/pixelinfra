@@ -255,6 +255,7 @@ namespace :wordpress do
         published_at: p['pubDate'],
         wordpress_id: p['post_id'],
         wordpress_author: p['creator'],
+        wordpress_scope: @scope,
         subsite_id: 1, 
         published: p['status'] == 'draft' ? false : true,
         tag_list: get_tags(p)
