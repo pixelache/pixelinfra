@@ -30,6 +30,15 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def posted_by
+    if creator_id?
+      creator.username
+    elsif !wordpress_author.blank?
+      wordpress_author
+    else
+      'unknown'
+    end
+  end
   
   def title_en
     self.title(:en)

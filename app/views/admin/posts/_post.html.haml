@@ -7,6 +7,8 @@
       - unless post.photos.empty?
         &sdot;
         = pluralize(post.photos.size, 'photo') + " attached"
+      &sdot;
+      = link_to 'View', [:admin, post], :target => :_blank
   %td= post.subsite.name
   %td
     - if post.published == true

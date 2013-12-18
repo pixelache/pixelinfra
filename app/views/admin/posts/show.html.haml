@@ -1,0 +1,17 @@
+.row
+  .small-9.columns
+    %h3= @post.title
+    %h6= "posted by #{@post.posted_by} on #{l @post.published_at, :format => :short}"
+- if @post.image?
+  .row
+    .small-9.columns= image_tag @post.image.url(:standard)
+      
+.row
+  .small-9.columns.post_body
+    = raw simple_format(@post.body)
+  .small-3.columns
+    - unless @post.photos.empty?
+      %h5 Photos
+      - @post.photos.each do |photo|
+        = link_to image_tag(photo.filename.url(:box)), photo.filename.url, :target => :_blank
+    
