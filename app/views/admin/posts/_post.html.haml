@@ -9,6 +9,16 @@
         = pluralize(post.photos.size, 'photo') + " attached"
       &sdot;
       = link_to 'View', [:admin, post], :target => :_blank
+      - unless post.event.blank?
+        %br/
+        &sdot;
+        = link_to post.event.name, post.event, :target => :_blank
+      - unless post.project.blank?
+        &sdot;
+        = link_to post.project.name, [:admin, post.project], :target => :_blank
+      - unless post.festival.blank?
+        &sdot;
+        = link_to post.festival.name, [:admin, post.festival], :target => :_blank
   %td= post.subsite.name
   %td
     - if post.published == true

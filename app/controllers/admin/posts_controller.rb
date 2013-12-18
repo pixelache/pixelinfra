@@ -31,7 +31,7 @@ class Admin::PostsController < Admin::BaseController
       when "site"
         "subsites.name #{direction}"
       else
-        "updated_at DESC"
+        "published_at DESC"
       end
     end
     @posts = apply_scopes(Post).includes(:subsite).order(order).page(params[:page]).per(30)
