@@ -14,7 +14,7 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? && x['description'].blank? }
   attr_accessor  :place_name
   before_save :update_image_attributes
-  validates_presence_of :subsite_id, :place_id, :start_at
+  validates_presence_of :subsite_id, :place_id, :start_at, :name
 
   scope :published, -> () { where(published: true) }
   scope :by_site, -> (x) { includes(:subsite).where(:subsite_id => x) }

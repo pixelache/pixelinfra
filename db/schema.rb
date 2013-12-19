@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 20131219165212) do
 
   add_index "flickrsets", ["event_id"], name: "index_flickrsets_on_event_id", using: :btree
   add_index "flickrsets", ["festival_id"], name: "index_flickrsets_on_festival_id", using: :btree
+  add_index "flickrsets", ["flickr_id"], name: "index_flickrsets_on_flickr_id", unique: true, using: :btree
   add_index "flickrsets", ["project_id"], name: "index_flickrsets_on_project_id", using: :btree
   add_index "flickrsets", ["subsite_id"], name: "index_flickrsets_on_subsite_id", using: :btree
 

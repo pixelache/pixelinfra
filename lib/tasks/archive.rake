@@ -6,7 +6,8 @@ namespace :archive do
     FlickRaw.api_key= ENV['FLICKR_API_KEY']
     FlickRaw.shared_secret= ENV['FLICKR_API_SECRET']
     flickr.photosets.getList(user_id: ENV['FLICKR_USER_ID']).each do |set|
-      if existing_in_database.map(&:first).include?(set.id)
+      if existing_in_database.map(&:first).include?(set.id.to_i)
+        # already exists so update timestamp if needed
         e = Flickrset.find_by(:flickr_id => set.id)
         if e.last_modified_date != Time.at(set.date_update.to_i).to_date
           e.last_modified_date = Time.at(set.date_update.to_i).to_date

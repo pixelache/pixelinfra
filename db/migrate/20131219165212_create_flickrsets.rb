@@ -13,7 +13,7 @@ class CreateFlickrsets < ActiveRecord::Migration
 
       t.timestamps
     end
-
+    add_index :flickrsets, :flickr_id, :unique => true
     FlickRaw.api_key= ENV['FLICKR_API_KEY']
     FlickRaw.shared_secret= ENV['FLICKR_API_SECRET']
     flickr.photosets.getList(user_id: ENV['FLICKR_USER_ID']).each do |set|
