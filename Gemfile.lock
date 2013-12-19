@@ -142,6 +142,7 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    flickraw (0.9.7)
     fog (1.18.0)
       builder
       excon (~> 0.28.0)
@@ -418,6 +419,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   figaro
+  flickraw
   fog
   font-awesome-rails
   formtastic (~> 2.3.0.rc2)

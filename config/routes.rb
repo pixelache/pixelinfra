@@ -9,6 +9,9 @@ Pixelinfra::Application.routes.draw do
       get :autocomplete_place_name, :on => :collection
     end
     resources :festivals
+    resources :flickrsets do
+      get :autocomplete_event_name, :on => :collection
+    end
     resources :nodes
     resources :pages
     resources :places

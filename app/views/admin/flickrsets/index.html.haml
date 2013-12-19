@@ -1,0 +1,19 @@
+.row
+  .small-10.columns
+    %h2 Flickr sets (archive)
+    
+    %p Note: Flickrsets are synchronised every 3 hours. If you upload a new set it may take up to 3 hours to appear in this list.
+    = paginate @flickrsets
+    %table.table.table-condensed
+      %thead
+        %tr
+          %th= sortable_column "Title of set", :column => "title"
+          %th= sortable_column "Last modified at", :column => "last_modified_date"
+          %th= sortable_column "Site"
+          %th Associations
+          %th{:colspan => 2}
+      %tbody
+        - @flickrsets.each do |set|
+          = render :partial => 'flickrset', :locals => {:flickrset => set}
+    = paginate @flickrsets
+    %p= link_to 'Create new Flickr set', 'http://www.flickr.com/photos/upload/'

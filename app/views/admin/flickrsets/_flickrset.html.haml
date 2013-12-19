@@ -1,0 +1,14 @@
+%tr
+  %td= link_to flickrset.title, "http://www.flickr.com/photos/pixelache/sets/#{flickrset.flickr_id}/", :target => :_blank
+  %td= l flickrset.last_modified_date, :format => :long
+  %td= flickrset.subsite.name
+  %td
+    .small
+      - unless flickrset.event.blank?
+        = link_to flickrset.event.event_with_date, [:admin, flickrset.event]
+      - unless flickrset.project.blank?
+        = link_to flickrset.project.name, [:admin, flickrset.project]
+      - unless flickrset.festival.blank?
+        = link_to flickrset.festival.name, [:admin, flickrset.festival]
+  %td.actions
+    = link_to 'Categorise', edit_admin_flickrset_path(flickrset)

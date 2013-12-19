@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218111955) do
+ActiveRecord::Schema.define(version: 20131219165212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,25 @@ ActiveRecord::Schema.define(version: 20131218111955) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "flickrsets", force: true do |t|
+    t.integer  "flickr_id",          limit: 8
+    t.string   "title"
+    t.text     "description"
+    t.date     "start_upload_date"
+    t.date     "last_modified_date"
+    t.integer  "subsite_id",                   null: false
+    t.integer  "event_id"
+    t.integer  "project_id"
+    t.integer  "festival_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "flickrsets", ["event_id"], name: "index_flickrsets_on_event_id", using: :btree
+  add_index "flickrsets", ["festival_id"], name: "index_flickrsets_on_festival_id", using: :btree
+  add_index "flickrsets", ["project_id"], name: "index_flickrsets_on_project_id", using: :btree
+  add_index "flickrsets", ["subsite_id"], name: "index_flickrsets_on_subsite_id", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -386,5 +405,36 @@ ActiveRecord::Schema.define(version: 20131218111955) do
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
+
+  create_table "videohosts", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "videos", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "url"
+    t.string   "hostid"
+    t.string   "thumbnail"
+    t.integer  "thumbnail__size"
+    t.integer  "thumbnail_width"
+    t.integer  "thumbnail_height"
+    t.string   "thumbnail_content_type"
+    t.integer  "event_id"
+    t.integer  "project_id"
+    t.integer  "festival_id"
+    t.integer  "video_width"
+    t.integer  "video_height"
+    t.integer  "duration"
+    t.boolean  "published"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "videos", ["event_id"], name: "index_videos_on_event_id", using: :btree
+  add_index "videos", ["festival_id"], name: "index_videos_on_festival_id", using: :btree
+  add_index "videos", ["project_id"], name: "index_videos_on_project_id", using: :btree
 
 end
