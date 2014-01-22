@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
   belongs_to :festival
   belongs_to :project
   belongs_to :creator, :class_name => 'User'
-  belongs_to :class_name, :class_name => 'User'
+  # belongs_to :class_name, :class_name => 'User'
   extend FriendlyId
   friendly_id :title_en , :use => [ :slugged, :finders, :scoped], :scope => :subsite
   has_and_belongs_to_many :post_categories, join_table: :posts_post_categories

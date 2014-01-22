@@ -5,3 +5,4 @@ I18n.fallbacks[:en] = [:en, :fr, :fi]
 I18n.fallbacks[:fi] = [:fi, :fr, :en]
 
 Globalize.fallbacks = {:en => [:en, :fi], :fi => [:fi, :en] }
+I18n.enforce_available_locales = false

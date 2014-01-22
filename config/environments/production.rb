@@ -88,5 +88,8 @@ Pixelinfra::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-  config.session_store :cookie_store, :key => '_pixelache_session', :domain => ".pixelache.ac"
+  config.middleware.use "CustomDomainCookie", ".pixelache.ac"
 end
+ActionController::Base.session = {
+  :domain => ".pixelache.ac"
+}
