@@ -63,7 +63,7 @@ module OmniAuth
     end
     
     def custom_domain?(host)
-      host !~ /#{@default_domain.sub(/^\./, '')}/i
+      host !~ /pixelache\.ac/i
     end
     
   end
