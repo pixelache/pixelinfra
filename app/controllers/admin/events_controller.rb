@@ -1,5 +1,9 @@
 class Admin::EventsController < Admin::BaseController
   autocomplete :place, :name
+  has_scope :by_subsite
+  has_scope :by_project
+  has_scope :by_festival
+  has_scope :by_year
   
   def edit
     @event = Event.friendly.find(params[:id])

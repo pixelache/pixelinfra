@@ -1,11 +1,46 @@
 .row
   .small-9.columns
     %h3 Events
+    
+    .filter_box.row
+      .large-4.columns
+        .filter_title Filter by site:
+        %select#by_subsite
+          %option{:value => ""} &nbsp;
+          - Subsite.all.each do |subsite|
+            %option{:value => subsite.id, :selected => (params[:by_subsite] == subsite.id.to_s ? :selected : false)}= subsite.name
+      .large-4.columns
+        .filter_title Filter by festival
+        %select#by_festival
+          %option{:value => ""} &nbsp;
+          - Festival.all.each do |festival|
+            %option{:value => festival.id, :selected => (params[:by_festival] == festival.id.to_s ? :selected : false)}= festival.name
+      .large-4.columns
+        .filter_title Filter by project:
+        %select#by_project
+          %option{:value => ""} &nbsp;
+          - Project.all.each do |project|
+            %option{:value => project.id, :selected => (params[:by_project] == project.id.to_s ? :selected : false)}= project.name
+      .large-4.columns
+        .filter_title Filter by year:
+        %select#by_year
+          %option{value: ""} &nbsp;
+          - Time.now.year.downto(2002).each do |year|
+            %option{:value => year, :selected => (params[:by_year] == year.to_s ? :selected : false)}= year.to_s
+      :javascript
+        $('.filter_box select').change(function() {
+          var parts = "#{request.url}".split(/\?/, 2);
+          if (parts[1]) {
+            window.location.href=parts[0] + "?" + parts[1].replace(new RegExp("\\&*" + $(this).attr('id') + "\=\\d+", "g"), '') + "&" + $(this).attr('id') + "=" + $(this).val();
+          } else {
+            window.location.href=parts[0] + "?" + $(this).attr('id') + "=" + $(this).val();
+          }
+        });    
     %table.table.table-condensed
       %thead
         %tr
           %th Name
-          %th Project
+          %th Site
           %th When?
           %th Published?
           %th{:colspan => 2}

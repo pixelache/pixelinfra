@@ -18,7 +18,10 @@ class Event < ActiveRecord::Base
 
   scope :published, -> () { where(published: true) }
   scope :by_site, -> (x) { includes(:subsite).where(:subsite_id => x) }
-  
+  scope :by_festival, -> festival { where(festival_id: festival) }
+  scope :by_subsite, -> subsite { where(subsite_id: subsite ) }
+  scope :by_project, -> project { where(project_id: project) }
+  scope :by_year, -> year { where(["start_at >= ? AND start_at <= ?", year+"-01-01", year+"-12-31"])}
   def name_en
     self.name(:en)
   end

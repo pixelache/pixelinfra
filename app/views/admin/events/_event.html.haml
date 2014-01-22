@@ -1,5 +1,14 @@
 %tr
-  %td= event.name
+  %td
+    = event.name
+    .small
+      - unless event.project.blank?
+        &sdot;
+        = link_to event.project.name, [:admin, event.project], :target => :_blank
+      - unless event.festival.blank?
+        &sdot;
+        = link_to event.festival.name, [:admin, event.festival], :target => :_blank
+      
   %td= event.subsite.name
   %td= event.start_at.strftime('%d %B %Y')
   %td= event.published == true ? 'yes' : 'no'
