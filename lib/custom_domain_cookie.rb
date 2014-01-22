@@ -2,11 +2,11 @@ module OmniAuth
   class Builder < ::Rack::Builder
     def initialize(app, &block)
       @options = nil
+      @default_domain = '.pixelache.ac'
       if rack14?
         super
       else
         @app = app
-        @default_domain = '.pixelache.ac'
         super(&block)
         @ins << @app
       end
