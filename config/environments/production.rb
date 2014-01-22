@@ -90,6 +90,3 @@ Pixelinfra::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
   config.middleware.use "CustomDomainCookie", ".pixelache.ac"
 end
-ActionController::Base.session = {
-  :domain => ".pixelache.ac"
-}
