@@ -4,4 +4,5 @@ class Subsite < ActiveRecord::Base
   has_many :events
   has_many :posts
   has_and_belongs_to_many :nodes
+  has_and_belongs_to_many :etherpads
 end

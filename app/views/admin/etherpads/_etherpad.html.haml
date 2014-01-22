@@ -1,6 +1,8 @@
 %tr
   %td= link_to etherpad.name, 'http://pad.pixelache.ac/p/' + etherpad.name, :target => :_blank
   %td= etherpad.subsites.map(&:name).join(', ')
+  %td= etherpad.festivals.map(&:name).join(', ')
   %td= etherpad.projects.map(&:name).join(', ')
+  
   %td.actions
     = link_to 'Categorise', edit_admin_etherpad_path(etherpad)

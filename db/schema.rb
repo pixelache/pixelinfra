@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131219165212) do
+ActiveRecord::Schema.define(version: 20140122144046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,14 @@ ActiveRecord::Schema.define(version: 20131219165212) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "etherpads_festivals", id: false, force: true do |t|
+    t.integer "etherpad_id", null: false
+    t.integer "festival_id", null: false
+  end
+
+  add_index "etherpads_festivals", ["etherpad_id"], name: "index_etherpads_festivals_on_etherpad_id", using: :btree
+  add_index "etherpads_festivals", ["festival_id"], name: "index_etherpads_festivals_on_festival_id", using: :btree
 
   create_table "etherpads_projects", id: false, force: true do |t|
     t.integer "etherpad_id"
@@ -419,7 +427,7 @@ ActiveRecord::Schema.define(version: 20131219165212) do
     t.string   "url"
     t.string   "hostid"
     t.string   "thumbnail"
-    t.integer  "thumbnail__size"
+    t.integer  "thumbnail_size",         limit: 8
     t.integer  "thumbnail_width"
     t.integer  "thumbnail_height"
     t.string   "thumbnail_content_type"
