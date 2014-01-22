@@ -2,7 +2,7 @@
   %td= link_to festival.name, festival.website
   %td= festival.node.name
   %td
-    = l festival.start_at, :format => :short
+    = date_range(festival.start_at, festival.end_at)
   %td.actions
     - if can? :edit, Festival
       = link_to 'Edit', edit_admin_festival_path(festival)
