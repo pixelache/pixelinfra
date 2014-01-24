@@ -4,7 +4,7 @@
   .row
     .small-6.columns
       %label Is this a sub-project of another project?
-      = f.input :parent, :collection => Project.roots
+      = f.input :parent, :collection => Project.all
   .row
     .small-6.columns
       %label External website URL:
