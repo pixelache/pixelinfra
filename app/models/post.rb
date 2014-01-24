@@ -29,7 +29,7 @@ class Post < ActiveRecord::Base
   scope :by_subsite, -> subsite { where(subsite_id: subsite ) }
   scope :by_project, -> project { where(project_id: project) }
   scope :by_year, -> year { where(["published_at >= ? AND published_at <= ?", year+"-01-01", year+"-12-31"])}
-    
+  scope :by_tag, -> tag{ joins(:taggings).where(:taggings => {:tag_id => tag}) }
   def check_published
     if self.published == true
       self.published_at ||= Time.now

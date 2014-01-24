@@ -2,30 +2,36 @@
   .small-10.columns
     %h2 Posts
     .filter_box.row
-      .large-3.columns
+      .large-2.columns
         .filter_title Filter by site:
         %select#by_subsite
           %option{:value => ""} &nbsp;
           - Subsite.all.each do |subsite|
             %option{:value => subsite.id, :selected => (params[:by_subsite] == subsite.id.to_s ? :selected : false)}= subsite.name
-      .large-3.columns
+      .large-2.columns
         .filter_title Filter by festival
         %select#by_festival
           %option{:value => ""} &nbsp;
           - Festival.all.each do |festival|
             %option{:value => festival.id, :selected => (params[:by_festival] == festival.id.to_s ? :selected : false)}= festival.name
-      .large-3.columns
+      .large-2.columns
         .filter_title Filter by project:
         %select#by_project
           %option{:value => ""} &nbsp;
           - Project.all.each do |project|
             %option{:value => project.id, :selected => (params[:by_project] == project.id.to_s ? :selected : false)}= project.name
-      .large-3.columns
+      .large-2.columns
         .filter_title Filter by year:
         %select#by_year
           %option{value: ""} &nbsp;
           - Time.now.year.downto(2002).each do |year|
             %option{:value => year, :selected => (params[:by_year] == year.to_s ? :selected : false)}= year.to_s
+      .large-2.columns
+        .filter_title Filter by tag:
+        %select#by_tag
+          %option{value: ""} &nbsp;
+          - Post.tag_counts_on(:tags).sort_by{|x| x.name.downcase }.each do |tag|
+            %option{:value => tag.id, :selected => (params[:by_tag] == tag.id.to_s ? :selected : false)}= tag.name
       :javascript
         $('.filter_box select').change(function() {
           var parts = "#{request.url}".split(/\?/, 2);

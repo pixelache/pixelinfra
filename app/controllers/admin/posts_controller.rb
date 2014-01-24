@@ -3,7 +3,8 @@ class Admin::PostsController < Admin::BaseController
   has_scope :by_festival
   has_scope :by_project
   has_scope :by_subsite
-  has_scope :publisjhed
+  has_scope :published
+  has_scope :by_tag
   has_scope :by_year
   handles_sortable_columns
   autocomplete :event, :name, :extra_data => [:start_at], :display_value => :event_with_date
