@@ -1,3 +1,3 @@
 class FestivalsController < InheritedResources::Base
-  actions :show
+  actions :show, :index
 end

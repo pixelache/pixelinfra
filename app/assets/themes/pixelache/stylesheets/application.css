@@ -3,3 +3,7 @@
  *= require pixelache/stylesheets/style.min
  *= require pixelache/stylesheets/projects
  */
+
+#main {
+  padding-top: 25px;
+}

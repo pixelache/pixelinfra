@@ -10,6 +10,7 @@
 - if can? :manage, Subsite
   |
   = link_to 'Site configuration', admin_subsites_path
+%br/
 - if can? :manage, User
   |
   = link_to 'Users', admin_users_path
