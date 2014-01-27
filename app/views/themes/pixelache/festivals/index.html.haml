@@ -1,11 +1,13 @@
 #festival_tree
   %ul
     - @festivals.sort_by(&:start_at).reverse.each do |festival|
-      %li= festival.name
-      - unless festival.events.empty?
-        %ul.events
-          - festival.events.sort_by(&:start_at).reverse.each do |event|
-            %li= event.event_with_date
+      %li
+        = festival.name
+        - unless festival.events.empty?
+          %ul.events
+            - festival.events.sort_by(&:start_at).reverse.each do |event|
+              %li
+                %span{:style => 'font-size: 11px;font-weight: 300;color: #666;'}= event.event_with_date
 = content_for :jquery do
   :plain
      $('#festival_tree').jstree();    
