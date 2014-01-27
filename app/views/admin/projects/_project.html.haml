@@ -1,8 +1,14 @@
 %tr
-  %td= project.name
+  %td
+    - ((project.depth)*2).times do
+      = "-"
+    = project.name
   %td.actions
     - if can? :edit, Project
       = link_to 'Edit', edit_admin_project_path(project)
     - if can? :destroy, Project
       |
       = link_to 'Destroy', [:admin, project], :method => :delete, :data => {:confirm => "Are you sure?"}
+- unless project.children.empty?
+  - project.children.sort_by(&:name).each do |child|
+    %tr= render :partial => 'project', :locals => {:project => child}      

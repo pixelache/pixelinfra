@@ -8,6 +8,7 @@
           %th Name
           %th{:colspan => 2}
       %tbody
-        - @projects.each do |project|
+        - @projects.sort_by(&:name).each do |project|
+          - next unless project.root?
           = render :partial => 'project', :locals => {:project => project}
     %p= link_to 'Enter new project', new_admin_project_path
