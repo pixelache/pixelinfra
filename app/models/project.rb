@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   friendly_id :name , :use => [:finders,  :slugged, :history]
   has_paper_trail
   has_and_belongs_to_many :etherpads
+  has_many :events
  # translates :description
 #  accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['description'].blank? }
     

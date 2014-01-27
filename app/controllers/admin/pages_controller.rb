@@ -1,6 +1,7 @@
 class Admin::PagesController < Admin::BaseController
   has_scope :page, :default => 1
   handles_sortable_columns
+
   
   def create
     create! { admin_pages_path }

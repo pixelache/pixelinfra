@@ -32,6 +32,7 @@ Pixelinfra::Application.routes.draw do
 
   resources :festivals
   resources :pages
+  resources :projects
   resources :users
   resources :nodes
   resources :posts
