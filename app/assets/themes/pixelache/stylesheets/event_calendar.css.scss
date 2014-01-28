@@ -102,6 +102,9 @@
   .orbit-prev, .orbit-next, .orbit-timer, .orbit-slide-number, .orbit-bullets-container {
     display: none;
   }
+  a {
+    display: block;
+  }
   img {
         width: 100%;
         height: auto;
@@ -109,6 +112,7 @@
       }
   .orbit-container {
     z-index: 3;
+    margin-top: -15px;
   }
   .event_last {
     font-size: 10px;
@@ -116,7 +120,8 @@
   .event_arrow {
     position: absolute;
     top: 50%;
-  
+    background: rgba(255, 255, 255, 0.85);
+    padding: 1px;
   }
   &.ec-has-image {
     img {

@@ -150,7 +150,7 @@ module CalendarHelper
               has_image.push(day)
               ftext += '<a href="' + url_for(t) + '" class="' + t.class.to_s + '">  '
               if other_month_class != "ec-other-month-bg"
-                ftext += image_tag t.image.url(:thumb).gsub(/development/, 'production')  if t.class == Event
+                ftext += image_tag t.image.url(:thumb)  if t.class == Event && t.image?
                 #'<img src="' + bg + '">' if bg
               end
               
@@ -179,7 +179,7 @@ module CalendarHelper
               has_image.push(day)
               ftext += '<a href="' + elink + '">' 
               if other_month_class != "ec-other-month-bg"
-                ftext += image_tag t.image.url(:thumb).gsub(/development/, 'production')  if t.class == Event
+                ftext += image_tag t.image.url(:thumb)  if t.class == Event && t.image?
                 # "<img src=\"#{bg}\">"
               end
               ftext += "<div class=\"event_last\"><div>"
@@ -190,7 +190,7 @@ module CalendarHelper
               today_class += " middle_event"
               if day.day == 1 && other_month_class != "ec-other-month-bg"
                 ftext += '<a href="' + elink + '" class="' + t.class.to_s + '">' 
-                ftext +=  image_tag t.image.url(:thumb).gsub(/development/, 'production')
+                ftext +=  image_tag t.image.url(:thumb)
                 ftext += '<div class="event_info"><div class="event_title">' 
               
                 # break depending on day of calendar
@@ -209,8 +209,8 @@ module CalendarHelper
                   ftext += "<div class=\"event_arrow\">&#8594;</div></a>"
                 else
                   ftext += "<a href=\"#{url_for(t)}\">"
-                  ftext += image_tag t.image.url(:thumb).gsub(/development/, 'production') 
-                  image_list.push(t.image.url(:thumb).gsub(/development/, 'production'))
+                  ftext += image_tag t.image.url(:thumb) 
+                  image_list.push(t.image.url(:thumb))
                   ftext += "<div class=\"event_info\"><span class=\"event_title\">"
                   ftext += break_string_on_spaces(truncate(t.name, :length => 35),18).join('<br />') + '</span><Br />'
                   ftext += "<span class=\"event_metadata\">&#8592;</span></div></a>"
@@ -221,8 +221,8 @@ module CalendarHelper
                 if other_month_class != "ec-other-month-bg"
                   
                   if t.class == Event
-                    ftext += image_tag t.image.url(:thumb).gsub(/development/, 'production')  
-                    image_list.push(t.image.url(:thumb).gsub(/development/, 'production'))
+                    ftext += image_tag t.image.url(:thumb)  if t.image?
+                    image_list.push(t.image.url(:thumb)) if t.image?
                   end
                   #"<img src=\"#{bg}\">"
                 end
@@ -246,7 +246,7 @@ module CalendarHelper
             else
               cal << '<ul data-orbit>'
               image_list.compact.uniq.each do |i|
-                cal << '<li><img src="' + i.gsub(/development/, 'production') + '"></li>'
+                cal << '<li><img src="' + i + '"></li>'
               end
               cal << '</ul>'
             end
