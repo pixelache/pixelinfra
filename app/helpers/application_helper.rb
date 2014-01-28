@@ -1,4 +1,19 @@
 module ApplicationHelper
+  
+
+  def break_string_on_spaces(string, position, counter = 18)
+    out = Array.new
+    base = [0, find_nearest_space(string, position, counter)].flatten.compact
+    base.each_with_index do |position, index|
+      if index+1 == base.size
+        out << string.slice(position..string.length).strip
+      else
+        out << string.slice(position..base[index+1]).strip
+      end
+    end
+    return out
+  end
+  
   def date_range(from_date, until_date, options = {})
       options.symbolize_keys!
       format = options[:format] || :short
@@ -27,5 +42,20 @@ module ApplicationHelper
         end
       end
     end
-    
+
+  
+  def find_nearest_space(string, start, counter = 18)
+    return nil if string.nil?
+    if start > string.length
+      return
+    else
+      start.downto(start-counter) do |char|    
+        splitchar = char
+        if string.slice(char..char) =~ /\s/
+          return Array.new.push(char, find_nearest_space(string, char + counter))
+        end
+      end
+    end
+  end
+        
 end

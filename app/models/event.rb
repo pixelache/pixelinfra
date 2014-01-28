@@ -31,6 +31,14 @@ class Event < ActiveRecord::Base
     self.name + " (#{self.start_at.strftime("%d.%m.%Y")})"
   end
   
+  def happens_on?(day)
+    if end_at.blank?
+      return true if day.to_date == start_at.to_date
+    else
+      return true if day.to_date >= start_at.to_date && day.to_date <= end_at.to_date
+    end
+  end
+
   def place_name
     place.blank? ? nil : place.name
   end
