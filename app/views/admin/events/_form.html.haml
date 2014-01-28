@@ -8,7 +8,7 @@
     %label Part of a festival?
     .small-4.columns= f.input :festival
     %label Part of a project?
-    .small-4.columns= f.input :project
+    .small-4.columns= f.input :project, :collection => Project.all.order(:name)
     .small-6.columns
       = f.input :place_name, :as => :autocomplete, :url =>  autocomplete_place_name_admin_events_path, :input_html => { :required => '', :id_element => '#event_place_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Where does this take place?", :hint => raw("(If it's a place not already the database, <a href=\"/admin/places/new\" target=\"_blank\">create it first.</a>)")
       %small.error You must select a place for this event.
