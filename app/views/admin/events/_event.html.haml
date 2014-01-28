@@ -1,5 +1,7 @@
 %tr
   %td
+    - if event.image?
+      = image_tag event.image.url(:thumb), :width => 60
     = event.name
     .small
       - unless event.project.blank?
