@@ -242,7 +242,7 @@ module CalendarHelper
           cal << "<div class=\"multiple\">" + has_events.select{|x| x == day }.count.to_s + " events today</div>"
           unless image_list.compact.empty?
             if image_list.compact.size == 1
-              cal << '<img src="' + i + '">'
+              cal << '<img src="' + image_list.first + '">'
             else
               cal << '<ul data-orbit>'
               image_list.compact.uniq.shuffle.each do |i|
