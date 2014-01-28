@@ -1,44 +1,57 @@
-- if current_user
-  = "Logged in as #{current_user.username}"
-  |
-  = link_to 'Edit your profile', edit_user_registration_path(current_user)
-  |
-  = link_to 'Sign out', '/signout'
-- else
-  = link_to 'Login', 'http://auth.pixelache.ac/users/sign_in'
-  
-- if can? :manage, Subsite
-  |
-  = link_to 'Site configuration', admin_subsites_path
-%br/
-- if can? :manage, User
-  |
-  = link_to 'Users', admin_users_path
-- if can? :manage, Event
-  |
-  = link_to 'Events', admin_events_path
-- if can? :manage, Place
-  |
-  = link_to 'Places', admin_places_path
-- if can? :manage, Page
-  |
-  = link_to 'Pages', admin_pages_path  
-- if can? :manage, Node
-  |
-  = link_to "Nodes", admin_nodes_path
-- if can? :manage, Festival
-  |
-  = link_to "Festivals", admin_festivals_path  
-- if can? :manage, Project
-  |
-  = link_to 'Projects', admin_projects_path
-- if can? :manage, Post
-  |
-  = link_to 'Posts', admin_posts_path
-- if can? :manage, Etherpad
-  |
-  = link_to 'Etherpads', admin_etherpads_path
-- if can? :manage, Flickrset
-  |
-  = link_to 'Flickr archive', admin_flickrsets_path
+%nav.top-bar{:"data-topbar" => ""}
+  %ul.title-area
+    %li.name
+      %h1 Pixelache
+  %section.top-bar-section
+    %ul.right
+      - if current_user
+        %li.has-dropdown
+          %a{:href=> '#'}= current_user.username
+          %ul.dropdown
+            %li= link_to 'Edit your profile', edit_user_registration_path(current_user)
+            %li= link_to 'Sign out', '/signout'
+      - else
+        %li.active= link_to 'Sign in', 'http://auth.pixelache.ac/users/sign_in'
+    
+    - if current_user
+
+      %ul.left
+        %li.has-dropdown
+          %a{:href => '#'} Site configuration            
+          %ul.dropdown
+            - if can? :manage, Subsite
+              %li= link_to 'Site/sub-sites', admin_subsites_path
+            - if can? :manage, User
+              %li= link_to 'Users', admin_users_path
+            - if can? :manage, Node
+              %li= link_to "Nodes", admin_nodes_path 
+      %ul.left
+        %li.has-dropdown
+          %li.has-dropdown
+            %a{:href => '#'} Events / activities
+            %ul.dropdown
+              - if can? :manage, Event
+                %li= link_to 'Events', admin_events_path
+              - if can? :manage, Project
+                %li= link_to 'Projects', admin_projects_path            
+              - if can? :manage, Place
+                %li= link_to 'Places', admin_places_path
+              - if can? :manage, Festival
+                %li= link_to "Festivals", admin_festivals_path
+      %ul.left
+        %li.has-dropdown
+          %a{:href => '#'} Posts / pages
+          %ul.dropdown
+            - if can? :manage, Post
+              %li= link_to 'Posts', admin_posts_path
+            - if can? :manage, Page
+              %li= link_to 'Pages', admin_pages_path  
+      %ul.left
+        %li.has-dropdown
+          %a{:href => '#'} Archival
+          %ul.dropdown
+            - if can? :manage, Etherpad
+              %li= link_to 'Etherpads', admin_etherpads_path
+            - if can? :manage, Flickrset
+              %li= link_to 'Flickr archive', admin_flickrsets_path
   
