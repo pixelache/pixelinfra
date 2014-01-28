@@ -102,16 +102,21 @@
   .orbit-prev, .orbit-next, .orbit-timer, .orbit-slide-number, .orbit-bullets-container {
     display: none;
   }
+  img {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+      }
   .orbit-container {
     z-index: 3;
-    .orbit-slides-container img {
-      width: 100%;
-      height: auto;
-      max-width: 100%;
-    }
   }
   .event_last {
     font-size: 10px;
+  }
+  .event_arrow {
+    position: absolute;
+    top: 50%;
+  
   }
   &.ec-has-image {
     img {
