@@ -25,13 +25,14 @@
   .row
     .small-4.columns
       %label Did this project evolve from another project?
-      = f.input :evolvedfrom, :collect => Project.all.order(:name)
+      = f.input :evolvedfrom, :collection => Project.all.order(:name)
       %label If so, then what year did the evolved project begin?
       = f.input :evolution_year
 
   .row
     .small-12.columns
       %label Images
+      %p Images will show at the top of the project page. If there is more than 1, a slideshow will be shown.
       .row
         = f.semantic_fields_for :photos do |ff|
 
@@ -39,7 +40,22 @@
             - if ff.object.filename?
               = image_tag ff.object.filename.url(:thumb)
             = ff.input :filename
-        
+            = ff.link_to_remove 'Remove this image'
       = f.link_to_add 'Add a photo', :photos
+      
+  .row
+    .small-6
+      %label Attachments
+      %p You can upload any other files that can be downloaded from the Project page.
+  .row
+    = f.semantic_fields_for :attachments do |ff|
+
+      .small-3.columns
+        - if !ff.object.nil?
+          = ff.object.attachedfile
+          = link_to 'Download', ff.object.attachedfile.url, :class => [:button, :round, :tiny]
+        = ff.input :attachedfile
+        = ff.link_to_remove 'Remove this attachment'
+  = f.link_to_add 'Add an attachment', :attachments
   .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]
