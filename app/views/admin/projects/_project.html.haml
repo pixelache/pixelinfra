@@ -2,7 +2,9 @@
   %td
     - ((project.depth)*2).times do
       = "-"
-    = project.name
+    %span{:class => project.evolvedto ? :evolved : false}= project.name
+    - if project.evolvedto
+      %small= "Evolved into #{project.evolvedto.name}"
   %td.actions
     - if can? :edit, Project
       = link_to 'Edit', edit_admin_project_path(project)

@@ -57,10 +57,14 @@ table {
       font-size: 9px;
       text-transform: uppercase;
     }
+    span.evolved {
+      text-decoration: line-through;
+    }
   }
   tr.child {
     display: none;
   }
+  
 }
 
 .post_body, .post_body p {

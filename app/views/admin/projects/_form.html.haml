@@ -51,7 +51,7 @@
     = f.semantic_fields_for :attachments do |ff|
 
       .small-3.columns
-        - if !ff.object.nil?
+        - if ff.object.attachedfile?
           = ff.object.attachedfile
           = link_to 'Download', ff.object.attachedfile.url, :class => [:button, :round, :tiny]
         = ff.input :attachedfile
