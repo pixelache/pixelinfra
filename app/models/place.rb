@@ -5,7 +5,7 @@ class Place < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode, :on => :create
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? }
-
+  has_many :events, :dependent => :nullify
   
   def name_en
     self.name(:en)

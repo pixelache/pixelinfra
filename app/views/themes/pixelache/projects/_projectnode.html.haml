@@ -1,11 +1,19 @@
-= project.name
-- unless project.events.empty?
-  %ul.events
-    - project.events.sort_by(&:start_at).each do |event|
-      %li
-        %span{:style => 'font-size: 11px;font-weight: 300;color: #666;'}= event.event_with_date  
+%li
+  = project.name
+  - if project.evolvedfrom
+    %small= "evolved in #{project.evolution_year}"
 
-- unless project.children.empty?
-  %ul
-    - project.children.sort_by(&:name).each do |child|
-      %li= render :partial => 'projectnode', :locals => {:project => child}
+  - unless project.events.empty?
+    %ul.events
+      - project.events.sort_by(&:start_at).each do |event|
+        %li
+          %span{:style => 'font-size: 11px;font-weight: 300;color: #666;'}= link_to event.event_with_date, event
+
+  - unless project.children.empty?
+    %ul
+      - project.children.sort_by(&:name).each do |child|
+        - if child.evolvedfrom
+          - next unless child.evolvedfrom.parent_id != child.parent_id
+        = render :partial => 'projectnode', :locals => {:project => child}
+  - if project.evolvedto
+    %ul= render :partial => 'projectnode', :locals => {:project => project.evolvedto}
