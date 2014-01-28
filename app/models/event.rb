@@ -10,7 +10,8 @@ class Event < ActiveRecord::Base
   has_paper_trail
   mount_uploader :image, ImageUploader
   resourcify
-
+  has_event_calendar
+  
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? && x['description'].blank? }
   attr_accessor  :place_name
   before_save :update_image_attributes

@@ -127,6 +127,7 @@ GEM
     erubis (2.7.0)
     etherpad-lite (0.3.0)
       rest-client (>= 1.6)
+    event-calendar (2.3.3)
     excon (0.28.0)
     execjs (2.0.2)
     factory_girl (4.3.0)
@@ -415,6 +416,7 @@ DEPENDENCIES
   devise
   email_spec
   etherpad-lite
+  event-calendar
   execjs
   factory_girl_rails
   faker
