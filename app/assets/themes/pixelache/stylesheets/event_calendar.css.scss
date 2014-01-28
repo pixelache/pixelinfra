@@ -99,6 +99,20 @@
 
 .ec-day-bg {
   border-left: 1px solid #d5d5d5;
+  .orbit-prev, .orbit-next, .orbit-timer, .orbit-slide-number, .orbit-bullets-container {
+    display: none;
+  }
+  .orbit-container {
+    z-index: 3;
+    .orbit-slides-container img {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+    }
+  }
+  .event_last {
+    font-size: 10px;
+  }
   &.ec-has-image {
     img {
       width: 100%;
@@ -110,6 +124,10 @@
       position: absolute;
       top: 50%;
       font-weight: bold;
+      z-index: 5;
+      margin-left: 105px;
+      background: rgba(189, 185, 160, 0.85);
+      padding: 1px;
     }
   }
   &.ec-multiple-events {
@@ -117,7 +135,10 @@
       font-size: 10px;
       font-weight: 300;
       position: absolute;
-      top: 60%;
+      top: 50%;
+      z-index: 5;
+      background: rgba(189, 185, 160, 0.85);
+      padding: 1px;
     }
   }
 }
@@ -130,6 +151,7 @@
   position: relative;
   width: 100%;
   table-layout: fixed;
+  z-index: 5;
 }
 
 /* Day header */

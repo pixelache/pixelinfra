@@ -136,10 +136,15 @@ module CalendarHelper
         elink  = ''
         ftext = ''
         festival_text = ''
+        image_list = []
         things.each do |t|
           if t.happens_on?(day)
             has_events.push(day)
-            bg = t.image.url(:thumb) if t.class == Event
+            
+            if t.class == Event
+              bg = t.image.url(:thumb) 
+              image_list.push(t.image.url(:thumb))
+            end
             elink = url_for(t)
             if t.start_at.to_date == day.to_date
               has_image.push(day)
@@ -178,7 +183,7 @@ module CalendarHelper
                 # "<img src=\"#{bg}\">"
               end
               ftext += "<div class=\"event_last\"><div>"
-              ftext += t(:last_day)
+              ftext += "<span class=\"small\">".html_safe + t(:last_day) + ": #{break_string_on_spaces(t.name, 18).join('<br />')}</span>".html_safe
               ftext +=  "</div></div></a>"
             else
 
@@ -205,6 +210,7 @@ module CalendarHelper
                 else
                   ftext += "<a href=\"#{url_for(t)}\">"
                   ftext += image_tag t.image.url(:thumb) 
+                  image_list.push(t.image.url(:thumb))
                   ftext += "<div class=\"event_info\"><span class=\"event_title\">"
                   ftext += break_string_on_spaces(truncate(t.name, :length => 35),18).join('<br />') + '</span><Br />'
                   ftext += "<span class=\"event_metadata\">&#8592;</span></div></a>"
@@ -213,7 +219,11 @@ module CalendarHelper
               else    
                 ftext += "<a href=\"#{url_for(t)}\">"
                 if other_month_class != "ec-other-month-bg"
-                  ftext += image_tag t.image.url(:thumb)  if t.class == Event
+                  
+                  if t.class == Event
+                    ftext += image_tag t.image.url(:thumb)  
+                    image_list.push(t.image.url(:thumb))
+                  end
                   #"<img src=\"#{bg}\">"
                 end
                 ftext += "<div class=\"event_arrow\">&#8594;</div></a>"
@@ -227,8 +237,20 @@ module CalendarHelper
         end
 	ftext = ftext.force_encoding('utf-8')
         cal << %(<td class="ec-day-bg #{today_class} #{other_month_class} #{has_events.select{|element| has_events.count(element) > 1 }.include?(day) ? "ec-multiple-events" : false} #{(has_image.include?(day) ? "ec-has-image" : false)}">)
+        # multiple events on the day, so ... SLIDESHOW
         if has_events.select{|element| has_events.count(element) > 1 }.include?(day)
           cal << "<div class=\"multiple\">" + has_events.select{|x| x == day }.count.to_s + " events today</div>"
+          unless image_list.compact.empty?
+            if image_list.compact.size == 1
+              cal << '<img src="' + i + '">'
+            else
+              cal << '<ul data-orbit>'
+              image_list.compact.uniq.each do |i|
+                cal << '<li><img src="' + i.gsub(/development/, 'production') + '"></li>'
+              end
+              cal << '</ul>'
+            end
+          end
           unless festival_text.blank?
             cal  << %(#{festival_text}&nbsp;</td>)
           end
