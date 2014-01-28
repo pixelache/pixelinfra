@@ -245,7 +245,7 @@ module CalendarHelper
               cal << '<img src="' + i + '">'
             else
               cal << '<ul data-orbit>'
-              image_list.compact.uniq.each do |i|
+              image_list.compact.uniq.shuffle.each do |i|
                 cal << '<li><img src="' + i + '"></li>'
               end
               cal << '</ul>'
