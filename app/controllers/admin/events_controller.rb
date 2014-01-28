@@ -1,19 +1,36 @@
 class Admin::EventsController < Admin::BaseController
   autocomplete :place, :name
+  handles_sortable_columns
   has_scope :by_subsite
   has_scope :by_project
   has_scope :by_festival
   has_scope :by_year
-  
+
+  def create
+    create! { admin_events_path }
+  end
+    
   def edit
     @event = Event.friendly.find(params[:id])
     super
   end
-  
-  def create
-    create! { admin_events_path }
+
+  def index
+    order = sortable_column_order do |column, direction|
+      case column
+      when "name"
+        "LOWER(slug) #{direction}"
+      when "published"
+        "published #{direction}, start_at #{direction}"
+      when "when"
+        "start_at #{direction}"
+      else
+        "end_at DESC"
+      end
+    end
+    @events = apply_scopes(Event).includes(:subsite).order(order).page(params[:page]).per(30)
   end
-  
+
   def update
     update! { admin_events_path }
   end

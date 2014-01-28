@@ -1,7 +1,7 @@
 .row
   .small-9.columns
     %h3 Events
-    %p= link_to 'Create new event', new_admin_event_path    
+    %p= link_to 'Create new event', new_admin_event_path, :class => [:button, :small, :round]
     .filter_box.row
       .large-3.columns
         .filter_title Filter by site:
@@ -36,18 +36,19 @@
             window.location.href=parts[0] + "?" + $(this).attr('id') + "=" + $(this).val();
           }
         });    
+    = paginate @events         
     %table.table.table-condensed
       %thead
         %tr
-          %th Name
+          %th= sortable_column "Name"
           %th Site
-          %th When?
-          %th Published?
+          %th= sortable_column "When"
+          %th= sortable_column "Published"
           %th{:colspan => 2}
       %tbody
         - @events.each do |event|
           = render :partial => 'event', :locals => {:event => event}
-
+    = paginate @events
 .row
   .small-9.columns
-    %p= link_to 'Create new event', new_admin_event_path
+    %p= link_to 'Create new event', new_admin_event_path, :class => [:button, :small, :round]
