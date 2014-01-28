@@ -1,0 +1,16 @@
+.row
+  .small-10.columns
+    %h1= @project.name
+    
+- unless @project.photos.empty?
+  .row
+    .small-10.columns
+      - @project.photos.each do |photo|
+        = image_tag photo.filename.url
+
+.row
+  .small-3.push-9.columns
+    - @project.children.each do |subproject|
+      = link_to subproject.name, subproject
+  .small-9.columns.pull-3
+    = raw @project.description
