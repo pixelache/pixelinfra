@@ -99,11 +99,25 @@
 
 .ec-day-bg {
   border-left: 1px solid #d5d5d5;
-  &.ec-has_image {
+  &.ec-has-image {
     img {
       width: 100%;
       max-width: 100%;
       height: auto;
+    }
+    .festival_arrow {
+      font-size: 24px;
+      position: absolute;
+      top: 50%;
+      font-weight: bold;
+    }
+  }
+  &.ec-multiple-events {
+    .multiple {
+      font-size: 10px;
+      font-weight: 300;
+      position: absolute;
+      top: 60%;
     }
   }
 }
@@ -235,6 +249,31 @@ a.ec-day-link {
   margin-right: 3px;
   border-left: 4px solid white;
 }
+
+.festival_info {
+  position: absolute;
+  font: 22px/15px Lucida Granda, Arial, sans-serif;
+  color: #FFF;
+  font-weight: 600;
+  top: 19px;
+  .festival_title {
+    margin-top: 7px;
+    color: #333;
+  }
+  a {
+    color: #333;
+  }
+ /* left: 0;*/
+  margin: 5px;
+  z-index: 4;
+  color: black;
+  letter-spacing: -1px;
+  background: rgb(185, 189, 160);
+  background: rgba(189, 185, 160, 0.85);
+  padding: 3px 2px;  
+}
+
+
 .event_info {
  position: absolute;
  font: 13px/15px Lucida Granda, Arial, sans-serif;
