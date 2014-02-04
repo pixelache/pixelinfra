@@ -1,3 +1,4 @@
+%h1 Post
 = semantic_nested_form_for [:admin, @post], :html => {:class => "custom", :multipart => true} do |f|
   .row
     %label Which site:
@@ -7,8 +8,11 @@
       - if f.object.wordpress_scope
         %label Historical info: belongs to scope
         = f.object.wordpress_scope
-      %label Database ID:
-      = f.object.id.to_s
+      %label 
+        Database ID #:
+        = f.object.id.to_s
+
+      = f.input :external, :label => " External event (not about a Pixelache activity)"
     .small-6.columns= f.input :post_categories
   .row
     %dl.tabs{"data-tab" => ""}
@@ -48,7 +52,7 @@
             - if ff.object.filename?
               = image_tag ff.object.filename.url(:thumb)
             = ff.input :filename
-            = link_to_remove 'Remove this photo'
+            = f.link_to_remove 'Remove this photo'
       = f.link_to_add 'Add a photo', :photos
   .row
     .small-6.columns

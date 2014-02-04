@@ -1,7 +1,7 @@
 %nav.top-bar{:"data-topbar" => ""}
   %ul.title-area
     %li.name
-      %h1 Pixelache
+      %h1= @site.name
     %li.toggle-topbar.menu-icon= link_to 'Menu', '#'
   %section.top-bar-section
     - if current_user
@@ -12,8 +12,10 @@
             %li= link_to 'Edit your profile', edit_user_registration_path(current_user)
             %li= link_to 'Sign out', '/signout'
       %ul.right
-        = form_tag('/admin/search') do |f|
-          %li= text_field_tag :searchterm, 'Search'
+        %li.has-form
+          = form_tag('/admin/search') do |f|
+            .row.collapse
+              .small-10.columns= text_field_tag :searchterm, 'Search'
         = content_for :jquery do
           :plain 
             $('input#searchterm').clearField();

@@ -1,4 +1,9 @@
-class Admin::PostsController < Admin::BaseController
+class Admin::PostsController < ApplicationController
+  inherit_resources
+  layout 'admin'
+  authorize_resource
+  before_filter :authenticate_user!
+  
   has_scope :page, :default => 1
   has_scope :by_festival
   has_scope :by_project
@@ -12,6 +17,10 @@ class Admin::PostsController < Admin::BaseController
   autocomplete :event, :name, :extra_data => [:start_at], :display_value => :event_with_date
   autocomplete :project, :name
   autocomplete :festival, :name
+
+  def check_permissions
+    authorize! :create, resource
+  end
   
   def create
     create! { admin_posts_path }
