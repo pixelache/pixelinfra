@@ -2,15 +2,23 @@
   %ul.title-area
     %li.name
       %h1 Pixelache
+    %li.toggle-topbar.menu-icon= link_to 'Menu', '#'
   %section.top-bar-section
-    %ul.right
-      - if current_user
+    - if current_user
+      %ul.right
         %li.has-dropdown
           %a{:href=> '#'}= current_user.username
           %ul.dropdown
             %li= link_to 'Edit your profile', edit_user_registration_path(current_user)
             %li= link_to 'Sign out', '/signout'
-      - else
+      %ul.right
+        = form_tag('/admin/search') do |f|
+          %li= text_field_tag :searchterm, 'Search'
+        = content_for :jquery do
+          :plain 
+            $('input#searchterm').clearField();
+    - else
+      %ul.right
         %li.active= link_to 'Sign in', 'http://auth.pixelache.ac/users/sign_in'
     
     - if current_user

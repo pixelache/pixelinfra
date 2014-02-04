@@ -20,19 +20,47 @@ header {
   margin-bottom: 25px;
 }
 
-form {
-  dl.tabs {
-    
-    dd {
-      border-top: 1px dotted #333;
-      border-right: 1px dotted #333;
-      border-left: 1px dotted #333;
+nav.top-bar {
+  ul.title-area {
+    li.name {
+      padding: 0px 5px;
+      h1 {
+        color: #ABA;
+        font-weight: bold;
+      }
     }
   }
-  .tabs-content {
-    border: 1px dotted #333;
-    padding-left: 10px;
+}
+
+.search_hit {
+  padding: 10px 0px;
+  border-bottom: 1px dotted #999;
+  .small {
+    margin-top: 5px;
+    font-size: 11px;
+    text-transform: uppercase;
+    a {
+
+     font-weight: 200; 
+    }
   }
+  
+}
+
+dl.tabs {
+  
+  dd {
+    border-top: 1px dotted #333;
+    border-right: 1px dotted #333;
+    border-left: 1px dotted #333;
+  }
+}
+.tabs-content {
+  border: 1px dotted #333;
+  padding-left: 10px;
+}
+
+form {
   li {
     list-style-type: none;
   }
@@ -50,6 +78,7 @@ form {
     color: #666;
   }
 }
+
 
 table {
   td {

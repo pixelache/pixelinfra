@@ -1,0 +1,21 @@
+.search_hit.row
+  .small-10.columns
+    = link_to hit.title, hit, :target => :_blank
+    %small= l hit.published_at, :format => :short
+    .small
+      = hit.wordpress_author
+      - unless hit.photos.empty?
+        &sdot;
+        = pluralize(hit.photos.size, 'photo') + " attached"
+      - unless hit.event.blank?
+        %br/
+        &sdot;
+        = link_to hit.event.name, hit.event, :target => :_blank
+      - unless hit.project.blank?
+        &sdot;
+        = link_to hit.project.name, [:admin, hit.project], :target => :_blank
+      - unless hit.festival.blank?
+        &sdot;
+        = link_to hit.festival.name, [:admin, hit.festival], :target => :_blank
+  .small-2.column 
+    = link_to "edit", edit_admin_post_path(hit), :target => :_blank, :class => [:button, :round, :tiny]

@@ -5,6 +5,8 @@ class Admin::PostsController < Admin::BaseController
   has_scope :by_subsite
   has_scope :published
   has_scope :by_tag
+  has_scope :is_pixelache, type: :boolean, default: true
+  has_scope :is_external, type: :boolean
   has_scope :by_year
   handles_sortable_columns
   autocomplete :event, :name, :extra_data => [:start_at], :display_value => :event_with_date

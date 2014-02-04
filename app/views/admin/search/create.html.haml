@@ -1,0 +1,18 @@
+.row
+  .small-12.columns
+    %h2 
+      Search results for:
+      %em= params[:searchterm]
+
+.row
+  .small-10.columns
+    #search_results
+      %dl.tabs{:"data-tab" => ""}
+        - @hits.group_by{|x| x.class}.each_with_index do |cl, i|
+          %dd{:class => (i == 0 ? :active : false)}= link_to "#{cl.first.to_s} (#{cl.last.count})", "##{cl.first.to_s}"
+      .tabs-content
+        - @hits.group_by{|x| x.class}.each_with_index do |cl, i|
+          .content{:id => cl.first.to_s, :class => (i == 0 ? :active : false)}
+            - cl.last.each do |hit|
+              .hit= render :partial => hit.class.to_s.downcase, :locals => {:hit => hit}
+    

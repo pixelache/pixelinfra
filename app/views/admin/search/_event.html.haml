@@ -1,0 +1,14 @@
+.search_hit.row
+  .small-10.columns
+    = link_to hit.name, hit, :target => :_blank
+    %small= date_range(hit.start_at, hit.end_at)
+    .small
+      - unless hit.project.blank?
+        &sdot;
+        = link_to hit.project.name, [:admin, hit.project], :target => :_blank
+      - unless hit.festival.blank?
+        &sdot;
+        = link_to hit.festival.name, [:admin, hit.festival], :target => :_blank
+    
+  .small-2.column 
+    = link_to "edit", edit_admin_event_path(hit), :target => :_blank, :class => [:button, :round, :tiny]

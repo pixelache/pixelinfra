@@ -21,6 +21,7 @@ Pixelinfra::Application.routes.draw do
       get :autocomplete_project_name, :on => :collection            
     end
     resources :projects
+    resources :search
     resources :subsites do
       resources :pages
       resources :posts

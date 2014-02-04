@@ -1,47 +1,65 @@
 .row
   .small-10.columns
-    %h2 Posts
-    .filter_box.row
-      .large-2.columns
-        .filter_title Filter by site:
-        %select#by_subsite
-          %option{:value => ""} &nbsp;
-          - Subsite.all.each do |subsite|
-            %option{:value => subsite.id, :selected => (params[:by_subsite] == subsite.id.to_s ? :selected : false)}= subsite.name
-      .large-2.columns
-        .filter_title Filter by festival
-        %select#by_festival
-          %option{:value => ""} &nbsp;
-          - Festival.all.each do |festival|
-            %option{:value => festival.id, :selected => (params[:by_festival] == festival.id.to_s ? :selected : false)}= festival.name
-      .large-2.columns
-        .filter_title Filter by project:
-        %select#by_project
-          %option{:value => ""} &nbsp;
-          - Project.all.each do |project|
-            %option{:value => project.id, :selected => (params[:by_project] == project.id.to_s ? :selected : false)}= project.name
-      .large-2.columns
-        .filter_title Filter by year:
-        %select#by_year
-          %option{value: ""} &nbsp;
-          - Time.now.year.downto(2002).each do |year|
-            %option{:value => year, :selected => (params[:by_year] == year.to_s ? :selected : false)}= year.to_s
-      .large-2.columns
-        .filter_title Filter by tag:
-        %select#by_tag
-          %option{value: ""} &nbsp;
-          - Post.tag_counts_on(:tags).sort_by{|x| x.name.downcase }.each do |tag|
-            %option{:value => tag.id, :selected => (params[:by_tag] == tag.id.to_s ? :selected : false)}= tag.name
-      :javascript
-        $('.filter_box select').change(function() {
-          var parts = "#{request.url}".split(/\?/, 2);
-          if (parts[1]) {
-            window.location.href=parts[0] + "?" + parts[1].replace(new RegExp("\\&*" + $(this).attr('id') + "\=\\d+", "g"), '') + "&" + $(this).attr('id') + "=" + $(this).val();
-          } else {
-            window.location.href=parts[0] + "?" + $(this).attr('id') + "=" + $(this).val();
-          }
-        }); 
-            
+    %h2 
+      Posts
+      %small
+        = pluralize(@posts.total_count, 'posts')
+        match these filters
+.filter_box.row
+  .large-2.columns
+    .filter_title Filter by site:
+    %select#by_subsite
+      %option{:value => ""} &nbsp;
+      - Subsite.all.each do |subsite|
+        %option{:value => subsite.id, :selected => (params[:by_subsite] == subsite.id.to_s ? :selected : false)}= subsite.name
+  .large-2.columns
+    .filter_title Filter by festival
+    %select#by_festival
+      %option{:value => ""} &nbsp;
+      - Festival.all.each do |festival|
+        %option{:value => festival.id, :selected => (params[:by_festival] == festival.id.to_s ? :selected : false)}= festival.name
+  .large-2.columns
+    .filter_title Filter by project:
+    %select#by_project
+      %option{:value => ""} &nbsp;
+      - Project.all.each do |project|
+        %option{:value => project.id, :selected => (params[:by_project] == project.id.to_s ? :selected : false)}= project.name
+  .large-2.columns
+    .filter_title Filter by year:
+    %select#by_year
+      %option{value: ""} &nbsp;
+      - Time.now.year.downto(2002).each do |year|
+        %option{:value => year, :selected => (params[:by_year] == year.to_s ? :selected : false)}= year.to_s
+  .large-2.columns
+    .filter_title Filter by tag:
+    %select#by_tag
+      %option{value: ""} &nbsp;
+      - Post.tag_counts_on(:tags).sort_by{|x| x.name.downcase }.each do |tag|
+        %option{:value => tag.id, :selected => (params[:by_tag] == tag.id.to_s ? :selected : false)}= tag.name
+  .large-2.columns
+    .filter_title Show:
+    %select#is_pixelache
+      %option{:value => "true", :selected => (params[:is_pixelache] == "true" ? :selected : false)} Only Pixelache
+      %option{:value => "false", :selected => (params[:is_pixelache] == "false" ? :selected : false)} All posts
+      %option{:value => "external", :selected => (params[:is_external] == "true" ? :selected : false) } Only external
+  :javascript
+    $('.filter_box select').change(function() {
+      var parts = "#{request.url}".split(/\?/, 2);
+      if ($(this).val() == "external") {
+        if (parts[1]) {
+          window.location.href=parts[0] + "?is_external=true&is_pixelache=false" + parts[1].replace(new RegExp("\\&*" + $(this).attr('id') + "\=\\w+", "g"), '');
+        } else {
+          window.location.href=parts[0] + "?is_external=true&is_pixelache=false";
+        }
+      }
+      else if (parts[1]) {
+        window.location.href=parts[0] + "?" + parts[1].replace(/is_external\=\w+/, '').replace(new RegExp("\\&*" + $(this).attr('id') + "\=(true|false|\\d+)", "g"), '') + "&" + $(this).attr('id') + "=" + $(this).val();
+      } else {
+        window.location.href=parts[0] + "?" + $(this).attr('id') + "=" + $(this).val();
+      }
+    }); 
+.row
+  .columns
     = paginate @posts
     %table.table.table-condensed
       %thead

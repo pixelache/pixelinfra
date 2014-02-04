@@ -31,7 +31,11 @@ module ApplicationHelper
       until_day = until_date.day
 
       if from_date.month == until_date.month
-        I18n.t("date_range.#{format}.same_month", from_day: from_date.day, until_day: until_date.day, month: from_month, year: from_year, sep: separator)
+        if from_date.day == until_date.day
+          I18n.l(from_date.to_date, :format => :long)
+        else
+          I18n.t("date_range.#{format}.same_month", from_day: from_date.day, until_day: until_date.day, month: from_month, year: from_year, sep: separator)
+        end
       else
         until_month = month_names[until_date.month]
         if from_date.year == until_date.year

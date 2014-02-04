@@ -1,0 +1,5 @@
+.search_hit.row
+  .small-8.columns
+    = link_to hit.name, hit
+  .small-2.column 
+    = link_to "edit", edit_admin_page_path(hit), :target => :_blank, :class => [:button, :round, :tiny]    
