@@ -15,6 +15,7 @@ module ApplicationHelper
   end
   
   def date_range(from_date, until_date, options = {})
+    return I18n.l(from_date.to_date, :format => :long) if until_date.nil?
       options.symbolize_keys!
       format = options[:format] || :short
       separator = options[:separator] || "—"

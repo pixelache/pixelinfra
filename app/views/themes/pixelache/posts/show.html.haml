@@ -1,7 +1,10 @@
 .post.row
   .small-12.columns
     %h2= @post.title
-    .metadata= "posted at #{l @post.published_at, :format => :long} by #{@post.creator.name}"
+    .metadata
+      = "posted at #{l @post.published_at, :format => :long} "
+      - unless @post.creator.nil? 
+        = "by #{@post.creator.name}"
 .row
   .small-12.column
     - if @post.image?
