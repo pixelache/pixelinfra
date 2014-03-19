@@ -14,6 +14,10 @@ gem 'execjs', :group => :production
 gem 'therubyracer', :group => :production
 
 gem 'acts-as-taggable-on'
+gem 'capistrano', '~> 3.1.0'
+gem 'capistrano-rails', '~> 1.1.0'
+gem 'capistrano-rvm'
+gem 'capistrano-bundler'
 gem 'cancan'
 gem 'carrierwave'
 gem 'closure_tree'
