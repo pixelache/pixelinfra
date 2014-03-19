@@ -8,7 +8,7 @@
         &sdot;
         = pluralize(post.photos.size, 'photo') + " attached"
       &sdot;
-      = link_to 'View', [:admin, post], :target => :_blank
+      = link_to 'View', post, :target => :_blank
       - unless post.event.blank?
         %br/
         &sdot;
