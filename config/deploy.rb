@@ -1,11 +1,12 @@
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
-set :application, 'pixelache infra'
+set :application, 'pixelacheinfra'
 set :repo_url, 'git@github.com:pixelache/pixelinfra.git'
-
+set :rvm_ruby_version, '2.1.1'
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+set :linked_files, %w{config/database.yml config/application.yml}
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/var/www/pixelinfra'

@@ -1,7 +1,7 @@
 %h2 Sign in
 = semantic_form_for(resource, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f|
-  %p= link_to 'Connect via Facebook', '/auth/facebook'
-  %p= link_to 'Connect via Google account', '/auth/google_oauth2'
-  %p= link_to 'Connect via Twitter', '/auth/twitter'
+  %p= link_to 'Connect via Facebook', 'http://auth.pixelache.ac/auth/facebook'
+  %p= link_to 'Connect via Google account', 'http://auth.pixelache.ac/auth/google_oauth2'
+  %p= link_to 'Connect via Twitter', 'http://auth.pixelache.ac/auth/twitter'
 
 = render "devise/shared/links"
