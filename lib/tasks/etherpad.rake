@@ -10,5 +10,5 @@ namespace :etherpad do
       Etherpad.create(:name => pad.name, :read_only_id => pad.read_only_id, :last_edited => Time.at(pad.last_edited / 1000).utc.to_datetime )
     end
   end
-  
+
 end

@@ -5,6 +5,7 @@
       %small
         = pluralize(@posts.total_count, 'posts')
         match these filters
+    %p= link_to 'Create new post', new_admin_post_path        
 .filter_box.row
   .large-2.columns
     .filter_title Filter by site:

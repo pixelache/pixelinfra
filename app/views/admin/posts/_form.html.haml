@@ -40,7 +40,11 @@
       - if f.object.image?
         = image_tag f.object.image.url(:thumb)
       = f.input :image, :hint => 'An image/icon to represent this event.'
-    = f.input :creator_id, :as => :hidden
+    .row
+      .small-6.columns
+        %label Post author
+        .row
+          .small-6.columns= f.input :creator, :as => :select, :collection => User.all.order(:name), :label => false
     = f.input :last_modified_id, :as => :hidden, :value => current_user.id
   .row
     .small-12.columns
