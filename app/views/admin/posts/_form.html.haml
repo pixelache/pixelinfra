@@ -13,7 +13,7 @@
         = f.object.id.to_s
 
       = f.input :external, :label => " External event (not about a Pixelache activity)"
-    .small-6.columns= f.input :post_categories
+    .small-6.columns= f.input :post_categories, as: :check_boxes
   .row
     %dl.tabs{"data-tab" => ""}
       - I18n.available_locales.each_with_index do |locale, i|
