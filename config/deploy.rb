@@ -1,63 +1,59 @@
-require 'rvm/capistrano'
-set :rvm_ruby_string, 'ruby-2.0.0-p247'
-set :default_environment, { 
-  'rvm_path' => '/usr/local/rvm',
-  'PATH' => "/usr/local/rvm/gems/ruby-2.0.0-p247/bin:/usr/local/rvm/gems/ruby-2.0.0-p247@global/bin:/usr/local/rvm/rubies/ruby-2.0.0-p247/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games",
-  'RUBY_VERSION' => 'ruby-2.0.0-p247',
-  'GEM_HOME' =>  "/usr/local/rvm/gems/ruby-2.0.0-p247",
-  'GEM_PATH' =>  "/usr/local/rvm/gems/ruby-2.0.0-p247:/usr/local/rvm/gems/ruby-2.0.0-p247@global"
-}
-# bundler bootstrap
-require 'bundler/capistrano'
-load 'deploy/assets'
+# config valid only for Capistrano 3.1
+lock '3.1.0'
 
-set :default_shell, :bash
+set :application, 'pixelacheinfra'
+set :repo_url, 'git@github.com:pixelache/pixelinfra.git'
+set :rvm_ruby_version, '2.1.1'
+# Default branch is :master
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+set :linked_files, %w{config/database.yml config/application.yml}
 
-set :application, "pixelinfra"
-set :repository,  "git://github.com/pixelache/pixelinfra.git"
-set :user, "www-data"
-set :password, 'with&against'
-set :use_sudo, false
-ssh_options[:forward_agent] = true
-default_run_options[:pty] = true
-set :scm, :git
-set :deploy_to, "/var/www/#{application}"
-# set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+# Default deploy_to directory is /var/www/my_app
+set :deploy_to, '/var/www/pixelinfra'
 
-role :web, "www.pixelache.ac"                          # Your HTTP server, Apache/etc
-role :app, "www.pixelache.ac"                          # This may be the same as your `Web` server
-role :db,  "www.pixelache.ac", :primary => true # This is where Rails migrations will run
+# Default value for :scm is :git
+# set :scm, :git
+
+# Default value for :format is :pretty
+# set :format, :pretty
+
+# Default value for :log_level is :debug
+# set :log_level, :debug
+
+# Default value for :pty is false
+# set :pty, true
+
+# Default value for :linked_files is []
+# set :linked_files, %w{config/database.yml}
+
+# Default value for linked_dirs is []
+# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
 set :keep_releases, 3
 
-desc "symlink to static"
-after "deploy:finalize_update", :roles => [:web, :app] do
-  run <<-CMD
-  ln -sf #{shared_path}/static/system #{latest_release}/public/system &&
-  ln -sf #{shared_path}/static/images #{latest_release}/public/images &&
-  ln -sf #{shared_path}/static/uploads #{latest_release}/public/uploads &&
-  cp #{shared_path}/config/database-template.yml #{latest_release}/config/database.yml &&
-  cp #{shared_path}/config/application.yml #{latest_release}/config/ &&
-  chown www-data:www-data #{shared_path}/log/*
-  CMD
-
-end
-
-namespace :mod_rails do
-  desc "Restart the application altering tmp/restart.txt for mod_rails."
-  task :restart, :roles => :app do
-    run "touch #{release_path}/tmp/restart.txt"
-  end
-end
 namespace :deploy do
-  %w(start restart).each { |name| task name, :roles => :app do mod_rails.restart end }
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      # execute :touch, release_path.join('tmp/restart.txt')
+    end
+  end
+
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
+  end
+
 end
-
-after "deploy", "deploy:migrate"
-
-desc 'copy ckeditor nondigest assets'
-task :copy_nondigest_assets, roles: :app do
-  run "cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} ckeditor:copy_nondigest_assets"
-end
-after 'deploy:assets:precompile', 'copy_nondigest_assets'
-
