@@ -12,6 +12,7 @@ Pixelinfra::Application.routes.draw do
     resources :flickrsets do
       get :autocomplete_event_name, :on => :collection
     end
+    resources :frontitems
     resources :nodes
     resources :pages
     resources :places
@@ -41,6 +42,7 @@ Pixelinfra::Application.routes.draw do
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout
   get '/auth/failure' => 'sessions#failure'
+  get '/admin' => 'admin/posts#index'
   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, via: :get
   
   match 'auth/:provider/callback' => 'authentications#create', :via => :get

@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140204130816) do
+ActiveRecord::Schema.define(version: 20140326134250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "attachments", force: true do |t|
     t.string   "attachedfile"
@@ -171,6 +172,26 @@ ActiveRecord::Schema.define(version: 20140204130816) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "frontitems", force: true do |t|
+    t.string   "item_type"
+    t.integer  "item_id"
+    t.integer  "position"
+    t.string   "external_url"
+    t.string   "background_colour"
+    t.string   "text_colour"
+    t.boolean  "active"
+    t.integer  "frontmodule_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "frontmodules", force: true do |t|
+    t.string   "name"
+    t.string   "partial_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "node_translations", force: true do |t|
     t.integer  "node_id",     null: false

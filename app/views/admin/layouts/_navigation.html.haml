@@ -56,6 +56,8 @@
               %li= link_to 'Posts', admin_posts_path
             - if can? :manage, Page
               %li= link_to 'Pages', admin_pages_path  
+            - if can? :manage, Frontitem
+              %li= link_to 'Frontpage design', admin_frontitems_path
       %ul.left
         %li.has-dropdown
           %a{:href => '#'} Archival

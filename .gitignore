@@ -13,6 +13,8 @@
 # bundler state
 /.bundle
 /vendor/bundle/
+/config/deploy/production.rb
+/config/deploy/staging.rb
 /vendor/ruby/
 
 # minimal Rails specific artifacts

@@ -3,6 +3,7 @@
  *= require pixelache/stylesheets/style.min
  *= require pixelache/stylesheets/projects
  *= require pixelache/stylesheets/event_calendar
+ *= require pixelache/stylesheets/front
  */
 
 #main {
