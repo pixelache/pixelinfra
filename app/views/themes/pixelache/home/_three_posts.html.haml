@@ -1,0 +1,14 @@
+.row.three_posts
+  .small-10.columns.large-offset-1 
+    .top_post
+      .title= @posts.first.title
+      .body= truncate_html(@posts.first.body, :length => 600)
+      .read_more= link_to 'Read More', @posts.first
+  
+    .smaller_posts.row
+      - @posts[1..2].each do |post|
+        .post.small-6.columns
+          .title= post.title
+          .body= truncate_html post.body, :length => 300
+          .read_more= link_to 'Read More', post
+            

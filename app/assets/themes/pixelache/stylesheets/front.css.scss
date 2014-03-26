@@ -1,0 +1,79 @@
+@import 'variables';
+
+.three_posts {
+  margin-bottom: 60px;
+  
+  .top_post {
+    margin-bottom: 75px;
+  
+    .title {
+      font-family: $quicksand;
+      font-size: 58px;
+      line-height: 72px;
+      margin-bottom: 60px;
+    }
+    .body {
+      font-family: Open Sans, sans-serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: #999;
+      line-height: 25px;
+      margin-bottom: 30px;
+    }
+    .read_more {
+      font-family: $quicksand;
+      font-size: 32px;
+      text-transform: lowercase;
+      a {
+        color: #000;
+      }
+    }
+  }
+
+  .smaller_posts {
+
+    .title {
+      font-family: $quicksand;
+      font-size: 28px;
+      line-height: 36px;
+      margin-bottom:15px;
+    }
+    .body {
+      font-family: Open Sans, sans-serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: #999;
+      line-height: 25px;
+      margin-bottom: 20px;    
+    }
+    .read_more {
+      font-family: $quicksand;
+      font-size: 32px;
+      text-transform: lowercase;
+      a {
+        color: #333;
+      }    
+    }
+  }
+}
+
+.calendar {
+  background-color: #663333;
+  font-family: $quicksand;
+  color: white;
+  padding: 20px 0px;
+  
+  .entry {
+    border-bottom: 1px dashed #666;
+    padding: 20px 0px;
+    .date {
+      font-size: 32px;
+      text-transform: uppercase;
+    }
+    .name {
+      font-size: 28px;
+      line-height: 32px;
+    }
+  } 
+}
+  

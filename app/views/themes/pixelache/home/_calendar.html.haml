@@ -1,0 +1,8 @@
+.row.calendar
+  .small-10.columns.large-offset-1
+    - @events.each do |event|
+      .row.entry
+        .small-3.columns
+          .date= event.start_at.strftime('%b %d.')
+        .small-9.columns
+          .name= event.name
