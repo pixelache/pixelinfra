@@ -4,11 +4,28 @@
       Front page design
       
 .row
-  .small-10.columns.large-offset-1
+  .small-10.columns.large-offset-1#sortable
     - @frontitems.order(:position).each do |fi|
-      .front_item
+      .front_item[fi]
         = fi.name
         %small= link_to 'edit', edit_admin_frontitem_path(fi)
       
   .row
     .small-6.columns= button_to 'Add new frontpage item', new_admin_frontitem_path, class: [:button, :round, :small], method: :get
+    
+    
+= content_for :jquery do
+  :plain
+    $('#sortable').sortable({
+      update: function(){
+            $.ajax({
+              url: '/admin/frontitems/sort',
+              type: 'post',
+              data: $('#sortable').sortable('serialize'),
+              dataType: 'script',
+              complete: function(request){
+                $('#sortable').effect('highlight');
+              }
+            });
+        }
+    });

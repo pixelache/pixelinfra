@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     if @site.name == 'pixelache'
       @posts = Post.by_subsite(@site.id).published.order('published_at desc').limit(3)
       @events = Event.by_subsite(@site.id).published.order("start_at DESC").limit(6)
-      @frontitems = Frontitem.by_site(@site.id)
+      @frontitems = Frontitem.by_site(@site.id).order(:position)
     else
       @home_text = @site.pages.find('home')
     end

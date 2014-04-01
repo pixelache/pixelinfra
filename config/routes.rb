@@ -13,7 +13,9 @@ Pixelinfra::Application.routes.draw do
     resources :flickrsets do
       get :autocomplete_event_name, :on => :collection
     end
-    resources :frontitems
+    resources :frontitems do
+      post :sort, :on => :collection
+    end
     resources :nodes
     resources :pages do
       get :options, :on => :collection

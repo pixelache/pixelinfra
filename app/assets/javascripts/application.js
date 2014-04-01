@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.core
 //= require jquery.ui.autocomplete
+//= require jquery.ui.sortable
 //= require foundation
 //= require jquery_nested_form
 //= require ckeditor/override
