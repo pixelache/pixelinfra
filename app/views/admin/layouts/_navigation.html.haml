@@ -64,6 +64,8 @@
         %li.has-dropdown
           %a{:href => '#'} Archival
           %ul.dropdown
+            - if can? :manage, Archivalimage
+              %li= link_to 'Archival images', admin_archivalimages_path
             - if can? :manage, Etherpad
               %li= link_to 'Etherpads', admin_etherpads_path
             - if can? :manage, Flickrset

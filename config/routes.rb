@@ -4,6 +4,7 @@ Pixelinfra::Application.routes.draw do
   themes_for_rails
   
   namespace :admin do
+    resources :archivalimages
     resources :dynamictaglines
     resources :etherpads
     resources :events do

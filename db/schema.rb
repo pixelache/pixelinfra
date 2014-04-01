@@ -11,11 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140401094936) do
+ActiveRecord::Schema.define(version: 20140401132852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_trgm"
+
+  create_table "archivalimage_translations", force: true do |t|
+    t.integer  "archivalimage_id", null: false
+    t.string   "locale",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "caption"
+  end
+
+  add_index "archivalimage_translations", ["archivalimage_id"], name: "index_archivalimage_translations_on_archivalimage_id", using: :btree
+  add_index "archivalimage_translations", ["locale"], name: "index_archivalimage_translations_on_locale", using: :btree
+
+  create_table "archivalimages", force: true do |t|
+    t.string   "image"
+    t.integer  "image_size"
+    t.integer  "image_width"
+    t.integer  "image_height"
+    t.string   "image_content_type"
+    t.integer  "event_id"
+    t.integer  "festival_id"
+    t.integer  "page_id"
+    t.integer  "flickr_id"
+    t.integer  "project_id"
+    t.string   "credit"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "archivalimages", ["event_id"], name: "index_archivalimages_on_event_id", using: :btree
+  add_index "archivalimages", ["festival_id"], name: "index_archivalimages_on_festival_id", using: :btree
+  add_index "archivalimages", ["page_id"], name: "index_archivalimages_on_page_id", using: :btree
+  add_index "archivalimages", ["project_id"], name: "index_archivalimages_on_project_id", using: :btree
 
   create_table "attachments", force: true do |t|
     t.string   "attachedfile"
