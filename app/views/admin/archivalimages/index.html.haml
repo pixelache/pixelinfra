@@ -1,0 +1,20 @@
+.row
+  .small-4.columns
+    %h2 Archival images
+.row
+  .small-8.columns
+    %p 
+      Here we can explicitly re-upload images from Flickr (or elsewhere) to the Pixelache site. This allows the following:
+      %ol
+        %li Enables the use of images in our "From the Archive" section on the frontpage
+        %li Makes another copy of the image on our server, not only on Flickr
+.row
+  .small-4.columns= link_to 'Upload new archival image', new_admin_archivalimage_path, :class => [:button, :round, :tiny]
+  
+.row
+  - @archivalimages.each do |ai|
+    .small-3.columns 
+      = image_tag ai.image.url(:halfwidth)
+      %h6= ai.name
+      %p= ai.year
+      = link_to 'Edit', edit_admin_archivalimage_path(ai)

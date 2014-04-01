@@ -1,6 +1,7 @@
 class CreateArchivalimages < ActiveRecord::Migration
   def up
     create_table :archivalimages do |t|
+      t.references :subsite
       t.string :image
       t.integer :image_size
       t.integer :image_width

@@ -4,7 +4,11 @@ Pixelinfra::Application.routes.draw do
   themes_for_rails
   
   namespace :admin do
-    resources :archivalimages
+    resources :archivalimages do
+      get :autocomplete_event_name, :on => :collection
+      get :autocomplete_festival_name, :on => :collection
+      get :autocomplete_project_name, :on => :collection  
+    end
     resources :dynamictaglines
     resources :etherpads
     resources :events do

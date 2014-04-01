@@ -1,0 +1,46 @@
+= semantic_form_for [:admin, @archivalimage], :html => {:class => "custom", :multipart => true} do |f|
+  .row
+    %label Which site:
+    .small-6.columns= f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
+    
+  .row
+    %label The image:
+    .small-3.columns
+      - if f.object.image?
+        = image_tag f.object.image.url(:thumb)
+      = f.input :image
+  .row
+    .small-8.columns
+      %dl.tabs{"data-tab" => ""}
+        - I18n.available_locales.each_with_index do |locale, i|
+          %dd{:class => (i == 0 ? :active : false)}
+            = link_to t(:locale_name, :locale => locale), "##{locale}"
+      .tabs-content
+        - I18n.available_locales.each_with_index do |locale, i|
+          .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+            = f.globalize_fields_for locale do |en|
+              .row
+                .small-12.columns
+                  %b= "Caption of photo in #{t :locale_name, :locale => locale}"
+                  = en.text_field :caption
+  .row
+    .small-6.columns= f.input :credit, :label => 'Photo credit'
+  .row
+    .small-6.columns
+      %h5 Connected to an event?
+      = f.input :event_name, :as => :autocomplete, :url =>  autocomplete_event_name_admin_archivalimages_path, :input_html => { :id_element => '#archivalimage_event_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the event name", :hint => raw("(If the event is not already the database, <a href=\"/admin/events/new\" target=\"_blank\">create it first.</a>)")
+    .small-6.columns= f.input :event_id, :as => :hidden
+  .row
+    .small-6.columns
+      %h5 Connected to a project?
+      = f.input :project_name, :as => :autocomplete, :url =>  autocomplete_project_name_admin_archivalimages_path, :input_html => { :id_element => '#archivalimage_project_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the project name", :hint => raw("(If the project is not already the database, <a href=\"/admin/events/new\" target=\"_blank\">create it first.</a>)")
+    .small-6.columns= f.input :project_id, :as => :hidden
+  .row
+    .small-6.columns
+      %h5 Connected to a festival?
+      = f.input :festival_name, :as => :autocomplete, :url =>  autocomplete_festival_name_admin_archivalimages_path, :input_html => { :id_element => '#archivalimage_festival_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the festival name", :hint => raw("(If this is related to a specific event that is part of a festival, you should just populate the event relation above, no need for the festival as a whole.)")
+    .small-6.columns= f.input :festival_id, :as => :hidden       
+    
+  .row
+    .small-2.columns= f.submit 'Save', :class => [:button, :round]
+  

@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20140401132852) do
   add_index "archivalimage_translations", ["locale"], name: "index_archivalimage_translations_on_locale", using: :btree
 
   create_table "archivalimages", force: true do |t|
+    t.integer  "subsite_id"
     t.string   "image"
     t.integer  "image_size"
     t.integer  "image_width"
