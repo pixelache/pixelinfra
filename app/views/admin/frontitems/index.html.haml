@@ -4,14 +4,21 @@
       Front page design
       
 .row
-  .small-10.columns.large-offset-1#sortable
+  .small-8.columns.large-offset-1#sortable
     - @frontitems.order(:position).each do |fi|
-      .front_item[fi]
-        = fi.name
-        %small= link_to 'edit', edit_admin_frontitem_path(fi)
+      .row.front_item[fi]
+        .small-4.columns
+          - if fi.frontmodule
+            - if fi.frontmodule.exampleimage?
+              = image_tag fi.frontmodule.exampleimage.url(:logo)
+        
+        .small-8.columns
+          %h4= fi.name
+          %div
+            %p= link_to 'Edit details', edit_admin_frontitem_path(fi), :class => [:button, :round, :tiny]
       
-  .row
-    .small-6.columns= button_to 'Add new frontpage item', new_admin_frontitem_path, class: [:button, :round, :small], method: :get
+.row
+  .small-6.columns= button_to 'Add new frontpage item', new_admin_frontitem_path, class: [:button, :round, :small], method: :get
     
     
 = content_for :jquery do

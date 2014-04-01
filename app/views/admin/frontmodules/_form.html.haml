@@ -1,0 +1,9 @@
+= semantic_form_for([:admin, @frontmodule], :html => {:multipart => true}) do |f|
+  .row
+    .small-5.colums= f.input :name
+  .row
+    .small-6.columns= f.input :partial_name, :label => 'Rails partial to load (found in app/views)'
+  .row
+    .small-5.columns= f.input :exampleimage
+  .row
+    .small-3.columns= f.submit 'Save', :class => [:button, :round, :small]

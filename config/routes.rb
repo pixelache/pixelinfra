@@ -16,6 +16,7 @@ Pixelinfra::Application.routes.draw do
     resources :frontitems do
       post :sort, :on => :collection
     end
+    resources :frontmodules
     resources :nodes
     resources :pages do
       get :options, :on => :collection
