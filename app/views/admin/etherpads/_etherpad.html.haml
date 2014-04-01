@@ -1,7 +1,7 @@
 %tr
   %td
     = link_to etherpad.name, 'http://pad.pixelache.ac/p/' + etherpad.name, :target => :_blank
-    %div= link_to 'Categorise', edit_admin_etherpad_path(etherpad), :class => [:button, :round, :tiny]
+    %div= link_to 'Categorise', edit_admin_etherpad_path(etherpad)
     - if etherpad.private_pad == true
       %small
         %b PRIVATE!

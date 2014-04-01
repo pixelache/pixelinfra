@@ -3,7 +3,9 @@
     = link_to etherpad.name, 'http://pad.pixelache.ac/p/' + etherpad.name, :target => :_blank
     - if user_signed_in?
       - if can? :edit, etherpad
-        %div= link_to 'Categorise', edit_admin_etherpad_path(etherpad), :class => [:button, :round, :tiny]
+        %div
+          %small
+            %b= link_to '[ORGANISE]', edit_admin_etherpad_path(etherpad)
 
 
   %td
