@@ -13,6 +13,6 @@
   %td= raw etherpad.projects.map(&:name).join('<br />')
   
   %td.actions
-  - if user_signed_in?
-    - if can? :destroy, etherpad
-      = link_to 'Delete', [:admin, etherpad], :method => :delete, :data => {:confirm => 'Are you sure? This will delete the pad forever.' }, :class => [:button, :round, :alert, :tiny]
+    - if user_signed_in?
+      - if can? :destroy, etherpad
+        = link_to 'Delete', [:admin, etherpad], :method => :delete, :data => {:confirm => 'Are you sure? This will delete the pad forever.' }, :class => [:button, :round, :alert, :tiny]
