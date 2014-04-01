@@ -9,7 +9,7 @@
 
  *= require pixelache/stylesheets/main
  */
-@import 'variables';
+
 
 #main {
   padding-top: 25px;
