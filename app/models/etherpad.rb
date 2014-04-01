@@ -6,4 +6,6 @@ class Etherpad < ActiveRecord::Base
   scope :by_festival, -> festival { joins(:festivals).where(["festivals.id = ?", festival]) }
   scope :by_subsite, -> subsite { joins(:subsites).where(["subsites.id = ?",  subsite]) }
   scope :by_project, -> project { joins(:projects).where(["projects.id = ?", project]) }
+  
+  scope :not_private, -> { where("private_pad is not true")}
 end

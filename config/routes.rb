@@ -39,7 +39,7 @@ Pixelinfra::Application.routes.draw do
   
   resources :dynamictaglines
   resources :events
-
+  resources :etherpads
   resources :festivals
   resources :pages
   resources :projects
