@@ -32,6 +32,8 @@ class Post < ActiveRecord::Base
   scope :is_pixelache, -> () { where(external: false) }
   scope :is_external, -> () { where(external: true) }
   scope :by_tag, -> tag{ joins(:taggings).where(:taggings => {:tag_id => tag}) }
+  
+  
   def check_published
     if self.published == true
       self.published_at ||= Time.now
@@ -47,6 +49,10 @@ class Post < ActiveRecord::Base
   
   def festival_name
     festival.blank? ? nil : festival.name
+  end
+  
+  def name
+    title
   end
   
   def project_name

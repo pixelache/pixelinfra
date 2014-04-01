@@ -1,0 +1,22 @@
+.row
+  .small-10.columns
+    %h2 
+      Dynamic tagline for site
+      %em= @dynamictagline.subsite.name
+      
+= semantic_form_for([:admin, @dynamictagline]) do |f|
+  .row
+    .small-6.columns
+      = f.input :festival, :label => 'Enter replacement for "Festival"'
+  .row
+    .small-6.columns
+      = f.input :electronic, :label => 'Enter replacement for "Electronic"'
+  .row
+    .small-6.columns
+      = f.input :art, :label => 'Enter replacement for "Art"'
+  .row
+    .small-6.columns
+      = f.input :subcultures, :label => 'Enter replacement for "Subcultures"'
+  .row
+    .small-2.columns
+      = f.submit "Save", :class => [:button, :round, :small]

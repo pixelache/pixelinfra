@@ -11,6 +11,7 @@
  *= require_self
  *= require foundation_and_overrides
  *= require foundation-datepicker
+ *= require jPicker-1.1.6.min
  *= require jquery-ui/smoothness
 */
 
@@ -103,4 +104,10 @@ table {
 
 .filter_box {
   .filter_title { float: left;}
+}
+
+.front_item {
+  padding: 15px;
+  border: 1px dotted black;
+  margin: 5px 0px;
 }

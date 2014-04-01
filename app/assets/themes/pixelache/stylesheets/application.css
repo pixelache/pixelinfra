@@ -1,11 +1,17 @@
 /*
  *= require_self
+
+ *= require pixelache/stylesheets/foundation_overrides
  *= require pixelache/stylesheets/style.min
  *= require pixelache/stylesheets/projects
  *= require pixelache/stylesheets/event_calendar
  *= require pixelache/stylesheets/front
+
+ *= require pixelache/stylesheets/main
  */
+@import 'variables';
 
 #main {
   padding-top: 25px;
 }
+

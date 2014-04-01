@@ -54,6 +54,10 @@ class Admin::PostsController < ApplicationController
     @posts = apply_scopes(Post).includes(:subsite).order(order).page(params[:page]).per(30)
   end
   
+  def options
+    @posts = Post.includes(:subsite).published.order('published_at DESC').page(params[:page]).per(70)  
+    render :layout => false
+  end
   
   def update
     @post = Subsite.find(params[:post][:subsite_id]).posts.find(params[:id])

@@ -219,3 +219,6 @@ en:
   activerecord:
     errors:
       <<: *errors
+
+  about: 'About'
+  activities: 'Activities'

@@ -1,5 +1,6 @@
 
-
-= render :partial => 'three_posts'
-
-= render :partial => 'calendar'
+- @frontitems.each do |fi|
+  - if fi.frontmodule
+    = render :partial => fi.frontmodule.partial_name
+  - else
+    = render :partial => 'thin_strip', :locals => {:front => fi}

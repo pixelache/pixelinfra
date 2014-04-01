@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326134250) do
+ActiveRecord::Schema.define(version: 20140331163738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,18 @@ ActiveRecord::Schema.define(version: 20140326134250) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "dynamictaglines", force: true do |t|
+    t.integer  "subsite_id",  null: false
+    t.text     "festival"
+    t.text     "electronic"
+    t.text     "art"
+    t.text     "subcultures"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "dynamictaglines", ["subsite_id"], name: "index_dynamictaglines_on_subsite_id", using: :btree
 
   create_table "etherpads", force: true do |t|
     t.string   "name"
@@ -178,12 +190,13 @@ ActiveRecord::Schema.define(version: 20140326134250) do
     t.integer  "item_id"
     t.integer  "position"
     t.string   "external_url"
-    t.string   "background_colour"
-    t.string   "text_colour"
+    t.string   "background_colour", default: "#f05a28", null: false
+    t.string   "text_colour",       default: "#FFF",    null: false
     t.boolean  "active"
     t.integer  "frontmodule_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "subsite_id"
   end
 
   create_table "frontmodules", force: true do |t|

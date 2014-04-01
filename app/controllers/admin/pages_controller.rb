@@ -35,6 +35,11 @@ class Admin::PagesController < Admin::BaseController
     @pages = Page.roots.includes(:subsite).order(order).page(params[:page]).per(20)
   end
   
+  def options
+    @pages = Page.roots.includes(:subsite).order('created_at DESC').page(params[:page]).per(70)  
+    render :layout => false
+  end
+  
   def update
     @page = Subsite.find(params[:page][:subsite_id]).pages.find(params[:id])
     update! { admin_pages_path }

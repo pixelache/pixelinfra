@@ -4,6 +4,7 @@ Pixelinfra::Application.routes.draw do
   themes_for_rails
   
   namespace :admin do
+    resources :dynamictaglines
     resources :etherpads
     resources :events do
       get :autocomplete_place_name, :on => :collection
@@ -14,9 +15,12 @@ Pixelinfra::Application.routes.draw do
     end
     resources :frontitems
     resources :nodes
-    resources :pages
+    resources :pages do
+      get :options, :on => :collection
+    end
     resources :places
     resources :posts do
+      get :options, :on => :collection
       get :autocomplete_event_name, :on => :collection
       get :autocomplete_festival_name, :on => :collection
       get :autocomplete_project_name, :on => :collection            
@@ -30,6 +34,7 @@ Pixelinfra::Application.routes.draw do
     resources :users    
   end
   
+  resources :dynamictaglines
   resources :events
 
   resources :festivals

@@ -1,0 +1,24 @@
+%nav.top-bar{"data-topbar" => ""}
+  %ul.title-area
+    %li.name
+      %h1
+        %a{:href => "/"} PIXELACHE
+    %li.toggle-topbar.menu-icon
+      %a{:href => "#"} Menu
+  %section.top-bar-section
+    / Right Nav Section
+    %ul.right
+      %li.active= link_to t(:about), page_path('about')
+      %li.has-dropdown
+        %a{:href => "#"}= t(:activities)
+        %ul.dropdown
+          %li
+            %a{:href => "#"} First link in dropdown
+      %li.has-dropdown
+        = link_to t(:archive), '#'
+        %ul.dropdown
+          %li= link_to t(:all_posts), posts_path
+          %li= link_to t(:yearly_archive), '#'
+    %ul.left
+      %li.tagline
+        %a{:href => "/"}= @site.dynamictagline.tagline

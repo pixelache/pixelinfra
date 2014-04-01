@@ -1,0 +1,4 @@
+- @posts.each do |p|
+  %option{:value => p.id}
+    = p.name
+    = " #{l p.published_at, :format => :short}"

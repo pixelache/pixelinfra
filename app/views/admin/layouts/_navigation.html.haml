@@ -1,7 +1,7 @@
-%nav.top-bar{:"data-topbar" => ""}
+%nav.top-bar.admin{:"data-topbar" => ""}
   %ul.title-area
     %li.name
-      %h1= @site.name
+      %h1= Admin
     %li.toggle-topbar.menu-icon= link_to 'Menu', '#'
   %section.top-bar-section
     - if current_user
@@ -35,6 +35,8 @@
               %li= link_to 'Users', admin_users_path
             - if can? :manage, Node
               %li= link_to "Nodes", admin_nodes_path 
+            - if can? :manage, Dynamictagline
+              %li= link_to 'Dynamic tagline', admin_dynamictaglines_path
       %ul.left
         %li.has-dropdown
           %li.has-dropdown

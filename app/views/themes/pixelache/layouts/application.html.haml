@@ -4,7 +4,7 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
       %title= content_for?(:title) ? yield(:title) : "Pixelache"
       %meta{:content => content_for?(:description) ? yield(:description) : "Pixelinfra", :name => "description"}
-        %link{:href => "http://fonts.googleapis.com/css?family=Quicksand:300,400,700", :rel => "stylesheet", :type => "text/css"}/
+        %link{:href => "http://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700", :rel => "stylesheet", :type => "text/css"}/
         = stylesheet_link_tag "application", :media => "all"
         = stylesheet_link_tag 'pixelache/stylesheets/application', :media => :screen
         = javascript_include_tag "application"
@@ -15,9 +15,11 @@
   %body{:class => "#{controller_name} #{action_name}"}
     #container.container
       %header
+        = render 'layouts/top_bar'
         - if user_signed_in?
           = render 'admin/layouts/navigation'
         = render 'layouts/messages'
+
       #main{:role => "main"}
         = yield
       %footer

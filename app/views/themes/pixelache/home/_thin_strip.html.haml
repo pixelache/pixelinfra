@@ -1,0 +1,5 @@
+.thin_strip{:style => "background-color: ##{front.background_colour}"}
+  .row
+    .small-1.columns= image_tag theme_image_path('megaphone.png')
+    .small-8.columns{:style => "color: ##{front.text_colour}"}= front.item.name
+    .small-3.columns= link_to t(:read_more) + " >>", front.item, :style => "color: ##{front.text_colour}"

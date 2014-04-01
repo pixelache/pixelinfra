@@ -1,0 +1,34 @@
+= semantic_form_for([:admin, @frontitem]) do |f|
+  .row
+    .small-3.columns= f.input :subsite, :label => "Which site?", :include_blank => false
+  .row
+    .small-6.columns
+      .row
+        .small-8.columns= f.input :frontmodule, :label => "Use existing module"
+    .small-6.columns
+      .row
+        .small-5.columns= f.input :item_type, :as => :select, :collection => ['Page', 'Post'], :label => 'Or embed a post or page:'
+      .row.page_selector
+        .small-12.columns= f.input :item_id, :as => :select, :input_html => {:disabled => :disabled}
+      .row
+        .small-6.columns= f.input :background_colour, :as => :string, :input_html => {:class => :colourpicker }
+      .row
+        .small-6.columns= f.input :text_colour, :as => :string, :input_html => {:class => :colourpicker }        
+  .row
+    .small-6.columns= f.submit "Save" , :class => [:button, :round]
+    
+:javascript
+  $('.colourpicker').jPicker();
+  $('select#frontitem_item_type').change(function(event) {
+    var choice = $(this).val().toLowerCase() + 's';
+    $('select#frontitem_frontmodule_id').val('');
+    $.get(
+     '/admin/' + choice + '/options',
+        function(response) {
+          $('#frontitem_item_id').html(response);
+          $('[value=""]',event.target).remove();
+          }
+    );
+    $('#frontitem_item_id').removeAttr('disabled');
+   
+  });

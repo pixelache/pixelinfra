@@ -7,7 +7,7 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails', '3.1'
-gem 'jquery-ui-rails', '4.1.0'
+gem 'jquery-ui-rails'
 gem 'jquery-ui-themes'
 gem 'jbuilder', '~> 1.2'
 gem 'execjs', :group => :production
@@ -63,7 +63,7 @@ gem 'vimeo'
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
+  gem 'binding_of_caller'#, :platforms=>[:mri_19, :mri_20, :rbx]
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
