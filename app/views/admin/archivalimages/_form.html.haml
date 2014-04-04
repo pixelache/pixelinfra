@@ -1,4 +1,4 @@
-= semantic_form_for [:admin, @archivalimage], :html => {:class => "custom", :multipart => true} do |f|
+= semantic_form_for [:admin, @archivalimage], :html => {:"data-abide" => "", :class => "custom", :multipart => true} do |f|
   .row
     %label Which site:
     .small-6.columns= f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
@@ -8,7 +8,7 @@
     .small-3.columns
       - if f.object.image?
         = image_tag f.object.image.url(:thumb)
-      = f.input :image
+      = f.input :image, :input_html =>{:required => ''}
   .row
     .small-8.columns
       %dl.tabs{"data-tab" => ""}

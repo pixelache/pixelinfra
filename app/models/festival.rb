@@ -15,5 +15,9 @@ class Festival < ActiveRecord::Base
       return true if day.to_date >= start_at.to_date && day.to_date <= end_at.to_date
     end
   end
-    
+  
+  def description
+    'replace me'
+  end
+  
 end
