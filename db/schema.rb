@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140418140111) do
+ActiveRecord::Schema.define(version: 20140418163415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,10 +170,27 @@ ActiveRecord::Schema.define(version: 20140418140111) do
     t.string   "facilitator_organisation_url"
     t.integer  "project_id"
     t.integer  "festival_id"
+    t.integer  "step_id"
+    t.integer  "user_id",                                default: 0, null: false
   end
 
   add_index "events", ["place_id"], name: "index_events_on_place_id", using: :btree
   add_index "events", ["subsite_id"], name: "index_events_on_subsite_id", using: :btree
+
+  create_table "feeds", force: true do |t|
+    t.string   "item_type"
+    t.integer  "item_id"
+    t.integer  "subsite_id"
+    t.datetime "fed_at"
+    t.string   "action"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "feeds", ["item_id"], name: "index_feeds_on_item_id", using: :btree
+  add_index "feeds", ["subsite_id"], name: "index_feeds_on_subsite_id", using: :btree
+  add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
 
   create_table "festivals", force: true do |t|
     t.string   "name"
@@ -224,8 +241,8 @@ ActiveRecord::Schema.define(version: 20140418140111) do
     t.integer  "item_id"
     t.integer  "position"
     t.string   "external_url"
-    t.string   "background_colour", default: "#f05a28", null: false
-    t.string   "text_colour",       default: "#FFF",    null: false
+    t.string   "background_colour", default: "f05a28", null: false
+    t.string   "text_colour",       default: "FFFFFF", null: false
     t.boolean  "active"
     t.integer  "frontmodule_id"
     t.datetime "created_at"

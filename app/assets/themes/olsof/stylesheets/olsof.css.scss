@@ -2,6 +2,7 @@
 
 body {
   background-color: $beige;
+  padding-top: 25px;
 }
 
 header {
@@ -16,7 +17,27 @@ header {
   }
 }
 
-#sidebar {
+
+.right_wrap {
+  .bar_menu {
+    float: right;
+    .bar {
+      margin-right: 5px;
+      float: left;
+      padding-top: 25px;
+      &.active {
+        padding-top: 0px;
+      }
+    }
+  }
+}
+
+#main {
+  clear: left;
+}
+
+#sidebar {  
+  .padding-top: 40px;
   .logo {
     clear: right;
     font-size: 32px;
@@ -66,8 +87,6 @@ ul.side-nav {
 .olsof-footer {
   margin-top: 25px;
   padding-top: 25px;
-  border-top: 3px solid #d0d0d0;
-  background-color: white;
 
 }
 

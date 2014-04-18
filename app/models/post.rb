@@ -14,14 +14,16 @@ class Post < ActiveRecord::Base
   has_paper_trail
   mount_uploader :image, ImageUploader
   resourcify
-
+  has_many :feeds, :as => :item, :dependent => :delete_all
+  include Feedable
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['title'].blank? && x['body'].blank? }
   accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }
   before_save :update_image_attributes
   before_save :check_published
   validates_presence_of :subsite_id
-
-  attr_accessor  :event_name, :project_name, :festival_name
+  validate :title_present_in_at_least_one_locale
+  after_create :check_for_feed
+  attr_accessor  :event_name, :project_name, :festival_name, :hide_from_feed
   
   scope :published, -> () { where(published: true) }
   scope :by_site, -> (x) { includes(:subsite).where(:subsite_id => x) }
@@ -37,6 +39,13 @@ class Post < ActiveRecord::Base
   def check_published
     if self.published == true
       self.published_at ||= Time.now
+      unless self.new_record? || hide_from_feed != false
+        add_to_feed('created')
+      end
+    else
+      unless feeds.empty?
+        feeds.map(&:destroy)
+      end
     end
     if self.creator_id.blank?
       self.creator_id = self.last_modified_id
@@ -45,6 +54,10 @@ class Post < ActiveRecord::Base
 
   def event_name
     event.blank? ? nil : event.event_with_date
+  end
+  
+  def feed_time
+    published_at
   end
   
   def festival_name
@@ -72,6 +85,13 @@ class Post < ActiveRecord::Base
   def title_en
     self.title(:en)
   end
+  
+  def title_present_in_at_least_one_locale
+    if I18n.available_locales.map { |locale| translation_for(locale).title }.compact.empty?
+      errors.add(:base, "You must specify a page title in at least one available language.")
+    end
+  end
+  
     
   def update_image_attributes
     if image.present?
@@ -81,6 +101,10 @@ class Post < ActiveRecord::Base
         self.image_width, self.image_height = `identify -format "%wx%h" #{image.file.path}`.split(/x/)
       end
     end
+  end
+  
+  def user_id
+    creator_id
   end
   
 end

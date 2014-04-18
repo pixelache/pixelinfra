@@ -14,62 +14,33 @@
   %body{:class => "#{controller_name} #{action_name}"}
     = javascript_include_tag "application"
     = javascript_include_tag "vendor/modernizr"
-    #container.container
-      %header
-        //= render 'admin/layouts/navigation'
-        = render 'layouts/messages'
+    .row
+      .small-3.columns#sidebar
+        .logo
+          .first= link_to 'Open', '/'
+        .logo
+          .second= link_to raw("&#8594; Sourcing"), '/'
+        .logo
+          .third= link_to 'Festivals', '/'
+        = yield :sidebar
+      
+      .small-2.columns#middle= yield :middle
+      
+      
+      .small-7.columns
+        .right_wrap.row
+          .small-12.columns
+            .bar_menu
+              .bar= image_tag(theme_image_path('vert_bar.png'))
+              .bar= image_tag(theme_image_path('vert_bar.png'))
+              .bar= image_tag(theme_image_path('vert_bar.png'))
+              .bar= image_tag(theme_image_path('vert_bar.png'))
         .row
-          .small-3.columns#sidebar
-            .logo
-              .first= link_to 'Open', '/'
-            .logo
-              .second= link_to raw("&#8594; Sourcing"), '/'
-            .logo
-              .third= link_to 'Festivals', '/'
-            = yield :sidebar
-          
-          .small-2.columns#middle= yield :middle
-          
-          
-          .small-7.columns#main= yield
-
-        / #main{:role => "main"}
-        /   .row
-        /     .large-9.push-3.columns= yield
-        /     .large-3.pull-9.columns
-        /       %dl.accordion{"data-accordion" => ""}
-        /         %dd
-        /           = link_to 'Partners', '#partners'
-        /           #partners.content.active
-        /             %ul.side-nav
-        /               - @site.nodes.uniq.each do |node|
-        /                 %li= link_to node.name, node
-        /         %dd
-        /           = link_to 'Info', '#pages'
-        /           #pages.content
-        /             %ul.side-nav
-        /               - Page.by_site(@site.id).published.each do |page|
-        /                 %li= link_to page.name, page
-        /         %dd  
-        /           = link_to 'Events', '#events'
-        /           #events.content
-        /             %ul.side-nav
-        /               - @site.events.published.each do |event|
-        /                 %li
-        /                   .title= link_to event.name, event
-        /                   .metadata
-        /                     = l event.start_at, :format => :long
-        /         %dd
-        /           = link_to 'Latest news', '#posts'
-        /           #posts.content.active
-        /             %ul.side-nav
-        /               - @site.posts.published.order('published_at DESC').limit(5).each do |p|
-        /                 %li
-        /                   .title= link_to p.title, p
-        /                   .date= l p.published_at, :format => :short
-        .olsof-footer
-          .row
-            - @site.nodes.uniq.each do |node|
-              .small-2.columns= link_to image_tag(node.logo.url(:logo).gsub(/development/, 'production'), :width => 130), node.website
-            .small-2.columns= theme_image_tag 'grundtvig_logo_english.jpg'
+          .small-12.columns#main= yield
+    %footer
+      .olsof-footer
+        .row
+          - @site.nodes.uniq.each do |node|
+            .small-2.columns= link_to image_tag(node.logo.url(:logo).gsub(/development/, 'production'), :width => 130), node.website
+          .small-2.columns= theme_image_tag 'grundtvig_logo_english.jpg'
     / ! end of #container

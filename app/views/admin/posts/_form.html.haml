@@ -1,6 +1,8 @@
 %h1 Post
 = semantic_nested_form_for [:admin, @post], :html => {:class => "custom", :multipart => true} do |f|
   .row
+    .small-12.columns= f.semantic_errors :base
+  .row
     %label Which site:
     .small-6.columns= f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
   .row
@@ -76,6 +78,7 @@
   .row
     .small-6.columns= f.input :tag_list
   .row
+    .small-3.columns= f.input :hide_from_feed, :as => :boolean, :label => "Hide from news feeds?"
     .small-3.columns= f.input :published
     .small-3.columns= f.input :published_at, :as => :string, :input_html => {:class => "datetime_picker"}
   .row

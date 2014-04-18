@@ -8,10 +8,12 @@ class Step < ActiveRecord::Base
   friendly_id :name , :use => [ :slugged, :finders, :scoped], :scope => :subsite
   resourcify
   
-  accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['title'].blank? && x['body'].blank? }
+  accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['description'].blank? }
     
   attr_accessor  :event_name, :festival_name
   scope :by_subsite, -> subsite { where(subsite_id: subsite ) }
+  
+  validates_presence_of :subsite_id, :number
   
   def event_name
     event.blank? ? nil : event.event_with_date
