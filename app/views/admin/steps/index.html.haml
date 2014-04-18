@@ -1,0 +1,32 @@
+.row
+  .small-10.columns
+    %h2 Steps
+.row
+  .small-10.columns
+    %p Here are defined the "Steps" of the Open Sourcing Festivals projects - name, number, dates, and host partner. A "step" may also be a festival or an event.
+    
+.row
+  .small-10.columns
+    %table
+      %thead
+        %th Number
+        %th Name of step
+        %th Dates
+        %th Actions
+      %tbody
+        - @steps.each do |step|
+          %td= step.number
+          %td
+            = step.name
+            .subtext
+              Host:
+              = step.node.name
+          %td= date_range(step.start_at, step.end_at)
+          %td.actions
+            - if can? :edit, Step
+              = link_to 'Edit', edit_admin_step_path(step), :class => [:button, :tiny, :round]
+            - if can? :destroy, Step
+              = link_to 'Destroy', [:admin, step], :method => :delete, :data => {:confirm => "Are you sure?"}, :class => [:button, :tiny, :round, :alert]
+.row
+  .small-9.columns
+    %p= link_to 'Create new step', new_admin_step_path, :class => [:button, :small, :round]              

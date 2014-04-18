@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140401132852) do
+ActiveRecord::Schema.define(version: 20140418140111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -437,6 +437,36 @@ ActiveRecord::Schema.define(version: 20140401132852) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "step_translations", force: true do |t|
+    t.integer  "step_id",     null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+  end
+
+  add_index "step_translations", ["locale"], name: "index_step_translations_on_locale", using: :btree
+  add_index "step_translations", ["step_id"], name: "index_step_translations_on_step_id", using: :btree
+
+  create_table "steps", force: true do |t|
+    t.integer  "subsite_id"
+    t.integer  "festival_id"
+    t.integer  "node_id"
+    t.date     "start_at"
+    t.date     "end_at"
+    t.string   "name"
+    t.integer  "number"
+    t.integer  "event_id"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "steps", ["event_id"], name: "index_steps_on_event_id", using: :btree
+  add_index "steps", ["festival_id"], name: "index_steps_on_festival_id", using: :btree
+  add_index "steps", ["node_id"], name: "index_steps_on_node_id", using: :btree
+  add_index "steps", ["subsite_id"], name: "index_steps_on_subsite_id", using: :btree
 
   create_table "subsites", force: true do |t|
     t.string   "name"

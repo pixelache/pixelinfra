@@ -35,6 +35,10 @@ Pixelinfra::Application.routes.draw do
     end
     resources :projects
     resources :search
+    resources :steps do
+      get :autocomplete_event_name, :on => :collection
+      get :autocomplete_festival_name, :on => :collection
+    end
     resources :subsites do
       resources :pages
       resources :posts

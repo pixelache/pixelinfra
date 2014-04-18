@@ -1,0 +1,29 @@
+%h2 Step
+= semantic_form_for [:admin, @step], :html => {:class => "custom"} do |f|
+  .row
+    .small-6.columns
+      = f.input :number
+      = f.input :subsite_id, :value => 2, :as => :hidden
+  .row
+    .small-6.columns
+      = f.input :name
+
+  .row
+    .small-6.columns
+      = f.input :node, :label => 'Host partner'
+
+  .row
+    .small-6.columns= f.input :start_at, :as => :string, :input_html => {:class => "datetime_picker"}
+    .small-6.columns= f.input :end_at, :as => :string, :input_html => {:class => "datetime_picker"}
+  .row
+    .small-6.columns
+      %h5 Connected to a festival?
+      = f.input :festival_name, :as => :autocomplete, :url =>  autocomplete_festival_name_admin_steps_path, :input_html => { :id_element => '#step_festival_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the festival name", :hint => raw("(Dates of the step can be different than dates of the festival, and in fact, probably should be.)")
+    .small-6.columns= f.input :festival_id, :as => :hidden     
+  .row
+    .small-6.columns
+      %h5 Connected to an event?
+      = f.input :event_name, :as => :autocomplete, :url =>  autocomplete_event_name_admin_steps_path, :input_html => { :id_element => '#step_event_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the event name", :hint => raw("(Only relate a Step to an Event if it's not part of a festival.)")
+    .small-6.columns= f.input :event_id, :as => :hidden
+  .row
+    .small-6.columns= f.submit 'Save', :class => [:button, :round, :tiny]

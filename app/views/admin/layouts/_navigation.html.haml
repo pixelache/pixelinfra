@@ -37,6 +37,8 @@
               %li= link_to "Nodes", admin_nodes_path 
             - if can? :manage, Dynamictagline
               %li= link_to 'Dynamic tagline', admin_dynamictaglines_path
+            - if can? :manage, Step
+              %li= link_to 'OLSOF Steps', admin_steps_path
       %ul.left
         %li.has-dropdown
           %li.has-dropdown
