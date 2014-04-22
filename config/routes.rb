@@ -55,6 +55,7 @@ Pixelinfra::Application.routes.draw do
   resources :users
   resources :nodes
   resources :posts
+  resources :steps
   
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout

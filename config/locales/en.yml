@@ -221,5 +221,10 @@ en:
       <<: *errors
 
   about: 'About'
+  calendar: 'Calendar'
+  choose: 'Choose...'
+  events: 'Events'
+  news: 'News'
   activities: 'Activities'
   from_the_archives: 'From the Archives'
+  facilitated_by: 'Facilitated by:'

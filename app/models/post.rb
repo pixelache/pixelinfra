@@ -51,7 +51,11 @@ class Post < ActiveRecord::Base
       self.creator_id = self.last_modified_id
     end
   end
-
+  
+  def description
+    body
+  end
+  
   def event_name
     event.blank? ? nil : event.event_with_date
   end

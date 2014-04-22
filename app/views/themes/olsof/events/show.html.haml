@@ -1,19 +1,28 @@
-.event
-  %h1= @event.name
-  - unless @event.facilitator_name.blank?
-    .event_hosts= link_to_unless(@event.facilitator_url.blank?, @event.facilitator_name, @event.facilitator_url)
+.row.event
+  .small-3.columns.media
+  
+    - unless @event.image.blank? && @event.photos.empty?
+      %ul.clearing-thumbs{:"data-clearing" => ""}
+        - if @event.image?
+          %li= link_to image_tag(@event.image.url(:box)), @event.image.url
+        - unless @event.photos.empty?
+          - @event.photos.each do |i|
+            %li= link_to image_tag(i.filename.url(:box)), i.filename.url
+            
+  .small-8.left.columns.content
+    %h2= @event.name
+    - unless @event.facilitator_name.blank?
+      .event_hosts
+        = t :facilitated_by
+        = link_to_unless(@event.facilitator_url.blank?, @event.facilitator_name, @event.facilitator_url)
 
 
-  - unless @event.festival.blank?
-    %h5= raw "at: #{ link_to @event.festival.name, @event.festival}"
+    - unless @event.festival.blank?
+      %h5= raw "at: #{ link_to @event.festival.name, @event.festival}"
 
-  .metadata
-    = l @event.start_at, :format => :long
-    - unless @event.end_at.blank? || @event.end_at == @event.start_at
-      = " - #{l @event.end_at, :format => :long}"
-  - if @event.image?
-    - if @event.image_width >= 800
-      = image_tag @event.image.url(:standard)
-    - else
-      = image_tag @event.image.url
-  = raw @event.description
+    .metadata
+      = l @event.start_at, :format => :long
+      - unless @event.end_at.blank? || @event.end_at == @event.start_at
+        = " - #{l @event.end_at, :format => :long}"
+
+    .body= raw @event.description

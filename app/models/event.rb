@@ -19,7 +19,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :subsite_id, :place_id, :start_at
   validate :name_present_in_at_least_one_locale
   after_create :check_for_feed
-  after_save :check_published
+  before_save :check_published
   has_many :feeds, :as => :item, :dependent => :delete_all
   
   scope :published, -> () { where(published: true) }

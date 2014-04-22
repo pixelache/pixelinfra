@@ -7,7 +7,8 @@ set :rvm_ruby_version, '2.1.1'
 set :keep_releases, 3
 set :linked_files, %w{config/database.yml config/application.yml }
 set :linked_dirs, %w{public/system public/uploads public/images public/assets log}
-
+set :rails_env, 'production'
+set :migrate_env, 'production'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -49,7 +50,8 @@ namespace :deploy do
     end
   end
 
-  after :finishing, "deploy:cleanup"
+  after :finishing, "deploy:migrate"
+  after "deploy:migrate", "deploy:cleanup"
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do

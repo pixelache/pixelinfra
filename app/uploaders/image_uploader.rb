@@ -5,7 +5,11 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   storage :fog
-
+  
+  def default_url
+    '/assets/transparent.gif'
+  end
+  
   def store_dir
       "#{Rails.env.to_s}/images/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end

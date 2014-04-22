@@ -12,6 +12,7 @@ class Step < ActiveRecord::Base
     
   attr_accessor  :event_name, :festival_name
   scope :by_subsite, -> subsite { where(subsite_id: subsite ) }
+  scope :by_site, -> (x) { includes(:subsite).where(:subsite_id => x) }
   
   validates_presence_of :subsite_id, :number
   

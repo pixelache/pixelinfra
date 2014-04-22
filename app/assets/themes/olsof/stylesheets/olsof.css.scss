@@ -19,14 +19,28 @@ header {
 
 
 .right_wrap {
+  margin-bottom: 40px !important;
   .bar_menu {
+    #menutext {
+      display: block;
+      float: left;
+      padding-top: 33px;
+      margin-right: 10px;
+      font-weight: bold;
+      font-family: Open Sans, Helvetica, sans-serif;
+      text-transform: lowercase;
+    }
     float: right;
     .bar {
       margin-right: 5px;
       float: left;
       padding-top: 25px;
-      &.active {
+      a {
+        padding: 2px;
+      }
+      &:hover, &.active {
         padding-top: 0px;
+        padding-bottom: 25px;
       }
     }
   }
@@ -39,12 +53,14 @@ header {
 #sidebar {  
   .padding-top: 40px;
   .logo {
+    font-size: 3em;
     clear: right;
-    font-size: 32px;
     line-height: 60px;
     font-weight: 600;
     text-transform: lowercase;
     text-align: right;
+    letter-spacing: 8px;
+    font-family: Helvetica;
     a {
       color: #000;
       &:hover { 
@@ -55,8 +71,68 @@ header {
       float: right;
       border-bottom: 3px dashed #000;
     }
+    .third {
+      margin-bottom: 75px;
+    }
+  }
+  
+  .nav_lines {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    top: 125px;
+    img.navbg {
+      z-index: -1;
+      position: absolute;
+      left: 0;
+    }
+    .item {
+      z-index:100;
+      position:absolute;    
+      color:white;
+      font-size: 15px;
+      font-family: Open Sans, Helvetica, Arial, sans-serif;
+      font-weight:bold;
+      text-transform: uppercase;
+      &.about {
+        left:125px;
+        top: 155px;
+      }
+      &.events {
+        left: 60px;
+        top: 125px;
+      }
+      &.news {
+        left: 75px;
+        top: 27px;
+      }
+      a {
+        color: #000;
+      }
+    }
+  }
+  
+  .calendar {
+    margin-top: 150px;
+    h5 {
+      font-size: 15px;
+      font-family: Open Sans, Helvetica, Arial, sans-serif;
+      font-weight:bold;
+      text-transform: uppercase;
+    }
+    ul.calendar_events {
+      list-style-type: none;
+      margin: 0px;
+      
+      li {
+        font-family: Courier New, Courier, fixed;
+        line-height: 1.125;
+        margin-bottom: 15px;
+      }
+    }
   }
 }
+
 ul.side-nav {
   li {
 
@@ -71,16 +147,50 @@ ul.side-nav {
   }
 }
 
-.event {
+.event, .event_index {
+  h2 {
+    font-family: Courier New, Courier, fixed;
+    line-height: 1.125;
+    margin-bottom: 15px;
+  }
+  .event_row {
+    margin-bottom: 40px;
+  }
+  .event_image {
+    margin-bottom: 25px;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+  }
+  font-family: Courier New, Courier, fixed;
   .metadata {
-    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    margin: 15px 0px;
     font-weight: 200;
     font-size: 13px;
-    margin-bottom: 5px;    
+  }
+  .body, .body p {
+    font-family: Courier New, Courier, fixed;
+    font-size: 15px;
+    line-height: 19px;
   }
 }
-.home_text {
-  
+
+.home_page {
+  .feed_row {
+    margin-bottom: 40px;
+  }
+  .feed_image {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    margin-bottom: 25px;
+  }
+  .date, .blurb {
+    font-family: Courier New, Courier, fixed;
+    font-size: 15px;
+    line-height: 19px;
+    color: #333;
+  }
   
 }
 
@@ -91,10 +201,99 @@ ul.side-nav {
 }
 
 .post {
+  font-family: Courier New, Courier, fixed;
+  h2 {
+    font-family: Courier New, Courier, fixed;
+    line-height: 1.125;
+    margin-bottom: 15px;
+  }
   .metadata {
-    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    margin-bottom: 15px;
     font-weight: 200;
     font-size: 13px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+  }
+  .body {
+    line-height: 19px;
+  }
+  .media {
+    ul.clearing-thumbs {
+      li {
+        margin-bottom: 7px;
+      }
+    }
   }
 }
+
+.page {
+  .content {
+    margin-top: 140px;
+    h2, h3 {
+      font-family: Courier New, Courier, fixed;
+      line-height: 1.125;
+      margin-bottom: 15px;
+    }
+    p {
+      font-family: Courier New, Courier, fixed;
+      line-height: 19px;
+    }
+  }
+}
+
+.node {
+  .content {
+    margin-top: 140px;
+    h2, h3 {
+      font-family: Courier New, Courier, fixed;
+      line-height: 1.125;
+      margin-bottom: 15px;
+    }
+    .metadata {
+      p {
+        margin: 0px;
+      }
+      font-family: Courier New, Courier, fixed;
+      margin: 35px 0px;
+    }
+    p, .body {
+      font-family: Courier New, Courier, fixed;
+      line-height: 19px;
+    }
+  }
+}
+
+// White overrides for blue background
+
+body.pages, body.nodes {
+  color: white;
+  background-color: $darkblue;
+  a {
+    color: white;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: #FFF;
+  }
+  #sidebar {
+    .logo {
+      a {
+        color: #FFF;
+        &:hover { 
+          color: #BBB; 
+        }
+      }
+      .first, .second, .third { 
+        border-bottom: 3px dashed #FFF;
+      }
+    }
+  }
+  .right_wrap {
+    .bar_menu {
+      .bar {
+        img {
+          -webkit-filter: invert(100%);  
+        }
+      }
+    }
+  }
+}
+

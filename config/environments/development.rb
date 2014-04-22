@@ -40,3 +40,14 @@ Pixelinfra::Application.configure do
   config.action_mailer.perform_deliveries = true
 
 end
+
+module ActionView
+  module Helpers
+    module AssetTagHelper
+      def image_tag(source, options = {})
+        options[:src] = "#{source}".gsub(/development/, 'production')
+        tag("img", options)
+      end
+    end
+  end
+end

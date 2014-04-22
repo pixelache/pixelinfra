@@ -1,7 +1,11 @@
-= image_tag @node.logo.url.gsub(/development/, 'production')
+.row.node
+  .small-2.columns.media.large-offset-1 &nbsp;
+  .small-7.columns.content.centered
+    .logo= image_tag @node.logo.url.gsub(/development/, 'production')
 
-%h5= "#{@node.city}, #{@node.country}"
+    .metadata
+      %p= "#{@node.city}, #{@node.country}"
+      %p= link_to @node.website, @node.website , :target => :_blank
+    .body= raw @node.description
 
-= raw @node.description
-
-%h4= link_to @node.website, @node.website , :target => :_blank
+  .small-3.columns.end &nbsp;

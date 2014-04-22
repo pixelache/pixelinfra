@@ -1,7 +1,7 @@
 .row
   .small-10.columns
     %h2 Pages
-    
+    %p= link_to 'Create new page', new_admin_page_path, :class => [:round, :button, :tiny]
     = paginate @pages
     %table.table.table-condensed.pages
       %thead
@@ -15,5 +15,5 @@
         - @pages.each do |page|
           = render :partial => 'page', :locals => {:page => page, :classpassed => nil}
     = paginate @pages
-    %p= link_to 'Enter new page', new_admin_page_path
+    %p= link_to 'Create new page', new_admin_page_path, :class => [:round, :button, :tiny]
     

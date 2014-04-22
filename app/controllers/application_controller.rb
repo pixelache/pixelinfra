@@ -11,7 +11,13 @@ class ApplicationController < ActionController::Base
   
   def determine_site
     @site = Subsite.find_by(:name => (request.host =~ /^olsof/ ? 'olsof' : 'pixelache'))
+    if @site.name =='olsof'
+      @calendar = Event.by_site(@site).where(['start_at >= ? OR end_at >= ?', Time.now, Time.now])
+      @calendar += Step.by_site(@site).where(['start_at >= ? OR end_at >= ?', Time.now, Time.now])
+    end
     @site.name
+    
+
   end
 
   rescue_from CanCan::AccessDenied do |exception|

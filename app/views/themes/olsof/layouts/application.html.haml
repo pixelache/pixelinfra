@@ -15,32 +15,74 @@
     = javascript_include_tag "application"
     = javascript_include_tag "vendor/modernizr"
     .row
-      .small-3.columns#sidebar
+      .large-3.medium-4.small-12.columns.push.large-offset-1#sidebar
         .logo
           .first= link_to 'Open', '/'
         .logo
-          .second= link_to raw("&#8594; Sourcing"), '/'
+          .second= link_to raw("&#8594;Sourcing"), '/'
         .logo
           .third= link_to 'Festivals', '/'
+        %select#mobile_menu
+          %option= t :choose
+          %option{:selected => (controller.controller_name == 'pages' ? :selected : false), :value => page_path('about')}= t :about
+          %option{:selected => (controller.controller_name == 'events' ? :selected : false),:value => events_path}= t :events
+          %option{:selected => (controller.controller_name == 'home'  || controller.controller_name == 'posts' ? :selected : false),:value => '/'}= t :news
+          :javascript 
+            $('#mobile_menu').change(function() {
+              window.location = $(this).find("option:selected").val();
+            });
+        
+        .nav_lines
+          = image_tag theme_image_path('nav_lines.png'), :class => :navbg
+          .item.about= link_to t(:about), page_path('about')
+          .item.events= link_to t(:events), events_path
+          .item.news= link_to t(:news), '/'
+          
+        .calendar
+          %h5= t(:calendar)
+          %ul.calendar_events
+            - @calendar.each do |cal|
+              %li
+                = "///#{date_range(cal.start_at, cal.end_at)}///"
+                %br/
+                = link_to cal.name, cal
+                
         = yield :sidebar
       
-      .small-2.columns#middle= yield :middle
-      
-      
-      .small-7.columns
+      .large-8.medium-8.small-12.pull.columns#middle
+        = yield :middle
+
         .right_wrap.row
           .small-12.columns
             .bar_menu
-              .bar= image_tag(theme_image_path('vert_bar.png'))
-              .bar= image_tag(theme_image_path('vert_bar.png'))
-              .bar= image_tag(theme_image_path('vert_bar.png'))
-              .bar= image_tag(theme_image_path('vert_bar.png'))
+              #menutext
+                - case controller.controller_name
+                  - when 'nodes'
+                    Partners
+                  - when 'pages'
+                    About
+                  - when 'posts'
+                    News
+                  - when 'home'
+                    News
+                  - when 'events'
+                    Events
+              .bar{:class => (controller.controller_name == 'pages' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/pages/about', :rel => "About"
+              .bar{:class => (controller.controller_name == 'nodes' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), nodes_path, :rel => "Partners"
+              .bar{:class => (controller.controller_name == 'posts' || controller.controller_name == 'home' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/', :rel => "News"
+              .bar{:class => (controller.controller_name == 'events' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), events_path, :rel => "Events"
+              :javascript
+                $('.bar').mouseover(function() {
+                  $('#menutext').text($(this).find('a').attr('rel'));
+                }).mouseout(function() {
+                  $('#menutext').text('');
+                });
         .row
           .small-12.columns#main= yield
     %footer
       .olsof-footer
         .row
           - @site.nodes.uniq.each do |node|
-            .small-2.columns= link_to image_tag(node.logo.url(:logo).gsub(/development/, 'production'), :width => 130), node.website
-          .small-2.columns= theme_image_tag 'grundtvig_logo_english.jpg'
+            .small-2.columns= link_to image_tag(node.logo.url(:logo), :width => 130), node.website
+          .small-2.columns= theme_image_tag 'grundtvig_logo_english.png'
     / ! end of #container

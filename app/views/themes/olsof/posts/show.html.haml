@@ -1,11 +1,19 @@
-.post
-  %h2= @post.title
-  .metadata= "posted at #{l @post.published_at, :format => :long} by #{@post.creator.name}"
+.row.post
+  .small-3.columns.media
+    - unless @post.image.blank? && @post.photos.empty?
+      %ul.clearing-thumbs{:"data-clearing" => ""}
+        - if @post.image?
+          - if @post.image_width >= 400
+            %li= link_to image_tag(@post.image.url(:standard)), @post.image.url
+          - else
+            %li= link_to image_tag(@post.image.url), @post.image.url
+        - unless @post.photos.empty?
+          - @post.photos.each do |i|
+            %li= link_to image_tag(i.filename.url(:box)), i.filename.url
+  .small-8.columns.content.left
+    %h2= @post.title
+    .metadata= "posted at #{l @post.published_at, :format => :long} by #{@post.creator.name}"
 
-  - if @post.image?
-    - if @post.image_width >= 800
-      = image_tag @post.image.url(:standard)
-    - else
-      = image_tag @post.image.url
 
-  = raw @post.body
+
+    .body= raw @post.body
