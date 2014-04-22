@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  include ThemesForRails::ActionController 
   theme :determine_site
   before_filter :configure_permitted_parameters, if: :devise_controller?
   

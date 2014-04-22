@@ -33,7 +33,7 @@
             });
         
         .nav_lines
-          = image_tag theme_image_path('nav_lines.png'), :class => :navbg
+          = image_tag current_theme_image_path('nav_lines.png'), :class => :navbg
           .item.about= link_to t(:about), page_path('about')
           .item.events= link_to t(:events), events_path
           .item.news= link_to t(:news), '/'

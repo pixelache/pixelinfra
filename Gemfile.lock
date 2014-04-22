@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/boxcar21/themes_for_rails.git
+  revision: dddae929e8fecfa603a6105389e3f12267911a58
+  branch: master
+  specs:
+    themes_for_rails (0.5.1)
+      rails (>= 3.0.0)
+
+GIT
   remote: git://github.com/cenotaph/rails3-jquery-autocomplete.git
   revision: 26909d6a09b3e9c629e4a45d9f9800181d7db4c7
   branch: master
@@ -23,14 +31,6 @@ GIT
     globalize (4.0.0)
       activemodel (>= 4.0.0, < 5)
       activerecord (>= 4.0.0, < 5)
-
-GIT
-  remote: git://github.com/jasherai/themes_for_rails.git
-  revision: f7213056a5c6532c2f2cce830b4c86d009c24563
-  branch: master
-  specs:
-    themes_for_rails (0.5.1)
-      rails (>= 3.0.0)
 
 GIT
   remote: git://github.com/josevalim/inherited_resources.git

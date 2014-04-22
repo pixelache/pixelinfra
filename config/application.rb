@@ -39,7 +39,8 @@ module Pixelinfra
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     # 
-    config.i18n.enforce_available_locales = false
+
     config.session_store :cookie_store, :key => '_pixelache_session', :domain => :all
   end
 end
+I18n.enforce_available_locales = false
