@@ -3,7 +3,7 @@ ThemesForRails.config do |config|
   config.themes_dir = ":root/app/assets/themes"
 
   # assets_dir is the path to your theme assets.
-  config.assets_dir = ":root/app/assets/themes/:name"
+  config.assets_dir = ":root/app/assets/themes/:name/assets"
 
   # views_dir is the path to your theme views
   config.views_dir =  ":root/app/views/themes/:name"
