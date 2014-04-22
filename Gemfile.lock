@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/boxcar21/themes_for_rails.git
-  revision: dddae929e8fecfa603a6105389e3f12267911a58
+  remote: git://github.com/ShiningRay/themes_for_rails.git
+  revision: 3fbe2bcc4f895bcb750d2c310af10b2acda1be3e
   branch: master
   specs:
     themes_for_rails (0.5.1)
