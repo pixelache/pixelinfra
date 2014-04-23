@@ -4,6 +4,8 @@ class PostsController < InheritedResources::Base
   
   def show
     @post = @site.posts.friendly.find(params[:id])
+    set_meta_tags :title => @post.title
+    
     if !@post.published
       if current_user
         if can? :read, @post

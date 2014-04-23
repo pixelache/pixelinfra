@@ -1,33 +1,39 @@
-.post.row
-  .small-12.columns
-    %h2= @post.title
-    .metadata
-      = "posted at #{l @post.published_at, :format => :long} "
-      - unless @post.creator.nil? 
-        = "by #{@post.creator.name}"
-.row
-  .small-12.column
+.post_single{:style => "width: " + (!@post.image_width.nil? ?  @post.image_width.to_s  : "660") + "px;"}
+  .internal.columns
     - if @post.image?
-      - if !@post.image_width.nil?
-        - if @post.image_width >= 800
-          = image_tag @post.image.url(:standard)
-        - else
-          = image_tag @post.image.url
-      - else
-        = image_tag @post.image.url
-.row
-  .small-8.column              
-    = raw @post.body
-  .small-4.columns
-    - if @post.event
-      %p
-        Event:
-        = link_to @post.event.name, @post.event
-    - if @post.project
-      %p
-        Project:
-        = link_to @post.project.name, @post.project
-    - if @post.festival
-      %p
-        Festival:
-        = link_to @post.festival.name, @post.festival
+      .row
+        .post_image 
+          
+          - if !@post.image_width.nil?
+            - if @post.image_width >= 1200
+              = image_tag @post.image.url(:twelvehundred)
+            - else
+              = image_tag @post.image.url
+          - else
+            = image_tag @post.image.url
+    .row
+      .columns.metadata
+        %span.date= l @post.published_at, :format => :long
+        - unless @post.creator.nil? 
+          = ", #{@post.creator.name}"
+    .row
+      .title= @post.title
+      
+    .row
+      .body= raw @post.body
+
+  .row
+    %h1= t(:related_content)
+  / .small-4.columns
+  /   - if @post.event
+  /     %p
+  /       Event:
+  /       = link_to @post.event.name, @post.event
+  /   - if @post.project
+  /     %p
+  /       Project:
+  /       = link_to @post.project.name, @post.project
+  /   - if @post.festival
+  /     %p
+  /       Festival:
+  /       = link_to @post.festival.name, @post.festival

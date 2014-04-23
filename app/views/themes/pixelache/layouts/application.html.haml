@@ -2,16 +2,17 @@
 %html
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      %title= content_for?(:title) ? yield(:title) : "Pixelache"
-      %meta{:content => content_for?(:description) ? yield(:description) : "Pixelinfra", :name => "description"}
-        %link{:href => "http://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700", :rel => "stylesheet", :type => "text/css"}/
-        = stylesheet_link_tag "application", :media => "all"
-        = stylesheet_link_tag 'pixelache/stylesheets/application', :media => :screen
-        = javascript_include_tag "application"
-        = javascript_include_tag "vendor/modernizr"
-        = javascript_include_tag "pixelache/javascripts/application"
-        = csrf_meta_tags
-        = yield(:head)
+    = display_meta_tags :site => 'Pixelache' 
+    
+    %meta{:content => content_for?(:description) ? yield(:description) : "Pixelinfra", :name => "description"}
+      %link{:href => "http://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700", :rel => "stylesheet", :type => "text/css"}/
+      = stylesheet_link_tag "application", :media => "all"
+      = stylesheet_link_tag 'pixelache/stylesheets/application', :media => :screen
+      = javascript_include_tag "application"
+      = javascript_include_tag "vendor/modernizr"
+      = javascript_include_tag "pixelache/javascripts/application"
+      = csrf_meta_tags
+      = yield(:head)
   %body{:class => "#{controller_name} #{action_name}"}
     #container.container
       %header

@@ -43,6 +43,7 @@ gem 'has_scope'
 gem 'http_accept_language'
 gem 'inherited_resources', github: 'josevalim/inherited_resources'
 gem 'kaminari'
+gem 'meta-tags', require: 'meta_tags'
 gem 'mini_magick'
 gem 'nested_form'
 gem "non-stupid-digest-assets"

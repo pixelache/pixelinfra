@@ -14,6 +14,10 @@ class ImageUploader < CarrierWave::Uploader::Base
       "#{Rails.env.to_s}/images/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
   
+  version :twelvehundred do
+    process :resize_to_fit => [1200, 900]
+  end
+  
   version :standard do
     process :resize_to_fit => [800, 600]
   end
