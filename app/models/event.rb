@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
   belongs_to :place
   belongs_to :subsite
   belongs_to :user
+  has_many :posts
   has_many :photos, as: :item
   extend FriendlyId
   friendly_id :name_en , :use => [ :slugged, :finders ] # :history]

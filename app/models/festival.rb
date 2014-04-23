@@ -2,6 +2,7 @@ class Festival < ActiveRecord::Base
   belongs_to :node
   has_many :events, :dependent => :nullify
   has_and_belongs_to_many :etherpads
+  has_many :posts
   # has_many :projects
   extend FriendlyId
   friendly_id :name, :use => [:slugged, :finders]

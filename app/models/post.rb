@@ -86,6 +86,30 @@ class Post < ActiveRecord::Base
     end
   end
   
+  def related_posts
+    related = []
+    if event
+      unless event.posts.empty?
+        related << event.posts.delete_if{|x| x == self}
+      end
+    end
+    if project
+      unless project.posts.empty?
+        related << project.posts.delete_if{|x| x == self }
+      end
+    end
+    if festival
+      unless festival.posts.empty?
+        related << festival.posts.delete_if{|x| x == self }
+      end
+    end
+    
+    unless tags.empty?
+    end
+    related.flatten.uniq.delete_if{|x| x == self }.shuffle
+
+  end
+  
   def title_en
     self.title(:en)
   end

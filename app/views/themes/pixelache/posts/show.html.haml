@@ -1,4 +1,4 @@
-.post_single{:style => "width: " + (!@post.image_width.nil? ?  @post.image_width.to_s  : "660") + "px;"}
+.post_single{:style => (!@post.image_width.nil? ?  (@post.image_width <= 1200 ?  "width: 46em;" : '' )  : 'width: 46em' ) }
   .internal.columns
     - if @post.image?
       .row
@@ -6,14 +6,17 @@
           
           - if !@post.image_width.nil?
             - if @post.image_width >= 1200
-              = image_tag @post.image.url(:twelvehundred)
+              - if @post.image.twelvehundred.file.exists?
+                = image_tag @post.image.url(:twelvehundred)
+              - else
+                = image_tag @post.image.url
             - else
               = image_tag @post.image.url
           - else
             = image_tag @post.image.url
     .row
       .columns.metadata
-        %span.date= l @post.published_at, :format => :long
+        %span.date= l @post.published_at.to_date, :format => :long
         - unless @post.creator.nil? 
           = ", #{@post.creator.name}"
     .row
@@ -24,11 +27,33 @@
 
   .row
     %h1= t(:related_content)
-  / .small-4.columns
-  /   - if @post.event
-  /     %p
-  /       Event:
-  /       = link_to @post.event.name, @post.event
+  - if @post.event
+    .row
+      .related.event
+        .related_metadata
+          %span.date= date_range(@post.event.start_at, @post.event.end_at)
+        .title= link_to t(:event) + ": " + @post.event.name, @post.event
+        .row
+          .small-4.columns  
+            - if @post.event.image?
+              .image= image_tag @post.event.image.url(:box)
+          .small-8.columns
+            .body= raw truncate_html(@post.event.description, :length => 250)
+        .read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), @post.event
+  - unless @post.related_posts.empty?
+    - @post.related_posts[0..4].each do |related|
+      .row
+        .related.post
+          .related_metadata
+            %span.date= l related.published_at.to_date, :format => :long
+            - unless related.creator.nil? 
+              = ", #{related.creator.name}" 
+          .title= link_to  t(:post) + ": " + related.title, related
+          .row
+            .small-12.columns.body= raw truncate_html(related.body, :length => 350)
+          .row
+            .small-12.columns.read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), related   
+        
   /   - if @post.project
   /     %p
   /       Project:
