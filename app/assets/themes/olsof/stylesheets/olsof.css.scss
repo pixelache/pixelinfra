@@ -200,7 +200,7 @@ ul.side-nav {
 
 }
 
-.post {
+.post, .event {
   font-family: Courier New, Courier, fixed;
   h2 {
     font-family: Courier New, Courier, fixed;
@@ -220,6 +220,10 @@ ul.side-nav {
     ul.clearing-thumbs {
       li {
         margin-bottom: 7px;
+        img {
+          width: 100%;
+          height: auto;
+        }
       }
     }
   }
@@ -248,6 +252,7 @@ ul.side-nav {
       line-height: 1.125;
       margin-bottom: 15px;
     }
+    
     .metadata {
       p {
         margin: 0px;
