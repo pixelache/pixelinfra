@@ -4,7 +4,9 @@ body {
   background-color: $beige;
   padding-top: 25px;
 }
-
+a {
+  color: #4a97c7;
+}
 header {
   margin-bottom: 30px;
   h1 {
@@ -94,9 +96,17 @@ header {
       font-family: Open Sans, Helvetica, Arial, sans-serif;
       font-weight:bold;
       text-transform: uppercase;
-      &.about {
+      &.publications {
         left:125px;
         top: 155px;
+      }
+      &.about {
+        top: -2px;
+        left: 185px;
+      }
+      &.partners {
+        left: 171px;
+        top: 123px;
       }
       &.events {
         left: 60px;
@@ -115,7 +125,7 @@ header {
   .calendar {
     margin-top: 150px;
     h5 {
-      font-size: 15px;
+      font-size: 1em;
       font-family: Open Sans, Helvetica, Arial, sans-serif;
       font-weight:bold;
       text-transform: uppercase;
@@ -125,8 +135,8 @@ header {
       margin: 0px;
       
       li {
-        font-family: Courier New, Courier, fixed;
-        line-height: 1.125;
+        font-family: Open Sans, Helvetica, Arial, sans-serif;
+        line-height: 1.4em;
         margin-bottom: 15px;
       }
     }
@@ -149,12 +159,22 @@ ul.side-nav {
 
 .event, .event_index {
   h2 {
-    font-family: Courier New, Courier, fixed;
+
     line-height: 1.125;
     margin-bottom: 15px;
   }
   .event_row {
     margin-bottom: 40px;
+    .name, .date {
+      font-size: 1.0em;
+      line-height: 1.6em;
+
+    }
+    .blurb {
+      font-size: 1.0em;
+      line-height: 1.4em;
+      color: #333;
+    }
   }
   .event_image {
     margin-bottom: 25px;
@@ -162,14 +182,14 @@ ul.side-nav {
     height: 0;
     padding-bottom: 100%;
   }
-  font-family: Courier New, Courier, fixed;
+
   .metadata {
     margin: 15px 0px;
     font-weight: 200;
     font-size: 13px;
   }
   .body, .body p {
-    font-family: Courier New, Courier, fixed;
+
     font-size: 15px;
     line-height: 19px;
   }
@@ -186,24 +206,37 @@ ul.side-nav {
     margin-bottom: 25px;
   }
   .date, .blurb {
-    font-family: Courier New, Courier, fixed;
-    font-size: 15px;
-    line-height: 19px;
+
+    font-size: 1.0em;
+    line-height: 1.4em;
     color: #333;
   }
   
 }
 
+ul.node_index {
+  list-style-type: none;
+  padding-top: 75px;
+
+  li {
+    font-size: 1.5em;
+    margin-bottom: 1.5em;
+    a {
+      color: #333;
+    }
+  }
+}
+
 .olsof-footer {
   margin-top: 25px;
-  padding-top: 25px;
+  padding: 25px 0px;
 
 }
 
 .post, .event {
-  font-family: Courier New, Courier, fixed;
+
   h2 {
-    font-family: Courier New, Courier, fixed;
+
     line-height: 1.125;
     margin-bottom: 15px;
   }
@@ -231,15 +264,15 @@ ul.side-nav {
 
 .page {
   .content {
-    margin-top: 140px;
+    margin-top: 70px;
     h2, h3 {
-      font-family: Courier New, Courier, fixed;
-      line-height: 1.125;
+      font-size: 1.3em;
+      line-height: 1.4em;
       margin-bottom: 15px;
     }
     p {
-      font-family: Courier New, Courier, fixed;
-      line-height: 19px;
+
+      line-height: 1.4em;
     }
   }
 }
@@ -248,7 +281,7 @@ ul.side-nav {
   .content {
     margin-top: 140px;
     h2, h3 {
-      font-family: Courier New, Courier, fixed;
+
       line-height: 1.125;
       margin-bottom: 15px;
     }
@@ -257,47 +290,12 @@ ul.side-nav {
       p {
         margin: 0px;
       }
-      font-family: Courier New, Courier, fixed;
+
       margin: 35px 0px;
     }
     p, .body {
-      font-family: Courier New, Courier, fixed;
+
       line-height: 19px;
-    }
-  }
-}
-
-// White overrides for blue background
-
-body.pages, body.nodes {
-  color: white;
-  background-color: $darkblue;
-  a {
-    color: white;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    color: #FFF;
-  }
-  #sidebar {
-    .logo {
-      a {
-        color: #FFF;
-        &:hover { 
-          color: #BBB; 
-        }
-      }
-      .first, .second, .third { 
-        border-bottom: 3px dashed #FFF;
-      }
-    }
-  }
-  .right_wrap {
-    .bar_menu {
-      .bar {
-        img {
-          -webkit-filter: invert(100%);  
-        }
-      }
     }
   }
 }

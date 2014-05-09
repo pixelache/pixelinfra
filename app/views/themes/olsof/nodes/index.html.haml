@@ -1,3 +1,7 @@
-%ul
-  - @nodes.each do |node|
-    %li= link_to node.name, node
+.row.page
+  .small-2.columns.media.large-offset-1 &nbsp;
+  .small-7.columns.content.centered
+    %ul.node_index
+      - @nodes.each do |node|
+        %li= link_to node.name, node
+  .small-3.columns.end &nbsp;        

@@ -7,7 +7,7 @@
           .small-4.column
             .event_image= link_to image_tag(event.image.url(:box).gsub(/development/, 'production')), event
             .name= link_to event.name, event
-            .date= "///#{date_range(event.start_at, event.end_at)}///"
+            .date= "#{date_range(event.start_at, event.end_at)}"
             .blurb
               = truncate_html(sanitize(event.description, tags: %w{bold strong b italic em }), :length => 170)
               = link_to ">>>", event

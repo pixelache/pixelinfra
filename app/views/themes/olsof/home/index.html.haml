@@ -7,7 +7,7 @@
           .small-4.column
             .feed_image= link_to image_tag(feeditem.item.image.url(:box).gsub('development', 'production')), feeditem.item
         
-            .date= link_to "///#{l feeditem.fed_at, :format => :short}///", feeditem.item
+            .date= link_to "#{l feeditem.fed_at, :format => :short}", feeditem.item
             .blurb
               = truncate_html(sanitize(feeditem.item.description, tags: %w{bold strong b italic em }), :length => 150)
               = link_to ">>>", feeditem.item

@@ -25,8 +25,10 @@
         %select#mobile_menu
           %option= t :choose
           %option{:selected => (controller.controller_name == 'pages' ? :selected : false), :value => page_path('about')}= t :about
-          %option{:selected => (controller.controller_name == 'events' ? :selected : false),:value => events_path}= t :events
-          %option{:selected => (controller.controller_name == 'home'  || controller.controller_name == 'posts' ? :selected : false),:value => '/'}= t :news
+          %option{:selected => (controller.controller_name == 'nodes' ? :selected : false), :value => nodes_path}= t :partners
+          %option{:selected => (controller.controller_name == 'publications' ? :selected : false), :value => publications_path}= t :publications
+          %option{:selected => (controller.controller_name == 'steps' || controller.controller_name == 'events' ? :selected : false), :value => events_path}= t :events
+          %option{:selected => (controller.controller_name == 'home'  || controller.controller_name == 'posts' ? :selected : false), :value => '/'}= t :news
           :javascript 
             $('#mobile_menu').change(function() {
               window.location = $(this).find("option:selected").val();
@@ -34,16 +36,18 @@
         
         .nav_lines
           = image_tag current_theme_image_path('nav_lines.png'), :class => :navbg
+          .item.publications= link_to t(:publications), publications_path
           .item.about= link_to t(:about), page_path('about')
+          .item.partners= link_to t(:partners), nodes_path
           .item.events= link_to t(:events), events_path
           .item.news= link_to t(:news), '/'
           
         .calendar
-          %h5= t(:calendar)
+          %h5= t(:calendar) + ":"
           %ul.calendar_events
             - @calendar.each do |cal|
               %li
-                = "///#{date_range(cal.start_at, cal.end_at)}///"
+                = "#{date_range(cal.start_at, cal.end_at)}"
                 %br/
                 = link_to cal.name, cal
                 
@@ -57,20 +61,25 @@
             .bar_menu
               #menutext
                 - case controller.controller_name
+                  - when 'publications'
+                    = t :publications
                   - when 'nodes'
-                    Partners
+                    = t :partners
                   - when 'pages'
-                    About
+                    = t :about
                   - when 'posts'
-                    News
+                    = t :news
                   - when 'home'
-                    News
+                    = t :news
                   - when 'events'
-                    Events
-              .bar{:class => (controller.controller_name == 'pages' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/pages/about', :rel => "About"
-              .bar{:class => (controller.controller_name == 'nodes' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), nodes_path, :rel => "Partners"
-              .bar{:class => (controller.controller_name == 'posts' || controller.controller_name == 'home' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/', :rel => "News"
-              .bar{:class => (controller.controller_name == 'events' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), events_path, :rel => "Events"
+                    = t :events
+                  - when 'steps'
+                    = t :events
+              .bar{:class => (controller.controller_name == 'pages' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/pages/about', :rel => t(:about)
+              .bar{:class => (controller.controller_name == 'publications' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/ppublications', :rel => t(:publications)           
+              .bar{:class => (controller.controller_name == 'nodes' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), nodes_path, :rel => t(:partners)
+              .bar{:class => (controller.controller_name == 'posts' || controller.controller_name == 'home' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/', :rel => t(:news)
+              .bar{:class => (controller.controller_name == 'events' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), events_path, :rel => t(:events)
               :javascript
                 $('.bar').mouseover(function() {
                   $('#menutext').text($(this).find('a').attr('rel'));

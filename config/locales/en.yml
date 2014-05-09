@@ -4,11 +4,11 @@ en:
     long:
       different_months_same_year: "%{from_month} %{from_day} %{sep} %{until_month} %{until_day}, %{year}"
       different_years: "%{from_month} %{from_day}, %{from_year} %{sep} %{until_month} %{until_day}, %{until_year}"
-      same_month: "%{month} %{from_day} %{sep} %{until_day}, %{year}"
+      same_month: "%{from_day} %{sep} %{until_day} %{month} %{year}"
     short:
       different_months_same_year: "%{from_month} %{from_day} %{sep} %{until_month} %{until_day}, %{year}"
       different_years: "%{from_month} %{from_day}, %{from_year} %{sep} %{until_month} %{until_day}, %{until_year}"
-      same_month: "%{month} %{from_day} %{sep} %{until_day}, %{year}"  
+      same_month: "%{from_day} %{sep} %{until_day} %{month} %{year}"  
   date:
     abbr_day_names:
     - Sun
@@ -42,7 +42,7 @@ en:
     - Saturday
     formats:
       default: ! '%Y-%m-%d'
-      long: ! '%B %d, %Y'
+      long: ! '%d %B %Y'
       short: ! '%b %d'
     month_names:
     -
@@ -227,8 +227,11 @@ en:
   events: 'Events'
   news: 'News'
   activities: 'Activities'
+  partners: 'Partners'
   post: 'Post'
   posts: 'Posts'
+  publications: 'Publications'
+  publications_coming_soon: 'Publications coming soon!'
   from_the_archives: 'From the Archives'
   facilitated_by: 'Facilitated by:'
   read_more: 'Read more'

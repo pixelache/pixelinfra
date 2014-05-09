@@ -31,10 +31,16 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
   .nav_lines {
     display: none;
   }
-  .bar_menu {
+  .bar_menu, .right_wrap {
     display: none;
   }
+  ul.node_index {
+    padding-top: 0px;
+  }
   
+  .page .content, .node .content {
+    margin-top: 15px;
+  }
   #sidebar {
     .logo {
       font-size: 3em;
