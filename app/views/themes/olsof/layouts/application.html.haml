@@ -58,6 +58,17 @@
 
         .right_wrap.row
           .small-12.columns
+            .language
+              .default
+                .active= image_tag(current_theme_image_path('black_circle.png'))
+                .current= I18n.locale.to_s
+              .choices
+                - [:en, :fi, :fr]. each do |lang|
+                  - next if lang == I18n.locale
+                  .choice
+                    = link_to(:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => lang.to_s) do
+                      .choice_circle= image_tag(current_theme_image_path('black_circle.png'))
+                      .choice_text= lang.to_s
             .bar_menu
               #menutext
                 - case controller.controller_name
@@ -86,6 +97,23 @@
                 }).mouseout(function() {
                   $('#menutext').text('');
                 });
+                $('.language .default').mouseover(function() {
+                  $('.language .active img').attr('src', '/assets/olsof/images/blue_circle.png');
+                  $('.language .current').css('color', '#4a97c7');
+                }).mouseout(function() {
+                  $('.language .active img').attr('src', '/assets/olsof/images/black_circle.png');
+                  $('.language .current').css('color', '#000');
+                }).click(function() {
+                  $('.language .choices').slideDown();
+                });
+                $('.language .choices .choice').mouseover(function() {
+                  $(this).find('img').attr('src', '/assets/olsof/images/blue_circle.png');
+                  $(this).find('a').css('color', '#4a97c7');
+                }).mouseout(function() {
+                  $(this).find('img').attr('src', '/assets/olsof/images/black_circle.png');
+                  $(this).find('a').css('color', '#000');
+                })
+
         .row
           .small-12.columns#main= yield
     %footer

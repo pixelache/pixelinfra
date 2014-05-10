@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include ThemesForRails::ActionController 
   theme :determine_site
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :get_locale
   
   private
 
@@ -16,10 +17,22 @@ class ApplicationController < ActionController::Base
       @calendar = Event.by_site(@site).where(['start_at >= ? OR end_at >= ?', Time.now, Time.now])
       @calendar += Step.by_site(@site).where(['start_at >= ? OR end_at >= ?', Time.now, Time.now])
     end
-    @site.name
-    
-
+    @site.name 
   end
+  
+  def get_locale 
+    if params[:locale]
+      session[:locale] = params[:locale]
+    end
+    
+    if session[:locale].blank?
+      available  = %w{en fi fr}
+      I18n.locale = request.preferred_language_from(available)
+    else
+      I18n.locale = session[:locale]
+    end
+  end
+
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message
