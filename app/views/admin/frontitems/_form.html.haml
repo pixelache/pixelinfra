@@ -1,34 +1,103 @@
-= semantic_form_for([:admin, @frontitem]) do |f|
+= semantic_form_for([:admin, @frontitem], :html => {:multipart => true}) do |f|
   .row
     .small-3.columns= f.input :subsite, :label => "Which site?", :include_blank => false
   .row
-    .small-6.columns
+    .small-12.columns= f.input :frontmodule, :label => "What do you want to add to the frontpage?", :as => :radio, :member_label => Proc.new { |fm| fm.exampleimage? ? image_tag(fm.exampleimage.url(:logo)) + raw("<p>" + fm.name + "</p>") : fm.name } 
+        
+  #hidden{:style => !f.object.new_record? ? "display: block" : false}
+    .small-12.columns
       .row
-        .small-8.columns= f.input :frontmodule, :label => "Use existing module"
-    .small-6.columns
-      .row
-        .small-5.columns= f.input :item_type, :as => :select, :collection => ['Page', 'Post'], :label => 'Or embed a post or page:'
+        .small-3.columns= f.input :item_type, :as => :select, :collection => ['Page', 'Post'], :label => 'Choose type of content:'
+        .small-3.columns.second= f.input :seconditem_type, :as => :select, :collection => ['Page', 'Post'], :label => 'Choose type of content (right):'
       .row.page_selector
-        .small-12.columns= f.input :item_id, :as => :select, :input_html => {:disabled => :disabled}
+        .small-12.columns
+          = f.input :item_id, :as => :hidden
+          = f.input :seconditem_id, :as => :hidden
       .row
-        .small-6.columns= f.input :background_colour, :as => :string, :input_html => {:class => :colourpicker }
+        .small-5.columns= f.input :item_name, :as => :autocomplete, :url =>  autocomplete_post_title_admin_frontitems_path, :input_html => { :id_element => '#frontitem_item_id', :data => {:no_matches_label => 'Not in database yet'}}, :wrapper_html => { :style => !f.object.new_record? ? "display: block" : false }, :label => "Type the first few letters of the post title", :hint => raw("(If the post is not already the database, <a href=\"/admin/posts/new\" target=\"_blank\">create it first.</a>)")
+        
+        .small-5.columns.second= f.input :seconditem_name, :as => :autocomplete, :url =>  autocomplete_post_title_admin_frontitems_path, :input_html => { :id_element => '#frontitem_seconditem_id', :data => {:no_matches_label => 'Not in database yet'}}, :wrapper_html => { :style => !f.object.new_record? ? "display: block" : false}, :label => "Type the first few letters of the post title", :hint => raw("(If the post is not already the database, <a href=\"/admin/posts/new\" target=\"_blank\">create it first.</a>)")
+     
       .row
-        .small-6.columns= f.input :text_colour, :as => :string, :input_html => {:class => :colourpicker }        
+        .small-2.columns= f.input :background_colour, :as => :string, :input_html => {:class => :colourpicker }
+        .small-3.left.columns
+          - if f.object.bigimage?
+            = image_tag f.object.bigimage.url(:thumb)
+            = f.input :remove_bigimage, :as => :boolean, :label => "Delete this image"
+          = f.input :bigimage, :label => 'Or background image:', :hint => 'Try to be at least 1920 pixels wide! Will override background colour.'
+      .row
+        .small-2.columns= f.input :text_colour, :as => :string, :input_html => {:class => :colourpicker }
+      .row
+        .small-6.columns= f.input :custom_title, :hint => "Optional. Will replace title of post on thin strip, or appear at top of full-size module. Basic HTML tags are OK here."
   .row
     .small-6.columns= f.submit "Save" , :class => [:button, :round]
     
-:javascript
-  $('.colourpicker').jPicker();
-  $('select#frontitem_item_type').change(function(event) {
-    var choice = $(this).val().toLowerCase() + 's';
-    $('select#frontitem_frontmodule_id').val('');
-    $.get(
-     '/admin/' + choice + '/options',
-        function(response) {
-          $('#frontitem_item_id').html(response);
-          $('[value=""]',event.target).remove();
-          }
-    );
-    $('#frontitem_item_id').removeAttr('disabled');
-   
-  });
+= content_for :jquery do
+  :plain
+    $(document).delegate('span.jPicker', 'click', function() {
+            var els = $('.jPicker.Container');
+            for(var i = 0; i < $.jPicker.List.length; i++) {
+                var o = $($.jPicker.List[i]).offset();
+                $(els.get(i)).offset({top: o.top - 50, left: o.left + 100});
+            }
+        });
+  
+    $('.colourpicker').jPicker();
+    
+    $('select#frontitem_item_type').change(function(event) {
+      var choice = $(this).val().toLowerCase() + 's';
+      $('select#frontitem_frontmodule_id').val('');
+      $.get(
+       '/admin/' + choice + '/options',
+          function(response) {
+            $('#frontitem_item_id').html(response);
+            $('[value=""]',event.target).remove();
+            }
+      );
+      $('#frontitem_item_id').removeAttr('disabled');
+    });
+    
+    $('input:radio[name="frontitem[frontmodule_id]"]').change(function() {
+      if ($(this).val() == 3 || $(this).val() == 5 || $(this).val() == 6) {
+        $('#hidden').fadeIn();
+        
+        $('html,body').animate({
+                scrollTop: $("#hidden").offset().top},
+                'slow');
+        
+      }
+    });
+    
+    $('#frontitem_item_type').change(function() {
+      $('#frontitem_item_name').val('');
+      $('#frontitem_item_id').val('');
+      var thetype = $(this).val().toLowerCase();
+      var themethod;
+      if (thetype == 'page') {
+        themethod = 'name';
+      }
+      else {
+        themethod = 'title';
+      }
+      $('#frontitem_item_name_input').fadeIn();
+      $('label[for=frontitem_item_name]').html("Type the first few letters of the " + thetype + " title...");
+      $('li#frontitem_item_name_input input').attr('data-autocomplete', '/admin/frontitems/autocomplete_' + thetype + '_' + themethod);
+      
+    });
+    
+    $('#frontitem_seconditem_type').change(function() {
+      $('#frontitem_seconditem_name').val('');
+      $('#frontitem_seconditem_id').val('');
+      var thetype = $(this).val().toLowerCase();
+      var themethod;
+      if (thetype == 'page') {
+        themethod = 'name';
+      }
+      else {
+        themethod = 'title';
+      }
+      $('#frontitem_seconditem_name_input').fadeIn();
+      $('label[for=frontitem_seconditem_name]').html("Type the first few letters of the " + thetype + " title...");
+      $('li#frontitem_seconditem_name_input input').attr('data-autocomplete', '/admin/frontitems/autocomplete_' + thetype + '_' + themethod);
+      
+    });    

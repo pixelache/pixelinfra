@@ -1,5 +1,13 @@
 @cache_dir = 'lib/assets/'
-@scope = '2009'
+@scope = '2014'
+
+# rake acts_as_taggable_on_engine:install:migrations
+# rake db:migrate
+# rake wordpress:posts
+# rake wordpress:attachments
+# rake wordpress:associate_secondary_images
+# rake wordpress:convert_line_breaks
+
 
 def hash_from_cache
   xml = @cache_dir + 'published.xml'
@@ -243,7 +251,7 @@ namespace :wordpress do
     data = File.read xml
     hash = Hash.from_xml data
     cats = PostCategory.all.map{|x| [x.name, x.id] }
-    Post.paper_trail_off
+    Post.paper_trail_off!
     hash['rss']['channel']['item'].each do |p|
       next unless p['post_type'] == 'post'
       next unless Post.find_by(:wordpress_id => p['post_id']).nil?
@@ -274,10 +282,10 @@ namespace :wordpress do
   task :convert_line_breaks => :environment do
     ActiveRecord::Base.record_timestamps = false
     begin
-      Post.all.each do |p|
+      Post.where(:wordpress_scope => @scope).each do |p|
         next if p.body.nil?
         p.body = p.body.gsub(/(?:\n\r?|\r\n?)/, '<br>')
-        p.save!
+        p.save! rescue p.id
       end
     ensure
       ActiveRecord::Base.record_timestamps = true

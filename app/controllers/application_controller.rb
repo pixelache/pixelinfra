@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
   
   private
 
-  def after_sign_in_path_for(resource)
-    'http://olsof.pixelache.ac/'
-  end
+  # def after_sign_in_path_for(resource)
+  #   'http://olsof.pixelache.ac/'
+  # end
   
   def determine_site
     @site = Subsite.find_by(:name => (request.host =~ /^olsof/ ? 'olsof' : 'pixelache'))
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     
     if session[:locale].blank?
       available  = %w{en fi fr}
-      I18n.locale = request.preferred_language_from(available)
+      I18n.locale = http_accept_language.compatible_language_from(available)
     else
       I18n.locale = session[:locale]
     end

@@ -3,16 +3,16 @@
 module Rails3JQueryAutocomplete
   module Orm
     module ActiveRecord
-      # 
+      #
       # def self.included(base)
       #   base.send :include, InstanceMethods
       #   base.send :alias_method_chain, :get_autocomplete_items, :globalize3
       #   base.send :alias_method_chain, :get_autocomplete_select_clause, :globalize3
       # end
-      # 
+      #
       # module InstanceMethods
 
-        def get_autocomplete_items(parameters)
+        def active_record_get_autocomplete_items(parameters)
           model             = parameters[:model]
           translated_model  = find_globalized_column_class_for(model, parameters[:method])
           model_with_method = translated_model || model
@@ -24,7 +24,7 @@ module Rails3JQueryAutocomplete
           limit   = get_autocomplete_limit(options)
           order   = get_autocomplete_order(method, options, model_with_method)
 
-          items = model.scoped
+          items = (::Rails::VERSION::MAJOR * 10 + ::Rails::VERSION::MINOR) >= 40 ? model.where(nil) : model.scoped
 
           if scopes.present?
             scopes.each { |scope| items = items.send(scope) }
@@ -50,8 +50,8 @@ module Rails3JQueryAutocomplete
           pk_table_name = model_with_pk.table_name
           m_table_name  = model_with_method.table_name
 
-          (["#{pk_table_name}.#{model_with_pk.primary_key}", "#{m_table_name}.#{method}"] +
-              (options[:extra_data].presence || []))
+          (["#{pk_table_name}.#{model_with_pk.primary_key}", "LOWER(#{m_table_name}.#{method})"] +
+            (options[:extra_data].presence || []))
         end
 
         # If the attribute of the record is globalized, returns the translation class; otherwise, returns nil.
@@ -62,7 +62,7 @@ module Rails3JQueryAutocomplete
             nil
           end
         end
-        
+
       # end
 
     end

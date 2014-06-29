@@ -20,6 +20,8 @@ Pixelinfra::Application.routes.draw do
     end
     resources :frontitems do
       post :sort, :on => :collection
+      get :autocomplete_post_title, :on => :collection
+      get :autocomplete_page_name, :on => :collection
     end
     resources :frontmodules
     resources :nodes

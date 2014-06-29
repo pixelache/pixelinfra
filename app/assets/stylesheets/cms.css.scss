@@ -114,3 +114,51 @@ table {
   border: 1px dotted black;
   margin: 5px 0px;
 }
+
+form.frontitem {
+  #hidden {
+    display: none;
+  }
+  #frontitem_item_name_input, #frontitem_seconditem_name_input {
+    display: none;
+  }
+}
+#frontitem_frontmodule_input fieldset.choices {
+  legend.label  {
+    width: 100%;
+    text-align: center;
+  
+    label {
+      font-size: 2.4em;
+    }
+    
+  }
+  ol.choices-group {
+    li.choice {
+      float: left;
+      padding: 0px 20px;
+      label {
+        img {
+          border: 1px dotted #999;
+        }
+        p {
+          font-size: 1.2em;
+          margin-left: 20px;
+          width: 300px;
+        }
+        input {
+          width: 20px;
+        }
+      }
+    }
+  }
+}
+
+#frontitem_background_colour_input, #frontitem_text_colour_input {
+  width: 100px;
+}
+span.jPicker {
+  margin-top: -40px;
+  margin-left: 104px;
+  float: left;
+}

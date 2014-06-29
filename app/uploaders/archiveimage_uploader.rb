@@ -11,7 +11,7 @@ class ArchiveimageUploader < CarrierWave::Uploader::Base
   end
 
   version :full do
-    process :resize_to_fit => [1800, 1000]
+    process :resize_to_fit => [1920, 1080]
   end
 
   version :twelve do

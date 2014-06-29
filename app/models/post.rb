@@ -72,6 +72,10 @@ class Post < ActiveRecord::Base
     title
   end
   
+  def name_with_date
+    self.title + (self.published != true ? ' (unpublished)' : " (#{self.published_at.strftime("%d.%m.%Y")})")
+  end
+  
   def project_name
     project.blank? ? nil : project.name
   end

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.1.1'
-gem 'rails', '4.0.4'
+gem 'rails', '4.1.2rc2'
 gem 'pg'
 
 gem 'sass-rails', '~> 4.0.0'
@@ -33,7 +33,7 @@ gem 'fog'
 gem 'font-awesome-rails'
 gem 'formtastic', '~> 2.3.0.rc2'
 gem 'foundation-rails', '5.0.3.1'
-gem 'friendly_id' , '5.0.2'
+gem 'friendly_id'
 gem 'friendly_id-globalize'
 gem 'geocoder'
 gem 'globalize', github: 'globalize/globalize', branch: 'master'
@@ -52,7 +52,7 @@ gem 'omniauth-facebook' #, '1.4.0'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 gem 'paper_trail', '>= 3.0.0.rc1'
-gem 'rails3-jquery-autocomplete', github: 'cenotaph/rails3-jquery-autocomplete', branch: 'master'
+gem 'rails3-jquery-autocomplete', github: 'crowdint/rails3-jquery-autocomplete'
 gem 'randumb'
 gem 'recaptcha'
 gem 'rolify'
@@ -79,6 +79,7 @@ group :development do
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
+  gem 'spring'
 end
 group :development, :test do
   gem 'factory_girl_rails'

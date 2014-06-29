@@ -18,4 +18,7 @@ class Page < ActiveRecord::Base
     self.name(:en)
   end
   
+  def title
+    name
+  end
 end

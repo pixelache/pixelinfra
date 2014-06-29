@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140418163415) do
+ActiveRecord::Schema.define(version: 20140629121932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -241,14 +241,25 @@ ActiveRecord::Schema.define(version: 20140418163415) do
     t.integer  "item_id"
     t.integer  "position"
     t.string   "external_url"
-    t.string   "background_colour", default: "f05a28", null: false
-    t.string   "text_colour",       default: "FFFFFF", null: false
+    t.string   "background_colour",     default: "f05a28", null: false
+    t.string   "text_colour",           default: "FFFFFF", null: false
     t.boolean  "active"
     t.integer  "frontmodule_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "subsite_id"
+    t.string   "bigimage"
+    t.integer  "bigimage_size"
+    t.integer  "bigimage_width"
+    t.integer  "bigimage_height"
+    t.string   "bigimage_content_type"
+    t.string   "seconditem_type"
+    t.string   "seconditem_id"
+    t.string   "custom_title"
   end
+
+  add_index "frontitems", ["item_id", "item_type"], name: "index_frontitems_on_item_id_and_item_type", using: :btree
+  add_index "frontitems", ["seconditem_id", "seconditem_type"], name: "index_frontitems_on_seconditem_id_and_seconditem_type", using: :btree
 
   create_table "frontmodules", force: true do |t|
     t.string   "name"
@@ -503,12 +514,14 @@ ActiveRecord::Schema.define(version: 20140418163415) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
 
   create_table "tags", force: true do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "taggings_count", default: 0
   end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

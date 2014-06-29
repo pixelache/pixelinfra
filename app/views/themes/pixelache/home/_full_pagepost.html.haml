@@ -1,0 +1,16 @@
+- if front.bigimage?
+  - style = "background: url(#{front.bigimage.url(:full)})  no-repeat center center; background-size: cover;"
+- else
+  - style = "background-color: ##{front.background_colour};"
+- if front.custom_title
+  - style += "padding-top: " + (front.custom_title ? "70px" : "30%;")
+.full_page_or_post.fullscreen{:style => style }
+  - if front.custom_title
+    .row
+      .small-10.small-offset-1.columns.custom_title{:style => "color: ##{front.text_colour}"}= raw front.custom_title
+  .row
+    .small-8.columns.small-offset-1.title= link_to front.item.name, front.item, :style => "color: ##{front.text_colour}"
+  .row
+    .small-8.columns.small-offset-1.blurb{:style => "color: ##{front.text_colour}"}= raw truncate_html(front.item.body, :length => 200)
+  .row
+    .small-8.columns.small-offset-1.read_more= link_to t(:read_more), front.item, :style => "color: ##{front.text_colour}"

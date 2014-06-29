@@ -1,0 +1,20 @@
+- if front.bigimage?
+  - style = "background: url(#{front.bigimage.url(:full)})  no-repeat center center; background-size: cover;"
+- else
+  - style = "background-color: ##{front.background_colour}; "
+.row.two_posts{:style => style }
+  .small-10.columns.large-offset-1 
+    - if front.custom_title
+      .row
+        .small-12.columns.custom_title{:style => "color: ##{front.text_colour}"}= raw front.custom_title
+    .smaller_posts.row
+      .post.small-6.columns
+        .title= link_to front.item.name, front.item, :style => "color: ##{front.text_colour}"
+        .body{:style => "color: ##{front.text_colour}"}= truncate_html sanitize(front.item.body, tags: %w{strong b italic i em underline u bold}), :length => 300
+        .read_more= link_to t(:read_more), front.item, :style => "color: ##{front.text_colour}"
+      - if front.seconditem
+        .post.small-6.columns
+          .title= link_to front.seconditem.name, front.seconditem, :style => "color: ##{front.text_colour}"
+          .body{:style => "color: ##{front.text_colour}"}= truncate_html sanitize(front.seconditem.body, tags: %w{strong b italic i em underline u bold}), :length => 300
+          .read_more= link_to t(:read_more), front.seconditem, :style => "color: ##{front.text_colour}"
+            
