@@ -24,12 +24,16 @@ nav.top-bar {
   
 }
 
+.contain-to-grid.admin {
+  background-color: #3fc7ff;
+}
 nav.top-bar.admin {
   background-color: #3fc7ff;
   height: 35px;
   
   .name {
     height: 35px;
+    margin-left: 13px;
     font-size: 14px;
     h1 {
       line-height: 35px;
@@ -40,5 +44,8 @@ nav.top-bar.admin {
       background-color: #3fc7ff;
       height: 35px;
     }
+  }
+  input#searchterm {
+    margin-top: -5px;
   }
 }

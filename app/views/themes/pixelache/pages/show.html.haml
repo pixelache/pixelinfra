@@ -1,0 +1,20 @@
+.page_tree
+  .row
+    .small-12.columns
+      - @page.self_and_ancestors.reverse.each do |p|
+        - if p == @page
+          %strong= p.name
+        - else
+          %span.leaf
+            = link_to p.name, p
+            = " : "
+    
+.page
+  .row
+    .small-7.columns.large-offset-1.title= raw @page.name
+  .row
+    .small-7.columns.large-offset-1.body= raw simple_format(@page.body)
+    - unless @page.children.empty?
+      .small-3.columns.children
+        - @page.children.each do |child|
+          .child= link_to child.name, child

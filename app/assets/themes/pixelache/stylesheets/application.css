@@ -8,16 +8,18 @@
  *= require pixelache/stylesheets/front
  *= require pixelache/stylesheets/main
  *= require pixelache/stylesheets/post
+ *= require pixelache/stylesheets/page
+ *= require pixelache/stylesheets/festival
  *= require pixelache/stylesheets/footer
  */
 
 .container {
-
+  
 }
 #main {
   z-index: 3;
   position: relative;
-  margin-bottom: 43em;
+  margin-bottom: 33em;
   padding-bottom: 3em;
 }
 

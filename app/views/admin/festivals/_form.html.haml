@@ -4,10 +4,31 @@
   .row
     .small-6.columns= f.input :name
   .row
+    .small-6.columns= f.input :subtitle
+  .row
     .small-6.columns= f.input :website
   .row
     .small-6.columns= f.input :start_at, :as => :string, :input_html => {:class => "datetime_picker"}
     .small-6.columns= f.input :end_at, :as => :string, :input_html => {:class => "datetime_picker"}
-
+  .row
+    %dl.tabs{"data-tab" => ""}
+      - I18n.available_locales.each_with_index do |locale, i|
+        %dd{:class => (i == 0 ? :active : false)}
+          = link_to t(:locale_name, :locale => locale), "##{locale}"
+    .tabs-content
+      - I18n.available_locales.each_with_index do |locale, i|
+        .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+          = f.globalize_fields_for locale do |en|
+            .row
+              .small-12.columns
+                %b= "Overview of festval (for its frontpage) in #{t :locale_name, :locale => locale}"
+                = en.cktext_area :overview_text
+                    
+  .row
+    .small-6.columns
+      - if f.object.image?
+        = image_tag f.object.image.url(:box)
+        = f.input :remove_image, :as => :boolean
+      = f.input :image
   .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]

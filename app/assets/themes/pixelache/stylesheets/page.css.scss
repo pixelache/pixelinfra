@@ -1,0 +1,49 @@
+@import 'variables';
+
+.page_tree {
+  background-color: #d0d2d3;
+  color: #6d6e70;
+  padding: 10px 0px;
+  
+  span.leaf {
+    padding-right: 5px;
+    a { 
+     color: #6d6e70;   
+    }
+  }
+}
+.page {
+  background-color: #f9ec31;
+  
+  .title {
+    font-family: $quicksand;
+    font-size: 3.5em;
+    padding: 80px 0px 30px 0px;
+    border-bottom: 1px solid #000;
+  }
+  
+  .body {
+    font-size: 0.975em;
+    line-height: 1.5em;
+    padding: 25px 0px 50px 0px;
+    p {
+      font-size: 0.975em;
+      line-height: 1.5em;
+      margin-bottom: 15px;
+    }
+  }
+  
+  .children {
+    .child {
+      a {
+        font-family: $quicksand;
+        font-weight: 300;
+        text-transform: uppercase;
+        font-size: 1.125em;
+        color: #000;
+      }
+      padding: 20px 0px;
+      border-bottom: 1px solid #000;
+    }
+  }
+}

@@ -20,6 +20,21 @@
                 %b= "Page content in #{t :locale_name, :locale => locale}"
                 = en.cktext_area :body
   .row
+    .small-5.columns
+      %h5 Parent page?
+      = f.input :parent, :as => :select, :collection => recurse_options_from_tree_collection_for_select(Page.roots, :id, :name), :hint => 'Leave blank for top level'
+    .small-6.columns
+      %h5 Connected to a project?
+      = f.input :project_name, :as => :autocomplete, :url =>  autocomplete_project_name_admin_pages_path, :input_html => { :id_element => '#page_project_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the project name", :hint => raw("(You only need to relate the top-level page. If the project is not already the database, <a href=\"/admin/projects/new\" target=\"_blank\">create it first.</a>)")
+    .small-6.columns= f.input :project_id, :as => :hidden
+    
+  .row
+    .small-6.columns
+      %h5 Connected to a festival?
+      = f.input :festival_name, :as => :autocomplete, :url =>  autocomplete_festival_name_admin_pages_path, :input_html => { :id_element => '#page_festival_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the festival name", :hint => raw("(You only need to relate the top-level page. If this is related to a specific event that is part of a festival, you should just populate the event relation above, no need for the festival as a whole.)")
+    .small-6.columns= f.input :festival_id, :as => :hidden
+    
+  .row
     .small-3.columns= f.input :published
   .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]

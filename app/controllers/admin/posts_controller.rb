@@ -16,7 +16,7 @@ class Admin::PostsController < ApplicationController
   handles_sortable_columns
   autocomplete :event, :name, :extra_data => [:start_at], :display_value => :event_with_date
   autocomplete :project, :name
-  autocomplete :festival, :name
+  autocomplete :festival, :name, :extra_data => [:name], :display_value => :name
 
   def check_permissions
     authorize! :create, resource

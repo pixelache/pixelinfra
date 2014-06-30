@@ -1,0 +1,1 @@
+require 'tree_select'

@@ -1,7 +1,8 @@
 class Admin::PagesController < Admin::BaseController
   has_scope :page, :default => 1
   handles_sortable_columns
-
+  autocomplete :project, :name
+  autocomplete :festival, :name, :extra_data => [:name], :display_value => :name
   
   def create
     create! { admin_pages_path }
@@ -48,7 +49,7 @@ class Admin::PagesController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:page => [:published, :slug, :subsite_id, subsite_ids: [], translations_attributes: [:id, :locale, :name, :body] ] )
+    params.permit(:page => [:published, :slug, :festival_id, :parent_id, :festival_name, :project_name, :project_id, :subsite_id, subsite_ids: [], translations_attributes: [:id, :locale, :name, :body] ] )
   end
   
 end

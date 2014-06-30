@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140629121932) do
+ActiveRecord::Schema.define(version: 20140630110342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,17 @@ ActiveRecord::Schema.define(version: 20140629121932) do
   add_index "feeds", ["subsite_id"], name: "index_feeds_on_subsite_id", using: :btree
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
 
+  create_table "festival_translations", force: true do |t|
+    t.integer  "festival_id",   null: false
+    t.string   "locale",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "overview_text"
+  end
+
+  add_index "festival_translations", ["festival_id"], name: "index_festival_translations_on_festival_id", using: :btree
+  add_index "festival_translations", ["locale"], name: "index_festival_translations_on_locale", using: :btree
+
   create_table "festivals", force: true do |t|
     t.string   "name"
     t.date     "start_at"
@@ -201,6 +212,14 @@ ActiveRecord::Schema.define(version: 20140629121932) do
     t.integer  "node_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "subtitle"
+    t.string   "image"
+    t.integer  "image_height"
+    t.integer  "image_width"
+    t.integer  "image_size"
+    t.string   "image_content_type"
+    t.string   "background_colour"
+    t.string   "primary_colour"
   end
 
   create_table "flickrsets", force: true do |t|
@@ -331,7 +350,12 @@ ActiveRecord::Schema.define(version: 20140629121932) do
     t.integer  "wordpress_id"
     t.string   "wordpress_author"
     t.string   "wordpress_scope"
+    t.integer  "festival_id"
+    t.integer  "project_id"
   end
+
+  add_index "pages", ["festival_id"], name: "index_pages_on_festival_id", using: :btree
+  add_index "pages", ["project_id"], name: "index_pages_on_project_id", using: :btree
 
   create_table "photos", force: true do |t|
     t.string   "filename"

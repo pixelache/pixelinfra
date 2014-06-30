@@ -1,0 +1,25 @@
+.festival{:style => "background-color: " + (@festival.background_colour.blank? ? "#FFF" : @festival.background_colour)} 
+  - if @festival.image?
+    - if @festival.image_width < 1000
+      .row
+        .small-6.columns
+          %h1= @festival.name
+          - unless @festival.subtitle.blank?
+            %h2= @festival.subtitle
+        .small-6.columns
+          = image_tag @festival.image.url
+  - else
+    .row
+      .small-12.columns
+        %h1= @festival.name
+        - unless @festival.subtitle.blank?
+          %h2= @festival.subtitle
+
+  - unless @festival.overview_text.blank?
+    .row
+      .small-9.columns= raw @festival.overview_text
+      - unless @festival.pages.empty?
+        .small-3.columns.children
+          - @festival.pages.first.children.each do |c|
+            .child= link_to c.name, c
+    

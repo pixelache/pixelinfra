@@ -27,6 +27,9 @@ Pixelinfra::Application.routes.draw do
     resources :nodes
     resources :pages do
       get :options, :on => :collection
+      get :autocomplete_event_name, :on => :collection
+      get :autocomplete_festival_name, :on => :collection
+      get :autocomplete_project_name, :on => :collection
     end
     resources :places
     resources :posts do
