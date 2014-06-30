@@ -1,0 +1,66 @@
+@import 'variables';
+
+footer {
+  z-index: 1;
+  width: 100%;
+  clear: both;
+  background-color: #333;
+  padding-bottom: 0px;
+  position: fixed;
+  bottom: 0;
+  
+  .hashtag {
+    background-color: #808184;
+    font-family: $quicksand;
+    font-size: 5.2em;
+    color: #FFF;
+    padding: 50px 0px;
+    font-weight: 300;
+    text-align: center;
+  }
+  
+  .follow {
+    background-color: #59595b;
+    padding: 35px 0px 50px 0px;
+    .title {
+      text-align: center;
+      font-family: $quicksand;
+      font-size: 2.0em;
+      font-weight: 300;
+      color: #FFF;
+      margin-bottom: 20px;
+    }
+    .icons {
+      text-align: center;
+      a {
+        padding: 0px 15px;
+      }
+    }
+  }
+  
+  .newsletter {
+    background-color: #404041;
+    font-size: 1.375em;
+    font-family: $quicksand;
+    font-weight: 300;
+    color: #FFF;
+    padding: 20px 0px;
+    input {
+      background-color: #373637;
+      text: #666;
+    }
+  }
+  .bottom_footer {
+    background-color: #231f20;
+    padding: 55px 0px;
+    .menus {
+      color: #fff100;
+    }
+    .fine_print {
+      p {
+        color: #bbbdbf;
+        margin: 5px 0px;
+      }
+    }
+  }
+}

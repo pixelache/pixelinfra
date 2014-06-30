@@ -16,14 +16,40 @@
   %body{:class => "#{controller_name} #{action_name}"}
     #container.container
       %header
-        = render 'layouts/top_bar'
+        .contain-to-grid.sticky= render 'layouts/top_bar'
         - if user_signed_in?
           = render 'admin/layouts/navigation'
         = render 'layouts/messages'
 
       #main{:role => "main"}
         = yield
-      %footer
+    %footer
+      .hashtag
+        %span{:style => 'font-weight: 400'}>#
+        pixelache
+      .follow
+        .title Follow us on
+        .icons
+          = link_to image_tag(theme_image_path('follow_fb.png')), 'https://www.facebook.com/pixelache'
+          = link_to image_tag(theme_image_path('follow_twitter.png')), 'https://twitter.com/pixelache'
+          = link_to image_tag(theme_image_path('follow_vimeo.png')),            'https://vimeo.com/pixelache'
+          = link_to image_tag(theme_image_path('follow_bambuser.png')),            'http://bambuser.com/channel/pixelversity'
+      .newsletter.container
+        .row
+          .small-1.columns= image_tag theme_image_path('megaphone.png')
+          .small-11.columns
+            Subscribe to our monthly newsletter:
+      .bottom_footer.container
+        .row
+          .small-2.columns.fine_print
+            %p office @ pixelache.ac
+            %p +358-50-5643463
+            %p
+            %p Kassutehtaankatu 1/21
+            %p Suvilahti (Bldg. 7)
+            %p 00540 Helsinki
+            %p Finland
+              
       :javascript
         $(document).ready(function() {
           #{yield :jquery}

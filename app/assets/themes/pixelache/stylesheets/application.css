@@ -8,10 +8,16 @@
  *= require pixelache/stylesheets/front
  *= require pixelache/stylesheets/main
  *= require pixelache/stylesheets/post
+ *= require pixelache/stylesheets/footer
  */
 
+.container {
 
+}
 #main {
-/*  padding-top: 25px;*/
+  z-index: 3;
+  position: relative;
+  margin-bottom: 43em;
+  padding-bottom: 3em;
 }
 
