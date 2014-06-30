@@ -1,0 +1,37 @@
+.row
+  .small-6.columns
+    %h3
+      Order subpages of
+      = @page.name
+.row
+  .small-6.columns
+    %p Drag and drop to re-order how they appear in menus
+    
+.row
+  .small-8.columns#sortable
+    - @page.children.sort_by(&:sort_order).each do |child|
+      .row.child[child]
+        .small-12.columns
+          %h6
+            = child.name
+          - if child.published != true 
+            %span.small
+              %em not published
+.row
+  .small-5.columns
+    = link_to 'Back', admin_pages_path, :class => [:button, :round, :tiny]
+= content_for :jquery do
+  :plain
+    $('#sortable').sortable({
+      update: function(){
+            $.ajax({
+              url: '/admin/pages/sort',
+              type: 'post',
+              data: $('#sortable').sortable('serialize'),
+              dataType: 'script',
+              complete: function(request){
+                $('#sortable').effect('highlight');
+              }
+            });
+        }
+    });    

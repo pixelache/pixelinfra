@@ -31,4 +31,7 @@
         = f.input :remove_image, :as => :boolean
       = f.input :image
   .row
+    .small-6.columns
+      = f.input :slug, :label => 'Override slug'
+  .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]

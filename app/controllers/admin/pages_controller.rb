@@ -41,6 +41,20 @@ class Admin::PagesController < Admin::BaseController
     render :layout => false
   end
   
+  def order
+    @page = Page.find(params[:id])
+  end
+  
+  def sort
+    @pages = Page.all
+    @pages.each do |fi|
+      next if params['page'].index(fi.id.to_s).nil?
+      fi.sort_order = params['page'].index(fi.id.to_s) + 1
+      fi.save
+    end
+    render nothing: true      
+  end
+  
   def update
     @page = Subsite.find(params[:page][:subsite_id]).pages.find(params[:id])
     update! { admin_pages_path }

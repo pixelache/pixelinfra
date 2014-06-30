@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630110342) do
+ActiveRecord::Schema.define(version: 20140630120610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -352,6 +352,7 @@ ActiveRecord::Schema.define(version: 20140630110342) do
     t.string   "wordpress_scope"
     t.integer  "festival_id"
     t.integer  "project_id"
+    t.integer  "sort_order"
   end
 
   add_index "pages", ["festival_id"], name: "index_pages_on_festival_id", using: :btree

@@ -1,19 +1,22 @@
 %tr{:class => classpassed.nil? ? false : classpassed + " child"}
+  %td= page.id
   %td
     - page.depth.times do
       = "--"
     = page.name
     - unless page.children.empty?
       %span.small= link_to '+ expand '  + pluralize(page.children.size, 'subpage'), "javascript:$('.child.children_#{page.id.to_s}').toggle();"
+      |
+      %spam.small= link_to 'order subpages', order_admin_page_path(page.id)
   %td= l page.updated_at.to_date, :format => :long
   %td= page.published == true ? 'yes' : 'no'
   %td= page.subsite.name
   %td.actions
     - if can? :edit, Page
-      = link_to 'Edit', edit_admin_subsite_page_path(page.subsite, page)
+      = link_to 'Edit', edit_admin_subsite_page_path(page.subsite, page.id)
     - if can? :destroy, Page
       |
-      = link_to 'Destroy', "/admin/subsites/#{page.subsite.id}/pages/#{page.slug.to_s}", :method => :delete, :data => {:confirm => "Are you sure?"}
+      = link_to 'Destroy', "/admin/subsites/#{page.subsite.id}/pages/#{page.id.to_s}", :method => :delete, :data => {:confirm => "Are you sure?"}
 - unless page.children.empty?
   - page.children.each do |child|
     = render :partial => 'page', :locals => {:page => child, :classpassed => "children_#{page.id.to_s}" }

@@ -30,13 +30,18 @@ Pixelinfra::Application.routes.draw do
       get :autocomplete_event_name, :on => :collection
       get :autocomplete_festival_name, :on => :collection
       get :autocomplete_project_name, :on => :collection
+      post :sort, :on => :collection
+      member do
+        get :order
+      end 
     end
     resources :places
     resources :posts do
       get :options, :on => :collection
       get :autocomplete_event_name, :on => :collection
       get :autocomplete_festival_name, :on => :collection
-      get :autocomplete_project_name, :on => :collection            
+      get :autocomplete_project_name, :on => :collection      
+   
     end
     resources :projects
     resources :search
@@ -54,7 +59,11 @@ Pixelinfra::Application.routes.draw do
   resources :dynamictaglines
   resources :events
   resources :etherpads
-  resources :festivals
+  resources :festivals do
+    member do
+      get '/*page', :action => :page, :as => :festival_page
+    end
+  end
   resources :pages
   resources :projects
   resources :publications

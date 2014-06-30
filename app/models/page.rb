@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  acts_as_tree
+  acts_as_tree :order => 'sort_order'
   translates :name, :body, :fallbacks_for_empty_translations => true
   belongs_to :subsite
   belongs_to :festival
