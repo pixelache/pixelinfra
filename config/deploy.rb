@@ -52,7 +52,7 @@ namespace :deploy do
 
   after :finishing, "deploy:migrate"
   after "deploy:migrate", "deploy:cleanup"
-
+  after "deploy:cleanup", "deploy:restart"
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:

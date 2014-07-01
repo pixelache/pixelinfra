@@ -8,7 +8,7 @@ class Admin::PagesController < Admin::BaseController
   has_scope :published
   has_scope :unlinked, type: :boolean
 
-  autocomplete :project, :name
+  autocomplete :project, :name, :extra_data => [:name], :display_value => :name
   autocomplete :festival, :name, :extra_data => [:name], :display_value => :name
   
   def create

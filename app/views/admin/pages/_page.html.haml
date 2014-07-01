@@ -16,6 +16,8 @@
   %td= page.published == true ? 'yes' : 'no'
   %td= page.subsite.name
   %td.actions
+    = link_to 'View', page_path(page.id), :target => :_blank
+    |
     - if can? :edit, Page
       = link_to 'Edit', edit_admin_subsite_page_path(page.subsite, page.id)
     - if can? :destroy, Page
