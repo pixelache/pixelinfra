@@ -1,6 +1,13 @@
 class Admin::PagesController < Admin::BaseController
   has_scope :page, :default => 1
   handles_sortable_columns
+  has_scope :page, :default => 1
+  has_scope :festivals, type: :boolean
+  has_scope :projects, type: :boolean
+  has_scope :by_subsite
+  has_scope :published
+  has_scope :unlinked, type: :boolean
+
   autocomplete :project, :name
   autocomplete :festival, :name, :extra_data => [:name], :display_value => :name
   
@@ -33,7 +40,7 @@ class Admin::PagesController < Admin::BaseController
         "updated_at DESC"
       end
     end
-    @pages = Page.roots.includes(:subsite).order(order).page(params[:page]).per(20)
+    @pages = apply_scopes(Page).roots.includes(:subsite).order(order).page(params[:page]).per(20)
   end
   
   def options

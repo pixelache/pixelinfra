@@ -1,7 +1,40 @@
 .row
   .small-10.columns
     %h2 Pages
+    %small
+      = pluralize(@pages.total_count, 'page')
+      match these filters
+      
     %p= link_to 'Create new page', new_admin_page_path, :class => [:round, :button, :tiny]
+.filter_box.row
+  .large-2.columns
+    .filter_title Filter by site:
+    %select#by_subsite
+      %option{:value => ""} &nbsp;
+      - Subsite.all.each do |subsite|
+        %option{:value => subsite.id, :selected => (params[:by_subsite] == subsite.id.to_s ? :selected : false)}= subsite.name
+  .large-2.columns
+    .filter_title Show:
+    %select#type_filter
+      %option{:value => "all", :selected => (params[:all] == "true" ? :selected : false)} All posts
+      
+      %option{:value => "festivals", :selected => (params[:festivals] == "true" ? :selected : false)} Festival pages
+      %option{:value => "projects", :selected => (params[:projects] == "true" ? :selected : false) } Project pages
+      %option{:value => "unlinked", :selected => (params[:unlinked] == "true" ? :selected : false) } Stand alone pages      
+
+
+  :javascript
+    $('.filter_box select#type_filter').change(function() {
+      var parts = "#{request.url}".split(/\?/, 2);
+      if (parts[1]) {
+        window.location.href=parts[0] + "?" + $(this).val() + "=true"; 
+        //+ parts[1].replace(new RegExp("\\&*" + $(this).attr('id') + "\=\\w+", "g"), '');
+      } else {
+        window.location.href=parts[0] + "?" + $(this).val() + "=true";
+      }
+    }); 
+.row
+  .columns
     = paginate @pages
     %table.table.table-condensed.pages
       %thead

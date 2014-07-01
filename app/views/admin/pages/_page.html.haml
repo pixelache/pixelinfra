@@ -7,7 +7,11 @@
     - unless page.children.empty?
       %span.small= link_to '+ expand '  + pluralize(page.children.size, 'subpage'), "javascript:$('.child.children_#{page.id.to_s}').toggle();"
       |
-      %spam.small= link_to 'order subpages', order_admin_page_path(page.id)
+      %span.small= link_to 'order subpages', order_admin_page_path(page.id)
+    - unless page.project.blank?
+      .small= link_to page.project.name, [:admin, page.project], :target => :_blank
+    - unless page.festival.blank?
+      .small= link_to page.festival.name, [:admin, page.festival], :target => :_blank      
   %td= l page.updated_at.to_date, :format => :long
   %td= page.published == true ? 'yes' : 'no'
   %td= page.subsite.name
