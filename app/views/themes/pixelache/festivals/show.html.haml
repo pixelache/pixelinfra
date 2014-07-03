@@ -1,14 +1,17 @@
 .festival{:style => "background-color: " + (@festival.background_colour.blank? ? "#FFF" : @festival.background_colour)} 
   - if @festival.image?
-    - if @festival.image_width < 1000
-      .row
-        .small-6.columns
-          %h1= @festival.name
-          - unless @festival.subtitle.blank?
-            %h2= @festival.subtitle
-          %h2= date_range(@festival.start_at, @festival.end_at)  
-        .small-6.columns
+    
+    .row
+      .small-6.columns
+        %h1= @festival.name
+        - unless @festival.subtitle.blank?
+          %h2= @festival.subtitle
+        %h2= date_range(@festival.start_at, @festival.end_at)  
+      .small-6.columns
+        - if @festival.image_width < 1000
           = image_tag @festival.image.url
+        - else
+          = image_tag @festival.image.url(:standard)
   - else
     .row
       .small-12.columns
@@ -20,20 +23,7 @@
   - unless @festival.overview_text.blank?
     .row
       .small-9.columns= raw @festival.overview_text
-      - unless @festival.pages.empty?
-        .small-3.columns.children
-          %dl.accordion{:"data-accordion" => ""}
-            - @festival.pages.first.children.each do |c|
-              - if c.children.empty?
-                
-                .child= link_to c.name, festival_page_festival_path(@festival, c)
-              - else
-                %dd.accordion-navigation
-                  = link_to c.name, "#page_#{c.id}"
-                  .content{:id => "page_#{c.id}"}
-                    .subchild= link_to c.name + " overview", festival_page_festival_path(@festival, c)
-                    - c.children.each_with_index do |cc, index|
-                      .subchild{:class => (index == (c.children.size - 1) ? :last : false)}= link_to cc.name, "#page_#{cc.id}"
+      = render :partial => 'sidebar'
                   
                     
                     

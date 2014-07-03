@@ -5,6 +5,41 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :get_locale
   
+  def reroute
+    url_parts = params[:url].split(/\//, 2)
+    primary_key = url_parts.first
+    
+    # first check for festival page
+    item = Festival.friendly.find_by_id(primary_key)
+    if item.blank?
+      item = Page.friendly.find(primary_key)
+      if item.blank?
+        item = Event.friendly.find(primary_key)
+        if item.blank?
+          item = Project.friendly.find(primary_key)
+        end
+      end
+    end
+    
+    if url_parts.size > 1
+      case item.class.to_s
+      when "Festival"
+        redirect_to festival_page_festival_path(item, url_parts[1])
+      when "Page"
+        redirect_to page_path(params[:url])
+      when "Event"
+        redirect_to event_path(item)
+      when "Project"
+        redirect_to project_path(item)
+      else
+        die
+      end
+    else
+      redirect_to item
+    end
+    
+  end
+  
   private
 
   # def after_sign_in_path_for(resource)
@@ -32,6 +67,7 @@ class ApplicationController < ActionController::Base
       I18n.locale = session[:locale]
     end
   end
+
 
 
   rescue_from CanCan::AccessDenied do |exception|

@@ -1,14 +1,20 @@
 .festival{:style => "background-color: " + (@festival.background_colour.blank? ? "#FFF" : @festival.background_colour)} 
   - if @festival.image?
-    - if @festival.image_width < 1000
-      .row
-        .small-6.columns
-          %h1= @festival.name
-          - unless @festival.subtitle.blank?
-            %h2= @festival.subtitle
-          %h3= @page.name
-        .small-6.columns
-          = image_tag @festival.image.url
+    .row
+      .small-6.columns
+        %h1= @festival.name
+        - unless @festival.subtitle.blank?
+          %h2= @festival.subtitle
+        %h3= @page.name
+      .small-6.columns
+        - if @festival.image?
+          - if @festival.image_width.blank?
+            = image_tag @festival.image.url(:standard)
+          - else
+            - if @festival.image_width < 1000
+              = image_tag @festival.image.url
+            - else
+              = image_tag @festival.image.url(:standard)
   - else
     .row
       .small-12.columns
@@ -19,22 +25,8 @@
 
         
   .row
-    .small-9.columns= raw @page.body
-    - unless @festival.pages.empty?
-      .small-3.columns.children
-        %dl.accordion{:"data-accordion" => ""}
-          - @festival.pages.first.children.each do |c|
-            - if c.children.empty?
-              
-              .child= link_to c.name, festival_page_festival_path(@festival, c)
-            - else
-              %dd.accordion-navigation<
-                %a{:href => "#page_#{c.id}"}>= c.name
-                .content{:id => "page_#{c.id}", :class => (c.self_and_descendants.include?(@page) ? :active : false)}
-                  .subchild= link_to c.name + " overview", festival_page_festival_path(@festival, c)
-                  - c.children.each_with_index do |cc, index|
-                    .subchild{:class => (index == (c.children.size - 1) ? :last : false)}= link_to cc.name, festival_page_festival_path(@festival, cc)
-                      
+    .small-9.columns= raw simple_format(@page.body)
+    = render :partial => 'sidebar'
 
   - if user_signed_in?
     - if can? :edit, @page
