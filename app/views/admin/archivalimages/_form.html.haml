@@ -8,7 +8,7 @@
     .small-3.columns
       - if f.object.image?
         = image_tag f.object.image.url(:thumb)
-      = f.input :image, :input_html =>{:required => ''}
+      = f.input :image
   .row
     .small-8.columns
       %dl.tabs{"data-tab" => ""}

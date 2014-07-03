@@ -9,7 +9,7 @@ class Archivalimage < ActiveRecord::Base
   mount_uploader :image, ArchiveimageUploader
   before_save :update_image_attributes
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['caption'].blank?  }
-  validates_presence_of :subsite_id
+  validates_presence_of :subsite_id, :image
   scope :by_site, -> (x) { includes(:subsite).where(:subsite_id => x) }
   attr_accessor  :event_name, :project_name, :festival_name
   
