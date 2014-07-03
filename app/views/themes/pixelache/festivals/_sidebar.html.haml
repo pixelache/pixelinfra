@@ -1,0 +1,23 @@
+.small-3.columns.children
+
+  
+  %dl.accordion{:"data-accordion" => ""}
+    - unless @festival.events.empty?
+      %dd.accordion-navigation
+        = link_to t(:events_and_activities), "#fest_events_#{@festival.id}"
+        .content{:id => "fest_events_#{@festival.id}"}
+          - @festival.events.each do |event|
+            .subchild= link_to event.name, event
+        
+    - unless @festival.pages.empty?
+      - @festival.pages.first.children.each do |c|
+        - if c.children.empty?
+        
+          .child= link_to c.name, festival_page_festival_path(@festival, c)
+        - else
+          %dd.accordion-navigation
+            = link_to c.name, "#page_#{c.id}"
+            .content{:id => "page_#{c.id}"}
+              .subchild= link_to c.name + " overview", festival_page_festival_path(@festival, c)
+              - c.children.each_with_index do |cc, index|
+                .subchild{:class => (index == (c.children.size - 1) ? :last : false)}= link_to cc.name, "#page_#{cc.id}"
