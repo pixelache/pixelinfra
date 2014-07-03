@@ -1,7 +1,7 @@
 class Admin::ArchivalimagesController < Admin::BaseController
   autocomplete :event, :name, :extra_data => [:start_at], :display_value => :event_with_date
-  autocomplete :project, :name
-  autocomplete :festival, :name
+  autocomplete :project, :name, :extra_data => [:name]
+  autocomplete :festival, :name, :extra_data => [:name]
   
   def create
     create! { admin_archivalimages_path }

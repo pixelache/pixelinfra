@@ -1,15 +1,15 @@
-= semantic_form_for [:admin, @festival], :html => {:class => "custom", :multipart => true} do |f|
+= semantic_form_for [:admin, @festival], :html => {:"data-abide" => '', :class => "custom", :multipart => true} do |f|
   .row
-    .small-6.columns= f.input :node, :include_blank => false
+    .small-6.columns= f.input :node, :include_blank => false, :input_html => {:required => ''}
   .row
-    .small-6.columns= f.input :name
+    .small-6.columns= f.input :name, :input_html => {:required => ''}
   .row
     .small-6.columns= f.input :subtitle
   .row
     .small-6.columns= f.input :website
   .row
-    .small-6.columns= f.input :start_at, :as => :string, :input_html => {:class => "datetime_picker"}
-    .small-6.columns= f.input :end_at, :as => :string, :input_html => {:class => "datetime_picker"}
+    .small-6.columns= f.input :start_at, :as => :string, :input_html => {:class => "datetime_picker", :required => ''}
+    .small-6.columns= f.input :end_at, :as => :string, :input_html => {:class => "datetime_picker", :required => ''}
   .row
     %dl.tabs{"data-tab" => ""}
       - I18n.available_locales.each_with_index do |locale, i|
