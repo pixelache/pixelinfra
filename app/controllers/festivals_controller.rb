@@ -14,4 +14,9 @@ class FestivalsController < InheritedResources::Base
     @page = @festival.pages.map(&:self_and_descendants).flatten.delete_if{|x| !potential.include?(x) }.first
     set_meta_tags :title => [@festival.name, @page.name].join(" - ")
   end
+  
+  def show
+    @festival = Festival.find(params[:id])
+    set_meta_tags :title => @festival.name
+  end
 end

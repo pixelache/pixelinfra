@@ -94,17 +94,17 @@ class Post < ActiveRecord::Base
     related = []
     if event
       unless event.posts.empty?
-        related << event.posts.delete_if{|x| x == self}
+        related << event.posts.reject{|x| x == self}
       end
     end
     if project
       unless project.posts.empty?
-        related << project.posts.delete_if{|x| x == self }
+        related << project.posts.reject{|x| x == self }
       end
     end
     if festival
       unless festival.posts.empty?
-        related << festival.posts.delete_if{|x| x == self }
+        related << festival.posts.reject{|x| x == self }
       end
     end
     
