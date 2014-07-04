@@ -1,8 +1,9 @@
 .festival_index
   - @festivals.each do |festival|
-    %section{:style => "background-color: ##{festival.background_colour}; color: ##{festival.primary_colour}"}
-      .row
-        .small-12.columns.title= festival.end_at.strftime("%Y")
-      .row
-        .small-12.columns.subtitle= festival.subtitle
+    = link_to festival do
+      %section{:style => "background-color: ##{festival.background_colour}; color: ##{festival.primary_colour}"}
+        .row
+          .small-12.columns.title= festival.end_at.strftime("%Y")
+        .row
+          .small-12.columns.subtitle= festival.subtitle
         
