@@ -279,6 +279,19 @@ namespace :wordpress do
     end
   end
 
+  task :convert_page_line_breaks => :environment do
+    ActiveRecord::Base.record_timestamps = false
+    begin
+      Page.where(:wordpress_scope => @scope).each do |p|
+        next if p.body.nil?
+        p.body = p.body.gsub(/(?:\n\r?|\r\n?)/, '<br />')
+        p.save! rescue p.id
+      end
+    ensure
+      ActiveRecord::Base.record_timestamps = true
+    end
+  end
+  
   task :convert_line_breaks => :environment do
     ActiveRecord::Base.record_timestamps = false
     begin
