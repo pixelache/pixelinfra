@@ -1,0 +1,19 @@
+.activities_index
+  = link_to festivals_path do
+    %section.festival
+      .row
+        .small-12.columns.center.title= t :festival
+      .row
+        .small-12.columns= t :festival_description
+  = link_to project_path('pixelversity') do
+    %section.pixelversity
+      .row
+        .small-12.columns.center.title Pixelversity
+      .row
+        .small-12.columns= t :pixelversity_description
+  = link_to page_path('residencies') do
+    %section.residencies
+      .row
+        .small-12.columns.center.title= t :residencies
+      .row
+        .small-12.columns= t :residencies_description

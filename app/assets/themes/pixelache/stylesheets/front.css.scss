@@ -159,3 +159,39 @@
     }
   }
 }
+
+
+// activities and archive indexes
+
+.activities_index {
+  a { color: #000; 
+    .pixelversity {
+      color: #FFF;
+    }
+  }
+  section {
+    padding: 90px 0px;
+    font-family: $quicksand;
+    font-size: 1.25em;
+    text-align: center;
+    
+    &.pixelversity {
+      background-color: #000;
+      a { color:#FFF; }
+      
+    }
+    &.festival {
+      background-color: #f9ec31;
+    }
+    &.residencies {
+      background-color: #f05a28;
+    }
+    .title {
+      line-height: 1em;
+      text-transform: uppercase;
+      font-size: 5em;
+      
+    }
+
+  }
+}

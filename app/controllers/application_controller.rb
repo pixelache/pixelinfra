@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :get_locale
   
+  
   def reroute
     url_parts = params[:url].split(/\//, 2)
     primary_key = url_parts.first

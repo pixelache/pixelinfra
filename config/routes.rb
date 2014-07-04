@@ -71,6 +71,7 @@ Pixelinfra::Application.routes.draw do
   resources :nodes
   resources :posts
   resources :steps
+  get '/activities' => 'home#activities'
   get '/pages/*id' => 'pages#show'
   get '/helsinki/*url', :controller => :application, :action => :reroute
   get '/signin' => 'sessions#new', :as => :signin

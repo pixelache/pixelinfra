@@ -1,0 +1,3 @@
+$("#dynamic_tagline").toggle();
+$("#dynamic_tagline a").html("<%= escape_javascript(@dynamictagline) %>");
+$("#dynamic_tagline").fadeIn();

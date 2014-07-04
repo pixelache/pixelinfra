@@ -1,5 +1,9 @@
 class HomeController < ApplicationController
 
+  def activities
+    
+  end
+  
   def index
     authenticate_or_request_with_http_basic('Pixelache eyes only! (for now)') do |username, password|
       username == 'trouble' && password == 'desire'

@@ -10,15 +10,19 @@
     %ul.right
       %li.active= link_to t(:about), page_path('about')
       %li.has-dropdown
-        %a{:href => "#"}= t(:activities)
+        = link_to  t(:activities), '/activities'
         %ul.dropdown
-          %li
-            %a{:href => "#"} First link in dropdown
+          %li= link_to t(:festival), festivals_path
+          %li= link_to 'Pixelversity', project_path('pixelversity')
+          %li= link_to 'Residencies', page_path('residencies')
       %li.has-dropdown
         = link_to t(:archive), '#'
         %ul.dropdown
           %li= link_to t(:all_posts), posts_path
           %li= link_to t(:yearly_archive), '#'
     %ul.left
-      %li.tagline
-        %a{:href => "/"}= @site.dynamictagline.tagline
+      %li.tagline#dynamic_tagline
+        = link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
+
+
+        
