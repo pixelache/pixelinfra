@@ -29,6 +29,8 @@
         .small-2.columns= f.input :text_colour, :as => :string, :input_html => {:class => :colourpicker }
       .row
         .small-6.columns= f.input :custom_title, :hint => "Optional. Will replace title of post on thin strip, or appear at top of full-size module. Basic HTML tags are OK here."
+      .row
+        .small-6.columns= f.input :custom_follow_text, :hint => "'Read more' text"        
   .row
     .small-6.columns= f.submit "Save" , :class => [:button, :round]
     

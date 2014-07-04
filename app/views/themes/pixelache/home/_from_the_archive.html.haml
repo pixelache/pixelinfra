@@ -7,5 +7,8 @@
       .small-6.columns.large-offset-2
         .year= @archive.year
     .row
+      .small-9.columns.large-offset-2.activity_name= @archive.activity.name
+
+    .row
       .small-9.columns.large-offset-2
-        .description= raw truncate_html(@archive.activity.description, :length => 300)
+        .description= raw truncate_html(sanitize(@archive.activity.description, tags: %w{strong b bold i em italic underline u}), :length => 300)

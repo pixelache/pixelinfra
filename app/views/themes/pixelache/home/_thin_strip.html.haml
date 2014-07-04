@@ -4,4 +4,4 @@
     .small-8.columns{:style => "color: ##{front.text_colour}"}
       = front.custom_title.blank? ? front.item.name : front.custom_title
       
-    .small-3.columns= link_to t(:read_more) + " >>", front.item, :style => "color: ##{front.text_colour}"
+    .small-3.columns= link_to front.custom_follow_text.blank? ? t(:read_more) : front.custom_follow_text + " >>", front.item, :style => "color: ##{front.text_colour}"
