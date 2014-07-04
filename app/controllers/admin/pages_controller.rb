@@ -30,7 +30,9 @@ class Admin::PagesController < Admin::BaseController
       case column
       when "id"
         "id #{direction}"
-      when "when"
+      when "created"
+        "created at #{direction}"
+      when "updated"
         "updated_at #{direction}"
       when "published"
         "published #{direction}, updated_at #{direction}"

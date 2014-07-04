@@ -12,6 +12,7 @@
       .small= link_to page.project.name, [:admin, page.project], :target => :_blank
     - unless page.festival.blank?
       .small= link_to page.festival.name, [:admin, page.festival], :target => :_blank      
+  %td= l page.created_at.to_date, :format => :long
   %td= l page.updated_at.to_date, :format => :long
   %td= page.published == true ? 'yes' : 'no'
   %td= page.subsite.name
