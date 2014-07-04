@@ -25,10 +25,9 @@
           %h2= @festival.subtitle
         %h2= date_range(@festival.start_at, @festival.end_at) 
         
-  - unless @festival.overview_text.blank?
-    .row
-      .small-9.columns= raw @festival.overview_text
-      = render :partial => 'sidebar'
+  .row
+    .small-9.columns= raw @festival.overview_text
+    = render :partial => 'sidebar'
                   
                     
                     

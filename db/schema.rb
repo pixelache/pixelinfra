@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704104007) do
+ActiveRecord::Schema.define(version: 20140704152319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,43 @@ ActiveRecord::Schema.define(version: 20140704104007) do
   end
 
   add_index "attachments", ["item_type", "item_id"], name: "index_attachments_on_item_type_and_item_id", using: :btree
+
+  create_table "attendees", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.text     "url"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "picture"
+    t.integer  "picture_size"
+    t.string   "picture_content_type"
+    t.integer  "picture_width"
+    t.integer  "picture_height"
+    t.boolean  "status"
+    t.text     "extra"
+    t.string   "country"
+    t.string   "attachment_url"
+    t.text     "address"
+    t.string   "organisation"
+    t.string   "project_name"
+    t.text     "project_description"
+    t.text     "project_creators"
+    t.text     "project_presenters"
+    t.text     "project_urls"
+    t.text     "motivation_statement"
+    t.string   "project_title"
+    t.string   "project_keyords"
+    t.integer  "event_id"
+    t.integer  "festival_id"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attendees", ["event_id"], name: "index_attendees_on_event_id", using: :btree
+  add_index "attendees", ["festival_id"], name: "index_attendees_on_festival_id", using: :btree
+  add_index "attendees", ["user_id"], name: "index_attendees_on_user_id", using: :btree
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -172,6 +209,8 @@ ActiveRecord::Schema.define(version: 20140704104007) do
     t.integer  "festival_id"
     t.integer  "step_id"
     t.integer  "user_id",                                default: 0, null: false
+    t.integer  "max_attendees"
+    t.integer  "eventr_id"
   end
 
   add_index "events", ["place_id"], name: "index_events_on_place_id", using: :btree
@@ -220,6 +259,7 @@ ActiveRecord::Schema.define(version: 20140704104007) do
     t.string   "image_content_type"
     t.string   "background_colour"
     t.string   "primary_colour"
+    t.integer  "eventr_id"
   end
 
   create_table "flickrsets", force: true do |t|
