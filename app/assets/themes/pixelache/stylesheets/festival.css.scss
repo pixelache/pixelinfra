@@ -1,5 +1,23 @@
 @import 'variables';
 
+// index
+
+.festival_index {
+  font-family: $quicksand;
+  
+  section {
+    padding: 90px 0px;
+    text-align: center;
+    .title {
+      font-size: 5em;
+      line-height: 1em;
+    }
+    .subtitle {
+      font-size: 2em;
+    }
+  }
+}
+
 .festival {
   padding: 50px 0px;
   line-height: 1.5em;

@@ -1,13 +1,8 @@
-#festival_tree
-  %ul
-    - @festivals.sort_by(&:start_at).reverse.each do |festival|
-      %li
-        = festival.name
-        - unless festival.events.empty?
-          %ul.events
-            - festival.events.sort_by(&:start_at).reverse.each do |event|
-              %li
-                %span{:style => 'font-size: 11px;font-weight: 300;color: #666;'}= event.event_with_date
-= content_for :jquery do
-  :plain
-     $('#festival_tree').jstree();    
+.festival_index
+  - @festivals.each do |festival|
+    %section{:style => "background-color: ##{festival.background_colour}; color: ##{festival.primary_colour}"}
+      .row
+        .small-12.columns.title= festival.end_at.strftime("%Y")
+      .row
+        .small-12.columns.subtitle= festival.subtitle
+        

@@ -64,6 +64,9 @@ dl.tabs {
 form {
   li {
     list-style-type: none;
+    input.colourpicker {
+      width: 100px;
+    }
   }
   
   .label {
@@ -154,9 +157,7 @@ form.frontitem {
   }
 }
 
-#frontitem_background_colour_input, #frontitem_text_colour_input {
-  width: 100px;
-}
+
 span.jPicker {
   margin-top: -40px;
   margin-left: 104px;

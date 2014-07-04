@@ -13,7 +13,8 @@ class Festival < ActiveRecord::Base
   translates :overview_text, :fallbacks_for_empty_translations => true
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['overview_text'].blank? }
   before_save :update_image_attributes
-
+  
+  scope :by_node, -> (x) { includes(:node).where(:node_id => x) }
   
   def happens_on?(day)
     if end_at.blank?

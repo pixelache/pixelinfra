@@ -34,4 +34,20 @@
     .small-6.columns
       = f.input :slug, :label => 'Override slug'
   .row
+    .small-2.columns= f.input :background_colour, :as => :string, :input_html => {:class => :colourpicker }, :label => 'Main colour for archive page background'
+  .row
+    .small-2.columns= f.input :primary_colour, :as => :string, :input_html => {:class => :colourpicker }, :label => 'Secondary colour for archive page text'    
+  .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]
+= content_for :jquery do
+  :plain
+    $(document).delegate('span.jPicker', 'click', function() {
+            var els = $('.jPicker.Container');
+            for(var i = 0; i < $.jPicker.List.length; i++) {
+                var o = $($.jPicker.List[i]).offset();
+                $(els.get(i)).offset({top: o.top - 50, left: o.left + 100});
+            }
+        });
+  
+    $('.colourpicker').jPicker();
+        

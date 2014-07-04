@@ -1,6 +1,14 @@
 class FestivalsController < InheritedResources::Base
   actions :show, :index, :page
   
+  def index
+    if @site.name == 'pixelache'
+      @festivals = Festival.all.by_node(1).order(:end_at).reverse
+    else
+      @festivals = Festival.all
+    end
+  end
+  
   def page
     
     @festival = Festival.find(params[:id])
