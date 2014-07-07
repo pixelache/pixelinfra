@@ -3,6 +3,7 @@ class Festival < ActiveRecord::Base
   has_many :events, :dependent => :nullify
   has_and_belongs_to_many :etherpads
   has_many :posts
+  has_many :attendees
   # has_many :projects
   extend FriendlyId
   friendly_id :name, :use => [:slugged, :finders]
@@ -26,6 +27,10 @@ class Festival < ActiveRecord::Base
   
   def description
     overview_text(:en)
+  end
+  
+  def in_future?
+    end_at > Time.now
   end
 
   def update_image_attributes

@@ -1,0 +1,18 @@
+.festival
+  = render :partial => 'header'
+
+        
+  .row
+    .small-9.columns
+      - if @festival.in_future?
+        %h3= t :coming_future
+      - else
+        %h3= t :coming_past
+      %ol
+        - @festival.attendees.each do |att|
+          %li.attendee= att.name
+        
+    = render :partial => 'sidebar'
+
+        
+    

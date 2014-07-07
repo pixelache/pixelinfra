@@ -8,6 +8,30 @@
 # rake wordpress:associate_secondary_images
 # rake wordpress:convert_line_breaks
 
+class Oldattendee < ActiveRecord::Base
+  establish_connection(
+    :adapter  => "mysql2",
+    :host     => "localhost",
+    :wait_timeout => 0.5,
+    :username => "root",
+    :password => ENV['old_mysql_password'],
+    :database => "newpixelache"
+  )
+  self.table_name =  :pixelache_eventr_attendee
+end
+
+class Oldattendeejoin < ActiveRecord::Base
+  establish_connection(
+    :adapter  => "mysql2",
+    :host     => "localhost",
+    :wait_timeout => 0.5,
+    :username => "root",
+    :password => ENV['old_mysql_password'],
+    :database => "newpixelache"
+  )
+  self.table_name =  "pixelache_eventr_event_attendee"
+end
+
 
 def hash_from_cache
   xml = @cache_dir + 'published.xml'
@@ -278,6 +302,42 @@ namespace :wordpress do
       article.save(validate: false)
     end
   end
+  
+  task :migrate_event_registrations => :environment do
+    ActiveRecord::Base.record_timestamps = false
+    
+    begin
+      Post.where('eventr_id is not null').each do |post|
+        puts 'Attendees for post ' + post.name
+        Oldattendeejoin.where(:event_ID => post.eventr_id).each do |ea|
+          oa = Oldattendee.find(ea.attendee_ID)
+          # puts oa.inspect
+          Attendee.create(:name => oa.name, :description => oa.description, :url => oa.url, :status => oa.status, :extra => oa.extra, :country => oa.country, :address => oa.address, :status => oa.status, :project_name => oa.project_name, :project_description => oa.project_description, :project_creators => oa.project_creators, :project_presenters => oa.project_presenters, :project_urls => oa.project_urls, :motivation_statement => oa.motivation_statement, :project_title => oa.project_title, :project_keywords => oa.project_keywords, :item => post.id, :item_type => 'Post')
+        end
+      end
+      Festival.where('eventr_id is not null').each do |fest|
+        puts 'Attendees for festival ' + fest.name
+        Oldattendeejoin.where(:event_ID => fest.eventr_id).each do |ea|
+          oa = Oldattendee.find(ea.attendee_ID)
+          # puts oa.inspect
+          Attendee.create(:name => oa.name, :description => oa.description, :url => oa.url, :status => oa.status, :extra => oa.extra, :country => oa.country, :address => oa.address, :status => oa.status, :project_name => oa.project_name, :project_description => oa.project_description, :project_creators => oa.project_creators, :project_presenters => oa.project_presenters, :project_urls => oa.project_urls, :motivation_statement => oa.motivation_statement, :project_title => oa.project_title, :project_keywords => oa.project_keywords, :item_id => fest.id, :item_type => 'Festival')
+        end
+      end
+      Event.where('eventr_id is not null').each do |event|
+        puts 'Attendees for event ' + event.name
+        Oldattendeejoin.where(:event_ID => event.eventr_id).each do |ea|
+          oa = Oldattendee.find(ea.attendee_ID)
+          # puts oa.inspect
+          Attendee.create(:name => oa.name, :description => oa.description, :url => oa.url, :status => oa.status, :extra => oa.extra, :country => oa.country, :address => oa.address, :status => oa.status, :project_name => oa.project_name, :project_description => oa.project_description, :project_creators => oa.project_creators, :project_presenters => oa.project_presenters, :project_urls => oa.project_urls, :motivation_statement => oa.motivation_statement, :project_title => oa.project_title, :project_keywords => oa.project_keywords, :item_id => event.id, :item_type => 'Event')
+        end
+      end            
+      
+    rescue => e
+      puts e
+    end
+  end
+  
+      
 
   task :convert_page_line_breaks => :environment do
     ActiveRecord::Base.record_timestamps = false

@@ -1,0 +1,23 @@
+- if @festival.image?
+  .row
+    .small-6.columns
+      %h1= @festival.name
+      - unless @festival.subtitle.blank?
+        %h2= @festival.subtitle
+      / %h3= @page.name
+    .small-6.columns
+      - if @festival.image?
+        - if @festival.image_width.blank?
+          = image_tag @festival.image.url(:standard)
+        - else
+          - if @festival.image_width < 1000
+            = image_tag @festival.image.url
+          - else
+            = image_tag @festival.image.url(:standard)
+- else
+  .row
+    .small-12.columns
+      %h1= @festival.name
+      - unless @festival.subtitle.blank?
+        %h2= @festival.subtitle
+      %h3= @page.name

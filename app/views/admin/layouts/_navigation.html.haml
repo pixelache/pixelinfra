@@ -52,6 +52,8 @@
                 %li= link_to 'Places', admin_places_path
               - if can? :manage, Festival
                 %li= link_to "Festivals", admin_festivals_path
+              - if can? :manage, Attendee
+                %li= link_to 'Event registrsations', admin_attendees_path
       %ul.left
         %li.has-dropdown
           %a{:href => '#'} Posts / pages

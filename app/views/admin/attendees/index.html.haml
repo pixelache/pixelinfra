@@ -1,0 +1,36 @@
+.row
+  .small-10.columns
+    %h2 Event registrations
+.filter_box.row
+  .large-2.columns
+    .filter_title Filter by activity:
+    %select#by_activity
+      %option{:value => ""} &nbsp;
+      - @filters.each do |filter|
+        %option{:value => "by_#{filter.class.to_s.downcase}=#{filter.id}", :selected => (params["by_#{filter.class.to_s.downcase}"] == filter.id.to_s ? :selected : false)}= filter.name
+
+  :javascript
+    $('.filter_box select').change(function() {
+      var parts = "#{request.url}".split(/\?/, 2);
+        window.location.href=parts[0] + "?" + $(this).val();
+    });
+.row
+  .small-6.columns= paginate @attendees
+.row
+  .small-10.columns 
+    %table
+      %thead
+        %th Activity
+        %th Name
+        %th Actions
+      %tbody
+        - @attendees.each do |att|
+          %tr
+            %td= att.name
+            %td= att.item.name
+            %td
+              - if can? :destroy, att
+                = link_to 'Delete', [:admin, att], :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => [:button, :round, :alert, :tiny]
+.row
+  .small-6.columns= paginate @attendees            
+          

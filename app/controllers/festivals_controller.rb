@@ -1,5 +1,10 @@
 class FestivalsController < InheritedResources::Base
-  actions :show, :index, :page
+  actions :show, :index, :page, :attendees
+  
+  def attendees
+    @festival = Festival.find(params[:festival_id])
+    set_meta_tags :title => @festival.name + " " + t(:coming_future)
+  end
   
   def index
     if @site.name == 'pixelache'
