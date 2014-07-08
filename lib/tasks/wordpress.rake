@@ -312,7 +312,7 @@ namespace :wordpress do
         Oldattendeejoin.where(:event_ID => post.eventr_id).each do |ea|
           oa = Oldattendee.find(ea.attendee_ID)
           # puts oa.inspect
-          Attendee.create(:name => oa.name, :description => oa.description, :url => oa.url, :status => oa.status, :extra => oa.extra, :country => oa.country, :address => oa.address, :status => oa.status, :project_name => oa.project_name, :project_description => oa.project_description, :project_creators => oa.project_creators, :project_presenters => oa.project_presenters, :project_urls => oa.project_urls, :motivation_statement => oa.motivation_statement, :project_title => oa.project_title, :project_keywords => oa.project_keywords, :item => post.id, :item_type => 'Post')
+          Attendee.create(:name => oa.name, :description => oa.description, :url => oa.url, :status => oa.status, :extra => oa.extra, :country => oa.country, :address => oa.address, :status => oa.status, :project_name => oa.project_name, :project_description => oa.project_description, :project_creators => oa.project_creators, :project_presenters => oa.project_presenters, :project_urls => oa.project_urls, :motivation_statement => oa.motivation_statement, :project_title => oa.project_title, :project_keywords => oa.project_keywords, :item_id => post.id, :item_type => 'Post')
         end
       end
       Festival.where('eventr_id is not null').each do |fest|
