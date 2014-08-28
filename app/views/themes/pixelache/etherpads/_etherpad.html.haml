@@ -1,20 +1,22 @@
 %tr
   %td
     = link_to etherpad.name, 'http://pad.pixelache.ac/p/' + etherpad.name, :target => :_blank
-    - if user_signed_in?
-      - if can? :edit, etherpad
-        %div
-          %small
-            %b= link_to '[ORGANISE]', edit_admin_etherpad_path(etherpad)
-
-
-  %td
-    = etherpad.subsites.map(&:name).join(', ')
-    
-  %td= etherpad.festivals.map(&:name).join(', ')
-  %td= raw etherpad.projects.map(&:name).join('<br />')
   
-  %td.actions
-    - if user_signed_in?
+    - unless etherpad.subsites.empty?
+      %div
+        %small
+          %b= etherpad.subsites.map(&:name).join(', ')
+  
+  %td
+    = etherpad.festivals.map(&:name).join(', ')
+    = raw etherpad.projects.map(&:name).join('<br />')
+  %td
+    = time_ago_in_words(etherpad.last_edited) + " ago"
+    .date= l etherpad.last_edited, :format => :long  
+  - if user_signed_in?  
+    %td.actions
+
+      - if can? :edit, etherpad
+        = link_to 'Edit metadata', edit_admin_etherpad_path(etherpad), :class => [:button, :round, :tiny]
       - if can? :destroy, etherpad
         = link_to 'Delete', [:admin, etherpad], :method => :delete, :data => {:confirm => 'Are you sure? This will delete the pad forever.' }, :class => [:button, :round, :alert, :tiny]

@@ -3,6 +3,7 @@ class Admin::EtherpadsController < Admin::BaseController
   has_scope :by_festival
   has_scope :by_project
   has_scope :by_subsite
+  handles_sortable_columns
   
   def destroy
     @etherpad = Etherpad.find(params[:id])
@@ -20,7 +21,17 @@ class Admin::EtherpadsController < Admin::BaseController
   end
   
   def index
-    @etherpads = apply_scopes(Etherpad).all.order('lower(name)')
+    order = sortable_column_order do |column, direction|
+      case column
+      when "name"
+        "lower(name) #{direction}"
+      when "last_edited"
+        "#{column} #{direction}, lower(name) ASC"
+      else
+        "last_edited DESC"
+      end
+    end
+    @etherpads = apply_scopes(Etherpad).all.order(order)
   end
   
   protected

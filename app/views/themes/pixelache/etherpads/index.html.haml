@@ -5,19 +5,19 @@
     %p Note: Etherpads are synchronised every 20 minutes. If you create a new pad it may take up to 20 minutes to appear in this list
     
     .filter_box.row
-      .large-4.columns
+      .small-2.columns
         .filter_title Filter by site:
         %select#by_subsite
           %option{:value => ""} &nbsp;
           - Subsite.all.each do |subsite|
             %option{:value => subsite.id, :selected => (params[:by_subsite] == subsite.id.to_s ? :selected : false)}= subsite.name
-      .large-4.columns
+      .large-3.columns
         .filter_title Filter by festival
         %select#by_festival
           %option{:value => ""} &nbsp;
           - Festival.all.each do |festival|
             %option{:value => festival.id, :selected => (params[:by_festival] == festival.id.to_s ? :selected : false)}= festival.name
-      .large-4.columns
+      .large-3.columns
         .filter_title Filter by project:
         %select#by_project
           %option{:value => ""} &nbsp;
@@ -36,11 +36,10 @@
     %table.table.table-condensed
       %thead
         %tr
-          %th Name
-          %th Site
-          %th Festivals
-          %th Projects
-          %th{:colspan => 2}
+          %th= sortable_column "Name", :column => "name"
+          %th Category
+          %th= sortable_column "Last edited", :column => "last_edited"
+          %th.actions
       %tbody
         - @etherpads.each do |pad|
           = render :partial => 'etherpad', :locals => {:etherpad => pad}

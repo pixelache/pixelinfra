@@ -37,3 +37,7 @@ select {
 select[size], select[multiple] {
     background-image: none;
 }
+
+td .date {
+  font-size: 0.8rem;
+}
