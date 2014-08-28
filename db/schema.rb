@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140707112742) do
+ActiveRecord::Schema.define(version: 20140828110750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,14 @@ ActiveRecord::Schema.define(version: 20140707112742) do
     t.datetime "updated_at"
     t.boolean  "private_pad"
   end
+
+  create_table "etherpads_events", id: false, force: true do |t|
+    t.integer "etherpad_id", null: false
+    t.integer "event_id",    null: false
+  end
+
+  add_index "etherpads_events", ["etherpad_id"], name: "index_etherpads_events_on_etherpad_id", using: :btree
+  add_index "etherpads_events", ["event_id"], name: "index_etherpads_events_on_event_id", using: :btree
 
   create_table "etherpads_festivals", id: false, force: true do |t|
     t.integer "etherpad_id", null: false
