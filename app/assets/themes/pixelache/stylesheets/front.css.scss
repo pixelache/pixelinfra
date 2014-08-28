@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'foundation_overrides';
 
 .three_posts {
   background-color: #FFF;
@@ -25,6 +26,12 @@
       font-size: 58px;
       line-height: 72px;
       margin-bottom: 60px;
+      a {
+        color: black;
+        &:hover {
+          color: black;
+        }
+      }
     }
     .body {
       font-family: Open Sans, sans-serif;
@@ -51,6 +58,9 @@
       font-size: 28px;
       line-height: 36px;
       margin-bottom:15px;
+      a {
+        color: black;
+      }
     }
     .body {
       font-family: Open Sans, sans-serif;
@@ -139,6 +149,7 @@
   height: 600px;
   background-repeat: no-repeat;
   .pink {
+    overflow: hidden;
     opacity: 0.8;
     width: 50%;
     background-color: #eb008b;
@@ -147,23 +158,42 @@
     font-family: $quicksand;
     .title {
       margin-top: 110px;
-      font-size: 2.375em;
+      font-size: 2.375rem;
     }
     .activity_name {
-      font-size: 2em;
+      font-size: 2rem;
     }
     .year {
-      font-size: 11.125em;
+      font-size: 11rem;
       margin: 25px 0px;
     }
     .description {
-      font-size: 20px;
+      font-size: 1.2rem;
       font-weight: 300;
 
     }
   }
 }
 
+@media only screen and (max-width: 759px) {
+  .from_the_archive {
+    .pink {
+      .year {
+        font-size: 4.5rem;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 760px) and (max-width: 959px) {
+  .from_the_archive {
+    .pink {
+      .year {
+        font-size: 8rem;
+      }
+    }
+  }
+}
 
 // activities and archive indexes
 

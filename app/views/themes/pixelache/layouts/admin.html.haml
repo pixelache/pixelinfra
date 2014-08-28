@@ -11,6 +11,7 @@
         = yield(:head)
   %body{:class => "#{controller_name} #{action_name}"}
     = javascript_include_tag "application"
+    = javascript_include_tag "pixelache/javascripts/application"
     %header
       = render 'admin/layouts/navigation'
       = render 'layouts/messages'

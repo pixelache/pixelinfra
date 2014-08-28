@@ -2,12 +2,12 @@ en:
   locale_name: 'English'
   date_range:
     long:
-      different_months_same_year: "%{from_month} %{from_day} %{sep} %{until_month} %{until_day}, %{year}"
+      different_months_same_year: "%{from_day} %{from_month} %{sep} %{until_day} %{until_month} %{year}"
       different_years: "%{from_month} %{from_day}, %{from_year} %{sep} %{until_month} %{until_day}, %{until_year}"
       same_month: "%{from_day} %{sep} %{until_day} %{month} %{year}"
     short:
-      different_months_same_year: "%{from_month} %{from_day} %{sep} %{until_month} %{until_day}, %{year}"
-      different_years: "%{from_month} %{from_day}, %{from_year} %{sep} %{until_month} %{until_day}, %{until_year}"
+      different_months_same_year: "%{from_day} %{from_month} %{sep} %{until_day} %{until_month} %{year}"
+      different_years: "%{from_day} %{from_month} %{from_year} %{sep} %{until_day} %{until_month} %{until_year}"
       same_month: "%{from_day} %{sep} %{until_day} %{month} %{year}"  
   date:
     abbr_day_names:
@@ -43,7 +43,7 @@ en:
     formats:
       default: ! '%Y-%m-%d'
       long: ! '%d %B %Y'
-      short: ! '%b %d'
+      short: ! '%d %b'
     month_names:
     -
     - January
@@ -243,3 +243,4 @@ en:
   facilitated_by: 'Facilitated by:'
   read_more: 'Read more'
   related_content: 'Related content'
+  scroll_down_for_documentation: 'Scroll down for documentation'

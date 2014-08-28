@@ -8,13 +8,19 @@
  *= require pixelache/stylesheets/front
  *= require pixelache/stylesheets/main
  *= require pixelache/stylesheets/post
+ *= require pixelache/stylesheets/event
  *= require pixelache/stylesheets/page
  *= require pixelache/stylesheets/festival
  *= require pixelache/stylesheets/footer
+
  */
 
 .container {
   
+}
+
+html {
+  font-size: 16px;
 }
 #main {
   z-index: 3;
@@ -24,3 +30,10 @@
 
 }
 
+select {
+    height: auto;
+}
+
+select[size], select[multiple] {
+    background-image: none;
+}

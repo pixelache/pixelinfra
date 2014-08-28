@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
   has_many :posts
   has_many :photos, as: :item
+  has_many :videos
   extend FriendlyId
   friendly_id :name_en , :use => [ :slugged, :finders ] # :history]
   has_paper_trail

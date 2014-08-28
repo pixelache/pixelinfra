@@ -2,14 +2,14 @@
   .row
     .small-10.columns.large-offset-1 
       .top_post
-        .title= @posts.first.title
+        .title= link_to @posts.first.title, @posts.first
         .body= truncate_html(@posts.first.body, :length => 600)
         .read_more= link_to 'Read More', @posts.first
   
       .smaller_posts.row
         - @posts[1..2].each do |post|
           .post.small-6.columns
-            .title= post.title
+            .title= link_to post.title, post
             .body= truncate_html post.body, :length => 300
             .read_more= link_to 'Read More', post
             

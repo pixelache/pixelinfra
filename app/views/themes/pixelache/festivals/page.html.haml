@@ -1,4 +1,4 @@
-.festival{:style => "background-color: " + (@festival.background_colour.blank? ? 
+.festival{:style => "background-color: " + (@festival.background_colour.blank? ? '#FFF' : @festival.background_colour) }
   = render :partial => 'header'
 
         

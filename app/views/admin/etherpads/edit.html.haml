@@ -6,8 +6,21 @@
     .small-3.columns= f.input :subsites
   .row
     .small-3.columns= f.input :festivals
-  .row
-    .small-3.columns= f.input :projects
+    .small-3.columns.small-offset-2= f.input :projects, :collection => Project.all.order(:name)
   .row
     .small-3.columns= f.input :private_pad, :label => "Make private?", :hint => "Tick this to remove this pad from the public list of  pads"
   = f.submit 'Save', :class => [:button, :small, :round]
+  
+= content_for :jquery do
+  :plain
+
+    $('select#etherpad_project_ids').zmultiselect({  
+        live: false,
+        placeholder: "Select a project",
+        filter: false
+    });
+    $('select#etherpad_festival_ids').zmultiselect({  
+        live: false,
+        placeholder: "Select a festival",
+        filter: false
+    })

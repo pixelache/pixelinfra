@@ -1,19 +1,11 @@
-.post_single{:style => (!@post.image_width.nil? ?  (@post.image_width <= 1200 ?  "width: 46em;" : '' )  : 'width: 46em' ) }
+.post_single.row
   .internal.columns
+    
+
     - if @post.image?
       .row
-        .post_image 
-          
-          - if !@post.image_width.nil?
-            - if @post.image_width >= 1200
-              - if @post.image.twelvehundred.file.exists?
-                = image_tag @post.image.url(:twelvehundred)
-              - else
-                = image_tag @post.image.url
-            - else
-              = image_tag @post.image.url
-          - else
-            = image_tag @post.image.url
+        .post_image= best_image(@post)
+
     .row
       .columns.metadata
         %span.date= l @post.published_at.to_date, :format => :long

@@ -22,7 +22,7 @@ class FestivalsController < InheritedResources::Base
     else
       p = params[:page]
     end
-    potential = p =~ /^\d+$/ ? Page.find(p) : Page.where(:slug => p)
+    potential = p =~ /^\d+$/ ? Page.where(:id => p) : Page.where(:slug => p)
     
     @page = @festival.pages.map(&:self_and_descendants).flatten.delete_if{|x| !potential.include?(x) }.first
     set_meta_tags :title => [@festival.name, @page.name].join(" - ")

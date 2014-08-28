@@ -1,5 +1,23 @@
 module ApplicationHelper
   
+  def best_image(resource)
+    if resource.image?
+      if !resource.image_width.nil?
+        if resource.image_width >= 1200
+          if resource.image.twelvehundred.file.exists?
+            image_tag resource.image.url(:twelvehundred)
+          else
+            image_tag resource.image.url
+          end
+        else
+          image_tag resource.image.url
+        end
+      else
+        image_tag resource.image.url
+      end
+    end
+  end
+  
 
   def break_string_on_spaces(string, position, counter = 18)
     out = Array.new
