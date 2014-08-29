@@ -5,26 +5,33 @@
     %p Note: Etherpads are synchronised every 20 minutes. If you create a new pad it may take up to 20 minutes to appear in this list
     
     .filter_box.row
-      .large-2.columns
-        .filter_title Filter by site:
+      .small-12.columns
+        %b Filter by:
+      .small-1.columns
+        .filter_title Site:
         %select#by_subsite
           %option{:value => ""} &nbsp;
           - Subsite.all.each do |subsite|
             %option{:value => subsite.id, :selected => (params[:by_subsite] == subsite.id.to_s ? :selected : false)}= subsite.name
+      .small-2.columns 
+        .filter_title Document type:
+        %select#by_documenttype
+          %option{:value => ""} &nbsp;
+          = options_from_tree_collection_for_select(Documenttype.roots, :id, :name)            
       .small-3.columns
-        .filter_title Filter by event
+        .filter_title Event
         %select#by_event
           %option{:value => ""} &nbsp;
           - @etherpad_events.each do |e|
             %option{:value => e.id, :selected => (params[:by_event] == e.id.to_s ? :selected : false)}= e.event_with_date            
-      .large-3.columns
-        .filter_title Filter by festival
+      .small-3.columns
+        .filter_title Festival
         %select#by_festival
           %option{:value => ""} &nbsp;
           - Festival.all.each do |festival|
             %option{:value => festival.id, :selected => (params[:by_festival] == festival.id.to_s ? :selected : false)}= festival.name
-      .large-3.columns
-        .filter_title Filter by project:
+      .small-3.columns
+        .filter_title Project:
         %select#by_project
           %option{:value => ""} &nbsp;
           - Project.all.each do |project|

@@ -3,6 +3,8 @@ class EtherpadsController < InheritedResources::Base
   has_scope :by_festival
   has_scope :by_project
   has_scope :by_subsite
+  has_scope :by_event
+  has_scope :by_documenttype
   handles_sortable_columns
   
   def index

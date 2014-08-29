@@ -8,7 +8,7 @@ class Etherpad < ActiveRecord::Base
   scope :by_subsite, -> subsite { joins(:subsites).where(["subsites.id = ?",  subsite]) }
   scope :by_project, -> project { joins(:projects).where(["projects.id = ?", project]) }
   scope :by_event, -> event { joins(:events).where(["events.id = ?", event]) }
-
+  scope :by_documenttype, -> documenttype { where(documenttype_id: documenttype) }
   scope :not_private, -> { where("private_pad is not true")}
   
   attr_accessor :event_tokens
