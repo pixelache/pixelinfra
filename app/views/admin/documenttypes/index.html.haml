@@ -1,0 +1,18 @@
+.row
+  .small-12.columns
+    %h2 Document Types
+.row
+  .small-12.columns
+    %p Here you can define document types, which can be used to categories documents, etherpads, archival items, press/media downloads, etc.
+.row
+  .small-10.columns
+    %table.table.table-condensed.documenttypes
+      %thead
+        %tr
+          %th Name
+          %th{:colspan => 2}
+      %tbody
+        - @documenttypes.sort_by(&:name).each do |documenttype|
+          - next unless documenttype.root?
+          = render :partial => 'documenttype', :locals => {:documenttype => documenttype}
+    %p= link_to 'Enter new document type', new_admin_documenttype_path, :class => [:button, :small, :round]

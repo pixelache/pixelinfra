@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140828110750) do
+ActiveRecord::Schema.define(version: 20140829102809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,22 @@ ActiveRecord::Schema.define(version: 20140828110750) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "documenttype_hierarchies", id: false, force: true do |t|
+    t.integer "ancestor_id",   null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations",   null: false
+  end
+
+  add_index "documenttype_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "documenttype_anc_desc_udx", unique: true, using: :btree
+  add_index "documenttype_hierarchies", ["descendant_id"], name: "documenttype_desc_idx", using: :btree
+
+  create_table "documenttypes", force: true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "dynamictaglines", force: true do |t|
     t.integer  "subsite_id",  null: false

@@ -39,6 +39,8 @@
               %li= link_to 'Dynamic tagline', admin_dynamictaglines_path
             - if can? :manage, Step
               %li= link_to 'OLSOF Steps', admin_steps_path
+            - if can? :manage, Documenttype
+              %li= link_to 'Document types', admin_documenttypes_path              
       %ul.left
         %li.has-dropdown
           %li.has-dropdown

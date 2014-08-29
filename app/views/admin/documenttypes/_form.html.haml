@@ -1,0 +1,11 @@
+= semantic_nested_form_for [:admin, @documenttype], :html => {:class => "custom", :multipart => true} do |f|
+  .row
+    .small-6.columns= f.input :name
+  .row
+    .small-6.columns
+      %label Is this a sub-type of another document type?
+      = f.input :parent, :collection => Documenttype.all.order(:name)
+  .row
+    .small-6.columns
+      = f.submit 'Save', :class => [:button, :round]
+      

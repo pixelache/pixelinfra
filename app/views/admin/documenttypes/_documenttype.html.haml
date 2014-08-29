@@ -1,0 +1,16 @@
+%tr
+  %td
+    - ((documenttype.depth)*2).times do
+      = "-"
+    %span{:class => documenttype.evolvedto ? :evolved : false}= documenttype.name
+ 
+ 
+  %td.actions
+    - if can? :edit, Documenttype
+      = link_to 'Edit', edit_admin_documenttype_path(documenttype)
+    - if can? :destroy, Documenttype
+      |
+      = link_to 'Destroy', [:admin, documenttype], :method => :delete, :data => {:confirm => "Are you sure?"}
+- unless documenttype.children.empty?
+  - documenttype.children.sort_by(&:name).each do |child|
+    %tr= render :partial => 'documenttype', :locals => {:documenttype => child}      
