@@ -4,6 +4,7 @@ class Admin::EtherpadsController < Admin::BaseController
   has_scope :by_project
   has_scope :by_subsite
   handles_sortable_columns
+  autocomplete :event, :name, :extra_data => [:start_at], :display_value => :event_with_date
   
   def destroy
     @etherpad = Etherpad.find(params[:id])
@@ -37,7 +38,7 @@ class Admin::EtherpadsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:etherpad => [:name, :private_pad,  subsite_ids: [], project_ids: [], festival_ids: [] ])
+    params.permit(:etherpad => [:name, :private_pad,  :event_name, subsite_ids: [], project_ids: [], festival_ids: [], event_ids: [] ])
   end
   
 end

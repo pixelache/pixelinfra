@@ -41,3 +41,19 @@ select[size], select[multiple] {
 td .date {
   font-size: 0.8rem;
 }
+
+
+  table.etherpads {
+    tbody {
+      tr {
+        td {
+          ul {
+            li {
+              list-style-type: none;
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+    }
+  }

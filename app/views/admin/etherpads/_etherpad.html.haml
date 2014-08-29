@@ -7,9 +7,14 @@
           %b PRIVATE!
       %small
         %b= etherpad.subsites.map(&:name).join(', ').humanize
-  %td
-    = etherpad.festivals.map(&:name).join(', ')
-    = raw etherpad.projects.map(&:name).join('<br />')
+  %td 
+    %ul
+      - etherpad.events.each do |e|
+        %li= link_to e.event_with_date, e, :target => :_blank
+      - etherpad.festivals.each do |f|
+        %li= link_to f.name, f, :target => :_blank
+      - etherpad.projects.each do |p|
+        %li= link_to p.name, p, :target => :_blank
   %td
     = time_ago_in_words(etherpad.last_edited) + " ago"
     .date= l etherpad.last_edited, :format => :long
