@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829102809) do
+ActiveRecord::Schema.define(version: 20140829104329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,11 +163,12 @@ ActiveRecord::Schema.define(version: 20140829102809) do
   create_table "etherpads", force: true do |t|
     t.string   "name"
     t.string   "read_only_id"
-    t.boolean  "deleted",      default: false, null: false
+    t.boolean  "deleted",         default: false, null: false
     t.datetime "last_edited"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "private_pad"
+    t.integer  "documenttype_id"
   end
 
   create_table "etherpads_events", id: false, force: true do |t|

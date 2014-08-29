@@ -3,6 +3,7 @@ class Admin::EtherpadsController < Admin::BaseController
   has_scope :by_festival
   has_scope :by_project
   has_scope :by_subsite
+  has_scope :by_event
   handles_sortable_columns
   autocomplete :event, :name, :extra_data => [:start_at], :display_value => :event_with_date
   
@@ -33,12 +34,13 @@ class Admin::EtherpadsController < Admin::BaseController
       end
     end
     @etherpads = apply_scopes(Etherpad).all.order(order)
+    @etherpad_events = @etherpads.map(&:events).flatten.compact
   end
   
   protected
   
   def permitted_params
-    params.permit(:etherpad => [:name, :private_pad,  :event_name, subsite_ids: [], project_ids: [], festival_ids: [], event_ids: [] ])
+    params.permit(:etherpad => [:name, :private_pad,  :event_name, :documenttype_id, subsite_ids: [], project_ids: [], festival_ids: [], event_ids: [] ])
   end
   
 end

@@ -17,5 +17,6 @@ class EtherpadsController < InheritedResources::Base
       end
     end
     @etherpads = apply_scopes(Etherpad).not_private.order(order) #"etherpads.last_edited desc, lower(etherpads.name)")
+    @etherpad_events = @etherpads.map(&:events).flatten.compact
   end
 end

@@ -3,12 +3,12 @@ class Etherpad < ActiveRecord::Base
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :festivals
   has_and_belongs_to_many :events
-  
+  belongs_to :documenttype
   scope :by_festival, -> festival { joins(:festivals).where(["festivals.id = ?", festival]) }
   scope :by_subsite, -> subsite { joins(:subsites).where(["subsites.id = ?",  subsite]) }
   scope :by_project, -> project { joins(:projects).where(["projects.id = ?", project]) }
-  scope :by_project, -> event { joins(:events).where(["events.id = ?", event]) }
-  
+  scope :by_event, -> event { joins(:events).where(["events.id = ?", event]) }
+
   scope :not_private, -> { where("private_pad is not true")}
   
   attr_accessor :event_tokens

@@ -7,6 +7,9 @@
           %b PRIVATE!
       %small
         %b= etherpad.subsites.map(&:name).join(', ').humanize
+      - unless etherpad.documenttype.blank?
+        %p
+          %em= etherpad.documenttype.name
   %td 
     %ul
       - etherpad.events.each do |e|

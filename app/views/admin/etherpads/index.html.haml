@@ -11,6 +11,12 @@
           %option{:value => ""} &nbsp;
           - Subsite.all.each do |subsite|
             %option{:value => subsite.id, :selected => (params[:by_subsite] == subsite.id.to_s ? :selected : false)}= subsite.name
+      .small-3.columns
+        .filter_title Filter by event
+        %select#by_event
+          %option{:value => ""} &nbsp;
+          - @etherpad_events.each do |e|
+            %option{:value => e.id, :selected => (params[:by_event] == e.id.to_s ? :selected : false)}= e.event_with_date            
       .large-3.columns
         .filter_title Filter by festival
         %select#by_festival
@@ -27,7 +33,11 @@
         $('.filter_box select').change(function() {
           var parts = "#{request.url}".split(/\?/, 2);
           if (parts[1]) {
-            window.location.href=parts[0] + "?" + parts[1].replace(new RegExp("\\&*" + $(this).attr('id') + "\=\\d+", "g"), '') + "&" + $(this).attr('id') + "=" + $(this).val();
+            if ($(this).val() == '') {
+              window.location.href=parts[0] + "?" + parts[1].replace(new RegExp("\\&*" + $(this).attr('id') + "\=\\d+", "g"), '');
+            } else {
+              window.location.href=parts[0] + "?" + parts[1].replace(new RegExp("\\&*" + $(this).attr('id') + "\=\\d+", "g"), '') + "&" + $(this).attr('id') + "=" + $(this).val();
+            }
           } else {
             window.location.href=parts[0] + "?" + $(this).attr('id') + "=" + $(this).val();
           }
@@ -37,7 +47,7 @@
       %thead
         %tr
           %th= sortable_column "Name", :column => "name"
-          %th Categories
+          %th Related activities
           %th= sortable_column "Last edited", :column => "last_edited"
           
           %th{:colspan => 2}
