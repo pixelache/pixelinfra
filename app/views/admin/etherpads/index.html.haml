@@ -34,8 +34,9 @@
         .filter_title Project:
         %select#by_project
           %option{:value => ""} &nbsp;
-          - Project.all.each do |project|
-            %option{:value => project.id, :selected => (params[:by_project] == project.id.to_s ? :selected : false)}= project.name
+          = options_from_tree_collection_for_select(Project.roots.order(:name), :id, :name, params[:by_project] )
+          -#- Project.all.each do |project|
+          -#  %option{:value => project.id, :selected => (params[:by_project] == project.id.to_s ? :selected : false)}= project.name
       :javascript
         $('.filter_box select').change(function() {
           var parts = "#{request.url}".split(/\?/, 2);
@@ -56,8 +57,8 @@
           %th= sortable_column "Name", :column => "name"
           %th Related activities
           %th= sortable_column "Last edited", :column => "last_edited"
-          
-          %th{:colspan => 2}
+          - if user_signed_in?
+            %th{:colspan => 2}
       %tbody
         - @etherpads.each do |pad|
           = render :partial => 'etherpad', :locals => {:etherpad => pad}

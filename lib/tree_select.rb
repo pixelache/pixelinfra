@@ -17,7 +17,7 @@ module ActionView
       
       private
       def recurse_options_from_tree_collection_for_select(collection, value_method, text_method, level = 0)
-        prefix = '-' * 5 * level
+        prefix = '-' * 3 * level
         result = []
         collection.each do |element|
           result << ["#{prefix}#{element.send(text_method)}", element.send(value_method)]    
