@@ -15,7 +15,7 @@ class Admin::PostsController < ApplicationController
   has_scope :by_year
   handles_sortable_columns
   autocomplete :event, :name, :extra_data => [:start_at], :display_value => :event_with_date
-  autocomplete :project, :name
+  autocomplete :project, :name, :extra_data => [:name], :display_value => :name
   autocomplete :festival, :name, :extra_data => [:name], :display_value => :name
 
   def check_permissions

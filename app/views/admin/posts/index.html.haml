@@ -5,7 +5,7 @@
       %small
         = pluralize(@posts.total_count, 'posts')
         match these filters
-    %p= link_to 'Create new post', new_admin_post_path        
+    %p= link_to 'Create new post', new_admin_post_path, :class => [:button, :round, :tiny]
 .filter_box.row
   .large-2.columns
     .filter_title Filter by site:
@@ -73,5 +73,5 @@
       %tbody
         - @posts.each do |post|
           = render :partial => 'post', :locals => {:post => post}
-    %p= link_to 'Create new post', new_admin_post_path
+    %p= link_to 'Create new post', new_admin_post_path, :class => [:button, :round, :tiny]
     = paginate @posts
