@@ -1,6 +1,6 @@
 %nav.top-bar{"data-topbar" => ""}
   %ul.title-area
-    %li.name= image_tag theme_image_path('PA_logo.png'), :alt => "Pixelache"
+    %li.name= link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), '/'
 
     %li.toggle-topbar.menu-icon
       %a{:href => "#"} Menu
