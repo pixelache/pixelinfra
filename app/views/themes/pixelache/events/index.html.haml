@@ -1,0 +1,24 @@
+.row
+  .small-12.columns
+    %h2= t :events
+
+
+- @events.in_groups_of(3).each do |event_group|
+  .row.event_row
+    - event_group.each do |event|
+      .small-4.columns.event_small
+        .title= link_to event.name, event
+        .metadata
+          = date_range(event.start_at, event.end_at)
+          = " | "
+          = event.place.try(:name)
+        - if event.image?
+          .event_image= link_to image_tag(event.image.url(:box)), event
+        .related
+          - if event.festival
+            = link_to event.festival.name, event.festival
+          - if event.project
+            = link_to event.project.name, event.project
+          = link_to t(:read_more), event, :class => :last
+.row
+  .small-12.columns= paginate @events

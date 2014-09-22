@@ -1,5 +1,56 @@
 @import 'variables';
 
+.event_row {
+  margin: 20px 0px 75px 0px;
+}
+
+
+// "Box" event on index view
+
+.event_small {
+  .metadata {
+    font-family: $quicksand;
+    font-size: 0.9rem;
+    margin-left: 0px;
+    padding: 10px 0px;
+    span.date {
+      font-weight: bold;
+    } 
+    a {
+      color: red;
+    }
+  }
+  
+  .title {
+    font-family: $quicksand;
+    a { color: #333; }
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+
+    padding-left: 0px;
+  }
+  
+  .related {
+    margin-top: 15px;
+    font-family: $quicksand;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    a { color: #666;
+       border-right: 1px solid #333;
+       padding-right: 10px;
+       &.last {
+         border-right: none;
+         text-transform: none;
+       }
+     }
+  }  
+    
+}
+
+
+
 .event_single {
   margin-right: auto;
   margin-left: auto;

@@ -11,6 +11,7 @@
       %li.has-dropdown
         = link_to  t(:activities), '/activities'
         %ul.dropdown
+          %li= link_to t(:events), events_path
           %li= link_to t(:festival), festivals_path
           %li= link_to 'Pixelversity', project_path('pixelversity')
           %li= link_to 'Residencies', page_path('residencies')

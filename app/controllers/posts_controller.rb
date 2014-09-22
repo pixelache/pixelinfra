@@ -2,6 +2,10 @@ class PostsController < InheritedResources::Base
   
   actions :index, :show
   
+  def index
+    @posts = Post.by_site(@site).published.order('published_at DESC').page(params[:page]).per(12)
+  end
+  
   def show
     @post = @site.posts.friendly.find(params[:id])
     set_meta_tags :title => @post.title
