@@ -1,5 +1,5 @@
 %li
-  = project.name
+  = link_to project.name, project
   - if project.evolvedfrom
     %small= "evolved in #{project.evolution_year}"
 

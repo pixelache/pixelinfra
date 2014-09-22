@@ -1,6 +1,115 @@
-
+@import 'variables';
 ul.events {
   font-size: 11px;
   font-weight: 300;
   color: #666;
+}
+
+.project_detail {
+  
+  .event {
+    padding: 20px 0px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #999;
+    
+    .metadata {
+      font-family: $quicksand;
+      font-size: 0.9rem;
+      margin-left: 0px;
+      padding: 10px 0px;
+      span.date {
+        font-weight: bold;
+      } 
+      a {
+        color: red;
+      }
+    }
+  
+    .title {
+      font-family: $quicksand;
+      a { color: #333; }
+      font-size: 1.5rem;
+      line-height: 1.8rem;
+      
+      padding-left: 0px;
+    }
+  
+    .related {
+      margin-top: 15px;
+      font-family: $quicksand;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 0.75rem;
+      line-height: 1rem;
+
+      a { color: #666;
+         border-right: 1px solid #333;
+         padding-right: 10px;
+         &.last {
+           border-right: none;
+           text-transform: none;
+         }
+       }
+    }     
+    
+  }
+  
+  .post {
+    padding: 20px 0px;
+    margin-bottom: 30px;
+    
+    border-bottom: 1px solid #999;
+    
+    .title {
+      font-family: $quicksand;
+      a { color: #333; }
+      font-size: 1.5rem;
+      line-height: 1.875rem;
+      margin-bottom: 5px;
+      padding-left: 0px;
+    }
+    .metadata {
+      color: #1b75bb;
+      font-family: $quicksand;
+      font-size: 0.875rem;
+      line-height: 0.875rem; 
+  //    border-bottom: 2px solid #999;
+      margin-bottom: 10px;
+      margin-left: 0px;
+      padding-left: 0px;
+      span.date {
+        font-weight: bold;
+      } 
+    }
+    .body {
+      margin-top: 10px;
+      color: #666;
+      font-size: 0.85rem;
+      line-height: 1.2rem;
+      p {
+        margin-bottom: 0px;
+        color: #666;
+        font-size: 0.85rem;
+        line-height: 1.2rem;
+      }
+    }
+    .related {
+      margin-top: 5px;
+      font-family: $quicksand;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 0.75rem;
+      line-height: 1rem;
+
+      a { color: #666;
+         border-right: 1px solid #333;
+         padding-right: 10px;
+         &.last {
+           border-right: none;
+           text-transform: none;
+         }
+       }
+    }  
+  }
+  
 }

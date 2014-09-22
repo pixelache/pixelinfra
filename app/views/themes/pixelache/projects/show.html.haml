@@ -1,16 +1,78 @@
-.row
-  .small-10.columns
-    %h1= @project.name
-    
-- unless @project.photos.empty?
+.outer.project_detail
   .row
     .small-10.columns
-      - @project.photos.each do |photo|
-        = image_tag photo.filename.url
+      %h1= @project.name
+    
+  - unless @project.photos.empty?
+    .row
+      .small-10.columns
+        - @project.photos.each do |photo|
+          = image_tag photo.filename.url
 
-.row
-  .small-3.push-9.columns
-    - @project.children.each do |subproject|
-      = link_to subproject.name, subproject
-  .small-9.columns.pull-3
-    = raw @project.description
+  .row
+    .small-3.push-9.columns
+      - unless @project.children.empty?
+        %h3= t(:subprojects_and_events)
+        #projects_tree
+          %ul
+            - @project.children.each do |subproject|
+              - next if subproject.evolvedfrom
+              = render :partial => 'projectnode', :locals => {:project => subproject}
+        = content_for :jquery do
+          :plain
+             $('#projects_tree').jstree();
+             jQuery("#projects_tree ul").on("click","li.jstree-node a",function(){
+                 document.location.href = this; 
+             });
+     
+    .small-9.columns.pull-3
+      = raw @project.description
+    
+  - unless @project.events.published.empty? && @project.posts.published.empty?
+    .row
+      .small-7.columns
+        - if @project.events.published.empty?
+          %h2= t(:no_events)
+        - else
+          %h3= t(:events)
+          - @project.events.published.each do |event|
+            .event.row
+              .small-12.columns
+                .title= link_to event.name, event
+                .metadata
+                  = date_range(event.start_at, event.end_at)
+                  = " | "
+                  = event.place.try(:name)
+              - if event.image?
+                .small-4.columns.event_image= link_to image_tag(event.image.url(:box)), event
+                .small-8.columns.body= raw truncate_html(event.description, :length => 350)
+              - else
+                .small-12.columns.body= raw truncate_html(event.description, :length => 350)
+              .small-12.columns.related
+                - if event.festival
+                  = link_to event.festival.name, event.festival
+                = link_to t(:read_more), event, :class => :last
+
+      .small-4.columns.small-offset-1
+        - if @project.posts.published.empty?
+          %h2= t(:no_posts)
+        - else
+          %h3= t(:posts)
+          - @project.posts.published.sort_by(&:published_at).reverse.each do |post|
+            .post.row
+              .small-12.columns
+                .title= link_to post.name, post
+                .metadata
+                  %span.date= l post.published_at.to_date, :format => :long
+                  - unless post.creator.nil? 
+                    = ", #{post.creator.name}"
+              - if post.image?
+                .small-12.columns.post_image= link_to image_tag(post.image.url(:box)), post
+              .small-12.columns.body= raw truncate_html(post.description, :length => 350)
+              .small-12.columns.related
+                - if post.festival
+                  = link_to post.festival.name, post.festival
+                - if post.event
+                  = link_to post.event.name, post.event                  
+                = link_to t(:read_more), post, :class => :last
+  
