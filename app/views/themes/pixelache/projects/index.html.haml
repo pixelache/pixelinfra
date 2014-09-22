@@ -1,11 +1,15 @@
-#projects_tree
-  %ul
-    - Project.roots.sort_by(&:name).each do |project|
-      - next if project.evolvedfrom
-      = render :partial => 'projectnode', :locals => {:project => project}
+.outer.row
+  .small-12.columns
+    %h1= t :projects
+    #projects_tree
+      %ul
+        - Project.roots.sort_by(&:name).each do |project|
+          - next if project.evolvedfrom
+          = render :partial => 'projectnode', :locals => {:project => project}
 
-
-                
 = content_for :jquery do
   :plain
      $('#projects_tree').jstree();
+     jQuery("#projects_tree ul").on("click","li.jstree-node a",function(){
+         document.location.href = this; 
+     });

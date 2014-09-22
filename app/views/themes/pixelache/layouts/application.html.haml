@@ -6,19 +6,23 @@
     
     %meta{:content => content_for?(:description) ? yield(:description) : "Pixelinfra", :name => "description"}
       %link{:href => "http://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700", :rel => "stylesheet", :type => "text/css"}/
+      %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700", :rel => "stylesheet", :type => "text/css"}/
       = stylesheet_link_tag "application", :media => "all"
       = stylesheet_link_tag 'pixelache/stylesheets/application', :media => :screen
       = javascript_include_tag "application"
       = javascript_include_tag "vendor/modernizr"
       = javascript_include_tag "pixelache/javascripts/application"
+      :javascript
+        var switchTo5x=true;
+      %script{:src => "http://w.sharethis.com/button/buttons.js", :type => "text/javascript"}
+      :javascript
+        stLight.options({publisher: "f1108f07-cb4f-4f90-a2a5-f66a2b227eb4", doNotHash: true, doNotCopy: true, hashAddressBar: false});
       = csrf_meta_tags
       = yield(:head)
   %body{:class => "#{controller_name} #{action_name}"}
     #container.container
       %header
         .contain-to-grid.sticky= render 'layouts/top_bar'
-        - if user_signed_in?
-          .contain-to-grid.admin.sticky= render 'admin/layouts/navigation'
         = render 'layouts/messages'
 
       #main{:role => "main"}

@@ -53,7 +53,7 @@
   
   h1 {
     font-family: $quicksand;
-    font-size: 4em;
+    font-size: 3.5rem;
     color: #333;
     text-transform: uppercase;
     margin-bottom: 20px;
@@ -66,6 +66,13 @@
   .post_image {
     margin: 75px 0px 40px 0px;
 
+  }
+  
+  .related_title {
+    margin-top: 70px;
+    h1 {
+      margin-bottom: 0px;
+    }
   }
   
   .metadata {
@@ -94,7 +101,7 @@
   .body {
     font-size: 14px;
     line-height: 26px;
-    color: #333;
+    color: #666;
     img {
       display: block;
       padding: 25px;
@@ -102,6 +109,7 @@
     }
     p {
       margin: 0px 0px 30px 0px;
+      color: #666;
     }
   }
   

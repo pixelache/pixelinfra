@@ -1,50 +1,53 @@
-.post_single.row
-  .internal.columns
+.row.outer
+  .post_single.columns.small-centered{:class => figure_width(@post, "small-8")}
+    .internal.row
+      .small-12.columns{:style => 'padding: 0px'}
     
 
-    - if @post.image?
-      .row
-        .post_image= best_image(@post)
+        .post_image
+          %center= best_image(@post)
 
-    .row
-      .columns.metadata
-        %span.date= l @post.published_at.to_date, :format => :long
-        - unless @post.creator.nil? 
-          = ", #{@post.creator.name}"
-    .row
-      .title= @post.title
+        .metadata
+          %span.date= l @post.published_at.to_date, :format => :long
+          - unless @post.creator.nil? 
+            = ", #{@post.creator.name}"
+        .title
+          = @post.title
       
+        .body= raw @post.body
     .row
-      .body= raw @post.body
+      .small-12.columns.share_this= render :partial => 'shared/share_this_buttons'
 
-  .row
-    %h1= t(:related_content)
-  - if @post.event
-    .row
-      .related.event
-        .related_metadata
-          %span.date= date_range(@post.event.start_at, @post.event.end_at)
-        .title= link_to t(:event) + ": " + @post.event.name, @post.event
+  
+    - unless @post.related_posts.empty? && !@post.event && !@post.project && !@post.festival
+      .row.related_title
+        %h1= t(:related_content)
+      - if @post.event
         .row
-          .small-4.columns  
-            - if @post.event.image?
-              .image= image_tag @post.event.image.url(:box)
-          .small-8.columns
-            .body= raw truncate_html(@post.event.description, :length => 250)
-        .read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), @post.event
-  - unless @post.related_posts.empty?
-    - @post.related_posts[0..4].each do |related|
-      .row
-        .related.post
-          .related_metadata
-            %span.date= l related.published_at.to_date, :format => :long
-            - unless related.creator.nil? 
-              = ", #{related.creator.name}" 
-          .title= link_to  t(:post) + ": " + related.title, related
+          .related.event
+            .related_metadata
+              %span.date= date_range(@post.event.start_at, @post.event.end_at)
+            .title= link_to t(:event) + ": " + @post.event.name, @post.event
+            .row
+              .small-4.columns  
+                - if @post.event.image?
+                  .image= image_tag @post.event.image.url(:box)
+              .small-8.columns
+                .body= raw truncate_html(@post.event.description, :length => 250)
+            .read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), @post.event
+      - unless @post.related_posts.empty?
+        - @post.related_posts[0..4].each do |related|
           .row
-            .small-12.columns.body= raw truncate_html(related.body, :length => 350)
-          .row
-            .small-12.columns.read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), related   
+            .related.post
+              .related_metadata
+                %span.date= l related.published_at.to_date, :format => :long
+                - unless related.creator.nil? 
+                  = ", #{related.creator.name}" 
+              .title= link_to  t(:post) + ": " + related.title, related
+              .row
+                .small-12.columns.body= raw truncate_html(related.body, :length => 350)
+              .row
+                .small-12.columns.read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), related
         
   /   - if @post.project
   /     %p

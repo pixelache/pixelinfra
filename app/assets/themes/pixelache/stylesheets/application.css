@@ -30,6 +30,14 @@ html {
 
 }
 
+.outer {
+  padding-bottom: 100px;
+}
+
+.takein {
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+}
 select {
     height: auto;
 }
@@ -42,3 +50,6 @@ td .date {
   font-size: 0.8rem;
 }
 
+.share_this {
+  padding: 10px 0px;
+}
