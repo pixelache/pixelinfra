@@ -5,6 +5,11 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.has_role? :goddess
       can :manage, :all
+    elsif user.has_role? :member
+      can :manage, Post
+      can :manage, Festival
+      can :manage, Project
+      
     elsif user.has_role? :olsof_staff
       can :manage, Event, :subsite => {:name => 'olsof' }
       can :manage, Page, :subsite => {:name => 'olsof' }

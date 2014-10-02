@@ -4,6 +4,6 @@
       - @events.each do |event|
         .row.entry
           .small-3.columns
-            .date= event.start_at.strftime('%b %d.')
+            .date= link_to event.start_at.strftime('%b %d.'), event
           .small-9.columns
-            .name= event.name
+            .name= link_to event.name, event

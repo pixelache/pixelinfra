@@ -3,6 +3,10 @@
     .small-10.columns.large-offset-1 
       .top_post
         .title= link_to @stream.first.title, @stream.first
+        .metadata
+          = date_range(@stream.first.stream_date, @stream.first.endstream_date)
+          - if @stream.first.class == Event
+            = ", " +  @stream.first.place.name
         .body= truncate_html(@stream.first.body, :length => 600)
         .read_more= link_to 'Read More', @stream.first
   
@@ -10,6 +14,10 @@
         - @stream[1..2].each do |post|
           .post.small-6.columns
             .title= link_to post.title, post
+            .metadata
+              = date_range(post.stream_date, post.endstream_date)
+              - if post.class == Event
+                = ", " +  post.place.name
             .body= truncate_html post.body, :length => 300
             .read_more= link_to 'Read More', post
             

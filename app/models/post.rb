@@ -115,8 +115,13 @@ class Post < ActiveRecord::Base
   end
   
   def stream_date
-    published_at
+    published_at.to_date
   end
+  
+  def endstream_date
+    return nil
+  end
+  
   def title_en
     self.title(:en)
   end

@@ -25,7 +25,7 @@ class Admin::EventsController < Admin::BaseController
       when "when"
         "start_at #{direction}"
       else
-        "end_at DESC"
+        "start_at DESC"
       end
     end
     @events = apply_scopes(Event).includes(:subsite).order(order).page(params[:page]).per(30)

@@ -32,7 +32,7 @@
     - if current_user
       %ul.right
         %li.has-dropdown
-          %a{:href=> '#'}= current_user.username
+          %a{:href=> '#'}= current_user.username.gsub(/\@.*$/, '')
           %ul.dropdown
             %li= link_to 'Edit your profile', edit_user_registration_path(current_user)
             %li= link_to 'Sign out', '/signout'

@@ -13,7 +13,7 @@ class HomeController < ApplicationController
       @posts = Post.by_subsite(@site.id).published.order('published_at desc').limit(3)
       @events = Event.by_subsite(@site.id).published.order("start_at DESC").limit(6)
       @stream = @posts + @events
-      @stream.sort_by{|x| x.stream_date }.flatten!
+      @stream = @stream.flatten.sort_by{|x| x.stream_date }.reverse
       @frontitems = Frontitem.by_site(@site.id).order(:position)
       @archive = Archivalimage.random(1).first
     elsif @site.name == 'olsof'

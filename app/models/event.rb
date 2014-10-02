@@ -31,6 +31,10 @@ class Event < ActiveRecord::Base
   scope :by_project, -> project { where(project_id: project) }
   scope :by_year, -> year { where(["start_at >= ? AND start_at <= ?", year+"-01-01", year+"-12-31"])}
   
+  def body
+    description
+  end
+  
   def check_published
     if published == true
       unless self.new_record? || hide_from_feed == true
@@ -72,9 +76,17 @@ class Event < ActiveRecord::Base
   def stream_date
     start_at.to_date
   end
-
+  
+  def endstream_date
+    end_at.nil? ? nil : end_at.to_date
+  end
+    
   def place_name
     place.blank? ? nil : place.name
+  end
+  
+  def title
+    name    
   end
   
   def update_image_attributes
