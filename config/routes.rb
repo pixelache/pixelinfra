@@ -83,7 +83,7 @@ Pixelinfra::Application.routes.draw do
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout
   get '/auth/failure' => 'sessions#failure'
-  get '/admin' => 'admin/posts#index'
+  get '/admin' => 'admin/events#index'
   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, via: :get
   
   match 'auth/:provider/callback' => 'authentications#create', :via => :get

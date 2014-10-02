@@ -68,6 +68,10 @@ class Event < ActiveRecord::Base
       return true if day.to_date >= start_at.to_date && day.to_date <= end_at.to_date
     end
   end
+  
+  def stream_date
+    start_at.to_date
+  end
 
   def place_name
     place.blank? ? nil : place.name

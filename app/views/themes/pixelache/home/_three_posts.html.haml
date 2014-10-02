@@ -2,12 +2,12 @@
   .row
     .small-10.columns.large-offset-1 
       .top_post
-        .title= link_to @posts.first.title, @posts.first
-        .body= truncate_html(@posts.first.body, :length => 600)
-        .read_more= link_to 'Read More', @posts.first
+        .title= link_to @stream.first.title, @stream.first
+        .body= truncate_html(@stream.first.body, :length => 600)
+        .read_more= link_to 'Read More', @stream.first
   
       .smaller_posts.row
-        - @posts[1..2].each do |post|
+        - @stream[1..2].each do |post|
           .post.small-6.columns
             .title= link_to post.title, post
             .body= truncate_html post.body, :length => 300

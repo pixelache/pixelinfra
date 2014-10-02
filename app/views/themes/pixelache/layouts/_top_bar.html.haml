@@ -1,7 +1,8 @@
-%nav.top-bar{"data-topbar" => ""}
+%nav.top-bar{"data-topbar" => "", :role => "navigation", :"data-options" => "is_hover: false"}
   %ul.title-area
-    %li.name= link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), '/'
-
+    %li.name
+      = link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), '/'
+      &nbsp;
     %li.toggle-topbar.menu-icon
       %a{:href => "#"} Menu
   %section.top-bar-section
@@ -16,10 +17,18 @@
           %li= link_to t(:projects), projects_path
           %li= link_to 'Residencies', page_path('residencies')
       %li.has-dropdown
+        = link_to t(:people), '#'
+        %ul.dropdown
+          %li= link_to t(:collaborators), '#'
+          %li= link_to t(:members), '#'
+          %li= link_to t(:network), '#'
+      %li.has-dropdown
         = link_to t(:archive), '#'
         %ul.dropdown
           %li= link_to t(:all_posts), posts_path
           %li= link_to t(:yearly_archive), '#'
+          
+          
     - if current_user
       %ul.right
         %li.has-dropdown
@@ -82,6 +91,7 @@
       %ul.left
         %li.tagline#dynamic_tagline
           = link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
+
     .lang
       = link_to_unless(session[:locale] == :en, 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
       |

@@ -114,6 +114,9 @@ class Post < ActiveRecord::Base
 
   end
   
+  def stream_date
+    published_at
+  end
   def title_en
     self.title(:en)
   end

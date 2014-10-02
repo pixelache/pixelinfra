@@ -30,14 +30,15 @@ html {
 
 }
 
-.top-bar .name {
-  padding: 6px 0px 0px 6px;
+.top-bar .name img {
+  padding: 10px 0px 0px 6px;
 }
 
 .top-bar .lang {
   font-size: 0.6rem;
   text-transform: uppercase;
   color: white;
+  float: left;
 }
 
 .outer {
