@@ -30,6 +30,16 @@ html {
 
 }
 
+.top-bar .name {
+  padding: 6px 0px 0px 6px;
+}
+
+.top-bar .lang {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  color: white;
+}
+
 .outer {
   padding-bottom: 100px;
 }

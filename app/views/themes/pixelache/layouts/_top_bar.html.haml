@@ -21,7 +21,12 @@
           %li= link_to t(:all_posts), posts_path
           %li= link_to t(:yearly_archive), '#'
     - if current_user
-
+      %ul.right
+        %li.has-dropdown
+          %a{:href=> '#'}= current_user.username
+          %ul.dropdown
+            %li= link_to 'Edit your profile', edit_user_registration_path(current_user)
+            %li= link_to 'Sign out', '/signout'
       %ul.left
         %li.has-dropdown
           %a{:href => '#'} Site configuration            
@@ -77,5 +82,8 @@
       %ul.left
         %li.tagline#dynamic_tagline
           = link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
-
+    .lang
+      = link_to_unless(session[:locale] == :en, 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
+      |
+      = link_to_unless(session[:locale] == :fi, 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} ) 
         

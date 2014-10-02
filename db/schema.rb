@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829104329) do
+ActiveRecord::Schema.define(version: 20141002114659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -221,7 +221,7 @@ ActiveRecord::Schema.define(version: 20140829104329) do
     t.integer  "image_height"
     t.string   "image_content_type"
     t.integer  "image_size",                   limit: 8
-    t.integer  "facebook_link",                limit: 8
+    t.text     "facebook_link"
     t.float    "cost"
     t.float    "cost_alternate"
     t.string   "cost_alternate_reason"

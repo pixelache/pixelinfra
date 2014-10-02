@@ -3,6 +3,7 @@ class Admin::PostsController < ApplicationController
   layout 'admin'
   authorize_resource
   before_filter :authenticate_user!
+  skip_before_filter :require_no_authentication
   
   has_scope :page, :default => 1
   has_scope :by_festival
