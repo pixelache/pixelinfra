@@ -1,18 +1,17 @@
 # Patch for rails3-jquery-autocomplete to work with globalize3.
 # (based on rails3-jquery-autocomplete 1.0.11)
-module Rails3JQueryAutocomplete
+module Rails4Autocomplete
   module Orm
     module ActiveRecord
-      #
-      # def self.included(base)
-      #   base.send :include, InstanceMethods
-      #   base.send :alias_method_chain, :get_autocomplete_items, :globalize3
-      #   base.send :alias_method_chain, :get_autocomplete_select_clause, :globalize3
-      # end
-      #
-      # module InstanceMethods
+      
+      def get_autocomplete_order(method, options, model=nil)
+        order = options[:order]
 
-        def active_record_get_autocomplete_items(parameters)
+        table_prefix = model ? "#{model.table_name}." : ""
+        order || "LOWER(#{table_prefix}#{method}) ASC"
+      end
+
+        def get_autocomplete_items(parameters)
           model             = parameters[:model]
           translated_model  = find_globalized_column_class_for(model, parameters[:method])
           model_with_method = translated_model || model

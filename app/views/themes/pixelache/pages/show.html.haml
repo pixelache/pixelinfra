@@ -15,7 +15,7 @@
       = raw @page.name
 
       - if can? :edit, @page
-        %small= link_to t(:edit), edit_admin_page_path(@page)
+        %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id)
   .row
     .small-7.columns.large-offset-1.body= raw simple_format(@page.body)
     - unless @page.children.empty?

@@ -21,6 +21,7 @@ class Page < ActiveRecord::Base
   scope :by_subsite, -> (x) { where(subsite_id: x ) }
   scope :projects, ->  { where("project_id is not null") }
   scope :unlinked, ->  { where("project_id is null and festival_id is null")}
+  scope :by_name, -> (name) { joins(:translations).where("page_translations.name ILIKE '%" + name + "%'")}
   
   def festival_name
     festival.blank? ? nil : festival.name

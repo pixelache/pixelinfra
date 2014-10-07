@@ -7,13 +7,6 @@ GIT
       rails (>= 3.0.0)
 
 GIT
-  remote: git://github.com/crowdint/rails3-jquery-autocomplete.git
-  revision: ab74bd73297922fd7755690ecdd9367c0e93662a
-  specs:
-    rails3-jquery-autocomplete (1.0.14)
-      rails (>= 3.0)
-
-GIT
   remote: git://github.com/globalize/globalize.git
   revision: 49bd7f154e3bdc84fb5513ebfb8bb26e632a9806
   branch: master
@@ -340,6 +333,8 @@ GEM
       sprockets-rails (~> 2.0)
     rails-footnotes (4.0.1)
       rails (>= 3.2)
+    rails4-autocomplete (1.1.1)
+      rails (>= 3.0)
     railties (4.1.6)
       actionpack (= 4.1.6)
       activesupport (= 4.1.6)
@@ -516,7 +511,7 @@ DEPENDENCIES
   quiet_assets
   rails (= 4.1.6)
   rails-footnotes (>= 3.7.9)
-  rails3-jquery-autocomplete!
+  rails4-autocomplete
   randumb
   rb-fchange
   rb-fsevent

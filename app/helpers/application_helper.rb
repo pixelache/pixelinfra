@@ -33,8 +33,10 @@ module ApplicationHelper
   end
   
   def date_range(from_date, until_date, options = {})
-    if until_date.nil?
-      if from_date.range_time.blank?
+    if until_date.nil? || from_date.class == Date
+      if from_date.class == Date
+        return I18n.l(from_date.to_date, :format => :long)
+      elsif from_date.range_time.blank? 
         return I18n.l(from_date.to_date, :format => :long)
       else
         return I18n.l(from_date, :format => :long)
