@@ -9,7 +9,7 @@
       .small-4.columns.event_small
         .title= link_to event.name, event
         .metadata
-          = date_range(event.start_at, event.end_at)
+          = date_range(event.start_at, event.end_at, :format => :short)
           = " | "
           = event.place.try(:name)
         - if event.image?

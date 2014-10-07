@@ -1,7 +1,7 @@
 .event_single.row.outer
   .internal.columns.small-8.columns.small-centered
     .title= @event.name
-    .metadata= date_range(@event.start_at, @event.end_at)
+    .metadata= date_range(@event.start_at, @event.end_at, :format => :long)
     .metadata
       = @event.place.try(:name)
       - unless @event.place.blank?
