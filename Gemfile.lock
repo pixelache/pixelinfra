@@ -222,6 +222,7 @@ GEM
       activesupport (>= 3.2, < 5)
     hashie (2.1.2)
     hike (1.2.3)
+    hominid (2.1.9)
     hpricot (0.8.6)
     html2haml (1.0.1)
       erubis (~> 2.7.0)
@@ -489,6 +490,7 @@ DEPENDENCIES
   haml-rails
   handles_sortable_columns
   has_scope
+  hominid
   html2haml
   http_accept_language
   hub

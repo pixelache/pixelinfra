@@ -30,6 +30,12 @@ html {
 
 }
 
+span.translation_missing {
+  font-size: 3em;
+  background-color: red;
+  color: white;
+}
+
 .top-bar .name img {
   padding: 10px 0px 0px 6px;
 }

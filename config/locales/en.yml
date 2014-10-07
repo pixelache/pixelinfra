@@ -221,6 +221,11 @@ en:
       <<: *errors
 
   about: 'About'
+  archive: 'Archive'
+  the_festival: 'The Festival'
+  join: 'Join'
+  projects: 'Projects'
+  email_address: 'Your email address'
   calendar: 'Calendar'
   choose: 'Choose...'
   event: 'Event'

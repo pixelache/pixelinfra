@@ -45,9 +45,27 @@ footer {
     font-weight: 300;
     color: #FFF;
     padding: 20px 0px;
+    .subscribe {
+      padding-top: 7px;
+    }
     input {
       background-color: #373637;
       text: #666;
+      margin-bottom: 0px;
+      border: none;
+      outline: none;
+      &:active, &:focus {
+        background-color: #373637;
+      }
+    }
+    button {
+      font-family: $quicksand;
+      font-size: 1.131rem;
+      color: white; 
+      background-color: black;
+      height: 35px;
+      padding: 5px 10px;
+      margin: 0px;
     }
   }
   .footer_menu {

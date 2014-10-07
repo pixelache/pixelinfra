@@ -5,6 +5,21 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :get_locale
   
+  def add_to_mailchimp   # change when we get API key
+    h = Hominid::Base.new({:api_key => ENV['mailchimp_api_key']})
+    list = h.find_list_id_by_name("Pixelache Helsinki Newsletter")
+    begin
+      h.subscribe(list, params[:email])
+      @signup_success = t(:thanks_signup)
+      @signup_error = nil
+    rescue
+      @signup_error = 'There was an error adding your email address, please try again.'
+    end
+    respond_to do |format|
+        format.js {render :partial => 'shared/email_signup', :content_type => 'text/javascript'}
+    end
+  end
+  
   
   def reroute
     url_parts = params[:url].split(/\//, 2)

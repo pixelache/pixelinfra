@@ -85,7 +85,7 @@ Pixelinfra::Application.routes.draw do
   get '/auth/failure' => 'sessions#failure'
   get '/admin' => 'admin/events#index'
   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, via: :get
-  
+  match   '/add_to_list', via: :post, :controller => :application, :action => :add_to_mailchimp
   match 'auth/:provider/callback' => 'authentications#create', :via => :get
   match '/oauth/authenticate' => 'authentications#create', :via => :get
   resources :authentications
