@@ -8,10 +8,14 @@
           %span.leaf
             = link_to p.name, p
             = " : "
-    
+
 .page
   .row
-    .small-7.columns.large-offset-1.title= raw @page.name
+    .small-7.columns.large-offset-1.title
+      = raw @page.name
+
+      - if can? :edit, @page
+        %small= link_to t(:edit), edit_admin_page_path(@page)
   .row
     .small-7.columns.large-offset-1.body= raw simple_format(@page.body)
     - unless @page.children.empty?
