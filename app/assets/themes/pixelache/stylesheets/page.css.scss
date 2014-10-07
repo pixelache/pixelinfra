@@ -35,6 +35,13 @@
   
   .children {
     .child {
+      &:hover {
+        background-color: #000;
+        color: #f9ec31;
+        a {
+          color: #f9ec31;
+        }
+      }
       a {
         font-family: $quicksand;
         font-weight: 300;

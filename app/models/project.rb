@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :etherpads
   has_many :events, :dependent => :nullify
   has_many :photos, as: :item
+  has_many :pages
   has_many :posts
   has_many :attachments, as: :item
   translates :description

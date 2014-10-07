@@ -100,6 +100,7 @@ class Post < ActiveRecord::Base
     if project
       unless project.posts.empty?
         related << project.posts.reject{|x| x == self }
+        related << project.pages
       end
     end
     if festival

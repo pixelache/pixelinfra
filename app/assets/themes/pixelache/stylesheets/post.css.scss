@@ -2,7 +2,7 @@
 
 
 .post_row {
-  margin: 20px 0px 75px 0px;
+  margin: 20px auto 75px auto;
 }
 
 .post_small {
@@ -12,6 +12,7 @@
     font-size: 1.5rem;
     line-height: 1.875rem;
     margin-bottom: 15px;
+    height: 5.3rem;
     padding-left: 0px;
   }
   .metadata {
@@ -53,7 +54,7 @@
   
   h1 {
     font-family: $quicksand;
-    font-size: 3.5rem;
+    font-size: 2.8rem;
     color: #333;
     text-transform: uppercase;
     margin-bottom: 20px;

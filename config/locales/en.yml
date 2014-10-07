@@ -223,6 +223,8 @@ en:
       <<: *errors
 
   about: 'About'
+  all_posts: 'All posts'
+  yearly_archive: 'Yearly archive'
   archive: 'Archive'
   the_festival: 'The Festival'
   join: 'Join'
@@ -230,6 +232,7 @@ en:
   email_address: 'Your email address'
   calendar: 'Calendar'
   choose: 'Choose...'
+  project: 'Project'
   event: 'Event'
   edit: 'Edit'
   events: 'Events'
