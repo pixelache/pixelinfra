@@ -2,7 +2,13 @@
   .internal.columns.small-8.columns.small-centered
     .title= @event.name
     .metadata= date_range(@event.start_at, @event.end_at)
-    .metadata= @event.place.try(:name)
+    .metadata
+      = @event.place.try(:name)
+      - unless @event.place.blank?
+        %p.place_address
+          = @event.place.address
+          - unless @event.place.latitude.blank?
+            = link_to t(:map), "http://maps.google.com/?q=#{@event.place.latitude},#{@event.place.longitude}", :target => :_blank
     - unless @event.photos.empty? && @event.videos.empty?
       .metadata= link_to t(:scroll_down_for_documentation), '#'
     - if @event.image?

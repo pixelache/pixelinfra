@@ -1,7 +1,7 @@
 @import 'variables';
 
 .event_row {
-  margin: 20px 0px 75px 0px;
+  margin: 20px auto 75px auto;
 }
 
 
@@ -19,6 +19,16 @@
     a {
       color: red;
     }
+    p.place_address {
+      margin-bottom: 0px;
+      font-size: 0.9rem;
+      a {
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: bold;
+        padding-left: 1em;
+      }
+    }
   }
   
   .title {
@@ -26,7 +36,7 @@
     a { color: #333; }
     font-size: 1.5rem;
     line-height: 1.8rem;
-
+    height: 5.3rem;
     padding-left: 0px;
   }
   
@@ -62,10 +72,10 @@
   
   h1 {
     font-family: $quicksand;
-    font-size: 4em;
+    font-size: 2.8rem;
     color: #333;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin: 20px 0px;
   }
 
   
@@ -84,8 +94,16 @@
     span.date {
       font-weight: bold;
     } 
-    a {
-      color: red;
+
+    p.place_address {
+      margin-bottom: 0px;
+      font-size: 0.9rem;
+      a {
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: bold;
+        padding-left: 1em;
+      }
     }
   }
   

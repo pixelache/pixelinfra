@@ -7,7 +7,7 @@ footer {
   background-color: #333;
   padding-bottom: 0px;
   position: fixed;
-  bottom: -10em;
+  bottom: 0em;
   
   .hashtag {
     background-color: #808184;
@@ -53,11 +53,18 @@ footer {
   .bottom_footer {
     background-color: #231f20;
     padding: 55px 0px;
+
+
     .menus {
       color: #fff100;
     }
     .fine_print {
+      img {
+        margin-bottom: 1rem;
+      }
       p {
+        font-size: 0.9rem;
+        line-height: 1.3rem;
         color: #bbbdbf;
         margin: 5px 0px;
       }

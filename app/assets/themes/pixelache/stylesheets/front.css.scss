@@ -41,6 +41,16 @@
       margin-left: 0px;
       padding: 10px 0px;
       color: #333;
+      p.place_address {
+        margin-bottom: 0px;
+        font-size: 0.9rem;
+        a {
+          text-transform: uppercase;
+          font-size: 0.8rem;
+          font-weight: bold;
+          padding-left: 1em;
+        }
+      }
     }
     .body {
       font-family: Open Sans, sans-serif;
@@ -79,6 +89,16 @@
       border-bottom: 1px solid #333;
       margin-left: 0px;
       padding: 10px 0px;
+      p.place_address {
+        margin-bottom: 0px;
+        font-size: 0.9rem;
+        a {
+          text-transform: uppercase;
+          font-size: 0.8rem;
+          font-weight: bold;
+          padding-left: 1em;
+        }
+      }
     }
     .body {
       font-family: Open Sans, sans-serif;

@@ -7,6 +7,10 @@
           = date_range(@stream.first.stream_date, @stream.first.endstream_date)
           - if @stream.first.class == Event
             = ", " +  @stream.first.place.name
+            %p.place_address
+              = @stream.first.place.address
+              - unless @stream.first.place.latitude.blank?
+                = link_to t(:map), "http://maps.google.com/?q=#{@stream.first.place.latitude},#{@stream.first.place.longitude}", :target => :_blank
         .body= truncate_html(@stream.first.body, :length => 600)
         .read_more= link_to 'Read More', @stream.first
   
@@ -18,6 +22,10 @@
               = date_range(post.stream_date, post.endstream_date)
               - if post.class == Event
                 = ", " +  post.place.name
+                %p.place_address
+                  = post.place.address
+                  - unless post.place.latitude.blank?
+                    = link_to t(:map), "http://maps.google.com/?q=#{post.place.latitude},#{post.place.longitude}", :target => :_blank                
             .body= truncate_html post.body, :length => 300
             .read_more= link_to 'Read More', post
             
