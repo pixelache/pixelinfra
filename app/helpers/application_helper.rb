@@ -34,7 +34,7 @@ module ApplicationHelper
   
   def date_range(from_date, until_date, options = {})
     if until_date.nil?
-      if from_date.strftime("%H:%M") == "00:00"
+      if from_date.range_time.blank?
         return I18n.l(from_date.to_date, :format => :long)
       else
         return I18n.l(from_date, :format => :long)

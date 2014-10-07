@@ -1,7 +1,28 @@
-%h2 Sign in
-= semantic_form_for(resource, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f|
-  %p= link_to 'Connect via Facebook', Rails.env.production? ? 'http://auth.pixelache.ac/auth/facebook' : '/auth/facebook'
-  %p= link_to 'Connect via Google account', 'http://auth.pixelache.ac/auth/google_oauth2'
-  %p= link_to 'Connect via Twitter', 'http://auth.pixelache.ac/auth/twitter'
+.devise_new_session
+  .row
+    .small.12.columns.text-center
+      %h2 Sign in
+    
+  = semantic_form_for(resource, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f|
+    .row
+      .small-4.columns.text-center.option
+        = link_to(Rails.env.production? ? 'http://auth.pixelache.ac/auth/facebook' : '/auth/facebook') do
+          = image_tag(theme_image_path('facebook_icon.png'))
+          %p= t(:connect_via_facebook)
+      .small-4.columns.text-center.option
+        = link_to 'http://auth.pixelache.ac/auth/google_oauth2' do
+          = image_tag(theme_image_path('google_icon.png'))
+          %p= t(:connect_via_google)
+      .small-4.columns.text-center.option
+        = link_to 'http://auth.pixelache.ac/auth/twitter' do
+          = image_tag(theme_image_path('twitter_icon.png'))
+          %p= t(:connect_via_twitter)
 
-= render "devise/shared/links"
+  .row
+    .small-8.small-centered.columns
+      .row
+        .small-6.columns.text-center
+          %p= link_to t(:sign_up), '/users/sign_up'
+        .small-6.columns.text-center.end
+          %p= link_to t(:forgot_your_password), '/users/password/new'
+

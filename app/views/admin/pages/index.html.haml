@@ -16,7 +16,7 @@
   .large-2.columns
     .filter_title Show:
     %select#type_filter
-      %option{:value => "all", :selected => (params[:all] == "true" ? :selected : false)} All posts
+      %option{:value => "all", :selected => (params[:all] == "true" ? :selected : false)} All pages
       
       %option{:value => "festivals", :selected => (params[:festivals] == "true" ? :selected : false)} Festival pages
       %option{:value => "projects", :selected => (params[:projects] == "true" ? :selected : false) } Project pages
@@ -32,7 +32,19 @@
       } else {
         window.location.href=parts[0] + "?" + $(this).val() + "=true";
       }
-    }); 
+    });
+    $('.filter_box select#by_subsite').change(function() {
+      var parts = "#{request.url}".split(/\?/, 2);
+      if (parts[1]) {
+        if ($(this).val() == '') {
+          window.location.href=parts[0] + "?" + parts[1].replace(new RegExp("\\&*" + $(this).attr('id') + "\=\\d+", "g"), '');
+        } else {
+          window.location.href=parts[0] + "?" + parts[1].replace(new RegExp("\\&*" + $(this).attr('id') + "\=\\d+", "g"), '') + "&" + $(this).attr('id') + "=" + $(this).val();
+        }
+      } else {
+        window.location.href=parts[0] + "?" + $(this).attr('id') + "=" + $(this).val();
+      }
+    });
 .row
   .columns
     = paginate @pages

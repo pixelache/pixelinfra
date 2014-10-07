@@ -18,7 +18,7 @@ class Page < ActiveRecord::Base
   scope :published, -> () { where(published: true) }
   scope :by_site, -> (x) { includes(:subsite).where(:subsite_id => x) }
   scope :festivals, ->  { where("festival_id is not null") }
-  scope :by_subsite, ->  { where(subsite_id: subsite ) }
+  scope :by_subsite, -> (x) { where(subsite_id: x ) }
   scope :projects, ->  { where("project_id is not null") }
   scope :unlinked, ->  { where("project_id is null and festival_id is null")}
   
