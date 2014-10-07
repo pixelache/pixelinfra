@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       @signup_success = t(:thanks_signup)
       @signup_error = nil
     rescue
-      @signup_error = 'There was an error adding your email address, please try again.'
+      @signup_error = t(:error_adding_email)
     end
     respond_to do |format|
         format.js {render :partial => 'shared/email_signup', :content_type => 'text/javascript'}

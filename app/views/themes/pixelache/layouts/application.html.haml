@@ -43,14 +43,15 @@
           .small-1.columns.text-right= image_tag theme_image_path('megaphone.png')
           .small-5.columns.text-left.subscribe
             Subscribe to our monthly newsletter:
-          = form_tag url_for('/add_to_list'), :id => :email_form, :method => :get, :remote => true do 
+          = form_tag url_for('/add_to_list'), :id => :email_form, :method => :post, :remote => true do 
             .small-5.columns.text-left
-              #loading{:style => 'display: none'}= image_tag('ajax-loader.gif')
+              #mailing_list_loading{:style => 'display: none'}= image_tag('/assets/ajax-loader.gif')
               #email_error
               .email_signup_form   
                 = text_field_tag :email, t(:email_address), { :class => "clearfield"}
             .small-1.column
-              %button{:class => :email_signup , :type => :submit }= t(:join)
+              %button{:class => :email_signup , :type => :submit , :id => :mailing_list_submit}= t(:join)
+
       .bottom_footer.container
         .row
           .small-2.columns.fine_print
@@ -87,6 +88,11 @@
       :javascript
         $(document).ready(function() {
           $('.clearfield').clearField();
+          $('form#email_form').submit(function() {
+            $("#mailing_list_loading").toggle();
+            $('button#mailing_list_submit').prop('disabled', true);
+            $('.email_signup_form').fadeOut();
+          });
           #{yield :jquery}
         });
     / ! end of #container

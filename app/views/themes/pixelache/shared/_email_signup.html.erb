@@ -1,0 +1,15 @@
+$("#mailing_list_loading").toggle();
+<% if @signup_success %>
+  $('#email_error').html('');
+  $('button#mailing_list_submit').fadeOut();
+  $('.email_signup_form').html('<%= @signup_success %>');
+  $('.email_signup_form').fadeIn();
+  $('#')
+<% end %>
+<% if @signup_error %>
+  $('#email_error').html('<%= @signup_error %>');
+  $('button#mailing_list_submit').removeAttr('disabled');
+  $('.email_signup_form').fadeIn();
+
+<% end %>
+

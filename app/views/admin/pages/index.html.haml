@@ -24,7 +24,7 @@
   .large-6.columns
     .filter_title Find by text:
     = form_tag '/admin/pages', :method => :get do
-      = autocomplete_field_tag 'by_name', '', autocomplete_page_name_admin_pages_path
+      = autocomplete_field_tag 'by_name', params[:by_name], autocomplete_page_name_admin_pages_path
 
 
   :javascript
