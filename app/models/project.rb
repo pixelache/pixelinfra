@@ -17,4 +17,12 @@ class Project < ActiveRecord::Base
   validates_uniqueness_of :name
   belongs_to :evolvedfrom, :class_name => 'Project', :foreign_key => "evolvedfrom_id"
   has_one :evolvedto, :class_name  => 'Project', :foreign_key => "evolvedfrom_id"
+  
+  def background_css
+    if photos.empty?
+      ""
+    else
+      "background: url(#{photos.first.filename.url}) no-repeat; background-position: 1.5rem 3rem; background-color: white"
+    end
+  end
 end

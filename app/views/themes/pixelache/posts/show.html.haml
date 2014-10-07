@@ -18,25 +18,24 @@
     .row
       .small-12.columns.share_this= render :partial => 'shared/share_this_buttons'
 
-  
-    - unless @post.related_posts.empty? && !@post.event && !@post.project && !@post.festival
+    - unless @post.related_content.empty?
       .row.related_title
         %h1= t(:related_content)
-      - if @post.event
-        .row
-          .related.event
-            .related_metadata
-              %span.date= date_range(@post.event.start_at, @post.event.end_at)
-            .title= link_to t(:event) + ": " + @post.event.name, @post.event
-            .row
-              .small-4.columns  
-                - if @post.event.image?
-                  .image= image_tag @post.event.image.url(:box)
-              .small-8.columns
-                .body= raw truncate_html(@post.event.description, :length => 250)
-            .read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), @post.event
-      - unless @post.related_posts.empty?
-        - @post.related_posts[0..4].each do |related|
+      - @post.related_content.each do |related|
+        - if related.class == Event
+          .row
+            .related.event
+              .related_metadata
+                %span.date= date_range(@post.event.start_at, @post.event.end_at)
+              .title= link_to t(:event) + ": " + @post.event.name, @post.event
+              .row
+                .small-4.columns  
+                  - if @post.event.image?
+                    .image= image_tag @post.event.image.url(:box)
+                .small-8.columns
+                  .body= raw truncate_html(@post.event.description, :length => 250)
+              .read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), @post.event
+        - elsif related.class == Post
           .row
             .related.post
               .related_metadata
@@ -48,17 +47,26 @@
                 .small-12.columns.body= raw truncate_html(related.body, :length => 350)
               .row
                 .small-12.columns.read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), related
-      - if @post.project
-        .row
-          .related.project.small-12.columns
-            .title= link_to t(:project) + ": " + @post.project.name, @post.project
-            - unless @post.project.description.blank?
-              .row{:style => 'padding-bottom: 20px'}
-                - if @post.project.photos.empty?
-                  .small-12.columns.body= raw truncate_html(@post.project.description, :length => 350)
-                - else
-                  .small-4.columns= image_tag @post.project.photos.first.filename.url(:box)
-                  .small-8.columns= raw truncate_html(@post.project.description, :length => 350)
+        - elsif related.class == Project
+          .row
+            .related.project
+              .title= link_to t(:project) + ": " + @post.project.name, @post.project
+              - unless @post.project.description.blank?
+                .row{:style => 'padding-bottom: 20px'}
+                  - if @post.project.photos.empty?
+                    .small-12.columns.body= raw truncate_html(@post.project.description, :length => 350)
+                  - else
+                    .small-4.columns= image_tag @post.project.photos.first.filename.url(:box)
+                    .small-8.columns= raw truncate_html(@post.project.description, :length => 350)
+        - elsif related.class == Page
+          .row
+            .related.related_page
+              .related_metadata
+              .title= link_to  t(:page) + ": " + related.title, related
+              .row
+                .small-12.columns.body= raw truncate_html(strip_tags(related.body), :length => 350)
+              .row
+                .small-12.columns.read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), related
         
   /   - if @post.project
   /     %p

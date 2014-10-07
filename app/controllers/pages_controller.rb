@@ -13,6 +13,8 @@ class PagesController < InheritedResources::Base
     set_meta_tags :title => @page.name
     if @page.root == @page && @page.root.festival
       redirect_to festival_path(@page.root.festival)
+    elsif @page.root == @page && @page.root.project
+      redirect_to project_path(@page.root.project)
     elsif @page.root != @page && @page.root.festival
       redirect_to festival_page_festival_path(@page.root.festival, @page.id)
     end

@@ -5,8 +5,29 @@ ul.events {
   color: #666;
 }
 
+// jstree fixes
+#projects_tree a {
+    white-space: normal !important;
+    height: auto;
+    padding: 1px 2px;
+}
+
 .project_detail {
-  
+  .wide_project_banner {
+    background-color: white;
+    min-height: 270px;
+    .title {
+      font-size: 4em;
+    }
+    .description_excerpt {
+      margin: 20px;
+      font-size: 1.2em;
+      padding: 10px;
+      background-color: #f9ec31;
+      opacity: 0.8;
+    }
+  }
+  background-color: #f9ec31;
   .event {
     padding: 20px 0px;
     margin-bottom: 30px;
