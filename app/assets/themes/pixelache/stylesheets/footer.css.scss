@@ -50,6 +50,41 @@ footer {
       text: #666;
     }
   }
+  .footer_menu {
+    list-style-type: none;
+    font-size: 0.8rem;
+    line-height: 1.3rem;
+    font-family: $opensans;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #ffff00;
+    a {
+      color: #ffff00;
+    }
+    .heading {
+      text-transform: uppercase;
+      color: #ffff00;
+      font-family: $opensans;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      a { 
+        color: #ffff00;
+      }
+    }
+    ul {
+      li {
+        list-style-type: none;
+        font-size: 0.8rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        color: #ffff00;
+        a {
+          color: #ffff00;
+        }
+      }
+    }
+  }
   .bottom_footer {
     background-color: #231f20;
     padding: 55px 0px;

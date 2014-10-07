@@ -54,7 +54,28 @@
             %p Suvilahti (Bldg. 7)
             %p 00540 Helsinki
             %p Finland
-          .small-7.columns.right.footer_menue
+          .small-6.columns.right.footer_menu
+            .row
+              .small-2.columns.text-left
+                .heading.text-center= link_to t(:about), page_path('about')
+              .small-3.columns.text-left
+                .heading.text-center= t(:activities)
+                %ul
+                  %li= link_to t(:events), events_path
+                  %li= link_to t(:the_festival), festivals_path
+                  %li= link_to t(:projects), projects_path
+                  %li= link_to t(:residencies), page_path('residencies')
+              .small-3.columns.text-left
+                .heading.text-center= t(:people)
+                %ul
+                  %li= link_to t(:collaborators), '#'
+                  %li= link_to t(:members), '#'
+                  %li= link_to t(:network), '#'
+              .small-3.columns.text-left
+                .heading.text-center= t(:archive)
+                .row
+                  - (Time.now.year - 1).downto(2002).each do |year|
+                    .small-6.columns= link_to year.to_s, '#'
       :javascript
         $(document).ready(function() {
           #{yield :jquery}
