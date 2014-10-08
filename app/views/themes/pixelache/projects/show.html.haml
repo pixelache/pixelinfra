@@ -14,74 +14,99 @@
   .wide_project_banner{:style => @project.background_css }
     .row
       .small-4.columns.title= @project.name
-      .small-6.columns.end.description_excerpt
-        = raw truncate_html(@project.description, :length => 400)
-        .read_more= link_to t(:read_more), '#'
+      - unless @project.description.blank?
+        .small-6.columns.end.description_excerpt
+          = raw truncate_html(@project.description, :length => 400)
+          .read_more.text-center
+            = link_to t(:read_more), '#', :onclick => 'javscript:$("html, body").animate({    scrollTop: $("#desccont").offset().top}, 1000);'
+            |
+            = link_to t(:see_activities), '#', :onclick => 'javscript:$("html, body").animate({    scrollTop: $("#activities").offset().top}, 1000);'
+        
+  - if @project.self_and_descendants.map{|x| x.events.published }.flatten.size > 1
+    .events_wrapper
+      .row
+        .small-12.columns.text-center
+          %h2= t :events
+      .events_carousel.row.small-centered
+        - @project.self_and_descendants.map{|x| x.events.published }.flatten.sort_by{|x| x.start_at }.reverse[0..8].each do |e| 
+          - if e.image?
+            .event.small-6.columns{:style => "background: url(#{e.image.url.gsub(/development/, 'production')}) no-repeat center center; background-size: cover"}
+              = link_to e do
+                .title= e.name
+                .when
+                  = date_range(e.start_at, e.end_at, :format => :short)
 
-  .row
-    .small-3.push-9.columns
-      - unless @project.children.empty?
-        %h3= t(:subprojects_and_events)
-        #projects_tree
-          %ul
-            - @project.children.each do |subproject|
-              - next if subproject.evolvedfrom
-              = render :partial => 'projectnode', :locals => {:project => subproject}
-        = content_for :jquery do
-          :plain
-             $('#projects_tree').jstree();
-             jQuery("#projects_tree ul").on("click","li.jstree-node a",function(){
-                 document.location.href = this; 
-             });
-     
-    .small-9.columns.pull-3
-      = raw @project.description
-    
-  - unless @project.events.published.empty? && @project.posts.published.empty?
+
+  .white#desccont
     .row
-      .small-7.columns
-        - if @project.events.published.empty?
-          %h2= t(:no_events)
-        - else
-          %h3= t(:events)
-          - @project.events.published.each do |event|
-            .event.row
-              .small-12.columns
-                .title= link_to event.name, event
-                .metadata
-                  = date_range(event.start_at, event.end_at)
-                  = " | "
-                  = event.place.try(:name)
-              - if event.image?
-                .small-4.columns.event_image= link_to image_tag(event.image.url(:box)), event
-                .small-8.columns.body= raw truncate_html(event.description, :length => 350)
-              - else
-                .small-12.columns.body= raw truncate_html(event.description, :length => 350)
-              .small-12.columns.related
-                - if event.festival
-                  = link_to event.festival.name, event.festival
-                = link_to t(:read_more), event, :class => :last
+      .small-4.push-8.columns
+      
+        -# pages
+        - unless @project.pages.empty?
+          .children
+            %h3= t(:more_information)
+            - @project.pages.roots.first.children.each do |child|
+              .child= link_to child.name, project_page_path(@project, child)
+          
+        - unless @project.children.empty?
+          %h3= t(:subprojects_and_events)
+          - if @project.children.size > 1
+            #projects_tree
+              %ul
+                - @project.children.each do |subproject|
+                  - next if subproject.evolvedfrom
+                  = render :partial => 'projectnode', :locals => {:project => subproject}
+            = content_for :jquery do
+              :plain
+                 $('#projects_tree').jstree();
+                 jQuery("#projects_tree ul").on("click","li.jstree-node a",function(){
+                     document.location.href = this; 
+                 });
+          - else
+            %h4= link_to @project.children.first.name, @project.children.first
+      .small-8.pull-4.columns
+        = raw @project.description
+  .activity_bar#activities
+    .row
+      .small-12.columns
+        %center
+          %h3= @activities.empty? ? t(:no_activities_yet) : t(:all_activity)
+    - unless @activities.empty?
+      - @activities.in_groups_of(2).each do |activity_group|
+        .row.activity_row{:"data-equalizer" => ""}
+          - activity_group.each do |activity|
+            - next if activity.nil?
+            .small-6.columns.activity_small{:"data-equalizer-watch" => ""}
+              .row
+                .small-5.columns
+                  - if activity.image?
+                    .post_image= link_to image_tag(activity.image.url(:box)), activity
+                .small-7.columns
+                  .title= link_to activity.name, activity
+                  .metadata
+                    - if activity.class == Post
+                      %span.date= l activity.published_at.to_date, :format => :long
+                      - unless activity.creator.nil? 
+                        = ", #{activity.creator.name}"
+                    -elsif activity.class == Event
+                      %p.place_address
+                        = activity.place.try(:name)
+                        - unless activity.place.blank?                    
+                          - unless activity.place.latitude.blank?
+                            = link_to t(:map), "http://maps.google.com/?q=#{activity.place.latitude},#{activity.place.longitude}", :target => :_blank
+                  .body= raw truncate_html(activity.description, :length => 350)
+              .row
+                .small-12.columns.related
+                  = link_to t(:read_more), activity, :class => :last
+    .row
+      .small-12.columns=  paginate @activities
 
-      .small-4.columns.small-offset-1
-        - if @project.posts.published.empty?
-          %h2= t(:no_posts)
-        - else
-          %h3= t(:posts)
-          - @project.posts.published.sort_by(&:published_at).reverse.each do |post|
-            .post.row
-              .small-12.columns
-                .title= link_to post.name, post
-                .metadata
-                  %span.date= l post.published_at.to_date, :format => :long
-                  - unless post.creator.nil? 
-                    = ", #{post.creator.name}"
-              - if post.image?
-                .small-12.columns.post_image= link_to image_tag(post.image.url(:box)), post
-              .small-12.columns.body= raw truncate_html(post.description, :length => 350)
-              .small-12.columns.related
-                - if post.festival
-                  = link_to post.festival.name, post.festival
-                - if post.event
-                  = link_to post.event.name, post.event                  
-                = link_to t(:read_more), post, :class => :last
-  
+= content_for :jquery do
+  :plain
+    $('.events_carousel').slick({infinite: true,
+      slidesToShow: 2,
+      adaptiveHeight: true,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      slidesToScroll: 1
+    });

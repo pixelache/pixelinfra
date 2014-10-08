@@ -72,7 +72,9 @@ Pixelinfra::Application.routes.draw do
     end
   end
   resources :pages
-  resources :projects
+  resources :projects do
+    resources :pages
+  end
   resources :publications
   resources :users
   resources :nodes
