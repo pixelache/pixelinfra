@@ -11,14 +11,16 @@ class Admin::PostsController < ApplicationController
   has_scope :by_subsite
   has_scope :published
   has_scope :by_tag
-  has_scope :is_pixelache, type: :boolean, default: true
+  has_scope :is_pixelache, type: :boolean, default: false
   has_scope :is_external, type: :boolean
   has_scope :by_year
+  has_scope :by_name
   handles_sortable_columns
   autocomplete :event, :name, :extra_data => [:start_at], :display_value => :event_with_date
   autocomplete :project, :name, :extra_data => [:name], :display_value => :name
   autocomplete :festival, :name, :extra_data => [:name], :display_value => :name
-
+  autocomplete :post, :title, :extra_data => [:title], :display_value => :title
+  
   def check_permissions
     authorize! :create, resource
   end
@@ -52,7 +54,7 @@ class Admin::PostsController < ApplicationController
         "published_at DESC"
       end
     end
-    @posts = apply_scopes(Post).includes(:subsite).order(order).page(params[:page]).per(30)
+    @posts = apply_scopes(Post).includes(:subsite).order(order).page(params[:page]).per(20)
   end
   
   def options

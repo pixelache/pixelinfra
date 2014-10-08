@@ -43,6 +43,11 @@
       %option{:value => "true", :selected => (params[:is_pixelache] == "true" ? :selected : false)} Only Pixelache
       %option{:value => "false", :selected => (params[:is_pixelache] == "false" ? :selected : false)} All posts
       %option{:value => "external", :selected => (params[:is_external] == "true" ? :selected : false) } Only external
+.row
+  .small-8.columns
+    .filter_title Find by text:
+    = form_tag '/admin/posts', :method => :get do
+      = autocomplete_field_tag 'by_name', params[:by_name], autocomplete_post_title_admin_posts_path
   :javascript
     $('.filter_box select').change(function() {
       var parts = "#{request.url}".split(/\?/, 2);

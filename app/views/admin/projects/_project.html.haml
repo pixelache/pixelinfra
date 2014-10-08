@@ -6,11 +6,11 @@
     - if project.evolvedto
       %small= "Evolved into #{project.evolvedto.name}"
   %td.actions
+    = link_to t(:view), project, :class => [:button, :round, :tiny], :target => :_blank
     - if can? :edit, Project
-      = link_to 'Edit', edit_admin_project_path(project)
+      = link_to 'Edit', edit_admin_project_path(project), :class => [:button, :round, :tiny]
     - if can? :destroy, Project
-      |
-      = link_to 'Destroy', [:admin, project], :method => :delete, :data => {:confirm => "Are you sure?"}
+      = link_to 'Destroy', [:admin, project], :method => :delete, :data => {:confirm => "Are you sure?"}, :class => [:button, :round, :tiny, :alert]
 - unless project.children.empty?
   - project.children.sort_by(&:name).each do |child|
     %tr= render :partial => 'project', :locals => {:project => child}      

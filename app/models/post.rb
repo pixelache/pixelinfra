@@ -34,6 +34,7 @@ class Post < ActiveRecord::Base
   scope :is_pixelache, -> () { where(external: false) }
   scope :is_external, -> () { where(external: true) }
   scope :by_tag, -> tag{ joins(:taggings).where(:taggings => {:tag_id => tag}) }
+  scope :by_name, -> (name) { joins(:translations).where("post_translations.title ILIKE '%" + name + "%'")}
   
   
   def check_published
