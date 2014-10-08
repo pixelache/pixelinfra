@@ -93,6 +93,7 @@
           = link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
 
     .lang
+      
       = link_to_unless(session[:locale] == :en, 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
       |
       = link_to_unless(session[:locale] == :fi, 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} ) 

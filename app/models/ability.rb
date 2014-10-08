@@ -5,6 +5,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.has_role? :goddess
       can :manage, :all
+      
     elsif user.has_role? :member
       can :manage, Event
       can :manage, Page, :subsite => {:name => 'pixelache' }

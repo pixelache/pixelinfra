@@ -1,0 +1,2 @@
+$('#activities').html("<%= escape_javascript(render 'activities') %>");
+$('#paginator').html("<%= escape_javascript(paginate(@activities, :remote => true)) %>");

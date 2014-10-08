@@ -1,0 +1,29 @@
+.row
+  .small-12.columns
+    %center
+      %h3= @activities.empty? ? t(:no_activities_yet) : t(:all_activity)
+- unless @activities.empty?
+  - @activities.in_groups_of(2).each do |activity_group|
+    .row.activity_row{:"data-equalizer" => ""}
+      - activity_group.each do |activity|
+        - next if activity.nil?
+        .small-6.columns.activity_small{:"data-equalizer-watch" => ""}
+          .row
+            .small-5.columns
+              - if activity.image?
+                .post_image= link_to image_tag(activity.image.url(:box)), activity
+            .small-7.columns
+              .title= link_to activity.name, activity
+              .metadata
+                - if activity.class == Post
+                  %span.date= l activity.published_at.to_date, :format => :long
+                  - unless activity.creator.nil? 
+                    = ", #{activity.creator.name}"
+                -elsif activity.class == Event
+                  %p.place_address
+                    = activity.place.try(:name)
+                    - unless activity.place.blank?                    
+                      - unless activity.place.latitude.blank?
+                        = link_to t(:map), "http://maps.google.com/?q=#{activity.place.latitude},#{activity.place.longitude}", :target => :_blank
+              .body= raw truncate_html(activity.description, :length => 350)
+              .related= link_to t(:read_more), activity, :class => :last

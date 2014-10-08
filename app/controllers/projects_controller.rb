@@ -1,4 +1,6 @@
 class ProjectsController < InheritedResources::Base
+  respond_to :html, :js
+  
   def show
     @project = Project.find(params[:id])
     @activities = @project.posts.published.order('published_at desc')
