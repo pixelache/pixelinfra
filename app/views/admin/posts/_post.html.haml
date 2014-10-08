@@ -27,8 +27,8 @@
       no
       
   %td.actions
-    - if can? :edit, Post
-      = link_to 'Edit', edit_admin_subsite_post_path(post.subsite, post)
-    - if can? :destroy, Post
-      |
-      = link_to 'Destroy', "/admin/subsites/#{post.subsite.id}/posts/#{post.slug.to_s}", :method => :delete, :data => {:confirm => "Are you sure?"}
+    = link_to t(:view), post, :class => [:button, :tiny, :round]
+    - if can? :edit, post
+      = link_to t(:edit), edit_admin_subsite_post_path(post.subsite, post), :class => [:button, :tiny, :round]
+    - if can? :destroy, post
+      = link_to 'Destroy', "/admin/subsites/#{post.subsite.id}/posts/#{post.slug.to_s}", :method => :delete, :data => {:confirm => "Are you sure?"}, :class => [:button, :tiny, :round, :alert]

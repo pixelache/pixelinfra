@@ -17,13 +17,11 @@
   %td= page.published == true ? 'yes' : 'no'
   %td= page.subsite.name
   %td.actions
-    = link_to 'View', page_path(page.id), :target => :_blank
-    |
-    - if can? :edit, Page
-      = link_to 'Edit', edit_admin_subsite_page_path(page.subsite, page.id)
-    - if can? :destroy, Page
-      |
-      = link_to 'Destroy', "/admin/subsites/#{page.subsite.id}/pages/#{page.id.to_s}", :method => :delete, :data => {:confirm => "Are you sure?"}
+    = link_to t(:view), page_path(page.id), :target => :_blank, :class => [:button, :tiny, :round]
+    - if can? :edit, page
+      = link_to t(:edit), edit_admin_subsite_page_path(page.subsite, page.id), :class => [:button, :tiny, :round]
+    - if can? :destroy, page
+      = link_to t(:delete), "/admin/subsites/#{page.subsite.id}/pages/#{page.id.to_s}", :method => :delete, :data => {:confirm => "Are you sure?"}, :class => [:button, :tiny, :round, :alert]
 - unless page.children.empty?
   - page.children.each do |child|
     = render :partial => 'page', :locals => {:page => child, :classpassed => "children_#{page.id.to_s}" }
