@@ -6,7 +6,7 @@ class Ability
     if user.has_role? :goddess
       can :manage, :all
     elsif user.has_role? :member
-      can :manage, Event, :subsite => {:name => 'pixelache' }
+      can :manage, Event
       can :manage, Page, :subsite => {:name => 'pixelache' }
       can :manage, Post, :subsite => {:name => 'pixelache' }
       can :manage, Festival, :subsite => {:name => 'pixelache' }
