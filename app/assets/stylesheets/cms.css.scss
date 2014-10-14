@@ -68,12 +68,25 @@ form {
     input.colourpicker {
       width: 100px;
     }
+    &.boolean {
+      label {
+        font-size: 1.1rem;
+      }
+      input {
+        margin-right: 8px;
+      }
+    }
+    p.inline-hints {
+      margin-top: -15px;
+      font-size: 0.8rem;
+    }
   }
   
   .label {
     float: left;
     text-align: right;
     margin-right: 10px;
+    font-size: 1.15rem;
     background-color: inherit;
     padding-left: 0px;
     color: #666;

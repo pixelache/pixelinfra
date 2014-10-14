@@ -16,6 +16,7 @@ class Event < ActiveRecord::Base
   has_event_calendar
   include Feedable
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? && x['description'].blank? }
+  accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }
   attr_accessor  :place_name, :hide_from_feed
   before_save :update_image_attributes
   validates_presence_of :subsite_id, :place_id, :start_at
@@ -30,6 +31,7 @@ class Event < ActiveRecord::Base
   scope :by_subsite, -> subsite { where(subsite_id: subsite ) }
   scope :by_project, -> project { where(project_id: project) }
   scope :by_year, -> year { where(["start_at >= ? AND start_at <= ?", year+"-01-01", year+"-12-31"])}
+  scope :by_name, -> (name) { joins(:translations).where("event_translations.name ILIKE '%" + name + "%'")}
   
   def body
     description
@@ -91,11 +93,11 @@ class Event < ActiveRecord::Base
   
   def update_image_attributes
     if image.present?
-      self.image_content_type = image.file.content_type
-      self.image_size = image.file.size
-      self.image_width, self.image_height = `identify -format "%wx%h" #{image.file.path}`.split(/x/)
-      # if you also need to store the original filename:
-      # self.original_filename = image.file.filename
+      if image.file.exists?
+        self.image_content_type = image.file.content_type
+        self.image_size = image.file.size
+        self.image_width, self.image_height = `identify -format "%wx%h" #{image.file.path}`.split(/x/)
+      end
     end
   end
 

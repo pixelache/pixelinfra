@@ -1,22 +1,25 @@
-%h1 An event!
+.row  
+  .small-12.columns
+    %h1 Event!
 = semantic_nested_form_for [:admin, @event], :html => {:class => "custom", :"data-abide" => '', :multipart => true} do |f|
+
   .row
-    %label Which website should this appear on?
     .small-3.columns
-      = f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
+      = f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false, :label => ' Which website should this appear on?'
   .row
-    %label Part of a festival?
-    .small-4.columns= f.input :festival
-    %label Part of a project?
-    .small-4.columns= f.input :project, :collection => Project.all.order(:name)
+    .small-4.columns
+      = f.input :festival, :label => 'Part of a festival?'
+    .small-4.columns
+      = f.input :project, :collection => Project.all.order(:name), :label => ' Part of a project?'
+  .row
     .small-6.columns
       = f.input :place_name, :as => :autocomplete, :url =>  autocomplete_place_name_admin_events_path, :input_html => { :required => '', :id_element => '#event_place_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Where does this take place?", :hint => raw("(If it's a place not already the database, <a href=\"/admin/places/new\" target=\"_blank\">create it first.</a>)")
       %small.error You must select a place for this event.
     .small-6.columns
       = f.input :place_id, :as => :hidden      
   .row
-    %label When?
     .small-6.columns
+      %label When?
       .row
         .small-6.columns
           = f.input :start_at, :as => :string, :input_html => {:required => '', :class => "datetime_picker"}
@@ -62,14 +65,35 @@
       = f.input :image, :hint => 'An image/icon to represent this event.'
     .small-6.columns= f.input :facebook_link, :hint => 'URL to the Facebook Event page'
   .row
+    .small-8.columns
+      %fieldset
+        %legend
+          %strong Additional images
+        %p Here you can upload additional images, such as archival photos, for an event. If you only have one image, put it above and leave this section blank.
+        = f.fields_for :photos do |ff|
+          - if !ff.object.new_record?
+            - unless ff.object.filename.blank?
+              = image_tag ff.object.filename.url(:thumb)
+          = ff.input :filename
+        = f.link_to_add 'Add a photo/image...', :photos
+  .row#olsof_stuff
+    .small-8.columns
+      %fieldset
+        %legend
+          %strong Open-Sourcing Festivals content
+        = f.input :resources_needed
+        = f.input :protocol
+  .row
     .small-2.columns= f.input :cost
   .row
-    .small-2.columns= f.input :cost_alternate, :hint => 'Second (discount) cost?'
+    .small-2.columns= f.input :cost_alternate, :hint => 'Second (discounted) cost?'
     .small-6.columns= f.input :cost_alternate_reason, :hint => 'Reason for discount (example: student price, unemployed, etc.)'
   .row 
     .small-5.columns= f.input :user_id, :as => :select, :collection => User.all.order(:name), :label => "Event created by?", :hint => "Leave blank for 'Pixelache'", :include_blank => true
-    .small-3.columns= f.input :hide_from_feed, :as => :boolean, :label => "Hide from news feeds?"
-    .small-4.columns= f.input :published, :hint => 'Tick this box to publish this on the site'
+  .row
+    .small-12.columns= f.input :hide_from_feed, :as => :boolean, :label => "Hide from news feeds?"
+  .row
+    .small-12.columns= f.input :published, :hint => 'Tick this box to publish this on the site, or else the public will never see it'
     
     
   .row

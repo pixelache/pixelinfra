@@ -13,7 +13,8 @@
     
   .wide_project_banner{:style => @project.background_css }
     .row
-      .small-4.columns.title= @project.name
+      .small-4.columns
+        .title= @project.name
       - unless @project.description.blank?
         .small-6.columns.end.description_excerpt
           = raw truncate_html(@project.description, :length => 400)
@@ -39,32 +40,33 @@
 
   .white#desccont
     .row
-      .small-4.push-8.columns
+      - unless @project.pages.empty? && @project.children.empty?
+        .small-4.push-8.columns
       
-        -# pages
-        - unless @project.pages.empty?
-          .children
-            %h3= t(:more_information)
-            - @project.pages.roots.first.children.each do |child|
-              .child= link_to child.name, project_page_path(@project, child)
+          -# pages
+          - unless @project.pages.empty?
+            .children
+              %h3= t(:more_information)
+              - @project.pages.roots.first.children.each do |child|
+                .child= link_to child.name, project_page_path(@project, child)
           
-        - unless @project.children.empty?
-          %h3= t(:subprojects_and_events)
-          - if @project.children.size > 1
-            #projects_tree
-              %ul
-                - @project.children.each do |subproject|
-                  - next if subproject.evolvedfrom
-                  = render :partial => 'projectnode', :locals => {:project => subproject}
-            = content_for :jquery do
-              :plain
-                 $('#projects_tree').jstree();
-                 jQuery("#projects_tree ul").on("click","li.jstree-node a",function(){
-                     document.location.href = this; 
-                 });
-          - else
-            %h4= link_to @project.children.first.name, @project.children.first
-      .small-8.pull-4.columns
+          - unless @project.children.empty?
+            %h3= t(:subprojects_and_events)
+            - if @project.children.size > 1
+              #projects_tree
+                %ul
+                  - @project.children.each do |subproject|
+                    - next if subproject.evolvedfrom
+                    = render :partial => 'projectnode', :locals => {:project => subproject}
+              = content_for :jquery do
+                :plain
+                   $('#projects_tree').jstree();
+                   jQuery("#projects_tree ul").on("click","li.jstree-node a",function(){
+                       document.location.href = this; 
+                   });
+            - else
+              %h4= link_to @project.children.first.name, @project.children.first
+      .columns{:class => (@project.pages.empty? && @project.children.empty?) ? "small-12" : "small-8"}
         = raw @project.description
   .activity_bar#activities= render 'activities'
     
@@ -78,6 +80,6 @@
       slidesToShow: 2,
       adaptiveHeight: true,
       autoplay: true,
-      autoplaySpeed: 2000,
+      autoplaySpeed: 2400,
       slidesToScroll: 1
     });

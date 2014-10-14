@@ -28,6 +28,12 @@
       %option{value: ""} &nbsp;
       - Time.now.year.downto(2002).each do |year|
         %option{:value => year, :selected => (params[:by_year] == year.to_s ? :selected : false)}= year.to_s
+.row
+  .small-8.columns
+    .filter_title Find by text:
+    = form_tag '/admin/events', :method => :get do
+      = autocomplete_field_tag 'by_name', params[:by_name], autocomplete_event_name_admin_events_path
+    
   :javascript
     $('.filter_box select').change(function() {
       var parts = "#{request.url}".split(/\?/, 2);
