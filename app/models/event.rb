@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  acts_as_taggable_on :tags, :technologies
   translates :name, :description, :notes, :fallbacks_for_empty_translations => true
   belongs_to :festival
   belongs_to :project

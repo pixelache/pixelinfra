@@ -46,7 +46,7 @@ class Admin::EventsController < Admin::BaseController
   
   def permitted_params
     params.permit(:event => [:subsite_id, :place_id, :start_at, :end_at, :published, :image, :image_width, :place_name, :image_height, :image_content_type, :image_size, :facebook_link, :cost, :cost_alternate, :cost_alternate_reason, :project_id, :festival_id, :facilitator_name, :facilitator_url, :facilitator_organisation, :user_id, :hide_from_feed, :user_id, :resources_needed, :protocol, 
-      :facilitator_organisation_url,
+      :facilitator_organisation_url, :tag_list, :technology_list,
       photos_attributes: [:id, :filename, :filename_content_type],
       translations_attributes: [:name, :description, :notes, :id, :locale]])
   end
