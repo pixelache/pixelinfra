@@ -35,6 +35,7 @@ class Post < ActiveRecord::Base
   scope :is_external, -> () { where(external: true) }
   scope :by_tag, -> tag{ joins(:taggings).where(:taggings => {:tag_id => tag}) }
   scope :by_name, -> (name) { joins(:translations).where("post_translations.title ILIKE '%" + name + "%'")}
+  scope :interviews, -> () { joins(:post_categories).where("post_categories.name ILIKE '%interviews'") }
   
   
   def check_published

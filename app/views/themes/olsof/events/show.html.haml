@@ -26,3 +26,9 @@
         = " - #{l @event.end_at, :format => :long}"
 
     .body= raw @event.description
+    
+    - unless @event.posts.published.interviews.empty?
+      %h3= t :interviews
+      %ul
+        - @event.posts.published.interviews.each do |post|
+          %li= link_to post.name, post, :target => :_blank

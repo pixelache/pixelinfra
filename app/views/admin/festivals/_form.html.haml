@@ -36,7 +36,9 @@
   .row
     .small-2.columns= f.input :background_colour, :as => :string, :input_html => {:class => :colourpicker }, :label => 'Main colour for archive page background'
   .row
-    .small-2.columns= f.input :primary_colour, :as => :string, :input_html => {:class => :colourpicker }, :label => 'Secondary colour for archive page text'    
+    .small-2.columns= f.input :primary_colour, :as => :string, :input_html => {:class => :colourpicker }, :label => 'Secondary colour for archive page text'
+  .row
+    .small-6.columns= f.input :published
   .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]
 = content_for :jquery do

@@ -16,6 +16,7 @@ class Festival < ActiveRecord::Base
   before_save :update_image_attributes
   
   scope :by_node, -> (x) { includes(:node).where(:node_id => x) }
+  scope :published,  -> () { where(published: true)}
   
   def happens_on?(day)
     if end_at.blank?

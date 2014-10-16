@@ -8,9 +8,9 @@ class FestivalsController < InheritedResources::Base
   
   def index
     if @site.name == 'pixelache'
-      @festivals = Festival.all.by_node(1).order(:end_at).reverse
+      @festivals = Festival.published.by_node(1).order(:end_at).reverse
     else
-      @festivals = Festival.all
+      @festivals = Festival.published
     end
   end
   
