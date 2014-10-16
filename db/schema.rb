@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016103312) do
+ActiveRecord::Schema.define(version: 20141016110149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -441,6 +441,8 @@ ActiveRecord::Schema.define(version: 20141016103312) do
     t.string   "item_type"
     t.integer  "item_id"
     t.string   "wordpress_scope"
+    t.string   "title"
+    t.string   "credit"
   end
 
   add_index "photos", ["item_type", "item_id"], name: "index_photos_on_item_type_and_item_id", using: :btree

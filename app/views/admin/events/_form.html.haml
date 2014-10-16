@@ -75,6 +75,8 @@
             - unless ff.object.filename.blank?
               = image_tag ff.object.filename.url(:thumb)
           = ff.input :filename
+          = ff.input :title
+          = ff.input :credit
         = f.link_to_add 'Add a photo/image...', :photos
   .row#olsof_stuff
     .small-8.columns

@@ -58,6 +58,8 @@
             - if ff.object.filename?
               = image_tag ff.object.filename.url(:thumb)
             = ff.input :filename
+            = ff.input :title
+            = ff.input :credit
             = f.link_to_remove 'Remove this photo'
       = f.link_to_add 'Add a photo', :photos
   .row
