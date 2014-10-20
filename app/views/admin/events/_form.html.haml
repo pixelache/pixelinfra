@@ -71,13 +71,19 @@
           %strong Additional images
         %p Here you can upload additional images, such as archival photos, for an event. If you only have one image, put it above and leave this section blank.
         = f.fields_for :photos do |ff|
-          - if !ff.object.new_record?
-            - unless ff.object.filename.blank?
-              = image_tag ff.object.filename.url(:thumb)
-          = ff.input :filename
-          = ff.input :title
-          = ff.input :credit
-        = f.link_to_add 'Add a photo/image...', :photos
+          .row
+            .small-4.columns
+              - if !ff.object.new_record?
+                - unless ff.object.filename.blank?
+                  = image_tag ff.object.filename.url(:thumb)
+                  = ff.input :filename, :label => t(:choose_photo)
+              - else
+                = ff.input :filename, :label => t(:change_photo)
+            .small-8.columns
+              = ff.input :title
+              = ff.input :credit
+          = ff.link_to_remove t(:remove_photo), :class => [:button, :round, :alert, :tiny]
+        = f.link_to_add 'Add a photo/image...', :photos, :class => [:button, :round, :tiny]
   .row#olsof_stuff
     .small-8.columns
       %fieldset
