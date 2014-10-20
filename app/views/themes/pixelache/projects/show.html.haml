@@ -23,25 +23,30 @@
             |
             = link_to t(:see_activities), '#', :onclick => 'javscript:$("html, body").animate({    scrollTop: $("#activities").offset().top}, 1000);'
         
+        
   - if @project.self_and_descendants.map{|x| x.events.published }.flatten.size > 1
     .events_wrapper
       .row
         .small-12.columns.text-center
           %h2= t :events
-      .events_carousel.row.small-centered
-        - @project.self_and_descendants.map{|x| x.events.published }.flatten.sort_by{|x| x.start_at }.reverse[0..8].each do |e| 
-          - if e.image?
-            .event.small-6.columns{:style => "background: url(#{e.image.url.gsub(/development/, 'production')}) no-repeat center center; background-size: cover"}
-              = link_to e do
-                .title= e.name
-                .when
-                  = date_range(e.start_at, e.end_at, :format => :short)
+          .events_carousel.row.small-centered
+            - @project.self_and_descendants.map{|x| x.events.published }.flatten.sort_by{|x| x.start_at }.reverse[0..8].each do |e| 
+              - if e.image?
+                .small-6.columns
+                  .event{:style => "background: url(#{e.image.url.gsub(/development/, 'production')}) no-repeat center center; background-size: cover"}
+                    = link_to e do
+                      .title= e.name
+                      .when
+                        = date_range(e.start_at, e.end_at, :format => :short)
 
 
   .white#desccont
     .row
+      .columns{:class => (@project.pages.empty? && @project.children.empty?) ? "small-12" : "small-8"}
+        = raw @project.description
+        
       - unless @project.pages.empty? && @project.children.empty?
-        .small-4.push-8.columns
+        .small-4.columns
       
           -# pages
           - unless @project.pages.empty?
@@ -66,8 +71,7 @@
                    });
             - else
               %h4= link_to @project.children.first.name, @project.children.first
-      .columns{:class => (@project.pages.empty? && @project.children.empty?) ? "small-12" : "small-8"}
-        = raw @project.description
+                      
   .activity_bar#activities= render 'activities'
     
                   
@@ -79,6 +83,7 @@
     $('.events_carousel').slick({infinite: true,
       slidesToShow: 2,
       adaptiveHeight: true,
+      arrows: false,
       autoplay: true,
       autoplaySpeed: 2400,
       slidesToScroll: 1
