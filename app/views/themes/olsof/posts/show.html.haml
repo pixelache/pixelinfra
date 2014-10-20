@@ -13,7 +13,8 @@
   .small-8.columns.content.left
     %h2= @post.title
     .metadata= "posted at #{l @post.published_at, :format => :long} by #{@post.creator.name}"
-
+    - if can? :edit, @post
+      = link_to t(:edit), url_for(:host => (Rails.env.development? ? 'localhost' : 'new.pixelache.ac'), port: (Rails.env.development? ? 3000 : false), action: :edit, id: @post, subsite_id: @post.subsite, controller: 'admin/posts'), :class => [:button, :tiny, :round]
 
 
     .body= raw @post.body

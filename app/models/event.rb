@@ -40,9 +40,11 @@ class Event < ActiveRecord::Base
   end
   
   def check_published
-    if published == true
-      unless self.new_record? || hide_from_feed == true
+    if published == true && hide_from_feed != true
+      if self.new_record? 
         add_to_feed('created')
+      else
+        add_to_feed('edited')
       end
     else
       unless feeds.empty?
