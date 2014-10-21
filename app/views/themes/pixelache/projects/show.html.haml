@@ -1,4 +1,12 @@
-.outer.project_detail
+:css
+  .project_detail {
+    background-color: ##{@project.project_bg_colour};
+    color: ##{@project.project_text_colour};
+  }
+  .project_detail a {
+    color: ##{@project.project_link_colour};
+  }
+.outer.project_detail(style="")
   - unless @project.root?
     .page_tree
       .row
@@ -16,7 +24,7 @@
       .small-4.columns
         .title= @project.name
       - unless @project.description.blank?
-        .small-6.columns.end.description_excerpt
+        .small-6.columns.end.description_excerpt(style="background-color: ##{@project.project_bg_colour}")
           = raw truncate_html(@project.description, :length => 400)
           .read_more.text-center
             = link_to t(:read_more), '#', :onclick => 'javscript:$("html, body").animate({    scrollTop: $("#desccont").offset().top}, 1000);'
@@ -28,7 +36,7 @@
     .events_wrapper
       .row
         .small-12.columns.text-center
-          %h2= t :events
+          %h2(style="color: ##{@project.project_text_colour}")= t :events
           .events_carousel.row.small-centered
             - @project.self_and_descendants.map{|x| x.events.published }.flatten.sort_by{|x| x.start_at }.reverse[0..8].each do |e| 
               - if e.image?

@@ -90,13 +90,11 @@ button.slick-next, button.slick-prev {
       margin: 20px;
       font-size: 1.2em;
       padding: 10px;
-      background-color: #f9ec31;
       opacity: 0.85;
       .read_more {
         margin: 25px 0px;
         text-transform: lowercase;
         a {
-          color: #f05a28;
           font-family: $quicksand;
           font-weight: bold;
           font-size: 14px;
@@ -104,7 +102,7 @@ button.slick-next, button.slick-prev {
       }
     }
   }
-  background-color: #f9ec31;
+
   .event {
     padding: 20px 0px;
     margin-bottom: 30px;
