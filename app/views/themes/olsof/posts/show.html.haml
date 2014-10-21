@@ -16,10 +16,13 @@
     %h2= @post.title
     .metadata= "posted at #{l @post.published_at, :format => :long} by #{@post.creator.name}"
     - if @post.image?
-      - if @post.image_width >= 400
-        = link_to image_tag(@post.image.url(:standard)), @post.image.url
+      - unless @post.image_width.blank?
+        - if @post.image_width >= 400
+          = link_to image_tag(@post.image.url(:standard)), @post.image.url
+        - else
+          = link_to image_tag(@post.image.url), @post.image.url
       - else
-        = link_to image_tag(@post.image.url), @post.image.url
+        = link_to image_tag(@post.image.url(:standard)), @post.image.url
     - if user_signed_in?
       - if can? :edit, @post
         = link_to t(:edit), url_for(:host => (Rails.env.development? ? 'localhost' : 'new.pixelache.ac'), port: (Rails.env.development? ? 3000 : false), action: :edit, id: @post, subsite_id: @post.subsite, controller: 'admin/posts'), :class => [:button, :tiny, :round]
