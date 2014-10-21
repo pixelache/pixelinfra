@@ -1,6 +1,8 @@
 .row.post
-  .small-3.columns.media
-    - unless @post.image.blank? && @post.photos.empty?
+  .columns.media{:class => (@post.photos.empty? ? 'small-2' : 'small-3')}
+    - if @post.photos.empty?
+      &nbsp;
+    - else
       %ul.clearing-thumbs{:"data-clearing" => ""}
         - if @post.image?
           - if @post.image_width >= 400
@@ -10,11 +12,17 @@
         - unless @post.photos.empty?
           - @post.photos.each do |i|
             %li= link_to image_tag(i.filename.url(:box)), i.filename.url
-  .small-8.columns.content.left
+  .columns.content.left{:class => (@post.photos.empty? ? 'small-10' : 'small-9')}
     %h2= @post.title
     .metadata= "posted at #{l @post.published_at, :format => :long} by #{@post.creator.name}"
-    - if can? :edit, @post
-      = link_to t(:edit), url_for(:host => (Rails.env.development? ? 'localhost' : 'new.pixelache.ac'), port: (Rails.env.development? ? 3000 : false), action: :edit, id: @post, subsite_id: @post.subsite, controller: 'admin/posts'), :class => [:button, :tiny, :round]
+    - if @post.image?
+      - if @post.image_width >= 400
+        = link_to image_tag(@post.image.url(:standard)), @post.image.url
+      - else
+        = link_to image_tag(@post.image.url), @post.image.url
+    - if user_signed_in?
+      - if can? :edit, @post
+        = link_to t(:edit), url_for(:host => (Rails.env.development? ? 'localhost' : 'new.pixelache.ac'), port: (Rails.env.development? ? 3000 : false), action: :edit, id: @post, subsite_id: @post.subsite, controller: 'admin/posts'), :class => [:button, :tiny, :round]
 
 
     .body= raw @post.body

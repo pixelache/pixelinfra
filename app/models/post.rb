@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   acts_as_taggable
   translates :title, :body, :excerpt, :fallbacks_for_empty_translations => true
   belongs_to :subsite
+  
   belongs_to :event
   belongs_to :festival
   belongs_to :project

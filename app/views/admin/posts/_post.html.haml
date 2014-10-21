@@ -27,7 +27,7 @@
       no
       
   %td.actions
-    = link_to t(:view), post, :class => [:button, :tiny, :round]
+    = link_to t(:view), url_for(:controller => '/posts', :id => post.slug, :action => :show, :host => post.subsite.subdomain, :port => Rails.env.development? ? 3000 : false), :target => :_blank, :class => [:button, :tiny, :round]
     - if can? :edit, post
       = link_to t(:edit), edit_admin_subsite_post_path(post.subsite, post), :class => [:button, :tiny, :round]
     - if can? :destroy, post
