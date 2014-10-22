@@ -122,4 +122,7 @@
           - @site.nodes.uniq.each do |node|
             .small-2.columns= link_to image_tag(node.logo.url(:logo), :width => 130), node.website
           .small-2.columns= theme_image_tag 'grundtvig_logo_english.png'
-    / ! end of #container
+    :javascript
+      $(document).ready(function() {
+        #{yield :jquery}
+      });

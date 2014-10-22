@@ -19,9 +19,12 @@
 //= require foundation
 //= require jquery_nested_form
 //= require ckeditor/init
+//= require jquery.slick
+//= require lazybox
 //= require_tree .
 
 $(function(){ $(document).foundation(); 
+  $('a[rel*=lazybox]').lazybox({overlay: true, esc: true, close: true, modal: true});
   $('.datetime_picker').fdatetimepicker({
       format: 'yyyy-mm-dd hh:ii'
   });

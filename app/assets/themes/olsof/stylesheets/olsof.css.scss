@@ -300,15 +300,22 @@ ul.node_index {
     line-height: 19px;
   }
   .media {
-    ul.clearing-thumbs {
-      li {
-        margin-bottom: 7px;
+    .image_carousel {
+      margin-bottom: 7px;
         img {
           width: 100%;
           height: auto;
         }
+        .img {
+          margin-bottom: 15px;
+        }
       }
     }
+  
+  
+  .related_post_link {
+    font-size: 1.2rem;
+    margin: 5px 0px;
   }
 }
 

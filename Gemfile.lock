@@ -250,6 +250,7 @@ GEM
     kgio (2.9.2)
     launchy (2.4.2)
       addressable (~> 2.3)
+    lazybox (1.0.2)
     letter_opener (1.2.0)
       launchy (~> 2.2)
     libv8 (3.16.14.3)
@@ -498,6 +499,7 @@ DEPENDENCIES
   jquery-ui-rails
   jquery-ui-themes
   kaminari
+  lazybox
   letter_opener
   meta-tags
   mini_magick
