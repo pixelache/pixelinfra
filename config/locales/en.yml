@@ -45,7 +45,7 @@ en:
     formats:
       default: ! '%Y-%m-%d'
       long: ! '%d %B %Y'
-      short: ! '%d %b'
+      short: ! '%d %b %Y'
     month_names:
     -
     - January
@@ -258,6 +258,7 @@ en:
   members: 'Members'
   posts: 'Posts'
   sign_up: 'Sign up'
+  from_event: 'From event'
   thanks_signup: 'Thank you for joining our mailing list.'
   connect_via_facebook: 'Connect via Facebook'
   connect_via_twitter: 'Connect via Twitter'

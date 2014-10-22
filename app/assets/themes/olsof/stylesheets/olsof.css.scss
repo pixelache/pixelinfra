@@ -5,7 +5,11 @@ body {
   padding-top: 25px;
 }
 a {
-  color: #4a97c7;
+  color: $link;
+  &:hover {
+    color: $hover;
+  }
+  
 }
 header {
   margin-bottom: 30px;
@@ -315,7 +319,7 @@ ul.node_index {
   
   .related_post_link {
     font-size: 1.2rem;
-    margin: 5px 0px;
+    margin: 20px 0px;
   }
 }
 

@@ -58,5 +58,5 @@ CKEDITOR.editorConfig = function( config ) {
             classes: true
         }
     };
-    config.disallowedContent = 'script; span; *[on*]; *{*}';
+    config.disallowedContent = 'script; span; *[on*]; font; *{*}';
 };
