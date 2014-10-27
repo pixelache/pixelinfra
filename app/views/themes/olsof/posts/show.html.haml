@@ -3,15 +3,15 @@
     - if @post.photos.empty?
       &nbsp;
     - else
-      %ul.clearing-thumbs{:"data-clearing" => ""}
+      .image_carousel
         - if @post.image?
           - if @post.image_width >= 400
-            %li= link_to image_tag(@post.image.url(:standard)), @post.image.url
+            .img= link_to image_tag(@post.image.url(:standard)), @post.image.url
           - else
-            %li= link_to image_tag(@post.image.url), @post.image.url
+            .img= link_to image_tag(@post.image.url), @post.image.url
         - unless @post.photos.empty?
           - @post.photos.each do |i|
-            %li= link_to image_tag(i.filename.url(:box)), i.filename.url
+            .img= link_to image_tag(i.filename.url(:box)), i.filename.url
   .columns.content.left{:class => (@post.photos.empty? ? 'small-10' : 'small-9')}
     %h2= @post.title
     .metadata= "posted at #{l @post.published_at, :format => :long} by #{@post.creator.name}"
@@ -39,3 +39,16 @@
         - @post.related_content.each do |rc|
           - next if rc.class == Project || rc.class == Festival
           %li= link_to rc.name, rc
+= content_for :jquery do
+  :plain
+
+    $('.image_carousel').slick({infinite: true,
+      slidesToShow: 4,
+      adaptiveHeight: false,
+      arrows: false,
+      vertical: true,
+      slide: '.img',
+      autoplay: true,
+      autoplaySpeed: 2400,
+      slidesToScroll: 1,
+    });          
