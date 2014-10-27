@@ -74,20 +74,34 @@
                 - case controller.controller_name
                   - when 'publications'
                     = t :publications
+                    :javascript
+                      var onPage = "#{t(:publications)}";
                   - when 'nodes'
                     = t :partners
+                    :javascript
+                      var onPage = "#{t(:partners)}";
                   - when 'pages'
                     = t :about
+                    :javascript
+                      var onPage = "#{t(:about)}";
                   - when 'posts'
                     = t :news
+                    :javascript
+                      var onPage = "#{t(:news)}";
                   - when 'home'
                     = t :news
+                    :javascript
+                      var onPage = "#{t(:news)}";
                   - when 'events'
                     = t :events
+                    :javascript
+                      var onPage = "#{t(:events)}";
                   - when 'steps'
                     = t :events
+                    :javascript
+                      var onPage = "#{t(:events)}";
               .bar{:class => (controller.controller_name == 'pages' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/pages/about', :rel => t(:about)
-              .bar{:class => (controller.controller_name == 'publications' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/ppublications', :rel => t(:publications)           
+              .bar{:class => (controller.controller_name == 'publications' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/publications', :rel => t(:publications)           
               .bar{:class => (controller.controller_name == 'nodes' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), nodes_path, :rel => t(:partners)
               .bar{:class => (controller.controller_name == 'posts' || controller.controller_name == 'home' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/', :rel => t(:news)
               .bar{:class => (controller.controller_name == 'events' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), events_path, :rel => t(:events)
@@ -95,7 +109,7 @@
                 $('.bar').mouseover(function() {
                   $('#menutext').text($(this).find('a').attr('rel'));
                 }).mouseout(function() {
-                  $('#menutext').text('');
+                  $('#menutext').text(onPage);
                 });
                 $('.language .default').mouseover(function() {
                   $('.language .active img').attr('src', '/assets/olsof/images/blue_circle.png');

@@ -1,7 +1,14 @@
 .row.page
   .small-2.columns.media.large-offset-1 &nbsp;
-  .small-7.columns.content.centered
-    %ul.node_index
+  .small-7.columns.centered
+    %h1= t :partners
+    .node_index
       - @nodes.each do |node|
-        %li= link_to node.name, node
+        .node
+          .logo= image_tag node.logo.url.gsub(/development/, 'production')
+
+          .metadata
+            .city= "#{node.city}, #{node.country}"
+            .website= link_to node.website, node.website , :target => :_blank
+          .body= raw node.description
   .small-3.columns.end &nbsp;        

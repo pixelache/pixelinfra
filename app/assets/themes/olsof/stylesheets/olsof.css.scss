@@ -268,15 +268,28 @@ ul.side-nav {
   
 }
 
-ul.node_index {
-  list-style-type: none;
-  padding-top: 75px;
-
-  li {
-    font-size: 1.5em;
-    margin-bottom: 1.5em;
-    a {
-      color: #333;
+.node_index {
+  padding-top: 2rem;
+  .node {
+    margin-bottom: 3rem;
+    .title {
+      font-size: 1.5em;
+      margin-bottom: 5px;
+      a {
+        color: #333;
+      }
+    }
+    .metadata {
+      .city {
+        color: #333;
+        margin: 5px 0px;
+      }
+      .website {
+        margin-bottom: 5px;
+      }
+    }
+    .description {
+      font-size: 0.9rem;
     }
   }
 }
