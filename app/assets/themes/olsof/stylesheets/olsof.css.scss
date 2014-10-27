@@ -12,6 +12,7 @@ a {
   
 }
 header {
+  margin-top: -25px;
   margin-bottom: 30px;
   h1 {
     a {
@@ -212,6 +213,16 @@ ul.side-nav {
     line-height: 1.125;
     margin-bottom: 15px;
   }
+  h5 {
+    .smaller {
+      font-size: 1rem;
+      color: #666;
+    }
+    p {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+  }
   .event_row {
     margin-bottom: 40px;
     .name, .date {
@@ -374,3 +385,17 @@ ul.side-nav {
   }
 }
 
+
+.step_index {
+  .step {
+    margin-bottom: 3.5rem;
+  }
+}
+
+ul.pagination li.current a {
+  background-color: $link;
+  &:hover {
+    background-color: $hover;
+  }
+  
+}

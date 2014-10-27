@@ -2,7 +2,7 @@ class Step < ActiveRecord::Base
   belongs_to :subsite
   belongs_to :festival
   belongs_to :node
-  belongs_to :event
+  has_many :events
   translates :description, :fallbacks_for_empty_translations => true
   extend FriendlyId
   friendly_id :name , :use => [ :slugged, :finders, :scoped], :scope => :subsite

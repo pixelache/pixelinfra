@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
   belongs_to :project
   belongs_to :place
   belongs_to :subsite
+  belongs_to :step
   belongs_to :user
   has_many :posts
   has_many :photos, as: :item

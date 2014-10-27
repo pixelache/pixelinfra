@@ -1,0 +1,23 @@
+.step_index.row
+  .small-2.columns.media &nbsp;
+  .small-10.columns.centered.end
+    %h1 Steps
+    
+    - @steps.order(:number).each do |step|
+      .step
+        %h3
+          = step.number.to_s + ":"
+          = step.name
+        - if step.festival
+          %h5
+            = t(:festival) + ": "
+            = link_to step.festival.name, step.festival.website.blank? ? step.festival : step.festival.website
+                  
+        - unless step.events.empty?
+          %h5= t :events
+          %ul
+            - step.events.each do |event|
+              %li= link_to event.name, event
+          
+  
+  

@@ -14,6 +14,9 @@
   %body{:class => "#{controller_name} #{action_name}"}
     = javascript_include_tag "application"
     = javascript_include_tag "vendor/modernizr"
+    - if user_signed_in?
+      %header
+        .contain-to-grid.sticky= render 'admin/layouts/navigation'
     .row
       .large-3.medium-4.small-12.columns.push.large-offset-1#sidebar
         .logo
