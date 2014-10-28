@@ -225,10 +225,16 @@ ul.side-nav {
   }
   .event_row {
     margin-bottom: 40px;
-    .name, .date {
-      font-size: 1.0em;
-      line-height: 1.6em;
+    .name {
+      font-size: 1.1rem;
+      line-height: 1.4rem;
 
+    }
+    .date {
+      font-size: 0.85rem;
+      color: #666;
+      margin: 5px 0px;
+      font-style: italic;
     }
     .blurb {
       font-size: 1.0em;
@@ -270,12 +276,18 @@ ul.side-nav {
     line-height: 1.4rem;
     margin-bottom: 5px;
   }
-  .date, .blurb {
-    font-size: 1.0em;
+  .date {
+    font-size: 0.85rem;
     line-height: 1.4em;
-    color: #333;
+    color: #666;
+    font-style: italic;
   }
-
+  .blurb {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.4em;
+    margin-top: 5px;
+  }
   
 }
 

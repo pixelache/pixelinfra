@@ -51,6 +51,10 @@ class Admin::PagesController < Admin::BaseController
     end
   end
   
+  def new
+    @page = Page.new
+  end
+  
   def options
     @pages = Page.roots.includes(:subsite).order('created_at DESC').page(params[:page]).per(70)  
     render :layout => false

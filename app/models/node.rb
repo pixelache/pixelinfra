@@ -11,11 +11,11 @@ class Node < ActiveRecord::Base
   
   def update_image_attributes
     if logo.present?
-      self.logo_content_type = logo.file.content_type
-      self.logo_size = logo.file.size
-      self.logo_width, self.logo_height = `identify -format "%wx%h" #{logo.file.path}`.split(/x/)
-      # if you also need to store the original filename:
-      # self.original_filename = image.file.filename
+      if logo.file.exists?
+        self.logo_content_type = logo.file.content_type
+        self.logo_size = logo.file.size
+        self.logo_width, self.logo_height = `identify -format "%wx%h" #{logo.file.path}`.split(/x/)
+      end
     end
   end
   

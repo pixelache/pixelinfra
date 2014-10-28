@@ -1,4 +1,4 @@
-= semantic_form_for [:admin, @page], :url => admin_page_path(@page.id), :html => {:class => "custom", :multipart => true} do |f|
+= semantic_form_for [:admin, @page], :html => {:class => "custom", :multipart => true} do |f|
   .row
     %label Which site:
     .small-6.columns= f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
