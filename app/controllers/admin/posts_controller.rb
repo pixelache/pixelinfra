@@ -68,7 +68,7 @@ class Admin::PostsController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       @post = Post.find(params[:id])
     end
-    if @post.update_attributes(permitted_params)
+    if @post.update_attributes(permitted_params[:post])
       redirect_to  admin_posts_path 
     end
   end
