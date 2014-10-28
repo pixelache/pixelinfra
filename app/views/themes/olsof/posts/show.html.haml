@@ -33,6 +33,16 @@
 
 
     .body= raw @post.body
+    
+    - unless @post.attachments.empty?
+      %h4= t :downloads
+      %ul.downloads
+        - @post.attachments.each do |att|
+          %li
+            = link_to att.title.blank? ? att['attachedfile'] : att.title, att.attachedfile.url
+            - unless att.attachedfile_size.blank?
+              %small= pluralize(att.attachedfile_size, 'byte')
+          
     - unless @post.related_content.empty?
       %h4= t :related_content
       %ul.related

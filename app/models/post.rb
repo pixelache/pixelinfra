@@ -12,13 +12,15 @@ class Post < ActiveRecord::Base
   friendly_id :title_en , :use => [ :slugged, :finders, :scoped], :scope => :subsite
   has_and_belongs_to_many :post_categories, join_table: :posts_post_categories
   has_many :photos, as: :item
+  has_many :attachments, as: :item
   has_paper_trail
   mount_uploader :image, ImageUploader
   resourcify
   has_many :feeds, :as => :item, :dependent => :delete_all
   include Feedable
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['title'].blank? && x['body'].blank? }
-  accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }
+  accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :attachments, :reject_if => proc {|x| x['attachedfile'].blank? }, :allow_destroy => true
   before_save :update_image_attributes
   before_save :check_published
   validates_presence_of :subsite_id
@@ -42,7 +44,7 @@ class Post < ActiveRecord::Base
   def check_published
     if self.published == true
       self.published_at ||= Time.now
-      unless self.new_record? || hide_from_feed != false
+      unless self.persisted? || hide_from_feed != false
         add_to_feed('created')
       end
     else

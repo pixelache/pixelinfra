@@ -8,8 +8,8 @@ class Project < ActiveRecord::Base
   has_many :attachments, as: :item
   translates :description
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['description'].blank? }
-  accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }
-  accepts_nested_attributes_for :attachments, :reject_if => proc {|x| x['attachedfile'].blank? }
+  accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :attachments, :reject_if => proc {|x| x['attachedfile'].blank? }, :allow_destroy => true
   extend FriendlyId
   friendly_id :name , :use => [ :slugged, :finders ]
   has_paper_trail
