@@ -122,4 +122,42 @@
       .small-12.large-6.columns
         %label= t :why_do_you_want_to_do_this
         = @projectproposal.why
-      
+
+- unless @projectproposal.comments.empty?
+  .row#comments_list
+    .small-12.columns
+      %h1= t :member_discussion_of_proposal
+  - @projectproposal.comments.sort_by(&:created_at).each do |comment|
+    .row.comment
+      .small-3.columns
+        = image_tag comment.user.avatar.url(:thumb)
+        %p
+          %strong= t(:user_says, :user => comment.user.name)
+      .small-9.columns
+        .comment= simple_format(comment.content)
+        - if comment.image?
+          = image_tag comment.image.url
+        - if comment.attachment?
+          .row
+            .small-12.columns
+              %p= link_to t(:download) + ' ' + File.basename(URI.parse(comment.attachment.url).path), comment.attachment.url
+        
+.row
+  .small-12.columns
+    %h1= t :what_do_you_think_about_this
+
+.row#comment_form
+  .small-8.columns
+    .row
+      .small-3.columns
+        = image_tag current_user.avatar.url(:thumb)
+        %p
+          %strong= t(:user_says, :user => current_user.name)
+      .small-9.columns
+        = semantic_form_for [:admin, @projectproposal,  @comment = @projectproposal.comments.build], html: {multipart: true, :"data-abide" => '' } do |f|
+          = f.input :user_id, as: :hidden, value: current_user.id
+          = f.input :content, :label => t(:your_comment),input_html: { :required => ''}
+          = f.input :image, :label => t(:attach_image_to_comment)
+          = f.input :attachment, :label => t(:attach_attachment_to_comment)
+          = f.submit t(:save), :class => [:button, :tiny, :round]
+        

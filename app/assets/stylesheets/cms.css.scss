@@ -232,3 +232,15 @@ table.etherpads {
     }
   }
 }
+
+#comments_list {
+  .comment {
+    padding: 30px 0px;
+    border-bottom: 1px solid $primary-color;
+  }
+}
+#comment_form {
+  #comment_content {
+    height: 120px;
+  }
+}

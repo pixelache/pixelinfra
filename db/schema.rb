@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103164140) do
+ActiveRecord::Schema.define(version: 20141104113101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,26 @@ ActiveRecord::Schema.define(version: 20141103164140) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "comments", force: true do |t|
+    t.integer  "item_id"
+    t.string   "item_type"
+    t.integer  "user_id"
+    t.text     "content"
+    t.string   "image"
+    t.integer  "image_width"
+    t.string   "image_content_type"
+    t.integer  "image_size"
+    t.integer  "image_height"
+    t.string   "attachment"
+    t.integer  "attachment_size"
+    t.string   "attachment_content_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["item_id", "item_type"], name: "index_comments_on_item_id_and_item_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "documenttype_hierarchies", id: false, force: true do |t|
     t.integer "ancestor_id",   null: false
@@ -673,6 +693,7 @@ ActiveRecord::Schema.define(version: 20141103164140) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "username"
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

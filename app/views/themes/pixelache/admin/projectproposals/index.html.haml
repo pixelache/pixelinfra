@@ -3,10 +3,12 @@
     %h2 Pixelache project proposals
 
 .row
+  .small-6.columns= link_to t(:create_new_proposal), new_admin_projectproposal_path, class: [:button, :round]
+.row
   .small-12.columns
     %table
       %thead
-        %th proposal #
+        %th Proposal #
         %th Proposer
         %th Name
         %th Comments

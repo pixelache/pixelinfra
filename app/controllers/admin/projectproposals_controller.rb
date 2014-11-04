@@ -1,5 +1,10 @@
 class Admin::ProjectproposalsController < Admin::BaseController
 
+  def show
+    @projectproposal = Projectproposal.find(params[:id])
+    set_meta_tags :title => @projectproposal.name
+  end
+  
   protected
   
   def permitted_params

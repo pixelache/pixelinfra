@@ -49,7 +49,9 @@ Pixelinfra::Application.routes.draw do
       get :autocomplete_project_name, :on => :collection      
       get :autocomplete_post_title, :on => :collection
     end
-    resources :projectproposals
+    resources :projectproposals do
+      resources :comments
+    end
     resources :projects
     resources :search
     resources :steps do

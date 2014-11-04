@@ -1,14 +1,13 @@
 class User < ActiveRecord::Base
   has_many :authentications
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :rememberable, :trackable, :validatable,
-          :database_authenticatable , :registerable, :recoverable
+          :database_authenticatable, :registerable, :recoverable
   rolify
-  # attr_accessible :role_ids, :as => :admin
-  # attr_accessible :provider, :uid, :name, :email
+
   validates_presence_of :name
   accepts_nested_attributes_for :authentications, :reject_if => proc { |attr| attr['username'].blank? }
+  mount_uploader :avatar, AvatarUploader
   
   def apply_omniauth(omniauth)
     if omniauth['provider'] == 'twitter'
