@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021091531) do
+ActiveRecord::Schema.define(version: 20141103164140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -542,6 +542,36 @@ ActiveRecord::Schema.define(version: 20141021091531) do
 
   add_index "project_translations", ["locale"], name: "index_project_translations_on_locale", using: :btree
   add_index "project_translations", ["project_id"], name: "index_project_translations_on_project_id", using: :btree
+
+  create_table "projectproposals", force: true do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.text     "description"
+    t.text     "long_description"
+    t.integer  "primary_initiator_id"
+    t.string   "cosupporters"
+    t.string   "producer"
+    t.string   "treasurer"
+    t.string   "documentation"
+    t.string   "communication"
+    t.string   "additional_experts"
+    t.string   "reporting"
+    t.string   "imagined_participants"
+    t.string   "equipment"
+    t.string   "budget"
+    t.string   "external_funding"
+    t.string   "inkind"
+    t.string   "people_expertise"
+    t.string   "where"
+    t.string   "when"
+    t.string   "when_will_it_end"
+    t.text     "why"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "projectproposals", ["project_id"], name: "index_projectproposals_on_project_id", using: :btree
 
   create_table "projects", force: true do |t|
     t.string   "name"

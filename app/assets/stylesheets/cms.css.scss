@@ -209,3 +209,26 @@ table.etherpads {
     }
   }
 }
+
+.project_proposal {
+  label {
+    float: left;
+    margin-right: 2rem;
+    width: 25%;
+    text-align: right;
+  }
+  .long_description {
+    float: left;
+    padding: 10px;
+    border: 1px dotted #BBB;
+  }
+  .row::after {
+    margin-bottom: 20px;
+  }
+  ol {
+    li {
+      clear: left;
+      list-style-type: none;
+    }
+  }
+}

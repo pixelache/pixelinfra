@@ -12,6 +12,9 @@ class Ability
       can :manage, Post, :subsite => {:name => 'pixelache' }
       can :manage, Festival, :subsite => {:name => 'pixelache' }
       can :manage, Project
+      can :create, Projectproposal
+      can :read, Projectproposal
+      can :manage, Projectproposal, :primary_initiator_id => current_user.id
       
     elsif user.has_role? :olsof_staff
       can :manage, Event, :subsite => {:name => 'olsof' }

@@ -1,0 +1,125 @@
+.project_proposal
+  .row
+    .small-12.columns
+      %h1= t :pixelache_project_proposal_form
+      %p= t(:proposed_by, :proposer => @projectproposal.primary_initiator.name, :when => l(@projectproposal.updated_at, :format => :long))
+    .row
+      .small-12.columns
+        %h2 What?
+    .row
+      .large-6.small-12.columns
+        %label=t(:name_of_project)
+        = @projectproposal.name
+    .row
+      .large-6.small-12.columns
+        %label= t(:part_of_existing_project)
+        = @projectproposal.project.try(:name)
+    .row
+      .large-6.small-12.columns
+        %label= t :description
+        = @projectproposal.description.html_safe
+    .row
+      .small-8.columns
+        %label= t :long_description
+        .long_description= @projectproposal.long_description.html_safe
+    .row
+      .small-12.columns
+        %h2 Who?
+    .row
+      .large-6.small-12.columns
+        %p= t(:proposed_by, :proposer => @projectproposal.primary_initiator.name, :when => l(@projectproposal.updated_at, :format => :long))
+        %label= t(:cosupporters)
+        = @projectproposal.cosupporters
+    .row
+      .large-6.small-12.columns= t :who_will_be_filling_following_roles
+    %ol
+      .row
+        .large-6.small-12.columns
+          %li
+            %label= t :producer
+            = @projectproposal.producer
+      .row
+        .large-6.small-12.columns
+          %li
+            %label= t :treasurer
+            = @projectproposal.treasurer
+      .row
+        .large-6.small-12.columns
+          %li
+            %label= t :documentation
+            = @projectproposal.documentation
+      .row
+        .large-6.small-12.columns
+          %li
+            %label= t :communication_person
+            = @projectproposal.communication
+      .row
+        .large-6.small-12.columns
+          %li
+            %label= t :reporting_person
+            = @projectproposal.reporting
+    .row
+      .large-6.small-12.columns
+        %label= t :additional_experts
+        = @projectproposal.additional_experts
+    .row
+      .large-6.small-12.columns
+        %label= t :imagined_participants
+        = @projectproposal.imagined_participants
+    .row
+      .small-12.columns
+        %h2 How?
+    .row
+      .large-6.small-12.columns= t :what_resources_you_need
+    %ol
+      .row
+        .large-6.small-12.columns
+          %li
+            %label= t :equipment
+            = @projectproposal.equipment
+      .row
+        .large-6.small-12.columns
+          %li
+            %label= t :budget
+            - if @projectproposal.budget.blank?
+              = t :no_budget_uploaded
+            - else
+              = link_to t(:download), @projectproposal.budget.url
+            %ol
+              %li
+                %label= t :external_funding
+                = @projectproposal.external_funding
+              %li
+                %label= t :inkind
+                = @projectproposal.inkind
+      .row
+        .large-6.small-12.columns
+          %li
+            %label= t :people_expertise
+            = @projectproposal.people_expertise
+    .row
+      .small-12.columns
+        %h2 When?
+    .row
+      .large-6.small-12.columns
+        %label= t :when_will_it_start
+        = @projectproposal.when
+    .row
+      .large-6.small-12.columns
+        %label= t :when_will_it_end
+        = @projectproposal.when_will_it_end
+    .row
+      .small-12.columns
+        %h2 Where?
+    .row
+      .small-12.large-6.columns
+        %label= t :where_will_this_take_place
+        = @projectproposal.where
+    .row
+      .small-12.columns
+        %h2 Why?
+    .row
+      .small-12.large-6.columns
+        %label= t :why_do_you_want_to_do_this
+        = @projectproposal.why
+      

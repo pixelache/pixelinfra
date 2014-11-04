@@ -1,0 +1,88 @@
+.row
+  .small-12.columns
+    %h1= t :pixelache_project_proposal_form
+
+= semantic_form_for [:admin, @projectproposal], :html => {:multipart => true, :"data-abide" => ''} do |f|
+  
+  .row
+    .small-12.columns
+      %h2 What?
+  .row
+    .large-6.small-12.columns= f.input :name, :label => t(:name_of_project), input_html: {:required => ''}
+  .row
+    .large-6.small-12.columns= f.input :project, :label => t(:part_of_existing_project)
+  .row
+    .large-6.small-12.columns= f.input :description, :label => t(:short_project_description), input_html: {:required => ''}
+  .row
+    .small-8.columns= f.input :long_description, input_html: {class: :ckeditor}
+  .row
+    .small-12.columns
+      %h2 Who?
+  .row
+    .large-6.small-12.columns
+      %label.label= t :primary_initiator
+      = current_user.name
+      = f.input :primary_initiator_id, as: :hidden, :value => current_user.id
+  .row
+    .large-6.small-12.columns= f.input :cosupporters, input_html: {:required => ''}
+  .row
+    .large-6.small-12.columns= t :who_will_be_filling_following_roles
+  %ol
+    .row
+      .large-6.small-12.columns
+        %li= f.input :producer
+    .row
+      .large-6.small-12.columns
+        %li= f.input :treasurer
+    .row
+      .large-6.small-12.columns
+        %li= f.input :documentation, :label => t(:documentation_person)
+    .row
+      .large-6.small-12.columns
+        %li= f.input :communication, :label => t( :communication_person)
+    .row
+      .large-6.small-12.columns
+        %li= f.input :reporting, :label => t( :reporting_person)
+  .row
+    .large-6.small-12.columns= t :additional_experts
+  .row
+    .large-6.small-12.columns= t :imagined_participants
+  .row
+    .small-12.columns
+      %h2 How?
+  .row
+    .large-6.small-12.columns= t :what_resources_you_need
+  %ol
+    .row
+      .large-6.small-12.columns
+        %li= f.input :equipment
+    .row
+      .large-6.small-12.columns
+        %li
+          = f.input :budget, :label => :upload_a_budget
+          %ol
+            %li= f.input :external_funding
+            %li= f.input :inkind
+    .row
+      .large-6.small-12.columns
+        %li= f.input :people_expertise
+  .row
+    .small-12.columns
+      %h2 When?
+  .row
+    .large-6.small-12.columns= f.input :when
+  .row
+    .large-6.small-12.columns= f.input :when_will_it_end
+  .row
+    .small-12.columns
+      %h2 Where?
+  .row
+    .small-12.large-6.columns= f.input :where, :label => t(:where_will_this_take_place)
+  .row
+    .small-12.columns
+      %h2 Why?
+  .row
+    .small-12.large-6.columns= f.input :why, :label => t(:why_do_you_want_to_do_this)
+      
+  .row
+    .small-5.columns= f.submit t(:save), class: [:button, :small, :round]

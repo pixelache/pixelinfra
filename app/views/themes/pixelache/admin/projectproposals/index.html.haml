@@ -1,0 +1,27 @@
+.row
+  .small-12.columns
+    %h2 Pixelache project proposals
+
+.row
+  .small-12.columns
+    %table
+      %thead
+        %th proposal #
+        %th Proposer
+        %th Name
+        %th Comments
+        %th &nbsp;
+      %tbody
+        - @projectproposals.each do |prop|
+          %tr
+            %td= prop.id.to_s
+            %td= prop.primary_initiator.name
+            %td= prop.name
+            %td
+            %td
+              = link_to t(:view), [:admin, prop], class: [:button, :round, :tiny]
+              - if can? :edit, prop
+                = link_to t(:edit), edit_admin_projectproposal_path(prop), class: [:button, :round, :tiny]
+              - if can? :destroy, prop
+                = link_to t(:destroy), [:admin, prop], :method => :delete, class: [:button, :alert, :round, :tiny], :data => { :confirm =>  t(:are_you_sure) }
+        
