@@ -18,10 +18,12 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
-      redirect_to @user
-    else
-      render :edit
+    if current_user == @user || current_user.has_role?(:goddess)
+      if @user.update_attributes(params[:user])
+        redirect_to @user
+      else
+        render :edit
+      end
     end
   end
 
@@ -33,7 +35,7 @@ class UsersController < ApplicationController
   protected
   
   def permitted_params
-    params.require(:user).permit(authentications_attributes: [:id, :provider, :username ] )
+    params.require(:user).permit(:avatar, authentications_attributes: [:id, :provider, :username ] )
   end
 
 end

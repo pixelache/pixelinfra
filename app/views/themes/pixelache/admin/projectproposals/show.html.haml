@@ -151,6 +151,8 @@
     .row
       .small-3.columns
         = image_tag current_user.avatar.url(:thumb)
+        
+        %p= link_to t(:edit_profile), edit_admin_user_path(current_user), class: [:button, :tiny, :secondary, :round]
         %p
           %strong= t(:user_says, :user => current_user.name)
       .small-9.columns

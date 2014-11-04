@@ -11,6 +11,6 @@ class Admin::UsersController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:user => [ role_ids: []  ])
+    params.permit(:user => [:avatar, role_ids: []  ])
   end
 end

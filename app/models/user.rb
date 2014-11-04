@@ -4,7 +4,9 @@ class User < ActiveRecord::Base
   devise :rememberable, :trackable, :validatable,
           :database_authenticatable, :registerable, :recoverable
   rolify
-
+  extend FriendlyId
+  friendly_id :name, :use => [:slugged, :finders]
+  
   validates_presence_of :name
   accepts_nested_attributes_for :authentications, :reject_if => proc { |attr| attr['username'].blank? }
   mount_uploader :avatar, AvatarUploader

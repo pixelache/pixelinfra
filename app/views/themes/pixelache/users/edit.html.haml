@@ -10,5 +10,8 @@
       .small-6.columns= ff.input :provider, :as => :select, :collection => [ ['Facebook', 'facebook'], ['Google', 'google_oauth2'], ['Twitter', 'twitter']]
     .row
       .small-6.columns= ff.input :username
-  = f.link_to_add 'Add another authentication method', :authentications
-  = f.submit "Save", :class => [:button]
+  = f.link_to_add 'Add another authentication method', :authentications, class: [:button, :tiny, :round, :secondary]
+  
+  = f.input :avatar
+  
+  = f.submit "Save", :class => [:button, :round, :small]
