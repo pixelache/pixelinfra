@@ -40,7 +40,7 @@
             - if can? :manage, Step
               %li= link_to 'OLSOF Steps', admin_steps_path
             - if can? :manage, Documenttype
-              %li= link_to 'Document types', admin_documenttypes_path              
+              %li= link_to 'Document types', admin_documenttypes_path
       %ul.left
         %li.has-dropdown
           %li.has-dropdown
@@ -49,13 +49,15 @@
               - if can? :manage, Event
                 %li= link_to 'Events', admin_events_path
               - if can? :manage, Project
-                %li= link_to 'Projects', admin_projects_path            
+                %li= link_to 'Projects', admin_projects_path
+              - if can? :read, Projectproposal
+                %li= link_to 'Project proposals', admin_projectproposals_path
               - if can? :manage, Place
                 %li= link_to 'Places', admin_places_path
               - if can? :manage, Festival
                 %li= link_to "Festivals", admin_festivals_path
               - if can? :manage, Attendee
-                %li= link_to 'Event registrsations', admin_attendees_path
+                %li= link_to 'Event registrations', admin_attendees_path
       %ul.left
         %li.has-dropdown
           %a{:href => '#'} Posts / pages
