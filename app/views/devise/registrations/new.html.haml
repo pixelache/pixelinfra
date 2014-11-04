@@ -1,20 +1,42 @@
-= semantic_nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "custom"} ) do |f|
-  = devise_error_messages!
-  .row
-    .large-6.columns= f.input :email
-  .row
-    .large-6.columns= f.input :name, :label => 'Your real/full name'
-  .row
-    .large-6.columns= f.input :username, :label => "Username/nickname"
-  %p You can add your Facebook and Twitter usernames here to allow sign-in with those services too.
-  = f.fields_for :authentications do |ff|
-    .fieldset
-      
+.row.page_container
+  .small-9.columns.small-offset-1
+    %h2= t :new_user_account
+    %p= t :new_user_account_blurb
+  
+    = semantic_nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "custom", :"data-abide" => ''} ) do |f|
+      = devise_error_messages!
       .row
-        .small-4.columns
-          = ff.input :provider, :as => :select, :collection => [ ['Facebook', 'facebook'], ['Google', 'google_oauth2'], ['Twitter', 'twitter']]
-          = ff.input :username
-    :javascript
-      $(document).foundation();
-  = f.link_to_add 'Add another authentication method', :authentications
-  = f.submit
+        .small-6.columns
+          .row
+            .small-12.columns= f.input :email, input_html: {:required => ''}
+          .row
+            .small-12.columns= f.input :name, :label => 'Your real/full name', input_html: {:required => ''}
+          .row
+            .small-12.columns= f.input :username, :label => "Username/nickname", input_html: {:required => ''}
+        .small-6.columns
+          .row
+            .small-12.columns
+              %label(for='user_password')= t :password
+              = f.password_field :password, autocomplete: "off", required: ''
+          .row
+            .small-12.columns
+              %label(for='user_password_confirmation')= t :password_confirmation
+              = f.password_field :password_confirmation, autocomplete: "off", required: '', :"data-equalto" => "password"
+          .row
+            .small-12.columns
+              %label= t :please_verify_your_humanity
+              = recaptcha_tags
+            
+      %medium You can add your Facebook, Google and Twitter usernames here to allow sign-in with those services too, linked to this account.
+      = f.fields_for :authentications do |ff|
+        .fieldset
+      
+          .row
+            .small-4.columns
+              = ff.input :provider, :as => :select, :collection => [ ['Facebook', 'facebook'], ['Google', 'google_oauth2'], ['Twitter', 'twitter']]
+              = ff.input :username
+        :javascript
+          $(document).foundation();
+      = f.link_to_add 'Add external authentication method', :authentications, class: [:button, :tiny, :round, :secondary]
+      %br(clear='all')
+      = f.submit t(:create_account),  class: [:button, :small, :round]

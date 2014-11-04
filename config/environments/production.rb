@@ -82,7 +82,7 @@ Pixelinfra::Application.configure do
     password: ENV["GMAIL_PASSWORD"]
   }
 
-
+  config.action_mailer.default_url_options = { :host => 'new.pixelache.ac' }
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
 

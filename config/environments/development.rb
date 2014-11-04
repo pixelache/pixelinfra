@@ -27,6 +27,7 @@ Pixelinfra::Application.configure do
   # number of complex assets.
   config.assets.debug = true
   # config.middleware.use "CustomDomainCookie", ".lvh.me"
+  config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,
@@ -38,7 +39,7 @@ Pixelinfra::Application.configure do
   }
   # Send email in development mode.
   config.action_mailer.perform_deliveries = true
-
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
 
 module ActionView

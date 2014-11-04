@@ -5,19 +5,32 @@
     
   = semantic_form_for(resource, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f|
     .row
-      .small-4.columns.text-center.option
+      .small-3.columns.text-center.option
         = link_to(Rails.env.production? ? 'http://auth.pixelache.ac/auth/facebook' : '/auth/facebook') do
           = image_tag(theme_image_path('facebook_icon.png'))
           %p= t(:connect_via_facebook)
-      .small-4.columns.text-center.option
+      .small-3.columns.text-center.option
         = link_to 'http://auth.pixelache.ac/auth/google_oauth2' do
           = image_tag(theme_image_path('google_icon.png'))
           %p= t(:connect_via_google)
-      .small-4.columns.text-center.option
+      .small-3.columns.text-center.option
         = link_to 'http://auth.pixelache.ac/auth/twitter' do
           = image_tag(theme_image_path('twitter_icon.png'))
           %p= t(:connect_via_twitter)
-
+      .small-3.columns.text-center.option
+        = link_to "#", :onclick => "javascript:$('#local_signin_form').slideToggle();return false" do
+          = image_tag(theme_image_path('pixel_inverted.png'))
+          %p= t(:sign_in_with_none)
+        #local_signin_form  
+          = semantic_form_for(resource, :url => session_path(resource_name), :html => {:class => 'form-vertical'}) do |f|
+            = f.input :email, :label => t(:your_email)
+            %label.label= t :signin_password
+            = f.password_field :password, autocomplete: "off" 
+            - if devise_mapping.rememberable?
+              .field
+                = f.check_box :remember_me 
+                = f.label :remember_me
+            = f.submit t(:sign_in), :class => [:button, :radius]
   .row
     .small-8.small-centered.columns
       .row

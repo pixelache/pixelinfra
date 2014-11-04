@@ -36,62 +36,70 @@
           %ul.dropdown
             %li= link_to 'Edit your profile', edit_user_registration_path(current_user)
             %li= link_to 'Sign out', '/signout'
-      %ul.left
-        %li.has-dropdown
-          %a{:href => '#'} Site configuration            
-          %ul.dropdown
-            - if can? :manage, Subsite
-              %li= link_to 'Site/sub-sites', admin_subsites_path
-            - if can? :manage, User
-              %li= link_to 'Users', admin_users_path
-            - if can? :manage, Node
-              %li= link_to "Nodes", admin_nodes_path 
-            - if can? :manage, Dynamictagline
-              %li= link_to 'Dynamic tagline', admin_dynamictaglines_path
-            - if can? :manage, Step
-              %li= link_to 'OLSOF Steps', admin_steps_path
-            - if can? :manage, Documenttype
-              %li= link_to 'Document types', admin_documenttypes_path              
-      %ul.left
-        %li.has-dropdown
+      - unless current_user.roles.empty?
+
+        %ul.left
           %li.has-dropdown
-            %a{:href => '#'} Events / activities
+            %a{:href => '#'} Site configuration            
             %ul.dropdown
-              - if can? :manage, Event
-                %li= link_to 'Events', admin_events_path
-              - if can? :manage, Project
-                %li= link_to 'Projects', admin_projects_path            
-              - if can? :manage, Place
-                %li= link_to 'Places', admin_places_path
-              - if can? :manage, Festival
-                %li= link_to "Festivals", admin_festivals_path
-              - if can? :manage, Attendee
-                %li= link_to 'Event registrsations', admin_attendees_path
-      %ul.left
-        %li.has-dropdown
-          %a{:href => '#'} Posts / pages
-          %ul.dropdown
-            - if can? :manage, Post
-              %li= link_to 'Posts', admin_posts_path
-            - if can? :manage, Page
-              %li= link_to 'Pages', admin_pages_path  
-            - if can? :manage, Frontitem
-              %li= link_to 'Frontpage design', admin_frontitems_path
-      %ul.left
-        %li.has-dropdown
-          %a{:href => '#'} Archival
-          %ul.dropdown
-            - if can? :manage, Archivalimage
-              %li= link_to 'Archival images', admin_archivalimages_path
-            - if can? :manage, Etherpad
-              %li= link_to 'Etherpads', admin_etherpads_path
-            - if can? :manage, Flickrset
-              %li= link_to 'Flickr archive', admin_flickrsets_path
+              - if can? :manage, Subsite
+                %li= link_to 'Site/sub-sites', admin_subsites_path
+              - if can? :manage, User
+                %li= link_to 'Users', admin_users_path
+              - if can? :manage, Node
+                %li= link_to "Nodes", admin_nodes_path 
+              - if can? :manage, Dynamictagline
+                %li= link_to 'Dynamic tagline', admin_dynamictaglines_path
+              - if can? :manage, Step
+                %li= link_to 'OLSOF Steps', admin_steps_path
+              - if can? :manage, Documenttype
+                %li= link_to 'Document types', admin_documenttypes_path              
+        %ul.left
+          %li.has-dropdown
+            %li.has-dropdown
+              %a{:href => '#'} Events / activities
+              %ul.dropdown
+                - if can? :manage, Event
+                  %li= link_to 'Events', admin_events_path
+                - if can? :manage, Project
+                  %li= link_to 'Projects', admin_projects_path
+                - if can? :read, Projectproposal
+                  %li= link_to 'Project proposals', admin_projectproposals_path                  
+                - if can? :manage, Place
+                  %li= link_to 'Places', admin_places_path
+                - if can? :manage, Festival
+                  %li= link_to "Festivals", admin_festivals_path
+                - if can? :manage, Attendee
+                  %li= link_to 'Event registrsations', admin_attendees_path
+        %ul.left
+          %li.has-dropdown
+            %a{:href => '#'} Posts / pages
+            %ul.dropdown
+              - if can? :manage, Post
+                %li= link_to 'Posts', admin_posts_path
+              - if can? :manage, Page
+                %li= link_to 'Pages', admin_pages_path  
+              - if can? :manage, Frontitem
+                %li= link_to 'Frontpage design', admin_frontitems_path
+        %ul.left
+          %li.has-dropdown
+            %a{:href => '#'} Archival
+            %ul.dropdown
+              - if can? :manage, Archivalimage
+                %li= link_to 'Archival images', admin_archivalimages_path
+              - if can? :manage, Etherpad
+                %li= link_to 'Etherpads', admin_etherpads_path
+              - if can? :manage, Flickrset
+                %li= link_to 'Flickr archive', admin_flickrsets_path
+      - if current_user.roles.empty?
+        %ul.left
+          %li.tagline#dynamic_tagline
+            = link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
     - else
       %ul.left
         %li.tagline#dynamic_tagline
           = link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
-
+          
     .lang
       
       = link_to_unless(session[:locale] == :en, 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 

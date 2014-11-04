@@ -271,3 +271,34 @@
 
   }
 }
+
+#new_user {
+  label.label {
+      background: none;
+      color: #888;
+      font-size: 1.2rem;
+      abbr {
+        display: none;
+      }
+      &.error {
+      color: #f04124;
+      }
+    }
+  
+  li {
+    list-style-type: none;
+  }
+}
+
+#recaptcha_area input[type="text"] {
+  display: inline-block;
+  height: auto;
+}
+
+#recaptcha_area { 
+  margin: 20px 0px;
+}
+
+#local_signin_form {
+  display: none;
+}

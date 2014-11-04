@@ -3,11 +3,16 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     @user = User.new(devise_parameter_sanitizer.sanitize(:sign_up))
     @user.password = SecureRandom.hex(32) if @user.password.blank?
-    if @user.save
+    if verify_recaptcha && @user.save
       flash[:notice] = 'User information saved. Welcome.'
       sign_in_and_redirect(:user, @user)
     else
-      flash[:error] = 'Error saving user: ' + @user.errors.inspect
+
+      unless flash[:recaptcha_error].blank?
+        flash.delete(:recaptcha_error)
+        flash[:error] = [t(:incorrect_captcha), resource.errors.full_messages].compact.join('; ')
+      end
+      render :action => 'new'
     end
 
   end
