@@ -19,8 +19,9 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if current_user == @user || current_user.has_role?(:goddess)
-      if @user.update_attributes(params[:user])
-        redirect_to @user
+      if @user.update_attributes(permitted_params)
+        flash[:notice] = 'Profile updated'
+        redirect_to '/'
       else
         render :edit
       end

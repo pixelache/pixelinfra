@@ -19,6 +19,7 @@ class Ability
       can :manage, Etherpad
       can :manage, Archivalimage
       can :manage, Flickrset
+      can :manage, user
     elsif user.has_role? :olsof_staff
       can :manage, Event, :subsite => {:name => 'olsof' }
       can :manage, Page, :subsite => {:name => 'olsof' }
