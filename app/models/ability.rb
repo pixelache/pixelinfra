@@ -14,8 +14,11 @@ class Ability
       can :manage, Project
       can :create, Projectproposal
       can :read, Projectproposal
-      can :manage, Projectproposal, :primary_initiator_id => current_user.id
-      
+      can :manage, Projectproposal, :primary_initiator_id => user.id
+      can :manage, Dynamictagline
+      can :manage, Etherpad
+      can :manage, Archivalimage
+      can :manage, Flickrset
     elsif user.has_role? :olsof_staff
       can :manage, Event, :subsite => {:name => 'olsof' }
       can :manage, Page, :subsite => {:name => 'olsof' }
