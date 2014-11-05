@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   accepts_nested_attributes_for :authentications, :reject_if => proc { |attr| attr['username'].blank? }
   mount_uploader :avatar, AvatarUploader
+
+  after_create :send_new_user_email_to_nathalie_and_john
   
   def apply_omniauth(omniauth)
     if omniauth['provider'] == 'twitter'
@@ -37,5 +39,10 @@ class User < ActiveRecord::Base
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'], :username => identifier)
   end
 
-
+  private
+  
+  def send_new_user_email_to_nathalie_and_john
+    UserMailer.new_user(self).deliver
+  end
+  
 end
