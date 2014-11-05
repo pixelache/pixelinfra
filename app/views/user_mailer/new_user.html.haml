@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %meta{:content => 'text/html; charset=UTF-8', :"http-equiv" => 'Content-Type'}
+  %body
+    %h1 New user notification
+    
+    %p
+      = @user.name
+      has registered for an account on the new Pixelache site.
+      
+    %p 
+      If this person should be a member or admin, please 
+      = link_to 'grant them the access they deserve', edit_admin_user_path(@user, :only_path => false)
+      and have a lovely, magical, extra-special day.
+      
+    %p
+      Sincerely,
+      
+    %p &nbsp;
+    %p Pixelache Bot
+    
