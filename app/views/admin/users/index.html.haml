@@ -22,6 +22,6 @@
               = render user
             %td
               - if can? :edit, user
-                = link_to t(:edit), edit_admin_user_path(user), class: [:button, :round, :small]
+                = link_to t(:edit), edit_admin_user_path(user), class: [:button, :round, :tiny]
               - if can? :delete, user
                 = link_to("Delete user", admin_user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button alert tiny round') unless user == current_user
