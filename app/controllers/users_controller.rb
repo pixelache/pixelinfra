@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   protected
   
   def permitted_params
-    params.require(:user).permit(:avatar, authentications_attributes: [:id, :provider, :username ] )
+    params.require(:user).permit(:avatar, :username, authentications_attributes: [:id, :provider, :username ] )
   end
 
 end

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   friendly_id :name, :use => [:slugged, :finders]
   
   validates_presence_of :name
+  validates_uniqueness_of :username
   accepts_nested_attributes_for :authentications, :reject_if => proc { |attr| attr['username'].blank? }
   mount_uploader :avatar, AvatarUploader
 

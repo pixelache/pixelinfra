@@ -1,5 +1,5 @@
 .row
-  .small-10.columns
+  .small-12.columns
     %h3 Users
     %table.table.table-condensed
       %thead
@@ -18,6 +18,10 @@
             %td= user.created_at.to_date
             %td= user.roles.map{|x| x.name.titleize}.join(', ') unless user.roles.empty?
             %td
-              %a.btn.btn-mini{"data-toggle" => "modal", "data-reveal-id" => "role-options-#{user.id}", :type => "button"} Details / edit
+              %a.button.round.tiny{"data-toggle" => "modal", "data-reveal-id" => "role-options-#{user.id}", :type => "button"} Change role
               = render user
-            %td= link_to("Delete user", admin_user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user
+            %td
+              - if can? :edit, user
+                = link_to t(:edit), edit_admin_user_path(user), class: [:button, :round, :small]
+              - if can? :delete, user
+                = link_to("Delete user", admin_user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button alert tiny round') unless user == current_user
