@@ -263,6 +263,7 @@ en:
   proposed_by: "Proposed by %{proposer} on %{when}"
   posted_by: "Posted by %{poster} on %{when}"
   created_on: 'Created on %{when}'
+  create_new_proposal: 'Create new proposal'
   activities: 'Activities'
   collaborators: 'Collaborators'
   network: 'Network'

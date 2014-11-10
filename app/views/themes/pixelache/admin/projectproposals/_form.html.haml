@@ -46,9 +46,9 @@
       .large-6.small-12.columns
         %li= f.input :reporting, :label => t( :reporting_person)
   .row
-    .large-6.small-12.columns= t :additional_experts
+    .large-6.small-12.columns= f.input :additional_experts, label: t(:additional_experts)
   .row
-    .large-6.small-12.columns= t :imagined_participants
+    .large-6.small-12.columns= f.input :imagined_participants, label: t(:imagined_participants)
   .row
     .small-12.columns
       %h2 How?
