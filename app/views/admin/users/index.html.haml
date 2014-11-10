@@ -4,16 +4,19 @@
     %table.table.table-condensed
       %thead
         %tr
-          %th Username
-          %th Email
-          %th Registered
+          %th= sortable_column "Username"
+          %th= sortable_column "Email"
+          %th= sortable_column "Registered"
           %th Role
           %th
           %th
       %tbody
         - @users.each do |user|
           %tr
-            %td= link_to user.name, [:admin,  user]
+            %td
+              = link_to user.name, [:admin,  user]
+              %br/
+              %em= user.username
             %td= user.email
             %td= user.created_at.to_date
             %td= user.roles.map{|x| x.name.titleize}.join(', ') unless user.roles.empty?

@@ -14,7 +14,9 @@
   .row
     .large-6.small-12.columns= f.input :description, :label => t(:short_project_description), input_html: {:required => ''}
   .row
-    .small-8.columns= f.input :long_description, input_html: {class: :ckeditor}
+    .small-12.columns
+      %label= t :long_description
+      = f.input :long_description, label: false, input_html: {class: :ckeditor}
   .row
     .small-12.columns
       %h2 Who?
@@ -61,18 +63,18 @@
         %li
           = f.input :budget, :label => :upload_a_budget
           %ol
-            %li= f.input :external_funding
-            %li= f.input :inkind
+            %li= f.input :external_funding, label: t(:external_funding)
+            %li= f.input :inkind, label: t(:inkind)
     .row
       .large-6.small-12.columns
-        %li= f.input :people_expertise
+        %li= f.input :people_expertise, label: t(:people_expertise)
   .row
     .small-12.columns
       %h2 When?
   .row
-    .large-6.small-12.columns= f.input :when
+    .large-6.small-12.columns= f.input :when, label: t(:when_will_it_happen)
   .row
-    .large-6.small-12.columns= f.input :when_will_it_end
+    .large-6.small-12.columns= f.input :when_will_it_end, label: t(:when_will_it_end)
   .row
     .small-12.columns
       %h2 Where?
