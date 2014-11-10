@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %meta{:content => 'text/html; charset=UTF-8', :"http-equiv" => 'Content-Type'}
+  %body
+    %h1 New Pixelache project proposal
+    
+    %p Hei member!
+    %p
+      = @projectproposal.primary_initiator.name
+      has created a new proposal for Pixelache, called
+      = @projectproposal.name + "."
+    
+    - if @projectproposal.project
+      %p
+        This project is submitted, intended to be part of the
+        = @projectproposal.project.name
+        project.
+        
+    %p
+      Please have a look at it via the 
+      = link_to 'website', admin_projectproposal_path(@projectproposal, :only_path => false)
+      and offer your comments before the next members meeting.
+      
+    %p
+      Sincerely,
+      
+    %p &nbsp;
+    %p Pixelache Bot
+    

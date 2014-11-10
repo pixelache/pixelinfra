@@ -7,4 +7,12 @@ class Projectproposal < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => [:slugged, :finders]
   validates_presence_of :name, :primary_initiator_id, :description
+  after_create :notify_members
+  
+  private
+  
+  def notify_members
+    ProjectproposalMailer.new_proposal(self).deliver rescue nil
+  end
+  
 end
