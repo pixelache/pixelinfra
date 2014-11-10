@@ -2,18 +2,19 @@
   %td= place.name
   %td= place.address
   %td.actions
-    %a.btn.btn-mini{"data-toggle" => "modal", "data-reveal-id" => "place-options-#{place.id}", :type => "button"} Edit
-    .reveal-modal{:id => "place-options-#{place.id}", "data-reveal" => ""}
+    - if can? :edit, place
+      %a.button.round.tiny{"data-toggle" => "modal", "data-reveal-id" => "place-options-#{place.id}", :type => "button"} Edit
+      .reveal-modal{:id => "place-options-#{place.id}", "data-reveal" => ""}
 
-      .modal-header
-        %a.close{"data-dismiss" => "modal" , :class => "close-reveal-modal"} &#215;
-        %h3 Change address
-      .modal-body
-        = render :partial => 'form', :locals => {:place => place}
+        .modal-header
+          %a.close{"data-dismiss" => "modal" , :class => "close-reveal-modal"} &#215;
+          %h3 Change address
+        .modal-body
+          = render :partial => 'form', :locals => {:place => place}
 
-      .modal-footer
-        %a.btn{"data-dismiss" => "modal", :href => "#"} &#215;
-    |
-    = link_to 'Destroy', [:admin, place], :method => :delete, :data => {:confirm => 'Are you sure you want to delete this place?'}
+        .modal-footer
+          %a.btn{"data-dismiss" => "modal", :href => "#"} &#215;
+    - if can? :destroy, place
+      = link_to 'Destroy', [:admin, place], :method => :delete,  class: [:button, :round, :alert, :tiny],  :data => {:confirm => 'Are you sure you want to delete this place?'}
 
     

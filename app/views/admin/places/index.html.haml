@@ -1,14 +1,14 @@
 .row
   .small-10.columns
     %h2 Places
-    %p= link_to 'Enter new place', new_admin_place_path    
+    %p= link_to 'Enter new place', new_admin_place_path , class: [:button, :round, :small]  
     %table.table.table-condensed
       %thead
         %tr
-          %th Name
-          %th Address
+          %th= sortable_column "Name"
+          %th= sortable_column "Address"
           %th{:colspan => 2}
       %tbody
         - @places.each do |place|
           = render :partial => 'place', :locals => {:place => place}
-    %p= link_to 'Enter new place', new_admin_place_path
+    %p= link_to 'Enter new place', new_admin_place_path , class: [:button, :round, :small]  
