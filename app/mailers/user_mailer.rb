@@ -1,10 +1,11 @@
 class UserMailer < ActionMailer::Base
-  default from: "pixelache@gmail.com"
+  default from: "no-reply@pixelache.ac"
   
   def new_user(user)
     @user = user
-    mail(to: 'nathalie@pixelache.ac',  subject: "New user: #{@user.name}") 
-    mail(to: 'john@pixelache.ac',  subject: "New user: #{@user.name}") 
+    ['nathalie@pixelache.ac', 'john@pixelache.ac'].each do |recipient|
+      mail(to: recipient,  subject: "New user: #{@user.name}") 
+    end
   end
 
 
