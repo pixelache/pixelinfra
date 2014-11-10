@@ -4,7 +4,7 @@
     .small-12.columns= f.semantic_errors :base
   .row
     %label Which site:
-    .small-6.columns= f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
+    .small-6.columns= f.input :subsite,  :as => :select , :collection => Subsite.accessible_by(current_ability),  :include_blank => false
   .row
     .small-6.columns
       - if f.object.wordpress_scope
