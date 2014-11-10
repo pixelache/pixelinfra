@@ -253,6 +253,10 @@ en:
   partners: 'Partners'
   post: 'Post'
   project_proposals: 'Project proposals'
+  new_post: 'New post'
+  posts: 'Posts'
+  edit_post: 'Edit post'
+  edit_event: 'Edit event'
   people: 'People'
   proposed_by: "Proposed by %{proposer} on %{when}"
   posted_by: "Posted by %{poster} on %{when}"

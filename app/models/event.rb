@@ -52,6 +52,9 @@ class Event < ActiveRecord::Base
         feeds.map(&:destroy)
       end
     end
+    if hide_from_feed == "1"
+      feeds.map(&:destroy)
+    end
   end
   
   def name_en

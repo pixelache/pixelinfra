@@ -1,6 +1,9 @@
 .event_single.row.outer
   .internal.columns.small-8.columns.small-centered
-    .title= @event.name
+    .title
+      = @event.name
+      - if can? :edit , @event
+        = link_to t(:edit_event), edit_admin_event_path(@event), class: [:tiny, :button, :secondary]
     .metadata= date_range(@event.start_at, @event.end_at, :format => :long)
     .metadata
       = @event.place.try(:name)

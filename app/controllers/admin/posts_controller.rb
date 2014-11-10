@@ -37,6 +37,7 @@ class Admin::PostsController < ApplicationController
   
   def edit
     @post = Subsite.find(params[:subsite_id]).posts.find(params[:id])
+    set_meta_tags :title => t(:edit_post)
   end
   
   def index
@@ -54,7 +55,13 @@ class Admin::PostsController < ApplicationController
         "published_at DESC"
       end
     end
+    set_meta_tags :title => t(:posts)
     @posts = apply_scopes(Post).includes(:subsite).order(order).page(params[:page]).per(20)
+  end
+  
+  def new
+    set_meta_tags :title => t(:new_post)
+    super
   end
   
   def options

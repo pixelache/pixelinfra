@@ -12,6 +12,7 @@
               - unless @stream.first.item.place.latitude.blank?
                 = link_to t(:map), "http://maps.google.com/?q=#{@stream.first.item.place.latitude},#{@stream.first.item.place.longitude}", :target => :_blank
         .body= truncate_html(@stream.first.item.body, :length => 600)
+        -# = raw image_tag(@stream.first.item.image.url(:box)).gsub('production', 'development')
         .read_more= link_to 'Read More', @stream.first.item
   
       .smaller_posts.row
@@ -27,5 +28,6 @@
                   - unless post.place.latitude.blank?
                     = link_to t(:map), "http://maps.google.com/?q=#{post.place.latitude},#{post.place.longitude}", :target => :_blank                
             .body= truncate_html post.body, :length => 300
+            -# = image_tag post.image.url(:standard)
             .read_more= link_to 'Read More', post
             
