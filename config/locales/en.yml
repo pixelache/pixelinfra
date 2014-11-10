@@ -252,8 +252,11 @@ en:
   all_activity: 'All activity'
   partners: 'Partners'
   post: 'Post'
+  project_proposals: 'Project proposals'
   people: 'People'
   proposed_by: "Proposed by %{proposer} on %{when}"
+  posted_by: "Posted by %{poster} on %{when}"
+  created_on: 'Created on %{when}'
   activities: 'Activities'
   collaborators: 'Collaborators'
   network: 'Network'

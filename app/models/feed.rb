@@ -7,4 +7,8 @@ class Feed < ActiveRecord::Base
   scope :created, -> { where(action: 'created')} 
   validates_presence_of :item
   
+  def title
+    item.name
+  end
+  
 end

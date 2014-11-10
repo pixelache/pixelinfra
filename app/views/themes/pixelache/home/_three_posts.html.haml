@@ -2,20 +2,20 @@
   .row
     .small-10.columns.large-offset-1 
       .top_post
-        .title= link_to @stream.first.title, @stream.first
+        .title= link_to @stream.first.item.title, @stream.first.item
         .metadata
-          = date_range(@stream.first.stream_date, @stream.first.endstream_date)
-          - if @stream.first.class == Event
-            = ", " +  @stream.first.place.name
+          = date_range(@stream.first.item.stream_date, @stream.first.item.endstream_date)
+          - if @stream.first.item.class == Event
+            = ", " +  @stream.first.item.place.name
             %p.place_address
-              = @stream.first.place.address
-              - unless @stream.first.place.latitude.blank?
-                = link_to t(:map), "http://maps.google.com/?q=#{@stream.first.place.latitude},#{@stream.first.place.longitude}", :target => :_blank
-        .body= truncate_html(@stream.first.body, :length => 600)
-        .read_more= link_to 'Read More', @stream.first
+              = @stream.first.item.place.address
+              - unless @stream.first.item.place.latitude.blank?
+                = link_to t(:map), "http://maps.google.com/?q=#{@stream.first.item.place.latitude},#{@stream.first.item.place.longitude}", :target => :_blank
+        .body= truncate_html(@stream.first.item.body, :length => 600)
+        .read_more= link_to 'Read More', @stream.first.item
   
       .smaller_posts.row
-        - @stream[1..2].each do |post|
+        - @stream.map(&:item)[1..2].each do |post|
           .post.small-6.columns
             .title= link_to post.title, post
             .metadata

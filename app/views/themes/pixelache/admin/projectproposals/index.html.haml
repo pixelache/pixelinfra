@@ -8,18 +8,29 @@
   .small-12.columns
     %table
       %thead
-        %th Proposal #
-        %th Proposer
-        %th Name
-        %th Comments
+        %th= sortable_column "Proposal #", :column => :id
+        %th= sortable_column "Proposer", :column => :user
+        %th= sortable_column "Name"
+        %th= sortable_column "Comments"
         %th &nbsp;
       %tbody
         - @projectproposals.each do |prop|
           %tr
             %td= prop.id.to_s
-            %td= prop.primary_initiator.name
-            %td= prop.name
             %td
+              = prop.primary_initiator.name
+              %p
+                %small= t(:created_on, :when => l(prop.created_at, format: :short))
+            %td
+              = prop.name
+              - if prop.project
+                %p
+                  %small= prop.project.name
+            %td
+              = prop.comments.size.to_s
+              - unless prop.comments.empty?
+                %p
+                  %small= t(:posted_by, :poster => prop.comments.order(:created_at).last.user.name, :when => l( prop.comments.order(:created_at).last.created_at, format: :short))
             %td
               = link_to t(:view), [:admin, prop], class: [:button, :round, :tiny]
               - if can? :edit, prop

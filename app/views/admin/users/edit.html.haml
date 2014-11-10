@@ -20,4 +20,5 @@
       = image_tag f.object.avatar.url(:thumb)
       %p= f.input :avatar
   
-  = f.submit "Save", :class => [:button, :round, :small]
+  .row
+    .small-8.columns= f.submit "Save", :class => [:button, :round, :small]
