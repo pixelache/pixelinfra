@@ -311,6 +311,8 @@ en:
   inkind: 'In-kind funding?'
   people_expertise: 'People/expertise?'
   places: 'Places'
+  events_and_activities: 'Events and Activities'
+  archive: 'Archive'
   your_comment: 'Your comment:'
   user_says: '%{user} says....'
   member_discussion_of_proposal: 'Member discussion of the proposal:'

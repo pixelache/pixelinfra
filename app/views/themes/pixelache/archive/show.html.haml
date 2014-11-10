@@ -1,0 +1,39 @@
+.yearly_archive{:style => @festival.blank? ? false : "background-color: ##{@festival.background_colour}; color: ##{@festival.primary_colour};"}
+  %style{type: 'text/css'}
+    = "h2 a { color: ##{@festival.primary_colour}; }"
+    
+  
+  .row
+    .small-12.columns.text-center
+      .big_year= @year
+  .row
+    .small-4.columns
+      - unless @festival.blank?
+        %h2= link_to @festival.name, @festival
+        .tagline= @festival.subtitle
+        = image_tag @festival.image.url(:standard) if @festival.image?
+
+        - @festival.events.each do |event|
+          .row
+            .small-12.columns
+              = image_tag event.image.url(:box) if event.image?
+        
+
+    .small-4.columns
+      - unless @events.empty?
+        %h2= t(:events)
+        - @events.sort_by{|x| x.start_at }.reverse.each do |event|
+          = link_to event do
+            .row.event
+              .small-12.columns
+                = image_tag event.image.url(:box) if event.image?
+    .small-4.columns
+      - unless @posts.empty?
+        %h2= t :posts
+        - @posts.sort_by(&:published_at).reverse.in_groups_of(4).each do |post_group|
+          .row
+            - post_group.each do |post|
+              - next if post.nil?
+              .small-3.columns
+                = link_to post do
+                  = image_tag post.image.url(:logo) if post.image?

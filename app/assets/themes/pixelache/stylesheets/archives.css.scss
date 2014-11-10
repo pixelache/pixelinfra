@@ -1,0 +1,18 @@
+@import 'variables';
+
+.yearly_archive {
+  .big_year {
+    font-size: 5rem;
+    font-family: $quicksand;
+    margin: 3rem 0px;
+  }
+
+  
+  .tagline {
+    font-family: $quicksand;
+    font-size: 1.6rem;
+  }
+  .event {
+    margin-bottom: 1.5rem;
+  }
+}

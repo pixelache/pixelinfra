@@ -11,13 +11,18 @@ nav.top-bar {
   }
 
   ul.right {
+
     li {
       font-family: Open Sans;
       font-weight: 800;
-      text-transform: uppercase;
       font-size: 16px;
       a {
+        text-transform: uppercase;
         color: #fff100;
+        background: #000 !important;
+      }
+      &.active {
+        background: none;
       }
     }
   }

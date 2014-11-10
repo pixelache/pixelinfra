@@ -84,7 +84,7 @@
                 .heading.text-center= t(:archive)
                 .row
                   - (Time.now.year - 1).downto(2002).each do |year|
-                    .small-6.columns= link_to year.to_s, '#'
+                    .small-6.columns= link_to year.to_s, "/archive/#{year.to_s}"
       :javascript
         $(document).ready(function() {
           $('.clearfield').clearField();

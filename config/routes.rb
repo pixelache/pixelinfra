@@ -74,6 +74,7 @@ Pixelinfra::Application.routes.draw do
 
     end
   end
+  resources :archive
   resources :pages
   resources :projects do
     resources :pages

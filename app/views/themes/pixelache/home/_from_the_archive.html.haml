@@ -7,7 +7,7 @@
       .small-6.columns.large-offset-2
         .year= @archive.year
     .row
-      .small-9.columns.large-offset-2.activity_name= @archive.activity.name
+      .small-9.columns.large-offset-2.activity_name= link_to @archive.activity.name, @archive.activity
 
     .row
       .small-9.columns.large-offset-2
