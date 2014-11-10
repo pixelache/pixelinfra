@@ -1,3 +1,21 @@
+%div{"data-magellan-expedition" => "fixed", :"data-options" => "throttle_delay:50;"}
+  %dl.sub-nav
+    %dd.first= @projectproposal.name + ": "
+    %dd.active{"data-magellan-arrival" => "what"}
+      %a{:href => "#what"} What?
+    %dd{"data-magellan-arrival" => "who"}
+      %a{:href => "#who"} Who?
+    %dd{"data-magellan-arrival" => "how"}
+      %a{:href => "#how"} How?
+    %dd{"data-magellan-arrival" => "when"}
+      %a{:href => "#when"} When?
+    %dd{"data-magellan-arrival" => "where"}
+      %a{:href => "#where"} Where?                  
+    %dd{"data-magellan-arrival" => "why"}
+      %a{:href => "#why"} Why?      
+    %dd{"data-magellan-arrival" => "comments"}
+      %a{:href => "#comments"} Comments?
+      
 .project_proposal
   .row
     .small-12.columns
@@ -5,26 +23,37 @@
       %p= t(:proposed_by, :proposer => @projectproposal.primary_initiator.name, :when => l(@projectproposal.updated_at, :format => :long))
     .row
       .small-12.columns
-        %h2 What?
+        %a{:name => :what}
+        %h2{:"data-magellan-destination" => "what"} What?
     .row
-      .large-6.small-12.columns
-        %label=t(:name_of_project)
-        = @projectproposal.name
+      .large-12.small-12.columns
+        .row
+          .small-2.columns.text-right=t(:name_of_project)
+          .small-10.columns
+            %strong
+              %h3= @projectproposal.name
     .row
-      .large-6.small-12.columns
-        %label= t(:part_of_existing_project)
-        = @projectproposal.project.try(:name)
+      .large-12.small-12.columns
+        .row
+          .small-2.columns
+            .text-right= t(:part_of_existing_project)
+          .small-10.columns= link_to_if (@projectproposal.project), @projectproposal.project.try(:name), @projectproposal.project, :target => :_blank
     .row
-      .large-6.small-12.columns
-        %label= t :description
-        = @projectproposal.description.html_safe
-    .row
-      .small-8.columns
-        %label= t :long_description
-        .long_description= @projectproposal.long_description.html_safe
+      .large-12.small-12.columns
+        .row
+          .small-2.columns
+            .text-right= t :description
+          .small-10.columns.end= @projectproposal.description.html_safe
     .row
       .small-12.columns
-        %h2 Who?
+        .row
+          .small-2.columns
+            .text-right= t :long_description
+          .small-10.columns.end.long_description= @projectproposal.long_description.html_safe
+    .row
+      .small-12.columns
+        %a{:name => :who}
+        %h2{:"data-magellan-destination" => "who"} Who?
     .row
       .large-6.small-12.columns
         %p= t(:proposed_by, :proposer => @projectproposal.primary_initiator.name, :when => l(@projectproposal.updated_at, :format => :long))
@@ -68,7 +97,8 @@
         = @projectproposal.imagined_participants
     .row
       .small-12.columns
-        %h2 How?
+        %a{:name => :how}
+        %h2{:"data-magellan-destination" => "how"} How?
     .row
       .large-6.small-12.columns= t :what_resources_you_need
     %ol
@@ -99,10 +129,11 @@
             = @projectproposal.people_expertise
     .row
       .small-12.columns
-        %h2 When?
+        %a{:name => :when}
+        %h2{:"data-magellan-destination" => "when"} When?
     .row
       .large-6.small-12.columns
-        %label= t :when_will_it_start
+        %label= t :when_will_it_happen
         = @projectproposal.when
     .row
       .large-6.small-12.columns
@@ -110,13 +141,15 @@
         = @projectproposal.when_will_it_end
     .row
       .small-12.columns
-        %h2 Where?
+        %a{:name => :where}
+        %h2{:"data-magellan-destination" => "where"} Where?
     .row
       .small-12.large-6.columns
         %label= t :where_will_this_take_place
         = @projectproposal.where
     .row
       .small-12.columns
+        %a{:name => :why}
         %h2 Why?
     .row
       .small-12.large-6.columns
@@ -126,7 +159,8 @@
 - unless @projectproposal.comments.empty?
   .row#comments_list
     .small-12.columns
-      %h1= t :member_discussion_of_proposal
+      %a{:name => :comments}
+      %h1{:"data-magellan-destination" => "comments"}= t :member_discussion_of_proposal
   - @projectproposal.comments.sort_by(&:created_at).each do |comment|
     .row.comment
       .small-3.columns
@@ -142,7 +176,7 @@
             .small-12.columns
               %p= link_to t(:download) + ' ' + File.basename(URI.parse(comment.attachment.url).path), comment.attachment.url
         
-.row
+.row#comments
   .small-12.columns
     %h1= t :what_do_you_think_about_this
 
@@ -162,4 +196,10 @@
           = f.input :image, :label => t(:attach_image_to_comment)
           = f.input :attachment, :label => t(:attach_attachment_to_comment)
           = f.submit t(:save), :class => [:button, :tiny, :round]
-        
+= content_for :jquery do
+  :plain
+    $('#magellan a[href*=#]').on('click', function(event){     
+      
+        event.preventDefault();
+        $('html,body').animate({scrollTop:$(this.hash).offset().top - 40}, 500);
+    });        

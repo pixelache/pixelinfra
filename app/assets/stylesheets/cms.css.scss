@@ -20,7 +20,7 @@
 @import 'foundation_and_overrides';
 
 header {
-  margin-bottom: 25px;
+  margin-bottom: 1rem;
 }
 
 nav.top-bar {
@@ -211,6 +211,14 @@ table.etherpads {
 }
 
 .project_proposal {
+  color: #333;
+  font-size: 0.9rem;
+  line-height: 1.3rem;
+  p {
+    color: #333;
+    font-size: 0.9rem;
+    line-height: 1.3rem;
+  }
   label {
     float: left;
     margin-right: 2rem;

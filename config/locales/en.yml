@@ -309,7 +309,7 @@ en:
   no_budget_uploaded: 'No budget uploaded'
   external_funding: 'External funding to seek?'
   inkind: 'In-kind funding?'
-  people_expertise: 'People/expertise'
+  people_expertise: 'People/expertise?'
   your_comment: 'Your comment:'
   user_says: '%{user} says....'
   member_discussion_of_proposal: 'Member discussion of the proposal:'
