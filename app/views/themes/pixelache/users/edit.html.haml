@@ -9,6 +9,8 @@
   .row
     .small-6.columns= f.input :email, input_html: {:required => ''}
 
+  .row
+    .small-6.columns= f.input :website
   = f.fields_for :authentications do |ff|
 
     .small-4.columns

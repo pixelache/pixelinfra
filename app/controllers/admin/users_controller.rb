@@ -30,6 +30,6 @@ class Admin::UsersController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:user => [:avatar, :name, :username, :email, role_ids: [], authentications_attributes: [:id, :user_id, :provider, :uid, :username]  ])
+    params.permit(:user => [:avatar, :name, :username, :email, :website, role_ids: [], authentications_attributes: [:id, :user_id, :provider, :uid, :username]  ])
   end
 end
