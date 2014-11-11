@@ -8,7 +8,7 @@
           %center= best_image(@post)
 
         .metadata
-          %span.date= l @post.published_at.to_date, :format => :long
+          %span.date= l @post.published_at.to_date, :format => :long if @post.published
           - unless @post.creator.nil? 
             = ", #{@post.creator.name}"
         .title

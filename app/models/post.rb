@@ -100,20 +100,20 @@ class Post < ActiveRecord::Base
     if event
       related << event
       unless event.posts.empty?
-        related << event.posts.reject{|x| x == self}
+        related << event.posts.published.reject{|x| x == self}
       end
     end
     if project
       related << project
       unless project.posts.empty?
-        related << project.posts.reject{|x| x == self }
+        related << project.posts.published.reject{|x| x == self }
         related << project.pages
       end
     end
     if festival
       related << festival
       unless festival.posts.empty?
-        related << festival.posts.reject{|x| x == self }
+        related << festival.posts.published.reject{|x| x == self }
       end
     end
     

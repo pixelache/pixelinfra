@@ -41,6 +41,7 @@ module Pixelinfra
     # 
 
     config.session_store :cookie_store, :key => '_pixelache_session', :domain => :all
+    config.time_zone = 'Helsinki'
   end
 end
 I18n.enforce_available_locales = false
