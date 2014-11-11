@@ -13,9 +13,9 @@ class Ability
       can :manage, Post, :subsite => {:name => 'pixelache' }
       can :manage, Festival, :subsite => {:name => 'pixelache' }
       can :manage, Project
-      can :create, Projectproposal
       can :read, Projectproposal
-      can :manage, Projectproposal, :primary_initiator_id => user.id
+      can :update, Projectproposal
+      can :destroy, Projectproposal, :primary_initiator_id => user.id
       can :manage, Dynamictagline
       can :manage, Etherpad
       can :manage, Archivalimage
