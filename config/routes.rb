@@ -29,6 +29,7 @@ Pixelinfra::Application.routes.draw do
       get :autocomplete_page_name, :on => :collection
     end
     resources :frontmodules
+    resources :memberships
     resources :nodes
     resources :pages do
       get :options, :on => :collection

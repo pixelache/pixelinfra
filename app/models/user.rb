@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :authentications
-
+  has_many :memberships
   devise :rememberable, :trackable, :validatable,
           :database_authenticatable, :registerable, :recoverable
   rolify

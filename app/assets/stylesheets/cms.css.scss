@@ -210,6 +210,16 @@ table.etherpads {
   }
 }
 
+table.project_proposals {
+  td {
+    p.metadata {
+      font-size: 0.6rem;
+      line-height: 1rem;
+      margin-top: 0.5rem;
+    }
+  }
+}
+
 .project_proposal {
   color: #333;
   font-size: 0.9rem;
