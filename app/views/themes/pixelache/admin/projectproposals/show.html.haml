@@ -1,6 +1,6 @@
 %div{"data-magellan-expedition" => "fixed", :"data-options" => "throttle_delay:50;"}
   %dl.sub-nav
-    %dd.first= @projectproposal.name + ": "
+    %dd.first{:style => 'width: 32%'}= @projectproposal.name + ": "
     %dd.active{"data-magellan-arrival" => "what"}
       %a{:href => "#what"} What?
     %dd{"data-magellan-arrival" => "who"}
@@ -43,7 +43,7 @@
         .row
           .small-2.columns
             .text-right= t :description
-          .small-10.columns.end= @projectproposal.description.html_safe
+          .small-10.columns.end= simple_format(@projectproposal.description.html_safe)
     .row
       .small-12.columns
         .row
@@ -114,7 +114,7 @@
             - if @projectproposal.budget.blank?
               = t :no_budget_uploaded
             - else
-              = link_to t(:download), @projectproposal.budget.url
+              = link_to t(:download), @projectproposal.budget.url, class: [:button, :round, :tiny]
             %ol
               %li
                 %label= t :external_funding
@@ -153,8 +153,10 @@
         %h2{:"data-magellan-destination" => "why"}  Why?
     .row
       .small-12.large-6.columns
-        %label= t :why_do_you_want_to_do_this
-        = @projectproposal.why
+        .row
+          .small-3.columns.text-right
+            = t :why_do_you_want_to_do_this
+          .small-9.columns= simple_format(@projectproposal.why)
 
 - unless @projectproposal.comments.empty?
   .row#comments_list
@@ -174,7 +176,7 @@
         - if comment.attachment?
           .row
             .small-12.columns
-              %p= link_to t(:download) + ' ' + File.basename(URI.parse(comment.attachment.url).path), comment.attachment.url
+              %p= link_to t(:download) + ' ' + File.basename(URI.parse(comment.attachment.url).path), comment.attachment.url, class: [:button, :round, :tiny]
 - if can? :create, Comment        
   .row#comments
     .small-12.columns

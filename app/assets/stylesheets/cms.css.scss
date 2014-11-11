@@ -229,9 +229,27 @@ table.etherpads {
     float: left;
     padding: 10px;
     border: 1px dotted #BBB;
+    font-size: 0.9rem;
+    line-height: 1.3rem;
+    ol {
+      li {
+        font-size: 0.9rem;
+        line-height: 1.3rem;
+        list-style-type: decimal;
+        ol {
+          li {
+            list-style-type: lower-alpha;
+          }
+        }
+      }
+    }
   }
   .row::after {
     margin-bottom: 20px;
+  }
+  li {
+    font-size: 0.9rem;
+    line-height: 1.3rem;
   }
   ol {
     li {
