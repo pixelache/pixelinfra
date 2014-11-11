@@ -18,7 +18,7 @@ class Post < ActiveRecord::Base
   resourcify
   has_many :feeds, :as => :item, :dependent => :delete_all
   include Feedable
-  accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['title'].blank? && x['body'].blank? }
+  accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['title'].blank? || x['body'].blank? }
   accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :attachments, :reject_if => proc {|x| x['attachedfile'].blank? }, :allow_destroy => true
   before_save :update_image_attributes
