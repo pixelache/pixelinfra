@@ -1,0 +1,23 @@
+.row
+  .small-12.columns
+    %h2= t :new_membership
+= semantic_form_for [:admin, @membership] do |f|
+  .row
+    .small-6.columns
+      = f.input :user, :collection => User.order("lower(name)")
+  .row
+    .small-6.columns
+      = f.input :year, :as => :select, :collection => 2014.downto(2003).to_a, :include_blank => false
+  .row
+    .small-6.columns
+      = f.input :paid
+  .row
+    .small-6.columns
+      = f.input :hallitus
+  .row
+    .small-6.columns
+      = f.input :hallitus_alternate
+  .row
+    .small-6.columns= f.input :notes
+  .row
+    .small-6.columns= f.submit t(:save), class: [:button, :round, :small]

@@ -1,0 +1,33 @@
+.row
+  .small-12.columns
+    %h2= t :memberships
+
+.row
+  .small-12.columns
+    %table
+      %thead
+        %th= t :year
+        %th= t :member
+        %th= t :is_paid
+        %th= t :hallitus
+        %th
+      %tbody
+        - @memberships.each do |m|
+          %tr 
+            %td= m.year
+            %td= m.user.name
+            %td
+              = m.paid == true ? t(:yes) : t(:no)
+              - unless m.notes.blank?
+                %p.metadata= m.notes
+            %td
+              = m.hallitus == true ? 'hallitus' : 'ei hallitus'
+              - if m.hallitus_alternate == true
+                %p.metadata alternate hallitus
+            %td.actions
+              - if can? :edit, m
+                = link_to t(:edit), edit_admin_membership_path(m), class: [:button, :round, :small]
+              - if can? :destroy, m
+                = link_to t(:delete), [:admin, m], :method => :delete, class: [:button, :round, :small, :alert], :data => {:confirm => t(:are_you_sure)}
+.row
+  .small-12.columns= link_to t(:new_membership), new_admin_membership_path, class: [:button, :round, :small]

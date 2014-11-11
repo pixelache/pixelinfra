@@ -46,4 +46,7 @@ class User < ActiveRecord::Base
     UserMailer.new_user(self).deliver rescue nil
   end
   
+  def password_required?
+    false
+  end
 end
