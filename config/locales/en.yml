@@ -313,6 +313,7 @@ en:
   places: 'Places'
   events_and_activities: 'Events and Activities'
   new_membership: 'New membership'
+  edit_membership: 'Edit membership'
   archive: 'Archive'
   is_paid: 'Paid?'
   member: 'Member'

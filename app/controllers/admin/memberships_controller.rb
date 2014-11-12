@@ -8,6 +8,11 @@ class Admin::MembershipsController < Admin::BaseController
     update! { admin_memberships_path }
   end
   
+  def edit
+    @membership = Membership.find(params[:id])
+    set_meta_tags :title => t(:edit_membership)
+  end
+  
   def new
     @membership = Membership.new
     set_meta_tags :title => t(:new_membership)
