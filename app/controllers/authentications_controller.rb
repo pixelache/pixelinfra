@@ -23,6 +23,11 @@ class AuthenticationsController < ApplicationController
       user = auth.user
       sign_in_and_redirect(:user, user)
 
+    # see if they have the auth defined without a user id as google
+    elsif  auth = Authentication.find_by_username_and_provider(omniauth['info']['email'], omniauth['provider'])
+      auth.update(:provider => omniauth['provider'], :uid => omniauth['uid'], :username => omniauth['info']['email'])
+      user = auth.user
+      sign_in_and_redirect(:user, user)
     else
       user = User.new
       user.apply_omniauth(omniauth)
