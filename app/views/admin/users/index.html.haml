@@ -7,6 +7,7 @@
           %th= sortable_column "Username"
           %th= sortable_column "Email"
           %th= sortable_column "Registered"
+          %th= sortable_column "Last signed in", :column => :last_sign_in_at
           %th Role
           %th
           %th
@@ -19,7 +20,11 @@
               %em= user.username
             %td= user.email
             %td= user.created_at.to_date
+            %td
+              - unless user.last_sign_in_at.nil?
+                = l user.last_sign_in_at,  :format => :long            
             %td= user.roles.map{|x| x.name.titleize}.join(', ') unless user.roles.empty?
+
             %td
               %a.button.round.tiny{"data-toggle" => "modal", "data-reveal-id" => "role-options-#{user.id}", :type => "button"} Change role
               = render user

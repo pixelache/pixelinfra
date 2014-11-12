@@ -19,8 +19,10 @@ class Admin::UsersController < Admin::BaseController
         "email #{direction}"
       when "registered"
         "created_at #{direction}"
+      when "last_sign_in_at"
+        "last_sign_in_at #{direction}"
       else
-        "created_at DESC"
+        "last_sign_in_at DESC"
       end
     end
     @users = apply_scopes(User).includes(:roles).order(order).page(params[:page]).per(30)
