@@ -15,6 +15,7 @@ class Ability
       can :manage, Project
       can :read, Projectproposal
       can :update, Projectproposal
+      can :create, Projectproposal
       can :destroy, Projectproposal, :primary_initiator_id => user.id
       can :manage, Dynamictagline
       can :manage, Etherpad

@@ -1,7 +1,8 @@
 .row
   .small-12.columns
     %h2= t :memberships
-
+.row
+  .small-12.columns= link_to t(:new_membership), new_admin_membership_path, class: [:button, :round, :small]
 .row
   .small-12.columns
     %table
