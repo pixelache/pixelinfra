@@ -10,4 +10,10 @@ class ProjectsController < InheritedResources::Base
     super
   end
   
+  def index
+    set_meta_tags :title => t(:projects)
+    @active_projects = Project.active
+    @inactive_projects = Project.inactive
+  end
+  
 end

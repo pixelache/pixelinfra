@@ -314,10 +314,13 @@ en:
   events_and_activities: 'Events and Activities'
   new_membership: 'New membership'
   edit_membership: 'Edit membership'
+  active_projects: 'Active projects'
+  projects_blurb: "Projects are the heart of Pixelache activities. Our ongoing events throughout the year are usually pieces of developing projects, which serve as a continuing dialogue with our networks of creative artists, activists and innovators."
   archive: 'Archive'
   is_paid: 'Paid?'
   member: 'Member'
   year: 'Year'
+  all_projects: 'All projects and events'
   your_comment: 'Your comment:'
   user_says: '%{user} says....'
   member_discussion_of_proposal: 'Member discussion of the proposal:'

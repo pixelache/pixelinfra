@@ -1,4 +1,4 @@
-%li
+%li{:class => project.name == 'Pixelversity' ? "jstree-open" : false }
   = link_to project.name, project
   - if project.evolvedfrom
     %small= "evolved in #{project.evolution_year}"
