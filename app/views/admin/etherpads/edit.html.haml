@@ -6,7 +6,7 @@
     .small-3.columns= f.input :subsites, :as => :check_boxes, :label => "Which website?"
   .row
     .small-3.columns= f.input :festivals
-    .small-3.columns.small-offset-2= f.input :projects, :collection => Project.all.order(:name)
+    .small-3.columns.small-offset-2= f.input :projects, :collection => Project.active_menu
   .row
     .small-6.columns
       
