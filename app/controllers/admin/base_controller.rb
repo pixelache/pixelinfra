@@ -6,8 +6,12 @@ class Admin::BaseController < InheritedResources::Base
   # check_authorization
   load_and_authorize_resource :find_by => :slug
   skip_before_filter :require_no_authentication
- 
- 
+  before_filter :set_meta_tagz
+  
+  def set_meta_tagz
+    set_meta_tags :title => params[:controller].gsub(/admin\//, '').humanize
+  end
+  
   def check_permissions
     authorize! :create, resource
   end

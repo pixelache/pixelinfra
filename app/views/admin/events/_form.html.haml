@@ -63,7 +63,7 @@
       - if f.object.image?
         = image_tag f.object.image.url(:thumb)
       = f.input :image, :hint => 'An image/icon to represent this event.'
-    .small-6.columns= f.input :facebook_link, :hint => 'URL to the Facebook Event page'
+    .small-6.columns= f.input :facebook_link, :hint => 'URL to the Facebook Event page', :as => :string
   .row
     .small-8.columns
       %fieldset
