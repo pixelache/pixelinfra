@@ -63,7 +63,8 @@
     .small-2.columns= f.input :project_text_colour, :as => :string, :input_html => {:class => :colourpicker }
   .row
     .small-2.columns= f.input :project_link_colour, :as => :string, :input_html => {:class => :colourpicker }    
-    
+  .row
+    .small-2.columns= f.input :active
   .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]
 = content_for :jquery do

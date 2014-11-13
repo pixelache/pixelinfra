@@ -6,6 +6,7 @@
       %thead
         %tr
           %th Name
+          %th Active?
           %th{:colspan => 2}
       %tbody
         - @projects.sort_by(&:name).each do |project|

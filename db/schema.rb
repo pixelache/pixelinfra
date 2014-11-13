@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111141550) do
+ActiveRecord::Schema.define(version: 20141113192758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -620,6 +620,7 @@ ActiveRecord::Schema.define(version: 20141111141550) do
     t.string   "project_bg_colour",   default: "f9ec31", null: false
     t.string   "project_text_colour", default: "333",    null: false
     t.string   "project_link_colour", default: "008cba", null: false
+    t.boolean  "active",              default: false,    null: false
   end
 
   create_table "roles", force: true do |t|

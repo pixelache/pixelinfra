@@ -5,6 +5,7 @@
     %span{:class => project.evolvedto ? :evolved : false}= project.name
     - if project.evolvedto
       %small= "Evolved into #{project.evolvedto.name}"
+  %td= project.active == true ? "active" : "inactive"
   %td.actions
     = link_to t(:view), project, :class => [:button, :round, :tiny], :target => :_blank
     - if can? :edit, Project

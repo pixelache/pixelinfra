@@ -17,7 +17,7 @@ class Admin::ProjectsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:project => [:name, :slug, :parent_id, :website, :evolvedfrom_id, :project_bg_colour, :project_text_colour, :project_link_colour, :evolution_year, :website, translations_attributes: [:description, :id, :locale], photos_attributes: [:id, :filename, :_destroy], attachments_attributes: [:id, :attachedfile, :_destroy]])
+    params.permit(:project => [:name, :slug, :parent_id, :website, :evolvedfrom_id, :project_bg_colour, :project_text_colour, :project_link_colour, :evolution_year, :website, :active, translations_attributes: [:description, :id, :locale], photos_attributes: [:id, :filename, :_destroy], attachments_attributes: [:id, :attachedfile, :_destroy]])
   end
     
 end 

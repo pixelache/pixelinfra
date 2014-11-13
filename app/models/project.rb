@@ -18,6 +18,15 @@ class Project < ActiveRecord::Base
   belongs_to :evolvedfrom, :class_name => 'Project', :foreign_key => "evolvedfrom_id"
   has_one :evolvedto, :class_name  => 'Project', :foreign_key => "evolvedfrom_id"
   
+  scope :active, -> { where(active: true)}
+  scope :inactive, -> { where(active: false)}
+  
+  def self.active_menu
+    a = Project.active.sort_by{|x| x.name }.map{|x| [x.name, x.id]}
+    i = Project.inactive.sort_by{|x| x.name }.map{|x| [x.name, x.id]}
+    return a + [' -- inactive/old projects -- '] + i
+  end 
+    
   def background_css
     if photos.empty?
       ""
