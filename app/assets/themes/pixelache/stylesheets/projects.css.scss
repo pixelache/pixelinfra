@@ -19,9 +19,21 @@ button.slick-next, button.slick-prev {
     white-space: normal !important;
     height: auto;
     padding: 1px 2px;
+
 }
 
 .project_index {
+  .projects_list {
+    margin-bottom: 2rem;
+    a {
+      border-right: 1px dotted #333;
+      padding: 0rem 0.6rem;
+      line-height: 1.7rem;
+      &.last {
+        border-right: none;
+      }
+    }
+  }
   .project {
     padding: 1.5rem 0rem;
     border-bottom: 1px dotted #666;

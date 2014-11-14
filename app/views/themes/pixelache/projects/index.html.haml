@@ -7,9 +7,12 @@
     .small-8.columns
       .text-center
         %h2= t :active_projects
-      
+      .row
+        .small-12.columns.projects_list
+          - @active_projects.each do |ap|
+            = link_to ap.name, "javascript:scrollTo('#project_#{ap.id}');"
       - @active_projects.each do |ap|
-        .project
+        .project[ap]
           .row
             .small-12.columns
               .title
