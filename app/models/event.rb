@@ -109,5 +109,10 @@ class Event < ActiveRecord::Base
     end
   end
 
+  private
+  
+  def should_generate_new_friendly_id?
+    changed?
+  end
   
 end

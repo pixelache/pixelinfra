@@ -5,7 +5,7 @@
   .row
     .small-3.columns= f.input :subsite, :label => "Site"
   .row
-    .small-3.columns= f.input :project
+    .small-3.columns= f.input :project, :collection => Project.active_menu
   .row
     .small-3.columns= f.input :festival
   .row

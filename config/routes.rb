@@ -54,6 +54,7 @@ Pixelinfra::Application.routes.draw do
       resources :comments
     end
     resources :projects
+    resources :residencies
     resources :search
     resources :steps do
       get :autocomplete_event_name, :on => :collection

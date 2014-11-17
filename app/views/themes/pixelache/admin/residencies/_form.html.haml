@@ -1,0 +1,37 @@
+= semantic_form_for [:admin, @residency], html: {:'data-abide' => '', multipart: true} do |f|
+  .row
+    .small-6.columns= f.input :name, input_html: {required: ''}
+  .row
+    .small-6.columns
+      = f.input :start_at, :as => :string, :input_html => {:required => '', :class => "date_picker"}
+      %small.error You must enter a start date and time.
+    .small-6.columns
+      = f.input :end_at, :as => :string, :input_html => {:class => "date_picker", required: ''}
+      %small.error You must enter a end date and time.
+  .row
+    %dl.tabs{"data-tab" => ""}
+      - I18n.available_locales.each_with_index do |locale, i|
+        %dd{:class => (i == 0 ? :active : false)}
+          = link_to t(:locale_name, :locale => locale), "##{locale}"
+    .tabs-content
+      - I18n.available_locales.each_with_index do |locale, i|
+        .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+          = f.globalize_fields_for locale do |en|
+            .row
+              .small-12.columns
+                %b= "Description of residency  in #{t :locale_name, :locale => locale}"
+                = en.cktext_area :description, :required => (locale == :en ? '' : false)
+                - if locale == :en
+                  %small.error You must enter an English description of this residency.
+  .row
+    .small-12.columns= f.input :country, input_html: {required: ''}
+  .row
+    .small-12.columns= f.input :is_micro, label: t(:is_microresidency)
+  .row
+    .small-12.columns= f.input :photo
+  .row
+    .small-6.columns= f.input :project, :collection => Project.active_menu
+  .row
+    .small-6.columns= f.input :user, collection: User.all, label: t(:is_also_user)
+  .row
+    .small-6.columns= f.submit t(:save), class: [:button, :round, :small]

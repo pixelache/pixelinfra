@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113192758) do
+ActiveRecord::Schema.define(version: 20141114133657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -622,6 +622,38 @@ ActiveRecord::Schema.define(version: 20141113192758) do
     t.string   "project_link_colour", default: "008cba", null: false
     t.boolean  "active",              default: false,    null: false
   end
+
+  create_table "residencies", force: true do |t|
+    t.string   "name"
+    t.string   "country"
+    t.date     "start_at"
+    t.date     "end_at"
+    t.boolean  "is_micro"
+    t.string   "photo"
+    t.integer  "photo_size"
+    t.integer  "photo_width"
+    t.integer  "photo_height"
+    t.string   "photo_content_type"
+    t.string   "slug"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "residencies", ["project_id"], name: "index_residencies_on_project_id", using: :btree
+  add_index "residencies", ["user_id"], name: "index_residencies_on_user_id", using: :btree
+
+  create_table "residency_translations", force: true do |t|
+    t.integer  "residency_id", null: false
+    t.string   "locale",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+  end
+
+  add_index "residency_translations", ["locale"], name: "index_residency_translations_on_locale", using: :btree
+  add_index "residency_translations", ["residency_id"], name: "index_residency_translations_on_residency_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"

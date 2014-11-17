@@ -156,4 +156,10 @@ class Post < ActiveRecord::Base
     creator_id
   end
   
+  private
+  
+  def should_generate_new_friendly_id?
+    changed?
+  end
+  
 end
