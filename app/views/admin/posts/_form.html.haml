@@ -97,6 +97,10 @@
       = f.input :festival_name, :as => :autocomplete, :url =>  autocomplete_festival_name_admin_posts_path, :input_html => { :id_element => '#post_festival_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the festival name", :hint => raw("(If this is related to a specific event that is part of a festival, you should just populate the event relation above, no need for the festival as a whole.)")
     .small-6.columns= f.input :festival_id, :as => :hidden    
   .row
+    .small-6.columns
+      %h5 Connected to a residency?
+      = f.input :residency
+  .row
     .small-6.columns= f.input :tag_list
   .row
     .small-3.columns= f.input :hide_from_feed, :as => :boolean, :label => "Hide from news feeds?"
