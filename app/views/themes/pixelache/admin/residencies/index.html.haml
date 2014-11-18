@@ -31,7 +31,7 @@
               - if can? :edit, r
                 = link_to t(:edit), edit_admin_residency_path(r), class: [:button, :round, :tiny]
               - if can? :destroy, r
-                = link_to t(:delete), [:admin, r], class: [:button, :alert, :round, :tiny], data: {confirm: t(:are_you_sure)}
+                = link_to t(:delete), [:admin, r], method: :delete,  class: [:button, :alert, :round, :tiny], data: {confirm: t(:are_you_sure)}
             
 .row
   .small-6.columns= link_to t(:new_residency), new_admin_residency_path, class: [:button, :tiny, :round]          
