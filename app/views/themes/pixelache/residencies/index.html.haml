@@ -1,0 +1,42 @@
+.page_tree
+  .row
+    .small-12.columns
+      - @page.self_and_ancestors.reverse.each do |p|
+        - if p == @page
+          %strong= p.name
+        - else
+          %span.leaf
+            = link_to p.name, p
+            = " : "
+
+.residency_container
+  .row
+    .small-7.columns.large-offset-1.title
+      = raw @page.name
+
+      - if can? :edit, @page
+        %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id), class: [:button, :secondary, :tiny]
+  .row
+    .small-7.columns.large-offset-1.body= raw simple_format(@page.body)
+    .small-3.columns.children
+      %dl.accordion{:"data-accordion" => ""}
+        %dd.accordion-navigation
+          = link_to t(:production_residencies), "#production"
+          .content#production
+            - @production.each_with_index do |res, index|
+              .subchild{:class => index == (@production.size - 1) ? :last : false}
+                = link_to res.name, res
+                %p.metadata
+                  = l res.start_at, format: "%B %Y"
+                  - if [res.end_at.month, res.end_at.year] != [res.start_at.month, res.start_at.year]
+                    = " - " + l(res.end_at, format: "%B %Y")
+        %dd.accordion-navigation
+          = link_to t(:microresidencies), "#microresidencies"
+          .content#microresidencies
+            - @microresidencies.each_with_index do |res, index|
+              .subchild{:class => index == (@microresidencies.size - 1) ? :last : false}
+                = link_to res.name, res
+                %p.metadata
+                  = l res.start_at, format: "%B %Y"
+                  - if [res.end_at.month, res.end_at.year] != [res.start_at.month, res.start_at.year]
+                    = " - " + l(res.end_at, format: "%B %Y")

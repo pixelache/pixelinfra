@@ -7,6 +7,16 @@ class Residency < ActiveRecord::Base
   friendly_id :name, use: [:finders, :slugged]
   mount_uploader :photo, ImageUploader
   
+  scope :micro, -> { where(is_micro: true) }
+  scope :production, -> { where("is_micro is not true")}
+  
+  def related_content
+    out = []
+    out << project if project
+    # out << posts
+    out.flatten.compact
+  end
+  
   private
   
   def should_generate_new_friendly_id?

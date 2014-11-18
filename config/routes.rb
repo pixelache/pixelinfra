@@ -85,6 +85,7 @@ Pixelinfra::Application.routes.draw do
   resources :users
   resources :nodes
   resources :posts
+  resources :residencies
   resources :steps
   get '/activities' => 'home#activities'
   get '/pages/*id' => 'pages#show'

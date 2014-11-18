@@ -26,7 +26,7 @@
               - if r.is_micro == true
                 %em Micro-residency
               - elsif r.project
-                %em r.project.name
+                %em= r.project.name
             %td
               - if can? :edit, r
                 = link_to t(:edit), edit_admin_residency_path(r), class: [:button, :round, :tiny]

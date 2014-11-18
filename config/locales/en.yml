@@ -325,6 +325,8 @@ en:
   edit_residency: 'Edit residency'
   is_microresidency: 'Is this a microresidency?'
   is_also_user: 'Does this person have a user account on this website?'
+  production_residencies: 'Production Residencies (since 2004)'
+  microresidencies: 'Micro-residencies'
   your_comment: 'Your comment:'
   user_says: '%{user} says....'
   member_discussion_of_proposal: 'Member discussion of the proposal:'
