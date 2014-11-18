@@ -33,7 +33,7 @@ class Admin::PagesController < Admin::BaseController
       when "id"
         "id #{direction}"
       when "created"
-        "created at #{direction}"
+        "created_at #{direction}"
       when "updated"
         "updated_at #{direction}"
       when "published"
