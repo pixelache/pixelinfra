@@ -340,6 +340,7 @@ en:
   no_posts: 'There are no posts relating to this topic.'
   related_event: 'Related event'
   your_comment_was_added: 'Your comment was added'
+  override_country: 'Enter text here that will display instead of the country from the above dropdown'
   your_comment_was_not_added: 'There was an error saving your comment'
   new_user_account: 'New user account'
   new_user_account_blurb: 'We strongly suggest that you use an existing Twitter, Facebook or Google account to manage your Pixelache authentication. If you really really want to have another password to remember, you can register below.'

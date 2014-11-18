@@ -26,6 +26,8 @@
   .row
     .small-12.columns= f.input :country, input_html: {required: ''}
   .row
+    .small-12.columns= f.input :country_override, :hint => t(:override_country)
+  .row
     .small-12.columns= f.input :is_micro, label: t(:is_microresidency)
   .row
     .small-12.columns= f.input :photo

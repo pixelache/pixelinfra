@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114133657) do
+ActiveRecord::Schema.define(version: 20141118184616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -639,6 +639,7 @@ ActiveRecord::Schema.define(version: 20141114133657) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "country_override"
   end
 
   add_index "residencies", ["project_id"], name: "index_residencies_on_project_id", using: :btree

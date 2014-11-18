@@ -11,7 +11,7 @@
   .row
     .small-7.columns.large-offset-1.title
       = raw @residency.name
-
+      .country= @residency.country_override.blank? ? @residency.country : @residency.country_override
       - if can? :edit, @residency
         %small= link_to t(:edit), edit_admin_residency_path(@residency), class: [:button, :secondary, :tiny]
   .row

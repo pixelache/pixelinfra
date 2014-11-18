@@ -11,7 +11,7 @@ class Admin::ResidenciesController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:residency => [:name, :country, :start_at, :end_at, :is_micro, :slug, :photo, :project_id, :user_id,  translations_attributes: [:id, :locale, :description]])
+    params.permit(:residency => [:name, :country, :start_at, :country_override, :end_at, :is_micro, :slug, :photo, :project_id, :user_id,  translations_attributes: [:id, :locale, :description]])
   end
   
 end

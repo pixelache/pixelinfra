@@ -130,6 +130,9 @@
   .entry {
     border-bottom: 1px dashed #666;
     padding: 20px 0px;
+    &.last {
+      border-bottom: none;
+    }
     .date {
       font-size: 32px;
       text-transform: uppercase;

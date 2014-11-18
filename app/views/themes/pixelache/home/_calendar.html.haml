@@ -1,8 +1,8 @@
 .calendar
   .row
     .small-10.columns.large-offset-1
-      - @events.each do |event|
-        .row.entry
+      - @events.each_with_index do |event, index|
+        .row.entry{:class => index == (@events.size - 1) ? :last : false}
           .small-3.columns
             .date= link_to event.start_at.strftime('%b %d.'), event
           .small-9.columns
