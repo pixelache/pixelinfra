@@ -10,6 +10,8 @@
     .small-4.columns
       = f.input :festival, :label => 'Part of a festival?'
     .small-4.columns
+      = f.input :residency, :label => 'Attached to a residency?'
+    .small-4.columns
       = f.input :project, :collection => Project.active_menu, :label => ' Part of a project?'
   .row
     .small-6.columns

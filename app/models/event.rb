@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
   belongs_to :step
   belongs_to :user
   has_many :posts
+  belongs_to :residency
   has_many :photos, as: :item
   has_many :videos
   extend FriendlyId

@@ -2,6 +2,7 @@ class Residency < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
   has_many :posts
+  has_many :events
   translates :description,  :fallbacks_for_empty_translations => true
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['description'].blank? }
   extend FriendlyId
