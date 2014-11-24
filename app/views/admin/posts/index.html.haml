@@ -2,9 +2,9 @@
   .small-10.columns
     %h2 
       Posts
-      %small
-        = pluralize(@posts.total_count, 'posts')
-        match these filters
+.row
+  .small-9.columns
+    %p= page_entries_info(@posts)
     %p= link_to 'Create new post', new_admin_post_path, :class => [:button, :round, :tiny]
 .filter_box.row
   .large-2.columns
@@ -40,8 +40,9 @@
   .large-2.columns
     .filter_title Show:
     %select#is_pixelache
-      %option{:value => "true", :selected => (params[:is_pixelache] == "true" ? :selected : false)} Only Pixelache
       %option{:value => "false", :selected => (params[:is_pixelache] == "false" ? :selected : false)} All posts
+      %option{:value => "true", :selected => (params[:is_pixelache] == "true" ? :selected : false)} Only Pixelache
+
       %option{:value => "external", :selected => (params[:is_external] == "true" ? :selected : false) } Only external
 .row
   .small-8.columns

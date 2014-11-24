@@ -1,4 +1,5 @@
 class Admin::ResidenciesController < Admin::BaseController
+  has_scope :page, :default => 1
   
   def create
     create! { admin_residencies_path }

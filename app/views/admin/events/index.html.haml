@@ -2,6 +2,9 @@
   .small-9.columns
     %h3 Events
 .row
+  .small-9.columns
+    %p= page_entries_info(@events)
+.row
   .small-9.columns= link_to 'Create new event', new_admin_event_path, :class => [:button, :small, :round]
 .filter_box.row
   .large-3.columns

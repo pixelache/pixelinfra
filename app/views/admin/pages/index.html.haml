@@ -1,9 +1,9 @@
 .row
   .small-10.columns
     %h2 Pages
-    %small
-      = pluralize(@pages.total_count, 'page')
-      match these filters
+.row
+  .small-9.columns
+    %p= page_entries_info(@pages)
       
     %p= link_to 'Create new page', new_admin_page_path, :class => [:round, :button, :tiny]
 .filter_box.row

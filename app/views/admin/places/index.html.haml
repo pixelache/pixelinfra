@@ -1,6 +1,9 @@
 .row
   .small-10.columns
     %h2 Places
+.row
+  .small-9.columns
+    %p= page_entries_info(@places)    
     %p= link_to 'Enter new place', new_admin_place_path , class: [:button, :round, :small]  
     %table.table.table-condensed
       %thead
