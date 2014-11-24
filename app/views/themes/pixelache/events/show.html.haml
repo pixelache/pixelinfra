@@ -13,7 +13,7 @@
           - unless @event.place.latitude.blank?
             = link_to t(:map), "http://maps.google.com/?q=#{@event.place.latitude},#{@event.place.longitude}", :target => :_blank
     - unless @event.photos.empty? && @event.videos.empty?
-      .metadata= link_to t(:scroll_down_for_documentation), '#'
+      .metadata= link_to t(:scroll_down_for_documentation), 'javascript:scrollTo("#documentation");'
     - if @event.image?
       .event_image= best_image(@event)
         
@@ -21,6 +21,20 @@
 
     .row
       .small-12.centered.columns.share_this= render :partial => 'shared/share_this_buttons'
+
+    - unless @event.all_documentation.empty?
+      .documentation#documentation
+        .row.related_title
+          .small-12.columns.small-centered
+            %h1= t(:documentation)
+        .image_carousel
+          - @event.all_documentation["images"].each do |i|
+            .img
+              = link_to image_tag(i.filename.url(:standard)), i.filename.url, rel: :lazybox
+              .thumb= image_tag i.filename.url(:thumb)
+          
+
+
   
     - unless @event.posts.empty? && !@event.festival && !@event.project
       .row.related_title
@@ -52,4 +66,20 @@
                     - else
                       .small-4.columns= image_tag @event.project.photos.first.filename.url(:box)
                       .small-8.columns= raw truncate_html(@event.project.description, :length => 350)
-          
+
+= content_for :jquery do
+  :plain
+    $('.image_carousel').slick({infinite: true,
+      slidesToShow: 1,
+      adaptiveHeight: true,
+      dots: true,
+      customPaging: function(slick,index) {
+         return slick.$slides.eq(index).find('.thumb').html();
+      },
+      arrows: true,
+      slide: '.img',
+      variableWidth: false,
+      autoplay: true,
+      autoplaySpeed: 2400,
+      slidesToScroll: 1,
+    });

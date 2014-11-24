@@ -25,6 +25,13 @@ class Archivalimage < ActiveRecord::Base
     festival.blank? ? nil : festival.name
   end
   
+  def filename   # play nice when we aggregate with photos
+    image
+  end
+  def filename_identifier
+    image_identifier
+  end
+  
   def name
     if event
       event.name

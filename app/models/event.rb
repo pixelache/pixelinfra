@@ -9,8 +9,10 @@ class Event < ActiveRecord::Base
   belongs_to :user
   has_many :posts
   has_many :flickrsets
+
   belongs_to :residency
   has_many :photos, as: :item
+  has_many :archivalimages
   has_many :videos
   extend FriendlyId
   friendly_id :name_en , :use => [ :slugged, :finders ] # :history]
@@ -37,6 +39,9 @@ class Event < ActiveRecord::Base
   scope :by_year, -> year { where(["start_at >= ? AND start_at <= ?", year+"-01-01", year+"-12-31"])}
   scope :by_name, -> (name) { joins(:translations).select("DISTINCT events.* ").where("event_translations.name ILIKE '%" + name + "%'")}
 
+  def all_documentation
+    {"images" => [photos + archivalimages].flatten.uniq {|p| p.filename_identifier } }
+  end
   
   def body
     description
