@@ -42,6 +42,7 @@ nav.top-bar {
     margin-top: 5px;
     font-size: 11px;
     text-transform: uppercase;
+
     a {
 
      font-weight: 200; 
@@ -113,6 +114,10 @@ table {
     .small {
       font-size: 9px;
       text-transform: uppercase;
+    }
+    p.metadata {
+      font-size: 0.8rem;
+      margin: 0.2rem 0rem;
     }
     span.evolved {
       text-decoration: line-through;

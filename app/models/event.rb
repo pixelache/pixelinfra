@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
   belongs_to :step
   belongs_to :user
   has_many :posts
+  has_many :flickrsets
   belongs_to :residency
   has_many :photos, as: :item
   has_many :videos
@@ -34,7 +35,7 @@ class Event < ActiveRecord::Base
   scope :by_subsite, -> subsite { where(subsite_id: subsite ) }
   scope :by_project, -> project { where(project_id: project) }
   scope :by_year, -> year { where(["start_at >= ? AND start_at <= ?", year+"-01-01", year+"-12-31"])}
-  scope :by_name, -> (name) { joins(:translations).where("event_translations.name ILIKE '%" + name + "%'")}
+  scope :by_name, -> (name) { joins(:translations).select("DISTINCT events.* ").where("event_translations.name ILIKE '%" + name + "%'")}
 
   
   def body

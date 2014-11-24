@@ -23,8 +23,8 @@
     .filter_title Filter by project:
     %select#by_project
       %option{:value => ""} &nbsp;
-      - Project.all.each do |project|
-        %option{:value => project.id, :selected => (params[:by_project] == project.id.to_s ? :selected : false)}= project.name
+      - Project.active_menu.each do |project|
+        %option{:value => project.last, :selected => (params[:by_project] == project.last.to_s ? :selected : false)}= project.first
   .large-3.columns
     .filter_title Filter by year:
     %select#by_year

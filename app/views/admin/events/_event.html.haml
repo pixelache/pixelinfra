@@ -3,16 +3,28 @@
     - if event.image?
       = image_tag event.image.url(:thumb), :width => 60
     = event.name
-    .small
-      - unless event.project.blank?
-        &sdot;
+
+    - unless event.project.blank?
+      %p.metadata
+        Project:
         = link_to event.project.name, [:admin, event.project], :target => :_blank
-      - unless event.festival.blank?
-        &sdot;
+    - unless event.festival.blank?
+      %p.metadata
+        Festival:
         = link_to event.festival.name, [:admin, event.festival], :target => :_blank
-      - unless event.photos.empty?
-        %sdot;
+    - unless event.photos.empty?
+      %p.metadata
+        Photos:
         = pluralize(event.photos.count, t(:photo))
+    - unless event.posts.empty?
+      %p.metadata
+        Posts:
+        = pluralize(event.posts.count, "post")
+    - unless event.flickrsets.empty?
+      %p.metadata
+        Flickr sets:
+        - event.flickrsets.each do |fs|
+          = link_to fs.title, "http://www.flickr.com/photos/pixelache/sets/#{fs.flickr_id}/", :target => :_blank
   %td= event.subsite.name
   %td= event.start_at.strftime('%d %B %Y')
   %td= event.published == true ? 'yes' : 'no'
