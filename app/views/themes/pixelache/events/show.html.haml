@@ -22,7 +22,7 @@
     .row
       .small-12.centered.columns.share_this= render :partial => 'shared/share_this_buttons'
 
-    - unless @event.all_documentation.empty?
+    - unless @event.all_documentation['images'].empty?
       .documentation#documentation
         .row.related_title
           .small-12.columns.small-centered
