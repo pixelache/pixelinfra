@@ -79,7 +79,11 @@ Pixelinfra::Application.routes.draw do
   resources :archive
   resources :pages
   resources :projects do
-    resources :pages
+    resources :pages do
+      member do
+        get '/*page', :action => :show, :as => :project_page
+      end
+    end
   end
   resources :publications
   resources :users

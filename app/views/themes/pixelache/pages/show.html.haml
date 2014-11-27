@@ -1,6 +1,5 @@
 = content_for :page_tree do
-
-  .small-12.columns
+  .row.left-collapse
     - @page.self_and_ancestors.reverse.each do |p|
       - if p == @page
         %strong= p.name
@@ -15,7 +14,7 @@
       = raw @page.name
 
       - if can? :edit, @page
-        %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id)
+        %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id), class: [:button, :tiny, :secondary]
   .row
     .small-7.columns.large-offset-1.body= raw simple_format(@page.body)
     - unless @page.children.empty?

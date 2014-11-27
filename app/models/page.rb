@@ -27,6 +27,15 @@ class Page < ActiveRecord::Base
     festival.blank? ? nil : festival.name
   end
   
+  def has_project?
+    !self_and_ancestors.map(&:project).compact.empty?
+  end
+  
+  def parent_project
+    if has_project?
+       self_and_ancestors.map(&:project).compact.first
+    end
+  end
   
   def name_en
     self.name(:en)

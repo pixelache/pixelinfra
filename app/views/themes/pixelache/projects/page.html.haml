@@ -1,7 +1,11 @@
-.page_tree
-  .row
-    .small-12.columns
-      - @page.self_and_ancestors.reverse.each do |p|
+= content_for :page_tree do
+  .row.left-collapse
+
+    - if @page.has_project?
+      %span.leaf
+        = link_to t(:projects), projects_path
+        = ' : '
+      - @page.self_and_ancestors.map(&:project).compact.each do |p|
         - if p == @page
           %strong= p.name
         - else
@@ -9,13 +13,24 @@
             = link_to p.name, p
             = " : "
 
+    - @page.self_and_ancestors.reverse.each do |p|
+      - if @page.has_project?
+        - next if @page.self_and_ancestors.map(&:project).compact.map(&:name).include?(p.name)
+      - if p == @page
+        %span.leaf
+          %strong= p.name
+      - else
+        %span.leaf
+          = link_to p.name, p
+          = " : "
+
 .page
   .row
     .small-7.columns.large-offset-1.title
       = raw @project.name + ": " + @page.name
 
       - if can? :edit, @page
-        %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id)
+        %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id), class: [:button, :tiny, :secondary]
   .row
     .small-7.columns.large-offset-1.body= raw simple_format(@page.body)
     - unless @page.children.empty?
