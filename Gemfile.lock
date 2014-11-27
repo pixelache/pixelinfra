@@ -394,6 +394,7 @@ GEM
     shog (0.1.3)
       colored (~> 1.2)
       rails (~> 4.0)
+    simple_oauth (0.3.0)
     slop (3.5.0)
     spring (1.1.3)
     sprockets (2.11.0)
@@ -444,6 +445,16 @@ GEM
       activerecord (>= 3.0.0)
     xpath (2.0.0)
       nokogiri (~> 1.3)
+    youtube_it (2.1.1)
+      builder
+      builder
+      faraday
+      faraday (>= 0.7.3)
+      nokogiri
+      oauth
+      oauth (>= 0.4.4)
+      simple_oauth
+      simple_oauth (>= 0.1.5)
 
 PLATFORMS
   ruby
@@ -537,3 +548,4 @@ DEPENDENCIES
   unf
   unicorn
   vimeo
+  youtube_it

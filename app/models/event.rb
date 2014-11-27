@@ -23,6 +23,7 @@ class Event < ActiveRecord::Base
   include Feedable
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? && x['description'].blank? }
   accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :videos , reject_if: proc {|x| x['in_url'].blank? }, :allow_destroy => true
   attr_accessor  :place_name, :hide_from_feed
   before_save :update_image_attributes
   validates_presence_of :subsite_id, :place_id, :start_at

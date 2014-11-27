@@ -69,7 +69,7 @@ gem 'truncate_html'
 gem 'unicorn'
 gem 'unf' 
 gem 'vimeo'
-
+gem 'youtube_it'
 
 group :development do
   gem 'better_errors'
