@@ -22,10 +22,29 @@
   %body{:class => "#{controller_name} #{action_name}"}
     #container.container
       %header
-        .contain-to-grid.sticky= render 'layouts/top_bar'
+        .top-bar-wrapper.sticky= render 'layouts/top_bar'
+        - if content_for? :page_tree
+          .page_tree
+            .row= yield :page_tree
+          .row.outer_arrow            
+            .small-12.columns
+              = link_to "#", :onmouseover => "javascript:down_pixelache_menu();" do
+                .arrow-down
+        - else
+          .row.black_arrow
+
+            = link_to "#", :onmouseover => "javascript:down_pixelache_menu();" do
+              .arrow-down
+        .outer_arrow         
+          .row
+            = link_to "#", :onmouseover => "javascript:up_pixelache_menu();" do
+              .arrow-up     
+        .pixelache_nav_menu= render :partial => 'layouts/nav_menu'
         = render 'layouts/messages'
 
       #main{:role => "main"}
+
+          
         = yield
     %footer
       .hashtag

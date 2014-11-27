@@ -5,52 +5,28 @@
       &nbsp;
     %li.toggle-topbar.menu-icon
       %a{:href => "#"} Menu
+
   %section.top-bar-section
-    / Right Nav Section
-    %ul.right
-      %li= link_to t(:about), page_path('about')
-      %li.has-dropdown
-        = link_to  t(:activities), '/activities'
-        %ul.dropdown
-          %li= link_to t(:events), events_path
-          %li= link_to t(:festival), festivals_path
-          %li= link_to t(:projects), projects_path
-          %li= link_to 'Residencies', page_path('residencies')
-      %li.has-dropdown
-        = link_to t(:people), '#'
-        %ul.dropdown
-          %li= link_to t(:collaborators), '#'
-          %li= link_to t(:members), '#'
-          %li= link_to t(:network), '#'
-      %li.has-dropdown
-        = link_to t(:archive), '#'
-        %ul.dropdown
-          %li= link_to t(:all_posts), posts_path
-          %li= link_to t(:yearly_archive), '#'
+    %ul.left
+      %li.tagline#dynamic_tagline
+        = link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
           
-          
+    %ul.right.lang
+
+      = link_to_unless(session[:locale] == :en, 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
+      %span.divider= " | "
+      = link_to_unless(session[:locale] == :fi, 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
     - if current_user
       %ul.right
         %li.has-dropdown
           %a{:href=> '#'}= current_user.username.gsub(/\@.*$/, '')
           %ul.dropdown
+            - unless current_user.roles.empty?
+              %li= link_to 'Admin', '/admin'
             %li= link_to 'Edit your profile', edit_user_path(current_user)
             %li= link_to 'Sign out', '/signout'
-      - unless current_user.roles.empty?
-        = render :partial => 'admin/layouts/admin_bar'
 
-      - if current_user.roles.empty?
-        %ul.left
-          %li.tagline#dynamic_tagline
-            = link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
-    - else
-      %ul.left
-        %li.tagline#dynamic_tagline
-          = link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
-          
-    .lang
-      
-      = link_to_unless(session[:locale] == :en, 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
-      |
-      = link_to_unless(session[:locale] == :fi, 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} ) 
+
+
+
         

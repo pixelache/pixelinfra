@@ -1,4 +1,4 @@
-.page_tree
+= content_for :page_tree do
   .row.left-collapse
     .columns
       %span.leaf
@@ -12,10 +12,6 @@
           %span.leaf
             = link_to p.name, p
             = " : "
-.row
-  = link_to "javascript:reveal_pixelache_menu();" do
-    .arrow-down
-.row.pixelache_nav_menu.left-collapse
   
 .festival{:style => "background-color: #" + (@festival.background_colour.blank? ? '#FFF' : @festival.background_colour) }
 

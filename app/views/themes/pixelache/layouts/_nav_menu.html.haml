@@ -1,0 +1,54 @@
+.row.left-collapse
+  .small-2.columns
+    %ul.text-right.first
+      %li= link_to t(:about), page_path('about')
+      %li= link_to t(:activities), "#", onmouseover: "javascript:toggleNavMenu('#activities')", id: :activities
+      %li= link_to t(:people), "#", onmouseover: "javascript:toggleNavMenu('#people')", id: :people
+      %li= link_to t(:archive), "#", onmouseover: "javascript:toggleNavMenu('#archive')", id: :archive
+  .small-2.columns
+    %ul.navhide#activities_menu
+      %li= link_to t(:events), "#", onmouseover: "javascript:toggleNavMenu('#events')", id: :events
+      %li= link_to t(:projects), "#", onmouseover: "javascript:toggleNavMenu('#projects')" , id: :projects
+      %li= link_to t(:festival), festivals_path
+      %li= link_to t(:residencies), residencies_path
+    %ul.navhide#people_menu
+      %li= link_to t(:collaborators), '#'
+      %li= link_to t(:members), '#'
+      %li= link_to t(:network), 'http://network.pixelache.ac/'
+    %ul.navhide#archive_menu
+      %li= link_to t(:all_posts), posts_path
+      %li= link_to t(:festivals), festivals_path
+      %li= link_to t(:yearly_archive), "#", onmouseover: "javascript:toggleNavMenu('#yearly')", id: :yearly
+              
+  .small-8.columns
+    %ul.navhide.inner#yearly_menu
+      .row
+        - (Time.now.year - 1).downto(2002).to_a.in_groups_of(3).each do |group|
+          .small-2.columns.small-offset-1
+            %ul.inner
+              - group.each do |year|
+                - next if year.nil?
+                %li= link_to year, "/archive/#{year}"
+    %ul.inner.navhide#events_menu
+      .row
+        - @recent_events.in_groups_of(4).each do |group|
+          .small-6.columns
+            %ul.inner
+              - group.each do |e|
+                - next if e.nil?
+                %li
+                  = link_to e.name, e
+                  = l e.start_at.to_date, format: :short
+                - if e == @recent_events.last
+                  %li= link_to t(:all_events), events_path
+    %ul.inner.navhide#projects_menu
+      .row
+        - @active_projects.in_groups_of(4) do |group|
+          .small-4.columns  
+            %ul.inner
+              - group.each do |p|
+                - next if p.nil?
+                %li= link_to p.name, p
+                - if p == @active_projects.last
+                  %li= link_to t(:all_projects), projects_path
+  

@@ -1,13 +1,13 @@
-.page_tree
-  .row
-    .small-12.columns
-      - @page.self_and_ancestors.reverse.each do |p|
-        - if p == @page
-          %strong= p.name
-        - else
-          %span.leaf
-            = link_to p.name, p
-            = " : "
+= content_for :page_tree do
+
+  .small-12.columns
+    - @page.self_and_ancestors.reverse.each do |p|
+      - if p == @page
+        %strong= p.name
+      - else
+        %span.leaf
+          = link_to p.name, p
+          = " : "
 
 .page
   .row

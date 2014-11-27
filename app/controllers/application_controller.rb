@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   theme :determine_site
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :get_locale
+  before_filter :populate_nav
   
   def add_to_mailchimp   # change when we get API key
     h = Hominid::Base.new({:api_key => ENV['mailchimp_api_key']})
@@ -20,6 +21,12 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def populate_nav
+    return if @site.name != 'pixelache'
+    @recent_events = Event.by_site(@site).published.order('start_at DESC').limit(8)
+    @active_projects = Project.active
+  
+  end
   
   def reroute
     url_parts = params[:url].split(/\//, 2)
