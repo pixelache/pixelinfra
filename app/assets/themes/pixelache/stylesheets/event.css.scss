@@ -4,6 +4,12 @@
   margin: 20px auto 75px auto;
 }
 
+.festival_strip {
+  margin: 1rem 0rem;
+  padding: 8px 0px;
+  font-size: 1.3rem;
+  font-family: $quicksand;
+}
 
 // "Box" event on index view
 
@@ -213,5 +219,22 @@
       }
     }
   
+  }
+  
+  .video_container {
+    .video {
+      .video_title {
+        font-family: $quicksand;
+        font-size: 1.5rem;
+        margin-bottom: 0.6rem;
+      }
+      .video_description {
+        color: #333;
+        font-family: inherit;
+        font-weight: normal;
+        font-size: 0.8rem;
+        line-height: 1.4rem;
+      }
+    }
   }
 }

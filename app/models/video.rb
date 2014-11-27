@@ -42,6 +42,7 @@ class Video < ActiveRecord::Base
       self.thumbnail_width, self.thumbnail_height = `identify -format "%wx%h" #{thumbnail.file.path}`.split(/x/)
     end
     if hostid == 'error' || hostid.blank?
+      die
       errors.add(:hostid, "Could not load video with this URL")
     end
     if videohost_id.blank?
@@ -59,12 +60,10 @@ class Video < ActiveRecord::Base
       
   end
   
-  def in_url
-    url
-  end
+ 
   
   def url
-    videohost_id == 1 ? "http://www.youtube.com/watch?v=#{hostid}" : "http://vimeo.com/#{hostid}"
+    videohost_id == 2 ? "http://www.youtube.com/watch?v=#{hostid}" : "http://vimeo.com/#{hostid}"
   end
   
   def video_provider

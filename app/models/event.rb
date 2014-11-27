@@ -41,7 +41,9 @@ class Event < ActiveRecord::Base
   scope :by_name, -> (name) { joins(:translations).select("DISTINCT events.* ").where("event_translations.name ILIKE '%" + name + "%'")}
 
   def all_documentation
-    {"images" => [photos + archivalimages].flatten.uniq {|p| p.filename_identifier } }
+    {"images" => [photos + archivalimages].flatten.uniq {|p| p.filename_identifier } ,
+     "videos" => videos
+    }
   end
   
   def body

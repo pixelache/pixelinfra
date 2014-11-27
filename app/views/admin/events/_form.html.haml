@@ -101,7 +101,7 @@
                   - unless ff.object.thumbnail.blank?
                     %p= image_tag ff.object.thumbnail.url(:thumb)
                     %p= ff.object.title
-                    = ff.input :in_url, label: t(:url_to_video)
+                    = ff.input :in_url, label: t(:url_to_video), input_html: { value: ff.object.url }
               - else
                 = ff.input :in_url, label: t(:url_to_video)
           = ff.link_to_remove t(:remove_video), class: [:button, :round, :alert, :tiny]

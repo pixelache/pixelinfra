@@ -1,4 +1,13 @@
+
+    
 .event_single.row.outer
+
+  - if @event.festival
+    .festival_strip.row{:style => "background-color: #" + (@event.festival.background_colour.blank? ? "#FFF" : @event.festival.background_colour) + "; color: #" +  (@event.festival.primary_colour.blank? ? "#333" : @event.festival.primary_colour)}
+      .small-12.columns.text-center
+        = @event.festival.name
+        = " : " unless @event.festival.subtitle.blank?
+        = @event.festival.subtitle
   .internal.columns.small-8.columns.small-centered
     .title
       = @event.name
@@ -22,21 +31,27 @@
     .row
       .small-12.centered.columns.share_this= render :partial => 'shared/share_this_buttons'
 
-    - unless @event.all_documentation['images'].empty?
+    - unless @event.all_documentation.empty?
       .documentation#documentation
         .row.related_title
           .small-12.columns.small-centered
             %h1= t(:documentation)
-        .image_carousel
-          - @event.all_documentation["images"].each do |i|
-            .img
-              = link_to image_tag(i.filename.url(:standard)), i.filename.url, rel: :lazybox
-              .thumb= image_tag i.filename.url(:thumb)
-          
-
+        - unless @event.all_documentation["images"].empty?
+          .image_carousel
+            - @event.all_documentation["images"].each do |i|
+              .img
+                = link_to image_tag(i.filename.url(:standard)), i.filename.url, rel: :lazybox
+                .thumb= image_tag i.filename.url(:thumb)
+        - unless @event.all_documentation["videos"].empty?
+          .video_container
+            - @event.all_documentation["videos"].each do |v|
+              .video{:style => v.thumbnail? ? "background: url(#{v.thumbnail.url}) no-repeat center center" : false }
+                .video_title= v.title
+                .flex-video= raw figure_video_type(v, v.video_width.blank? ? 580 : v.video_width, v.video_height.blank? ? 390 : v.video_height)
+                .video_description= raw v.description
 
   
-    - unless @event.posts.empty? && !@event.festival && !@event.project
+    - unless @event.posts.empty? &&  !@event.project
       .row.related_title
         .small-12.columns.small-centered
           %h1= t(:related_content)

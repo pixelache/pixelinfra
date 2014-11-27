@@ -15,6 +15,7 @@ gem 'execjs', :group => :production
 gem 'therubyracer', :group => :production
 
 gem 'acts-as-taggable-on', '~> 3.4'
+gem 'auto_html'
 gem 'capistrano', '~> 3.1.0'
 gem 'capistrano-rails', '~> 1.1.0'
 gem 'capistrano-rvm'
