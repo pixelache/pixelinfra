@@ -1,4 +1,25 @@
-.festival{:style => "background-color: " + (@festival.background_colour.blank? ? '#FFF' : @festival.background_colour) }
+.page_tree
+  .row.left-collapse
+    .columns
+      %span.leaf
+        = link_to t(:festivals), festivals_path
+        = ' : '
+      - @page.self_and_ancestors.reverse.each do |p|
+        - if p == @page
+          %span.leaf
+            %strong= p.name
+        - else
+          %span.leaf
+            = link_to p.name, p
+            = " : "
+.row
+  = link_to "javascript:reveal_pixelache_menu();" do
+    .arrow-down
+.row.pixelache_nav_menu.left-collapse
+  
+.festival{:style => "background-color: #" + (@festival.background_colour.blank? ? '#FFF' : @festival.background_colour) }
+
+            
   = render :partial => 'header'
 
         

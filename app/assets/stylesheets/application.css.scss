@@ -13,6 +13,8 @@
 */
 @import 'slick';
 @import "font-awesome";
+@import 'foundation_and_overrides';
+
 .brand {
   float: left;
   padding-right: 8px;
@@ -37,3 +39,34 @@ ul.nav li {
   border: solid 1px #C66;
 }
 
+.arrow-down {
+  margin-left: 3rem;
+	width: 0; 
+	height: 0; 
+	border-left: 14px solid transparent;
+	border-right: 14px solid transparent;
+	
+	border-top: 14px solid #d0d2d3;
+}
+
+.left-collapse {
+  .columns {
+    padding-left: 0;
+    padding-right: $column-gutter;
+  }
+}
+
+.right-collapse {
+  .columns {
+    padding-right: 0;
+    padding-right: $column-gutter;
+  }
+}
+
+.pixelache_nav_menu {
+  background-color: #666;
+  &:hover {
+    color: #FFF;
+  }
+  color: #ccc;
+}

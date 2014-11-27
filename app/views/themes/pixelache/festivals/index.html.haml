@@ -1,9 +1,23 @@
 .festival_index
   - @festivals.each do |festival|
-    = link_to festival do
+    = link_to festival, id: "festival_#{festival.id}" do
       %section{:style => "background-color: ##{festival.background_colour}; color: ##{festival.primary_colour}"}
         .row
           .small-12.columns.title= festival.end_at.strftime("%Y")
         .row
           .small-12.columns.subtitle= festival.subtitle
+    - unless festival.festivalbackdrop.blank?
+      = content_for :jquery do
+        :plain
+          $("#festival_#{festival.id.to_s}").on( "mouseenter", function() {
+            $("#festival_#{festival.id.to_s} section").fadeTo('fast', 0.3, function()
+            {
+                $(this).css("background-image", "url(#{festival.festivalbackdrop.url})");
+            }).fadeTo('fast', 1);
+            
+            
+            }).on( "mouseleave", function() {
+            $("#festival_#{festival.id.to_s} section").css("background-image", "none");
+            });
+          
         

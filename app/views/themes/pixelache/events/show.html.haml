@@ -1,13 +1,23 @@
-
+.page_tree
+  .row
+    .small-12.columns
+      - if @event.project
+        = link_to t(:projects), project_path
+        = " : "
+        - @event.project.self_and_ancestors.reverse.each do |p|
+          %span.leaf
+            = link_to p.name, p
+            = " : "
+        %strong= @event.name
     
 .event_single.row.outer
 
   - if @event.festival
     .festival_strip.row{:style => "background-color: #" + (@event.festival.background_colour.blank? ? "#FFF" : @event.festival.background_colour) + "; color: #" +  (@event.festival.primary_colour.blank? ? "#333" : @event.festival.primary_colour)}
       .small-12.columns.text-center
-        = @event.festival.name
+        = link_to @event.festival.name, @event.festival, :style => "color: #" +  (@event.festival.primary_colour.blank? ? "#333" : @event.festival.primary_colour)
         = " : " unless @event.festival.subtitle.blank?
-        = @event.festival.subtitle
+        = link_to @event.festival.subtitle, @event.festival, :style => "color: #" +  (@event.festival.primary_colour.blank? ? "#333" : @event.festival.primary_colour)
   .internal.columns.small-8.columns.small-centered
     .title
       = @event.name

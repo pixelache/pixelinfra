@@ -6,18 +6,21 @@
   .project_detail a {
     color: ##{@project.project_link_colour};
   }
+.page_tree
+  .row
+    .small-12.columns
+      = link_to t(:projects), projects_path
+      = ' : '
+      - @project.self_and_ancestors.reverse.each do |p|
+        - if p == @project
+          %strong= p.name
+        - else
+          %span.leaf
+            = link_to p.name, p
+            = " : "
+              
 .outer.project_detail(style="")
-  - unless @project.root?
-    .page_tree
-      .row
-        .small-12.columns
-          - @project.self_and_ancestors.reverse.each do |p|
-            - if p == @project
-              %strong= p.name
-            - else
-              %span.leaf
-                = link_to p.name, p
-                = " : "
+
     
   .wide_project_banner{:style => @project.background_css }
     .row

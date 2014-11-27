@@ -339,6 +339,7 @@ en:
   no_events: 'No events yet.'
   documentation: 'Documentation'
   no_posts: 'There are no posts relating to this topic.'
+  festivals: 'Festivals'
   related_event: 'Related event'
   your_comment_was_added: 'Your comment was added'
   override_country: 'Enter text here that will display instead of the country from the above dropdown'

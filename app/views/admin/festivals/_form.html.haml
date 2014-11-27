@@ -38,7 +38,14 @@
   .row
     .small-2.columns= f.input :primary_colour, :as => :string, :input_html => {:class => :colourpicker }, :label => 'Secondary colour for archive page text'
   .row
+    .small-6.columns
+      - if f.object.festivalbackdrop?
+        = image_tag f.object.festivalbackdrop.url, :width => 400
+        = f.input :remove_festivalbackdrop, as: :boolean
+      = f.input :festivalbackdrop, hint: 'Resolution must be 1920x480px!'
+  .row
     .small-6.columns= f.input :published
+
   .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]
 = content_for :jquery do

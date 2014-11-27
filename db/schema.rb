@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141127105743) do
+ActiveRecord::Schema.define(version: 20141127161241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -311,6 +311,7 @@ ActiveRecord::Schema.define(version: 20141127105743) do
     t.string   "primary_colour"
     t.integer  "eventr_id"
     t.boolean  "published",          default: false, null: false
+    t.string   "festivalbackdrop"
   end
 
   create_table "flickrsets", force: true do |t|
