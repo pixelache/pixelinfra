@@ -5,9 +5,14 @@
   background-color: #d0d2d3;
   color: #6d6e70;
   padding: 0.5rem 0rem;
-  max-height: 2rem;
+  max-height: 4rem;
   overflow: hidden;
   z-index: 12;
+  .larger {
+    a {
+      font-size: 0.9rem;
+    }
+  }
   a {
     font-size: 0.8rem;
     color: #6d6e70;  

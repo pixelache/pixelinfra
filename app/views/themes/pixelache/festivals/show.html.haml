@@ -1,15 +1,10 @@
-.page_tree
-  .row
-    .small-12.columns
-      = link_to t(:festivals), festivals_path
-      = ' : '
-      - @festival.self_and_ancestors.reverse.each do |p|
-        - if p == @festival
-          %strong= p.name
-        - else
-          %span.leaf
-            = link_to p.name, p
-            = " : "
+= content_for :page_tree do
+  .row.left-collapse
+    = link_to t(:festivals), festivals_path
+    = ' : '
+    %span.leaf
+      %strong=  @festival.name
+
             
 .festival{:style => "background-color: " + (@festival.background_colour.blank? ? "#FFF" : @festival.background_colour)} 
 

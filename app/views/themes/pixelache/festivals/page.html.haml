@@ -1,17 +1,24 @@
 = content_for :page_tree do
-  .row.left-collapse
+  .row.left-collapse.larger
     .columns
       %span.leaf
-        = link_to t(:festivals), festivals_path
+        = link_to @festival.name, @festival
         = ' : '
-      - @page.self_and_ancestors.reverse.each do |p|
+        
+      - @page.self_and_ancestors.reverse.each_with_index do |p, i|
+        - next if p == @page
+        - next if p.festival
+        %span.leaf
+          = link_to p.name, p
+          = " : " unless i == @page.self_and_ancestors.size - 2
+  .row.left-collapse.moving
+    - @page.parent.children.reverse.each_with_index do |p, i| 
+      %span.leaf
         - if p == @page
-          %span.leaf
-            %strong= p.name
+          %strong= link_to p.name, p
         - else
-          %span.leaf
-            = link_to p.name, p
-            = " : "
+          = link_to p.name, p
+        = " : " unless i == @page.parent.children.size - 1
   
 .festival{:style => "background-color: #" + (@festival.background_colour.blank? ? '#FFF' : @festival.background_colour) }
 
