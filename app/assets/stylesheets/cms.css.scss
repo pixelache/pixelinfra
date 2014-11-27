@@ -112,12 +112,18 @@ form {
 table {
   td {
     .small {
-      font-size: 9px;
+      font-size: 0.8rem;
       text-transform: uppercase;
+      a {
+        font-weight: 600;
+        font-size: 0.7rem;
+      }
     }
     p.metadata {
-      font-size: 0.8rem;
-      margin: 0.2rem 0rem;
+      font-size: 0.65rem;
+      line-height: 1rem;
+      color: #666;
+      margin: 0;
     }
     span.evolved {
       text-decoration: line-through;
