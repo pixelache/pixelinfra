@@ -6,4 +6,16 @@ class Flickrset < ActiveRecord::Base
   validates_presence_of :flickr_id, :subsite_id
   
   attr_accessor :event_name
+  
+  before_save :get_last_mod_date
+  
+  def get_last_mod_date
+    if last_modified_date.blank?
+      FlickRaw.api_key= ENV['FLICKR_API_KEY']
+      FlickRaw.shared_secret= ENV['FLICKR_API_SECRET']
+      set = flickr.photosets.getInfo(:photoset_id => flickr_id)
+      self.last_modified_date = Time.at(set.date_update.to_i).to_date
+    end
+  end
+  
 end

@@ -3,6 +3,10 @@ class Admin::FlickrsetsController < Admin::BaseController
   handles_sortable_columns
   autocomplete :event, :name, :extra_data => [:start_at], :display_value => :event_with_date
     
+  def create
+    create! { admin_flickrsets_path }
+  end
+  
   def index
     order = sortable_column_order do |column, direction|
       case column
@@ -26,7 +30,7 @@ class Admin::FlickrsetsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:flickrset => [:subsite_id, :project_id, :flickr_id, :event_id, :festival_id])
+    params.permit(:flickrset => [:subsite_id, :project_id, :flickr_id, :title, :description, :event_id, :festival_id])
   end
   
 end

@@ -2,7 +2,10 @@
   .small-10.columns
     %h2 Flickr sets (archive)
     
-    %p Note: Flickrsets are synchronised every 3 hours. If you upload a new set it may take up to 3 hours to appear in this list.
+    %p Note: Flickrsets from the pixelache account are synchronised every 3 hours. If you upload a new set it may take up to 3 hours to appear in this list. You can manually add Flickr sets that belong to other users on Flickr if relevant.
+    %p
+      = link_to 'Create new Flickr set on Flickr', 'http://www.flickr.com/photos/upload/', class: [:button, :tiny, :round]
+      = link_to 'Add new Flickr set to this CMS', new_admin_flickrset_path, class: [:button, :tiny, :round]
     = paginate @flickrsets
     %table.table.table-condensed
       %thead
@@ -16,4 +19,4 @@
         - @flickrsets.each do |set|
           = render :partial => 'flickrset', :locals => {:flickrset => set}
     = paginate @flickrsets
-    %p= link_to 'Create new Flickr set', 'http://www.flickr.com/photos/upload/'
+    %p= link_to 'Create new Flickr set', 'http://www.flickr.com/photos/upload/', class: [:button, :tiny, :round]
