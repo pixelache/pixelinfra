@@ -22,7 +22,7 @@
   %body{:class => "#{controller_name} #{action_name}"}
     #container.container
       %header
-        .top-bar-wrapper.sticky= render 'layouts/top_bar'
+        .top-bar-wrapper.contain-to-grid.sticky= render 'layouts/top_bar'
         - if content_for? :page_tree
           .page_tree
             .row= yield :page_tree

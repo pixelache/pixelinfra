@@ -10,14 +10,9 @@
       = content_for :jquery do
         :plain
           $("#festival_#{festival.id.to_s}").on( "mouseenter", function() {
-            $("#festival_#{festival.id.to_s} section").fadeTo('fast', 0.3, function()
-            {
-                $(this).css("background-image", "url(#{festival.festivalbackdrop.url})");
-            }).fadeTo('fast', 1);
-            
-            
-            }).on( "mouseleave", function() {
+             $("#festival_#{festival.id.to_s} section").css("background-image", "url(#{festival.festivalbackdrop.url})");
+          }).on( "mouseleave", function() {
             $("#festival_#{festival.id.to_s} section").css("background-image", "none");
-            });
+          });
           
         
