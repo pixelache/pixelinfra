@@ -30,7 +30,7 @@ class Admin::FlickrsetsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:flickrset => [:subsite_id, :project_id, :flickr_id, :title, :description, :event_id, :festival_id])
+    params.permit(:flickrset => [:subsite_id, :project_id, :flickr_id, :flickr_user, :title, :description, :event_id, :festival_id])
   end
   
 end

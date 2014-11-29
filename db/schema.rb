@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141127161241) do
+ActiveRecord::Schema.define(version: 20141129142156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -320,12 +320,13 @@ ActiveRecord::Schema.define(version: 20141127161241) do
     t.text     "description"
     t.date     "start_upload_date"
     t.date     "last_modified_date"
-    t.integer  "subsite_id",                   null: false
+    t.integer  "subsite_id",                                            null: false
     t.integer  "event_id"
     t.integer  "project_id"
     t.integer  "festival_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "flickr_user",                  default: "91330886@N08", null: false
   end
 
   add_index "flickrsets", ["event_id"], name: "index_flickrsets_on_event_id", using: :btree
