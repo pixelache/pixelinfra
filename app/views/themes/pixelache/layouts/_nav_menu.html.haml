@@ -1,11 +1,15 @@
 .row.left-collapse
   .small-2.columns
     %ul.text-right.first
-      %li= link_to t(:about), page_path('about')
+      %li= link_to t(:info), "#", onmouseover: "javascript:toggleNavMenu('#info')", id: :info
       %li= link_to t(:activities), "#", onmouseover: "javascript:toggleNavMenu('#activities')", id: :activities
       %li= link_to t(:people), "#", onmouseover: "javascript:toggleNavMenu('#people')", id: :people
       %li= link_to t(:archive), "#", onmouseover: "javascript:toggleNavMenu('#archive')", id: :archive
   .small-2.columns
+    %ul.navhide#info_menu
+      %li= link_to t(:about), page_path('about')
+      %li= link_to t(:latest_news), "#", onmouseover: "javascript:toggleNavMenu('#news')", id: :news
+      %li= link_to t(:press), page_path('press')
     %ul.navhide#activities_menu
       %li= link_to t(:events), "#", onmouseover: "javascript:toggleNavMenu('#events')", id: :events
       %li= link_to t(:projects), "#", onmouseover: "javascript:toggleNavMenu('#projects')" , id: :projects
@@ -21,6 +25,12 @@
       %li= link_to t(:yearly_archive), "#", onmouseover: "javascript:toggleNavMenu('#yearly')", id: :yearly
               
   .small-8.columns
+    %ul.navhide.inner#news_menu
+      - @recent_news.each do |news|
+        %li
+          = link_to news.title, news
+          = l news.published_at.to_date, format: :short
+      %li= link_to t(:all_news), posts_path
     %ul.navhide.inner#yearly_menu
       .row
         - (Time.now.year - 1).downto(2002).to_a.in_groups_of(3).each do |group|

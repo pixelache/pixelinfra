@@ -25,21 +25,13 @@
         .top-bar-wrapper.contain-to-grid.sticky= render 'layouts/top_bar'
         - if content_for? :page_tree
           .page_tree
-            .row= yield :page_tree
-          .row.outer_arrow            
-            .small-12.columns
-              = link_to "#", :onmouseover => "javascript:down_pixelache_menu();" do
-                .arrow-down
+            = yield :page_tree
+          .arrow-down
+          .arrow-up
         - else
-          .row.black_arrow
-
-            = link_to "#", :onmouseover => "javascript:down_pixelache_menu();" do
-              .arrow-down
-        .outer_arrow         
-          .row
-            = link_to "#", :onmouseover => "javascript:up_pixelache_menu();" do
-              .arrow-up     
-        .pixelache_nav_menu= render :partial => 'layouts/nav_menu'
+          .black.arrow-down
+          .black.arrow-up     
+        .pixelache_nav_menu{:class => content_for?(:page_tree) ? false : :black}= render :partial => 'layouts/nav_menu'
         = render 'layouts/messages'
 
       #main{:role => "main"}
@@ -111,6 +103,14 @@
             $("#mailing_list_loading").toggle();
             $('button#mailing_list_submit').prop('disabled', true);
             $('.email_signup_form').fadeOut();
+          });
+          $('.arrow-down').mouseover(function() {
+            down_pixelache_menu();
+           
+          });
+          $('.arrow-up').mouseover(function() {
+            up_pixelache_menu();
+           
           });
           #{yield :jquery}
         });

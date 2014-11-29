@@ -78,8 +78,9 @@ td .date {
 	border-right: 14px solid transparent;
 	cursor: pointer;
 	border-top: 14px solid #d0d2d3;
-  position: absolute;
+  position: fixed;
   left: 12px;
+  top: 72px;
   z-index: 12;
 }
 
@@ -92,22 +93,34 @@ td .date {
   margin-top: -14px;
   float: right;
   display: none;
-  position: absolute;
+  position: fixed;
   right: 12px;
+  top: 72px;
   z-index: 13;
 }
 
-.black_arrow {
-  .arrow-down {
+.black {
+  &.arrow-down {
     border-top: 14px solid #000;
-    position: fixed;
+    top: 40px;
+  }
+  &.pixelache_nav_menu {
+    top: 40px;
+  }
+  &.arrow-up {
+
+    top: 40px;
   }
 }
+
 .pixelache_nav_menu {
   display: none;
+  width: 100%;
+  position: absolute;
+  top: 72px;
   background-color: #666;
   padding: 0.5rem 0rem;
-  z-index: 13;
+  z-index: 10;
   ul.first {
     padding-right: 1.4rem;
   }

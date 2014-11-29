@@ -21,4 +21,8 @@ class Flickrset < ActiveRecord::Base
   def flickr_url
     "https://www.flickr.com/photos/#{flickr_user}/sets/#{flickr_id}/"
   end
+  
+  def event_name
+    event.blank? ? nil : event.event_with_date
+  end
 end

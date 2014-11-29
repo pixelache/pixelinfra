@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     return if @site.name != 'pixelache'
     @recent_events = Event.by_site(@site).published.order('start_at DESC').limit(8)
     @active_projects = Project.active
-  
+    @recent_news = Post.by_site(@site).published.order('published_at DESC').limit(4)
   end
   
   def reroute

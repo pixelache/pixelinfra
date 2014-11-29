@@ -1,14 +1,13 @@
-.page_tree
-  .row
-    .small-12.columns
-      - if @event.project
-        = link_to t(:projects), project_path
-        = " : "
-        - @event.project.self_and_ancestors.reverse.each do |p|
-          %span.leaf
-            = link_to p.name, p
-            = " : "
-        %strong= @event.name
+= content_for :page_tree do
+  .row.left-collapse
+    - if @event.project
+      = link_to t(:projects), project_path
+      = " : "
+      - @event.project.self_and_ancestors.reverse.each do |p|
+        %span.leaf
+          = link_to p.name, p
+          = " : "
+      %strong= @event.name
     
 .event_single.row.outer
 
@@ -41,7 +40,7 @@
     .row
       .small-12.centered.columns.share_this= render :partial => 'shared/share_this_buttons'
 
-    - unless @event.all_documentation.empty?
+    - unless @event.all_documentation.empty? && !@event.flickrsets.empty?
       .documentation#documentation
         .row.related_title
           .small-12.columns.small-centered
@@ -52,6 +51,10 @@
               .img
                 = link_to image_tag(i.filename.url(:standard)), i.filename.url, rel: :lazybox
                 .thumb= image_tag i.filename.url(:thumb)
+        - unless @event.flickrsets.empty?
+          .subtitle= t :image_galleries
+          - @event.flickrsets.each do |set|
+            %p= link_to set.title, set.flickr_url, target: :_blank
         - unless @event.all_documentation["videos"].empty?
           .video_container
             - @event.all_documentation["videos"].each do |v|
