@@ -14,7 +14,7 @@ namespace :archive do
           e.save
         end
       else
-        Flickrset.create(:title => set.title, :description => set.description, :start_upload_date => Time.at(set.date_create.to_i).to_date, :last_modified_date => Time.at(set.date_update.to_i).to_date,       :flickr_id => set.id, :subsite_id => 1)
+        Flickrset.create(:title => set.title, :description => set.description, :start_upload_date => Time.at(set.date_create.to_i).to_date, :last_modified_date => Time.at(set.date_update.to_i).to_date,       :flickr_id => set.id, :flickr_user => ENV['FLICKR_USER_ID'], :subsite_id => 1)
       end
     end
   end
