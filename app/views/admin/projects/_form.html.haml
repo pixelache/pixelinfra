@@ -40,9 +40,28 @@
             - if ff.object.filename?
               = image_tag ff.object.filename.url(:thumb)
             = ff.input :filename
-            = ff.link_to_remove 'Remove this image'
-      = f.link_to_add 'Add a photo', :photos
-      
+            = ff.link_to_remove 'Remove this image', class: [:button, :alert, :round, :tiny]
+      = f.link_to_add 'Add a photo', :photos, class: [:button, :round, :tiny]
+  .row
+    .small-8.columns
+      %fieldset
+        %legend
+          %strong Videos
+        %p Add links to Vimeo or YouTube videos from the event here.
+        = f.fields_for :videos do |ff|
+          .row
+            .small-8.columns
+              - if !ff.object.new_record?
+                - unless ff.object.new_record?
+                  - unless ff.object.thumbnail.blank?
+                    %p= image_tag ff.object.thumbnail.url(:thumb)
+                    %p= ff.object.title
+                    = ff.input :in_url, label: t(:url_to_video), input_html: { value: ff.object.url }
+              - else
+                = ff.input :in_url, label: t(:url_to_video)
+          = ff.link_to_remove t(:remove_video), class: [:button, :round, :alert, :tiny]
+        = f.link_to_add 'Add a video....', :videos, class: [:button, :round, :tiny]
+              
   .row
     .small-6
       %label Attachments
@@ -55,8 +74,8 @@
           = ff.object.attachedfile
           = link_to 'Download', ff.object.attachedfile.url, :class => [:button, :round, :tiny]
         = ff.input :attachedfile
-        = ff.link_to_remove 'Remove this attachment'
-  = f.link_to_add 'Add an attachment', :attachments
+        = ff.link_to_remove 'Remove this attachment', class: [:button, :round, :alert, :tiny]
+  = f.link_to_add 'Add an attachment', :attachments, class: [:button, :round, :tiny]
   .row
     .small-2.columns= f.input :project_bg_colour, :as => :string, :input_html => {:class => :colourpicker }
   .row

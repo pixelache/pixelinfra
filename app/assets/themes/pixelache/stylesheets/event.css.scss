@@ -204,12 +204,20 @@
 }
 
 .documentation {
-  margin-bottom: 6.5rem;
-  .subtitle {
-    font-family: $quicksand;
-    font-size: 1.5rem;
-    margin-bottom: 0.6rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid black;
+  padding-bottom: 3rem;
+
+  .flickr_galleries {
+    margin: 85px 0px 2rem 0px;
+    clear: left;
+    .subtitle {
+      font-family: $quicksand;
+      font-size: 1.5rem;
+      margin-bottom: 0.6rem;
+    }
   }
+  
   .image_carousel {
 
     .img {

@@ -67,6 +67,22 @@ class Event < ActiveRecord::Base
     end
   end
   
+  def has_documentation?
+    if all_documentation["images"].empty? && flickrsets.empty? && all_documentation["videos"].empty? 
+      if project
+        if project.videos.empty?
+          return false
+        else
+          return true
+        end
+      else
+        return false
+      end
+    else
+      return true
+    end
+  end
+  
   def name_en
     self.name(:en)
   end

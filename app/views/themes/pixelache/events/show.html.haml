@@ -30,8 +30,8 @@
           = @event.place.address
           - unless @event.place.latitude.blank?
             = link_to t(:map), "http://maps.google.com/?q=#{@event.place.latitude},#{@event.place.longitude}", :target => :_blank
-    - unless @event.photos.empty? && @event.videos.empty?
-      .metadata= link_to t(:scroll_down_for_documentation), 'javascript:scrollTo("#documentation");'
+    - if @event.has_documentation?
+      .metadata= link_to t(:scroll_down_for_documentation), '#', onclick: 'scrollTo("#documentation");'
     - if @event.image?
       .event_image= best_image(@event)
         
@@ -40,7 +40,8 @@
     .row
       .small-12.centered.columns.share_this= render :partial => 'shared/share_this_buttons'
 
-    - unless @event.all_documentation.empty? && !@event.flickrsets.empty?
+    - if @event.has_documentation?
+
       .documentation#documentation
         .row.related_title
           .small-12.columns.small-centered
@@ -52,10 +53,22 @@
                 = link_to image_tag(i.filename.url(:standard)), i.filename.url, rel: :lazybox
                 .thumb= image_tag i.filename.url(:thumb)
         - unless @event.flickrsets.empty?
-          .subtitle= t :image_galleries
-          - @event.flickrsets.each do |set|
-            %p= link_to set.title, set.flickr_url, target: :_blank
-        - unless @event.all_documentation["videos"].empty?
+          .flickr_galleries
+            .subtitle= t(@event.all_documentation["images"].empty? ? :image_galleries : :additional_images)
+            - @event.flickrsets.each do |set|
+              %p= link_to set.title, set.flickr_url, target: :_blank
+            
+        - if @event.all_documentation["videos"].empty?
+          - if @event.project
+            - unless @event.project.videos.empty?
+              .subtitle= t :videos_from_this_project, project: @event.project.name
+              .video_container
+                - @event.project.videos.each do |v|
+                  .video{:style => v.thumbnail? ? "background: url(#{v.thumbnail.url}) no-repeat center center" : false }
+                    .video_title= v.title
+                    .flex-video= raw figure_video_type(v, v.video_width.blank? ? 580 : v.video_width, v.video_height.blank? ? 390 : v.video_height)
+                    .video_description= raw v.description
+        - else
           .video_container
             - @event.all_documentation["videos"].each do |v|
               .video{:style => v.thumbnail? ? "background: url(#{v.thumbnail.url}) no-repeat center center" : false }
