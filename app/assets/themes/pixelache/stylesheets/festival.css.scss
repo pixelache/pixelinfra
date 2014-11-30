@@ -58,3 +58,21 @@
 
 
 }
+
+.festival_menu {
+  .title {
+    font-family: $quicksand;
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+    padding: 80px 0px 30px 0px;
+    border-bottom: 1px solid #000;
+  }
+  .subtitle {
+    margin-bottom: 0.4rem;
+  }
+  .date_range {
+    font-size: 0.8rem;
+    font-style: italic;
+  }
+  
+}

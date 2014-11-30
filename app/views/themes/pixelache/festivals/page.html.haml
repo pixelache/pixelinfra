@@ -1,37 +1,38 @@
-= content_for :page_tree do
-  .row.left-collapse.larger
-    .columns
-      %span.leaf
-        = link_to @festival.name, @festival
-        = ' : '
-        
-      - @page.self_and_ancestors.reverse.each_with_index do |p, i|
-        - next if p == @page
-        - next if p.festival
-        %span.leaf
-          = link_to p.name, p
-          = " : " unless i == @page.self_and_ancestors.size - 2
-  .row.left-collapse.moving
-    - @page.parent.children.reverse.each_with_index do |p, i| 
-      %span.leaf
-        - if p == @page
-          %strong= link_to p.name, p
-        - else
-          = link_to p.name, p
-        = " : " unless i == @page.parent.children.size - 1
+= content_for :festival_menu do
+  = render :partial => 'festival_menu', :locals => {festival: @festival}
+/ = content_for :page_tree do
+/   .row.left-collapse.larger
+/     .columns
+/       %span.leaf
+/         = link_to @festival.name, @festival
+/         = ' : '
+/
+/       - @page.self_and_ancestors.reverse.each_with_index do |p, i|
+/         - next if p == @page
+/         - next if p.festival
+/         %span.leaf
+/           = link_to p.name, p
+/           = " : " unless i == @page.self_and_ancestors.size - 2
+/   .row.left-collapse.moving
+/     - @page.parent.children.reverse.each_with_index do |p, i|
+/       %span.leaf
+/         - if p == @page
+/           %strong= link_to p.name, p
+/         - else
+/           = link_to p.name, p
+/         = " : " unless i == @page.parent.children.size - 1
   
-.festival{:style => "background-color: #" + (@festival.background_colour.blank? ? '#FFF' : @festival.background_colour) }
-
-            
-  = render :partial => 'header'
-
+.festival
+  .row  
+    .small-9.columns= raw @page.title
         
   .row
     .small-9.columns= raw simple_format(@page.body)
-    = render :partial => 'sidebar'
+
 
   - if user_signed_in?
     - if can? :edit, @page
       .row
         .small-3.columns= link_to '[edit]', edit_admin_subsite_page_path(@page.subsite, @page.id)
-    
+
+                        

@@ -17,6 +17,7 @@
  */
 
 @import 'slick';
+@import 'variables';
 
 .container {
 
@@ -77,11 +78,11 @@ td .date {
 	border-left: 14px solid transparent;
 	border-right: 14px solid transparent;
 	cursor: pointer;
-	border-top: 14px solid #d0d2d3;
+	border-top: 14px solid #000;
   position: fixed;
   left: 12px;
-  top: 72px;
-  z-index: 12;
+  top: 40px;
+  z-index: 13;
 }
 
 .arrow-up {
@@ -95,8 +96,8 @@ td .date {
   display: none;
   position: fixed;
   right: 12px;
-  top: 72px;
-  z-index: 13;
+  top: 40px;
+  z-index: 999;
 }
 
 .black {
@@ -104,22 +105,61 @@ td .date {
     border-top: 14px solid #000;
     top: 40px;
   }
-  &.pixelache_nav_menu {
-    top: 40px;
-  }
   &.arrow-up {
-
     top: 40px;
+    z-index: 99;
+  }
+}
+
+
+.page_tree {
+  background-color: #d0d2d3;
+  color: #6d6e70;
+  padding: 0.5rem 0rem;
+  max-height: 4rem;
+  overflow: hidden;
+  position: fixed;
+
+  width: 100%;
+  height: 32px;
+  max-height: 32px;
+  z-index: 12;
+  .larger {
+    a {
+      font-size: 0.9rem;
+    }
+  }
+  a {
+    font-size: 0.8rem;
+    color: #6d6e70;  
+    &:hover {
+     color: $primary-color; 
+    }
+  }
+  
+  span.leaf {
+    padding-right: 5px;
+    font-size: 0.8rem;
+    a { 
+     color: #6d6e70;   
+     &:hover {
+      color: $primary-color; 
+     }
+    }
   }
 }
 
 .pixelache_nav_menu {
   display: none;
+  
+  &.festival_menu {
+    display: block;
+  }
   width: 100%;
-  position: absolute;
-  top: 72px;
+  position: fixed;
+  top: 40px;
   background-color: #666;
-  padding: 0.5rem 0rem;
+  padding: 10px 0px 5px 0px;
   z-index: 10;
   ul.first {
     padding-right: 1.4rem;
@@ -127,6 +167,9 @@ td .date {
   ul {
     &.navhide {
       display: none;
+      &.open {
+        display: block !important;
+      }
     }
     padding: 0px;
     margin: 0px;
@@ -138,6 +181,9 @@ td .date {
       font-size: 0.9rem;
       color: #FFF;
       a {
+        &.active {
+          color: #FFF !important;
+        }
         &:hover {
           color: #FFF !important;
         }

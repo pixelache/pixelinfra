@@ -1,0 +1,41 @@
+.row.left-collapse
+  .small-2.columns
+    .title= link_to festival.name, festival, style: "color: ##{festival.primary_colour.blank? ? 'FFF' : festival.primary_colour}"
+    .subtitle= festival.subtitle
+    .date_range= date_range(festival.start_at, festival.end_at, format: :short)
+  .small-2.columns
+    %ul.text-right.first
+      %li= link_to t(:events), "#", onmouseover: "javascript:toggleNavMenu('#events')", id: :events, class: (@event ? :active : false)
+      - unless festival.pages.empty?
+        - festival.pages.first.children.each do |c|
+          - if c.children.empty?
+            %li= link_to c.name, festival_page_festival_path(festival, c), class: (@page.blank? ? false : (  !@page.ancestors.include?(c) ? false : :active))
+          - else
+            %li= link_to c.name, "#", onmouseover: "javascript:toggleNavMenu('#page_#{c.id}')", id: "page_#{c.id}", class: (@page.blank? ? false : (  @page.ancestors.include?(c) ? :active : false))
+            
+  -# 2nd columns, depth of 2
+  .small-4.columns
+    %ul.navhide#events_menu{class: (@event ? :open : false)}
+      - festival.events.each do |e|
+        %li= link_to e.name, e, class: (@event ? ((@event == e) ? :active : false ) : false )
+    
+    - festival.pages.first.find_all_by_generation(1).each do |p|
+      %ul.navhide{id: "page_#{p.id}_menu", class: (@page.blank? ? false : (  (@page.self_and_ancestors & p.children).empty? ? false : :open)) }
+        %li= link_to p.name + " overview", p
+        - p.children.each do |pp|
+          - if pp.children.empty?
+            %li= link_to pp.name, pp, class: (@page.blank? ? false : (  @page.self_and_ancestors.include?(pp)  ? :active : false ))
+          - else
+            %li= link_to pp.name, "#", onmouseover: "javascript:toggleNavMenu('#page_#{pp.id}')", id: "page_#{pp.id}", class: (@page.blank? ? false : (  @page.ancestors.include?(pp) || (@page == pp) ? :active : false))
+          
+  -# 3rd column, depth of 3
+  .small-4.columns
+    - festival.pages.first.find_all_by_generation(2).each do |p|
+      %ul.navhide{id: "page_#{p.id}_menu", class: (@page.blank? ? false : (  (@page.self_and_ancestors & p.self_and_descendants).empty? ? false : :open)) }
+        %li= link_to p.name + " overview", p, class: (@page.blank? ? false : (  p == @page ? :active : false))
+        - p.children.each do |pp|
+          %li= link_to pp.name, pp, class: (@page.blank? ? false : (  @page.self_and_ancestors.include?(pp) ? :active : false ))
+      
+= content_for :jquery do
+  $('.festival').css('margin-top', $('.festival_menu').css('height'));
+                    

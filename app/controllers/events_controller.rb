@@ -7,6 +7,9 @@ class EventsController < InheritedResources::Base
   
   def show
     @event = Event.find(params[:id])
+    if @event.festival
+      @festival = @event.festival
+    end
     set_meta_tags :title => @event.name
   end
   

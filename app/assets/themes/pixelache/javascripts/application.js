@@ -7,6 +7,7 @@ function down_pixelache_menu() {
   $('.pixelache_nav_menu').slideDown();
   $('.arrow-up').css('display', 'block');
 
+
 }
 
 function up_pixelache_menu() {

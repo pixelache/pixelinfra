@@ -1,12 +1,9 @@
-= content_for :page_tree do
-  .row.left-collapse
-    = link_to t(:festivals), festivals_path
-    = ' : '
-    %span.leaf
-      %strong=  @festival.name
+= content_for :festival_menu do
+  = render :partial => 'festival_menu', :locals => {festival: @festival}
+
 
             
-.festival{:style => "background-color: " + (@festival.background_colour.blank? ? "#FFF" : @festival.background_colour)} 
+.festival
 
   - if @festival.image?
     
@@ -36,8 +33,7 @@
         
   .row
     .small-9.columns= raw @festival.overview_text
-    = render :partial => 'sidebar'
-                  
-                    
+
+
                     
     

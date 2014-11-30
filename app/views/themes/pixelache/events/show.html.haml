@@ -1,22 +1,21 @@
-= content_for :page_tree do
-  .row.left-collapse
-    - if @event.project
-      = link_to t(:projects), project_path
-      = " : "
-      - @event.project.self_and_ancestors.reverse.each do |p|
-        %span.leaf
-          = link_to p.name, p
-          = " : "
-      %strong= @event.name
+- if @event.festival
+  = content_for :festival_menu do
+    = render :partial => 'festivals/festival_menu', :locals => {festival: @event.festival}
+- else
+  = content_for :page_tree do
+    .row.left-collapse
+      - if @event.project
+        = link_to t(:projects), project_path
+        = " : "
+        - @event.project.self_and_ancestors.reverse.each do |p|
+          %span.leaf
+            = link_to p.name, p
+            = " : "
+        %strong= @event.name
     
-.event_single.row.outer
+.event_single.row.outer{class: @event.festival ? :festival : false}
 
-  - if @event.festival
-    .festival_strip.row{:style => "background-color: #" + (@event.festival.background_colour.blank? ? "#FFF" : @event.festival.background_colour) + "; color: #" +  (@event.festival.primary_colour.blank? ? "#333" : @event.festival.primary_colour)}
-      .small-12.columns.text-center
-        = link_to @event.festival.name, @event.festival, :style => "color: #" +  (@event.festival.primary_colour.blank? ? "#333" : @event.festival.primary_colour)
-        = " : " unless @event.festival.subtitle.blank?
-        = link_to @event.festival.subtitle, @event.festival, :style => "color: #" +  (@event.festival.primary_colour.blank? ? "#333" : @event.festival.primary_colour)
+
   .internal.columns.small-8.columns.small-centered
     .title
       = @event.name
