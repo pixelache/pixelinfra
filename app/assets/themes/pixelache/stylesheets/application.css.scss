@@ -154,6 +154,11 @@ td .date {
   
   &.festival_menu {
     display: block;
+    ul {
+      li {
+        font-size: 0.8rem;
+      }
+    }
   }
   width: 100%;
   position: fixed;
