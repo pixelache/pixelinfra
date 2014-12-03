@@ -17,7 +17,7 @@
     .filter_title Filter by festival
     %select#by_festival
       %option{:value => ""} &nbsp;
-      - Festival.all.each do |festival|
+      - Festival.all.order(:start_at).each do |festival|
         %option{:value => festival.id, :selected => (params[:by_festival] == festival.id.to_s ? :selected : false)}= festival.name
   .large-3.columns
     .filter_title Filter by project:
