@@ -350,6 +350,7 @@ en:
   all_projects: 'All projects'
   additional_images: 'Additional images'
   related_event: 'Related event'
+  add_festival_theme: 'Add festival theme'
   your_comment_was_added: 'Your comment was added'
   override_country: 'Enter text here that will display instead of the country from the above dropdown'
   your_comment_was_not_added: 'There was an error saving your comment'

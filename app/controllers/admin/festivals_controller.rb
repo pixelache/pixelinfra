@@ -1,5 +1,6 @@
 class Admin::FestivalsController < Admin::BaseController
   # autocomplete :place, :name
+  handles_sortable_columns
   
   
   def create
@@ -14,6 +15,20 @@ class Admin::FestivalsController < Admin::BaseController
     destroy! { admin_festivals_path }
   end
   
+  
+  def index
+    order = sortable_column_order do |column, direction|
+      case column
+      when "name"
+        "name #{direction}"
+      when "dates"
+        "start_at #{direction}"
+      else
+        "start_at"
+      end
+    end
+    @festivals = apply_scopes(Festival).includes(:node).order(order).page(params[:page]).per(20)
+  end
  
   protected
   

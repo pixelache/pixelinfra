@@ -1,13 +1,21 @@
 %tr
-  %td= link_to festival.name, festival.website
+  %td
+    = link_to festival.name, festival.website
+    - unless festival.festivalthemes.empty?
+      %p.metadata= pluralize(festival.festivalthemes.count, 'festival theme:')
+      - festival.festivalthemes.each do |ft|
+        = ft.name
+        - if can? :manage, ft
+          = link_to t(:edit),  edit_admin_festivaltheme_path(ft)
+          |
+          = link_to t(:delete) , [:admin, ft], :method => :delete, data: {confirm: t(:are_you_sure)}
+    %p.metadata= link_to t(:add_festival_theme), new_admin_festival_festivaltheme_path(festival)
   %td= festival.node.name
   %td
     = date_range(festival.start_at, festival.end_at)
   %td.actions
-    = link_to 'Show', festival, :target => :_blank
-    |
+    = link_to 'Show', festival, :target => :_blank, class: [:button, :tiny, :round]
     - if can? :edit, Festival
-      = link_to 'Edit', edit_admin_festival_path(festival)
+      = link_to 'Edit', edit_admin_festival_path(festival), class: [:button, :tiny, :round]
     - if can? :destroy, Festival
-      |
-      = link_to 'Destroy', [:admin, festival], :method => :delete, :data => {:confirm => "Are you sure?"}
+      = link_to 'Destroy', [:admin, festival], :method => :delete, :data => {:confirm => "Are you sure?"}, class: [:button, :alert, :tiny, :round]

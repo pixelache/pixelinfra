@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141129142156) do
+ActiveRecord::Schema.define(version: 20141203140850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -261,6 +261,7 @@ ActiveRecord::Schema.define(version: 20141129142156) do
     t.text     "resources_needed"
     t.text     "protocol"
     t.integer  "residency_id"
+    t.integer  "festivaltheme_id"
   end
 
   add_index "events", ["place_id"], name: "index_events_on_place_id", using: :btree
@@ -313,6 +314,26 @@ ActiveRecord::Schema.define(version: 20141129142156) do
     t.boolean  "published",          default: false, null: false
     t.string   "festivalbackdrop"
   end
+
+  create_table "festivaltheme_translations", force: true do |t|
+    t.integer  "festivaltheme_id", null: false
+    t.string   "locale",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.text     "description"
+  end
+
+  add_index "festivaltheme_translations", ["festivaltheme_id"], name: "index_festivaltheme_translations_on_festivaltheme_id", using: :btree
+  add_index "festivaltheme_translations", ["locale"], name: "index_festivaltheme_translations_on_locale", using: :btree
+
+  create_table "festivalthemes", force: true do |t|
+    t.integer  "festival_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "festivalthemes", ["festival_id"], name: "index_festivalthemes_on_festival_id", using: :btree
 
   create_table "flickrsets", force: true do |t|
     t.integer  "flickr_id",          limit: 8

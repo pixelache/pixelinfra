@@ -5,9 +5,9 @@
     %table.table.table-condensed
       %thead
         %tr
-          %th Name
-          %th Host
-          %th Dates
+          %th= sortable_column 'Name'
+          %th= sortable_column 'Host'
+          %th= sortable_column 'Dates'
           %th{:colspan => 2}
       %tbody
         - @festivals.each do |festival|

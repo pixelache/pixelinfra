@@ -9,6 +9,7 @@
   .row
     .small-4.columns
       = f.input :festival, :label => 'Part of a festival?'
+      = f.input :festivaltheme, :label => 'If so, part of a festival theme?', :member_label => :name_and_festival, :hint => 'Make sure you match the right festival!'
     .small-4.columns
       = f.input :residency, :label => 'Attached to a residency?'
     .small-4.columns

@@ -1,0 +1,24 @@
+= semantic_form_for [:admin, @festival, festivaltheme] do |f|
+  .row
+    .small-12.columns= f.input :festival, include_blank: false
+    
+  .row
+    %dl.tabs{"data-tab" => ""}
+      - I18n.available_locales.each_with_index do |locale, i|
+        %dd{:class => (i == 0 ? :active : false)}
+          = link_to t(:locale_name, :locale => locale), "##{locale}"
+    .tabs-content
+      - I18n.available_locales.each_with_index do |locale, i|
+        .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+          = f.globalize_fields_for locale do |en|
+            .row
+              .small-12.columns
+                %b= "Theme name in #{t :locale_name, :locale => locale}"
+                = en.text_field :name
+            .row
+              .small-12.columns
+                %b= "Theme description/overview in #{t :locale_name, :locale => locale}"
+                = en.cktext_area :description
+                
+  .row
+    .small-6.columns= f.submit t(:save),  class: [:button, :small, :round]
