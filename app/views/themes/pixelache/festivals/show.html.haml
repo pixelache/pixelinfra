@@ -7,22 +7,15 @@
 
   - if @festival.image?
     
-    .row
-      .small-6.columns
-        %h1= @festival.name
-        - unless @festival.subtitle.blank?
-          %h2= @festival.subtitle
-        %h2= date_range(@festival.start_at, @festival.end_at)  
-      .small-6.columns
-        - if @festival.image?
-          - unless @festival.image_width.blank?
-            - if @festival.image_width < 1000
-              = image_tag @festival.image.url
-            - else
-              = image_tag @festival.image.url(:standard)
-          - else
-            = image_tag @festival.image.url(:standard)
-          
+    / .row
+    /   .small-6.columns
+    /     %h1= @festival.name
+    /     - unless @festival.subtitle.blank?
+    /       %h2= @festival.subtitle
+    /     %h2= date_range(@festival.start_at, @festival.end_at)
+    .small-12.columns.festival_image
+      = image_tag @festival.image.url
+
   - else
     .row
       .small-12.columns

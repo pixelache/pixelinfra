@@ -23,8 +23,9 @@
     #container.container
       %header
         .top-bar-wrapper.contain-to-grid.sticky= render 'layouts/top_bar'
-        .arrow-down
-        .arrow-up
+        - unless @festival
+          .arrow-down
+          .arrow-up
         .pixelache_nav_menu{:class => content_for?(:festival_menu) ? :festival_menu : :black, :style => content_for?(:festival_menu) ?  "background-color: #" + (@festival.background_colour.blank? ? "#FFF" : @festival.background_colour) + "; color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour) : false } 
           - if content_for? :festival_menu
             = yield :festival_menu
