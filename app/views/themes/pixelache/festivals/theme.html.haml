@@ -1,0 +1,23 @@
+= content_for :festival_menu do
+  = render :partial => 'festival_menu', :locals => {festival: @festival}
+
+
+            
+.festival
+  .row
+    .small-12.columns
+      %h1= @festivaltheme.name
+        
+  .row
+    .small-9.columns
+      = raw @festivaltheme.description
+      
+      %h2= t :activities
+      %ul
+        - @festivaltheme.events.published.sort_by(&:start_at).each do |d|
+          %li= link_to d.name, d
+    
+
+
+                    
+    

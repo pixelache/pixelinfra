@@ -32,4 +32,11 @@ class FestivalsController < InheritedResources::Base
     @festival = Festival.find(params[:id])
     set_meta_tags :title => @festival.name
   end
+  
+  def theme
+    @festival = Festival.find(params[:id])
+    @festivaltheme = @festival.festivalthemes.find(params[:theme_id])
+    set_meta_tags :title => "#{@festival.name} | #{@festivaltheme.name}"
+  end
+      
 end

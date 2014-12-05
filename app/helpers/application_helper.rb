@@ -77,6 +77,36 @@ module ApplicationHelper
     end
   end
 
+
+  def determine_hierarchy(cssclass = :active, parent = nil, items = [ ] )
+    items.each do |i|
+      next if i.nil?
+      if i.class == Page
+        if (parent.self_and_descendents & i).empty?  
+          return false
+        else
+          return cssclass
+        end
+      elsif i.class == Festivaltheme
+        if parent.slug == 'programme'
+          return cssclass
+        elsif i == parent
+          return cssclass
+        else
+          return false
+        end
+      elsif i.class == Event
+        if parent.slug == 'programme' || i.festivaltheme == parent || i == parent
+          return cssclass
+        else
+          return false
+        end
+      else
+        return false
+      end
+    end
+  end
+  
   def figure_width(resource, default = "small-12")
     if resource.image.nil?
       return default
