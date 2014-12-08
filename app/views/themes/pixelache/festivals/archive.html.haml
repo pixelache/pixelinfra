@@ -1,0 +1,25 @@
+= content_for :festival_menu do
+  = render :partial => 'festival_menu', :locals => {festival: @festival}
+
+.festival
+  .row
+    .small-8.small-offset-2.columns.text-center
+      %h1= t :archive_and_documentation
+    
+  .row
+    .small-8.small-offset-2.columns
+      - unless @videos.empty?
+        %h2= t :videos
+        %ul.archive
+          - @videos.each do |v|
+            %li.video{:style => v.thumbnail? ? "background: url(#{v.thumbnail.url}) no-repeat center center" : false }
+              .video_title= v.title
+              .flex-video= raw figure_video_type(v, v.video_width.blank? ? 580 : v.video_width, v.video_height.blank? ? 390 : v.video_height)
+              .video_description= raw v.description
+      %h2= t :events
+      %ul.archive
+        - @events.each do |e|
+          %li
+            = link_to e.name, e, target: :_blank
+            - if e.has_documentation?
+              %span.documentation_link= link_to t(:documentation), url_for(e) + "#documentation", target: :_blank

@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'foundation_and_overrides';
 
 // index
 
@@ -23,6 +24,30 @@
   padding: 50px 0px;
   line-height: 1.5em;
   
+  ul.archive {
+    padding-left: 0px;
+    margin-left: 0px;
+    li {
+      list-style-type: none;
+      span.documentation_link {
+        padding-left: 2rem;
+        font-size: 0.8rem;
+        font-style: bold;
+        
+        a {
+          background-color: $secondary-color;
+          padding: 2px;
+          border: 1px solid #666;
+          color: black;
+          &:hover {
+            color: $secondary-color;
+            background-color: #999;
+          }
+        }
+        text-transform: uppercase;
+      }
+    }
+  }
   .festival_image {
     background-size: cover;
   }

@@ -1,6 +1,14 @@
 class FestivalsController < InheritedResources::Base
   actions :show, :index, :page, :attendees
   
+  def archive
+    @festival = Festival.find(params[:id])
+    @events = @festival.events.published
+    @videos = Video.where(:festival_id => params[:id])
+    @videos += Video.joins(:event).where(["events.festival_id = ?", @festival.id])
+    set_meta_tags :title => @festival.name + " " + t(:archive)
+  end
+  
   def attendees
     @festival = Festival.find(params[:festival_id])
     set_meta_tags :title => @festival.name + " " + t(:coming_future)

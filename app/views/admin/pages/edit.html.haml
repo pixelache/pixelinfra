@@ -1,1 +1,2 @@
-= render :partial => 'form'
+= semantic_form_for @page, url: "/admin/subsites/#{@page.subsite.id}/pages/#{@page.id}", :html => {:class => "custom", :multipart => true} do |f|
+  = render :partial => 'form', :locals => {f: f}

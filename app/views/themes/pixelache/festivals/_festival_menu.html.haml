@@ -3,6 +3,7 @@
   /   .title= link_to festival.name, festival, style: "color: ##{festival.primary_colour.blank? ? 'FFF' : festival.primary_colour}"
   /   .subtitle= festival.subtitle
   /   .date_range= date_range(festival.start_at, festival.end_at, format: :short)
+  
   .small-2.columns
     %ul.text-right.first
       -# %li= link_to t(:events), "#", onmouseover: "javascript:toggleNavMenu('#events')", id: :events, class: (@event ? :active : false)
@@ -12,10 +13,14 @@
             %li= link_to c.name, festival_page_festival_path(festival, c), class: determine_hierarchy(:active, c, [@page, @festivaltheme, @event])
           - else
             %li= link_to c.name, "#", onmouseover: "javascript:toggleNavMenu('#page_#{c.id}')", id: "page_#{c.id}", class: determine_hierarchy(:active, c, [@page, @festivaltheme, @event])
-            
+      - if Time.now.to_date > festival.end_at
+        %li= link_to t(:archive), archive_festival_path(festival), class: controller.action_name == 'archive' ? :active : false
+        
+        
   -# 2nd columns, depth of 2
-  .small-4.columns
+  .small-2.columns
     
+    -# level 1 pages
     - festival.pages.first.find_all_by_generation(1).each do |p|
       %ul.navhide{id: "page_#{p.id}_menu", class: determine_hierarchy(:open, p, [@page, @festivaltheme, @event]) }
         %li= link_to p.name + " overview", "/festivals/#{@festival.slug}/#{p.slug}" unless p.body.blank?
@@ -25,28 +30,70 @@
           - else
             %li= link_to pp.name, "#", onmouseover: "javascript:toggleNavMenu('#page_#{pp.id}')", id: "page_#{pp.id}", class: determine_hierarchy(:active, pp, [@page, @festivaltheme, @event] )
         - if p.slug == 'programme'
-          - festival.festivalthemes.each do |theme|
-            %li= link_to theme.name, festival_theme_festival_path(@festival, theme), onmouseover: "javascript:toggleNavMenu('#theme_#{theme.id}')", id: "theme_#{theme.id}", class: determine_hierarchy(:active, theme, [@page, @festivaltheme, @event])
-          - unless festival.events.to_a.delete_if{|x| x.festivaltheme.nil? }.empty?
-            %li= link_to "Other activities", '#', onmouseover: "javascript:toggleNavMenu('#otherevents')", id: "otherevents", class: @event.nil? ? false : (@event.festivaltheme.nil? ? :active : false)
+          -# display themes directly if 2 or less, otherwise make themes menu
+          - if festival.festivalthemes.size <= 2
+            - festival.festivalthemes.each do |theme|
+              %li= link_to theme.name, festival_theme_festival_path(@festival, theme), onmouseover: "javascript:toggleNavMenu('#theme_#{theme.id}')", id: "theme_#{theme.id}", class: determine_hierarchy(:active, theme, [@page, @festivaltheme, @event])
+            - unless festival.events.to_a.delete_if{|x| x.festivaltheme.nil? }.empty?
+              %li= link_to "Other activities", '#', onmouseover: "javascript:toggleNavMenu('#otherevents')", id: "otherevents", class: @event.nil? ? false : (@event.festivaltheme.nil? ? :active : false)
+          - else
+            %li= link_to t(:themes), '#', onmouseover: "javscript:toggleNavMenu('#themes')", id: "themes", class: (@event.nil? && @festivaltheme.nil?) ? false : :active
 
           
-  -# 3rd column, depth of 3
-  .small-6.columns
+          
+  -# 3rd column
+  .small-3.columns
+    
+    - if festival.festivalthemes.size <= 2
+      - #themes are directly listed in last column, so put events
+      - festival.festivalthemes.each do |theme|
+        %ul.navhide{id: "theme_#{theme.id}_menu", class: determine_hierarchy(:open, theme, [@page, @festivaltheme, @event])}
+          - theme.events.sort_by(&:start_at).each do |e|
+            %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])    
+      - unless festival.events.to_a.delete_if{|x| x.festivaltheme.nil? }.empty?
+        %ul.navhide#otherevents_menu{ class: @event.nil? ? false : (@event.festivaltheme.nil? ? :open : false) }
+          - festival.events.to_a.delete_if{|x| !x.festivaltheme.nil? }.sort_by(&:start_at).each do |e|
+            %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
+            
+    
+    - else
+      -# themes need to be listed here and actual events bumped to column #4
+      %ul.navhide#themes_menu{class: (@event.nil? && @festivaltheme.nil?) ? false : :open}  
+        - festival.festivalthemes.each do |theme|
+          %li= link_to theme.name, festival_theme_festival_path(@festival, theme), onmouseover: "javascript:toggleNavMenu('#theme_#{theme.id}')", id: "theme_#{theme.id}", class: determine_hierarchy(:active, theme, [@page, @festivaltheme, @event])
+        - unless festival.events.to_a.delete_if{|x| x.festivaltheme.nil? }.empty?
+          %li= link_to "Other activities", '#', onmouseover: "javascript:toggleNavMenu('#otherevents')", id: "otherevents", class: @event.nil? ? false : (@event.festivaltheme.nil? ? :active : false)
+
+    - festival.pages.first.find_all_by_generation(2).each do |p|
+      %ul.navhide{id: "page_#{p.id}_menu", class: [determine_hierarchy("open", p, [@page, @festivaltheme, @event]), (p.children.empty? ? :inner : false)] }  
+        %li= link_to p.name + " overview", p, class:  determine_hierarchy(:active, p, [@page, @festivaltheme, @event]) unless p.body.blank?
+        - p.children.each do |pp|
+          - if pp.children.empty?
+            %li= link_to pp.name, pp, class: determine_hierarchy(:active, pp, [@page, @festivaltheme, @event])
+          - else
+            %li= link_to pp.name, "#", onmouseover: "javascript:toggleNavMenu('#page_#{pp.id}')", id: "page_#{pp.id}", class: determine_hierarchy(:active, pp, [@page, @festivaltheme, @event] )
+          
+
+  -# make 4th column if needed
+  .small-5.columns.final
     - festival.festivalthemes.each do |theme|
-      %ul.navhide{id: "theme_#{theme.id}_menu", class: determine_hierarchy(:open, theme, [@page, @festivaltheme, @event])}
+      %ul.navhide.inner{id: "theme_#{theme.id}_menu", class: determine_hierarchy(:open, theme, [@page, @festivaltheme, @event])}
         - theme.events.sort_by(&:start_at).each do |e|
-          %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
+          %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])    
     - unless festival.events.to_a.delete_if{|x| x.festivaltheme.nil? }.empty?
-      %ul.navhide#otherevents_menu{ class: @event.nil? ? false : (@event.festivaltheme.nil? ? :open : false) }
+      %ul.navhide.inner#otherevents_menu{ class: @event.nil? ? false : (@event.festivaltheme.nil? ? :open : false) }
         - festival.events.to_a.delete_if{|x| !x.festivaltheme.nil? }.sort_by(&:start_at).each do |e|
           %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
-  
-    - festival.pages.first.find_all_by_generation(2).each do |p|
-      %ul.navhide{id: "page_#{p.id}_menu", class:  determine_hierarchy(:active, p, [@page, @festivaltheme, @event])}
-        %li= link_to p.name + " overview", p, class:  determine_hierarchy(:active, p, [@page, @festivaltheme, @event]) unless p.children.empty?
+          
+    - festival.pages.first.find_all_by_generation(3).each do |p|
+      - next if p.children.empty?
+      %ul.navhide.inner{id: "page_#{p.id}_menu", class:  determine_hierarchy(:open, p, [@page, @festivaltheme, @event])}
+        
+        - unless p.body.blank?
+          %li= link_to p.name + " overview", p, class:  determine_hierarchy(:active, p, [@page, @festivaltheme, @event]) 
         - p.children.each do |pp|
-          %li= link_to pp.name, pp, class: determine_hierarchy(:active, pp, [@page, @festivaltheme, @event])
+          %li= link_to pp.name, pp, class: determine_hierarchy(:active, pp, [@page, @festivaltheme, @event])     
+   
       
 = content_for :jquery do
   $('.festival').css('margin-top', $('.festival_menu').css('height'));
