@@ -20,6 +20,7 @@ class FestivalsController < InheritedResources::Base
     else
       @festivals = Festival.published
     end
+    set_meta_tags :title => t(:festivals)
   end
   
   def page

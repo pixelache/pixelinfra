@@ -22,6 +22,8 @@ function toggleNavMenu(div) {
   $(div).css('color', '#fff');
   $(div + "_menu").parent('.columns').children('ul.navhide').css('display', 'none');
   $(div + "_menu").parent('.columns').children('ul.navhide').removeClass('open');
+  //$(div + "_menu").parents('.columns').siblings().children('ul.navhide').css('display', 'none');
+
   $(div + "_menu").css('display', 'block');
   
 }
