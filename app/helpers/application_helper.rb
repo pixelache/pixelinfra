@@ -81,8 +81,8 @@ module ApplicationHelper
   def determine_hierarchy(cssclass = :active, parent = nil, items = [ ] )
     items.each do |i|
       next if i.nil?
-      if i.class == Page
-        if (parent.self_and_descendents & i).empty?  
+      if i.class == Page && parent.class == Page
+        if (parent.self_and_descendants & [i]).empty?  
           return false
         else
           return cssclass
