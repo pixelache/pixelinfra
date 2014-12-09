@@ -125,5 +125,12 @@
     font-size: 0.8rem;
     font-style: italic;
   }
-  
+  .home_link {
+    float: right;
+    text-align: right;
+    font-size: 0.75rem;
+    a {
+      color: #FFF;
+    }
+  }
 }

@@ -4,11 +4,15 @@
   .small-12.columns.festival_top_header.text-left{style: "  border-bottom: 1px solid #"  + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour)}
     %span.name= link_to @festival.name, @festival, style: "color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour)
     %span.subtitle= @festival.subtitle
-    %span.dates= date_range(@festival.start_at, @festival_end_at)
+    %span.dates= date_range(@festival.start_at, @festival.end_at)
+    .home_link
+      = link_to "Pixelache", '/'
+      = " : "
+      = link_to 'Festivals', festivals_path
     
 .row.left-collapse
   
-  .small-2.columns
+  .large-2.columns.small-12.medium-2
     %ul.text-right.first
       -# %li= link_to t(:events), "#", onmouseover: "javascript:toggleNavMenu('#events')", id: :events, class: (@event ? :active : false)
       - unless festival.pages.empty?
@@ -22,16 +26,16 @@
       - unless @festival.attendees.empty?
         - counter += 1
         - if Time.now.to_date > festival.end_at
-          %li= link_to t(:who_was_there), festival_attendees_path(festival)
+          %li= link_to t(:who_was_there), festival_attendees_path(festival), class: controller.action_name == 'attendees' ? :active : false
         - else
-          %li= link_to t(:who_is_coming), festival_attendees_path(festival)
+          %li= link_to t(:who_is_coming), festival_attendees_path(festival), class: controller.action_name == 'attendees' ? :active : false
       - if Time.now.to_date > festival.end_at
         - counter += 1
         %li= link_to t(:archive), archive_festival_path(festival), class: controller.action_name == 'archive' ? :active : false
       - highest = counter unless highest > counter
         
   -# 2nd columns, depth of 2
-  .columns{:class => (festival.festivalthemes.size <= 2) ? 'small-3' : 'small-2'}
+  .columns.small-12{:class => (festival.festivalthemes.size <= 2) ? 'large-3 medium-3' : 'large-2 medium-2'}
     
     -# level 1 pages
 
@@ -71,7 +75,7 @@
           
           
   -# 3rd column
-  .small-3.columns
+  .small-12.large-3.medium-3.columns
     
     - if festival.festivalthemes.size <= 2 && !festival.festivalthemes.empty?
       - #themes are directly listed in last column, so put events
@@ -118,7 +122,7 @@
       - highest = counter unless highest > counter
 
   -# make 4th column if needed
-  .columns.final{:class => (festival.festivalthemes.size <= 2) ? 'small-4' : 'small-5'}
+  .small-12.columns.final{:class => (festival.festivalthemes.size <= 2) ? 'large-4 medium-4' : 'large-5 medium-5'}
     - festival.festivalthemes.each do |theme|
       - counter = 0
       %ul.navhide.inner{id: "theme_#{theme.id}_menu", class: determine_hierarchy(:open, theme, [@page, @festivaltheme, @event])}

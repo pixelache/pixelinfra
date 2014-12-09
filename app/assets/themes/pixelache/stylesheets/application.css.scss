@@ -210,4 +210,20 @@ td .date {
 
   
 }
+@media only screen and (max-width: 40em)  { 
+  .pixelache_nav_menu {
+    ul {
+      &.navhide {
+        border-bottom: 1px solid #999;
+        margin-bottom: 0.3rem;
+      }
+      li {
+        
+        float: left;
+        padding: 0.3rem 0.4rem 0rem 0.4rem;
+        border-right: 1px dotted #999;
+      }
+    }
+  }
+}
 
