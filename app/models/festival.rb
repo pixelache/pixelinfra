@@ -3,7 +3,7 @@ class Festival < ActiveRecord::Base
   has_many :events, :dependent => :nullify
   has_and_belongs_to_many :etherpads
   has_many :posts
-  has_many :attendees
+  has_many :attendees, as: :item
   has_many :festivalthemes
   # has_many :projects
   extend FriendlyId

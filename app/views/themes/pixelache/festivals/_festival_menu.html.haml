@@ -1,11 +1,12 @@
 // Calculate highest possible number of rows and set it to that
 - highest = 0
-
 .row.left-collapse
-  / .small-2.columns
-  /   .title= link_to festival.name, festival, style: "color: ##{festival.primary_colour.blank? ? 'FFF' : festival.primary_colour}"
-  /   .subtitle= festival.subtitle
-  /   .date_range= date_range(festival.start_at, festival.end_at, format: :short)
+  .small-12.columns.festival_top_header.text-left{style: "  border-bottom: 1px solid #"  + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour)}
+    %span.name= link_to @festival.name, @festival, style: "color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour)
+    %span.subtitle= @festival.subtitle
+    %span.dates= date_range(@festival.start_at, @festival_end_at)
+    
+.row.left-collapse
   
   .small-2.columns
     %ul.text-right.first
@@ -18,12 +19,19 @@
             %li= link_to c.name, festival_page_festival_path(festival, c), class: determine_hierarchy(:active, c, [@page, @festivaltheme, @event])
           - else
             %li= link_to c.name, "#", onmouseover: "javascript:toggleNavMenu('#page_#{c.id}')", id: "page_#{c.id}", class: determine_hierarchy(:active, c, [@page, @festivaltheme, @event])
+      - unless @festival.attendees.empty?
+        - counter += 1
+        - if Time.now.to_date > festival.end_at
+          %li= link_to t(:who_was_there), festival_attendees_path(festival)
+        - else
+          %li= link_to t(:who_is_coming), festival_attendees_path(festival)
       - if Time.now.to_date > festival.end_at
+        - counter += 1
         %li= link_to t(:archive), archive_festival_path(festival), class: controller.action_name == 'archive' ? :active : false
-        
+      - highest = counter unless highest > counter
         
   -# 2nd columns, depth of 2
-  .small-2.columns
+  .columns{:class => (festival.festivalthemes.size <= 2) ? 'small-3' : 'small-2'}
     
     -# level 1 pages
 
@@ -110,7 +118,7 @@
       - highest = counter unless highest > counter
 
   -# make 4th column if needed
-  .small-5.columns.final
+  .columns.final{:class => (festival.festivalthemes.size <= 2) ? 'small-4' : 'small-5'}
     - festival.festivalthemes.each do |theme|
       - counter = 0
       %ul.navhide.inner{id: "theme_#{theme.id}_menu", class: determine_hierarchy(:open, theme, [@page, @festivaltheme, @event])}
@@ -138,7 +146,7 @@
           - counter += 1
         - highest = counter unless highest > counter
    
-- highest = (highest * 1.5).to_f.to_s + "rem"    
+- highest = ((highest * 1.5) + 2 ).to_f.to_s + "rem"    
 = content_for :jquery do
   
   $('.festival_menu').css('height', '#{highest}');

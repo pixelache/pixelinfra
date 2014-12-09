@@ -1,18 +1,32 @@
-.festival
-  = render :partial => 'header'
+= content_for :festival_menu do
+  = render :partial => 'festival_menu', :locals => {festival: @festival}
 
-        
+
+.festival        
   .row
-    .small-9.columns
+    - if @festival.image?
+      .small-10.small-offset-1.columns.festival_image.text-center
+        = image_tag @festival.image.url
+  .row
+    .small-10.small-offset-1.columns.festival_image.text-center
+      %h1= @festival.name
+  .row
+    .small-8.small-offset-2.columns.text-center
       - if @festival.in_future?
-        %h3= t :coming_future
+        %h3= t :who_is_coming
       - else
-        %h3= t :coming_past
+        %h3= t :who_was_there
+  .row
+    .small-8.small-offset-2.columns.text-left        
       %ol
         - @festival.attendees.each do |att|
-          %li.attendee= att.name
-        
-    = render :partial => 'sidebar'
+          %li.attendee
+            .name
+              = link_to_unless (att.url.blank?), att.name, att.url, target: :_blank
+              - unless att.country.blank?
+                %span.country= " (#{Country[att.country].nil? ? att.country : Country[att.country].name})"
+            .description= raw att.description
+
 
         
     

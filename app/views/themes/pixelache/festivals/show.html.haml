@@ -16,13 +16,12 @@
     .small-10.small-offset-1.columns.festival_image.text-center
       = image_tag @festival.image.url
 
-  - else
-    .row
-      .small-10.small-offset-1.columns
-        %h1= @festival.name
-        - unless @festival.subtitle.blank?
-          %h2= @festival.subtitle
-        %h2= date_range(@festival.start_at, @festival.end_at) 
+  .row
+    .small-10.small-offset-1.columns.text-center
+      %h1= @festival.name
+      - unless @festival.subtitle.blank?
+        %h2= @festival.subtitle
+      %h3= date_range(@festival.start_at, @festival.end_at) 
         
   .row
     .small-8.small-offset-2.columns= raw @festival.overview_text

@@ -19,11 +19,34 @@
     }
   }
 }
+.festival_top_header {
+  font-size: 0.9rem;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
+  .name {
+    font-size: 0.8rem; 
+  }
+  .subtitle {
+    font-size: 0.7rem; 
+    padding: 0rem 0.8rem;
+  }
+  .dates {
+    font-size: 0.8rem; 
+  }
+}
 
 .festival {
   padding: 50px 0px;
   line-height: 1.5em;
   
+  ol {
+    li.attendee {
+      .description {
+        color: #666;
+        font-size: 0.8rem;
+      }
+    }
+  }
   ul.archive {
     padding-left: 0px;
     margin-left: 0px;
