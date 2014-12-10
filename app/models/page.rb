@@ -8,6 +8,7 @@ class Page < ActiveRecord::Base
   friendly_id :name_en, :use => [ :slugged, :finders, :scoped], :scope => :subsite
   has_paper_trail
   resourcify
+  has_many :frontitems, as: :item, :dependent => :destroy
   
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? && x['body'].blank? }
 
