@@ -151,6 +151,9 @@ td .date {
 
 .pixelache_nav_menu {
   display: none;
+  .columns {
+    padding-right: 1.4rem;
+  }
   .final {
     white-space: nowrap;
     overflow: hidden;
