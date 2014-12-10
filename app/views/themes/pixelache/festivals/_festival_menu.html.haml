@@ -130,7 +130,7 @@
       - counter = 0
       %ul.navhide{id: "page_#{p.id}_menu", class: [determine_hierarchy("open", p, [@page, @festivaltheme, @event]), p.children.map(&:children).flatten.empty? ? :inner: false] }  
         - unless p.body.blank?
-          %li= link_to p.name + " overview", p, class:  determine_hierarchy(:active, p, [@page, @festivaltheme, @event])
+          %li= link_to p.name + " overview", festival_page_festival_path(@festival, p), class:  @page.blank? ? false : (@page == p ? :active : false)
           - counter += 1
         - p.children.published.each do |pp|
           - counter += 1

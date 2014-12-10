@@ -2,6 +2,8 @@
   .small-10.columns
     %h2 Places
 .row
+  .small-12.columns= paginate @places
+.row
   .small-9.columns
     %p= page_entries_info(@places)    
     %p= link_to 'Enter new place', new_admin_place_path , class: [:button, :round, :small]  
@@ -14,4 +16,8 @@
       %tbody
         - @places.each do |place|
           = render :partial => 'place', :locals => {:place => place}
+.row
+  .small-12.columns= paginate @places
+.row
+  .small-12.columns
     %p= link_to 'Enter new place', new_admin_place_path , class: [:button, :round, :small]  

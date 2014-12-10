@@ -12,6 +12,17 @@
     
   .row
     .small-8.small-offset-2.columns
+      %h2= t :events
+      %ul.archive
+        - @events.each do |e|
+          %li
+            = link_to e.name, e, target: :_blank
+            - if e.has_documentation?
+              - unless e.all_documentation['images'].empty? && e.flickrsets.empty?
+                = link_to t(:photos), url_for(e) + "#documentation", target: :_blank, class: [:button, :tiny, :secondary]
+              - unless e.all_documentation['videos'].empty?
+                = link_to t(:videos), url_for(e) + "#documentation", target: :_blank, class: [:button, :tiny, :secondary]
+                
       - unless @videos.empty?
         %h2= t :videos
         %ul.archive
@@ -19,10 +30,4 @@
             %li.video
               .video_title= link_to v.title, v.url, target: :_blank
               .video_description= raw v.description
-      %h2= t :events
-      %ul.archive
-        - @events.each do |e|
-          %li
-            = link_to e.name, e, target: :_blank
-            - if e.has_documentation?
-              = link_to t(:documentation), url_for(e) + "#documentation", target: :_blank, class: [:button, :tiny, :secondary]
+
