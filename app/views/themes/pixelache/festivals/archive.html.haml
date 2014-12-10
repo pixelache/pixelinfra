@@ -3,8 +3,12 @@
 
 .festival.festival_page
   .row
-    .small-8.small-offset-2.columns.text-center
-      %h1= t :archive_and_documentation
+    .small-8.small-offset-2.columns.text-left.top_festival
+      %h1= @festival.name
+      %h2= t(:archive_and_documentation)
+      .top_festival_dates
+        %h5
+          = "#{date_range(@festival.start_at, @festival.end_at, format: :long)}, #{@festival.festival_location}"
     
   .row
     .small-8.small-offset-2.columns
@@ -21,4 +25,4 @@
           %li
             = link_to e.name, e, target: :_blank
             - if e.has_documentation?
-              %span.documentation_link= link_to t(:documentation), url_for(e) + "#documentation", target: :_blank
+              = link_to t(:documentation), url_for(e) + "#documentation", target: :_blank, class: [:button, :tiny, :secondary]

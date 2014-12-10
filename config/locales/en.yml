@@ -343,6 +343,8 @@ en:
   press: 'Press'
   latest_news: 'Latest news'
   all_news: 'All news...'
+  show_bio: 'Toggle bio'
+  about_person: 'About'
   documentation: 'Documentation'
   no_posts: 'There are no posts relating to this topic.'
   festivals: 'Festivals'

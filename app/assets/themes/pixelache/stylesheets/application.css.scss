@@ -162,6 +162,7 @@ td .date {
     ul {
       li {
         font-size: 0.8rem;
+
       }
     }
   }
@@ -175,10 +176,15 @@ td .date {
     padding-right: 1.4rem;
   }
   ul {
+    border-right: 1px dotted #CCC;
+
     &.navhide {
       display: none;
       &.open {
         display: block !important;
+      }
+
+        
       }
     }
     padding: 0px;
@@ -190,6 +196,11 @@ td .date {
     li {
       font-size: 0.9rem;
       list-style-type: none;
+      a {
+        color: #CCC;
+        &:hover {
+          color: #FFF;
+        }
     }
   }
 

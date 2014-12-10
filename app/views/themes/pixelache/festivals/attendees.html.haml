@@ -3,29 +3,31 @@
 
 
 .festival.festival_page
+
   .row
-    - if @festival.image?
-      .small-10.small-offset-1.columns.festival_image.text-center
-        = image_tag @festival.image.url
-  .row
-    .small-10.small-offset-1.columns.festival_image.text-center
+    .small-8.small-offset-2.columns.text-left.top_festival
       %h1= @festival.name
-  .row
-    .small-8.small-offset-2.columns.text-center
-      - if @festival.in_future?
-        %h3= t :who_is_coming
-      - else
-        %h3= t :who_was_there
+      %h2
+        - if @festival.in_future?
+          = t :who_is_coming
+        - else
+          = t :who_was_there
+      .top_festival_dates
+        %h5
+          = "#{date_range(@festival.start_at, @festival.end_at, format: :long)}, #{@festival.festival_location}"
+
   .row
     .small-8.small-offset-2.columns.text-left        
       %ol
         - @festival.attendees.each do |att|
-          %li.attendee
-            .name
+          %li.attendee[att]
+            %span.name
               = link_to_unless (att.url.blank?), att.name, att.url, target: :_blank
               - unless att.country.blank?
                 %span.country= " (#{Country[att.country].nil? ? att.country : Country[att.country].name})"
-            .description= raw att.description
+            - unless att.description.blank?
+              = link_to t(:show_bio), '#', onclick: "$('#attendee_#{att.id} .description').slideToggle(); return false;", class: [:button, :tiny, :secondary]
+              .description= raw att.description.gsub(/\\\"/, '"')
 
 
         
