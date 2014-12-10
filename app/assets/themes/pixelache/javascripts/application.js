@@ -18,8 +18,8 @@ function up_pixelache_menu() {
 }
 function toggleNavMenu(div) {
   
-  $(div).parent().parent().children('li').children('a').css('color', '#ccc');
-  $(div).css('color', '#fff');
+  $(div).parent().parent().children('li').children('a').css('color', '');
+  //$(div).css('color', '#fff');
   $(div + "_menu").parent('.columns').children('ul.navhide').css('display', 'none');
   $(div + "_menu").parent('.columns').children('ul.navhide').removeClass('open');
   //$(div + "_menu").parents('.columns').siblings().children('ul.navhide').css('display', 'none');

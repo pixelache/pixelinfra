@@ -38,6 +38,9 @@
   .row
     .small-2.columns= f.input :primary_colour, :as => :string, :input_html => {:class => :colourpicker }, :label => 'Secondary colour for archive page text'
   .row
+    .small-2.columns= f.input :tertiary_colour, :as => :string, :input_html => {:class => :colourpicker }, :label => 'Third colour for text links, etc. (should stand out against background)'
+
+  .row
     .small-6.columns
       - if f.object.festivalbackdrop?
         = image_tag f.object.festivalbackdrop.url, :width => 400

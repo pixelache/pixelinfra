@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141210120613) do
+ActiveRecord::Schema.define(version: 20141210122156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -314,6 +314,7 @@ ActiveRecord::Schema.define(version: 20141210120613) do
     t.boolean  "published",          default: false,               null: false
     t.string   "festivalbackdrop"
     t.string   "festival_location",  default: "Helsinki, Finland", null: false
+    t.string   "tertiary_colour",    default: "FFFFFF",            null: false
   end
 
   create_table "festivaltheme_translations", force: true do |t|

@@ -189,27 +189,13 @@ td .date {
     }
     li {
       font-size: 0.9rem;
-      color: #FFF;
-      a {
-        &.active {
-          color: #FFF !important;
-        }
-        &:hover {
-          color: #FFF !important;
-        }
-        color: #ccc;
-      }
       list-style-type: none;
     }
   }
-  &:hover {
-    color: #FFF;
-  }
-  color: #ccc;
-  
 
-  
 }
+
+
 @media only screen and (max-width: 40em)  { 
   .pixelache_nav_menu {
     ul {

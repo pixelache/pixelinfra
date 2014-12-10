@@ -1,12 +1,19 @@
 // Calculate highest possible number of rows and set it to that
 - highest = 0
-.row.left-collapse
+:css
+  .festival_menu li a, .festival_menu .festival_top_header a:hover  {
+    color: ##{@festival.tertiary_colour};
+  }
+  .festival_menu li a:hover, .festival_menu .festival_top_header a , .festival_menu li a.active {
+    color: ##{@festival.primary_colour};
+  }
+.row
   .small-12.columns.festival_top_header.text-left{style: "  border-bottom: 1px solid #"  + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour)}
-    = link_to "Pixelache", '/', style: "color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour)
+    = link_to "Pixelache", '/'
     = " : "
-    = link_to 'Festivals', festivals_path, style: "color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour)
+    = link_to 'Festivals', festivals_path
     = " : "
-    %span.name= link_to @festival.name, @festival, style: "color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour)
+    %span.name= link_to @festival.name, @festival
     
     // %span.dates= " (" + date_range(@festival.start_at, @festival.end_at) + ")"
 
