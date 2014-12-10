@@ -48,6 +48,8 @@
         %li= link_to t(:archive), archive_festival_path(festival), class: controller.action_name == 'archive' ? :active : false
       - highest = counter unless highest > counter
         
+        
+        
   -# 2nd columns, depth of 2
   .columns.small-12#nav_column_1{:class => (festival.festivalthemes.size <= 2) ? 'large-3 medium-3' : 'large-2 medium-2'}
     
@@ -55,7 +57,7 @@
 
     - festival.pages.published.first.find_all_by_generation(1).published.each do |p|
       - counter = 0
-      %ul.navhide{id: "page_#{p.id}_menu", class: [determine_hierarchy(:open, p, [@page, @festivaltheme, @event]), p.children.map(&:children).flatten.empty? ? :inner: false] }
+      %ul.navhide{id: "page_#{p.id}_menu", class: [determine_hierarchy(:open, p, [@page, @festivaltheme, @event]), p.children.map(&:children).flatten.empty?  && @festival.festivalthemes.nil? ? :inner: false] }
         - unless p.body.blank?
           - counter += 1
           %li= link_to p.name + " overview", "/festivals/#{@festival.slug}/#{p.slug}" 
