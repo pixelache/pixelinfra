@@ -6,11 +6,13 @@ en:
       different_months_same_year: "%{from_day} %{from_month} %{sep} %{until_day} %{until_month} %{year}"
       different_years: "%{from_month} %{from_day}, %{from_year} %{sep} %{until_month} %{until_day}, %{until_year}"
       same_month: "%{from_day} %{month} %{start_time} %{sep} %{until_day} %{month} %{end_time} %{year}"
+      same_month_no_time: "%{from_day} %{sep} %{until_day} %{month}  %{year}"
     short:
       same_day: "%{from_day} %{from_month} %{year} %{start_time} %{sep} %{end_time}"
       different_months_same_year: "%{from_day} %{from_month} %{sep} %{until_day} %{until_month} %{year}"
       different_years: "%{from_day} %{from_month} %{from_year} %{sep} %{until_day} %{until_month} %{until_year}"
       same_month: "%{from_day} %{sep} %{until_day} %{month} %{year}"  
+      same_month_no_time: "%{from_day} %{sep} %{until_day} %{month} %{year}"
   date:
     abbr_day_names:
     - Sun
