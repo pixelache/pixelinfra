@@ -12,9 +12,8 @@
         %h2= t :videos
         %ul.archive
           - @videos.each do |v|
-            %li.video{:style => v.thumbnail? ? "background: url(#{v.thumbnail.url}) no-repeat center center" : false }
-              .video_title= v.title
-              .flex-video= raw figure_video_type(v, v.video_width.blank? ? 580 : v.video_width, v.video_height.blank? ? 390 : v.video_height)
+            %li.video
+              .video_title= link_to v.title, v.url, target: :_blank
               .video_description= raw v.description
       %h2= t :events
       %ul.archive

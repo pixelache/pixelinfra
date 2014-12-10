@@ -63,17 +63,19 @@
               .subtitle= t :videos_from_this_project, project: @event.project.name
               .video_container
                 - @event.project.videos.each do |v|
-                  .video{:style => v.thumbnail? ? "background: url(#{v.thumbnail.url}) no-repeat center center" : false }
-                    .video_title= v.title
-                    .flex-video= raw figure_video_type(v, v.video_width.blank? ? 580 : v.video_width, v.video_height.blank? ? 390 : v.video_height)
-                    .video_description= raw v.description
+                  .video.row{:style => v.thumbnail? ? "background: url(#{v.thumbnail.url}) no-repeat center center" : false }
+                    .large-6.columns.flex-video= raw figure_video_type(v, v.video_width.blank? ? 580 : v.video_width, v.video_height.blank? ? 390 : v.video_height)
+                    .large-6.columns
+                      .video_title= v.title
+                      .video_description= raw v.description
         - else
           .video_container
             - @event.all_documentation["videos"].each do |v|
-              .video{:style => v.thumbnail? ? "background: url(#{v.thumbnail.url}) no-repeat center center" : false }
-                .video_title= v.title
-                .flex-video= raw figure_video_type(v, v.video_width.blank? ? 580 : v.video_width, v.video_height.blank? ? 390 : v.video_height)
-                .video_description= raw v.description
+              .video.row
+                .large-7.columns= raw figure_video_type(v, 400, 300)
+                .large-5.columns
+                  .video_title= v.title
+                  .video_description= raw v.description
 
   
     - unless @event.posts.empty? &&  !@event.project
@@ -123,3 +125,4 @@
       autoplaySpeed: 2400,
       slidesToScroll: 1,
     });
+    $('.video_description').readmore();

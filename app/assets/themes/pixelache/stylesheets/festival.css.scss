@@ -73,6 +73,13 @@
   ul.archive {
     padding-left: 0px;
     margin-left: 0px;
+    li.video {
+      margin-bottom: 1rem;
+      .video_description {
+        display: none;
+        font-size: 0.8rem;
+      }
+    }
     li {
       list-style-type: none;
       span.documentation_link {

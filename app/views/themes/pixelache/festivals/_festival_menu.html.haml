@@ -4,6 +4,12 @@
   .festival_menu li a, .festival_menu .festival_top_header a:hover  {
     color: ##{@festival.tertiary_colour};
   }
+  .festival_menu ul {
+    border-right: 1px solid ##{@festival.tertiary_colour};
+  }
+  .festival_menu ul.inner {
+    border-right: none;
+  }
   .festival_menu li a:hover, .festival_menu .festival_top_header a , .festival_menu li a.active {
     color: ##{@festival.primary_colour};
   }
