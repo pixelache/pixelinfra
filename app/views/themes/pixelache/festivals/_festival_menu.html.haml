@@ -2,13 +2,14 @@
 - highest = 0
 .row.left-collapse
   .small-12.columns.festival_top_header.text-left{style: "  border-bottom: 1px solid #"  + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour)}
+    = link_to "Pixelache", '/', style: "color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour)
+    = " : "
+    = link_to 'Festivals', festivals_path, style: "color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour)
+    = " : "
     %span.name= link_to @festival.name, @festival, style: "color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour)
-    %span.subtitle= @festival.subtitle
-    %span.dates= date_range(@festival.start_at, @festival.end_at)
-    .home_link
-      = link_to "Pixelache", '/'
-      = " : "
-      = link_to 'Festivals', festivals_path
+    
+    // %span.dates= " (" + date_range(@festival.start_at, @festival.end_at) + ")"
+
     
 .row.left-collapse
   
@@ -150,9 +151,11 @@
           - counter += 1
         - highest = counter unless highest > counter
    
-- highest = ((highest * 1.5) + 2 ).to_f.to_s + "rem"    
+- highest_total = ((highest * 1.5) + 2 ).to_f.to_s + "rem"   
+- list = ((highest * 1.4)).to_f.to_s  + "rem" 
 = content_for :jquery do
   
-  $('.festival_menu').css('height', '#{highest}');
-  $('#main').css('margin-top', '#{highest}');
+  $('.festival_menu').css('height', '#{highest_total}');
+  $('.festival_menu ul').css('height', '#{list}');
+  $('#main').css('margin-top', '#{highest_total}');
                     

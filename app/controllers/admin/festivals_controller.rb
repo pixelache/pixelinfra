@@ -33,7 +33,7 @@ class Admin::FestivalsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:festival => [:name, :website, :slug, :start_at, :node_id, :remove_image, :festival_id, :end_at, :background_colour, :primary_colour, :image, :published, :subtitle, :slug, :festivalbackdrop, translations_attributes: [:id, :locale, :overview_text]] )
+    params.permit(:festival => [:name, :website, :slug, :start_at, :festival_location, :node_id, :remove_image, :festival_id, :end_at, :background_colour, :primary_colour, :image, :published, :subtitle, :slug, :festivalbackdrop, translations_attributes: [:id, :locale, :overview_text]] )
   end
     
 end 

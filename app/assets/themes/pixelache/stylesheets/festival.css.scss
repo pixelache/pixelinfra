@@ -24,7 +24,7 @@
   padding-bottom: 0.4rem;
   margin-bottom: 0.3rem;
   .name {
-    font-size: 0.8rem; 
+    font-weight: bold;
   }
   .subtitle {
     font-size: 0.7rem; 
@@ -36,9 +36,30 @@
 }
 
 .festival {
-  padding: 50px 0px;
-  line-height: 1.5em;
+  .festival_banner {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2.5rem;
+  }
   
+  line-height: 1.5em;
+  .top_festival {
+    margin-bottom: 2rem;
+    h1 {
+      text-transform: uppercase;
+      margin: 0px;
+    }
+    h2 {
+      margin: 0px;
+    }
+  }
+  .top_festival_dates {
+    border-top: 1px solid #333;
+    text-transform: uppercase;
+    color: #999;
+    margin-top: 1rem;
+    padding-top: 0.6rem;
+  }
   ol {
     li.attendee {
       .description {
