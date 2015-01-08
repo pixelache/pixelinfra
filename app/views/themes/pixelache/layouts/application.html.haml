@@ -48,14 +48,15 @@
         .small-12.columns
           %span{:style => 'font-weight: 400'}>#
           pixelache
-      .follow.row
-        .small-12.columns
-          .title Follow us on
-          .icons
-            = link_to image_tag(theme_image_path('follow_fb.png')), 'https://www.facebook.com/pixelache'
-            = link_to image_tag(theme_image_path('follow_twitter.png')), 'https://twitter.com/pixelache'
-            = link_to image_tag(theme_image_path('follow_vimeo.png')), 'https://vimeo.com/pixelache'
-            = link_to image_tag(theme_image_path('follow_bambuser.png')), 'http://bambuser.com/channel/pixelversity'
+      .follow
+        .row
+          .small-12.columns
+            .title Follow us on
+            .icons
+              = link_to image_tag(theme_image_path('follow_fb.png')), 'https://www.facebook.com/pixelache'
+              = link_to image_tag(theme_image_path('follow_twitter.png')), 'https://twitter.com/pixelache'
+              = link_to image_tag(theme_image_path('follow_vimeo.png')), 'https://vimeo.com/pixelache'
+              = link_to image_tag(theme_image_path('follow_bambuser.png')), 'http://bambuser.com/channel/pixelversity'
       .newsletter
         .row
           .small-1.columns.text-right.hide-for-small-only= image_tag theme_image_path('megaphone.png')
@@ -85,23 +86,23 @@
             %p Finland
           .small-12.medium-10.columns.right.footer_menu
             .row
+              .small-6.medium-2.columns.text-left.medium-offset-3
+                .heading.medium-text-left.small-text-center= link_to t(:about), page_path('about')
               .small-6.medium-2.columns.text-left
-                .heading.text-center= link_to t(:about), page_path('about')
-              .small-6.medium-3.columns.text-left
-                .heading.text-center= t(:activities)
+                .heading.medium-text-left.small-text-center= t(:activities)
                 %ul
                   %li= link_to t(:events), events_path
                   %li= link_to t(:the_festival), festivals_path
                   %li= link_to t(:projects), projects_path
                   %li= link_to t(:residencies), page_path('residencies')
-              .small-6.medium-3.columns.text-left
-                .heading.text-center= t(:people)
+              .small-6.medium-2.columns.text-left
+                .heading.medium-text-left.small-text-center= t(:people)
                 %ul
                   %li= link_to t(:collaborators), '#'
                   %li= link_to t(:members), '#'
                   %li= link_to t(:network), '#'
               .small-6.medium-3.columns.text-left
-                .heading.text-center= t(:archive)
+                .heading.medium-text-left.small-text-center= t(:archive)
                 .row
                   - (Time.now.year - 1).downto(2002).each do |year|
                     .small-6.columns= link_to year.to_s, "/archive/#{year.to_s}"

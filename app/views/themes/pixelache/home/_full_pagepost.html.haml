@@ -7,10 +7,10 @@
 .full_page_or_post.fullscreen{:style => style }
   - if front.custom_title
     .row
-      .small-10.small-offset-1.columns.custom_title{:style => "color: ##{front.text_colour}"}= raw front.custom_title
+      .medium-10.small-12.medium-offset-1.columns.custom_title{:style => "color: ##{front.text_colour}"}= raw front.custom_title
   .row
-    .small-8.columns.small-offset-1.title= link_to front.item.name, front.item, :style => "color: ##{front.text_colour}"
+    .small-12.medium-8.columns.medium-offset-1.title= link_to front.item.name, front.item, :style => "color: ##{front.text_colour}"
   .row
-    .small-8.columns.small-offset-1.blurb{:style => "color: ##{front.text_colour}"}= raw truncate_html(front.item.body, :length => 200)
+    .small-12.medium-8.columns.medium-offset-1.blurb{:style => "color: ##{front.text_colour}"}= raw truncate_html(front.item.body, :length => 200)
   .row
-    .small-8.columns.small-offset-1.read_more= link_to t(:read_more), front.item, :style => "color: ##{front.text_colour}"
+    .small-12.medium-8.columns.medium-offset-1.read_more= link_to t(:read_more), front.item, :style => "color: ##{front.text_colour}"

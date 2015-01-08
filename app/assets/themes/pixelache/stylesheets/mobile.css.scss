@@ -16,20 +16,53 @@
     .read_more {
       font-size: 1.5rem;
     }
-    .three_posts .smaller_posts {
-      .metadata {
-        p.place_address a {
-          padding-left: 0;
-        }
-      }
-      .read_more {
-        font-size: 1.5rem;
-        margin-bottom: 2.5rem;
-      }
-    }
-    
   }
 
+
+  .three_posts .smaller_posts {
+    .metadata {
+      margin-bottom: 0.5rem;
+      p.place_address a {
+        padding-left: 0;
+      }
+    }
+    .read_more {
+      font-size: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+  }
+    
+  .thin_strip {
+    .read_more {
+      padding-top: 0.8rem;
+    }
+  }
+
+  .from_the_archive {
+    .pink {
+      width: 100%;
+      .title {
+        margin-top: 2rem;
+      }
+      .year {
+        letter-spacing: initial;
+      }
+    }
+  }
+  
+  .full_page_or_post  {
+    .custom_title {
+      margin-bottom: 2.5rem;
+    }
+    .title {
+      margin-bottom: 1rem;
+    }
+    .blurb {
+      font-size: 1.2rem;
+      line-height: 1.8rem;
+    }
+  }
+  
   .pixelache_nav_menu {
     
 

@@ -1,14 +1,14 @@
 .from_the_archive{:style => "background: url(#{@archive.image.url(:full)})  no-repeat center top "}
   .pink
     .row
-      .small-12.columns.large-offset-2
+      .small-12.columns.medium-offset-2
         .title= t(:from_the_archives)
     .row
-      .small-6.columns.large-offset-2
+      .small-12.medium-6.columns.medium-offset-2
         .year= @archive.year
     .row
-      .small-9.columns.large-offset-2.activity_name= link_to @archive.activity.name, @archive.activity
+      .small-12.medium-9.columns.medium-offset-2.activity_name= link_to @archive.activity.name, @archive.activity
 
     .row
-      .small-9.columns.large-offset-2
+      .small-12.medium-9.columns.medium-offset-2
         .description= raw truncate_html(sanitize(@archive.activity.description, tags: %w{strong b bold i em italic underline u}), :length => 300)
