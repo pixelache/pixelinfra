@@ -3,6 +3,7 @@ class EventsController < InheritedResources::Base
   
   def index
     @events = Event.by_site(@site).published.order('start_at DESC').page(params[:page]).per(12)
+    set_meta_tags title: t(:events)
   end
   
   def show

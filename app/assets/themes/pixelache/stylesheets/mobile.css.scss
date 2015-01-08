@@ -63,6 +63,13 @@
     }
   }
   
+  .event_small {
+    margin-bottom: 2rem;
+    .hashtag {
+      font-size: 0.8rem;
+    }
+  }
+  
   .event_single {
     padding: 0;
     .internal {
@@ -95,7 +102,7 @@
   }
   
   .page_tree {
-    height: 80px;
+
     max-height: 80px;
     line-height: 1.2rem;
   }

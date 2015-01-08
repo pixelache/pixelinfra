@@ -37,6 +37,10 @@ class Festival < ActiveRecord::Base
     end_at > Time.now
   end
 
+  def to_hashtag
+    "##{name.gsub(/\s*/, '')}"
+  end
+  
   def update_image_attributes
     if image.present?
       if image.file.exists?

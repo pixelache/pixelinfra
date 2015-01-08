@@ -36,4 +36,9 @@ class Project < ActiveRecord::Base
       "background: url(#{photos.first.filename.url}) no-repeat center top; background-size: cover; background-color: white"
     end
   end
+  
+  def to_hashtag
+    "##{name.gsub(/\s*/, '')}"
+  end
+   
 end
