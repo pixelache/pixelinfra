@@ -63,6 +63,44 @@
     }
   }
   
+  .event_single {
+    padding: 0;
+    .internal {
+      padding-top: 0px;
+    }
+    
+    .event_image {
+      margin: 20px 0px;
+    }
+    .title {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+    .metadata {
+      font-size: 1.3rem;
+      line-height: 1.8rem;
+      p.place_address {
+        clear: left;
+        a {
+          padding-left: 0px;
+        }
+      }
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    .related_title {
+      margin-top: 3rem;
+    }
+  }
+  
+  .page_tree {
+    height: 80px;
+    max-height: 80px;
+    line-height: 1.2rem;
+  }
+  
+  
   .pixelache_nav_menu {
     
 
