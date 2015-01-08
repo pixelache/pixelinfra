@@ -1,0 +1,57 @@
+@media only screen and (max-width: 40em)  { 
+  
+  
+  .three_posts .top_post , .two_posts .top_post  {
+    .title {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+    .metadata {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      p.place_address a {
+        padding-left: 0;
+      }
+    }
+    .read_more {
+      font-size: 1.5rem;
+    }
+    .three_posts .smaller_posts {
+      .metadata {
+        p.place_address a {
+          padding-left: 0;
+        }
+      }
+      .read_more {
+        font-size: 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+    }
+    
+  }
+
+  .pixelache_nav_menu {
+    
+
+    ul {
+      &.navhide {
+        border-bottom: 1px solid #999;
+        margin-bottom: 0.3rem;
+
+      }
+      li {
+        
+        float: left;
+        padding: 0.3rem 0.4rem 0rem 0.4rem;
+        border-right: 1px dotted #999;
+      }
+    }
+  }
+  
+  footer {
+    .footer_menu {
+      padding-top: 0.8rem;
+    }
+  }
+  
+}

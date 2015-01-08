@@ -1,18 +1,17 @@
 @import 'variables';
 
 footer {
-  z-index: -40;
+
   width: 100%;
   clear: both;
   background-color: #333;
-  padding-bottom: 0px;
-  position: fixed;
-  bottom: 0em;
+
+
   
   .hashtag {
     background-color: #808184;
     font-family: $quicksand;
-    font-size: 5.2em;
+    font-size: 4rem;
     color: #FFF;
     padding: 50px 0px;
     font-weight: 300;
@@ -50,7 +49,7 @@ footer {
     }
     input {
       background-color: #373637;
-      text: #666;
+      color: #666;
       margin-bottom: 0px;
       border: none;
       outline: none;
@@ -69,6 +68,7 @@ footer {
     }
   }
   .footer_menu {
+
     list-style-type: none;
     font-size: 0.8rem;
     line-height: 1.3rem;

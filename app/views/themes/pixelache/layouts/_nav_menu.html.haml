@@ -1,4 +1,4 @@
-.row.left-collapse
+.row.left-collapse.top_of_nav
   .small-2.columns
     %ul.text-right.first
       %li= link_to t(:info), "#", onmouseover: "javascript:toggleNavMenu('#info')", id: :info
@@ -33,12 +33,18 @@
       %li= link_to t(:all_news), posts_path
     %ul.navhide.inner#yearly_menu
       .row
-        - (Time.now.year - 1).downto(2002).to_a.in_groups_of(3).each do |group|
-          .small-2.columns.small-offset-1
-            %ul.inner
-              - group.each do |year|
-                - next if year.nil?
-                %li= link_to year, "/archive/#{year}"
+        - (Time.now.year - 1).downto(2002).to_a.in_groups_of((Time.now.year - 1).downto(2002).size /  3).each_with_index do |group, colno|
+          - unless group.compact.count < ((Time.now.year - 1).downto(2002).size /  3)
+            .small-3.columns.small-offset-1
+              %ul.inner_year
+                - group.each do |year|
+                  - next if year.nil?
+                  %li= link_to year, "/archive/#{year}"
+                - unless (Time.now.year - 1).downto(2002).to_a.in_groups_of((Time.now.year - 1).downto(2002).size /  3)[colno + 1].nil?
+                  - if (Time.now.year - 1).downto(2002).to_a.in_groups_of((Time.now.year - 1).downto(2002).size /  3)[colno+1].compact.count < ((Time.now.year - 1).downto(2002).size /  3)
+                    - (Time.now.year - 1).downto(2002).to_a.in_groups_of((Time.now.year - 1).downto(2002).size /  3)[colno+1].each do |y|
+                      - next if y.nil?
+                      %li= link_to y, "/archive/#{y}"
     %ul.inner.navhide#events_menu
       .row
         - @recent_events.in_groups_of(4).each do |group|

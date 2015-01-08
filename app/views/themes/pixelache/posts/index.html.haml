@@ -9,7 +9,7 @@
       .small-4.columns.post_small
         .title= link_to post.title, post
         .metadata
-          %span.date= l post.published_at.to_date, :format => :long
+          %span.date= l post.published_at.localtime.to_date, :format => :long
           - unless post.creator.nil? 
             = ", #{post.creator.name}"
       

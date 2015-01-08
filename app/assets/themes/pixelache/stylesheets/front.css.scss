@@ -23,8 +23,8 @@
   
     .title {
       font-family: $quicksand;
-      font-size: 58px;
-      line-height: 72px;
+      font-size: 3rem;
+      line-height: 3.5rem;
       padding-bottom: 20px;
       border-bottom: 1px solid #333;
       a {
@@ -62,7 +62,7 @@
     }
     .read_more {
       font-family: $quicksand;
-      font-size: 32px;
+      font-size: 2rem;
       text-transform: lowercase;
       a {
         color: #000;
@@ -110,7 +110,7 @@
     }
     .read_more {
       font-family: $quicksand;
-      font-size: 32px;
+      font-size: 2rem;
       text-transform: lowercase;
       a {
         color: #333;
@@ -169,8 +169,8 @@
     margin-bottom: 240px; 
   }
   .title {
-    font-size: 58px;
-    line-height: 72px;
+    font-size: 3rem;
+    line-height: 3.5rem;
     font-family: $quicksand;
   }
   .blurb {
@@ -183,7 +183,7 @@
   }
   .read_more {
     font-family: $quicksand;
-    font-size: 32px;
+    font-size: 2rem;
     text-transform: lowercase;
   }
 }

@@ -44,33 +44,37 @@
           
         = yield
     %footer
-      .hashtag
-        %span{:style => 'font-weight: 400'}>#
-        pixelache
-      .follow
-        .title Follow us on
-        .icons
-          = link_to image_tag(theme_image_path('follow_fb.png')), 'https://www.facebook.com/pixelache'
-          = link_to image_tag(theme_image_path('follow_twitter.png')), 'https://twitter.com/pixelache'
-          = link_to image_tag(theme_image_path('follow_vimeo.png')),            'https://vimeo.com/pixelache'
-          = link_to image_tag(theme_image_path('follow_bambuser.png')),            'http://bambuser.com/channel/pixelversity'
-      .newsletter.container
+      .hashtag.row
+        .small-12.columns
+          %span{:style => 'font-weight: 400'}>#
+          pixelache
+      .follow.row
+        .small-12.columns
+          .title Follow us on
+          .icons
+            = link_to image_tag(theme_image_path('follow_fb.png')), 'https://www.facebook.com/pixelache'
+            = link_to image_tag(theme_image_path('follow_twitter.png')), 'https://twitter.com/pixelache'
+            = link_to image_tag(theme_image_path('follow_vimeo.png')), 'https://vimeo.com/pixelache'
+            = link_to image_tag(theme_image_path('follow_bambuser.png')), 'http://bambuser.com/channel/pixelversity'
+      .newsletter
         .row
-          .small-1.columns.text-right= image_tag theme_image_path('megaphone.png')
-          .small-5.columns.text-left.subscribe
+          .small-1.columns.text-right.hide-for-small-only= image_tag theme_image_path('megaphone.png')
+          .small-12.medium-5.columns.text-left.subscribe
             Subscribe to our monthly newsletter:
-          = form_tag url_for('/add_to_list'), :id => :email_form, :method => :post, :remote => true do 
-            .small-5.columns.text-left
-              #mailing_list_loading{:style => 'display: none'}= image_tag('/assets/ajax-loader.gif')
-              #email_error
-              .email_signup_form   
-                = text_field_tag :email, t(:email_address), { :class => "clearfield"}
-            .small-1.column
-              %button{:class => :email_signup , :type => :submit , :id => :mailing_list_submit}= t(:join)
+          .small-12.columns.medium-6
+            = form_tag url_for('/add_to_list'), :id => :email_form, :method => :post, :remote => true do 
+              .row
+                .small-7.medium-7.medium-offset-0.small-offset-1.columns.text-left
+                  #mailing_list_loading{:style => 'display: none'}= image_tag('/assets/ajax-loader.gif')
+                  #email_error
+                  .email_signup_form   
+                    = text_field_tag :email, t(:email_address), { :class => "clearfield"}
+                .small-2.end.medium-1.column{style: "float: left !important;"}
+                  %button{:class => :email_signup , :type => :submit , :id => :mailing_list_submit}= t(:join)
 
       .bottom_footer.container
         .row
-          .small-2.columns.fine_print
+          .medium-2.small-12.columns.fine_print.small-text-center.medium-text-left
             = link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), '/'
             %p office@pixelache.ac
             %p +358-50-5643463
@@ -79,28 +83,29 @@
             %p Suvilahti (Bldg. 7)
             %p 00540 Helsinki
             %p Finland
-          .small-6.columns.right.footer_menu
+          .small-12.medium-10.columns.right.footer_menu
             .row
-              .small-2.columns.text-left
+              .small-6.medium-2.columns.text-left
                 .heading.text-center= link_to t(:about), page_path('about')
-              .small-3.columns.text-left
+              .small-6.medium-3.columns.text-left
                 .heading.text-center= t(:activities)
                 %ul
                   %li= link_to t(:events), events_path
                   %li= link_to t(:the_festival), festivals_path
                   %li= link_to t(:projects), projects_path
                   %li= link_to t(:residencies), page_path('residencies')
-              .small-3.columns.text-left
+              .small-6.medium-3.columns.text-left
                 .heading.text-center= t(:people)
                 %ul
                   %li= link_to t(:collaborators), '#'
                   %li= link_to t(:members), '#'
                   %li= link_to t(:network), '#'
-              .small-3.columns.text-left
+              .small-6.medium-3.columns.text-left
                 .heading.text-center= t(:archive)
                 .row
                   - (Time.now.year - 1).downto(2002).each do |year|
                     .small-6.columns= link_to year.to_s, "/archive/#{year.to_s}"
+                    
       :javascript
         $(document).ready(function() {
           $('.clearfield').clearField();

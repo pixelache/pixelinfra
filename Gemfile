@@ -79,7 +79,7 @@ group :development do
   gem 'guard-rails'
   gem 'guard-rspec'
   gem 'html2haml'
-  gem 'hub', :require=>nil
+  gem 'hub', :require => nil
   gem 'letter_opener'
   gem 'nifty-generators'
   gem 'rails-footnotes',  '>= 3.7.9'

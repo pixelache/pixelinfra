@@ -1,6 +1,6 @@
 .three_posts
   .row
-    .small-10.columns.large-offset-1 
+    .small-12.medium-10.columns.medium-offset-1 
       .top_post
         .title= link_to @stream.first.item.title, @stream.first.item
         .metadata
@@ -17,7 +17,7 @@
   
       .smaller_posts.row
         - @stream.map(&:item)[1..2].each do |post|
-          .post.small-6.columns
+          .post.small-12.medium-6.columns
             .title= link_to post.title, post
             .metadata
               = date_range(post.stream_date, post.endstream_date)
