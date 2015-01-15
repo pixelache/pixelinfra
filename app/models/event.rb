@@ -9,7 +9,9 @@ class Event < ActiveRecord::Base
   belongs_to :user
   has_many :posts
   has_many :flickrsets
-  belongs_to :festivaltheme
+  #belongs_to :festivaltheme
+  has_many :festivalthemes,  through: :festivaltheme_relations
+  has_many :festivaltheme_relations, as: :relation
   belongs_to :residency
   has_many :photos, as: :item
   has_many :archivalimages

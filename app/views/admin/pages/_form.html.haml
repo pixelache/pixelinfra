@@ -33,8 +33,12 @@
     %h5 Connected to a festival?
     = f.input :festival_name, :as => :autocomplete, :url =>  autocomplete_festival_name_admin_pages_path, :input_html => { :id_element => '#page_festival_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the festival name", :hint => raw("(You only need to relate the top-level page. If this is related to a specific event that is part of a festival, you should just populate the event relation above, no need for the festival as a whole.)")
   .small-6.columns= f.input :festival_id, :as => :hidden
-  
+  .small-4.columns
+    %h4 Festival theme?
+    = f.input :festivalthemes
 .row
   .small-3.columns= f.input :published
 .row
   .small-2.columns= f.submit 'Save', :class => [:button, :round]
+:javascript
+  $('select#page_festivaltheme_ids').chosen();  

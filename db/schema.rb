@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141210122156) do
+ActiveRecord::Schema.define(version: 20150115130809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -317,6 +317,15 @@ ActiveRecord::Schema.define(version: 20141210122156) do
     t.string   "tertiary_colour",    default: "FFFFFF",            null: false
   end
 
+  create_table "festivaltheme_relations", id: false, force: true do |t|
+    t.integer "relation_id"
+    t.string  "relation_type"
+    t.integer "festivaltheme_id"
+  end
+
+  add_index "festivaltheme_relations", ["festivaltheme_id"], name: "index_festivaltheme_relations_on_festivaltheme_id", using: :btree
+  add_index "festivaltheme_relations", ["relation_id", "relation_type"], name: "index_festivaltheme_relations_on_relation_id_and_relation_type", using: :btree
+
   create_table "festivaltheme_translations", force: true do |t|
     t.integer  "festivaltheme_id", null: false
     t.string   "locale",           null: false
@@ -485,6 +494,7 @@ ActiveRecord::Schema.define(version: 20141210122156) do
     t.integer  "festival_id"
     t.integer  "project_id"
     t.integer  "sort_order"
+    t.integer  "festivaltheme_id"
   end
 
   add_index "pages", ["festival_id"], name: "index_pages_on_festival_id", using: :btree

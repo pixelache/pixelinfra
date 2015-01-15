@@ -9,7 +9,8 @@ class Page < ActiveRecord::Base
   has_paper_trail
   resourcify
   has_many :frontitems, as: :item, :dependent => :destroy
-  
+  has_many :festivalthemes,  through: :festivaltheme_relations
+  has_many :festivaltheme_relations, as: :relation
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? && x['body'].blank? }
 
   attr_accessor :festival_name, :project_name
