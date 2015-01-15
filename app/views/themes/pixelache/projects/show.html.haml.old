@@ -1,0 +1,101 @@
+:css
+  .project_detail {
+    background-color: ##{@project.project_bg_colour};
+    color: ##{@project.project_text_colour};
+  }
+  .project_detail a {
+    color: ##{@project.project_link_colour};
+  }
+= content_for :page_tree do
+  .row.left-collapse
+    %span.leaf
+      = link_to t(:projects), projects_path
+      = ' : '
+    - @project.self_and_ancestors.reverse.each do |p|
+      - if p == @project
+        %strong= p.name
+      - else
+        %span.leaf
+          = link_to p.name, p
+          = " : "
+              
+.outer.project_detail(style="")
+
+    
+  .wide_project_banner{:style => @project.background_css }
+    .row
+      .small-4.columns
+        .title= @project.name
+      - unless @project.description.blank?
+        .small-6.columns.end.description_excerpt(style="background-color: ##{@project.project_bg_colour}")
+          = raw truncate_html(@project.description, :length => 400)
+          .read_more.text-center
+            = link_to t(:read_more), '#', :onclick => 'javscript:$("html, body").animate({    scrollTop: $("#desccont").offset().top}, 1000);'
+            |
+            = link_to t(:see_activities), '#', :onclick => 'javscript:$("html, body").animate({    scrollTop: $("#activities").offset().top}, 1000);'
+        
+        
+  - if @project.self_and_descendants.map{|x| x.events.published }.flatten.size > 1
+    .events_wrapper
+      .row
+        .small-12.columns.text-center
+          %h2(style="color: ##{@project.project_text_colour}")= t :events
+          .events_carousel.row.small-centered
+            - @project.self_and_descendants.map{|x| x.events.published }.flatten.sort_by{|x| x.start_at }.reverse[0..8].each do |e| 
+              - if e.image?
+                .small-6.columns
+                  .event{:style => "background: url(#{e.image.url.gsub(/development/, 'production')}) no-repeat center center; background-size: cover"}
+                    = link_to e do
+                      .title= e.name
+                      .when
+                        = date_range(e.start_at, e.end_at, :format => :short)
+
+
+  .white#desccont
+    .row
+      .columns{:class => (@project.pages.empty? && @project.children.empty?) ? "small-12" : "small-8"}
+        = raw @project.description
+        
+      - unless @project.pages.empty? && @project.children.empty?
+        .small-4.columns
+      
+          -# pages
+          - unless @project.pages.empty?
+            .children
+              %h3= t(:more_information)
+              - @project.pages.roots.first.children.each do |child|
+                .child= link_to child.name, project_page_path(@project, child)
+          
+          - unless @project.children.empty?
+            %h3= t(:subprojects_and_events)
+            - if @project.children.size > 1
+              #projects_tree
+                %ul
+                  - @project.children.each do |subproject|
+                    - next if subproject.evolvedfrom
+                    = render :partial => 'projectnode', :locals => {:project => subproject}
+              = content_for :jquery do
+                :plain
+                   $('#projects_tree').jstree();
+                   jQuery("#projects_tree ul").on("click","li.jstree-node a",function(){
+                       document.location.href = this; 
+                   });
+            - else
+              %h4= link_to @project.children.first.name, @project.children.first
+                      
+  .activity_bar#activities= render 'activities'
+    
+                  
+  .row
+    .small-12.columns#paginator=  paginate @activities, :remote => true
+
+= content_for :jquery do
+  :plain
+    $('.events_carousel').slick({infinite: true,
+      slidesToShow: 2,
+      adaptiveHeight: true,
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 2400,
+      slidesToScroll: 1
+    });

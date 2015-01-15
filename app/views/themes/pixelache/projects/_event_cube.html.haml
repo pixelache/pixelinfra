@@ -1,0 +1,15 @@
+.small-12.medium-6.large-4.columns
+  .event_small{style: event.image? ? "background-image: url(#{event.image.url(:box).gsub(/development/, 'production')});" : false}
+    .yellow
+      .title= link_to event.name, event
+      .metadata
+        = date_range(event.start_at, event.end_at, :format => :short)
+        = " | "
+        = event.place.try(:name)
+
+      .hashtag
+        
+        - if event.festival
+          = link_to event.festival.to_hashtag, event.festival
+        - if event.project
+          = link_to event.project.to_hashtag, event.project

@@ -111,36 +111,69 @@ button.slick-next, button.slick-prev {
 }
 .project_detail {
   
-  .wide_project_banner {
-    padding-top: 30px;
+  .project_title {
+    font-size: 4em;
     background-color: white;
-    min-height: 270px;
-    .title {
-      font-size: 4em;
-      background-color: white;
-      opacity: 0.9;
-      padding: 6px;
-      text-align: center;
-      float: left;
+    opacity: 0.9;
+    font-family: $quicksand;
+    font-weight: 300;
+    padding: 1rem 0px;
+  }
+  .title-wrapper {
+    width: 100%;
+
+  }
+  
+  .description {
+    border-top: 1px solid #333;
+    padding: 2rem 0;
+    font-family: $opensans;
+    font-size: 1rem;
+    line-height: 1.8rem;
+  }
+  .share_this {
+    border-top: 1px solid #333;
+    padding-top: 0.5rem;
+  }
+  
+  .events_wrapper {
+    margin: 3rem 0px;
+    .wrapper_title {
+      font-family: $quicksand;
+      font-weight: 300;
+      font-size: 3rem;
+      line-height: 3.6rem;
+      text-transform: uppercase;
+      color: #333;
+      margin-bottom: 1.5rem;
     }
-    .description_excerpt {
-      margin: 20px;
-      font-size: 1.2em;
-      padding: 10px;
-      opacity: 0.85;
-      .read_more {
-        margin: 25px 0px;
-        text-transform: lowercase;
-        a {
-          font-family: $quicksand;
-          font-weight: bold;
-          font-size: 14px;
+    .events_small {
+      .yellow {
+        .hashtag {
+          display: none;
         }
       }
     }
   }
+  .activities_wrapper {
+    border-top: 1px solid #333;
+    padding: 2rem 0px;
+    .wrapper_title {
+      font-family: $quicksand;
+      font-weight: 300;
+      font-size: 3rem;
+      line-height: 3.6rem;
+      text-transform: uppercase;
+      color: #333;
+      margin-bottom: 1.5rem;
+    }
+  }
+  
+}
 
-  .event {
+
+.whatever {
+    .event {
     padding: 20px 0px;
     margin-bottom: 30px;
     border-bottom: 1px solid #999;

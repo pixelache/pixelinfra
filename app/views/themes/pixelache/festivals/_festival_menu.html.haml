@@ -29,8 +29,9 @@
   .large-2.columns.small-12.medium-2#nav_column_0
     %ul.text-right.first
       -# %li= link_to t(:events), "#", onmouseover: "javascript:toggleNavMenu('#events')", id: :events, class: (@event ? :active : false)
+      - counter = 0
       - unless festival.pages.empty?
-        - counter = 0
+
         - festival.pages.published.first.children.published.each do |c|
           - counter += 1
           - if c.children.empty? && c.slug != 'programme'

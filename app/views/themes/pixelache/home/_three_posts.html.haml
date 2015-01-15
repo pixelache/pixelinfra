@@ -4,9 +4,8 @@
       .top_post
         .title= link_to @stream.first.item.title, @stream.first.item
         .metadata
-          = date_range(@stream.first.item.stream_date, @stream.first.item.endstream_date)
+          = "#{date_range(@stream.first.item.stream_date, @stream.first.item.endstream_date)}#{@stream.first.item.class == Event ? (', ' + @stream.first.item.place.name) : ' '}"
           - if @stream.first.item.class == Event
-            = ", " +  @stream.first.item.place.name
             %p.place_address
               = @stream.first.item.place.address
               - unless @stream.first.item.place.latitude.blank?

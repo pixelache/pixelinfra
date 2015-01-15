@@ -71,7 +71,7 @@
   }
   
   .event_single {
-    padding: 0;
+    padding-top: 2rem;
     .internal {
       padding-top: 0px;
     }
@@ -102,9 +102,10 @@
   }
   
   .page_tree {
-
+    height: initial;
     max-height: 80px;
     line-height: 1.2rem;
+    padding: 0 1rem;
   }
   
   
