@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
   has_many :flickrsets
   #belongs_to :festivaltheme
   has_many :festivalthemes,  through: :festivaltheme_relations
-  has_many :festivaltheme_relations, as: :relation
+  has_many :festivaltheme_relations, as: :relation, foreign_key: :relation_id
   belongs_to :residency
   has_many :photos, as: :item
   has_many :archivalimages

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115130809) do
+ActiveRecord::Schema.define(version: 20150116142522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -317,7 +317,7 @@ ActiveRecord::Schema.define(version: 20150115130809) do
     t.string   "tertiary_colour",    default: "FFFFFF",            null: false
   end
 
-  create_table "festivaltheme_relations", id: false, force: true do |t|
+  create_table "festivaltheme_relations", force: true do |t|
     t.integer "relation_id"
     t.string  "relation_type"
     t.integer "festivaltheme_id"
