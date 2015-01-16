@@ -1,5 +1,6 @@
 // Calculate highest possible number of rows and set it to that
 - highest = 0
+- themelevel = 2
 :css
   .festival_menu li a, .festival_menu .festival_top_header a:hover  {
     color: ##{@festival.tertiary_colour};
@@ -100,43 +101,69 @@
           - else  
             - # 3 or more themes, so make another menu level
             - counter += 1
-            %li= link_to t(:themes), '#', onmouseover: "javscript:toggleNavMenu('#themes')", id: "themes", class: (@event.nil? && @festivaltheme.nil?) ? false : :active
+            - if counter > 1
+              %li= link_to t(:themes), '#', onmouseover: "javscript:toggleNavMenu('#themes')", id: "themes", class: (@event.nil? && @festivaltheme.nil?) ? false : :active
+            - else
+              - themelevel = 1
+              - festival.festivalthemes.each do |theme|
+                - counter += 1
+                %li= link_to theme.name, festival_theme_festival_path(@festival, theme), onmouseover: "javascript:toggleNavMenu('#theme_#{theme.id}')", id: "theme_#{theme.id}", class: determine_hierarchy(:active, theme, [@page, @festivaltheme, @event])
+              - unless festival.events.published.to_a.delete_if{|x| x.festivalthemes.empty? }.empty?
+                - counter += 1
+                %li= link_to "Other activities", '#', onmouseover: "javascript:toggleNavMenu('#otherevents')", id: "otherevents", class: @event.nil? ? false : (@event.festivalthemes.empty? ? :active : false)
       - highest = counter unless highest > counter
           
           
   -# 3rd column
   .small-12.large-3.medium-3.columns#nav_column_2
-    
-    - if festival.festivalthemes.size <= 2 && !festival.festivalthemes.empty?
-      - #themes are directly listed in last column, so put events
+    - if themelevel == 1
       - festival.festivalthemes.each do |theme|
         - counter = 0
-        %ul.navhide{id: "theme_#{theme.id}_menu", class:  determine_hierarchy(:open, theme, [@page, @festivaltheme, @event]) }
+        %ul.navhide.inner{id: "theme_#{theme.id}_menu", class: determine_hierarchy(:open, theme, [@page, @festivaltheme, @event])}
+          - theme.pages.published.each do |p|
+            - counter += 1
+            %li= link_to p.name, festival_page_festival_path(@festival, p),  class: determine_hierarchy(:active, p, [@page, @festivaltheme, @event])
           - theme.events.published.sort_by(&:start_at).each do |e|
             - counter += 1
             %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
         - highest = counter unless highest > counter
       - unless festival.events.published.to_a.delete_if{|x| x.festivalthemes.empty? }.empty?
         - counter = 0
-        %ul.navhide#otherevents_menu{ class: @event.nil? ? false : (@event.festivalthemes.empty? ? :open : false) }
+        %ul.navhide.inner#otherevents_menu{ class: @event.nil? ? false : (@event.festivalthemes.empty? ? :open : false) }
           - festival.events.published.to_a.delete_if{|x| !x.festivalthemes.empty? }.sort_by(&:start_at).each do |e|
             - counter += 1
             %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
-        - highest = counter unless highest > counter
+    - else
+      - if festival.festivalthemes.size <= 2 && !festival.festivalthemes.empty?
+        - #themes are directly listed in last column, so put events
+        - festival.festivalthemes.each do |theme|
+          - counter = 0
+          %ul.navhide{id: "theme_#{theme.id}_menu", class:  determine_hierarchy(:open, theme, [@page, @festivaltheme, @event]) }
+            - theme.events.published.sort_by(&:start_at).each do |e|
+              - counter += 1
+              %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
+          - highest = counter unless highest > counter
+        - unless festival.events.published.to_a.delete_if{|x| x.festivalthemes.empty? }.empty?
+          - counter = 0
+          %ul.navhide#otherevents_menu{ class: @event.nil? ? false : (@event.festivalthemes.empty? ? :open : false) }
+            - festival.events.published.to_a.delete_if{|x| !x.festivalthemes.empty? }.sort_by(&:start_at).each do |e|
+              - counter += 1
+              %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
+          - highest = counter unless highest > counter
       
     
-    - else
-      -# themes need to be listed here and actual events bumped to column #4
-      - unless festival.festivalthemes.size < 2
-        - counter = 0
-        %ul.navhide#themes_menu{class: (@event.nil? && @festivaltheme.nil?) ? false : :open}  
-          - festival.festivalthemes.each do |theme|
-            - counter += 1
-            %li= link_to theme.name, festival_theme_festival_path(@festival, theme), onmouseover: "javascript:toggleNavMenu('#theme_#{theme.id}')", id: "theme_#{theme.id}", class: determine_hierarchy(:active, theme, [@page, @festivaltheme, @event])
-          - unless festival.events.published.to_a.delete_if{|x| x.festivalthemes.empty? }.empty?
-            - counter += 1
-            %li= link_to "Other activities", '#', onmouseover: "javascript:toggleNavMenu('#otherevents')", id: "otherevents", class: @event.nil? ? false : (@event.festivalthemes.empty? ? :active : false)
-        - highest = counter unless highest > counter
+      - else
+        -# themes need to be listed here and actual events bumped to column #4
+        - unless festival.festivalthemes.size < 2
+          - counter = 0
+          %ul.navhide#themes_menu{class: (@event.nil? && @festivaltheme.nil?) ? false : :open}  
+            - festival.festivalthemes.each do |theme|
+              - counter += 1
+              %li= link_to theme.name, festival_theme_festival_path(@festival, theme), onmouseover: "javascript:toggleNavMenu('#theme_#{theme.id}')", id: "theme_#{theme.id}", class: determine_hierarchy(:active, theme, [@page, @festivaltheme, @event])
+            - unless festival.events.published.to_a.delete_if{|x| x.festivalthemes.empty? }.empty?
+              - counter += 1
+              %li= link_to "Other activities", '#', onmouseover: "javascript:toggleNavMenu('#otherevents')", id: "otherevents", class: @event.nil? ? false : (@event.festivalthemes.empty? ? :active : false)
+          - highest = counter unless highest > counter
       
     - festival.pages.published.first.find_all_by_generation(2).each do |p|
       - counter = 0
@@ -154,23 +181,24 @@
 
   -# make 4th column if needed
   .small-12.columns.final#nav_column_3{:class => (festival.festivalthemes.size <= 2) ? 'large-4 medium-4' : 'large-5 medium-5'}
-    - festival.festivalthemes.each do |theme|
-      - counter = 0
-      %ul.navhide.inner{id: "theme_#{theme.id}_menu", class: determine_hierarchy(:open, theme, [@page, @festivaltheme, @event])}
-        - theme.pages.published.each do |p|
-          - counter += 1
-          %li= link_to p.name, festival_page_festival_path(@festival, p),  class: determine_hierarchy(:active, p, [@page, @festivaltheme, @event])
-        - theme.events.published.sort_by(&:start_at).each do |e|
-          - counter += 1
-          %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
-      - highest = counter unless highest > counter
-    - unless festival.events.published.to_a.delete_if{|x| x.festivalthemes.empty? }.empty?
-      - counter = 0
-      %ul.navhide.inner#otherevents_menu{ class: @event.nil? ? false : (@event.festivalthemes.empty? ? :open : false) }
-        - festival.events.published.to_a.delete_if{|x| !x.festivalthemes.empty? }.sort_by(&:start_at).each do |e|
-          - counter += 1
-          %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
-      - highest = counter unless highest > counter 
+    - unless themelevel == 1
+      - festival.festivalthemes.each do |theme|
+        - counter = 0
+        %ul.navhide.inner{id: "theme_#{theme.id}_menu", class: determine_hierarchy(:open, theme, [@page, @festivaltheme, @event])}
+          - theme.pages.published.each do |p|
+            - counter += 1
+            %li= link_to p.name, festival_page_festival_path(@festival, p),  class: determine_hierarchy(:active, p, [@page, @festivaltheme, @event])
+          - theme.events.published.sort_by(&:start_at).each do |e|
+            - counter += 1
+            %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
+        - highest = counter unless highest > counter
+      - unless festival.events.published.to_a.delete_if{|x| x.festivalthemes.empty? }.empty?
+        - counter = 0
+        %ul.navhide.inner#otherevents_menu{ class: @event.nil? ? false : (@event.festivalthemes.empty? ? :open : false) }
+          - festival.events.published.to_a.delete_if{|x| !x.festivalthemes.empty? }.sort_by(&:start_at).each do |e|
+            - counter += 1
+            %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
+        - highest = counter unless highest > counter 
     - festival.pages.first.find_all_by_generation(3).each do |p|
       - next if p.children.empty?
       - counter = 0

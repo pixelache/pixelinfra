@@ -104,7 +104,7 @@ module ApplicationHelper
           return false
         end
       elsif i.class == Event
-        if parent.slug == 'programme' || i.festivaltheme == parent || i == parent
+        if parent.slug == 'programme' || i.festivalthemes.include?(parent) || i == parent
           return cssclass
         else
           return false
