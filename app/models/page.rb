@@ -33,6 +33,10 @@ class Page < ActiveRecord::Base
     !self_and_ancestors.map(&:project).compact.empty?
   end
   
+  def headings
+    Nokogiri::HTML(self.body).search('a[name]').map{|x| [x['name'], x.text] }.delete_if{|x| x.first.blank? }
+  end
+  
   def parent_project
     if has_project?
        self_and_ancestors.map(&:project).compact.first

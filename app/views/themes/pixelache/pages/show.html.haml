@@ -10,14 +10,46 @@
 
 .page
   .row
-    .small-7.columns.large-offset-1.title
+    .small-12.medium-7.columns.medium-offset-1.title
       = raw @page.name
-
+      
       - if can? :edit, @page
         %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id), class: [:button, :tiny, :secondary]
   .row
-    .small-7.columns.large-offset-1.body= raw simple_format(@page.body)
-    - unless @page.children.empty?
-      .small-3.columns.children
+    .small-12.medium-7.columns.medium-offset-1.body= raw simple_format(@page.body)
+    - unless @page.headings.empty?
+      .small-3.columns.children.hide-for-small-only
+        .child.top= link_to t(:top), '#', onclick: 'scrollTo("body");'
+        - @page.headings.each do |heading|
+          - next if heading.first == 'top'
+          .child= link_to heading.last, "#", onclick: "scrollTo('a[name=#{heading.first}]');"
         - @page.children.each do |child|
           .child= link_to child.name, child
+          
+= content_for :jquery do
+  :plain
+    var stickyNavTop = $('.children').offset().top;  
+    var stickyPageTop = $('.page').offset().top;  
+    var stickyNavLeft = $('.children').offset().left;  
+    var stickyNav = function(){  
+    var scrollTop = $(window).scrollTop();  
+       
+    if (scrollTop > stickyNavTop) {   
+        $('.children').addClass('sticky_side_nav');  
+        $('.children').css('left', stickyNavLeft);
+        $('.children').css('top', stickyPageTop);  
+        $('.children .top').css('display', 'block');
+    } else {  
+        $('.children').removeClass('sticky_side_nav');   
+        $('.children').css('left', '');
+        $('.children').css('top', '');
+        $('.children .top').css('display', 'none');
+    }  
+    };  
+  
+    stickyNav();  
+  
+    $(window).scroll(function() {  
+        stickyNav();  
+    });  
+ 
