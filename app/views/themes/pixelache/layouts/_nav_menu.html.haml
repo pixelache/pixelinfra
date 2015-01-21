@@ -11,8 +11,8 @@
       %li= link_to t(:latest_news), posts_path, onmouseover: "javascript:toggleNavMenu('#news')", id: :news
       %li= link_to t(:press), page_path('press')
     %ul.navhide#activities_menu
-      %li= link_to t(:events), "#", onmouseover: "javascript:toggleNavMenu('#events')", id: :events
-      %li= link_to t(:projects), "#", onmouseover: "javascript:toggleNavMenu('#projects')" , id: :projects
+      %li= link_to t(:events), events_path, onmouseover: "javascript:toggleNavMenu('#events')", id: :events
+      %li= link_to t(:projects), projects_path, onmouseover: "javascript:toggleNavMenu('#projects')" , id: :projects
       %li= link_to t(:festival), festivals_path
       %li= link_to t(:residencies), residencies_path
     %ul.navhide#people_menu
@@ -59,7 +59,7 @@
                   %li= link_to t(:all_events), events_path
     %ul.inner.navhide#projects_menu
       .row
-        - @active_projects.in_groups_of(4) do |group|
+        - @active_projects.take(8).in_groups_of(4) do |group|
           .small-12.medium-6.columns  
             %ul.inner
               - group.each do |p|
