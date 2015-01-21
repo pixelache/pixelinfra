@@ -13,7 +13,7 @@
     %ul.navhide#activities_menu
       %li= link_to t(:events), events_path, onmouseover: "javascript:toggleNavMenu('#events')", id: :events
       %li= link_to t(:projects), projects_path, onmouseover: "javascript:toggleNavMenu('#projects')" , id: :projects
-      %li= link_to t(:festival), festivals_path
+      %li= link_to t(:festival), festivals_path, onmouseover: "javascript:toggleNavMenu('#festivals')" , id: :festivals
       %li= link_to t(:residencies), residencies_path
     %ul.navhide#people_menu
       %li= link_to t(:collaborators), '#'
@@ -21,7 +21,7 @@
       %li= link_to t(:network), 'http://network.pixelache.ac/'
     %ul.navhide#archive_menu
       %li= link_to t(:all_posts), posts_path
-      %li= link_to t(:festivals), festivals_path
+      %li= link_to t(:festivals), festivals_path, onmouseover: "javascript:toggleNavMenu('#festivals')" , id: :festivals
       %li= link_to t(:yearly_archive), "#", onmouseover: "javascript:toggleNavMenu('#yearly')", id: :yearly
               
   .small-12.medium-8.columns
@@ -52,6 +52,12 @@
           %span.date= l e.start_at.to_date, format: :short
         - if e == @recent_events.take(4).last
           %li= link_to t(:all_events), events_path
+    %ul.inner.navhide#festivals_menu
+      - @recent_festivals.each do |f|
+        %li
+          = link_to f.name, f
+          %span.date= f.subtitle
+      %li= link_to t(:festivals_archive), festivals_path
     %ul.inner.navhide#projects_menu
       .row
         - @active_projects.take(8).in_groups_of(4) do |group|
