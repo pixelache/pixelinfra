@@ -32,7 +32,7 @@
           - else
             = render :partial => 'layouts/nav_menu'
         - if content_for? :page_tree
-          .page_tree
+          .page_tree.sticky
             = yield :page_tree
 
 

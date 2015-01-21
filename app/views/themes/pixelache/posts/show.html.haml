@@ -1,3 +1,23 @@
+= content_for :page_tree do
+  .row.left-collapse
+    - if @post.festival 
+      %strong= link_to @post.festival.name, @post.festival
+      %span.leaf= " : "
+    - elsif @post.event
+      - if @post.event.project
+        %strong= link_to @post.event.project.name, @post.event.project
+        %span.leaf= " : "
+      %span.leaf= link_to @post.event, @post.event
+      %span.leaf= " : "
+    - elsif @post.project
+      %strong= link_to @post.project.name, @post.project
+      %span.leaf= " : "
+    - else
+      %strong= link_to t(:news), posts_path
+      %span.leaf= " : "
+    %span.leaf= link_to @post.name, @post
+
+
 .row.outer
   .post_single.columns.small-centered{:class => figure_width(@post, "small-8")}
     .internal.row

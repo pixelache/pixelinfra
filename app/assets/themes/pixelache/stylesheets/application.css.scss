@@ -147,6 +147,9 @@ td .date {
   height: 32px;
   max-height: 32px;
   z-index: 12;
+  &.fixed {
+    top: 40px;
+  }
   .larger {
     a {
       font-size: 0.9rem;
