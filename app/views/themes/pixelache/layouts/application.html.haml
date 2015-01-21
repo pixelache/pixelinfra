@@ -12,6 +12,8 @@
       = javascript_include_tag "application"
       = javascript_include_tag "vendor/modernizr"
       = javascript_include_tag "pixelache/javascripts/application"
+      - if controller.controller_name == 'events' || controller.controller_name == 'home'
+        %script{:src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}", :type => "text/javascript"}
       :javascript
         var switchTo5x=true;
       %script{:src => "http://w.sharethis.com/button/buttons.js", :type => "text/javascript"}

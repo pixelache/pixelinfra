@@ -8,8 +8,9 @@
           - if @stream.first.item.class == Event
             %p.place_address
               = @stream.first.item.place.address
-              - unless @stream.first.item.place.latitude.blank?
-                = link_to t(:map), "http://maps.google.com/?q=#{@stream.first.item.place.latitude},#{@stream.first.item.place.longitude}", :target => :_blank
+            - unless @stream.first.item.place.latitude.blank?
+              %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer_#{@stream.first.item.id}').slideToggle();google.maps.event.trigger(maps.map_#{@stream.first.item.id}, 'resize'); maps.map_#{@stream.first.item.id}.setCenter(new google.maps.LatLng(#{@stream.first.item.place.latitude + 0.004}, #{@stream.first.item.place.longitude})); return false;"
+              .google_map{id: "mapcontainer_#{@stream.first.item.id}"}= render partial: 'shared/small_map'
         .body= truncate_html(@stream.first.item.body, :length => 600)
         -# = raw image_tag(@stream.first.item.image.url(:box)).gsub('production', 'development')
         .read_more= link_to 'Read More', @stream.first.item
@@ -24,9 +25,53 @@
                 = ", " +  post.place.name
                 %p.place_address
                   = post.place.address
-                  - unless post.place.latitude.blank?
-                    = link_to t(:map), "http://maps.google.com/?q=#{post.place.latitude},#{post.place.longitude}", :target => :_blank                
+                - unless post.place.latitude.blank?
+                  %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer_#{post.id}').slideToggle();google.maps.event.trigger(maps.map_#{post.id}, 'resize');maps.map_#{post.id}.setCenter(new google.maps.LatLng(#{post.place.latitude + 0.004}, #{post.place.longitude})); return false;"
+                  
+                  .google_map{id: "mapcontainer_#{post.id}"}= render partial: 'shared/small_map'
+                                      
             .body= truncate_html post.body, :length => 300
             -# = image_tag post.image.url(:standard)
             .read_more= link_to 'Read More', post
-            
+
+= content_for :jquery do
+  - places = @stream.map(&:item).delete_if{|x| x.class != Event}.delete_if{|x| x.place.nil?}.delete_if{|x| x.place.latitude.blank? }
+  - unless places.empty?
+ 
+
+    - places.each do |event|
+      = "var map_#{event.id};"
+      = "function initialize_#{event.id}(condition) {"
+      = "   var myLatlng_#{event.id} = new google.maps.LatLng(#{event.place.latitude}, #{event.place.longitude});"
+      = "   var myOptions_#{event.id} = { zoom: 14, "
+      = "      center: myLatlng_#{event.id},"
+      :plain
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+           }
+      = "   var marker_#{event.id} = new google.maps.Marker({  position: myLatlng_#{event.id}, map: map_#{event.id}, "
+      = "   title: '#{escape_javascript(event.name)}'}); "
+
+      = "map_#{event.id} = new google.maps.Map(document.getElementById('mapcontainer_#{event.id}'), myOptions_#{event.id});"
+      = "  marker_#{event.id}.setMap(map_#{event.id});"
+      = " return map_#{event.id};"
+      = "} "
+      
+    :plain
+      function initialize() {
+      
+    - places.each do |event|
+      = "  map_#{event.id} = initialize_#{event.id}();"
+    = "return { "
+    - places.each do |event|
+      = "map_" + event.id.to_s + ": map_#{event.id},"
+    :plain
+        nomap: 0
+        }
+      }
+      $(window).load(function() {
+        maps = initialize() 
+      });
+      // google.maps.event.addDomListener(window, 'load', initialize );
+      
+  
+    
