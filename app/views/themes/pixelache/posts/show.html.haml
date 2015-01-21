@@ -1,21 +1,24 @@
-= content_for :page_tree do
-  .row.left-collapse
-    - if @post.festival 
-      %strong= link_to @post.festival.name, @post.festival
-      %span.leaf= " : "
-    - elsif @post.event
-      - if @post.event.project
-        %strong= link_to @post.event.project.name, @post.event.project
+- if @festival
+  = content_for :festival_menu do
+    = render :partial => 'festivals/festival_menu', :locals => {festival: @festival}
+- else
+  = content_for :page_tree do
+    .row.left-collapse
+      - if @post.event
+        - if @post.event.project
+          %strong= link_to @post.event.project.name, @post.event.project
+          %span.leaf= " : "
+        %span.leaf= link_to @post.event.name, @post.event
         %span.leaf= " : "
-      %span.leaf= link_to @post.event, @post.event
-      %span.leaf= " : "
-    - elsif @post.project
-      %strong= link_to @post.project.name, @post.project
-      %span.leaf= " : "
-    - else
-      %strong= link_to t(:news), posts_path
-      %span.leaf= " : "
-    %span.leaf= link_to @post.name, @post
+      - elsif @post.project
+        %span.leaf= link_to t(:project), projects_path
+        %span.leaf= " : "
+        %strong= link_to @post.project.name, @post.project
+        %span.leaf= " : "
+      - else
+        %strong= link_to t(:news), posts_path
+        %span.leaf= " : "
+      %span.leaf= link_to @post.name, @post
 
 
 .row.outer

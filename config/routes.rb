@@ -74,6 +74,7 @@ Pixelinfra::Application.routes.draw do
   resources :etherpads
   resources :festivals do
     get :attendees
+    resources :posts
     member do
       get :archive
       get '/theme/:theme_id', :controller => :festivals, :action => :theme, :as => :festival_theme

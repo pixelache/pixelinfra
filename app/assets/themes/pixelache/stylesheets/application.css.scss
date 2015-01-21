@@ -194,6 +194,16 @@ td .date {
   
   &.festival_menu {
     display: block;
+    #posts_menu {
+      display: none;
+      &.open {
+        display: block;
+        ul.navhide {
+          display: block;
+          border-right: none;
+        }
+      }
+    }
     ul {
         
       margin-left: 0.8rem;

@@ -1,8 +1,14 @@
 @import 'variables';
 
 
+.posts_index_container {
+  padding-top: 2rem;
+}
 .post_row {
-  margin: 20px auto 75px auto;
+  margin-bottom: 4rem !important;
+  .end {
+    float: left !important;
+  }
 }
 
 .post_small {
