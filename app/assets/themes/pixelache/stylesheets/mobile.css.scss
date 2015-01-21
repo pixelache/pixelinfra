@@ -111,6 +111,16 @@
     padding-left: 36px;
   }
   
+  //   smaller calendar font on frontpage
+  .calendar {
+    .entry {
+      .name {
+        font-size: 1.3rem;
+        line-height: 1.6rem;
+      }
+    }
+  }
+  
   
   .pixelache_nav_menu {
     
