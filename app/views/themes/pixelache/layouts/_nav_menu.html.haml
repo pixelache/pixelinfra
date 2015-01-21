@@ -46,17 +46,12 @@
                       - next if y.nil?
                       %li= link_to y, "/archive/#{y}"
     %ul.inner.navhide#events_menu
-      .row
-        - @recent_events.in_groups_of(4).each do |group|
-          .small-12.medium-6.columns
-            %ul.inner
-              - group.each do |e|
-                - next if e.nil?
-                %li
-                  = link_to e.name, e
-                  = l e.start_at.to_date, format: :short
-                - if e == @recent_events.last
-                  %li= link_to t(:all_events), events_path
+      - @recent_events.take(4).each do |e|
+        %li
+          = link_to e.name, e
+          %span.date= l e.start_at.to_date, format: :short
+        - if e == @recent_events.take(4).last
+          %li= link_to t(:all_events), events_path
     %ul.inner.navhide#projects_menu
       .row
         - @active_projects.take(8).in_groups_of(4) do |group|
