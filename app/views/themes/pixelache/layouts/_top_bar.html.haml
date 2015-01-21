@@ -9,14 +9,21 @@
     %ul.left
       %li.tagline#dynamic_tagline
         = link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
-          
+      %li= link_to image_tag(theme_image_path('search.png')), '#', onclick: "$('ul.right').toggle('slide');$('#searchli').toggle('slide');return false;"
+      %li.has-form#searchli
+        .row.collapse
+          .large-2.hide-for-small-only.columns
+            = form_tag '/search' do 
+              = text_field :search, :term, value:  t(:search)
+              
+      
     %ul.right.lang
 
       = link_to_unless(session[:locale] == :en, 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
       %span.divider= " | "
       = link_to_unless(session[:locale] == :fi, 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
     - if current_user
-      %ul.right
+      %ul.right.user
         %li.has-dropdown
           %a{:href=> '#'}= current_user.username.gsub(/\@.*$/, '')
           %ul.dropdown

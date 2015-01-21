@@ -365,6 +365,7 @@ en:
   related_event: 'Related event'
   add_festival_theme: 'Add festival theme'
   who_is_coming: 'Who is coming?'
+  search: 'Search...'
   who_was_there: 'Who was there?'
   your_comment_was_added: 'Your comment was added'
   override_country: 'Enter text here that will display instead of the country from the above dropdown'

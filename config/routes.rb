@@ -97,6 +97,7 @@ Pixelinfra::Application.routes.draw do
   resources :residencies
   resources :steps
   get '/activities' => 'home#activities'
+  post '/search' => 'search#create'
   get '/pages/*id' => 'pages#show'
   get '/helsinki/*url', :controller => :application, :action => :reroute
   get '/signin' => 'sessions#new', :as => :signin

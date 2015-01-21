@@ -1,3 +1,7 @@
+//@import 'foundation_overrides';
+
+// mobiles
+
 @media only screen and (max-width: 40em)  { 
   
   
@@ -116,7 +120,8 @@
     .entry {
       .name {
         font-size: 1.3rem;
-        line-height: 1.6rem;
+        line-height: 1.6rem
+        ;
       }
     }
   }
@@ -146,6 +151,17 @@
     .footer_menu {
       padding-top: 0.8rem;
     }
+  }
+  
+}
+
+// tablets
+@media only screen and (min-width: 40.063em) and (max-width:  59em) {
+  nav.top-bar li.tagline a {
+    font-size: 0.8rem;
+  }
+  nav.top-bar .lang {
+    font-size: 0.75rem;
   }
   
 }
