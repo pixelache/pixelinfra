@@ -48,7 +48,7 @@
         .calendar
           %h5= t(:calendar) + ":"
           %ul.calendar_events
-            - @calendar.each do |cal|
+            - @calendar.sort_by(&:start_at).each do |cal|
               %li
                 = "#{date_range(cal.start_at, cal.end_at)}"
                 %br/
