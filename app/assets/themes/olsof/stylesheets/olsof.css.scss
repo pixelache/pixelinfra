@@ -3,14 +3,18 @@
 body {
   background-color: $beige;
   padding-top: 25px;
+  font-family: $roboto;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: $roboto;
 }
 a {
   color: $link;
   &:hover {
     color: $hover;
   }
-  
 }
+
 header {
   margin-top: -25px;
   margin-bottom: 30px;
@@ -80,7 +84,7 @@ header {
       padding-top: 33px;
       margin-right: 10px;
       font-weight: bold;
-      font-family: Open Sans, Helvetica, sans-serif;
+      font-family: $roboto;
       text-transform: lowercase;
     }
     float: right;
@@ -113,7 +117,7 @@ header {
     text-transform: lowercase;
     text-align: right;
     letter-spacing: 8px;
-    font-family: Helvetica;
+    font-family: $roboto;
     a {
       color: #000;
       &:hover { 
@@ -144,7 +148,7 @@ header {
       position:absolute;    
       color:white;
       font-size: 15px;
-      font-family: Open Sans, Helvetica, Arial, sans-serif;
+      font-family: $roboto;
       font-weight:bold;
       text-transform: uppercase;
       &.publications {
@@ -177,7 +181,7 @@ header {
     margin-top: 150px;
     h5 {
       font-size: 1em;
-      font-family: Open Sans, Helvetica, Arial, sans-serif;
+      font-family: $roboto;
       font-weight:bold;
       text-transform: uppercase;
     }
@@ -186,7 +190,7 @@ header {
       margin: 0px;
       
       li {
-        font-family: Open Sans, Helvetica, Arial, sans-serif;
+        font-family: $roboto;
         line-height: 1.4em;
         margin-bottom: 15px;
       }

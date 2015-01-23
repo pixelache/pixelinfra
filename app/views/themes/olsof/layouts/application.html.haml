@@ -5,7 +5,7 @@
       %title= content_for?(:title) ? yield(:title) : "Open Learning Steps and Open-sourcing Festivals"
       %meta{:content => content_for?(:description) ? yield(:description) : "OLSOF project", :name => "description"}
       = stylesheet_link_tag "application", :media => "all"
-     
+      %link{:href => "http://fonts.googleapis.com/css?family=Roboto:400,500,700,300", :rel => "stylesheet", :type => "text/css"}/
       = stylesheet_link_tag 'olsof/stylesheets/application', :media => :screen
       = csrf_meta_tags
       
