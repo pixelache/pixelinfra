@@ -9,12 +9,12 @@
     %ul.left
       %li.tagline#dynamic_tagline
         = link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
-      %li= link_to image_tag(theme_image_path('search.png')), '#', onclick: "$('ul.right').toggle('slide');$('#searchli').toggle('slide');return false;"
-      %li.has-form#searchli
+      %li.search_icon= link_to image_tag(theme_image_path('search.png')), '#', onclick: "$('ul.right').toggle('slide');$('#searchli').toggle('slide');return false;"
+      %li.has-form#searchli{class: (@term.nil? ? false : :open)}
         .row.collapse
-          .large-2.hide-for-small-only.columns
+          .large-8.hide-for-small-only.columns
             = form_tag '/search' do 
-              = text_field :search, :term, value:  t(:search)
+              = text_field :search, :term, value:  (@term.nil? ? t(:search) : @term), class: :clearfield
               
       
     %ul.right.lang

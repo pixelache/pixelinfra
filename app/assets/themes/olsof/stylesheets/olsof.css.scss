@@ -28,6 +28,7 @@ header {
 .right_wrap {
   margin-bottom: 40px !important;
   .language {
+    display: none;
     cursor: pointer;
     float: right;
     margin-left: 30px;
@@ -116,7 +117,7 @@ header {
     a {
       color: #000;
       &:hover { 
-        color: #666; 
+        color: #000; 
       }
     }
     .first, .second, .third { 

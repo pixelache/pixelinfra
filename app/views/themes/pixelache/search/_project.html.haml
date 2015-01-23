@@ -1,0 +1,5 @@
+.project_hit
+  .title= hit.name
+  .date= t(:last_modified, when: hit.updated_at.strftime('%d %B %Y'))
+  .excerpt= raw truncate_html(sanitize(hit.description, tags: %w{b bold strong i em italic u underline}), :length => 300)
+  .read_more= link_to t(:read_more), hit

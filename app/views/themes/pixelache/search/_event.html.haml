@@ -1,0 +1,5 @@
+.event_hit
+  .title= link_to hit.name, hit
+  .date= date_range(hit.start_at, hit.end_at, format: :long)
+  .excerpt= raw truncate_html(sanitize(hit.description, tags: %w{b em i strong u underline bold}), :length => 300)
+  .read_more= link_to t(:read_more), hit

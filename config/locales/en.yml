@@ -268,6 +268,7 @@ en:
   people: 'People'
   proposed_by: "Proposed by %{proposer} on %{when}"
   posted_by: "Posted by %{poster} on %{when}"
+  last_modified:  "Last edited on %{when}"
   created_on: 'Created on %{when}'
   create_new_proposal: 'Create new proposal'
   activities: 'Activities'
@@ -367,6 +368,9 @@ en:
   who_is_coming: 'Who is coming?'
   search: 'Search...'
   who_was_there: 'Who was there?'
+  search_results_for: 'Search results for "%{result}:"'
+  no_search_results: 'Sorry, no search results were returned.'
+  please_try_again: 'Please try a different search.'
   your_comment_was_added: 'Your comment was added'
   override_country: 'Enter text here that will display instead of the country from the above dropdown'
   your_comment_was_not_added: 'There was an error saving your comment'

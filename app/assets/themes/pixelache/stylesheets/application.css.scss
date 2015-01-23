@@ -15,6 +15,7 @@
  *= require pixelache/stylesheets/archives
  *= require pixelache/stylesheets/residencies
  *= require pixelache/stylesheets/mobile
+ *= require pixelache/stylesheets/search
  */
 
 @import 'slick';
@@ -56,8 +57,16 @@ span.translation_missing {
   .name img {
     padding: 10px 0px 0px 6px;
   }
+  ul {
+    li.search_icon a {
+      height: 40px;
+    }
+  }
   #searchli {
     display: none;
+    &.open {
+      display: block;
+    }
   }
 }
 
