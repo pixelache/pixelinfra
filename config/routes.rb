@@ -94,6 +94,7 @@ Pixelinfra::Application.routes.draw do
   resources :users
   resources :nodes
   resources :posts
+
   resources :residencies
   resources :steps
   get '/activities' => 'home#activities'
@@ -103,6 +104,7 @@ Pixelinfra::Application.routes.draw do
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout
   get '/auth/failure' => 'sessions#failure'
+  get '/members' => 'memberships#index', as: 'member'
   get '/admin' => 'admin/events#index'
   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, via: :get
   match   '/add_to_list', via: :post, :controller => :application, :action => :add_to_mailchimp

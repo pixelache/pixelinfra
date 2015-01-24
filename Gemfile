@@ -22,6 +22,7 @@ gem 'capistrano-rvm'
 gem 'capistrano-bundler'
 gem 'cancancan'
 gem 'carrierwave'
+gem 'carrierwave-aws'
 gem 'chosen-rails'
 gem 'closure_tree'
 gem 'ckeditor' #, github: 'galetahub/ckeditor', branch: 'master'
@@ -32,7 +33,7 @@ gem 'etherpad-lite'
 gem 'event-calendar', :require => 'event_calendar'
 gem 'figaro'
 gem 'flickraw'
-gem 'fog'
+
 gem 'font-awesome-rails'
 gem 'formtastic', '~> 2.3.0.rc2'
 gem 'foundation-rails', '5.3.0'
@@ -73,8 +74,8 @@ gem 'vimeo'
 gem 'youtube_it'
 
 group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'#, :platforms=>[:mri_19, :mri_20, :rbx]
+  # gem 'better_errors'
+  # gem 'binding_of_caller'#, :platforms=>[:mri_19, :mri_20, :rbx]
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'

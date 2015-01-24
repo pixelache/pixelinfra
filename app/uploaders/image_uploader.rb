@@ -4,7 +4,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::MiniMagick
 
-  storage :fog
+  storage :aws
   
   def default_url
     '/assets/transparent.gif'

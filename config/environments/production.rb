@@ -94,3 +94,4 @@ Pixelinfra::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
   # config.middleware.use "CustomDomainCookie", ".pixelache.ac"
 end
+ENV['EXECJS_RUNTIME'] = 'Node'
