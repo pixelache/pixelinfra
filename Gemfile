@@ -12,7 +12,7 @@ gem 'jquery-ui-rails'
 gem 'jquery-ui-themes'
 gem 'jbuilder', '~> 1.2'
 gem 'execjs', :group => :production
-gem 'therubyracer', :group => :production
+# gem 'therubyracer', :group => :production
 
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'auto_html'

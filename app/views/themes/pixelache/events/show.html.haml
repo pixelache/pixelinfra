@@ -28,7 +28,7 @@
         %p.place_address
           = @event.place.address
         - unless @event.place.latitude.blank?
-          %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer').slideToggle();google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude + 0.004}, #{@event.place.longitude})); return false;"
+          %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));});return false;"
           .google_map#mapcontainer= render partial: 'shared/small_map'
     - if @event.has_documentation?
       .metadata= link_to t(:scroll_down_for_documentation), '#', onclick: 'scrollTo("#documentation");'

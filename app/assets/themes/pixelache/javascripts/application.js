@@ -30,6 +30,7 @@ function toggleWideNavMenu(div, linklevel) {
   
 }
 
+
 function toggleNavMenu(div, linklevel) {
   
   $(div).parent().parent().children('li').children('a').css('color', '');

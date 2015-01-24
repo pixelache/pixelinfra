@@ -9,7 +9,7 @@
             %p.place_address
               = @stream.first.item.place.address
             - unless @stream.first.item.place.latitude.blank?
-              %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer_#{@stream.first.item.id}').slideToggle();google.maps.event.trigger(maps.map_#{@stream.first.item.id}, 'resize'); maps.map_#{@stream.first.item.id}.setCenter(new google.maps.LatLng(#{@stream.first.item.place.latitude + 0.004}, #{@stream.first.item.place.longitude})); return false;"
+              %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer_#{@stream.first.item.id}').slideToggle(function() { google.maps.event.trigger(maps.map_#{@stream.first.item.id}, 'resize'); maps.map_#{@stream.first.item.id}.setCenter(new google.maps.LatLng(#{@stream.first.item.place.latitude }, #{@stream.first.item.place.longitude})); }); return false;"
               .google_map{id: "mapcontainer_#{@stream.first.item.id}"}= render partial: 'shared/small_map'
         .body= truncate_html(@stream.first.item.body, :length => 600)
         -# = raw image_tag(@stream.first.item.image.url(:box)).gsub('production', 'development')
@@ -26,7 +26,7 @@
                 %p.place_address
                   = post.place.address
                 - unless post.place.latitude.blank?
-                  %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer_#{post.id}').slideToggle();google.maps.event.trigger(maps.map_#{post.id}, 'resize');maps.map_#{post.id}.setCenter(new google.maps.LatLng(#{post.place.latitude + 0.004}, #{post.place.longitude})); return false;"
+                  %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer_#{post.id}').slideToggle(function() { google.maps.event.trigger(maps.map_#{post.id}, 'resize');maps.map_#{post.id}.setCenter(new google.maps.LatLng(#{post.place.latitude}, #{post.place.longitude})); }); return false;"
                   
                   .google_map{id: "mapcontainer_#{post.id}"}= render partial: 'shared/small_map'
                                       
