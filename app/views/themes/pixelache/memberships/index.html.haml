@@ -1,0 +1,29 @@
+.membership_container 
+  .row
+    .small-12.columns
+      %h2= t :members
+  .row
+    .small-12.columns
+      %p= t :membership_info
+      
+  - @members.sort_by{|x| x.user.name.split(/\s/).last.downcase }.in_groups_of(3) do |mg|
+    .row.member_row
+      - mg.each_with_index do |member, index|
+        - next if member.nil?
+        .small-12.medium-4.columns.member_square{class: mg[index+1].nil? ? :end : false}
+          .name= member.user.name
+          .avatar= image_tag member.user.avatar.url
+          - if member.hallitus == true
+            .on_board= t :on_hallitus
+          - if member.hallitus_alternate == true
+            .on_board= t :on_hallitus_alternate
+          .membership_years
+            = t :active_member_years
+            = member.user.memberships.sort_by(&:year).map { |y| y.year.to_s + (y.hallitus == true ? '*' : '') + (y.hallitus_alternate == true ? '**' : '') }.join(', ')
+  
+  .row
+    .small-12.columns
+      %p
+        = "* = " + t(:on_hallitus)
+        = ", ** = " + t(:on_hallitus_alternate)
+    

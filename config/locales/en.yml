@@ -265,6 +265,7 @@ en:
   posts: 'Posts'
   edit_post: 'Edit post'
   edit_event: 'Edit event'
+  active_member_years: 'Years as member: '
   people: 'People'
   proposed_by: "Proposed by %{proposer} on %{when}"
   posted_by: "Posted by %{poster} on %{when}"
@@ -272,9 +273,12 @@ en:
   created_on: 'Created on %{when}'
   create_new_proposal: 'Create new proposal'
   activities: 'Activities'
+  on_hallitus: 'Board member'
+  on_hallitus_alternate: 'Alternate board member'
   collaborators: 'Collaborators'
   network: 'Network'
   members: 'Members'
+  membership_info: 'Pixelache is a membership-based association organised under the name Piknik Frequence ry. Our current members are:'
   posts: 'Posts'
   sign_up: 'Sign up'
   from_event: 'From event'

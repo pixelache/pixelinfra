@@ -1,0 +1,35 @@
+@import 'variables';
+
+.membership_container {
+  padding: 2rem 0;
+  
+  .member_row {
+    margin-bottom: 2rem;
+
+    .member_square {
+      margin-bottom: 2rem;
+      .name {
+        font-family: $quicksand;
+        font-size: 1.2rem;
+        color: #333;
+      }
+      .avatar {
+        img {
+          max-height: 300px;
+        }
+      }
+      .on_board {
+        text-transform: uppercase;
+        color: #666;
+        margin: 0.5rem;
+        font-size: 0.9rem;
+      }
+      .membership_years {
+        color: #666;
+        margin: 0.5rem;
+        font-size: 0.9rem;
+      }
+    }
+    
+  }
+}
