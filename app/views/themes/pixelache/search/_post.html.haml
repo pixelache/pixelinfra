@@ -1,5 +1,5 @@
 .post_hit
-  .title= hit.name
+  .title= link_to hit.name, hit
   .date= t(:posted_by, poster: hit.creator.try(:name), when: hit.updated_at.strftime('%d %B %Y'))
   .excerpt= raw truncate_html(sanitize(hit.body, tags: %w{b bold strong i italic em underline u}), :length => 300)
   .read_more= link_to t(:read_more), hit

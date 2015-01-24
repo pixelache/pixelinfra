@@ -12,10 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.core
-//= require jquery.ui.autocomplete
+//= require jquery-ui/core
+//= require jquery-ui/autocomplete
 //= require autocomplete-rails
-//= require jquery.ui.sortable
+//= require jquery-ui/sortable
 //= require foundation
 //= require jquery_nested_form
 //= require ckeditor/init

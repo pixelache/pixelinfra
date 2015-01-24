@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     return if @site.name != 'pixelache'
     @recent_events = Event.by_site(@site).published.order('start_at DESC').limit(4)
     @active_projects = Project.active.random(7)
-    @recent_festivals =  Festival.by_node(@site.id).published.order(end_at: :desc).limit(3)
+    @recent_festivals =  Festival.by_node(@site.id).published.order('end_at desc').limit(3)
     @recent_news = Post.by_site(@site).published.order('published_at DESC').limit(4)
   end
   

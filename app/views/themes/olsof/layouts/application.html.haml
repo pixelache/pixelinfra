@@ -18,7 +18,7 @@
       %header
         .contain-to-grid.sticky= render 'admin/layouts/navigation'
     .row
-      .large-3.medium-4.small-12.columns.push.large-offset-1#sidebar
+      .large-3.medium-4.small-10.small-offset-1.columns.push.large-offset-1#sidebar
         .logo
           .first= link_to 'Open', '/'
         .logo
@@ -30,7 +30,9 @@
           %option{:selected => (controller.controller_name == 'pages' ? :selected : false), :value => page_path('about')}= t :about
           %option{:selected => (controller.controller_name == 'nodes' ? :selected : false), :value => nodes_path}= t :partners
           %option{:selected => (controller.controller_name == 'publications' ? :selected : false), :value => publications_path}= t :publications
-          %option{:selected => (controller.controller_name == 'steps' || controller.controller_name == 'events' ? :selected : false), :value => events_path}= t :events
+          %option{select: controller.controller_name == 'steps' ? :selected : false, value: steps_path}= t :steps
+          
+          %option{:selected =>  controller.controller_name == 'events' ? :selected : false, :value => events_path}= t :events
           %option{:selected => (controller.controller_name == 'home'  || controller.controller_name == 'posts' ? :selected : false), :value => '/'}= t :news
           :javascript 
             $('#mobile_menu').change(function() {
@@ -42,18 +44,25 @@
           .item.publications= link_to t(:publications), publications_path
           .item.about= link_to t(:about), page_path('about')
           .item.partners= link_to t(:partners), nodes_path
+          .item.steps= link_to t(:steps), steps_path
           .item.events= link_to t(:events), events_path
           .item.news= link_to t(:news), '/'
           
         .calendar
-          %h5= t(:calendar) + ":"
+          
+          .heading
+            = image_tag current_theme_image_path('littlesquare.jpg')
+            = t(:calendar)
           %ul.calendar_events
             - @calendar.sort_by(&:start_at).each do |cal|
               %li
-                = "#{date_range(cal.start_at, cal.end_at)}"
-                %br/
-                = link_to cal.name, cal
-                
+                .date= "#{date_range(cal.start_at, cal.end_at, format: :long)}"
+                .name= link_to cal.name, cal
+        .search
+          .square= image_tag current_theme_image_path('littlesquare.jpg')
+          = form_tag '/search/' do
+            = text_field :search, :term
+            = submit_tag 'Search'
         = yield :sidebar
       
       .large-8.medium-8.small-12.pull.columns#middle

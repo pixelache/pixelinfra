@@ -149,27 +149,34 @@ header {
       color:white;
       font-size: 15px;
       font-family: $roboto;
-      font-weight:bold;
+
       text-transform: uppercase;
+      a:hover { 
+        color: #999;
+      }
       &.publications {
-        left:125px;
-        top: 155px;
+        left: 29px;
+        top: 151px;
       }
       &.about {
-        top: -2px;
-        left: 185px;
+        top: 0px;
+        left: 69px;
       }
       &.partners {
-        left: 171px;
-        top: 123px;
+        left: 15px;
+        top: 73px;
       }
       &.events {
-        left: 60px;
-        top: 125px;
+        left: 169px;
+        top: 110px;
       }
       &.news {
-        left: 75px;
-        top: 27px;
+        left: 103px;
+        top: 53px;
+      }
+      &.steps {
+        left: 204px;
+        top: 47px;
       }
       a {
         color: #000;
@@ -177,14 +184,66 @@ header {
     }
   }
   
-  .calendar {
-    margin-top: 150px;
-    h5 {
+  .search {
+    margin: 0.5rem 0px;
+    .heading {
       font-size: 1em;
       font-family: $roboto;
-      font-weight:bold;
+      
       text-transform: uppercase;
     }
+    .square {
+      float: left;
+      padding-top: 4px;
+      margin-right: 3px;
+    }
+    input[type=text] {
+      background-color: $beige;
+      border-top: none; border-right: none; border-left: none;
+      border-bottom: 1px solid black;
+      outline: none;
+      height: 1.2rem;
+      color: #333;
+      float: left;
+      padding: 0px;
+      box-shadow: none;
+      font-size: 0.8rem;
+      &:focus {
+        border-top: none; border-right: none; border-left: none;
+        border-bottom: 1px solid black;
+        outline: none;
+        box-shadow: none;
+      }
+      width: 140px;
+      &:active {
+        border-top: none; border-right: none; border-left: none;
+        border-bottom: 1px solid black;
+        box-shadow: none;
+      }
+    }
+    input[type=submit] {
+      background-color: $beige;
+      border: none;
+      color: #333;
+      outline: none;
+      margin-top: 4px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    
+    
+  }
+  .calendar {
+    margin: 150px 0 2rem 0;
+    
+    .heading {
+      font-size: 1em;
+      font-family: $roboto;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
     ul.calendar_events {
       list-style-type: none;
       margin: 0px;
@@ -192,7 +251,17 @@ header {
       li {
         font-family: $roboto;
         line-height: 1.4em;
-        margin-bottom: 15px;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid black;
+        .date {
+          font-size: 0.75rem;
+          color: #666;
+          font-style: italic;
+        }
+        .name {
+          font-size: 0.9rem;
+          text-transform: uppercase;
+        }
       }
     }
   }

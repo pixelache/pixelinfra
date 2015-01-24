@@ -1,5 +1,5 @@
 .residency_hit
-  .title= hit.name
+  .title= link_to hit.name, hit
   .date= date_range(hit.start_at, hit.end_at)
   .excerpt= raw truncate_html(sanitize(hit.description, tags: %w{b bold strong i em italic u underline}), :length => 300)
   .read_more= link_to t(:read_more), hit
