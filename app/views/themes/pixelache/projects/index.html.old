@@ -1,0 +1,43 @@
+.outer.project_index
+  .row
+    .small-12.columns
+      %h1= t :projects
+      %p= t :projects_blurb
+  .row
+    .small-8.columns
+      .text-center
+        %h2= t :active_projects
+      .row
+        .small-12.columns.projects_list
+          - @active_projects.each do |ap|
+            = link_to ap.name, "javascript:scrollTo('#project_#{ap.id}');"
+      - @active_projects.each do |ap|
+        .project[ap]
+          .row
+            .small-12.columns
+              .title
+                %h3= link_to ap.name, ap
+          .row
+            - unless ap.photos.empty?
+              .small-6.columns
+                = image_tag ap.photos.sample.filename.url(:box)
+            .small-6.columns
+              .blurb= truncate_html(ap.description, length: 500)
+              - unless ap.self_and_descendants.map{|x| x.events.published }.flatten.empty?
+                %p= pluralize(ap.self_and_descendants.map{|x| x.events.published }.flatten.size, t(:event))
+              .read_more= link_to t(:read_more), ap
+    .small-3.columns.end
+      .text-center
+        %h2= t :all_projects
+      #projects_tree
+        %ul
+          - Project.roots.sort_by(&:name).each do |project|
+            - next if project.evolvedfrom
+            = render :partial => 'projectnode', :locals => {:project => project}
+
+= content_for :jquery do
+  :plain
+     $('#projects_tree').jstree();
+     jQuery("#projects_tree ul").on("click","li.jstree-node a",function(){
+         document.location.href = this; 
+     });

@@ -30,28 +30,48 @@
           
 = content_for :jquery do
   :plain
+
     var stickyNavTop = $('.children').offset().top;  
     var stickyPageTop = $('.page').offset().top;  
     var stickyNavLeft = $('.children').offset().left;  
     var stickyNav = function(){  
-    var scrollTop = $(window).scrollTop();  
+      var scrollTop = $(window).scrollTop();  
        
-    if (scrollTop > stickyNavTop) {   
-        $('.children').addClass('sticky_side_nav');  
-        $('.children').css('left', stickyNavLeft);
-        $('.children').css('top', stickyPageTop);  
-        $('.children .top').css('display', 'block');
-    } else {  
-        $('.children').removeClass('sticky_side_nav');   
-        $('.children').css('left', '');
-        $('.children').css('top', '');
-        $('.children .top').css('display', 'none');
-    }  
+      if (scrollTop > stickyNavTop) {   
+          $('.children').addClass('sticky_side_nav');  
+          $('.children').css('left', stickyNavLeft);
+          $('.children').css('top', stickyPageTop);  
+          $('.children .top').css('display', 'block');
+      } else {  
+          $('.children').removeClass('sticky_side_nav');   
+          $('.children').css('left', '');
+          $('.children').css('top', '');
+          $('.children .top').css('display', 'none');
+      }  
     };  
   
     stickyNav();  
-  
+    $(window).on('resize', function() {
+      if ($('.children .top').css('display') == "block") {
+        $('.children').css('left',  35 + ($('.body').offset().left + $('.body').outerWidth()));
+      }
+    })
     $(window).scroll(function() {  
+      if ($('.children .top').css('display') == "block") {
+        $('.children').css('left',  35 + ($('.body').offset().left + $('.body').outerWidth()));
+      } else {
         stickyNav();  
-    });  
+      }
+    });
+    $('.arrow-down').mouseover(function() {
+      if ($('.children .top').css('display') == "block") {
+        alert('oo');
+        $('.children').css('top',$('.page_tree').offset().top + $('.page_tree').css('height'));
+      }
+    });
+    $('.arrow-up').mouseover(function() {
+      if ($('.children .top').css('display') == "block") {
+        $('.children').css('top',$('.page').offset().top );
+      }
+    });
  

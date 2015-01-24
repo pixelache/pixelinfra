@@ -20,6 +20,9 @@
           = f.globalize_fields_for locale do |en|
             .row
               .small-12.columns
+                %b= "Short description (one sentence) in  #{t :locale_name, :locale => locale}"
+                = en.text_field :short_description
+              .small-12.columns
                 %b= "Page content in #{t :locale_name, :locale => locale}"
                 = en.cktext_area :description
   .row

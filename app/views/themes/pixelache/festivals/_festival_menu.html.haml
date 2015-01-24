@@ -60,7 +60,7 @@
   .columns.medium-10#posts_menu.nav_column_1{class: controller.controller_name == 'posts' ? :open : false}
     - unless festival.posts.published.empty?
       %ul.navhide
-        - festivalposts = festival.posts.published.order(published_at: :desc)
+        - festivalposts = festival.posts.published.order('published_at desc')
         - festivalposts.take(@post.nil? ? 5 : (festivalposts.take(4).include?(@post) ? 4 : 3)).each do |post|
           %li= link_to post.name, post, class: (@post.nil? ? '' : (@post == post ? :active : ''))
         - unless @post.nil?

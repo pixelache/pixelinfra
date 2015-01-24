@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150124133753) do
+ActiveRecord::Schema.define(version: 20150124155951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -605,11 +605,12 @@ ActiveRecord::Schema.define(version: 20150124133753) do
   add_index "project_hierarchies", ["descendant_id"], name: "project_desc_idx", using: :btree
 
   create_table "project_translations", force: :cascade do |t|
-    t.integer  "project_id",              null: false
-    t.string   "locale",      limit: 255, null: false
+    t.integer  "project_id",                    null: false
+    t.string   "locale",            limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.string   "short_description"
   end
 
   add_index "project_translations", ["locale"], name: "index_project_translations_on_locale", using: :btree
