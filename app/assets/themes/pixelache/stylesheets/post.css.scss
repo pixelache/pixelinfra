@@ -3,8 +3,12 @@
 
 .posts_index_container {
   padding-top: 2rem;
+  h2 {
+    margin-bottom: 2rem;
+  }
 }
 .post_row {
+  margin-top: 2rem;
   margin-bottom: 4rem !important;
   .end {
     float: left !important;
