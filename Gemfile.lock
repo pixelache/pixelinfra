@@ -87,6 +87,10 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
+    byebug (3.5.1)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+      slop (~> 3.6)
     cancancan (1.10.1)
     capistrano (3.1.0)
       i18n
@@ -143,6 +147,7 @@ GEM
     coffee-script-source (1.8.0)
     colored (1.2)
     colorize (0.7.5)
+    columnize (0.9.0)
     compass (0.12.7)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -156,6 +161,7 @@ GEM
     currencies (0.4.2)
     database_cleaner (1.0.1)
     debug_inspector (0.0.2)
+    debugger-linecache (1.2.0)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -500,6 +506,7 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on (~> 3.4)
   auto_html
+  byebug
   cancancan
   capistrano (~> 3.1.0)
   capistrano-bundler

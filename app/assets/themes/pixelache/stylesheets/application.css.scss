@@ -59,11 +59,14 @@ span.translation_missing {
     padding: 10px 0px 0px 6px;
   }
   ul {
-    li.search_icon a {
-      height: 40px;
+    li.search_icon {
+       a {
+        height: 40px;
+      }
     }
   }
   #searchli {
+    float: right;
     display: none;
     &.open {
       display: block;

@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :authentications, :dependent => :destroy
   has_many :memberships
+  has_many :posts, foreign_key: "creator_id"
   devise :rememberable, :trackable, :validatable,
           :database_authenticatable, :registerable, :recoverable
   rolify

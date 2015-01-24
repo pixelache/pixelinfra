@@ -11,6 +11,12 @@
 
   .row
     .small-6.columns= f.input :website
+  .row
+    .small-12.columns.medium-6= f.input :bio, input_html: {class: 'ckeditor'}
+  .row
+    .small-12.columns.medium-3= f.input :twitter_name
+  .row
+    .small-12.columns.medium-4= f.input :feed_urls
   = f.fields_for :authentications do |ff|
 
     .small-4.columns

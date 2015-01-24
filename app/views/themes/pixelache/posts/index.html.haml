@@ -5,12 +5,14 @@
   
 .row.posts_index_container
   .large-10.columns.large-offset-1
+    - if @user
+      %h2= t(:all_posts_by, member: @user.name)
 
     - @posts.in_groups_of(3).each do |post_group|
-      .row.post_row
+      .row.post_row{:"data-equalizer" => ''}
         - post_group.compact.each_with_index do |post, index|
           .medium-4.small-12.columns.post_small{class: post_group[index+1].nil? ? :end : false}
-            .title= link_to post.title, post
+            .title{:"data-equalizer-watch" => ''}= link_to post.title, post
             .metadata
               %span.date= l post.published_at.localtime.to_date, :format => :long
               - unless post.creator.nil? 
@@ -26,5 +28,5 @@
                 - if post.project
                   = link_to post.project.name, post.project
                 = link_to t(:read_more), post, :class => :last
-      .row
-        .small-12.columns= paginate @posts
+    .row
+      .small-12.columns= paginate @posts

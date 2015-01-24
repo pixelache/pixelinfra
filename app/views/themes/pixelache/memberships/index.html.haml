@@ -11,7 +11,7 @@
       - mg.each_with_index do |member, index|
         - next if member.nil?
         .small-12.medium-4.columns.member_square{class: mg[index+1].nil? ? :end : false}
-          .name= member.user.name
+          .name= link_to member.user.name, "/member/#{member.user.slug}"
           .avatar= image_tag member.user.avatar.url
           - if member.hallitus == true
             .on_board= t :on_hallitus

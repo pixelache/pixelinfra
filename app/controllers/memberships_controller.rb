@@ -7,4 +7,13 @@ class MembershipsController < ApplicationController
     set_meta_tags title: t(:members)
   end
   
+  def show
+    @member = User.find(params[:id])
+    if @member.memberships.empty?
+      flash[:error] = t(:this_user_is_not_a_member)
+      redirect_to '/members'
+    end
+    set_meta_tags title: @member.name
+  end
+  
 end

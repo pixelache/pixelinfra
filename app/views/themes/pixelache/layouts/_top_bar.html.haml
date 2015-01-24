@@ -9,19 +9,21 @@
     %ul.left
       %li.tagline#dynamic_tagline
         = link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
-      %li.search_icon= link_to image_tag(theme_image_path('search.png')), '#', onclick: "$('ul.right').toggle('slide');$('#searchli').toggle('slide');return false;"
       %li.has-form#searchli{class: (@term.nil? ? false : :open)}
         .row.collapse
           .large-8.hide-for-small-only.columns
             = form_tag '/search' do 
-              = text_field :search, :term, value:  (@term.nil? ? t(:search) : @term), class: :clearfield
-              
+              = text_field :search, :term, value:  (@term.nil? ? t(:search) : @term), class: :clearfield        
+    %ul.right
+      %li.search_icon= link_to image_tag(theme_image_path('search.png')), '#', onclick: "$('ul.right').toggle('slide');$('#searchli').toggle('slide');return false;"
       
-    %ul.right.lang
+              
+    - unless current_user
+      %ul.right.lang
 
-      = link_to_unless(session[:locale] == :en, 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
-      %span.divider= " | "
-      = link_to_unless(session[:locale] == :fi, 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
+        = link_to_unless(session[:locale] == :en, 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
+        %span.divider= " | "
+        = link_to_unless(session[:locale] == :fi, 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
     - if current_user
       %ul.right.user
         %li.has-dropdown
@@ -30,6 +32,11 @@
             - unless current_user.roles.empty?
               %li= link_to 'Admin', '/admin'
             %li= link_to 'Edit your profile', edit_user_path(current_user)
+            - unless session[:locale] == :en
+              %li= link_to 'Change to English',  {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}
+               
+            - unless session[:locale] == :fi
+              %li= link_to 'Change to Finnish', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} 
             %li= link_to 'Sign out', '/signout'
 
 
