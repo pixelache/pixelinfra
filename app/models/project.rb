@@ -19,7 +19,7 @@ class Project < ActiveRecord::Base
   validates_uniqueness_of :name
   belongs_to :evolvedfrom, :class_name => 'Project', :foreign_key => "evolvedfrom_id"
   has_one :evolvedto, :class_name  => 'Project', :foreign_key => "evolvedfrom_id"
-  
+  mount_uploader :background, AttachmentUploader 
   scope :active, -> { where(active: true)}
   scope :inactive, -> { where(active: false)}
   
@@ -34,10 +34,10 @@ class Project < ActiveRecord::Base
   end
   
   def background_image_css
-    if photos.empty?
+    if background.url.nil?
       ""
     else
-      "background: url(#{photos.first.filename.url.gsub(/development/, 'production')}) no-repeat 60% top; background-size: contain; background-color:  ##{project_bg_colour}"
+      "background: url(#{background.url.gsub(/development/, 'production')}) no-repeat right top; background-size: contain; background-color:  ##{project_bg_colour}"
     end
   end
   

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150124155951) do
+ActiveRecord::Schema.define(version: 20150124165720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -648,18 +648,23 @@ ActiveRecord::Schema.define(version: 20150124155951) do
   add_index "projectproposals", ["project_id"], name: "index_projectproposals_on_project_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
-    t.string   "name",                limit: 255
-    t.string   "slug",                limit: 255
+    t.string   "name",                    limit: 255
+    t.string   "slug",                    limit: 255
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "website",             limit: 255
+    t.string   "website",                 limit: 255
     t.integer  "evolvedfrom_id"
     t.integer  "evolution_year"
-    t.string   "project_bg_colour",   limit: 255, default: "f9ec31", null: false
-    t.string   "project_text_colour", limit: 255, default: "333",    null: false
-    t.string   "project_link_colour", limit: 255, default: "008cba", null: false
-    t.boolean  "active",                          default: false,    null: false
+    t.string   "project_bg_colour",       limit: 255, default: "f9ec31", null: false
+    t.string   "project_text_colour",     limit: 255, default: "333",    null: false
+    t.string   "project_link_colour",     limit: 255, default: "008cba", null: false
+    t.boolean  "active",                              default: false,    null: false
+    t.string   "background"
+    t.integer  "background_file_size",    limit: 8
+    t.string   "background_content_type"
+    t.integer  "background_height"
+    t.integer  "background_width"
   end
 
   create_table "residencies", force: :cascade do |t|

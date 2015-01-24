@@ -31,7 +31,12 @@
       = f.input :evolvedfrom, :collection => Project.all.order(:name)
       %label If so, then what year did the evolved project begin?
       = f.input :evolution_year
-
+  .row
+    .large-4.small-12.columns
+    - if f.object.background?
+      = image_tag f.object.background.url, :width => 400
+      = f.input :remove_background, as: :boolean
+    = f.input :background, hint: 'For projects index page. 1920 pixels wide please'
   .row
     .small-12.columns
       %label Images
