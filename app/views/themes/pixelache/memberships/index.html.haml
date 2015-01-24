@@ -3,9 +3,9 @@
     .small-12.columns
       %h2= t :members
   .row
-    .small-12.columns
+    .small-12.medium-10.columns
       %p= t :membership_info
-      
+      %h4= t :current_members
   - @members.sort_by{|x| x.user.name.split(/\s/).last.downcase }.in_groups_of(3) do |mg|
     .row.member_row
       - mg.each_with_index do |member, index|
@@ -26,4 +26,14 @@
       %p
         = "* = " + t(:on_hallitus)
         = ", ** = " + t(:on_hallitus_alternate)
-    
+  
+  .row
+    .small-12.columns
+      %h4= t :past_members
+  .row
+    .small-12.columns
+      - @past_members.sort_by{|x| x.user.name.split(/\s/).last.downcase }.each do |pm|
+        %p
+          = pm.user.name 
+          = "(#{pm.user.memberships.sort_by(&:year).map { |y| y.year.to_s + (y.hallitus == true ? '*' : '') + (y.hallitus_alternate == true ? '**' : '') }.join(', ')})"
+        
