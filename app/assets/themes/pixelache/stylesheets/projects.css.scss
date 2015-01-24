@@ -23,6 +23,35 @@ button.slick-next, button.slick-prev {
 }
 
 .project_index {
+  
+  .strip {
+
+
+    max-height: 670px;
+    
+    .title_box {
+      padding-bottom: 33.333333333%;
+      height: 0;
+      h2 {
+        color: inherit;
+      }
+      .subtitle {
+        color: inherit;
+      }
+   
+
+
+      position: relative;
+    }
+    
+    .image_box {
+      background-size: contain;
+      padding-bottom: 33.333333333%;
+      height: 0;
+      max-height: 670px;
+    }
+  }
+  
   .projects_list {
     margin-bottom: 2rem;
     a {

@@ -30,10 +30,14 @@ class Project < ActiveRecord::Base
   end 
     
   def background_css
+    "background-color: ##{project_bg_colour}; color: ##{project_text_colour}; "
+  end
+  
+  def background_image_css
     if photos.empty?
       ""
     else
-      "background: url(#{photos.first.filename.url}) no-repeat center top; background-size: cover; background-color: white"
+      "background: url(#{photos.first.filename.url.gsub(/development/, 'production')}) no-repeat 60% top; background-size: contain; background-color:  ##{project_bg_colour}"
     end
   end
   

@@ -15,5 +15,5 @@ class ProjectsController < InheritedResources::Base
     @active_projects = Project.active
     @inactive_projects = Project.inactive
   end
-  
+
 end
