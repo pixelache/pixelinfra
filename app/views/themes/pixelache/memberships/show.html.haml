@@ -19,7 +19,7 @@
           %p.metadata
             = "* = " + t(:on_hallitus)
             = ", ** = " + t(:on_hallitus_alternate)
-        - unless @member.bio.empty?
+        - unless @member.bio.blank?
           .bio= auto_html(@member.bio) { simple_format; link(:target => 'blank') }
     .row
       .small-12.medium-6.columns

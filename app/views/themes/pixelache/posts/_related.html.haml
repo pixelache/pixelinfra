@@ -15,9 +15,7 @@
   .row
     .related.post
       .related_metadata
-        %span.date= l related.published_at.to_date, :format => :long
-        - unless related.creator.nil? 
-          = ", #{related.creator.name}" 
+        %span.date= "#{l related.published_at.to_date, :format => :long}#{(", " + related.creator.name) unless related.creator.blank?}"
       .title= link_to  t(:post) + ": " + related.title, related
       .row
         .small-12.columns.body= raw truncate_html(related.body, :length => 350)

@@ -72,6 +72,7 @@
   .hashtag {
     float: right;
     right: 15px;
+    font-size: 0.8rem;
     bottom: 1rem;
     a {
       color: #666;
@@ -191,7 +192,7 @@
       padding-bottom: 0px;
     }
     .body {
-      font-family: Open Sans, Helvetica, sans-serif;
+      font-family: $opensans;
       font-size: 14px;
       line-height: 26px;
       color: #333;
