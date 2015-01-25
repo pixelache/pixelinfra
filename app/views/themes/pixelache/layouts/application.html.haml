@@ -24,7 +24,7 @@
   %body{:class => "#{controller_name} #{action_name}"}
     #container.container
       %header
-        .top-bar-wrapper.contain-to-grid.sticky= render 'layouts/top_bar'
+        .top-bar-wrapper.sticky= render 'layouts/top_bar'
         - unless @festival
           .arrow-down.sticky
           .arrow-up

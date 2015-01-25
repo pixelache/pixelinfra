@@ -1,7 +1,7 @@
 = content_for :page_tree do
-  .row.left-collapse
-    %span.leaf
-      %strong= link_to t(:projects), projects_path
+
+  %span.leaf
+    %strong= link_to t(:projects), projects_path
 
 .project_index      
   - @active_projects.shuffle.each do |project|
