@@ -9,9 +9,11 @@
       %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700", :rel => "stylesheet", :type => "text/css"}/
       = stylesheet_link_tag "application", :media => "all"
       = stylesheet_link_tag 'pixelache/stylesheets/application', :media => :screen
+      = stylesheet_link_tag 'pixelache/stylesheets/mobile', :media => :screen
       = javascript_include_tag "application"
       = javascript_include_tag "vendor/modernizr"
       = javascript_include_tag "pixelache/javascripts/application"
+
       - if controller.controller_name == 'events' || controller.controller_name == 'home'
         %script{:src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}", :type => "text/javascript"}
       :javascript

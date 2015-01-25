@@ -1,3 +1,6 @@
+/*
+ *= require_self
+*/
 //@import 'foundation_overrides';
 
 // mobiles
@@ -153,6 +156,30 @@
     }
   }
   
+  //  projects index page
+  .project_index {
+    .strip {
+      .image_box {
+        left: 0%;
+        width: 100%;
+        .titles {
+          h2 {
+            float: left;
+            padding: 5px;
+          }
+          .subtitle {
+            clear: left;
+            float: left;
+            padding: 5px;
+          }
+        }
+      }
+      
+      .selector {
+        display: none;
+      }
+    }      
+  }
 }
 
 // tablets
@@ -164,4 +191,19 @@
     font-size: 0.75rem;
   }
   
+  .project_index {
+    .strip {
+      .title_box {
+        .titles {
+          padding-top: 15%;
+      
+          h2 {  
+            font-size: 1.8rem;
+            line-height: 2.1rem;
+          }
+        }
+      }
+      
+    }
+  }
 }

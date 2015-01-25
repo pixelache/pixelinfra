@@ -14,18 +14,18 @@
   .festival_menu li a:hover, .festival_menu .festival_top_header a , .festival_menu li a.active {
     color: ##{@festival.primary_colour};
   }
-.row
-  .small-12.columns.festival_top_header.text-left
-    = link_to "Pixelache", '/'
-    = " : "
-    = link_to 'Festivals', festivals_path
-    = " : "
-    %span.name= link_to @festival.name, @festival
+
+.small-12.columns.festival_top_header.text-left
+  = link_to "Pixelache", '/'
+  = " : "
+  = link_to 'Festivals', festivals_path
+  = " : "
+  %span.name= link_to @festival.name, @festival
+  
     
-    // %span.dates= " (" + date_range(@festival.start_at, @festival.end_at) + ")"
 
     
-.row.left-collapse.festival_main_menu
+.left-collapse.festival_main_menu
   
   .large-2.columns.small-12.medium-2#nav_column_0
     %ul.text-right.first

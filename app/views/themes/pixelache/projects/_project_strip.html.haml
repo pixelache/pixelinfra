@@ -1,14 +1,20 @@
 .strip{style: project.background_css}
 
-  .title_box.columns{style: project.background_css}
+  .title_box.columns.hide-for-small-only{style: project.background_css}
     .row
-      .small-10.columns.small-offset-1.titles
+      .large-10.columns.large-offset-1.titles.medium-12
         
         %h2= link_to project.name, project
         .subtitle= project.short_description
   .selector.trigger.columns{style: "background-color: rgb(#{project.colour_offset}); opacity: 1;"} &nbsp;
   .image_box{style: project.background_image_css}
-    .image_overlay{style: "background-color: rgb(#{project.colour_offset}); opacity: 0.2;"}
+    .row.show-for-small-only{style: "background-color: transparent; color:##{project.project_text_colour};" }
+      .small-10.columns.small-offset-1.titles
+        
+        %h2{style: "background-color: ##{project.project_bg_colour}; float: left" }= link_to project.name, project, style: "color:##{project.project_text_colour};"
+        - unless project.short_description.blank?
+          .subtitle{style: "background-color: ##{project.project_bg_colour}; color:##{project.project_text_colour};" }= project.short_description
+    .image_overlay.hide-for-small-only{style: "background-color: rgb(#{project.colour_offset}); opacity: 0.2;"}
       .occluded{style: "color: ##{project.project_text_colour}"}
         - counter = 0
         %ul
