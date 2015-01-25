@@ -205,15 +205,18 @@ button.slick-next, button.slick-prev {
     font-family: $quicksand;
     font-weight: 300;
     padding: 1rem 0px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 1rem;
   }
+  
+
   .title-wrapper {
     width: 100%;
 
   }
   
   .description {
-    border-top: 1px solid #333;
-    padding: 2rem 0;
+
     font-family: $opensans;
     font-size: 1rem;
     line-height: 1.8rem;

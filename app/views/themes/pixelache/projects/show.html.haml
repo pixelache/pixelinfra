@@ -1,6 +1,6 @@
 
 = content_for :page_tree do
-  .row.left-collapse
+  .left-collapse
     %span.leaf
       = link_to t(:projects), projects_path
       = ' : '
@@ -18,12 +18,20 @@
       .small-12.columns
         .title_wrapper  
           .project_title= @project.name
-        .description
-          = raw @project.description
+    - unless @project.photos.empty?
+      .row
+        .small-12.columns.image_carousel
+          - @project.photos.each do |photo|
+            .slide= image_tag photo.filename.url(:standard)
+    .row
+      .small-12.columns.description= raw @project.description
+    .row
+      .small-12.columns
         .share_this= render :partial => 'shared/share_this_buttons'
 
         
-        
+    .row
+      .small-12.columns
         - if @project.self_and_descendants.map{|x| x.events.published }.flatten.size > 2
           .events_wrapper
             .row
@@ -88,3 +96,6 @@
       autoplaySpeed: 2400,
       slidesToScroll: 1
     });
+  - if @project.photos.size > 1
+    :plain
+      $('.image_carousel').slick({fade: true, arrows: false, autoplay: true, autoplaySpeed: 2900});
