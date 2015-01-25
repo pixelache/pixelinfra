@@ -6,9 +6,12 @@
       %label Is this a sub-project of another project?
       = f.input :parent, :collection => Project.all.order(:name)
   .row
-    .small-6.columns
+    .large-6.columns
       %label External website URL:
       = f.input :website
+    .small-12.large-6.columns
+      %label Redirect to?
+      = f.input :redirect_to, hint: 'Projects page will redirect to this URL'
   .row
     %dl.tabs{"data-tab" => ""}
       - I18n.available_locales.each_with_index do |locale, i|
