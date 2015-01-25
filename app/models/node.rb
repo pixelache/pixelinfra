@@ -10,7 +10,7 @@ class Node < ActiveRecord::Base
   has_and_belongs_to_many :subsites
   
   def update_image_attributes
-    if logo.present?
+    if logo.present? && logo_changed?
       if logo.file.exists?
         self.logo_content_type = logo.file.content_type
         self.logo_size = logo.file.size

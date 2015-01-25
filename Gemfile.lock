@@ -84,6 +84,10 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     bcrypt (3.1.9)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -480,11 +484,6 @@ GEM
       oauth (>= 0.4.3)
     warden (1.2.3)
       rack (>= 1.0)
-    web-console (2.0.0)
-      activemodel (~> 4.0)
-      binding_of_caller (>= 0.7.2)
-      railties (~> 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
     with_advisory_lock (3.0.0)
       activerecord (>= 3.2)
       thread_safe
@@ -506,6 +505,8 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on (~> 3.4)
   auto_html
+  better_errors
+  binding_of_caller
   byebug
   cancancan
   capistrano (~> 3.1.0)
@@ -591,5 +592,4 @@ DEPENDENCIES
   unf
   unicorn
   vimeo
-  web-console
   youtube_it

@@ -144,7 +144,7 @@ class Post < ActiveRecord::Base
   
     
   def update_image_attributes
-    if image.present?
+    if image.present? && image_changed?
       if image.file.exists?
         self.image_content_type = image.file.content_type
         self.image_size = image.file.size

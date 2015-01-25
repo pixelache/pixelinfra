@@ -4,10 +4,12 @@ class Photo < ActiveRecord::Base
   belongs_to :item, polymorphic: true
   
   def update_image_attributes
-    if filename.present?
-      self.filename_content_type = filename.file.content_type
-      self.filename_size = filename.file.size
-      self.filename_width, self.filename_height = `identify -format "%wx%h" #{filename.file.path}`.split(/x/)
+    if filename.present? && filename_changed?
+      if filename.file.exists?
+        self.filename_content_type = filename.file.content_type
+        self.filename_size = filename.file.size
+        self.filename_width, self.filename_height = `identify -format "%wx%h" #{filename.file.path}`.split(/x/)
+      end
     end
   end
 

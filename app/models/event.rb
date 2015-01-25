@@ -53,6 +53,9 @@ class Event < ActiveRecord::Base
   end
   
   def check_published
+    if self.user_id.nil?
+      self.user_id = 0
+    end
     if published == true && hide_from_feed != true
       if self.new_record? 
         add_to_feed('created') unless hide_from_feed == "1"
@@ -128,7 +131,7 @@ class Event < ActiveRecord::Base
   end
   
   def update_image_attributes
-    if image.present?
+    if image.present? && image_changed?
       if image.file.exists?
         self.image_content_type = image.file.content_type
         self.image_size = image.file.size

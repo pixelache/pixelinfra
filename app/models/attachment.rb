@@ -4,7 +4,7 @@ class Attachment < ActiveRecord::Base
   before_save :get_metadata
   
   def get_metadata
-    if attachedfile.present?
+    if attachedfile.present?  && attachedfile_changed?
       if attachedfile.file.exists?
         self.attachedfile_content_type = attachedfile.file.content_type
         self.attachedfile_size = attachedfile.file.size

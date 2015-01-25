@@ -74,8 +74,8 @@ gem 'vimeo'
 gem 'youtube_it'
 
 group :development do
-  # gem 'better_errors'
-  # gem 'binding_of_caller'#, :platforms=>[:mri_19, :mri_20, :rbx]
+  gem 'better_errors'
+  gem 'binding_of_caller'#, :platforms=>[:mri_19, :mri_20, :rbx]
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
@@ -90,7 +90,7 @@ group :development do
   gem 'rb-inotify', :require=>false
   gem 'spring'
   gem 'byebug'
-  gem 'web-console'
+  # gem 'web-console'
 end
 group :development, :test do
   gem 'factory_girl_rails'

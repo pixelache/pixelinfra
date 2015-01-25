@@ -7,7 +7,7 @@ class Comment < ActiveRecord::Base
   before_save :update_image_attributes, :update_attachment_attributes
   
   def update_image_attributes
-    if image.present?
+    if image.present? && image_changed?
       if image.file.exists?
         self.image_content_type = image.file.content_type
         self.image_size = image.file.size
@@ -17,7 +17,7 @@ class Comment < ActiveRecord::Base
   end
   
   def update_attachment_attributes
-    if attachment.present?
+    if attachment.present? && attachment_changed?
       if attachment.file.exists?
         self.attachment_content_type = attachment.file.content_type
         self.attachment_size = attachment.file.size

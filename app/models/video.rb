@@ -36,10 +36,12 @@ class Video < ActiveRecord::Base
       self.video_height = v['height']
       self.duration = v['duration']
     end
-    if thumbnail.present?
-      self.thumbnail_content_type = thumbnail.file.content_type
-      self.thumbnail_size = thumbnail.file.size
-      self.thumbnail_width, self.thumbnail_height = `identify -format "%wx%h" #{thumbnail.file.path}`.split(/x/)
+    if thumbnail.present? && thumbnail_changed?
+      if thumbnail.file.exists?
+        self.thumbnail_content_type = thumbnail.file.content_type
+        self.thumbnail_size = thumbnail.file.size
+        self.thumbnail_width, self.thumbnail_height = `identify -format "%wx%h" #{thumbnail.file.path}`.split(/x/)
+      end
     end
     if hostid == 'error' || hostid.blank?
       die

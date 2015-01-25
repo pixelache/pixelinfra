@@ -41,7 +41,7 @@ class Frontitem < ActiveRecord::Base
   end
   
   def update_image_attributes
-    if bigimage.present?
+    if bigimage.present? && bigimage_changed?
       if bigimage.file.exists?
         self.bigimage_content_type = bigimage.file.content_type
         self.bigimage_size = bigimage.file.size
