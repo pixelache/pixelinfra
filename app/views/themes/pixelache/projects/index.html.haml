@@ -9,3 +9,14 @@
   
   - @inactive_projects.sort_by(&:name).each do |project|
     = render :partial => 'project_strip', locals: {project: project}
+    
+= content_for :jquery do
+  :plain
+    $('.selector').hover(function() {
+      $(this).next().children('.image_overlay').css('opacity', '0.9');
+      $(this).next().children('.image_overlay').children('.occluded').css('display', 'block');
+      
+    }, function() {
+      $(this).next().children('.image_overlay').css('opacity', '0.2');
+      $(this).next().children('.image_overlay').children('.occluded').css('display', 'none');
+    });

@@ -1,5 +1,15 @@
-.strip{style: project.background_image_css}
-  .row
-    .title_box.small-4.columns.end{style: project.background_css}
-      %h2= project.name
-      .subtitle= project.short_description
+.strip{style: project.background_css}
+
+  .title_box.columns{style: project.background_css}
+    .row
+      .small-10.columns.small-offset-1.titles
+        
+        %h2= project.name
+        .subtitle= project.short_description
+  .selector.columns{style: "background-color: rgb(#{project.colour_offset}); opacity: 1;"} &nbsp;
+  .image_box{style: project.background_image_css}
+    .image_overlay{style: "background-color: rgb(#{project.colour_offset}); opacity: 0.2;"}
+      .occluded{style: "color: ##{project.project_text_colour}"}
+        %ul
+          - project.events.published.take(3).each do |event|
+            %li= event.name

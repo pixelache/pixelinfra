@@ -29,26 +29,63 @@ button.slick-next, button.slick-prev {
 
     max-height: 670px;
     
-    .title_box {
-      padding-bottom: 33.333333333%;
+    .selector {
+      cursor: pointer;
+      width: 3%;
+      padding-bottom: 31%;
       height: 0;
-      h2 {
-        color: inherit;
+      z-index : 80;
+    }
+    .image_overlay {
+      height: 0;
+      padding-bottom: 100%%;
+      width: 100%;
+
+      
+      .occluded {
+        display: none;
+        position: absolute;
+        left: 10%;
+        top: 15%;
+        
+        li {
+          font-family: $quicksand;
+          font-size: 1.2rem;
+          color: inherit;
+          list-style-type: none;
+        }
       }
-      .subtitle {
-        color: inherit;
-      }
-   
+    }
+    .title_box {
+      padding-bottom: 31%;
+      height: 0;
+      width: 31%;
+      
+      .titles {
+        padding-top: 30%;
+
+
+        h2 {
+          color: inherit;
+          line-height: 2.5rem;
+        }
+        .subtitle {
+          color: inherit;
+        }
+      }   
 
 
       position: relative;
     }
     
     .image_box {
+      position: relative;
+      left: 33%;
       background-size: contain;
-      padding-bottom: 33.333333333%;
+      padding-bottom: 31%;
       height: 0;
       max-height: 670px;
+      width: 67.66666666667%;
     }
   }
   

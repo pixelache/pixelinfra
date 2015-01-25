@@ -37,8 +37,12 @@ class Project < ActiveRecord::Base
     if background.url.nil?
       ""
     else
-      "background: url(#{background.url.gsub(/development/, 'production')}) no-repeat right top; background-size: contain; background-color:  ##{project_bg_colour}"
+      "background: url(#{background.url.gsub(/development/, 'production')}) no-repeat right top; background-size: cover; background-color:  ##{project_bg_colour}"
     end
+  end
+  
+  def colour_offset
+    "#{project_bg_colour.match(/(..)(..)(..)/).to_a[1..3].map{|x| [[0, x.hex + ( x.hex * -0.15)].max, 255].min }.map{|x| x.to_i.to_s }.join(', ')}"
   end
   
   def to_hashtag
