@@ -4,12 +4,35 @@
     .row
       .small-10.columns.small-offset-1.titles
         
-        %h2= project.name
+        %h2= link_to project.name, project
         .subtitle= project.short_description
-  .selector.columns{style: "background-color: rgb(#{project.colour_offset}); opacity: 1;"} &nbsp;
+  .selector.trigger.columns{style: "background-color: rgb(#{project.colour_offset}); opacity: 1;"} &nbsp;
   .image_box{style: project.background_image_css}
     .image_overlay{style: "background-color: rgb(#{project.colour_offset}); opacity: 0.2;"}
       .occluded{style: "color: ##{project.project_text_colour}"}
+        - counter = 0
         %ul
-          - project.events.published.take(3).each do |event|
-            %li= event.name
+          - unless project.children.empty?
+            - project.children.shuffle.each do |subproject|
+              - next if subproject.events.published.empty?
+              - if counter < 7
+                %li.subproject= link_to subproject.name, subproject
+                - counter += 1
+                - subproject.events.published.shuffle.take(2).each do |event|
+                  - if counter < 7
+                    %li.event= link_to event.name, subproject
+                    - counter += 1
+          - if counter < 7
+            - project.events.published.take(6).each do |event|
+              %li.event= link_to event.name, project
+              - counter += 1
+          - if counter < 7
+            - project.posts.published.take(4).each do |post|
+              - if counter < 7
+                %li.post= link_to post.name, post
+                - counter += 1
+          - if counter < 7
+            - project.pages.published.shuffle.take(4).each do |page|
+              - if counter < 7
+                %li.project_page= link_to page.name, page
+                - counter += 1

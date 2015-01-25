@@ -279,6 +279,7 @@ en:
   network: 'Network'
   members: 'Members'
   see_all: 'See all'
+  past_projects: 'Past projects:'
   recent_posts_by: "Latest posts by %{member}:"
   all_posts_by: "All posts by %{member}:"
   membership_info: 'Pixelache is a membership-based association organised as Piknik Frequency ry. To contact members, email members <@> pixelache dot ac.'

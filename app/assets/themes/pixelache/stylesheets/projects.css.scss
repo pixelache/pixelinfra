@@ -24,6 +24,16 @@ button.slick-next, button.slick-prev {
 
 .project_index {
   
+  .dividing_strip {
+    background-color: #49a2fc;
+    padding: 15px 0px 10px 0px;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #FFF;
+  }
   .strip {
 
 
@@ -38,7 +48,7 @@ button.slick-next, button.slick-prev {
     }
     .image_overlay {
       height: 0;
-      padding-bottom: 100%%;
+      padding-bottom: 45.8%;
       width: 100%;
 
       
@@ -50,8 +60,18 @@ button.slick-next, button.slick-prev {
         
         li {
           font-family: $quicksand;
-          font-size: 1.2rem;
+          &.subproject {
+            font-size: 1.4rem;
+          }
+          &.event, &.post {
+            font-size: 1.1rem;
+          }
+          &.page {
+            font-size: 1.2rem;
+          }
+          
           color: inherit;
+          a { color: inherit; }
           list-style-type: none;
         }
       }
@@ -67,6 +87,7 @@ button.slick-next, button.slick-prev {
 
         h2 {
           color: inherit;
+          a { color: inherit; }
           line-height: 2.5rem;
         }
         .subtitle {
