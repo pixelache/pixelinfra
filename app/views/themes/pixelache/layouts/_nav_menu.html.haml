@@ -46,11 +46,11 @@
                       - next if y.nil?
                       %li= link_to y, "/archive/#{y}"
     %ul.inner.navhide#events_menu
-      - @recent_events.take(4).each do |e|
+      - @recent_events.each do |e|
         %li
           = link_to e.name, e
           %span.date= l e.start_at.to_date, format: :short
-        - if e == @recent_events.take(4).last
+        - if e == @recent_events.last
           %li= link_to t(:all_events), events_path
     %ul.inner.navhide#festivals_menu
       - @recent_festivals.each do |f|

@@ -198,6 +198,9 @@ td .date {
   }
   .top_of_nav {
     padding: 0.8rem 0rem;
+    ul {
+      margin-bottom: 0;
+    }
   }
   display: none;
   .columns {
