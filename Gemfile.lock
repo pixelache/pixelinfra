@@ -7,15 +7,6 @@ GIT
       rails (>= 3.0.0)
 
 GIT
-  remote: git://github.com/globalize/globalize.git
-  revision: c0f909d5c7a6146903e4109da7ceb4b9d8eef685
-  branch: master
-  specs:
-    globalize (4.0.3)
-      activemodel (>= 4.0.0, < 5)
-      activerecord (>= 4.0.0, < 5)
-
-GIT
   remote: git://github.com/josevalim/inherited_resources.git
   revision: 9b1386f0effe9510e132915fa329f353f35db41c
   specs:
@@ -24,6 +15,14 @@ GIT
       has_scope (~> 0.6.0.rc)
       railties (>= 3.2, < 5)
       responders
+
+GIT
+  remote: git://github.com/ncri/globalize.git
+  revision: 05ea52429ebd4f8c4cbd2595ab5269ad35d6830a
+  specs:
+    globalize (4.0.2)
+      activemodel (>= 4.2.0.beta4, < 4.3)
+      activerecord (>= 4.2.0.beta4, < 4.3)
 
 GIT
   remote: git://github.com/textacular/textacular.git
