@@ -35,43 +35,4 @@
             .read_more= link_to 'Read More', post
 
 = content_for :jquery do
-  - places = @stream.map(&:item).delete_if{|x| x.class != Event}.delete_if{|x| x.place.nil?}.delete_if{|x| x.place.latitude.blank? }
-  - unless places.empty?
- 
-
-    - places.each do |event|
-      = "var map_#{event.id};"
-      = "function initialize_#{event.id}(condition) {"
-      = "   var myLatlng_#{event.id} = new google.maps.LatLng(#{event.place.latitude}, #{event.place.longitude});"
-      = "   var myOptions_#{event.id} = { zoom: 14, "
-      = "      center: myLatlng_#{event.id},"
-      :plain
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-           }
-      = "   var marker_#{event.id} = new google.maps.Marker({  position: myLatlng_#{event.id}, map: map_#{event.id}, "
-      = "   title: '#{escape_javascript(event.name)}'}); "
-
-      = "map_#{event.id} = new google.maps.Map(document.getElementById('mapcontainer_#{event.id}'), myOptions_#{event.id});"
-      = "  marker_#{event.id}.setMap(map_#{event.id});"
-      = " return map_#{event.id};"
-      = "} "
-      
-    :plain
-      function initialize() {
-      
-    - places.each do |event|
-      = "  map_#{event.id} = initialize_#{event.id}();"
-    = "return { "
-    - places.each do |event|
-      = "map_" + event.id.to_s + ": map_#{event.id},"
-    :plain
-        nomap: 0
-        }
-      }
-      $(window).load(function() {
-        maps = initialize() 
-      });
-      // google.maps.event.addDomListener(window, 'load', initialize );
-      
-  
-    
+  = render :partial => "google_maps_scraps", locals: {places: @stream.map(&:item).delete_if{|x| x.class != Event}.delete_if{|x| x.place.nil?}.delete_if{|x| x.place.latitude.blank? } }

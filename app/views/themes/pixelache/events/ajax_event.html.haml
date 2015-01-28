@@ -1,0 +1,20 @@
+.row
+  .small-12.medium-8.columns.medium-offset-2
+    .top_post
+      .category= @event.category
+      .title= link_to @event.name, @event
+      .metadata
+        = "#{date_range(@event.stream_date, @event.endstream_date)}, #{@event.place.name}"
+        %p.place_address
+          = @event.place.address
+        - unless @event.place.latitude.blank?
+          //%p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer_#{@event.id}').slideToggle(function() { google.maps.event.trigger(maps.map_#{@event.id}, 'resize'); maps.map_#{@event.id}.setCenter(new google.maps.LatLng(#{@event.place.latitude }, #{@event.place.longitude})); }); return false;"
+          //.google_map{id: "mapcontainer_#{@event.id}"}= render partial: 'shared/small_map'
+          %p.map.link= link_to t(:map), "https://www.google.com.au/maps/preview/@#{@event.place.latitude},#{@event.place.longitude},8z", target: :_blank
+      .body= truncate_html(@event.body, :length => 200)
+      -# = raw image_tag(@event.image.url(:box)).gsub('production', 'development')
+      .read_more= link_to 'Read More', @event
+
+= content_for :jquery do
+  = render :partial => "home/google_maps_scraps", locals: {places: [@event] }
+  

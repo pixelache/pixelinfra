@@ -11,6 +11,9 @@ class EventsController < InheritedResources::Base
     if @event.festival
       @festival = @event.festival
     end
+    if request.xhr?
+      render :template => 'events/ajax_event', layout: false
+    end
     set_meta_tags :title => @event.name
   end
   

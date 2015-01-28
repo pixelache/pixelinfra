@@ -1,0 +1,68 @@
+.multipost_selected
+  .row
+    .small-12.medium-8.columns.medium-offset-2
+      .top_post
+        .category= @stream.first.item.category
+        .title= link_to @stream.first.item.title, @stream.first.item
+        .metadata
+          = "#{date_range(@stream.first.item.stream_date, @stream.first.item.endstream_date)}#{@stream.first.item.class == Event ? (', ' + @stream.first.item.place.name) : ' '}"
+          - if @stream.first.item.class == Event
+            %p.place_address
+              = @stream.first.item.place.address
+            - unless @stream.first.item.place.latitude.blank?
+              %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer_#{@stream.first.item.id}').slideToggle(function() { google.maps.event.trigger(maps.map_#{@stream.first.item.id}, 'resize'); maps.map_#{@stream.first.item.id}.setCenter(new google.maps.LatLng(#{@stream.first.item.place.latitude }, #{@stream.first.item.place.longitude})); }); return false;"
+              .google_map{id: "mapcontainer_#{@stream.first.item.id}"}= render partial: 'shared/small_map'
+        .body= truncate_html(@stream.first.item.body, :length => 290)
+        -# = raw image_tag(@stream.first.item.image.url(:box)).gsub('production', 'development')
+        .read_more= link_to t(:read_more), @stream.first.item
+
+
+.post_slider_container
+  .post_slider.row
+    - @stream[1..6].push(@stream.first).map(&:item).each_with_index do |post, index|
+      .post.small-12.medium-6.large-4.columns
+        - if post.image?
+          .category= post.category
+          .post_image= link_to image_tag(post.image.url(:logo)), '#', onclick: "load_to_top('#{url_for(post)}'); return false;"
+          .title= link_to post.title, '#', onclick: "load_to_top('#{url_for(post)}'); return false;" 
+          .metadata
+            = date_range(post.stream_date, post.endstream_date) + ", "
+            - if post.class == Event
+              = post.place.name
+            - elsif post.class == Post
+              = post.creator.name
+          .google_map{id: "mapcontainer_#{post.id}", style: 'display: none'}
+             
+
+              
+= content_for :jquery do
+  :plain
+    $('.post_slider').slick({infinite: true,
+      slidesToShow: 3,
+      responsive: [
+          {
+
+            breakpoint: 800,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+          ],
+      adaptiveHeight: true,
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 2400,
+      slidesToScroll: 1
+    });
+
+  - if @stream.first.item.class == Event
+    - unless @stream.first.item.place.latitude.blank?
+      = render :partial => "google_maps_scraps", locals: {places: [@stream.first.item] }

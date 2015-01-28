@@ -10,6 +10,19 @@ function down_pixelache_menu() {
 
 }
 
+
+function load_to_top(href) {
+  var freezeheight = $('.multipost_selected').css('height');
+  $('.multipost_selected').css('height', freezeheight);
+  $('.top_post').fadeOut();
+  $('.multipost_selected').load(href, function() {
+    $('.multipost_selected').css('height', '');
+    maps = initialize();
+  });
+  
+}
+
+  
 function up_pixelache_menu() {
 
   $('.pixelache_nav_menu').slideUp();

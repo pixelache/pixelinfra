@@ -58,6 +58,10 @@ class Post < ActiveRecord::Base
     end
   end
   
+  def category
+    post_categories.map(&:name).join(' / ')
+  end
+  
   def description
     body
   end

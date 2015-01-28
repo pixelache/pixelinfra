@@ -180,6 +180,18 @@
       }
     }      
   }
+  
+  .post_slider_container {
+    .post_slider {
+      .post {
+        .post_image {
+          max-height: 220px;
+        }
+      }
+    }
+  }
+  
+  
 }
 
 // tablets
@@ -204,6 +216,16 @@
         }
       }
       
+    }
+  }
+  
+  .post_slider_container {
+    .post_slider {
+      .post {
+        .post_image {
+          max-height: 280px;
+        }
+      }
     }
   }
 }

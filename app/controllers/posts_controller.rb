@@ -1,6 +1,5 @@
-class PostsController < InheritedResources::Base
-  
-  actions :index, :show
+class PostsController < ApplicationController
+
   
   def index
     if params[:festival_id]
@@ -23,15 +22,19 @@ class PostsController < InheritedResources::Base
       @festival = @post.festival
     end
     if !@post.published
+      flash[:notice] = 'This post is not published.'
       if current_user
-        if can? :read, @post
-          flash[:notice] = 'This post is not published.'
-          super
+        if !can? :read, @post
+          redirect_to posts_path
         end
+      else
+        redirect_to posts_path
       end
-    else
-      super
+    end
+    if request.xhr?
+      render template: 'posts/ajax_post', layout: false
     end
   end
+  
   
 end

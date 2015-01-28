@@ -52,6 +52,10 @@ class Event < ActiveRecord::Base
     description
   end
   
+  def category
+    I18n.translate(:event)
+  end
+  
   def check_published
     if self.user_id.nil?
       self.user_id = 0
