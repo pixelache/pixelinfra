@@ -5,12 +5,20 @@
   .small-10.columns
     %p Edit the names of templates and example images for the front items.
     
-- @frontmodules.each do |fm|
-  .row
-    .small-3.columns
-      - if fm.exampleimage?
-        = image_tag fm.exampleimage.url(:thumb)
-    .small-5.columns= fm.name
-    .small-4.columns.actions
-      = link_to 'Edit', edit_admin_frontmodule_path(fm), :class => [:button, :round, :tiny]
+
+%table
+  %thead
+    %th= t :name
+    %th &nbsp;
+  %tbody
+    - @frontmodules.each do |fm|
+      %tr
+        %td
+          - if fm.exampleimage?
+            = image_tag fm.exampleimage.url(:thumb)
+          %b= fm.name
+        %td
+          = link_to 'Edit', edit_admin_frontmodule_path(fm), :class => [:button, :round, :tiny]
+
+= link_to 'New front module', new_admin_frontmodule_path,        :class => [:button, :round, :tiny]
     
