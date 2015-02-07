@@ -4,4 +4,14 @@
   .row
     .small-10.column.medium-offset-1.content
       = image_tag 'https://s3-eu-west-1.amazonaws.com/pixelache/media/publication-page-image-small.jpg'
-      Publications coming soon!
+      %h3= t :interviews
+      - @interviews.each do |i|
+        %p.publication
+          = i.title
+          = link_to raw("&#9654;"), i.attachedfile.url
+      - unless @videos.empty?
+        %h3= t :videos
+        - @videos.each do |v|
+          %p.publication
+            = v.event.name
+            = link_to raw("&#9654;"), v.url, target: :_blank
