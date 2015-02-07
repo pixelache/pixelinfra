@@ -501,6 +501,9 @@ footer {
   }
 }
 
+ul.pagination {
+  margin-left: 0.5rem;
+}
 ul.pagination li.current a {
   background-color: $link;
   &:hover {
