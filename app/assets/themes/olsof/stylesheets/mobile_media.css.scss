@@ -20,7 +20,7 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
 #mobile_menu {
   display: none;
   margin: 0px auto;
-  width: 30em;
+ 
 }
 
 @media #{$small-up} { 
@@ -42,6 +42,12 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
     margin-top: 15px;
   }
   #sidebar {
+    .search {
+      margin: 1rem 0px;
+      input[type=text] {
+        width: 200px;
+      }
+    }
     .logo {
       font-size: 3em;
       .third {
@@ -56,6 +62,7 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
   #mobile_menu {
     display: block;
   }
+  
 }
 
 @media #{$medium-up} { 
@@ -63,13 +70,18 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
 }
 
 @media #{$medium-only} { 
+  #middle {
+    float: left;
+  }
   #sidebar {
+    margin-bottom: 2rem;
     .logo {
       font-size: 2.4em;
     }
     
     .nav_lines {
-      top: 110px;
+      top: 25px;
+      float: left;
     }
     
     .calendar {

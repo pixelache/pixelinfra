@@ -15,7 +15,9 @@
     %header
       = render 'admin/layouts/navigation'
       = render 'layouts/messages'
+      
     #main.container{:role => "main"}
+
       = yield
     %footer
     :javascript

@@ -129,7 +129,7 @@ header {
       border-bottom: 3px dashed #000;
     }
     .third {
-      margin-bottom: 75px;
+      margin-bottom: 2rem;
     }
   }
   
@@ -137,7 +137,7 @@ header {
     position: relative;
     width: 200px;
     height: 200px;
-    top: 125px;
+    float:  left;
     img.navbg {
       z-index: -1;
       position: absolute;
@@ -186,6 +186,7 @@ header {
   
   .search {
     margin: 0.5rem 0px;
+    float: left;
     .heading {
       font-size: 1em;
       font-family: $roboto;
@@ -234,7 +235,7 @@ header {
     
   }
   .calendar {
-    margin: 150px 0 2rem 0;
+    margin: 3rem 0 2rem 0;
     
     .heading {
       font-size: 1em;
