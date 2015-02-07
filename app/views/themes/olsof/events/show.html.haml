@@ -1,60 +1,76 @@
-.row.event
-  .small-3.columns.media
-  
-    - unless @event.image.blank? && @event.photos.empty?
-      .image_carousel
+.page
+  - unless @event.image.blank? && @event.photos.empty?
+    - images = 0
+    .row
+      .small-12.columns.large-10.large-offset-1.image_carousel
         - if @event.image?
-          .img= link_to image_tag(@event.image.url(:box)), @event.image.url(:standard), rel: :lazybox
+          - images += 1
+          .img= link_to image_tag(@event.image.url(:standard)), @event.image.url, rel: :lazybox
         - unless @event.photos.empty?
           - @event.photos.each do |i|
             .img
+              - images += 1
               = link_to image_tag(i.filename.url(:box)), i.filename.url(:standard), rel: :lazybox
             
-  .small-8.left.columns.content
-    %h2= @event.name
-    - if user_signed_in?
-      - if can? :edit, @event
-        = link_to t(:edit), edit_admin_event_path(@event), class: [:button, :tiny, :round]
-    - unless @event.facilitator_name.blank?
-      .event_hosts
-        = t :facilitated_by
-        = link_to_unless(@event.facilitator_url.blank?, @event.facilitator_name, @event.facilitator_url)
-     
-    - unless @event.festival.blank?
-      %h5= raw "at: #{ link_to @event.festival.name, @event.festival}"
-    %h5
-      = date_range(@event.start_at, @event.end_at)
-      - unless @event.place.nil?    
-        %br/
-        = @event.place.try(:name)
-        .smaller= @event.place.try(:address)
-      
-        - unless @event.place.latitude.nil? && @event.place.longitude.nil?
-          %p= link_to t(:map), "http://maps.google.com/?q=#{@event.place.latitude},#{@event.place.longitude}", :target => :_blank
+  .row
+    .small-12.columns.large-10.large-offset-1.event_title
+      %h2= @event.name
+      - if user_signed_in?
+        - if can? :edit, @event
+          = link_to t(:edit), edit_admin_event_path(@event), class: [:button, :tiny, :round]
           
-
-
-
-    .body= raw @event.description
+  - unless @event.facilitator_name.blank?
+    .row
+      .small-12.columns.large-10.large-offset-1
+        .metadata
+          = date_range(@event.start_at, @event.end_at)
+          - unless @event.place.nil?    
+            %br/
+            = @event.place.try(:name)
+            .smaller= @event.place.try(:address)
     
-    - unless @event.posts.published.interviews.empty?
-      %h3= t :interviews
-      %ul
+            - unless @event.place.latitude.nil? && @event.place.longitude.nil?
+              %p= link_to t(:map), "http://maps.google.com/?q=#{@event.place.latitude},#{@event.place.longitude}", :target => :_blank
+    
+    .row
+      .small-12.columns.large-10.large-offset-1
+        .second_metadata
+          - unless @event.festival.blank?
+            = t :festival
+            = link_to @event.festival
+          - unless @event.facilitator_name.blank? && @event.facilitator_organisation.blank?
+            = t :facilitated_by
+            = link_to_unless(@event.facilitator_url.blank?, @event.facilitator_name, @event.facilitator_url)
+          - unless @event.step.blank?
+            = t :step
+            = @event.step.name
+      
+
+  .row
+    .small-12.columns.large-10.large-offset-1
+      .body= raw @event.description
+  
+  - unless @event.posts.published.interviews.empty?
+    .row
+      .small-12.columns.large-10.large-offset-1
+        %h3= t :interviews
+        %ul
         - @event.posts.published.interviews.each do |post|
           %li= link_to post.name, post, :target => :_blank
-          
 
-= content_for :jquery do
-  :plain
+- if images > 1
 
-    $('.image_carousel').slick({infinite: true,
-      slidesToShow: 4,
-      adaptiveHeight: true,
-      arrows: false,
-      vertical: true,
-      slide: '.img',
-      variableWidth: false,
-      autoplay: true,
-      autoplaySpeed: 2400,
-      slidesToScroll: 1,
-    });
+  = content_for :jquery do
+    :plain
+
+      $('.image_carousel').slick({infinite: true,
+        slidesToShow: 4,
+        adaptiveHeight: true,
+        arrows: false,
+        vertical: true,
+        slide: '.img',
+        variableWidth: false,
+        autoplay: true,
+        autoplaySpeed: 2400,
+        slidesToScroll: 1,
+      });

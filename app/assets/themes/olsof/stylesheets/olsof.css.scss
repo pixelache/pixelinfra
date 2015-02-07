@@ -468,10 +468,38 @@ footer {
     font-size: 0.9rem;
     margin-bottom: 1rem;
   }
+  .metadata {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    line-height: 1.4rem;
+    p {
+      font-size: 1rem;
+      line-height: 1.4rem;
+      margin-bottom: 0;
+    }
+  }
   
+  .second_metadata {
+
+    border-bottom: 1px solid #333;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+  }
+  .event_title {
+    margin-top: 1rem;
+  }
+  .body {
+    font-size: 0.9rem;
+    padding-top: 0.75rem;
+    p {
+      font-size: 0.9rem;
+    }
+  }
   .node {
     margin-left: 0;
-
+    margin: 1.5rem 0;
     .logo {
       padding: 0;
     }
@@ -483,8 +511,9 @@ footer {
     }
     .body {
       clear: left;
-      margin-bottom: 3rem;
+
       font-size: 0.85rem;
+  
       p {
         font-size: 0.85rem;
       }

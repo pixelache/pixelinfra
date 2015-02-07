@@ -1,12 +1,12 @@
 .page
   .row
-    .small-10.columns.medium-offset-1.title= t :partners
+    .small-12.columns.large-10.large-offset-1.title= t :partners
   .row
-    .small-10.column.medium-offset-1.content
+    .small-12.columns.large-10.large-offset-1.content
       - @nodes.each do |node|
         .node.row
-          .logo.small-10.medium-6.columns= image_tag node.logo.url.gsub(/development/, 'production')
-          .metadata.small-12.columns
+          .logo.small-10.medium-4.columns= image_tag node.logo.url.gsub(/development/, 'production')
+          .small-12.columns.metadata
             .city= "#{node.city}, #{node.country}"
             .website= link_to node.website, node.website , :target => :_blank
           .body= raw node.description
