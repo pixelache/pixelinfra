@@ -27,21 +27,22 @@
               .second= link_to raw("&#8594;Sourcing"), '/'
             .logo
               .third= link_to 'Festivals', '/'
-            %select#mobile_menu.show-for-small-only
-              %option= t :choose
-              %option{:selected => (controller.controller_name == 'pages' ? :selected : false), :value => page_path('about')}= t :about
-              %option{:selected => (controller.controller_name == 'nodes' ? :selected : false), :value => nodes_path}= t :partners
-              %option{:selected => (controller.controller_name == 'publications' ? :selected : false), :value => publications_path}= t :publications
-              %option{select: controller.controller_name == 'steps' ? :selected : false, value: steps_path}= t :steps
+            .small-8.columns.show-for-small-only.small-offset-4
+              %select#mobile_menu
+                %option= t :choose
+                %option{:selected => (controller.controller_name == 'pages' ? :selected : false), :value => page_path('about')}= t :about
+                %option{:selected => (controller.controller_name == 'nodes' ? :selected : false), :value => nodes_path}= t :partners
+                %option{:selected => (controller.controller_name == 'publications' ? :selected : false), :value => publications_path}= t :publications
+                %option{select: controller.controller_name == 'steps' ? :selected : false, value: steps_path}= t :steps
           
-              %option{:selected =>  controller.controller_name == 'events' ? :selected : false, :value => events_path}= t :events
-              - @calendar.sort_by(&:start_at).each do |cal|
-                %option{value: url_for(cal)}= " -- #{cal.name} ({#{cal.start_at.strftime("%d %B")})"
-              %option{:selected => (controller.controller_name == 'home'  || controller.controller_name == 'posts' ? :selected : false), :value => '/'}= t :news
-              :javascript 
-                $('#mobile_menu').change(function() {
-                  window.location = $(this).find("option:selected").val();
-                });
+                %option{:selected =>  controller.controller_name == 'events' ? :selected : false, :value => events_path}= t :events
+                - @calendar.sort_by(&:start_at).each do |cal|
+                  %option{value: url_for(cal)}= " -- #{cal.name} (#{cal.start_at.strftime("%d %B")})"
+                %option{:selected => (controller.controller_name == 'home'  || controller.controller_name == 'posts' ? :selected : false), :value => '/'}= t :news
+                :javascript 
+                  $('#mobile_menu').change(function() {
+                    window.location = $(this).find("option:selected").val();
+                  });
         
           .nav_lines.medium-6.columns.medium-offset-2.hide-for-small-only.large-10.large-offset-3
             = image_tag current_theme_image_path('nav_lines.png'), :class => :navbg
@@ -66,8 +67,9 @@
             .calendar-dd.show-for-medium-only.medium-3.medium-offset-1.columns
               %select
                 %option{value: nil}= t :calendar
-
-          .search.medium-4.medium-offset-2.large-10.columns.large-offset-2
+                - @calendar.sort_by(&:start_at).each do |cal|
+                  %option{value: url_for(cal)}= " -- #{cal.name} (#{cal.start_at.strftime("%d %B")})"
+          .search.medium-4.medium-offset-2.large-10.columns.large-offset-2.small-offset-2
             .square= image_tag current_theme_image_path('littlesquare.jpg')
             = form_tag '/search/' do
               = text_field :search, :term
@@ -157,7 +159,7 @@
                 })
 
         .row
-          .small-12.columns#main= yield
+          .small-10.small-offset-1.medium-12.columns#main= yield
     %footer.olsof-footer
       .row  
         .small-12.columns.text-center.info_line

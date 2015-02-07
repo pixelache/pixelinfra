@@ -91,7 +91,10 @@ class ApplicationController < ActionController::Base
     else
       I18n.locale = session[:locale]
     end
-
+    if @site.name == 'olsof'
+      I18n.locale = 'en'
+    end
+    
   end
 
 

@@ -17,7 +17,7 @@ class Step < ActiveRecord::Base
   validates_presence_of :subsite_id, :number
   
   def event_name
-    event.blank? ? nil : event.event_with_date
+    events.empty? ? nil : event.first.event_with_date
   end
   
   def festival_name

@@ -468,6 +468,28 @@ footer {
     font-size: 0.9rem;
     margin-bottom: 1rem;
   }
+  
+  .node {
+    margin-left: 0;
+
+    .logo {
+      padding: 0;
+    }
+    .metadata {
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
+      padding: 0.5rem 0;
+      margin: 0.5rem 0;
+    }
+    .body {
+      clear: left;
+      margin-bottom: 3rem;
+      font-size: 0.85rem;
+      p {
+        font-size: 0.85rem;
+      }
+    }
+  }
   .content {
     padding: 0;
     h2, h3 {
