@@ -1,5 +1,5 @@
-.row.page
-  .small-2.columns.media.large-offset-1 &nbsp;
-  .small-7.columns.content.centered
-    = raw @page.body
-  .small-3.columns.end &nbsp;
+.page
+  .row
+    .small-10.columns.medium-offset-1.title= @page.name
+  .row
+    .small-10.column.medium-offset-1.content= raw @page.body

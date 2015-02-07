@@ -457,15 +457,27 @@ footer {
 }
 
 .page {
+  .title {
+    background-color: black;
+    color: $beige;
+    font-family: $roboto;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
   .content {
-    margin-top: 70px;
+    padding: 0;
     h2, h3 {
-      font-size: 1.3em;
-      line-height: 1.4em;
-      margin-bottom: 15px;
+      font-size: 1.1rem;
+      line-height: 1.4rem;
+      padding: 0.5rem 0;
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
+      margin: 0.5rem 0;
     }
     p {
-
       line-height: 1.4em;
     }
   }
