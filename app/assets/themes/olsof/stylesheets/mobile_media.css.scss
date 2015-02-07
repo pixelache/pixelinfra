@@ -29,6 +29,7 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
 }
 
 @media #{$small-only} { 
+  
   select {
     border: 2px solid #333;
     font-family: $roboto;
@@ -67,7 +68,8 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
       }
     }
     .logo {
-      font-size: 3em;
+      font-size: 2.4em;
+      line-height: 3.1rem;
       .third {
         margin-bottom: 25px;
       }

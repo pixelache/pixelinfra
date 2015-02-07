@@ -26,5 +26,5 @@
               = truncate_html(sanitize(feeditem.item.description, tags: %w{bold strong b italic em }), :length => 150)
               = link_to raw("&#9654;"), feeditem.item
     .row
-      .small-10.small-offset-2.medium-12.medium-offset-0= paginate @feed
+      .small-10.small-offset-1.medium-12.medium-offset-0= paginate @feed
   
