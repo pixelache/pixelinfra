@@ -1,23 +1,26 @@
-.step_index.row
-  .small-2.columns.media &nbsp;
-  .small-10.columns.centered.end
-    %h1 Steps
+.page
+  .row
+    .small-10.columns.medium-offset-1.title= t :steps
+  .row
+    .small-10.column.medium-offset-1.content
+      = image_tag 'http://www.welcometosandiego.com/wp-content/uploads/2010/12/cheeseburger.jpg'
     
-    - @steps.order(:number).each do |step|
-      .step
-        %h3
-          = step.number.to_s + ":"
-          = step.name
-        - if step.festival
-          %h5
-            = t(:festival) + ": "
-            = link_to step.festival.name, step.festival.website.blank? ? step.festival : step.festival.website
+      - @steps.order(:number).each do |step|
+        .step
+          %h3
+            = step.number.to_s + ":"
+            = step.name
+          - if step.festival
+            %h5
+              = t(:festival) + ": "
+              %ul
+                %li= link_to step.festival.name, step.festival.website.blank? ? step.festival : step.festival.website
                   
-        - unless step.events.empty?
-          %h5= t :events
-          %ul
-            - step.events.each do |event|
-              %li= link_to event.name, event
+          - unless step.events.empty?
+            %h5= t(:events) +  ": "
+            %ul
+              - step.events.each do |event|
+                %li= link_to event.name, event
           
   
   

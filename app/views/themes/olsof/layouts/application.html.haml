@@ -53,7 +53,7 @@
             .item.news= link_to t(:news), '/'
         .row
           - unless @calendar.empty?
-            .calendar.show-for-large-only.medium-4.large-10.columns.large-offset-2
+            .calendar.show-for-large-up.medium-4.large-10.columns.large-offset-2
             
               .heading
                 = image_tag current_theme_image_path('littlesquare.jpg')
@@ -63,7 +63,7 @@
                   %li
                     .date= "#{date_range(cal.start_at, cal.end_at, format: :long)}"
                     .name= link_to cal.name, cal
-            .calendar-dd.show-for-medium-only.medium-4.medium-offset-0.columns
+            .calendar-dd.show-for-medium-only.medium-3.medium-offset-1.columns
               %select
                 %option{value: nil}= t :calendar
 
@@ -77,7 +77,7 @@
       .large-8.medium-10.small-12.pull.columns#middle.medium-offset-1.large-offset-0
         = yield :middle
 
-        .right_wrap.row.show-for-large-only
+        .right_wrap.row.show-for-large-up
           .small-12.columns
             .language
               .default

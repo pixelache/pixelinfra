@@ -57,8 +57,8 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
     padding-top: 0px;
   }
   
-  .page .content, .node .content {
-    margin-top: 15px;
+  .page  {
+    margin-top: 0rem;
   }
   #sidebar {
     .search {
@@ -93,7 +93,19 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
   #middle {
     float: left;
   }
+  .page {
+    margin-top: 0rem;
+  }
   #sidebar {
+    select {
+      border: 2px solid #333;
+      font-family: $roboto;
+      background-color: $beige;
+      &:hover, &:focus {
+        background-color: $beige;
+        outline: 1px solid #3366cc;
+      }
+    }
     margin-bottom: 2rem;
     .logo {
       font-size: 2.4em;
