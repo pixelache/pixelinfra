@@ -1,0 +1,3 @@
+.excerpt{:"data-equalizer-watch" => ''}
+  = raw truncate_html(sanitize(hit.body, tags: %w{b bold strong i italic em underline u}), :length => 300)
+  %span.read_more= link_to raw("&#9654;"), hit

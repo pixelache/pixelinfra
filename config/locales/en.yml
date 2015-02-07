@@ -267,6 +267,7 @@ en:
   edit_event: 'Edit event'
   active_member_years: 'Years as member: '
   people: 'People'
+  steps: 'Steps'
   proposed_by: "Proposed by %{proposer} on %{when}"
   posted_by: "Posted by %{poster} on %{when}"
   last_modified:  "Last edited on %{when}"

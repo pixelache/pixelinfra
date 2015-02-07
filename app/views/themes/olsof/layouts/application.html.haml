@@ -84,6 +84,10 @@
             .bar_menu
               #menutext
                 - case controller.controller_name
+                  - when 'steps'
+                    = t :steps
+                    :javascript
+                      var onPage = "#{t(:steps)}";
                   - when 'publications'
                     = t :publications
                     :javascript
@@ -113,6 +117,9 @@
                     :javascript
                       var onPage = "#{t(:events)}";
               .bar{:class => (controller.controller_name == 'pages' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/pages/about', :rel => t(:about)
+              
+              .bar{:class => (controller.controller_name == 'steps' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/steps', :rel => t(:steps)
+              
               .bar{:class => (controller.controller_name == 'publications' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/publications', :rel => t(:publications)           
               .bar{:class => (controller.controller_name == 'nodes' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), nodes_path, :rel => t(:partners)
               .bar{:class => (controller.controller_name == 'posts' || controller.controller_name == 'home' ? :active : false)}= link_to image_tag(theme_image_path('vert_bar.png')), '/', :rel => t(:news)
@@ -142,9 +149,16 @@
 
         .row
           .small-12.columns#main= yield
-    %footer
-      .olsof-footer
-        .row
+    %footer.olsof-footer
+      .row  
+        .small-12.columns.text-center.info_line
+          = link_to 'Contact', 'mailto:grundvig@pixelache.ac'
+          |
+          2013-2015
+          |
+          = link_to 'GitHub', 'https://github.com/pixelache/pixelinfra'
+      .row 
+        .small-12.columns
           - @site.nodes.uniq.each do |node|
             .small-2.columns= link_to image_tag(node.logo.url(:logo), :width => 130), node.website
           .small-2.columns= theme_image_tag 'grundtvig_logo_english.png'

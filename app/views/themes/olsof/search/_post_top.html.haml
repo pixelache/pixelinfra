@@ -1,0 +1,2 @@
+.title= link_to hit.name, hit
+.date= t(:posted_by, poster: hit.creator.try(:name), when: hit.updated_at.strftime('%d %B %Y'))

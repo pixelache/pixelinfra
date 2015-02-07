@@ -1,0 +1,18 @@
+.search_results_container
+  .row
+    .small-12.columns
+      %h2
+        %en= t(:search_results_for, result: @term)
+  - if @hits.empty?
+    .row
+      .small-12.columns
+        %h3= t :no_search_results
+        %p= t :please_try_again
+  - else
+    - @hits.in_groups_of(3).each do |group|
+      .row.search_result{:"data-equalizer" => ''}        
+        - group.compact.each_with_index do |hit, index|
+          .small-12.medium-4.columns.top_of_hit{:"data-equalizer-watch" => '', class: group[index+1].nil? ? :end : false}= render partial: "search/#{hit.class.to_s.downcase}_top", locals: {hit: hit}
+      .row.search_result{:"data-equalizer" => ''}             
+        - group.compact.each_with_index do |hit, index|
+          .small-12.medium-4.columns.bottom_of_hit{class: group[index+1].nil? ? :end : false}= render partial: "search/#{hit.class.to_s.downcase}", locals: {hit: hit}
