@@ -20,7 +20,7 @@ class Post < ActiveRecord::Base
   include Feedable
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['title'].blank? || x['body'].blank? }
   accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :attachments, :reject_if => proc {|x| x['attachedfile'].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :attachments, :reject_if => proc {|x| x['attachedfile'].blank? && x['title'].blank? && x['description'].blank? }, :allow_destroy => true
   before_save :update_image_attributes
   before_save :check_published
   validates_presence_of :subsite_id

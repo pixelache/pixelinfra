@@ -49,6 +49,8 @@
           .small-6.columns= f.input :creator, :as => :select, :collection => User.all.order(:name), :label => false
     = f.input :last_modified_id, :as => :hidden, :input_html => {:value => current_user.id }
   .row
+    .small-12.columns.divider    
+  .row
     .small-12.columns
       %label Additional images
       .row
@@ -63,12 +65,14 @@
             = ff.link_to_remove 'Remove this photo'
       = f.link_to_add 'Add a photo', :photos
   .row
+    .small-12.columns.divider
+  .row
     .small-12.columns
       %label Attachments
       .row
         = f.semantic_fields_for :attachments do |ff|
 
-          .small-3.columns
+          .large-3.columns
             - if ff.object.attachedfile?
               %p
                 = File.basename(URI.parse(ff.object.attachedfile.url).path)
@@ -78,9 +82,12 @@
             = ff.input :attachedfile
             = ff.input :title
             = ff.input :description
-            = ff.link_to_remove 'Remove this attachment'
-      = f.link_to_add 'Add an attachment', :attachments
-            
+            = ff.link_to_remove 'Remove this attachment', class: [:button, :tiny, :alert, :round]
+      
+    .row
+      .small-12.columns.add_attachment_button= f.link_to_add 'Add an attachment', :attachments, class: [:button, :small, :round]
+  .row
+    .divider
   .row
     .small-6.columns
       %h5 Connected to an event?

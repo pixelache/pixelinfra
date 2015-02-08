@@ -7,6 +7,10 @@
       - unless post.photos.empty?
         &sdot;
         = pluralize(post.photos.size, 'photo') + " attached"
+      - unless post.attachments.empty?
+        &sdot;
+        = pluralize(post.attachments.size, 'attachment')
+
       &sdot;
       = link_to 'View', post, :target => :_blank
     - unless post.event.blank?

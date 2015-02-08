@@ -1,17 +1,31 @@
 .page
 .row  
-  .small-10.indented_title= t :events
+  .small-12.indented_title= t :events
 .row
-  .event_index.small-10.columns
+  .event_index.small-12.columns
     - @events.in_groups_of(3).each do |group|
-      .row.event_row
+      .row.event_row.images
+        - group.each_with_index do |event, index|
+          - next if event.nil?
+          .medium-4.small-10.small-offset-1.medium-offset-0.column{class: index == 2 ? :end : ''}
+            .event_image= link_to image_tag(event.image.url(:box).gsub(/development/, 'production')), event
+            .name.show-for-small-only= link_to event.name, event
+            .date.show-for-small-only= "#{date_range(event.start_at, event.end_at)}"
+            .blurb.show-for-small-only
+              = truncate_html(sanitize(event.description, tags: %w{bold strong b italic em }), :length => 170)
+              = link_to raw("&#9654;"), event
+      .row.event_row.hide-for-small-only{:"data-equalizer" => ''}
         - group.each do |event|
           - next if event.nil?
-          .small-4.column
-            .event_image= link_to image_tag(event.image.url(:box).gsub(/development/, 'production')), event
+          .medium-4.small-10.small-offset-1.medium-offset-0.columns{:"data-equalizer-watch" => ''}
             .name= link_to event.name, event
             .date= "#{date_range(event.start_at, event.end_at)}"
-            .blurb
+      .row.event_row.text_blurb.hide-for-small-only{:"data-equalizer" => ''}
+        - group.each do |event|
+          - next if event.nil?
+          .medium-4.columns
+            .blurb{:"data-equalizer-watch" => ''}
               = truncate_html(sanitize(event.description, tags: %w{bold strong b italic em }), :length => 170)
-              = link_to ">>>", event
-  
+              = link_to raw("&#9654;"), event
+    .row
+      .small-10.small-offset-1.medium-12.medium-offset-0= paginate @events            

@@ -2,7 +2,7 @@
 
 body {
   background-color: $beige;
-  padding-top: 25px;
+  padding-top: 1.6rem;
   font-family: $roboto;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -16,7 +16,7 @@ a {
 }
 
 header {
-  margin-top: -25px;
+  margin-top: -1.6rem;
   margin-bottom: 30px;
   h1 {
     a {
@@ -30,7 +30,7 @@ header {
 
 
 .right_wrap {
-  margin-bottom: 40px !important;
+  margin-bottom: 2.5rem !important;
   .language {
     display: none;
     cursor: pointer;
@@ -91,13 +91,13 @@ header {
     .bar {
       margin-right: 5px;
       float: left;
-      padding-top: 25px;
+      padding-top: 1.6rem;
       a {
         padding: 2px;
       }
       &:hover, &.active {
         padding-top: 0px;
-        padding-bottom: 25px;
+        padding-bottom: 1.6rem;
       }
     }
   }
@@ -108,7 +108,7 @@ header {
 }
 
 #sidebar {  
-  .padding-top: 40px;
+  .padding-top: 2.5rem;
   .logo {
     font-size: 3em;
     clear: right;
@@ -215,7 +215,7 @@ header {
         outline: none;
         box-shadow: none;
       }
-      width: 140px;
+      width: 12.5rem;
       &:active {
         border-top: none; border-right: none; border-left: none;
         border-bottom: 1px solid black;
@@ -300,26 +300,34 @@ ul.side-nav {
     }
   }
   .event_row {
-    margin-bottom: 40px;
+    .text_blurb {
+      margin-bottom: 2.5rem;
+    }
     .name {
-      font-size: 1.1rem;
-      line-height: 1.4rem;
+      font-size: 1rem;
+      line-height: 1.3rem;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
 
     }
     .date {
       font-size: 0.85rem;
+      line-height: 1.4em;
       color: #666;
-      margin: 5px 0px;
       font-style: italic;
+      padding-bottom: 0.8rem;
     }
     .blurb {
-      font-size: 1.0em;
-      line-height: 1.4em;
+      font-size: 0.95rem;
       color: #333;
+      line-height: 1.4em;
+      padding: 0.8rem 0;
+      border-top: 1px solid #333;
+      border-bottom: 2px solid black;
     }
   }
   .event_image {
-    margin-bottom: 25px;
+    margin-bottom: 1.6rem;
     width: 100%;
     height: 0;
     padding-bottom: 100%;
@@ -337,6 +345,8 @@ ul.side-nav {
   }
 }
 
+
+
 .home_page {
   
   .text_blurb {
@@ -347,7 +357,7 @@ ul.side-nav {
     width: 100%;
     height: 0;
     padding-bottom: 100%;
-    margin-bottom: 25px;
+    margin-bottom: 1.6rem;
   }
   .title {
     font-size: 1rem;
@@ -564,7 +574,7 @@ footer {
 
 .node {
   .content {
-    margin-top: 140px;
+    margin-top: 12.5rem;
     h2, h3 {
 
       line-height: 1.125;
@@ -596,6 +606,10 @@ footer {
 
 ul.pagination {
   margin-left: 0.5rem;
+  margin-top: 1rem;
+  li.page {
+    margin-top: 0;
+  }
 }
 ul.pagination li.current a {
   background-color: $link;
