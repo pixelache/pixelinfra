@@ -3,7 +3,7 @@
     .small-10.columns.medium-offset-1.title= t :steps
   .row
     .small-10.column.medium-offset-1.content
-      = image_tag 'http://www.welcometosandiego.com/wp-content/uploads/2010/12/cheeseburger.jpg'
+      = image_tag = image_tag theme_image_path('i-steps.png')
     
       - @steps.order(:number).each do |step|
         .step

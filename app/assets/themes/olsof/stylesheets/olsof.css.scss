@@ -260,7 +260,8 @@ header {
           font-style: italic;
         }
         .name {
-          font-size: 0.9rem;
+          font-size: 0.875rem;
+          line-height: 1.2rem;
           text-transform: uppercase;
         }
       }
@@ -294,7 +295,7 @@ ul.side-nav {
       color: #666;
     }
     p {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       text-transform: uppercase;
     }
   }
@@ -330,9 +331,9 @@ ul.side-nav {
     font-size: 13px;
   }
   .body, .body p {
+    font-size: 0.875rem;
+    line-height: 1.2rem;
 
-    font-size: 15px;
-    line-height: 19px;
   }
 }
 
@@ -394,7 +395,7 @@ ul.side-nav {
       }
     }
     .description {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
     }
   }
 }
@@ -434,7 +435,8 @@ footer {
     margin-bottom: 15px;
   }
   .body {
-    line-height: 19px;
+    font-size: 0.875rem;
+    line-height: 1.2rem;
   }
   .media {
     .image_carousel {
@@ -456,8 +458,19 @@ footer {
   }
 }
 
+.indented_title {
+  background-color: black;
+  color: $beige;
+  font-family: $roboto;
+  font-weight: 300;
+  text-transform: uppercase;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
 .page {
   margin-top: 3.5rem;
+
   .title {
     background-color: black;
     color: $beige;
@@ -465,7 +478,7 @@ footer {
     font-weight: 300;
     text-transform: uppercase;
     padding: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     margin-bottom: 1rem;
   }
   .metadata {
@@ -491,10 +504,12 @@ footer {
     margin-top: 1rem;
   }
   .body {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
+    line-height: 1.2rem;
     padding-top: 0.75rem;
     p {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
+      line-height: 1.2rem;
     }
   }
   .node {
@@ -511,26 +526,28 @@ footer {
     }
     .body {
       clear: left;
-
-      font-size: 0.85rem;
+      line-height: 1.2rem;
+      font-size: 0.875rem;
   
       p {
-        font-size: 0.85rem;
+        font-size: 0.875rem;
+        line-height: 1.2rem;
       }
     }
   }
   .content {
     padding: 0;
     h2, h3 {
-      font-size: 1.1rem;
-      line-height: 1.4rem;
+      font-size: 1rem;
+      line-height: 1.3rem;
       padding: 0.5rem 0;
       border-top: 1px solid #333;
       border-bottom: 1px solid #333;
       margin: 0.5rem 0;
     }
     p {
-      line-height: 1.4em;
+      font-size: 0.875rem;
+      line-height: 1.2rem;
     }
   }
   p.publication {
@@ -556,14 +573,16 @@ footer {
     
     .metadata {
       p {
+        font-size: 0.875rem;
+        line-height: 1.2rem;
         margin: 0px;
       }
 
       margin: 35px 0px;
     }
     p, .body {
-
-      line-height: 19px;
+      font-size: 0.875rem;
+      line-height: 1.2rem;
     }
   }
 }

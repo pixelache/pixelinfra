@@ -3,7 +3,7 @@
     .small-12.columns.large-10.large-offset-1.title= t :publications
   .row
     .small-12.columns.large-10.large-offset-1.content
-      = image_tag 'https://s3-eu-west-1.amazonaws.com/pixelache/media/publication-page-image-small.jpg'
+      = image_tag theme_image_path('i-publications.png')
       %h3= t :interviews
       - @interviews.each do |i|
         %p.publication
