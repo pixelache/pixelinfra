@@ -1,6 +1,7 @@
+- images = 0
 .page
   - unless @event.image.blank? && @event.photos.empty?
-    - images = 0
+
     .row
       .small-12.columns.large-10.large-offset-1.image_carousel
         - if @event.image?

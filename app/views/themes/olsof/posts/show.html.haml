@@ -1,64 +1,65 @@
-.row.post
-  .columns.media{:class => (@post.photos.empty? ? 'small-2' : 'small-3')}
-    - if @post.photos.empty?
-      &nbsp;
-    - else
-      .image_carousel
+- images = 0
+.page
+  .row
+    .small-12.columns.large-10.large-offset-1.event_title
+      %h2= @post.name
+      - if user_signed_in?
+        - if can? :edit, @post
+          = link_to t(:edit), edit_admin_post_path(@post), class: [:button, :tiny, :round]
+          
+  - unless @post.image.blank? && @post.photos.empty?
+
+    .row
+      .small-12.columns.large-10.large-offset-1.image_carousel
         - if @post.image?
-          - if @post.image_width >= 400
-            .img= link_to image_tag(@post.image.url(:standard)), @post.image.url
-          - else
-            .img= link_to image_tag(@post.image.url), @post.image.url
+          - images += 1
+          .img= link_to image_tag(@post.image.url(:standard)), @post.image.url, rel: :lazybox
         - unless @post.photos.empty?
           - @post.photos.each do |i|
-            .img= link_to image_tag(i.filename.url(:box)), i.filename.url
-  .columns.content.left{:class => (@post.photos.empty? ? 'small-10' : 'small-9')}
-    %h2= @post.title
-    .metadata= "posted at #{l @post.published_at, :format => :long} by #{@post.creator.name}"
-    - if @post.event
-      .related_post_link
-        = t(:from_event) + ":"
-        = link_to @post.event.name, @post.event
-    - if @post.image?
-      - unless @post.image_width.blank?
-        - if @post.image_width >= 400
-          = link_to image_tag(@post.image.url(:standard)), @post.image.url
-        - else
-          = link_to image_tag(@post.image.url), @post.image.url
-      - else
-        = link_to image_tag(@post.image.url(:standard)), @post.image.url
-    - if user_signed_in?
-      - if can? :edit, @post
-        = link_to t(:edit), url_for(:host => (Rails.env.development? ? 'localhost' : 'new.pixelache.ac'), port: (Rails.env.development? ? 3000 : false), action: :edit, id: @post, subsite_id: @post.subsite, controller: 'admin/posts'), :class => [:button, :tiny, :round]
+            .img
+              - images += 1
+              = link_to image_tag(i.filename.url(:box)), i.filename.url(:standard), rel: :lazybox
+  .row
+    .small-12.columns.large-10.large-offset-1
+      .metadata= "posted on #{l @post.published_at, :format => :long} by #{@post.creator.name}"
 
 
-    .body= raw @post.body
+  .row
+    .small-12.columns.large-10.large-offset-1
+      .body= raw @post.body
     
-    - unless @post.attachments.empty?
-      %h4= t :downloads
-      %ul.downloads
-        - @post.attachments.each do |att|
-          %li
-            = link_to att.title.blank? ? att['attachedfile'] : att.title, att.attachedfile.url
-            - unless att.attachedfile_size.blank?
-              %small= pluralize(att.attachedfile_size, 'byte')
+  - unless @post.attachments.empty?
+    .row
+      .small-12.columns.large-10.large-offset-1
+        %h4= t :downloads
+        %ul.downloads
+          - @post.attachments.each do |att|
+            %li
+              = link_to att.title.blank? ? att['attachedfile'] : att.title, att.attachedfile.url
+              - unless att.attachedfile_size.blank?
+                %small= pluralize(att.attachedfile_size, 'byte')
           
     - unless @post.related_content.empty?
-      %h4= t :related_content
-      %ul.related
-        - @post.related_content.each do |rc|
-          - next if rc.class == Project || rc.class == Festival
-          %li= link_to rc.name, rc
-= content_for :jquery do
-  :plain
+      .row
+        .small-12.columns.large-10.large-offset-1
+          %h4= t :related_content
+          %ul.related
+            - @post.related_content.each do |rc|
+              - next if rc.class == Project || rc.class == Festival
+              %li= link_to rc.name, rc
 
-    $('.image_carousel').slick({infinite: true,
-      slidesToShow: 4,
-      adaptiveHeight: false,
-      arrows: false,
-      vertical: true,
-      slide: '.img',
-      autoplay: true,
-      autoplaySpeed: 2400,
-      slidesToScroll: 1,
-    });          
+
+- if images > 1
+
+  = content_for :jquery do
+    :plain
+      $('.image_carousel').slick({infinite: true,
+        adaptiveHeight: true,
+        arrows: false,
+        slide: '.img',
+        variableWidth: false,
+        autoplay: true,
+        autoplaySpeed: 2400,
+        slidesToScroll: 1,
+      });
+     
