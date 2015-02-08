@@ -2,6 +2,7 @@ class Attachment < ActiveRecord::Base
   belongs_to :item, polymorphic: true
   mount_uploader :attachedfile, AttachmentUploader
   before_save :get_metadata
+  belongs_to :documenttype
   
   def get_metadata
     if attachedfile.present?  && attachedfile_changed?

@@ -35,7 +35,8 @@
         %ul.downloads
           - @post.attachments.each do |att|
             %li
-              = link_to att.title.blank? ? att['attachedfile'] : att.title, att.attachedfile.url
+              = att.title.blank? ? att['attachedfile'] : att.title
+              = link_to raw("&#9654;"), att.attachedfile.url
               - unless att.attachedfile_size.blank?
                 %small= pluralize(att.attachedfile_size, 'byte')
           
@@ -46,7 +47,9 @@
           %ul.related
             - @post.related_content.each do |rc|
               - next if rc.class == Project || rc.class == Festival
-              %li= link_to rc.name, rc
+              %li
+                = rc.name
+                = link_to raw("&#9654;"), rc, target: :_blank
 
 
 - if images > 1
@@ -54,7 +57,7 @@
   = content_for :jquery do
     :plain
       $('.image_carousel').slick({infinite: true,
-        adaptiveHeight: true,
+        adaptiveHeight: false,
         arrows: false,
         slide: '.img',
         variableWidth: false,
