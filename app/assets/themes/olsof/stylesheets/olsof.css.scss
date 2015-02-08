@@ -300,6 +300,12 @@ ul.side-nav {
     }
   }
   .event_row {
+    &.images {
+      .blurb {
+        margin-bottom: 2.5rem;
+        border-bottom: none;
+      }
+    }
     .text_blurb {
       margin-bottom: 2.5rem;
     }

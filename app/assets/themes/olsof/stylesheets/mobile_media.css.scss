@@ -63,9 +63,7 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
   #sidebar {
     .search {
       margin: 1rem 0px;
-      input[type=text] {
-        width: 200px;
-      }
+
     }
     .logo {
       font-size: 2.4em;

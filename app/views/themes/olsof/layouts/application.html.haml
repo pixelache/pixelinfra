@@ -18,9 +18,9 @@
       %header
         .contain-to-grid.sticky= render 'admin/layouts/navigation'
     .row
-      .large-4.medium-12.small-10.small-offset-1.columns.push.large-offset-0#sidebar
+      .large-4.medium-12.small-10.small-offset-1.columns.push.medium-offset-0#sidebar
         .row
-          .logo_container.medium-4.large-12.large-offset-0.columns
+          .logo_container.medium-6.large-12.large-offset-0.columns
             .logo
               .first= link_to 'Open', '/'
             .logo
@@ -44,7 +44,7 @@
                     window.location = $(this).find("option:selected").val();
                   });
         
-          .nav_lines.medium-6.columns.medium-offset-2.hide-for-small-only.large-10.large-offset-3
+          .nav_lines.medium-6.columns.medium-offset-1.hide-for-small-only.large-10.large-offset-3
             = image_tag current_theme_image_path('nav_lines.png'), :class => :navbg
             .item.publications= link_to t(:publications), publications_path
             .item.about= link_to t(:about), page_path('about')
@@ -64,19 +64,19 @@
                   %li
                     .date= "#{date_range(cal.start_at, cal.end_at, format: :long)}"
                     .name= link_to cal.name, cal
-            .calendar-dd.show-for-medium-only.medium-3.medium-offset-1.columns
+            .calendar-dd.show-for-medium-only.medium-3.medium-offset-3.columns
               %select
                 %option{value: nil}= t :calendar
                 - @calendar.sort_by(&:start_at).each do |cal|
                   %option{value: url_for(cal)}= " -- #{cal.name} (#{cal.start_at.strftime("%d %B")})"
-          .search.medium-4.medium-offset-2.large-10.columns.large-offset-2.small-offset-2
+          .search.medium-4.medium-offset-1.large-10.columns.large-offset-2.small-offset-2
             .square= image_tag current_theme_image_path('littlesquare.jpg')
             = form_tag '/search/' do
               = text_field :search, :term
               = submit_tag 'Search'
           = yield :sidebar
 
-      .large-8.medium-10.small-12.pull.columns#middle.medium-offset-1.large-offset-0
+      .large-8.small-12.pull.columns#middle.medium-offset-0.large-offset-0
         = yield :middle
 
         .right_wrap.row.show-for-large-up
@@ -159,7 +159,7 @@
                 })
 
         .row
-          .small-10.small-offset-1.medium-12.medium-offset-0.columns#main= yield
+          .small-10.small-offset-1.medium-10.medium-offset-1.columns#main= yield
     %footer.olsof-footer
       .row  
         .small-12.columns.text-center.info_line
