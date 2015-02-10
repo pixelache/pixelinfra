@@ -1,20 +1,20 @@
 %h2 Step
-= semantic_form_for [:admin, @step], :html => {:class => "custom"} do |f|
+= semantic_form_for [:admin, @step], :html => {:class => "custom", :"data-abide" => ''} do |f|
   .row
     .small-6.columns
-      = f.input :number
+      = f.input :number, input_html: {required: ''}
       = f.input :subsite_id, :value => 2, :as => :hidden
   .row
     .small-6.columns
-      = f.input :name
+      = f.input :name, input_html: {required: ''}
 
   .row
     .small-6.columns
-      = f.input :node, :label => 'Host partner'
+      = f.input :node, :label => 'Host partner', input_html: {required: ''}
 
   .row
-    .small-6.columns= f.input :start_at, :as => :string, :input_html => {:class => "datetime_picker"}
-    .small-6.columns= f.input :end_at, :as => :string, :input_html => {:class => "datetime_picker"}
+    .small-6.columns= f.input :start_at, :as => :string, :input_html => {:class => "datetime_picker", required: ''}
+    .small-6.columns= f.input :end_at, :as => :string, :input_html => {:class => "datetime_picker", required: ''}
   .row
     .small-6.columns
       %h5 Connected to a festival?

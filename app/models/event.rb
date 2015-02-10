@@ -106,6 +106,8 @@ class Event < ActiveRecord::Base
     self.name + " (#{self.start_at.strftime("%d.%m.%Y")})"
   end
   
+
+  
   def feed_time
     start_at
   end

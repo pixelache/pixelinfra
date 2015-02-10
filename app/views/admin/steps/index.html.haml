@@ -21,7 +21,7 @@
               = step.name
               .subtext
                 Host:
-                = step.node.name
+                = step.node.try(:name)
             %td= date_range(step.start_at, step.end_at)
             %td.actions
               - if can? :edit, Step
