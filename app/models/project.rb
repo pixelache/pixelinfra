@@ -22,6 +22,10 @@ class Project < ActiveRecord::Base
   mount_uploader :background, AttachmentUploader 
   scope :active, -> { where(active: true)}
   scope :inactive, -> { where(active: false)}
+  has_many :subscriptions, as: :item
+  before_save :check_listserv_support
+  include Listable
+  
   
   def self.active_menu
     a = Project.active.sort_by{|x| x.name }.map{|x| [x.name, x.id]}

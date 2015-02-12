@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150208140922) do
+ActiveRecord::Schema.define(version: 20150211190752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -317,6 +317,8 @@ ActiveRecord::Schema.define(version: 20150208140922) do
     t.string   "festivalbackdrop",   limit: 255
     t.string   "festival_location",  limit: 255, default: "Helsinki, Finland", null: false
     t.string   "tertiary_colour",    limit: 255, default: "FFFFFF",            null: false
+    t.boolean  "has_listserv",                   default: false,               null: false
+    t.string   "listservname"
   end
 
   create_table "festivaltheme_relations", force: :cascade do |t|
@@ -668,6 +670,8 @@ ActiveRecord::Schema.define(version: 20150208140922) do
     t.integer  "background_height"
     t.integer  "background_width"
     t.string   "redirect_to"
+    t.boolean  "has_listserv",                        default: false,    null: false
+    t.string   "listservname"
   end
 
   create_table "residencies", force: :cascade do |t|
@@ -743,6 +747,18 @@ ActiveRecord::Schema.define(version: 20150208140922) do
   add_index "steps", ["festival_id"], name: "index_steps_on_festival_id", using: :btree
   add_index "steps", ["node_id"], name: "index_steps_on_node_id", using: :btree
   add_index "steps", ["subsite_id"], name: "index_steps_on_subsite_id", using: :btree
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.string   "item_type"
+    t.string   "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "subscriptions", ["item_type", "item_id"], name: "index_subscriptions_on_item_type_and_item_id", using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "subsites", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -850,4 +866,5 @@ ActiveRecord::Schema.define(version: 20150208140922) do
   add_index "videos", ["festival_id"], name: "index_videos_on_festival_id", using: :btree
   add_index "videos", ["project_id"], name: "index_videos_on_project_id", using: :btree
 
+  add_foreign_key "subscriptions", "users"
 end

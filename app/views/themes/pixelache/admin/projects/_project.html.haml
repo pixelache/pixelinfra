@@ -7,7 +7,7 @@
       %small= "Evolved into #{project.evolvedto.name}"
   %td= project.active == true ? "active" : "inactive"
   %td.actions
-    = link_to t(:view), project, :class => [:button, :round, :tiny], :target => :_blank
+    = link_to t(:view), [:admin, project], :class => [:button, :round, :tiny], :target => :_blank
     - if can? :edit, Project
       = link_to 'Edit', edit_admin_project_path(project), :class => [:button, :round, :tiny]
     - if can? :destroy, Project

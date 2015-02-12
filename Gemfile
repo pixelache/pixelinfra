@@ -40,17 +40,19 @@ gem 'foundation-rails', '5.3.0'
 gem 'friendly_id'
 gem 'friendly_id-globalize'
 gem 'geocoder'
-#gem 'globalize', github: 'globalize/globalize', branch: 'master'
-gem "globalize", github: "ncri/globalize" 
+gem 'globalize' #, github: 'globalize/globalize', branch: 'master'
+# gem "globalize", github: "ncri/globalize"
 gem 'haml-rails'
 gem 'handles_sortable_columns'
 gem 'has_scope'
 gem 'hominid'
 gem 'http_accept_language'
-gem 'inherited_resources', github: 'josevalim/inherited_resources'
+gem 'inherited_resources' #, github: 'josevalim/inherited_resources'
 gem "jquery-slick-rails"
 gem 'lazybox'
 gem 'kaminari'
+gem 'mailman'
+gem 'mailman-rails'
 gem 'meta-tags', require: 'meta_tags'
 gem 'mini_magick'
 gem 'nested_form'
@@ -64,6 +66,7 @@ gem 'rails4-autocomplete'
 # gem 'rails3-jquery-autocomplete', github: 'crowdint/rails3-jquery-autocomplete'
 gem 'randumb'
 gem 'recaptcha'
+gem 'rest-client'
 gem 'rolify'
 gem 'shog'
 gem 'textacular', branch: :master, github: 'textacular/textacular'
@@ -84,6 +87,7 @@ group :development do
   gem 'hub', :require => nil
   gem 'letter_opener'
   gem 'nifty-generators'
+  gem 'pry-rails', :group => :development
   gem 'rails-footnotes',  '>= 3.7.9'
   gem 'quiet_assets'
   gem 'rb-fchange', :require=>false

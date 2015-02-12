@@ -16,10 +16,13 @@ class Festival < ActiveRecord::Base
   translates :overview_text, :fallbacks_for_empty_translations => true
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['overview_text'].blank? }
   before_save :update_image_attributes
-  
+  has_many :subscriptions, as: :item
   scope :by_node, -> (x) { includes(:node).where(:node_id => x) }
   scope :published,  -> () { where(published: true)}
   scope :by_year, -> year { where(["start_at >= ? AND start_at <= ?", year+"-01-01", year+"-12-31"])} 
+  
+  
+
   
   def happens_on?(day)
     if end_at.blank?

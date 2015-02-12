@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
     self.password = SecureRandom.hex(32) if password.blank?  # generate random password to satisfy validations
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'], :username => identifier)
   end
+  
+  def subscribed_to?(item)
+    item.subscriptions.map(&:user).include?(self)
+  end
 
   private
   

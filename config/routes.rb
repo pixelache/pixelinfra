@@ -56,7 +56,12 @@ Pixelinfra::Application.routes.draw do
     resources :projectproposals do
       resources :comments
     end
-    resources :projects
+    resources :projects do
+      member do
+        get :subscribe
+        get :unsubscribe
+      end
+    end
     resources :residencies
     resources :search
     resources :steps do
