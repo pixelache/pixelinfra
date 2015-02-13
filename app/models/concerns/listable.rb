@@ -26,15 +26,17 @@ module Listable
   end
   
   def subscribe_to_list(user)
-
-    begin
-      r = RestClient.post(@@base_url + "/members", { list_id: listservname + "." + ENV['PIXELACHE_MAILMAN_SERVER'], subscriber: user.email, display_name: user.name })
-    rescue => e
-      if e.response == '"Member already subscribed"'
-        # do nothing
+    if Rails.env.development?
+      return true
+    else
+      begin
+        r = RestClient.post(@@base_url + "/members", { list_id: listservname + "." + ENV['PIXELACHE_MAILMAN_SERVER'], subscriber: user.email, display_name: user.name })
+      rescue => e
+        if e.response == '"Member already subscribed"'
+          # do nothing
+        end
       end
     end
-
 
     
     # get member id so we can unsubscribe
@@ -48,9 +50,13 @@ module Listable
   end
   
   def unsubscribe_from_list(user)
-    bigid = subscriptions.find_by(user: user).member_id
-    RestClient.delete(@@base_url + "/members/#{bigid}")
-    subscriptions.find_by(user: user).destroy
+    if Rails.env.development?
+      return true
+    else 
+      bigid = subscriptions.find_by(user: user).member_id
+      RestClient.delete(@@base_url + "/members/#{bigid}")
+      subscriptions.find_by(user: user).destroy
+    end
   end
-    
+  
 end

@@ -23,6 +23,7 @@ Pixelinfra::Application.routes.draw do
       member do
         get :subscribe
         get :unsubscribe
+        get :toggle_list
       end
       resources :festivalthemes
     end
@@ -64,6 +65,7 @@ Pixelinfra::Application.routes.draw do
       member do
         get :subscribe
         get :unsubscribe
+        get :toggle_list
       end
     end
     resources :residencies

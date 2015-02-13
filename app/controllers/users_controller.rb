@@ -14,6 +14,7 @@ class UsersController < ApplicationController
         redirect_to '/'
       end
     end
+    set_meta_tags title: t(:edit_your_profile)
   end
   
   def update

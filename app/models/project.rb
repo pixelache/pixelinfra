@@ -33,6 +33,18 @@ class Project < ActiveRecord::Base
     return a + [' -- inactive/old projects -- '] + i
   end 
     
+  def subscribe_path
+    '/admin/projects/' + self.slug + '/subscribe'
+  end
+  
+  def toggle_path
+    '/admin/projects/' + self.slug + '/toggle_list'
+  end
+  
+  def unsubscribe_path
+    '/admin/projects/' + self.slug + '/unsubscribe'
+  end
+  
   def background_css
     "background-color: ##{project_bg_colour}; color: ##{project_text_colour}; "
   end

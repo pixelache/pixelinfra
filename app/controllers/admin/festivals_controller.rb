@@ -36,6 +36,16 @@ class Admin::FestivalsController < Admin::BaseController
     redirect_to [:admin, @festival]
   end
   
+  def toggle_list
+    @festival = Festival.find(params[:id])
+
+    current_user.subscribed_to?(@festival) ? @festival.unsubscribe_from_list(current_user) :     @festival.subscribe_to_list(current_user)
+    @status = current_user.subscribed_to?(@festival)
+    respond_to do |format|
+      format.js 
+    end
+  end
+  
   def unsubscribe
     @festival = Festival.find(params[:id])
     @festival.unsubscribe_from_list(current_user)

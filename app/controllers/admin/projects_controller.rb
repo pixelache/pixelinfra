@@ -17,6 +17,15 @@ class Admin::ProjectsController < Admin::BaseController
     @project.subscribe_to_list(current_user)
     redirect_to [:admin, @project]
   end
+    
+  def toggle_list
+    @project = Project.find(params[:id])
+    current_user.subscribed_to?(@project) ? @project.unsubscribe_from_list(current_user) : @project.subscribe_to_list(current_user)
+    @status = current_user.subscribed_to?(@project)
+    respond_to do |format|
+      format.js   #note.. not .json
+    end
+  end
   
   def unsubscribe
     @project = Project.find(params[:id])

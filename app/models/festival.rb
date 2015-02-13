@@ -23,6 +23,18 @@ class Festival < ActiveRecord::Base
   before_save :check_listserv_support
   include Listable
   
+  def subscribe_path
+    '/admin/festivals/' + self.slug + '/subscribe'
+  end
+  
+  def toggle_path
+    '/admin/projects/' + self.slug + '/toggle_list'
+  end
+  
+  
+  def unsubscribe_path
+    '/admin/festivals/' + self.slug + '/unsubscribe'
+  end
 
   
   def happens_on?(day)

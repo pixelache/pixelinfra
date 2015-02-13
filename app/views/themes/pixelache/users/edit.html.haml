@@ -29,7 +29,30 @@
   .row
     .small-8.columns
       = image_tag f.object.avatar.url(:thumb)
-      %p= f.input :avatar
-  
+      %p= f.input :avatar 
+  .row  
+    .large-8.columns.small-12
+      %fieldset
+        %label Subscriptions
+        %p
+          Mailing lists exist for the following items:
+        %ul
+          - Subscription.all.map(&:item).uniq.each do |has_list|
+            %li
+              = link_to has_list.name, [:admin, has_list], target: :_blank
+              - if current_user.subscribed_to?(has_list)
+                %b Subscribed
+                = link_to 'Unsubscribe', has_list.toggle_path, class: [:button, :alert, :round, :tiny, :sublink], remote: true
+              - else
+                = link_to 'Subscribe', has_list.toggle_path, class: [:button, :sublink, :tiny], remote: true
+          
   .row
     .small-8.columns= f.submit "Save", :class => [:button, :round, :small]
+
+= content_for :jquery do
+  :plain
+    $('a.sublink').bind('ajax:complete', function(evt, data, status, xhr) {
+      var $this = $(this);
+      $this.html(data.responseText);
+      $this.toggleClass('alert');
+    });
