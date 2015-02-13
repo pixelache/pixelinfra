@@ -1,5 +1,14 @@
 
 namespace :archive do
+  
+  desc 'Update mailing list archives'
+  task :listservs => :environment do
+    Subscription.all.map(&:item).uniq.map(&:listservname).each do |list|
+      listname = "#{list}@#{ENV['PIXELACHE_MAILMAN_SERVER']}"
+      result = `/usr/local/bin/mhonarc -outdir /var/www/mailer_archives/#{listname} -mhpattern '^[^\.]' /var/www/mailer_archives/{#{listname}}/new`
+    end
+  end
+  
   desc 'Synchronise flickr sets with pixelache database'
   task :sync_flickr_sets => :environment do
     existing_in_database = Flickrset.all.map{|x| [x.flickr_id, x.last_modified_date]}
