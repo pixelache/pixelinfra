@@ -166,6 +166,7 @@ td .date {
   
   &.fixed {
     top: 40px;
+    z-index: 98;
   }
   .larger {
     a {
@@ -191,6 +192,7 @@ td .date {
     }
   }
 }
+
 
 .pixelache_nav_menu {
   &.fixed {

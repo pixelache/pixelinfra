@@ -5,11 +5,11 @@ class HomeController < ApplicationController
   end
   
   def index
-    unless @site.name == 'olsof'
-      authenticate_or_request_with_http_basic('Pixelache eyes only! (for now)') do |username, password|
-        username == 'trouble' && password == 'desire'
-      end
-    end
+    # unless @site.name == 'olsof'
+    #   authenticate_or_request_with_http_basic('Pixelache eyes only! (for now)') do |username, password|
+    #     username == 'trouble' && password == 'desire'
+    #   end
+    # end
     @users = User.all
     if @site.name == 'pixelache'
       @events = Event.by_subsite(@site.id).published.order("start_at DESC").limit(6)
