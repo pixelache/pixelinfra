@@ -37,11 +37,10 @@
         %p
           Mailing lists exist for the following items:
         %ul
-          - Subscription.all.map(&:item).uniq.each do |has_list|
+          - [Project.where(has_listserv: true), Festival.where(has_listserv: true)].flatten.each do |has_list|
             %li
               = link_to has_list.name, [:admin, has_list], target: :_blank
               - if current_user.subscribed_to?(has_list)
-                %b Subscribed
                 = link_to 'Unsubscribe', has_list.toggle_path, class: [:button, :alert, :round, :tiny, :sublink], remote: true
               - else
                 = link_to 'Subscribe', has_list.toggle_path, class: [:button, :sublink, :tiny], remote: true

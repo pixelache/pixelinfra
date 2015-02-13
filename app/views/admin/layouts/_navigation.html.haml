@@ -9,7 +9,8 @@
         %li.has-dropdown
           %a{:href=> '#'}= current_user.username
           %ul.dropdown
-            %li= link_to 'Edit your profile', edit_user_registration_path(current_user)
+            %li= link_to 'Public side', '/'
+            %li= link_to 'Edit your profile', edit_user_path(current_user)
             %li= link_to 'Sign out', '/signout'
       %ul.right
         %li.has-form
