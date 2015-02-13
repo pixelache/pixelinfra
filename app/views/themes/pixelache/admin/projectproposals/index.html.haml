@@ -18,13 +18,28 @@
           %tr
             %td= prop.id.to_s
             %td
-              = prop.primary_initiator.name
-              %p.metadata= t(:created_on, :when => l(prop.created_at, format: :short))
+              - if prop.versions.size == 1
+                = prop.primary_initiator.name
+              - else
+                = User.find(prop.versions.first.whodunnit).name
+              %p.metadata
+                = t(:created_on, :when => l(prop.created_at, format: :short))
+              %p.metadata
+                = t(:last_modified, when: l(prop.updated_at, format: :short))
+                by
+                = prop.primary_initiator.name
             %td
               = prop.name
               - if prop.project
                 %p
-                  %small= prop.project.name
+                  %small
+                    to be a subproject of:
+                    = prop.project.name
+              - if prop.offspring
+                %p
+                  LED TO NEW PROJECT:
+                  = link_to prop.offspring.name, [:admin, prop.offspring], target: :_blank
+                  
             %td
               = prop.comments.size.to_s
               - unless prop.comments.empty?

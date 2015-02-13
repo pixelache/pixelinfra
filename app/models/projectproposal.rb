@@ -8,7 +8,7 @@ class Projectproposal < ActiveRecord::Base
   friendly_id :name, :use => [:slugged, :finders]
   validates_presence_of :name, :primary_initiator_id, :description
   after_create :notify_members
-  
+  belongs_to :offspring, class_name: 'Project'
   private
   
   def notify_members

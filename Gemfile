@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.2.0'
 gem 'rails', '4.2.0'
 gem 'pg'
+
 gem 'mysql2' # for data migration
 
 gem 'sass-rails', '~> 4.0.0'
@@ -12,7 +13,7 @@ gem 'jquery-ui-rails'
 gem 'jquery-ui-themes'
 gem 'jbuilder', '~> 1.2'
 gem 'execjs', :group => :production
-# gem 'therubyracer', :group => :production
+
 
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'auto_html'
@@ -92,7 +93,7 @@ group :development do
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
-  gem 'spring'
+  #gem 'spring'
   gem 'byebug'
   # gem 'web-console'
 end

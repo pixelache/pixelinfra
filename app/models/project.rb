@@ -25,7 +25,7 @@ class Project < ActiveRecord::Base
   has_many :subscriptions, as: :item
   before_save :check_listserv_support
   include Listable
-  
+  has_one :projectproposal, foreign_key: 'offspring_id'
   
   def self.active_menu
     a = Project.active.sort_by{|x| x.name }.map{|x| [x.name, x.id]}

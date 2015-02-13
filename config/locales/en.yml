@@ -268,6 +268,7 @@ en:
   active_member_years: 'Years as member: '
   people: 'People'
   steps: 'Steps'
+  led_to_new_project: 'Did this proposal lead to the creation of a project?'
   proposed_by: "Proposed by %{proposer} on %{when}"
   posted_by: "Posted by %{poster} on %{when}"
   last_modified:  "Last edited on %{when}"

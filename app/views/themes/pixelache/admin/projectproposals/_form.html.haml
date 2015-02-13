@@ -11,6 +11,9 @@
     .large-6.small-12.columns= f.input :name, :label => t(:name_of_project), input_html: {:required => ''}
   .row
     .large-6.small-12.columns= f.input :project, :label => t(:part_of_existing_project), collection: Project.active_menu
+  - unless @projectproposal.new_record?
+    .row
+      .large-6.columns.small-12= f.input :offspring, label: t(:led_to_new_project), collection: Project.all.order(:name)
   .row
     .large-6.small-12.columns= f.input :description, :label => t(:short_project_description), input_html: {:required => ''}
   .row

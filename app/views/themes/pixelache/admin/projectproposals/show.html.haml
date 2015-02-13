@@ -42,6 +42,12 @@
       .large-12.small-12.columns
         .row
           .small-2.columns
+            .text-right= t(:led_to_new_project)
+          .small-10.columns= link_to_if (@projectproposal.offspring), @projectproposal.offspring.try(:name), @projectproposal.offspring, :target => :_blank          
+    .row
+      .large-12.small-12.columns
+        .row
+          .small-2.columns
             .text-right= t :description
           .small-10.columns.end= simple_format(@projectproposal.description.html_safe)
     .row

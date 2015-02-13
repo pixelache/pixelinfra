@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211190752) do
+ActiveRecord::Schema.define(version: 20150213144632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -647,6 +647,7 @@ ActiveRecord::Schema.define(version: 20150211190752) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "comment_count",                     default: 0
+    t.integer  "offspring_id"
   end
 
   add_index "projectproposals", ["project_id"], name: "index_projectproposals_on_project_id", using: :btree
