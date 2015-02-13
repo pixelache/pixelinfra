@@ -1,0 +1,24 @@
+.row
+  .small-12.columns
+    %h1
+      = @festival.name
+      = link_to fa_icon('gear'), edit_admin_festival_path(@festival)
+    
+- if @festival.has_listserv == true
+  .row
+    .small-12.columns
+      %h3 
+        Mailing list for festival:
+        %em= @festival.listservname + "@" + ENV['PIXELACHE_MAILMAN_SERVER']
+
+  .row
+    .small-12.columns
+      - if current_user.subscribed_to?(@festival)
+        %p
+          You are currently subscribed to receive emails to
+          %em= current_user.email
+        = link_to 'Unsubscribe', unsubscribe_admin_festival_path(@festival), class: [:button, :alert, :round, :tiny]
+      - else
+        = link_to 'Subscribe to mailing list', subscribe_admin_festival_path(@festival), class: [:button,  :round, :tiny]
+.row
+  .small-12.columns= link_to 'Back to all festivals', admin_festivals_path, class: [:button, :round, :tiny]

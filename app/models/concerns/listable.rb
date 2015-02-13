@@ -19,6 +19,7 @@ module Listable
     rescue => e
       if e.response  == '404 Not Found'
         r = RestClient.post(url, { fqdn_listname: self.listservname + "@" + ENV['PIXELACHE_MAILMAN_SERVER']} )
+        r = RestClient.put(url + "/#{self.listservname}@#{ENV['PIXELACHE_MAILMAN_SERVER']}/archivers", { prototype: "True", mhonarc: "False", :"mail-archive" => "False"})
       end
     end
   end

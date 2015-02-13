@@ -20,7 +20,8 @@ class Festival < ActiveRecord::Base
   scope :by_node, -> (x) { includes(:node).where(:node_id => x) }
   scope :published,  -> () { where(published: true)}
   scope :by_year, -> year { where(["start_at >= ? AND start_at <= ?", year+"-01-01", year+"-12-31"])} 
-  
+  before_save :check_listserv_support
+  include Listable
   
 
   

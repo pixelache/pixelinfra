@@ -50,7 +50,16 @@
     .small-6.columns= f.input :festival_location
   .row
     .small-6.columns= f.input :published
-
+  .row
+    .small-6.columns
+      %fieldset
+        %label Mailing lists
+        .row
+          .small-12.columns= f.input :has_listserv, label: 'Create mailing list for this project?', hint: 'experimental!!! may not work yet'
+        .row
+          .small-17.columns  
+            = f.input :listservname, input_html: {value: @festival.listservname.blank? ? @festival.slug.parameterize : @festival.listservname}, label: 'Name of mailing list:', hint: 'experimental!!!'
+            = "@mailer.pixelache.ac"          
   .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]
 = content_for :jquery do

@@ -15,7 +15,7 @@
   %td
     = date_range(festival.start_at, festival.end_at)
   %td.actions
-    = link_to 'Show', festival, :target => :_blank, class: [:button, :tiny, :round]
+    = link_to 'Show', [:admin,festival], :target => :_blank, class: [:button, :tiny, :round]
     - if can? :edit, Festival
       = link_to 'Edit', edit_admin_festival_path(festival), class: [:button, :tiny, :round]
     - if can? :destroy, Festival

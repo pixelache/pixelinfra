@@ -29,7 +29,18 @@ class Admin::FestivalsController < Admin::BaseController
     end
     @festivals = apply_scopes(Festival).includes(:node).order(order).page(params[:page]).per(20)
   end
- 
+  
+  def subscribe
+    @festival = Festival.find(params[:id])
+    @festival.subscribe_to_list(current_user)
+    redirect_to [:admin, @festival]
+  end
+  
+  def unsubscribe
+    @festival = Festival.find(params[:id])
+    @festival.unsubscribe_from_list(current_user)
+    redirect_to [:admin, @festival]
+  end  
   protected
   
   def permitted_params

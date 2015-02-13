@@ -20,6 +20,10 @@ Pixelinfra::Application.routes.draw do
       get :autocomplete_event_name, :on => :collection      
     end
     resources :festivals do
+      member do
+        get :subscribe
+        get :unsubscribe
+      end
       resources :festivalthemes
     end
     resources :festivalthemes

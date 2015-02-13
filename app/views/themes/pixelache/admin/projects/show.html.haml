@@ -1,6 +1,8 @@
 .row
   .small-12.columns
-    %h1= @project.name
+    %h1
+      = @project.name
+      = link_to fa_icon('gear'), edit_admin_project_path(@project)
     
 - if @project.has_listserv == true
   .row
