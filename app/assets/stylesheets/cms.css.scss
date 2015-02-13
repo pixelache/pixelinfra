@@ -300,3 +300,27 @@ table.project_proposals {
     height: 120px;
   }
 }
+
+.control_panel {
+  .panel {
+    font-color: #333;
+    font-weight: 300;
+    &.limited {
+      max-height: 400px;
+      overflow: auto;
+    }
+    .entry {
+      .date {
+        font-size: 0.7rem;
+        color: #666;
+        font-weight: italic;
+        margin: 0.4rem 0 0.8rem 0;
+      }
+      .description {
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+        font-weight: 300;
+      }
+    }
+  }
+}

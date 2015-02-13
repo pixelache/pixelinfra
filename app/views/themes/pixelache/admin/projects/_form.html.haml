@@ -85,6 +85,10 @@
           = ff.object.attachedfile
           = link_to 'Download', ff.object.attachedfile.url, :class => [:button, :round, :tiny]
         = ff.input :attachedfile
+        = ff.input :documenttype
+        = ff.input :title
+        = ff.input :description
+        = ff.input :public, as: :boolean
         = ff.link_to_remove 'Remove this attachment', class: [:button, :round, :alert, :tiny]
   = f.link_to_add 'Add an attachment', :attachments, class: [:button, :round, :tiny]
   .row

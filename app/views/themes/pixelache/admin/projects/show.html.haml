@@ -1,24 +1,82 @@
-.row
-  .small-12.columns
-    %h1
-      = @project.name
-      = link_to fa_icon('gear'), edit_admin_project_path(@project)
-    
-- if @project.has_listserv == true
+.control_panel
   .row
     .small-12.columns
-      %h3 
-        Mailing list for project:
-        %em= @project.listservname + "@" + ENV['PIXELACHE_MAILMAN_SERVER']
+      %h1
+        = @project.name
+        = link_to fa_icon('gear'), edit_admin_project_path(@project)
+  .row
+    - if @project.has_listserv == true
 
+      .medium-4.small-12.columns.panel.radius.callout
+        %h4 
+          Mailing list
+          %em= @project.listservname + "@" + ENV['PIXELACHE_MAILMAN_SERVER']
+
+        .row
+          .small-12.columns
+            - if current_user.subscribed_to?(@project)
+              %p
+                You are currently subscribed to receive emails to
+                %em= current_user.email
+              = link_to 'Unsubscribe', unsubscribe_admin_project_path(@project), class: [:button, :alert, :round, :tiny]
+            - else
+              = link_to 'Subscribe to mailing list', subscribe_admin_project_path(@project), class: [:button,  :round, :tiny]
+        .row
+          .small-12.columns
+            %h6= link_to "List archives", "http://lists.pixelache.ac/#{@project.listservname}@#{ENV['PIXELACHE_MAILMAN_SERVER']}", target: :_blank
+        
+    - unless @project.etherpads.empty?
+
+      .medium-4.medium-offset-1.small-12.columns.panel.end.limited
+        %h4 Etherpads
+        - @project.etherpads.each do |etherpad|
+          .entry
+            = link_to etherpad.name, 'http://pad.pixelache.ac/p/' + etherpad.name, :target => :_blank
+            - if etherpad.private_pad == true
+              %small
+                %b PRIVATE!
+            %small= time_ago_in_words(etherpad.last_edited) + " ago"
+            .date= l etherpad.last_edited, :format => :long
+            
+    - unless @project.events.empty?
+      .medium-4.medium-offset-1.small-12.columns.panel.end.limited
+        %h4 Events
+        - @project.events.order('start_at DESC').each do |event|
+          .entry
+            = link_to event.name, event, :target => :_blank
+            %small= time_ago_in_words(event.updated_at) + " ago"
+            .date= date_range(event.start_at, event.end_at, :format => :short)
+
+            
+    - unless @project.posts.empty?
+      .medium-4.medium-offset-1.small-12.columns.panel.end.limited
+        %h4 Blog posts
+        - @project.posts.order('published_at DESC').each do |post|
+          .entry
+            = link_to post.name, post, :target => :_blank
+            %small= time_ago_in_words(post.updated_at) + " ago"
+            .date= l post.published_at
+            
+    - unless @project.pages.empty?
+      .medium-4.medium-offset-1.small-12.columns.panel.end.limited
+        %h4 Info/static pages
+        - @project.pages.order('updated_at DESC').each do |page|
+          .entry
+            = link_to page.name, page, :target => :_blank
+            %small= time_ago_in_words(page.updated_at) + " ago"
+            
+    - unless @project.attachments.empty?
+      .medium-4.medium-offset-1.small-12.columns.panel.end.limited
+        %h4 Documents
+        - @project.attachments.order('updated_at DESC').each do |doc|
+          .entry
+            = link_to doc.title.blank? ? doc.attachedfile : doc.title, doc.attachedfile.url
+            %small= time_ago_in_words(doc.updated_at) + " ago"
+            - unless doc.description.blank?
+              .description= doc.description
+            - unless doc.documenttype.blank?
+              .date= doc.documenttype.name
+
+                                    
   .row
-    .small-12.columns
-      - if current_user.subscribed_to?(@project)
-        %p
-          You are currently subscribed to receive emails to
-          %em= current_user.email
-        = link_to 'Unsubscribe', unsubscribe_admin_project_path(@project), class: [:button, :alert, :round, :tiny]
-      - else
-        = link_to 'Subscribe to mailing list', subscribe_admin_project_path(@project), class: [:button,  :round, :tiny]
-.row
-  .small-12.columns= link_to 'Back to all projects', admin_projects_path, class: [:button, :round, :tiny]
+    .small-12.columns= link_to 'Back to all projects', admin_projects_path, class: [:button, :round, :tiny]
