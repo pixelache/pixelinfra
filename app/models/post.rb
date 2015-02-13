@@ -24,7 +24,7 @@ class Post < ActiveRecord::Base
   before_save :update_image_attributes
   before_save :check_published
   validates_presence_of :subsite_id
-  validate :title_present_in_at_least_one_locale
+  #validate :title_present_in_at_least_one_locale
   after_create :check_for_feed
   attr_accessor  :event_name, :project_name, :festival_name, :hide_from_feed
   

@@ -29,7 +29,7 @@ class Event < ActiveRecord::Base
   attr_accessor  :place_name, :hide_from_feed
   before_save :update_image_attributes
   validates_presence_of :subsite_id, :place_id, :start_at
-  validate :name_present_in_at_least_one_locale
+  #validate :name_present_in_at_least_one_locale
   before_save :check_for_feed
   before_save :check_published
   has_many :feeds, :as => :item, :dependent => :delete_all
