@@ -7,7 +7,7 @@
   #hidden{:style => !f.object.new_record? ? "display: block" : false}
     .small-12.columns
       .row
-        .small-3.columns= f.input :item_type, :as => :select, :collection => ['Page', 'Post', 'Project'], :label => 'Choose type of content:'
+        .small-3.columns= f.input :item_type, :as => :select, :collection => ['Page', 'Post', 'Project', 'Festival', 'Residency'], :label => 'Choose type of content:'
         .small-3.columns.second= f.input :seconditem_type, :as => :select, :collection => ['Page', 'Post', 'Project'], :label => 'Choose type of content (right):'
       .row.page_selector
         .small-12.columns
@@ -75,11 +75,11 @@
       $('#frontitem_item_id').val('');
       var thetype = $(this).val().toLowerCase();
       var themethod;
-      if (thetype == 'page') {
-        themethod = 'name';
+      if (thetype == 'post') {
+        themethod = 'title';
       }
       else {
-        themethod = 'title';
+        themethod = 'name';
       }
       $('#frontitem_item_name_input').fadeIn();
       $('label[for=frontitem_item_name]').html("Type the first few letters of the " + thetype + " title...");
@@ -92,11 +92,11 @@
       $('#frontitem_seconditem_id').val('');
       var thetype = $(this).val().toLowerCase();
       var themethod;
-      if (thetype == 'page') {
-        themethod = 'name';
+      if (thetype == 'post') {
+        themethod = 'title';
       }
       else {
-        themethod = 'title';
+        themethod = 'name';
       }
       $('#frontitem_seconditem_name_input').fadeIn();
       $('label[for=frontitem_seconditem_name]').html("Type the first few letters of the " + thetype + " title...");

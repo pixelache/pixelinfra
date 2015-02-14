@@ -22,9 +22,9 @@ class Frontitem < ActiveRecord::Base
     if frontmodule
       if item
         if seconditem
-          frontmodule.name + " (left: #{item.name}, right: #{seconditem.name})"
+          "<div class='module_title'>" + frontmodule.name + "</div><div class='module_content'>left: #{item.name}, right: #{seconditem.name}</div>"
         else
-          frontmodule.name + " (#{item.name})"
+          "<div class='module_title'>" +  frontmodule.name + "</div><div class='module_content'>#{item.name}</div>"
         end
       else
         frontmodule.name

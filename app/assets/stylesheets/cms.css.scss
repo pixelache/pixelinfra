@@ -154,6 +154,16 @@ table {
   padding: 15px;
   border: 1px dotted black;
   margin: 5px 0px;
+  
+  .module_title {
+   font-size: 0.8rem;
+   font-weight: 300;
+   color: #777; 
+  }
+  .module_content {
+    color: #333;
+    margin: 0.5rem ;
+  }
 }
 
 form.frontitem {

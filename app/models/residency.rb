@@ -19,6 +19,10 @@ class Residency < ActiveRecord::Base
     out.flatten.compact
   end
   
+  def body
+    description
+  end
+  
   private
   
   def should_generate_new_friendly_id?

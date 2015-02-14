@@ -65,4 +65,8 @@ class Project < ActiveRecord::Base
     "##{name.gsub(/\s*/, '')}"
   end
    
+  def body
+    description
+  end
+  
 end

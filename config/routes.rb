@@ -35,6 +35,9 @@ Pixelinfra::Application.routes.draw do
       post :sort, :on => :collection
       get :autocomplete_post_title, :on => :collection
       get :autocomplete_page_name, :on => :collection
+      get :autocomplete_project_name, on: :collection
+      get :autocomplete_festival_name, on: :collection
+      get :autocomplete_residency_name, on: :collection
     end
     resources :frontmodules
     resources :memberships

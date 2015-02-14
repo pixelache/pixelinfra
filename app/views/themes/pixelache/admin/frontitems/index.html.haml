@@ -2,7 +2,14 @@
   .small-10.columns.large-offset-1
     %h2 
       Front page design
-      
+.row
+  .small-6.columns= button_to 'Add new frontpage item', new_admin_frontitem_path, class: [:button, :round, :small], method: :get
+
+.row
+  .small-6.columns
+    %h4 Current frontpage:
+    %p Images are samples; text describes actual content.
+    %p Drag and drop vertically to arrange the order. The order auto-saves when you let go of the drag-and-drop.
 .row
   .small-8.columns.large-offset-1#sortable
     - @frontitems.order(:position).each do |fi|
@@ -13,7 +20,7 @@
               = image_tag fi.frontmodule.exampleimage.url(:logo)
         
         .small-8.columns
-          = fi.name
+          = fi.name.html_safe
           .row
             .small-12.columns
               &nbsp;

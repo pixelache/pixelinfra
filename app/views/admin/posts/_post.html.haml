@@ -3,7 +3,7 @@
   %td
     = post.title
     .small
-      = post.wordpress_author
+      = post.creator.nil? ? post.wordpress_author : post.creator.try(:name)
       - unless post.photos.empty?
         &sdot;
         = pluralize(post.photos.size, 'photo') + " attached"

@@ -1,5 +1,9 @@
 module ApplicationHelper
   
+  def hover_colour(colour)
+    "#{colour.match(/(..)(..)(..)/).to_a[1..3].map{|x| [[0, x.hex + ( x.hex * -0.15)].max, 255].min }.map{|x| x.to_i.to_s }.join(', ')}"
+  end
+  
   def best_image(resource)
     if resource.image?
       if !resource.image_width.nil?

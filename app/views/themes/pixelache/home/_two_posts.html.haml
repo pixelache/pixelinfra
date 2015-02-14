@@ -2,21 +2,36 @@
   - style = "background: url(#{front.bigimage.url(:full)})  no-repeat center center; background-size: cover;"
 - else
   - style = "background-color: ##{front.background_colour}; "
-.two_posts{:style => style }
+:scss
+  #two_posts_#{front.id.to_s} {
+    color: ##{front.text_colour};
+    .body {
+      color: ##{front.text_colour};
+    }
+    a {
+      color: ##{front.text_colour};
+      
+    }
+    a:hover {
+      color: rgb(#{hover_colour(front.text_colour)});
+    } 
+  }
+  
+.two_posts{:style => style, id: "two_posts_#{front.id.to_s}" }
   .row
     .small-10.columns.large-offset-1 
       - if front.custom_title
         .row
-          .small-12.columns.custom_title{:style => "color: ##{front.text_colour}"}= raw front.custom_title
+          .small-12.columns.custom_title= raw front.custom_title
       .smaller_posts.row
         - unless front.item.nil?
-          .post.small-6.columns
-            .title= link_to front.item.name, front.item, :style => "color: ##{front.text_colour}"
-            .body{:style => "color: ##{front.text_colour}"}= truncate_html sanitize(front.item.body, tags: %w{strong b italic i em underline u bold}), :length => 300
-            .read_more= link_to t(:read_more), front.item, :style => "color: ##{front.text_colour}"
+          .post.medium-6.small-12.columns
+            .title= link_to front.item.name, front.item
+            .body= truncate_html sanitize(front.item.body, tags: %w{strong b italic i em underline u bold}), :length => 300
+            .read_more= link_to t(:read_more), front.item
         - if front.seconditem
-          .post.small-6.columns
-            .title= link_to front.seconditem.name, front.seconditem, :style => "color: ##{front.text_colour}"
-            .body{:style => "color: ##{front.text_colour}"}= truncate_html sanitize(front.seconditem.body, tags: %w{strong b italic i em underline u bold}), :length => 300
-            .read_more= link_to t(:read_more), front.seconditem, :style => "color: ##{front.text_colour}"
+          .post.medium-6.small-12.columns
+            .title= link_to front.seconditem.name, front.seconditem
+            .body= truncate_html sanitize(front.seconditem.body, tags: %w{strong b italic i em underline u bold}), :length => 300
+            .read_more= link_to t(:read_more), front.seconditem
             

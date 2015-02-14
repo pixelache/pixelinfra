@@ -27,6 +27,10 @@ class Festival < ActiveRecord::Base
     '/admin/festivals/' + self.slug + '/subscribe'
   end
   
+  def body
+    description
+  end
+  
   def toggle_path
     '/admin/projects/' + self.slug + '/toggle_list'
   end
