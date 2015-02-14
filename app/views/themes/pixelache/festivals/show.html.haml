@@ -4,13 +4,9 @@
 
             
 .festival
-  .festival_banner
-    = image_tag @festival.image.url
-  
-  / - if @festival.image?
-  /
-  /   .small-10.small-offset-1.columns.festival_image.text-center
-  /
+  - if @festival.image?
+    .festival_banner
+      = image_tag @festival.image.url
 
   .row
     .small-8.small-offset-2.columns.text-left.top_festival
