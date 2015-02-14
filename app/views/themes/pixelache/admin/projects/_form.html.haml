@@ -102,7 +102,7 @@
   .row
     .small-6.columns= f.input :has_listserv, label: 'Create mailing list for this project?', hint: 'experimental!!! may not work yet'
     .small-6.columns  
-      = f.input :listservname, input_html: {value: @project.listservname.blank? ? @project.name.parameterize : @project.listservname}, label: 'Name of mailing list:', hint: 'experimental!!!'
+      = f.input :listservname, input_html: {value: @project.listservname.blank? && !@project.new_record? ? @project.name.parameterize : @project.listservname}, label: 'Name of mailing list:', hint: 'experimental!!!'
       = "@mailer.pixelache.ac"
   .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]
