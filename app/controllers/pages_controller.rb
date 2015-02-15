@@ -19,14 +19,15 @@ class PagesController < InheritedResources::Base
       @page = @site.pages.published.find(p)
       if @page.has_project?
         redirect_to project_page_path(:project_id => @page.parent_project)
-      end
-      set_meta_tags :title => @page.name
-      if @page.root == @page && @page.root.festival
-        redirect_to festival_path(@page.root.festival)
-      elsif @page.root == @page && @page.root.project
-        redirect_to project_path(@page.root.project)
-      elsif @page.root != @page && @page.root.festival
-        redirect_to festival_page_festival_path(@page.root.festival, @page.id)
+      else
+        set_meta_tags :title => @page.name
+        if @page.root == @page && @page.root.festival
+          redirect_to festival_path(@page.root.festival)
+        elsif @page.root == @page && @page.root.project
+          redirect_to project_page_path(@page.root.project, @page)
+        elsif @page.root != @page && @page.root.festival
+          redirect_to festival_page_festival_path(@page.root.festival, @page.id)
+        end
       end
     end
     set_meta_tags :title => @page.name
