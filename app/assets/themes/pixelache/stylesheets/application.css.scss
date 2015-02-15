@@ -151,7 +151,33 @@ td .date {
   }
 }
 
-
+.project_tree {
+  background-color: #e0e2e3;
+  color: #6d6e70;
+  padding: 0.2rem 44px;
+  max-height: 2.2rem;
+  overflow: visible;
+  width: 100%;
+  ul {
+    margin-left: 0;
+    padding-left: 0;
+    li {
+      float: left;
+      list-style-type: none;
+      font-size: 0.85rem;
+      padding-right: 1rem;
+    }
+    ul.f-dropdown {
+      li {
+        float: none;
+      }
+    }
+  }
+  &.fixed {
+    top: 72px;
+    z-index: 98;
+  }
+}
 
 .page_tree {
   background-color: #d0d2d3;

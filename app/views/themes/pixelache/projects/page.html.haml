@@ -1,5 +1,5 @@
 = content_for :page_tree do
-  .row.left-collapse
+  .left-collapse
 
     - if @page.has_project?
       %span.leaf
@@ -17,23 +17,36 @@
       - if @page.has_project?
         - next if @page.self_and_ancestors.map(&:project).compact.map(&:name).include?(p.name)
       - if p == @page
-        %span.leaf
-          %strong= p.name
+        %strong= p.name
       - else
         %span.leaf
           = link_to p.name, p
           = " : "
-
+= content_for :project_tree do
+  .left_collapse
+    %ul.project_tree
+      - unless @project.children.empty?
+        %li{:"data-dropdown" => 'subprojects', :"aria-controls" => 'subprojects', :"aria-expanded" => false, :"data-options" => "is_hover:false;"}= link_to  t(:subprojects), '#'
+        %ul#subprojects.f-dropdown{:"data-dropdown-content" => '', :"aria-hidden" => true, :tabindex => -1}
+          - @project.children.each do |child|
+            %li= link_to child.name, child
+      -  unless @project.pages.empty?
+        - @project.pages.roots.first.children.published.each do |child|
+          - if child.children.published.empty?
+            %li= link_to child.name, project_page_path(@project, child)
+          - else
+            %li{:"data-dropdown" => "child_#{child.id.to_s}", :"aria-controls" => "child_#{child.id.to_s}", :"aria-expanded" => false, :"data-options" => "is_hover:false;"}= link_to child.name, project_page_path(@project, child)
+            %ul.f-dropdown{id: "child_#{child.id.to_s}", :"data-dropdown-content" => '', :"aria-hidden" => true, :tabindex => -1}
+              %li= link_to t(:overview), project_page_path(@project, child)
+              - child.children.published.each do |subchild|
+                %li= link_to subchild.name, project_page_path(@project, subchild)
+                
 .page
-  .row
-    .small-7.columns.large-offset-1.title
-      = raw @project.name + ": " + @page.name
+  .row.title_wrapper
+    .small-12.medium-8.medium-offset-2.small-centered.title
+      = @page.name
 
       - if can? :edit, @page
         %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id), class: [:button, :tiny, :secondary]
   .row
-    .small-7.columns.large-offset-1.body= raw simple_format(@page.body)
-    - unless @page.children.empty?
-      .small-3.columns.children
-        - @page.children.each do |child|
-          .child= link_to child.name, child
+    .small-12.medium-8.medium-offset-2.small-centered.body= raw simple_format(@page.body)

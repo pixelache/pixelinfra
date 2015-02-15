@@ -38,7 +38,9 @@
         - if content_for? :page_tree
           .page_tree.sticky.sub
             = yield :page_tree
-
+        - if content_for? :project_tree
+          .project_tree.sticky.sub
+            = yield :project_tree
 
         
         = render 'layouts/messages'
@@ -123,6 +125,7 @@
             var t = parseInt($('.pixelache_nav_menu').css('height'));
             down_pixelache_menu();
             $('.page_tree').animate({top: (t + 40) + 'px'}, 400);
+            $('div.project_tree').animate({top: (t + 72) + 'px'}, 400);
             // $(":animated").promise().done(function() {
             //
             //   $('.page_tree').css('top', (t + 40) + 'px');
@@ -131,6 +134,7 @@
           $('.arrow-up').mouseover(function() {
             up_pixelache_menu();
             $('.page_tree').animate({top: '40px'}, 400);
+            $('div.project_tree').animate({top: '72px'}, 400);
           });
           #{yield :jquery}
         });

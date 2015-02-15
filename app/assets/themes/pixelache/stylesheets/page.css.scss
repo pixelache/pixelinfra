@@ -4,13 +4,20 @@
 
 
 .page {
-  background-color: #f9ec31;
-  
+  // background-color: #f9ec31;
+  .title_wrapper {
+    padding: 1.5rem 0rem 3rem 0rem;
+  }
   .title {
-    font-family: $quicksand;
-    font-size: 3.5em;
-    padding: 80px 0px 30px 0px;
-    border-bottom: 1px solid #000;
+    
+    font-size: 4em;
+    background-color: white;
+    opacity: 0.9;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 300;
+    padding: 1rem 0px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 1rem;
   }
   a.button.secondary {
     margin-bottom: 0px;

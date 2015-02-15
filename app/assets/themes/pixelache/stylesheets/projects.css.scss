@@ -216,7 +216,7 @@ button.slick-next, button.slick-prev {
   }
   
   .description {
-
+    margin-top: 1rem;
     font-family: $opensans;
     font-size: 1rem;
     line-height: 1.8rem;
@@ -228,6 +228,7 @@ button.slick-next, button.slick-prev {
   
   .events_wrapper {
     margin: 3rem 0px;
+    border-bottom: 1px solid #333;
     .wrapper_title {
       font-family: $quicksand;
       font-weight: 300;
@@ -246,8 +247,7 @@ button.slick-next, button.slick-prev {
     }
   }
   .activities_wrapper {
-    border-top: 1px solid #333;
-    padding: 2rem 0px;
+    padding: 1rem 0px;
     .wrapper_title {
       font-family: $quicksand;
       font-weight: 300;
