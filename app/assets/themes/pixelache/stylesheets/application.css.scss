@@ -155,11 +155,12 @@ td .date {
   background-color: #e0e2e3;
   color: #6d6e70;
   padding: 0.2rem 44px;
-  max-height: 2.2rem;
-  overflow: visible;
+//  max-height: 2.2rem;
+  overflow: overlay;
   width: 100%;
   ul {
     margin-left: 0;
+    margin-bottom: 0;
     padding-left: 0;
     li {
       float: left;

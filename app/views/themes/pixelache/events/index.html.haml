@@ -1,7 +1,22 @@
 = content_for :page_tree do
-  .row.left-collapse
+  .left-collapse
+    - if @project
+      %span.leaf
+        = link_to t(:projects), projects_path
+        = ' : '
+      - @project.self_and_ancestors.reverse.each do |p|
+        - if p == @project
+          %strong= link_to p.name, p
+          = " : "
+        - else
+          %span.leaf
+            = link_to p.name, p
+            = " : "
     %strong= t :events
-
+- if @project
+  = content_for :project_tree do
+    = render :partial => 'shared/projects_tree' 
+    
 .row.event_container
   .small-10.small-offset-1.columns
     - @events.each do |event|

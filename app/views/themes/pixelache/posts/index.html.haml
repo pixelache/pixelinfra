@@ -1,8 +1,24 @@
 - if @festival
   = content_for :festival_menu do
     = render :partial => 'festivals/festival_menu', :locals => {festival: @festival}
-
-  
+= content_for :page_tree do
+  .left-collapse
+    - if @project
+      %span.leaf
+        = link_to t(:projects), projects_path
+        = ' : '
+      - @project.self_and_ancestors.reverse.each do |p|
+        - if p == @project
+          %strong= link_to p.name, p
+          = " : "
+        - else
+          %span.leaf
+            = link_to p.name, p
+            = " : "
+    %strong= t :news
+- if @project
+  = content_for :project_tree do
+    = render :partial => 'shared/projects_tree'  
 .row.posts_index_container
   .large-10.columns.large-offset-1
     - if @user

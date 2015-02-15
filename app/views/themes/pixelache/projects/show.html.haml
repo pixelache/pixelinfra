@@ -11,37 +11,10 @@
         %span.leaf
           = link_to p.name, p
           = " : "
-= content_for :project_tree do
-  .left_collapse
-    %ul.project_tree
-      - unless @project.children.empty?
-        %li{:"data-dropdown" => 'subprojects', :"aria-controls" => 'subprojects', :"aria-expanded" => false, :"data-options" => "is_hover:false;"}= link_to  t(:subprojects), '#'
-        %ul#subprojects.f-dropdown{:"data-dropdown-content" => '', :"aria-hidden" => true, :tabindex => -1}
-          - @project.children.each do |child|
-            %li= link_to child.name, child
-      -  unless @project.pages.empty?
-        - if @project.pages.roots.empty?
-          - collection = @project.pages.first.children.published
-        - else
-          - collection = @project.pages.roots.first.children.published
-        - collection.each do |child|
-          - if child.children.published.empty?
-            - if child.project
-              %li= link_to child.name, child.project
-            - else
-              %li= link_to child.name, project_page_path(@project, child)
-          - else
-            %li{:"data-dropdown" => "child_#{child.id.to_s}", :"aria-controls" => "child_#{child.id.to_s}", :"aria-expanded" => false, :"data-options" => "is_hover:false;"}= link_to child.name, project_page_path(@project, child)
-            %ul.f-dropdown{id: "child_#{child.id.to_s}", :"data-dropdown-content" => '', :"aria-hidden" => true, :tabindex => -1}
-              %li= link_to t(:overview), project_page_path(@project, child)
-              - child.children.published.each do |subchild|
-                - if subchild.project
-                  %li= link_to subchild.name, subchild.project
-                - else
-                  %li= link_to subchild.name, project_page_path(@project, subchild)
 
-                    
-                  
+= content_for :project_tree do
+  = render :partial => 'shared/projects_tree'
+  
 .outer.project_detail.row
   .small-12.medium-8.medium-offset-2.small-centered
     .row

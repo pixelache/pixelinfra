@@ -2,8 +2,18 @@ class EventsController < InheritedResources::Base
   actions :index, :show
   
   def index
-    @events = Event.by_site(@site).published.order('start_at DESC').page(params[:page]).per(12)
-    set_meta_tags title: t(:events)
+    if params[:festival_id]
+      @festival = Festival.find(params[:festival_id])
+      @events = Event.by_site(@site).by_festival(@festival).published.order('published_at DESC').page(params[:page]).per(12)
+      set_meta_tags title: @festival.name + " " + t(:events)
+    elsif params[:project_id]
+      @project = Project.find(params[:project_id])
+      @events = Kaminari.paginate_array(@project.self_and_descendants.map{|x| x.events.published }.flatten.sort_by(&:start_at).reverse).page(params[:page]).per(12)
+      set_meta_tags title: @project.name + " " + t(:events)
+    else
+      @events = Event.by_site(@site).published.order('start_at DESC').page(params[:page]).per(12)
+      set_meta_tags title: t(:events)
+    end
   end
   
   def show
