@@ -5,7 +5,7 @@
   = content_for :page_tree do
     .left-collapse
       - if @event.project
-        = link_to t(:projects), project_path
+        = link_to t(:projects), projects_path
         = " : "
         - @event.project.self_and_ancestors.reverse.each do |p|
           %span.leaf

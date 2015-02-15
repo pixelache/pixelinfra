@@ -5,12 +5,12 @@
 
 .project_index      
   - @active_projects.shuffle.each do |project|
-    = render :partial => 'project_strip', locals: {project: project}
+    = render :partial => 'project_strip', locals: {project: project, active_projects: @active_projects }
   .dividing_strip
     .row  
       .small-12.columns.text-center= t :past_projects
   - @inactive_projects.sort_by(&:name).each do |project|
-    = render :partial => 'project_strip', locals: {project: project}
+    = render :partial => 'project_strip', locals: {project: project, active_projects: @active_projects }
     
 = content_for :jquery do
   :plain

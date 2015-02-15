@@ -333,6 +333,7 @@ en:
   events_and_activities: 'Events and Activities'
   new_membership: 'New membership'
   edit_membership: 'Edit membership'
+  active_project: 'Active project'
   active_projects: 'Active projects'
   projects_blurb: "Projects are the heart of Pixelache activities. Our ongoing events throughout the year are usually pieces of developing projects, which serve as a continuing dialogue with our networks of creative artists, activists and innovators."
   archive: 'Archive'
@@ -378,6 +379,7 @@ en:
   additional_images: 'Additional images'
   related_event: 'Related event'
   add_festival_theme: 'Add festival theme'
+  subproject: 'Subproject'
   who_is_coming: 'Who is coming?'
   search: 'Search...'
   who_was_there: 'Who was there?'
@@ -385,6 +387,7 @@ en:
   no_search_results: 'Sorry, no search results were returned.'
   please_try_again: 'Please try a different search.'
   your_comment_was_added: 'Your comment was added'
+  end_of_subprojects: 'End of %{project} subprojects'
   override_country: 'Enter text here that will display instead of the country from the above dropdown'
   your_comment_was_not_added: 'There was an error saving your comment'
   new_user_account: 'New user account'

@@ -34,6 +34,51 @@ button.slick-next, button.slick-prev {
     text-transform: uppercase;
     color: #FFF;
   }
+  .children_strip {
+    
+    padding: 10px 0px 10px 0px;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 2px;
+    right: 10px;
+  }
+  .active_strip {
+    padding: 8px 0px;
+    font-size: 1.9rem;
+    line-height: 2.3rem;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    
+  }
+  .end_strip {
+    padding: 6px 0px;
+    font-size: 0.9rem;
+    line-height: 1.2rem;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+
+  }
+  
+  .subprojects {
+    display: none;
+    .strip {
+      .title_box {
+        .titles {
+          h2 {
+            a {
+              font-size: 1.8rem;
+            }
+          }
+        }
+      }
+    }
+  }   
   .strip {
 
 
