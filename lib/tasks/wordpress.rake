@@ -1,5 +1,5 @@
 @cache_dir = 'lib/assets/'
-@scope = '2014'
+@scope = '2007'
 
 # rake acts_as_taggable_on_engine:install:migrations
 # rake db:migrate
@@ -8,34 +8,34 @@
 # rake wordpress:associate_secondary_images
 # rake wordpress:convert_line_breaks
 
-class Oldattendee < ActiveRecord::Base
-  establish_connection(
-    :adapter  => "mysql2",
-    :host     => "localhost",
-    :wait_timeout => 0.5,
-    :username => "root",
-    :password => ENV['old_mysql_password'],
-    :database => "newpixelache"
-  )
-  self.table_name =  :pixelache_eventr_attendee
-end
-
-class Oldattendeejoin < ActiveRecord::Base
-  establish_connection(
-    :adapter  => "mysql2",
-    :host     => "localhost",
-    :wait_timeout => 0.5,
-    :username => "root",
-    :password => ENV['old_mysql_password'],
-    :database => "newpixelache"
-  )
-  self.table_name =  "pixelache_eventr_event_attendee"
-end
+# class Oldattendee < ActiveRecord::Base
+#   establish_connection(
+#     :adapter  => "mysql2",
+#     :host     => "localhost",
+#     :wait_timeout => 0.5,
+#     :username => "root",
+#     :password => ENV['old_mysql_password'],
+#     :database => "newpixelache"
+#   )
+#   self.table_name =  :pixelache_eventr_attendee
+# end
+#
+# class Oldattendeejoin < ActiveRecord::Base
+#   establish_connection(
+#     :adapter  => "mysql2",
+#     :host     => "localhost",
+#     :wait_timeout => 0.5,
+#     :username => "root",
+#     :password => ENV['old_mysql_password'],
+#     :database => "newpixelache"
+#   )
+#   self.table_name =  "pixelache_eventr_event_attendee"
+# end
 
 
 def hash_from_cache
-  xml = @cache_dir + 'published.xml'
-  cache = @cache_dir + 'published.cache.rb'
+  xml = @cache_dir + 'pixelache2005.xml'
+  cache = @cache_dir + 'pixelache2005.cache.rb'
 
   if ! File.exists?(cache)
     data = File.read xml
@@ -183,7 +183,7 @@ namespace :wordpress do
   end
 
   task :categories => :environment do
-    xml = @cache_dir + 'published.xml'
+    xml = @cache_dir + 'pixelache2005.xml'
     data = File.read xml
     hash = Hash.from_xml data
     hash['rss']['channel']['category'].each do |c|
@@ -192,7 +192,7 @@ namespace :wordpress do
   end
   
   task :attachments => :environment do
-    xml = @cache_dir + 'published.xml'
+    xml = @cache_dir + 'pixelache2005.xml'
     data = File.read xml
     hash = Hash.from_xml data
     hash['rss']['channel']['item'].each do |i|
@@ -208,7 +208,7 @@ namespace :wordpress do
   end    
 
   task :map_page_tree => :environment do 
-    xml = @cache_dir + 'published.xml'
+    xml = @cache_dir + 'pixelache2005.xml'
     data = File.read xml
     hash = Hash.from_xml data
     hash['rss']['channel']['item'].each do |p|
@@ -222,7 +222,7 @@ namespace :wordpress do
   end
   
   task :pages => :environment do
-    xml = @cache_dir + 'published.xml'
+    xml = @cache_dir + 'pixelache2005.xml'
     data = File.read xml
     hash = Hash.from_xml data
     hash['rss']['channel']['item'].each do |p|
@@ -244,7 +244,7 @@ namespace :wordpress do
   end
   
   task :associate_secondary_images => :environment do 
-    xml = @cache_dir + 'published.xml'
+    xml = @cache_dir + 'pixelache2005.xml'
     data = File.read xml
     hash = Hash.from_xml data
     
@@ -271,7 +271,7 @@ namespace :wordpress do
   end 
   
   task :posts => :environment do
-    xml = @cache_dir + 'published.xml'
+    xml = @cache_dir + 'pixelache2005.xml'
     data = File.read xml
     hash = Hash.from_xml data
     cats = PostCategory.all.map{|x| [x.name, x.id] }
