@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213144632) do
+ActiveRecord::Schema.define(version: 20150216112250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_trgm"
 
   create_table "archivalimage_translations", force: :cascade do |t|
     t.integer  "archivalimage_id",             null: false
@@ -673,6 +672,7 @@ ActiveRecord::Schema.define(version: 20150213144632) do
     t.string   "redirect_to"
     t.boolean  "has_listserv",                        default: false,    null: false
     t.string   "listservname"
+    t.boolean  "hidden",                              default: false,    null: false
   end
 
   create_table "residencies", force: :cascade do |t|

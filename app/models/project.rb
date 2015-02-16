@@ -27,6 +27,8 @@ class Project < ActiveRecord::Base
   include Listable
   has_one :projectproposal, foreign_key: 'offspring_id'
   
+  scope :visible, -> () { where(hidden: false) }
+  
   def self.active_menu
     a = Project.active.sort_by{|x| x.name }.map{|x| [x.name, x.id]}
     i = Project.inactive.sort_by{|x| x.name }.map{|x| [x.name, x.id]}

@@ -8,8 +8,8 @@
         .subtitle= project.short_description
         - if project.evolvedto
           .evolved= link_to t(:evolved_into, project: project.evolvedto.name, year: project.evolvedto.evolution_year), '#', onclick: "$('#project_#{project.evolvedto.id.to_s}').parent().slideDown(); scrollTo('#project_#{project.evolvedto.id.to_s}'); ", style: project.background_css
-    - unless project.children.empty?
-      .children_strip= link_to raw(pluralize(project.descendants.flatten.size, t(:subproject)) + "&#9660;"), '#', style: "color: ##{project.project_text_colour}", onclick: "$('#subprojects_#{project.id.to_s}').slideToggle(); return false;"
+    - unless project.children.visible.empty?
+      .children_strip= link_to raw(pluralize(project.descendants.visible.flatten.size, t(:subproject)) + "&#9660;"), '#', style: "color: ##{project.project_text_colour}", onclick: "$('#subprojects_#{project.id.to_s}').slideToggle(); return false;"
       
   .selector.trigger.columns{style: "background-color: rgb(#{project.colour_offset}); opacity: 1;"} &nbsp;
   .image_box{style: project.background_image_css}
@@ -23,8 +23,8 @@
       .occluded{style: "color: ##{project.project_text_colour}"}
         - counter = 0
         %ul
-          - unless project.children.empty?
-            - project.children.shuffle.each do |subproject|
+          - unless project.children.visible.empty?
+            - project.children.visible.shuffle.each do |subproject|
               - next if subproject.events.published.empty?
               - if counter < 7
                 %li.subproject= link_to subproject.name, subproject
@@ -48,9 +48,9 @@
                 %li.project_page= link_to page.name, page
                 - counter += 1
 
-- unless project.children.flatten.empty?
+- unless project.children.visible.flatten.empty?
   .subprojects{id: "subprojects_#{project.id.to_s}"}                
-    - project.children.flatten.each do |subproject|
+    - project.children.visible.flatten.each do |subproject|
       - if active_projects.include?(subproject)
         .active_strip{style: subproject.background_css}
           .row

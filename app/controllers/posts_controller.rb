@@ -8,7 +8,7 @@ class PostsController < ApplicationController
       set_meta_tags title: @festival.name + " " + t(:posts)
     elsif params[:project_id]
       @project = Project.find(params[:project_id])
-      @posts = Kaminari.paginate_array(@project.self_and_descendants.map{|x| x.posts.by_site(@site).published }.flatten.sort_by(&:published_at).reverse).page(params[:page]).per(12)
+      @posts = Kaminari.paginate_array(@project.self_and_descendants.visible.map{|x| x.posts.by_site(@site).published }.flatten.sort_by(&:published_at).reverse).page(params[:page]).per(12)
       set_meta_tags title: @project.name + " " + t(:posts)      
     elsif params[:user_id]
       @user = User.find(params[:user_id])
