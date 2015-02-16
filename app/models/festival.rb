@@ -32,7 +32,7 @@ class Festival < ActiveRecord::Base
   end
   
   def toggle_path
-    '/admin/projects/' + self.slug + '/toggle_list'
+    '/admin/festivals/' + self.slug + '/toggle_list'
   end
   
   
