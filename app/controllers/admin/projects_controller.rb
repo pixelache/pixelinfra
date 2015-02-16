@@ -18,6 +18,19 @@ class Admin::ProjectsController < Admin::BaseController
     redirect_to [:admin, @project]
   end
     
+  def subscribe_other
+    @project = Project.find(params[:id])
+    email = params[:email]
+    # not elegant but will fix later
+    if User.find_by(email: params[:email]).nil?
+      @project.subscribe_to_list(params[:email])
+ 
+    else
+      @project.subscribe_to_list(User.find_by(email: params[:email]))
+    end
+    redirect_to admin_project_path(@project)
+  end
+    
   def toggle_list
     @project = Project.find(params[:id])
     current_user.subscribed_to?(@project) ? @project.unsubscribe_from_list(current_user) : @project.subscribe_to_list(current_user)

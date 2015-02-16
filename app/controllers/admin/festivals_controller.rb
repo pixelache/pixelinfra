@@ -36,6 +36,21 @@ class Admin::FestivalsController < Admin::BaseController
     redirect_to [:admin, @festival]
   end
   
+    
+  def subscribe_other
+    @festival = Festival.find(params[:id])
+    email = params[:email]
+    # not elegant but will fix later
+    if User.find_by(email: params[:email]).nil?
+      @festival.subscribe_to_list(params[:email])
+ 
+    else
+      @festival.subscribe_to_list(User.find_by(email: params[:email]))
+    end
+    redirect_to admin_festival_path(@festival)
+  end
+  
+  
   def toggle_list
     @festival = Festival.find(params[:id])
 

@@ -4,6 +4,7 @@
       %h1
         = @project.name
         = link_to fa_icon('gear'), edit_admin_project_path(@project)
+        = link_to fa_icon('heart'), @project, alt: 'View on public site'
   - if @project.projectproposal
     .row
       .small-12.columns
@@ -29,7 +30,22 @@
               = link_to 'Subscribe to mailing list', subscribe_admin_project_path(@project), class: [:button,  :round, :tiny]
         .row
           .small-12.columns
-            %h6= link_to "List archives", "http://lists.pixelache.ac/#{@project.listservname}@#{ENV['PIXELACHE_MAILMAN_SERVER']}", target: :_blank
+            %h6 All subscriptions
+            - @project.all_members.each do |member|
+              - if u = User.find_by(email: member["email"])
+                - if u.subscribed_to?(@project)
+                  = u.email
+                - else
+                  = u.email + " (not in local DB)"
+            - if can? :edit, @project
+              .row
+                .small-12.columns
+                  %h6 Add to list:
+                  = form_tag subscribe_other_admin_project_path(@project) do
+                    = text_field_tag :email
+        .row
+          .small-12.columns
+            %h6= link_to "List archives", "http://lists.pixelache.ac/#{@project.listservname}@#{ENV['PIXELACHE_MAILMAN_SERVER']}", target: :_blank, class: [:button, :tiny, :round]
         
     - unless @project.etherpads.empty?
 

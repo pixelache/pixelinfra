@@ -3,22 +3,39 @@
     %h1
       = @festival.name
       = link_to fa_icon('gear'), edit_admin_festival_path(@festival)
-    
+      = link_to fa_icon('heart'), @festival, alt: 'View on public site'
 - if @festival.has_listserv == true
   .row
     .small-12.columns
-      %h3 
-        Mailing list for festival:
-        %em= @festival.listservname + "@" + ENV['PIXELACHE_MAILMAN_SERVER']
+      %fieldset
+        %label Mailing list
+        %h4
+          Mailing list for festival:
+          %em= @festival.listservname + "@" + ENV['PIXELACHE_MAILMAN_SERVER']
 
-  .row
-    .small-12.columns
-      - if current_user.subscribed_to?(@festival)
-        %p
-          You are currently subscribed to receive emails to
-          %em= current_user.email
-        = link_to 'Unsubscribe', unsubscribe_admin_festival_path(@festival), class: [:button, :alert, :round, :tiny]
-      - else
-        = link_to 'Subscribe to mailing list', subscribe_admin_festival_path(@festival), class: [:button,  :round, :tiny]
+        .row
+          .small-12.columns
+            - if current_user.subscribed_to?(@festival)
+              %p
+                You are currently subscribed to receive emails to
+                %em= current_user.email
+              = link_to 'Unsubscribe', unsubscribe_admin_festival_path(@festival), class: [:button, :alert, :round, :tiny]
+            - else
+              = link_to 'Subscribe to mailing list', subscribe_admin_festival_path(@festival), class: [:button,  :round, :tiny]
+        .row
+          .small-12.columns
+            %h6 All subscriptions
+            - @festival.all_members.each do |member|
+              - if u = User.find_by(email: member["email"])
+                - if u.subscribed_to?(@festival)
+                  = u.email
+                - else
+                  = u.email + " (not in local DB)"
+            - if can? :edit, @festival
+              .row
+                .small-12.columns
+                  %h6 Add to list:
+                  = form_tag subscribe_other_admin_festival_path(@festival) do
+                    = text_field_tag :email                  
 .row
   .small-12.columns= link_to 'Back to all festivals', admin_festivals_path, class: [:button, :round, :tiny]
