@@ -4,8 +4,10 @@
     .row
       .large-10.columns.large-offset-1.titles.medium-12
         
-        %h2= link_to project.name, project
+        %h2{style: project.name.longest_word.size > 15 ? "font-size: 1.8rem; line-height: 2.2rem" : ""}= link_to project.name, project
         .subtitle= project.short_description
+        - if project.evolvedto
+          .evolved= link_to t(:evolved_into, project: project.evolvedto.name, year: project.evolvedto.evolution_year), '#', onclick: "$('#project_#{project.evolvedto.id.to_s}').parent().slideDown(); scrollTo('#project_#{project.evolvedto.id.to_s}'); ", style: project.background_css
     - unless project.children.empty?
       .children_strip= link_to raw(pluralize(project.descendants.flatten.size, t(:subproject)) + "&#9660;"), '#', style: "color: ##{project.project_text_colour}", onclick: "$('#subprojects_#{project.id.to_s}').slideToggle(); return false;"
       
@@ -53,7 +55,7 @@
         .active_strip{style: subproject.background_css}
           .row
             .small-12.columns.text-center
-              = t(:active_project) + ": "
+              = link_to t(:active_project) + ": ", '#',  onclick: "scrollTo('#project_#{subproject.id.to_s}')", style: subproject.background_css
               = link_to subproject.name, '#', onclick: "scrollTo('#project_#{subproject.id.to_s}')", style: subproject.background_css
       - else
         = render :partial => 'project_strip', locals: {project: subproject, active_projects: active_projects}

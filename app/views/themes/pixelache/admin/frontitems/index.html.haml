@@ -16,7 +16,9 @@
       .row.front_item[fi]
         .small-4.columns
           - if fi.frontmodule
-            - if fi.frontmodule.exampleimage?
+            - if fi.bigimage?
+              = image_tag fi.bigimage.url(:halfwidth)
+            - elsif fi.frontmodule.exampleimage?
               = image_tag fi.frontmodule.exampleimage.url(:logo)
         
         .small-8.columns

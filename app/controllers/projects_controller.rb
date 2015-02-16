@@ -17,7 +17,7 @@ class ProjectsController < InheritedResources::Base
   def index
     set_meta_tags :title => t(:projects)
     @active_projects = Project.active
-    @inactive_projects = Project.inactive.roots
+    @inactive_projects = Project.inactive.roots.where(evolution_year: nil)
   end
 
 end
