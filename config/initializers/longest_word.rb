@@ -1,0 +1,1 @@
+require 'longest_word'
