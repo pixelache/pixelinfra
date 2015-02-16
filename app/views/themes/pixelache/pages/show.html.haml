@@ -33,11 +33,12 @@
 
     var stickyNavTop = $('.children').offset().top;  
     var stickyPageTop = $('.page').offset().top;  
-    var stickyNavLeft = $('.children').offset().left;  
+    var stickyNavLeft = $('.body').offset().left + $('.body').outerWidth() + 35
     var stickyNav = function(){  
       var scrollTop = $(window).scrollTop();  
        
-      if (scrollTop > stickyNavTop) {   
+      if (scrollTop > stickyNavTop && $('.children:not(.sticky_side_nav)')) { 
+     
           $('.children').addClass('sticky_side_nav');  
           $('.children').css('left', stickyNavLeft);
           $('.children').css('top', stickyPageTop);  
@@ -65,7 +66,6 @@
     });
     $('.arrow-down').mouseover(function() {
       if ($('.children .top').css('display') == "block") {
-        alert('oo');
         $('.children').css('top',$('.page_tree').offset().top + $('.page_tree').css('height'));
       }
     });
