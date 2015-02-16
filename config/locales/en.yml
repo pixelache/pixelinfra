@@ -404,3 +404,4 @@ en:
   your_comment_was_not_added: 'There was an error saving your comment'
   your_email: 'Your email address:'
   evolved_into: 'Evolved into %{project} in %{year}'
+  documents: 'Documents'

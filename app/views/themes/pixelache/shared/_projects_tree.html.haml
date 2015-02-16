@@ -39,4 +39,7 @@
         - @project.self_and_descendants.visible.map{|x| x.posts.by_site(@site).published }.flatten.sort_by(&:published_at).reverse.take(5).each do |p|
           %li= link_to p.title, p
         - if @project.self_and_descendants.visible.map{|x| x.posts.by_site(@site).published }.flatten.size > 5
-          %li= link_to t(:all_posts), project_posts_path(project_id: @project.slug) 
+          %li= link_to t(:all_posts), project_posts_path(@project)
+
+    - unless @project.attachments.public_files.empty?
+      %li= link_to t(:documents), project_publications_path(@project)

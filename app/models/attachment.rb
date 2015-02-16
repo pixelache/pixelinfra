@@ -4,6 +4,7 @@ class Attachment < ActiveRecord::Base
   before_save :get_metadata
   belongs_to :documenttype
   
+  scope :public_files, ->() { where(public: true) }
   def get_metadata
     if attachedfile.present?  && attachedfile_changed?
       if attachedfile.file.exists?

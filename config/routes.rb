@@ -87,12 +87,18 @@ Pixelinfra::Application.routes.draw do
     end
     resources :users    
   end
+
+
+
+
+
   resources :dynamictaglines
   resources :events
   resources :etherpads
   resources :festivals do
     get :attendees
     resources :posts
+    resources :attachments, as: :publications
     member do
       get :archive
       get '/theme/:theme_id', :controller => :festivals, :action => :theme, :as => :festival_theme
@@ -100,10 +106,13 @@ Pixelinfra::Application.routes.draw do
     end
   end
   resources :archive
+  
   resources :pages
+  
   resources :projects do
     resources :posts
     resources :events
+    resources :attachments, as: :publications
     resources :pages do
       member do
         get '/*page', :action => :show, :as => :project_page

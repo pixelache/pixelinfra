@@ -11,9 +11,9 @@
         %span.leaf
           = link_to p.name, p
           = " : "
-
-= content_for :project_tree do
-  = render :partial => 'shared/projects_tree'
+- unless @project.posts.published.empty? && @project.descendants.visible.empty? && @project.self_and_descendants.visible.map{|x| x.events.published }.flatten.empty? && @project.attachments.public_files.empty?
+  = content_for :project_tree do
+    = render :partial => 'shared/projects_tree'
   
 .outer.project_detail.row
   .small-12.medium-8.medium-offset-2.small-centered

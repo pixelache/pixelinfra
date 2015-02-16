@@ -5,6 +5,7 @@ class Festival < ActiveRecord::Base
   has_many :posts
   has_many :attendees, as: :item
   has_many :festivalthemes
+  has_many :attachments, as: :item
   # has_many :projects
   extend FriendlyId
   friendly_id :name, :use => [:slugged, :finders]

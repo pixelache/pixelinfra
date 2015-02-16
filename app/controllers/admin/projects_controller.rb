@@ -4,9 +4,7 @@ class Admin::ProjectsController < Admin::BaseController
     create! { admin_projects_path }
   end
   
-  def update
-    update! { admin_projects_path }
-  end
+
   
   def destroy
     destroy! { admin_projects_path }

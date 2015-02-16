@@ -1,0 +1,41 @@
+- if @festival
+  = content_for :festival_menu do
+    = render :partial => 'festivals/festival_menu', :locals => {festival: @festival}
+
+- else
+  = content_for :page_tree do
+    .left-collapse
+      - if @project
+        %span.leaf
+          = link_to t(:projects), projects_path
+          = ' : '
+        - @project.self_and_ancestors.reverse.each do |p|
+          - if p == @project
+            %strong= link_to p.name, p
+            = " : "
+          - else
+            %span.leaf
+              = link_to p.name, p
+              = " : "
+      %strong= t :documents
+    
+- if @project
+  = content_for :project_tree do
+    = render :partial => 'shared/projects_tree'  
+
+.document_container
+  .row
+    .small-8.small-offset-2.columns.text-left.title
+      %h1= t :documents
+  .row
+    .small-8.small-offset-2.columns.downloads
+      - @attachments.each do |attachment|
+        .row
+          .small-12.column.file
+            - unless attachment.title.blank?
+              .title= attachment.title
+            - unless attachment.description.blank?
+              .description= attachment.description
+            .file
+              = link_to attachment['attachedfile'], attachment.attachedfile.url
+              %span.metadata= "(#{attachment.attachedfile_size}) bytes"

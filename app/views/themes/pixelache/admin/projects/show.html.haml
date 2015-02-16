@@ -87,18 +87,36 @@
             = link_to page.name, page, :target => :_blank
             %small= time_ago_in_words(page.updated_at) + " ago"
             
-    - unless @project.attachments.empty?
-      .medium-4.medium-offset-1.small-12.columns.panel.end.limited
-        %h4 Documents
+    .medium-4.medium-offset-1.small-12.columns.panel.end.limited
+      %h4 Documents
+      %p
+        %small= fa_icon('eye') + " = public, will show on generated 'Publications' page"
+      - unless @project.attachments.empty?
         - @project.attachments.order('updated_at DESC').each do |doc|
           .entry
+            - if doc.public
+              = fa_icon('eye')
             = link_to doc.title.blank? ? doc.attachedfile : doc.title, doc.attachedfile.url
             %small= time_ago_in_words(doc.updated_at) + " ago"
             - unless doc.description.blank?
               .description= doc.description
             - unless doc.documenttype.blank?
               .date= doc.documenttype.name
-
+            
+  .row
+    .small-12.columns
+      %h4 Upload attachments to project
+      = semantic_nested_form_for [:admin, @project] do |f|
+        = f.fields_for :attachments do |ff|
+          .medium-4.columns.small-12.panel
+            = ff.input :attachedfile
+            = ff.input :documenttype
+            = ff.input :title
+            = ff.input :description
+            = ff.input :public, as: :boolean, label: 'Downloadable by public?', hint: 'Tick to appear on project documents page'
+            = ff.link_to_remove 'Remove this attachment', class: [:button, :round, :alert, :tiny]
+        = f.link_to_add 'Add an attachment', :attachments, class: [:button, :round, :tiny]
+        %p= f.submit 'Upload' ,     class: [:button, :round,  :small]
                                     
   .row
     .small-12.columns= link_to 'Back to all projects', admin_projects_path, class: [:button, :round, :tiny]

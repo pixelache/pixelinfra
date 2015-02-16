@@ -16,3 +16,43 @@
     margin-bottom: 1.5rem;
   }
 }
+
+.document_container {
+  padding: 1.5rem 0rem 2rem 0rem;
+  
+  .title {
+    h1 {
+      font-family: $quicksand;
+      margin-bottom: 0.6rem;
+      padding: 2rem 0px 1rem 0px;
+      border-bottom: 1px solid #000;
+    }
+  }
+  
+  .downloads {
+    padding-top: 1.5rem;
+    
+    .file {
+      margin-bottom: 1.5rem;
+      
+      .title {
+        font-size: 1.1rem;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+      .description {
+        font-size: 1rem;
+        font-weight: 300;
+        color: #666;
+        margin-bottom: 0.8rem;
+      }
+    
+      .metadata {
+        font-size: 0.8rem;
+        font-size: italic;
+        color: #666;
+      }
+      
+    }
+  }
+}
