@@ -26,10 +26,12 @@
     .internal.row
       .small-12.columns{:style => 'padding: 0px'}
     
-
-        .post_image
-          %center= best_image(@post)
-
+        - unless @post.photos.empty? && !@post.image?
+          .post_image{class: @post.photos.empty? ? false : 'image_carousel' }
+            .slide= best_image(@post)
+            - @post.photos.each do |h|
+              .slide= image_tag h.filename.url(:standard)
+              
         .metadata
           %span.date= l @post.published_at.localtime.to_date, :format => :long if @post.published
           - unless @post.creator.nil? 
@@ -52,3 +54,8 @@
           %h1= t(:related_content)
         - @post.related_content.each do |related|
           = render :partial => 'related', locals: {related: related}
+
+- if [@post.photos, @post.image].flatten.compact.size > 1
+  = content_for :jquery do
+    :plain
+      $('.image_carousel').slick({fade: true, arrows: false, autoplay: true, autoplaySpeed: 2900});
