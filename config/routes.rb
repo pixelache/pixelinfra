@@ -131,13 +131,16 @@ Pixelinfra::Application.routes.draw do
     resources :events
   end
   
+  resources :feeds
   resources :steps
+  
   get '/activities' => 'home#activities'
   post '/search' => 'search#create'
   get '/pages/*id' => 'pages#show'
   get '/helsinki/*url', :controller => :application, :action => :reroute
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout
+  get '/feed' => 'feeds#index', :defaults => { :format => 'rss' }
   get '/auth/failure' => 'sessions#failure'
   get '/members' => 'memberships#index', as: 'members'
   get '/member/:id' => 'memberships#show', as: 'member'

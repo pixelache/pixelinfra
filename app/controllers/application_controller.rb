@@ -33,35 +33,39 @@ class ApplicationController < ActionController::Base
     url_parts = params[:url].split(/\//, 2)
     primary_key = url_parts.first
     
-    # first check for festival page
-    item = Festival.friendly.find_by_id(primary_key)
-    if item.blank?
-      item = Page.friendly.find(primary_key)
+    if url_parts.first == 'feed'
+      redirect_to feeds_path, format: :rss
+    else
+      # first check for festival page
+      item = Festival.friendly.find_by_id(primary_key)
       if item.blank?
-        item = Event.friendly.find(primary_key)
+        item = Page.friendly.find(primary_key)
         if item.blank?
-          item = Project.friendly.find(primary_key)
+          item = Event.friendly.find(primary_key)
+          if item.blank?
+            item = Project.friendly.find(primary_key)
+          end
         end
       end
-    end
     
-    if url_parts.size > 1
-      case item.class.to_s
-      when "Festival"
-        redirect_to festival_page_festival_path(item, url_parts[1])
-      when "Page"
-        redirect_to page_path(params[:url])
-      when "Event"
-        redirect_to event_path(item)
-      when "Project"
-        redirect_to project_path(item)
+      if url_parts.size > 1
+        case item.class.to_s
+        when "Festival"
+          redirect_to festival_page_festival_path(item, url_parts[1])
+        when "Page"
+          redirect_to page_path(params[:url])
+        when "Event"
+          redirect_to event_path(item)
+        when "Project"
+          redirect_to project_path(item)
+        else
+          die
+        end
       else
-        die
+        redirect_to item
       end
-    else
-      redirect_to item
+      
     end
-    
   end
   
   private
