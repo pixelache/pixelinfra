@@ -4,8 +4,9 @@ class FestivalsController < InheritedResources::Base
   def archive
     @festival = Festival.find(params[:id])
     @events = @festival.events.published
-    @videos = Video.where(:festival_id => params[:id])
+    @videos = Video.where(:festival => @festival)
     @videos += Video.joins(:event).where(["events.festival_id = ?", @festival.id])
+    @documents = @festival.attachments.public_files
     set_meta_tags :title => @festival.name + " " + t(:archive)
   end
   

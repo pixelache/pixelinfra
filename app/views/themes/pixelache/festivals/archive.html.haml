@@ -31,3 +31,11 @@
               .video_title= link_to v.title, v.url, target: :_blank
               .video_description= raw v.description
 
+      - unless @documents.empty?
+        %h2= t :documents
+        %ul.archive
+          - @documents.each do |d|
+            %li.video
+              .video_title= link_to d.title, d.attachedfile.url
+              .video_description= raw d.description
+

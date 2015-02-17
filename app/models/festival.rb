@@ -12,12 +12,15 @@ class Festival < ActiveRecord::Base
   has_event_calendar
   validates_presence_of :name, :node_id
   has_many :pages
+  has_many :videos
   mount_uploader :image, ImageUploader
   mount_uploader :festivalbackdrop, AttachmentUploader
   translates :overview_text, :fallbacks_for_empty_translations => true
+
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['overview_text'].blank? }
   accepts_nested_attributes_for :attachments, :reject_if => proc {|x| x['attachedfile'].blank? }, :allow_destroy => true
-    
+  accepts_nested_attributes_for :videos , reject_if: proc {|x| x['in_url'].blank? }, :allow_destroy => true
+  
   before_save :update_image_attributes
   has_many :subscriptions, as: :item
   scope :by_node, -> (x) { includes(:node).where(:node_id => x) }

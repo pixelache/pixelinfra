@@ -1,4 +1,4 @@
-= semantic_form_for [:admin, @festival], :html => {:"data-abide" => '', :class => "custom", :multipart => true} do |f|
+= semantic_nested_form_for [:admin, @festival], :html => {:"data-abide" => '', :class => "custom", :multipart => true} do |f|
   .row
     .small-6.columns= f.input :node, :include_blank => false, :input_html => {:required => ''}
   .row
@@ -40,6 +40,27 @@
   .row
     .small-2.columns= f.input :tertiary_colour, :as => :string, :input_html => {:class => :colourpicker }, :label => 'Third colour for text links, etc. (should stand out against background)'
 
+  .row
+    .small-8.columns
+      %fieldset
+        %legend
+          %strong Videos
+        %p Add links to Vimeo or YouTube videos from the festival here. If the video is for a specific event, do NOT add it here, but add it to that event's page.
+        = f.fields_for :videos do |ff|
+          .row
+            .small-8.columns
+              - if !ff.object.new_record?
+                - unless ff.object.new_record?
+                  - unless ff.object.thumbnail.blank?
+                    %p= image_tag ff.object.thumbnail.url(:thumb)
+                    %p= ff.object.title
+                    = ff.input :in_url, label: t(:url_to_video), input_html: { value: ff.object.url }
+              - else
+                = ff.input :in_url, label: t(:url_to_video)
+          = ff.link_to_remove t(:remove_video), class: [:button, :round, :alert, :tiny]
+        = f.link_to_add 'Add a video....', :videos, class: [:button, :round, :tiny]
+        
+        
   .row
     .small-6.columns
       - if f.object.festivalbackdrop?

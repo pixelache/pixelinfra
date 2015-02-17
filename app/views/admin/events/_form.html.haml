@@ -25,9 +25,9 @@
       %label When?
       .row
         .small-6.columns
-          = f.input :start_at, :as => :string, :input_html => {:required => '', :class => "datetime_picker", value: f.object.new_record? ? false : f.object.start_at.strftime('%Y-%m-%d %H:%M')}
+          = f.input :start_at, :as => :string, :input_html => {:required => '', :class => "datetime_picker", value: f.object.new_record? ? '' : f.object.start_at.strftime('%Y-%m-%d %H:%M')}
           %small.error You must enter a start date and time.
-        .small-6.columns= f.input :end_at, :as => :string, :input_html => {:class => "datetime_picker", value: f.object.new_record? ? false : f.object.end_at.strftime('%Y-%m-%d %H:%M')}
+        .small-6.columns= f.input :end_at, :as => :string, :input_html => {:class => "datetime_picker", value: f.object.new_record? ? '' : f.object.end_at.strftime('%Y-%m-%d %H:%M')}
 
   .row
     %dl.tabs{"data-tab" => ""}
