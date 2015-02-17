@@ -80,6 +80,9 @@
   margin-right: auto;
   margin-left: auto;
 
+  .related_container {
+    margin-top: 3rem;
+  }
   
   h1 {
     font-family: $quicksand;
@@ -99,7 +102,7 @@
   }
   
   .related_title {
-    margin-top: 70px;
+
     h1 {
       margin-bottom: 0px;
     }
@@ -129,9 +132,10 @@
   }
   
   .body {
-    font-size: 14px;
-    line-height: 26px;
+    font-size: 1rem;
+    line-height: 1.6rem;
     color: #666;
+    margin: 0px 0px 10px 0px;
     img {
       display: block;
       padding: 25px;
@@ -162,16 +166,17 @@
     }
     .body {
       font-family: $opensans;
-      font-size: 14px;
-      line-height: 26px;
+      font-size: 1rem;
+      line-height: 1.6rem;
       color: #333;
+      margin-bottom: 1.5rem;
       img {
         display: block;
         padding: 25px;
         margin: 0px auto;
       }
       p {
-        margin: 0px 0px 10px 0px;
+        margin: 0px 0px 0.8rem 0px;
       }
     }
     .related_metadata {

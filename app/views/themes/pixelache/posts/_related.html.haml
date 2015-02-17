@@ -11,6 +11,7 @@
         .small-8.columns
           .body= raw truncate_html(related.description, :length => 250)
       .read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), related
+      
 - elsif related.class == Post
   .row
     .related.post
@@ -21,6 +22,7 @@
         .small-12.columns.body= raw truncate_html(related.body, :length => 350)
       .row
         .small-12.columns.read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), related
+        
 - elsif related.class == Project
   .row
     .related.project
@@ -32,6 +34,7 @@
           - else
             .small-4.columns= image_tag @post.project.photos.first.filename.url(:box)
             .small-8.columns= raw truncate_html(@post.project.description, :length => 350)
+            
 - elsif related.class == Page
   .row
     .related.related_page
@@ -41,3 +44,13 @@
         .small-12.columns.body= raw truncate_html(strip_tags(related.body), :length => 350)
       .row
         .small-12.columns.read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), related
+        
+- elsif related.class == Residency
+  .row
+    .related.related_page
+      .related_metadata
+      .title= link_to  t(:residency) + ": " + related.name, related
+      .row
+        .small-12.columns.body= raw truncate_html(strip_tags(related.description), :length => 350)
+      .row
+        .small-12.columns.read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), related        

@@ -33,7 +33,7 @@ class Post < ActiveRecord::Base
   scope :by_festival, -> festival { where(festival_id: festival) }
   scope :by_subsite, -> subsite { where(subsite_id: subsite ) }
   scope :by_project, -> project { where(project_id: project) }
-  scope :by_user, -> (x) { where(:last_modified_id => x, :creator_id => x) }
+  scope :by_user, -> (x) { where(["last_modified_id = ? OR creator_id = ?", x, x] ) }
   scope :by_year, -> year { where(["published_at >= ? AND published_at <= ?", year+"-01-01", year+"-12-31"])}
   scope :is_pixelache, -> () { where(external: false) }
   scope :is_external, -> () { where(external: true) }
@@ -121,7 +121,12 @@ class Post < ActiveRecord::Base
         related << festival.posts.published.reject{|x| x == self }
       end
     end
-    
+    if residency
+      related << residency
+      unless residency.posts.empty?
+        related << residency.posts.published.reject{|x| x == self }
+      end
+    end
     unless tags.empty?
     end
     related.flatten.uniq.delete_if{|x| x == self }.shuffle
