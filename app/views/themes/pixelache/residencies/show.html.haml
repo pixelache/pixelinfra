@@ -29,9 +29,9 @@
             .links_to_all.small-12.columns
               %ul
                 - unless @residency.events.published.empty?
-                  %li= link_to t(:all_events), residency_events_path(@residency)
+                  %li{class: @residency.posts.published.empty? ? :end : ''}= link_to t(:all_events), residency_events_path(@residency)
                 - unless @residency.posts.published.empty?
-                  %li= link_to t(:all_posts), residency_posts_path(@residency)
+                  %li{class: @residency.events.published.empty? ? '' : :end}= link_to t(:all_posts), residency_posts_path(@residency)
                   
             - @residency.related_content.each do |related|
               - if related.class == Project
@@ -54,13 +54,12 @@
                     .related_title= link_to t(:post) + ": " + related.name, related
                     - unless related.description.blank?
                       .row{:style => 'padding-bottom: 1.8rem'}
-                        - if !related.image?
-                          .small-12.columns.body= raw truncate_html(related.description, :length => 350)
-                        - else
-                          .small-4.columns= link_to image_tag(related.image.url(:box)), related
-                          .small-8.columns
-                            = raw truncate_html(related.description, :length => 350)
-                            .read_more= link_to t(:read_more), related
+                        .small-12.medium-4.columns
+                          - if related.image?
+                            = link_to image_tag(related.image.url(:box)), related
+                        .small-12.medium-8.columns.body
+                          = raw truncate_html(related.description, :length => 350)
+                          .read_more= link_to t(:read_more), related
                             
               - if related.class == Event
                 .related.row
@@ -70,13 +69,13 @@
                       .date= date_range(related.start_at,related.end_at)
                     - unless related.description.blank?
                       .row{:style => 'padding-bottom: 1.8rem'}
-                        - if !related.image?
-                          .small-12.columns.body= raw truncate_html(related.description, :length => 350)
-                        - else
-                          .small-4.columns= link_to image_tag(related.image.url(:box)), related
-                          .small-8.columns
-                            = raw truncate_html(sanitize(related.description), :length => 350)
-                            .read_more= link_to t(:read_more), related                    
+                        .medium-4.small-12.columns
+                          - if related.image?
+                            = link_to image_tag(related.image.url(:box)), related
+                        .medium-8.small-12.columns.body
+                          = raw truncate_html(related.description, :length => 350)
+                          .read_more= link_to t(:read_more), related  
+                                              
         
     .small-12.medium-3.columns.children
       %dl.accordion{:"data-accordion" => "", :"data-options" => "multi_expand:true"}

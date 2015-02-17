@@ -7,6 +7,24 @@
 
 @media only screen and (max-width: 40em)  { 
   
+  //   residencies
+  
+  .residency_container {
+    .title {
+      font-size: 1.9rem;
+    }
+    .related_title {
+      .row {
+        &.related {
+          border-bottom: 1px dotted #999;
+          
+          .body {
+            padding-bottom: 0;
+          }
+        }
+      }
+    }
+  }
   
   .three_posts .top_post , .two_posts .top_post  {
     .title {

@@ -39,6 +39,7 @@
     line-height: 2.6rem;
     margin-bottom: 1rem;
     .links_to_all {
+      padding: 0;
       margin-bottom: 1rem;
       ul {
         margin: 0; padding: 0;
@@ -47,8 +48,11 @@
           float: left;
           margin-right: 0.5rem;
           padding-right: 0.4rem;
-          
+          border-right: 1px dotted #999;
           text-transform: lowercase;
+          &.end {
+            border-right: none;
+          }
           a {
             color: #333;
             &:hover {
