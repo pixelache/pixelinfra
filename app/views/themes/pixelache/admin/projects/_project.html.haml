@@ -1,5 +1,8 @@
 %tr
+  %td{style: 'max-width: 120px'}
+    = image_tag(project.background.url, height: 60) unless !project.background?
   %td
+    
     - ((project.depth)*2).times do
       = "-"
     %span{:class => project.evolvedto ? :evolved : false}= project.name
