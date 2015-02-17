@@ -1,5 +1,5 @@
 %tr
-  %td= link_to flickrset.title, "http://www.flickr.com/photos/pixelache/sets/#{flickrset.flickr_id}/", :target => :_blank
+  %td= link_to flickrset.title, "http://www.flickr.com/photos/#{flickrset.flickr_user}/sets/#{flickrset.flickr_id}/", :target => :_blank
   %td= l flickrset.last_modified_date, :format => :long unless flickrset.last_modified_date.blank?
   %td= flickrset.subsite.name
   %td
