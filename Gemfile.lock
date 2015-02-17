@@ -513,6 +513,7 @@ DEPENDENCIES
   closure_tree
   coffee-rails (~> 4.0.0)
   compass-rails
+  countries
   country_select
   database_cleaner (= 1.0.1)
   devise

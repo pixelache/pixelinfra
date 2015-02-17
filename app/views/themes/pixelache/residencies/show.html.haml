@@ -9,9 +9,8 @@
   .row
     .small-10.medium-7.columns.small-offset-1.title
       = raw @residency.name
-      .country= @residency.country_override.blank? ? @residency.country : @residency.country_override
-      - if can? :edit, @residency
-        %small.hide-for-small-only= link_to t(:edit), edit_admin_residency_path(@residency), class: [:button, :secondary, :tiny]
+      .country= @residency.country_override.blank? ? (@residency.country.size == 2 ?  Country[@residency.country].name : @residency.country ) : @residency.country_override
+
   .row
     .small-10.small-offset-1.medium-7.columns.large-offset-1.body
       - if @residency.photo?
@@ -32,14 +31,17 @@
                     .small-12.columns.body= raw truncate_html(related.description, :length => 350)
                   - else
                     .small-4.columns= image_tag related.photos.first.filename.url(:box)
-                    .small-8.columns= raw truncate_html(related.description, :length => 350)
+                    .small-8.columns
+                      = raw truncate_html(related.description, :length => 350)
+                      - if can? :edit, @residency
+                        %small.hide-for-small-only= link_to t(:edit), edit_admin_residency_path(@residency), class: [:button, :secondary, :tiny]
                     
         
     .small-12.medium-3.columns.children
       %dl.accordion{:"data-accordion" => ""}
         %dd.accordion-navigation
           = link_to t(:production_residencies), "#production"
-          .content#production
+          .content#production{class: @residency.is_micro == true ? '' : :active}
             - @production.each_with_index do |res, index|
               .subchild{:class => index == (@production.size - 1) ? :last : false}
                 = link_to res.name, res
@@ -49,7 +51,7 @@
                     = " - " + l(res.end_at, format: "%B %Y")
         %dd.accordion-navigation
           = link_to t(:microresidencies), "#microresidencies"
-          .content#microresidencies
+          .content#microresidencies{class: @residency.is_micro == true ? :active : ''}
             - @microresidencies.each_with_index do |res, index|
               .subchild{:class => index == (@microresidencies.size - 1) ? :last : false}
                 = link_to res.name, res
