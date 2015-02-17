@@ -38,8 +38,29 @@
     font-size: 2rem;
     line-height: 2.6rem;
     margin-bottom: 1rem;
+    .links_to_all {
+      margin-bottom: 1rem;
+      ul {
+        margin: 0; padding: 0;
+        li { 
+          list-style-type: none;
+          float: left;
+          margin-right: 0.5rem;
+          padding-right: 0.4rem;
+          
+          text-transform: lowercase;
+          a {
+            color: #333;
+            &:hover {
+              color: #999;
+            }
+          }
+        }
+      }
+    }
   }
   .related {
+
     margin-top: 1rem;
     font-family: $quicksand;
     font-weight: bold;

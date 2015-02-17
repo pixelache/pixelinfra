@@ -7,9 +7,8 @@
         = " | "
         = event.place.try(:name)
 
-      .hashtag
-        
-        - if event.festival
-          = link_to event.festival.to_hashtag, event.festival
-        - if event.project
-          = link_to event.project.to_hashtag, event.project
+
+      - if event.festival
+        .hashtag= link_to event.festival.to_hashtag, event.festival
+      - if event.project
+        .hashtag{style: 'bottom: 2rem'}= link_to event.project.to_hashtag, event.project

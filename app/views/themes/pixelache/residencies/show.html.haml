@@ -26,6 +26,13 @@
         .row.related_title
           .small-12.columns
             %h1= t(:related_content)
+            .links_to_all.small-12.columns
+              %ul
+                - unless @residency.events.published.empty?
+                  %li= link_to t(:all_events), residency_events_path(@residency)
+                - unless @residency.posts.published.empty?
+                  %li= link_to t(:all_posts), residency_posts_path(@residency)
+                  
             - @residency.related_content.each do |related|
               - if related.class == Project
                 .related.row

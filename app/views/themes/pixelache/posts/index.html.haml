@@ -3,6 +3,14 @@
     = render :partial => 'festivals/festival_menu', :locals => {festival: @festival}
 = content_for :page_tree do
   .left-collapse
+    - if @residency
+      %span.leaf
+        = link_to t(:residencies), residencies_path
+        = " : "
+      %span.leaf
+        = link_to @residency.name, @residency
+        = " : "
+      
     - if @project
       %span.leaf
         = link_to t(:projects), projects_path

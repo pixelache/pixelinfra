@@ -9,7 +9,15 @@ class PostsController < ApplicationController
     elsif params[:project_id]
       @project = Project.find(params[:project_id])
       @posts = Kaminari.paginate_array(@project.self_and_descendants.visible.map{|x| x.posts.by_site(@site).published }.flatten.sort_by(&:published_at).reverse).page(params[:page]).per(12)
-      set_meta_tags title: @project.name + " " + t(:posts)      
+      set_meta_tags title: @project.name + " " + t(:posts)    
+
+    elsif params[:residency_id]
+      @residency = Residency.find(params[:residency_id])
+      posts = @residency.posts.published
+      posts += @residency.project.posts.published if @residency.project
+      @posts = Kaminari.paginate_array(posts.flatten.uniq.sort_by{|x| x.published_at}.reverse).page(params[:page]).per(12)
+      set_meta_tags title: @residency.name + " " + t(:posts) 
+      
     elsif params[:user_id]
       @user = User.find(params[:user_id])
       @posts = Post.by_site(@site).by_user(@user.id).published.order('published_at DESC').page(params[:page]).per(12)
