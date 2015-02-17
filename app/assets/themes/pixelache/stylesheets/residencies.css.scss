@@ -6,12 +6,19 @@
   .title {
     font-family: $quicksand;
     font-size: 3rem;
-    padding: 80px 0px 0px 0px;
+    padding: 3.5rem 0rem 0.5rem;
     border-bottom: 1px solid #000;
     .country {
       clear: left;
       font-size: 1.2rem;
       color: #666;
+      margin: 0.6rem 0;
+    }
+    .date {
+      clear: left;
+      font-size: 1rem;
+      color: #666;
+      font-weight: 300;
       margin: 0.6rem 0;
     }
   }
@@ -27,27 +34,39 @@
     }
   }
   .related_title {
-    h1 {
-      text-transform: uppercase;
-    }
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 2.6rem;
+    margin-bottom: 1rem;
   }
   .related {
-    margin-top: 15px;
+    margin-top: 1rem;
     font-family: $quicksand;
-    text-transform: uppercase;
     font-weight: bold;
-    font-size: 0.75rem;
-    line-height: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.2rem;
     .related_title {
       font-size: 1.2rem;
+      line-height: 1.5rem;
+      .date {
+        font-size: 0.9rem;
+        color: #999;
+        font-style: italic;
+        margin: 0;
+      }
     }
     a { color: #666;
 
-       &.last {
-         border-right: none;
-         text-transform: none;
-       }
+     &.last {
+       border-right: none;
+       text-transform: none;
      }
+   }
+   .read_more {
+     a {
+       text-transform: lowercase;
+     }
+   }
   }  
   
   .children {

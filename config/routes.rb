@@ -126,7 +126,11 @@ Pixelinfra::Application.routes.draw do
   resources :nodes
   resources :posts
 
-  resources :residencies
+  resources :residencies do
+    resources :posts
+    resources :events
+  end
+  
   resources :steps
   get '/activities' => 'home#activities'
   post '/search' => 'search#create'

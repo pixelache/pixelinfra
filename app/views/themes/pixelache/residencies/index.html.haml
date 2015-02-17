@@ -1,22 +1,25 @@
-.page_tree
-
-  - @page.self_and_ancestors.reverse.each do |p|
-    - if p == @page
-      %strong= p.name
-    - else
-      %span.leaf
-        = link_to p.name, p
-        = " : "
+= content_for :page_tree do
+  .left_collapse
+    - @page.self_and_ancestors.reverse.each do |p|
+      - if p == @page
+        %strong= p.name
+      - else
+        %span.leaf
+          = link_to p.name, p
+          = " : "
 
 .residency_container
   .row
     .small-10.columns.small-offset-1.title.medium-7
       = raw @page.name
 
+  .row
+    .small-10.medium-7.columns.small-offset-1.body
+      = raw simple_format(@page.body)
+
       - if can? :edit, @page
         %small.hide-for-small-only= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id), class: [:button, :secondary, :tiny]
-  .row
-    .small-10.medium-7.columns.small-offset-1.body= raw simple_format(@page.body)
+        
     .small-12.medium-3.columns.children
       %dl.accordion{:"data-accordion" => "", :"data-options" => "multi_expand:true"}
         %dd.accordion-navigation

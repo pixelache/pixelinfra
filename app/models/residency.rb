@@ -14,9 +14,11 @@ class Residency < ActiveRecord::Base
   
   def related_content
     out = []
-    out << project if project
-    # out << posts
-    out.flatten.compact
+    # out << project if project
+    out << posts.published
+    out << events.published
+    out.unshift project if project
+    out.flatten.compact.uniq
   end
   
   def body
