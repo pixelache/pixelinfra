@@ -214,18 +214,20 @@
             - counter += 1
             %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
         - highest = counter unless highest > counter 
-    - festival.pages.first.find_all_by_generation(3).each do |p|
-      - next if p.children.empty?
-      - counter = 0
-      %ul.navhide.inner{id: "page_#{p.id}_menu", class:  determine_hierarchy(:open, p, [@page, @festivaltheme, @event])}
         
-        - unless p.body.blank?
-          %li= link_to p.name + " overview", festival_page_festival_path(@festival, p), class:  determine_hierarchy(:active, p, [@page, @festivaltheme, @event])
-          - counter += 1
-        - p.children.published.each do |pp|
-          %li= link_to pp.name, pp, class: determine_hierarchy(:active, pp, [@page, @festivaltheme, @event])
-          - counter += 1
-        - highest = counter unless highest > counter
+    - unless festival.pages.published.empty?
+      - festival.pages.published.first.find_all_by_generation(3).each do |p|
+        - next if p.children.empty?
+        - counter = 0
+        %ul.navhide.inner{id: "page_#{p.id}_menu", class:  determine_hierarchy(:open, p, [@page, @festivaltheme, @event])}
+        
+          - unless p.body.blank?
+            %li= link_to p.name + " overview", festival_page_festival_path(@festival, p), class:  determine_hierarchy(:active, p, [@page, @festivaltheme, @event])
+            - counter += 1
+          - p.children.published.each do |pp|
+            %li= link_to pp.name, pp, class: determine_hierarchy(:active, pp, [@page, @festivaltheme, @event])
+            - counter += 1
+          - highest = counter unless highest > counter
    
 - highest_total = ((highest * 1.5) + 1.8 ).to_f.to_s + "rem"   
 - list = ((highest * 1.25)).to_f.to_s  + "rem" 
