@@ -36,6 +36,40 @@
                 .small-12.columns
                   %h6 Add to list:
                   = form_tag subscribe_other_admin_festival_path(@festival) do
-                    = text_field_tag :email                  
+                    = text_field_tag :email       
+                    
+.row                    
+  .medium-4.medium-offset-1.small-12.columns.panel.end.limited
+    %h4 Documents
+    %p
+      %small= fa_icon('eye') + " = public, will show on generated 'Publications' page"
+    - unless @festival.attachments.empty?
+      - @festival.attachments.order('updated_at DESC').each do |doc|
+        .entry
+          - if doc.public
+            = fa_icon('eye')
+          = link_to doc.title.blank? ? doc.attachedfile : doc.title, doc.attachedfile.url
+          %small= time_ago_in_words(doc.updated_at) + " ago"
+          - unless doc.description.blank?
+            .description= doc.description
+          - unless doc.documenttype.blank?
+            .date= doc.documenttype.name
+            
+  .row
+    .small-12.columns
+      %h4 Upload attachments to project
+      = semantic_nested_form_for [:admin, @festival] do |f|
+        = f.fields_for :attachments do |ff|
+          .medium-4.columns.small-12.panel
+            = ff.input :attachedfile
+            = ff.input :documenttype
+            = ff.input :title
+            = ff.input :description
+            = ff.input :public, as: :boolean, label: 'Downloadable by public?', hint: 'Tick to appear on project documents page'
+            = ff.link_to_remove 'Remove this attachment', class: [:button, :round, :alert, :tiny]
+        = f.link_to_add 'Add an attachment', :attachments, class: [:button, :round, :tiny]
+        %p= f.submit 'Upload' ,     class: [:button, :round,  :small]
+        
+                                       
 .row
   .small-12.columns= link_to 'Back to all festivals', admin_festivals_path, class: [:button, :round, :tiny]
