@@ -95,6 +95,14 @@
   }
 
 }
+
+.accordion .accordion-navigation {
+  .accordion_title {
+    a {
+      font-weight: 500 !important;
+    }
+  }
+}
 .accordion .accordion-navigation > .content.active, .accordion dd > .content.active {
   background-color: #f9ec31;
 }
