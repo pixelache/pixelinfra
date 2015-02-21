@@ -44,9 +44,11 @@
           .medium-4.small-12.columns.post_small{class: post_group[index+1].nil? ? :end : false}
             .title{:"data-equalizer-watch" => ''}= link_to post.title, post
             .metadata
-              %span.date= l post.published_at.localtime.to_date, :format => :long
-              - unless post.creator.nil? 
-                = ", #{post.creator.name}"
+              %span.date=(l post.published_at.localtime.to_date, :format => :long) + ", "
+              - if post.creator.nil? 
+                Pixelache
+              - else 
+                = "#{post.creator.name}"
       
             - if post.image?
               .post_image= link_to image_tag(post.image.url(:box)), post

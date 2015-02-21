@@ -4,6 +4,13 @@
 }
 
 nav.top-bar {
+  
+  form {
+    input#search_term {
+      top: 4px;
+    }
+  }
+  
   .lang {
     font-size: 1rem;
     text-transform: uppercase;
@@ -78,6 +85,7 @@ nav.top-bar.admin {
   }
   input#searchterm {
     margin-top: -5px;
+
   }
 }
 

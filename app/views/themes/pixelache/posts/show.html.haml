@@ -33,12 +33,16 @@
               .slide= image_tag h.filename.url(:standard)
               
         .metadata
-          %span.date= l @post.published_at.localtime.to_date, :format => :long if @post.published
+          %span.date
+            - if @post.published
+              = l(@post.published_at.localtime.to_date, :format => :long) + ", "
+            - else
+              = t(:not_yet_published) + ", "
           - unless @post.creator.nil? 
             - if @post.creator.memberships.empty?
-              = raw ", #{@post.creator.name}"
+              = raw "#{@post.creator.name}"
             - else
-              = raw ", #{link_to @post.creator.name, member_path(@post.creator)}"
+              = raw "#{link_to @post.creator.name, member_path(@post.creator)}"
         .title
           = @post.title
           - if can? :edit, @post
