@@ -370,3 +370,8 @@ fi:
   your_comment_was_added: 'Kommenttisi lisättiin'
   your_comment_was_not_added: 'Kommenttisi tallentamisessa oli virhe'
   your_email: 'Sähköpostiosoitteesi:'
+
+  evolved_into: 'Evolved into %{project} in %{year}'
+  documents: 'Documents'
+  residency: 'Residency'
+  not_yet_published: 'Not yet published'  
