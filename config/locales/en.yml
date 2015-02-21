@@ -408,3 +408,5 @@ en:
   documents: 'Documents'
   residency: 'Residency'
   not_yet_published: 'Not yet published'
+  video: "Video"
+  file: 'File'

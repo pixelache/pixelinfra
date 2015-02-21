@@ -1,6 +1,8 @@
 %tr
   %td
     = link_to festival.name, festival.website
+    %small
+      %strong= festival.node.name
     - unless festival.festivalthemes.empty?
       %p.metadata= pluralize(festival.festivalthemes.count, 'festival theme')
       - festival.festivalthemes.each do |ft|
@@ -11,7 +13,12 @@
             |
             = link_to t(:delete) , [:admin, ft], :method => :delete, data: {confirm: t(:are_you_sure)}
     %p.metadata= link_to t(:add_festival_theme), new_admin_festival_festivaltheme_path(festival)
-  %td= festival.node.name
+  %td.stats
+    %ul
+      %li= link_to pluralize(festival.events.published.size, t(:event)), festival_events_path(festival), target: :_blank
+      %li= link_to pluralize(festival.attachments.size, t(:file)), festival_publications_path(festival), target: :_blank
+      %li= link_to pluralize([festival.videos,  festival.events.published.map(&:videos).flatten].flatten.compact.uniq.size, t(:video)), archive_festival_path(festival), target: :_blank
+
   %td
     = date_range(festival.start_at, festival.end_at)
   %td.actions

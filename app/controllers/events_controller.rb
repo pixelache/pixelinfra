@@ -4,7 +4,7 @@ class EventsController < InheritedResources::Base
   def index
     if params[:festival_id]
       @festival = Festival.find(params[:festival_id])
-      @events = Event.by_site(@site).by_festival(@festival).published.order('published_at DESC').page(params[:page]).per(12)
+      @events = Kaminari.paginate_array(@festival.events.published.order('start_at DESC')).page(params[:page]).per(12)
       set_meta_tags title: @festival.name + " " + t(:events)
       
     elsif params[:project_id]

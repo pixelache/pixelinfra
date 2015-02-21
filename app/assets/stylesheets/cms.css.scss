@@ -212,6 +212,16 @@ span.jPicker {
   float: left;
 }
 
+td.stats {
+  
+  ul {
+    margin: 0; padding: 0;
+    li {
+      list-style-type: none;
+      font-size: 0.8rem;
+    }
+  }
+}
 td .date {
   font-size: 0.75rem;
 }

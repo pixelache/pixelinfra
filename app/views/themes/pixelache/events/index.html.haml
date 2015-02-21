@@ -1,3 +1,6 @@
+- if @festival
+  = content_for :festival_menu do
+    = render :partial => 'festivals/festival_menu', :locals => {festival: @festival}
 = content_for :page_tree do
   .left-collapse
     - if @residency
@@ -20,6 +23,7 @@
             = link_to p.name, p
             = " : "
     %strong= t :events
+    
 - if @project
   = content_for :project_tree do
     = render :partial => 'shared/projects_tree' 

@@ -98,6 +98,7 @@ Pixelinfra::Application.routes.draw do
   resources :festivals do
     get :attendees
     resources :posts
+    resources :events
     resources :attachments, as: :publications
     member do
       get :archive
