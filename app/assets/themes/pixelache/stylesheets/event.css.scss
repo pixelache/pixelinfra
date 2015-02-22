@@ -179,7 +179,7 @@
   .related {
     border-bottom: 1px solid #333;
     padding-top: 20px;
-    
+
     &.event {
       padding-top: 35px;
     }
@@ -200,6 +200,7 @@
       font-size: 14px;
       line-height: 26px;
       color: #333;
+      border-bottom: none;
       img {
         display: block;
         padding: 25px;

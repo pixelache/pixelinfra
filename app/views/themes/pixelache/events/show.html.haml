@@ -79,36 +79,16 @@
                   .video_description= raw v.description
 
   
-    - unless @event.posts.empty? &&  !@event.project
-      .row.related_title
-        .small-12.columns.small-centered
+  - unless @event.related_content.empty?
+    .row
+      .small-12.medium-8.columns.small-centered.related_container
+        .related_title.small-12.columns
           %h1= t(:related_content)
-      .row
-        .small-12.columns.small-centered
-          - unless @event.posts.empty?
-            - @event.posts[0..4].each do |related|
-              .row
-                .related.post.small-12.columns
-                  .related_metadata
-                    %span.date= l related.published_at.to_date, :format => :long
-                    - unless related.creator.nil? 
-                      = ", #{related.creator.name}" 
-                  .title= link_to  t(:post) + ": " + related.title, related
-                  .row
-                    .small-12.columns.body= raw truncate_html(related.body, :length => 350)
-                  .row
-                    .small-12.columns.read_more= link_to raw("&rsaquo; &rsaquo; ") + t(:read_more), related
-          - if @event.project
-            .row
-              .related.project.small-12.columns
-                .title= link_to t(:project) + ": " + @event.project.name, @event.project
-                - unless @event.project.description.blank?
-                  .row{:style => 'padding-bottom: 20px'}
-                    - if @event.project.photos.empty?
-                      .small-12.columns.body= raw truncate_html(@event.project.description, :length => 350)
-                    - else
-                      .small-4.columns= image_tag @event.project.photos.first.filename.url(:box)
-                      .small-8.columns= raw truncate_html(@event.project.description, :length => 350)
+    - unless @event.related_content.empty?
+      - @event.related_content[0..4].each do |related|
+        .row
+          .small-12.medium-8.columns.small-centered.related_container
+            = render :partial => 'shared/related', locals: {item: @event, related: related }
 
 = content_for :jquery do
   :plain

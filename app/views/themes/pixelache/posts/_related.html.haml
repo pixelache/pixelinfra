@@ -16,7 +16,10 @@
   .row
     .related.post
       .related_metadata
-        %span.date= "#{l related.published_at.to_date, :format => :long}#{(", " + related.creator.name) unless related.creator.blank?}"
+        %span.date
+          = "#{l related.published_at.to_date, :format => :long}" + ", " 
+          - unless related.creator.blank?
+            = related.creator.name
       .title= link_to  t(:post) + ": " + related.title, related
       .row
         .small-12.medium-4.columns

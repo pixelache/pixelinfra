@@ -132,6 +132,35 @@ class Event < ActiveRecord::Base
     place.blank? ? nil : place.name
   end
   
+  def related_content
+    related = []
+      unless self.posts.empty?
+        related << self.posts.published.reject{|x| x == self}
+      end
+    if project
+      related << project
+      unless project.posts.empty?
+        related << project.posts.published.reject{|x| x == self }
+        related << project.pages
+      end
+    end
+    if festival
+      related << festival
+      unless festival.posts.empty?
+        related << festival.posts.published.reject{|x| x == self }
+      end
+    end
+    if residency
+      related << residency
+      unless residency.posts.empty?
+        related << residency.posts.published.reject{|x| x == self }
+      end
+    end
+    unless tags.empty?
+    end
+    related.flatten.uniq.delete_if{|x| x == self } #.shuffle  
+  end
+  
   def title
     name    
   end
