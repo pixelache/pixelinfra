@@ -11,7 +11,7 @@ class Ability
       can :manage, Event
       can :manage, Page, :subsite => {:name => 'pixelache' }
       can :manage, Post, :subsite => {:name => 'pixelache' }
-      can :manage, Festival, :subsite => {:name => 'pixelache' }
+      can :manage, Festival
       can :manage, Project
       can :read, Projectproposal
       can :update, Projectproposal
