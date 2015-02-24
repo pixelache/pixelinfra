@@ -85,7 +85,7 @@
         .related_title.small-12.columns
           %h1= t(:related_content)
     - unless @event.related_content.empty?
-      - @event.related_content[0..4].each do |related|
+      - @event.related_content[0..5].each do |related|
         .row
           .small-12.medium-8.columns.small-centered.related_container
             = render :partial => 'shared/related', locals: {item: @event, related: related }

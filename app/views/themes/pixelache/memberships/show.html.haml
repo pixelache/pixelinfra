@@ -1,3 +1,12 @@
+- unless @member.memberships.empty?
+  = content_for :page_tree do
+    .row.left-collapse
+      %span.leaf
+        = link_to t(:members), '/members/'
+      = " : "
+      %strong
+        = @member.name
+
 .membership_container
   .row
     .small-12.columns

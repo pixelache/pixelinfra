@@ -1,6 +1,10 @@
 .row
   .small-12.columns
     %h3 Users
+.row
+  .small-12.columns= paginate @users
+.row
+  .small-12.columns
     %table.table.table-condensed
       %thead
         %tr
@@ -19,7 +23,7 @@
               %br/
               %em= user.username
             %td= user.email
-            %td= user.created_at.to_date
+            %td= l user.created_at.to_date, :format => :short
             %td
               - unless user.last_sign_in_at.nil?
                 = l user.last_sign_in_at,  :format => :long            
@@ -33,3 +37,5 @@
                 = link_to t(:edit), edit_admin_user_path(user), class: [:button, :round, :tiny]
               - if can? :delete, user
                 = link_to("Delete user", admin_user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button alert tiny round') unless user == current_user
+.row
+  .small-12.columns= paginate @users

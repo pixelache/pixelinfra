@@ -144,12 +144,7 @@ class Event < ActiveRecord::Base
         related << project.pages
       end
     end
-    if festival
-      related << festival
-      unless festival.posts.empty?
-        related << festival.posts.published.reject{|x| x == self }
-      end
-    end
+
     if residency
       related << residency
       unless residency.posts.empty?
