@@ -1,11 +1,5 @@
 - images = 0
 .page
-  .row
-    .small-12.columns.large-10.large-offset-1.event_title
-      %h2= @post.name
-      - if user_signed_in?
-        - if can? :edit, @post
-          = link_to t(:edit), edit_admin_post_path(@post), class: [:button, :tiny, :round]
           
   - unless @post.image.blank? && @post.photos.empty?
 
@@ -19,9 +13,19 @@
             .img
               - images += 1
               = link_to image_tag(i.filename.url(:box)), i.filename.url(:standard), rel: :lazybox
+
+  .row
+    .small-12.columns.large-10.large-offset-1.event_title
+      %h2= @post.name
+      - if user_signed_in?
+        - if can? :edit, @post
+          = link_to t(:edit), edit_admin_post_path(@post), class: [:button, :tiny, :round]
+
   .row
     .small-12.columns.large-10.large-offset-1
-      .metadata= "posted on #{l @post.published_at, :format => :long} by #{@post.creator.name}"
+      .metadata
+        %p= l @post.published_at, :format => :long
+        %p= "posted by #{@post.creator.name}"
 
 
   .row

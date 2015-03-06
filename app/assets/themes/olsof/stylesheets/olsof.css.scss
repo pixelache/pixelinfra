@@ -486,7 +486,11 @@ footer {
 }
 .page {
   margin-top: 3.5rem;
-
+  
+  .image_carousel {
+    margin-bottom: 0.75rem;
+  }
+  
   .title {
     background-color: black;
     color: $beige;
