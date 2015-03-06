@@ -19,7 +19,6 @@ class HomeController < ApplicationController
       @archive = Archivalimage.random(1).first
     elsif @site.name == 'olsof'
       @feed = Feed.by_subsite(@site.id).created.order('fed_at DESC').page(params[:page]).per(6)
-      
     end
   end
   

@@ -4,11 +4,15 @@
   .row
     .small-12.columns.large-10.large-offset-1.content
       = image_tag theme_image_path('i-publications.png')
-      %h3= t :interviews
-      - @interviews.each do |i|
-        %p.publication
-          = i.title
-          = link_to raw("&#9654;"), i.attachedfile.url
+      - @interviews.group_by(&:documenttype).each do |d|
+        - if d.first.nil?
+          %h3= t :other_documents
+        - else
+          %h3= d.first.name
+        - d.last.each do |i|
+          %p.publication
+            = i.title
+            = link_to raw("&#9654;"), i.attachedfile.url
       - unless @videos.empty?
         %h3= t :videos
         - @videos.each do |v|

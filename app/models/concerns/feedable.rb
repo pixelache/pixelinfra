@@ -6,8 +6,8 @@ module Feedable
   end
   
   def check_for_feed
-    unless self.hide_from_feed == true || self.published != true
-      self.feeds.each(&:destroy)
+    self.feeds.each(&:destroy)
+    unless self.hide_from_feed == true || self.published != true      
       self.add_to_feed
     end
   end
