@@ -42,23 +42,28 @@
       .row.post_row{:"data-equalizer" => ''}
         - post_group.compact.each_with_index do |post, index|
           .medium-4.small-12.columns.post_small{class: post_group[index+1].nil? ? :end : false}
-            .title{:"data-equalizer-watch" => ''}= link_to post.title, post
-            .metadata
-              %span.date=(l post.published_at.localtime.to_date, :format => :long) + ", "
-              - if post.creator.nil? 
-                Pixelache
-              - else 
-                = "#{post.creator.name}"
+            .categories
+              = post.category
       
             - if post.image?
               .post_image= link_to image_tag(post.image.url(:box)), post
-              .related
-                - if post.event
-                  = link_to post.event.name, post.event
-                - if post.festival
-                  = link_to post.festival.name, post.festival
-                - if post.project
-                  = link_to post.project.name, post.project
-                = link_to t(:read_more), post, :class => :last
+
+            .lower{:"data-equalizer-watch" => ''}
+              .title= link_to post.title, post
+              - if post.event || post.festival || post.project
+                .related
+                  - if post.event
+                    = link_to post.event.name, post.event
+                  - if post.festival
+                    = link_to post.festival.name, post.festival
+                  - if post.project
+                    = link_to post.project.name, post.project
+              .metadata
+                %span.date=(l post.published_at.localtime.to_date, :format => :long) + ", "
+                - if post.creator.nil? 
+                  Pixelache
+                - else 
+                  = "#{post.creator.name}"
+                                          
     .row
       .small-12.columns= paginate @posts

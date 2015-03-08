@@ -20,7 +20,7 @@
       .row
         .small-12.medium-7.columns.medium-offset-1.body= raw simple_format(@page.body)
         - unless @page.headings.empty?
-          .small-3.columns.children.hide-for-small-only
+          .small-3.columns.children.hide-for-small-only#side_nav
             .child.top= link_to t(:top), '#', onclick: 'scrollTo("body");'
             - @page.headings.each do |heading|
               - next if heading.first == 'top'
@@ -33,7 +33,8 @@
 
     var stickyNavTop = $('.children').offset().top;  
     var stickyPageTop = $('.page').offset().top;  
-    var stickyNavLeft = $('.body').offset().left + $('.body').outerWidth() + 35
+    var startingwidth = $('#side_nav').width();
+    var stickyNavLeft = $('#side_nav').offset().left
     var stickyNav = function(){  
       var scrollTop = $(window).scrollTop();  
        
@@ -43,6 +44,8 @@
           $('.children').css('left', stickyNavLeft);
           $('.children').css('top', stickyPageTop);  
           $('.children .top').css('display', 'block');
+   
+          $('.sticky_side_nav').css('width', startingwidth);
       } else {  
           $('.children').removeClass('sticky_side_nav');   
           $('.children').css('left', '');

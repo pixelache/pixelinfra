@@ -5,6 +5,7 @@
 
 .page {
   // background-color: #f9ec31;
+  padding-top: 2rem;
   .title_wrapper {
     padding: 1.5rem 0rem 3rem 0rem;
   }
@@ -59,7 +60,7 @@
   
   .children {
     .child {
-      width: 25%;
+     
       &.top {
         display: none;
       }
