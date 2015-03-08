@@ -44,10 +44,12 @@
           .medium-4.small-12.columns.post_small{class: post_group[index+1].nil? ? :end : false}
             .categories
               = post.category
-      
-            - if post.image?
-              .post_image= link_to image_tag(post.image.url(:box)), post
 
+            .post_image{style: post.image? ? "background-image: url(#{post.image.url(:box).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".gray").css("display", "block");', onmouseout: '$(this).find(".gray").css("display", "none");'}
+              .gray
+                .excerpt= link_to raw(truncate_html(strip_tags(post.body.gsub(/&nbsp;/, ' ')), :length => 260)), post
+                .read_more= link_to t(:read_more), post
+                  
             .lower{:"data-equalizer-watch" => ''}
               .title= link_to post.title, post
               - if post.event || post.festival || post.project
