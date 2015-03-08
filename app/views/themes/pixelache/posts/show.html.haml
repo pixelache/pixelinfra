@@ -25,13 +25,19 @@
   .post_single.columns.small-centered{:class => figure_width(@post, "small-8")}
     .internal.row
       .small-12.columns{:style => 'padding: 0px'}
-    
+        .categories= @post.category
+          
         - unless @post.photos.empty? && !@post.image?
           .post_image{class: @post.photos.empty? ? false : 'image_carousel' }
             .slide= best_image(@post)
             - @post.photos.each do |h|
               .slide= image_tag h.filename.url(:standard)
               
+        .title
+          = @post.title
+          - if can? :edit, @post
+            = link_to t(:edit_post), edit_admin_subsite_post_path(@post.subsite, @post), class: [:tiny, :button, :secondary]
+            
         .metadata
           %span.date
             - if @post.published
@@ -42,13 +48,8 @@
             - if @post.creator.memberships.empty?
               = raw "#{@post.creator.name}"
             - else
-              = raw "#{link_to @post.creator.name, member_path(@post.creator)}"
-        .title
-          = @post.title
-          - if can? :edit, @post
-            = link_to t(:edit_post), edit_admin_subsite_post_path(@post.subsite, @post), class: [:tiny, :button, :secondary]
-      
-        .body= raw @post.body
+              = raw "#{link_to @post.creator.name, member_path(@post.creator)}"      
+        .body=raw Nokogiri::HTML.parse(@post.body.gsub(/(<(?!\/)[^>]+>)+(<\/[^>]+>)+/, '')).inner_html
     .row
       .small-12.columns.share_this= render :partial => 'shared/share_this_buttons'
 

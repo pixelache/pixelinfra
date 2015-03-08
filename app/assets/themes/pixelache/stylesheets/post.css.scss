@@ -39,10 +39,6 @@
     font-size: 0.8rem;
     font-weight: bold;
     color: #333;
-    span.related {
-      
-    }
-    
   }
   .post_image {
     margin: 5px 0;
@@ -92,7 +88,7 @@
 .post_single {
   margin-right: auto;
   margin-left: auto;
-
+  padding-top: 3rem;
   .related_container {
     margin-top: 3rem;
   }
@@ -109,9 +105,17 @@
     padding-bottom: 10px;
   }
   
+  .categories {
+    text-transform: uppercase;
+    border-bottom: 2px solid #191919;
+    padding-bottom: 0.2rem;
+    font-family: $quicksand;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #333;
+  }
   .post_image {
-    margin: 75px 0px 40px 0px;
-
+    margin: 5px 0;
   }
   
   .related_title {
@@ -122,26 +126,24 @@
   }
   
   .metadata {
-    color: #1b75bb;
+    a { color: #1b75bb; }
+    color: #333;
     font-family: $quicksand;
-    font-size: 14px;
-    line-height: 25px; 
-    border-bottom: 2px solid #999;
-    margin-bottom: 30px;
-    margin-left: 0px;
-    padding-left: 0px;
-    span.date {
-      font-weight: bold;
-    } 
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-top: 1rem;
+    margin-bottom: 2.5rem;
+
   }
   
   .title {
     font-family: $quicksand;
     color: #333;
-    font-size: 24px;
-    line-height: 30px;
-    margin-bottom: 30px;
-    padding-left: 0px;
+    font-size: 3rem;
+    font-weight: bold;
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+    padding: 1rem 0;
   }
   
   .body {
