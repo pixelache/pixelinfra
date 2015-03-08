@@ -1,39 +1,76 @@
-.yearly_archive{:style => @festival.blank? ? false : "background-color: ##{@festival.background_colour}; color: ##{@festival.primary_colour};"}
-  %style{type: 'text/css'}
-    = "h2 a { color: ##{@festival.primary_colour}; }"
+.yearly_archive
     
   
   .row
-    .small-12.columns.text-center
-      .big_year= @year
-  .row
-    .small-4.columns
-      - unless @festival.blank?
-        %h2= link_to @festival.name, @festival
-        .tagline= @festival.subtitle
-        = image_tag @festival.image.url(:standard) if @festival.image?
-
-        - @festival.events.each do |event|
+    .small-8.columns
+      .row
+        .medium-9.columns.medium-offset-3
+          .year= @year
+      - unless @festival.blank? 
+        .festival
           .row
-            .small-12.columns
-              = image_tag event.image.url(:box) if event.image?
+            .medium-9.columns.medium-offset-3
+              .section_title
+                = @festival.name + " : "
+                = @festival.subtitle
+          .row
+            .medium-9.columns.medium-offset-3.events
+              - @festival.events.published.each do |e|
+                .row
+                  .small-3.columns= link_to image_tag(e.image.url(:box)), e
+                  .small-9.columns.title_container
+                    .name= link_to e.name, e
+
+        - unless @projects.empty?
+          .projects
+            .row
+              .medium-9.columns.medium-offset-3
+                .section_title= t(:projects)
+                
+            .row
+              .medium-9.columns.medium-offset-3.project_list
+                - @projects.each do |p|
+                  .row
+                    .small-3.columns
+                      - if p.photos.empty?
+                        &nbsp;
+                      - else
+                        = link_to image_tag(p.photos.first.filename.url(:box)), p
+                    .small-9.columns.title_container
+                      .name= link_to p.name, p
+    .small-4.columns
+      #archive_menu.sticky
+        %ul
+          %li= link_to t(:top), '#'
+          %li= link_to t(:festival), '#festival'
+          
         
-
-    .small-4.columns
-      - unless @events.empty?
-        %h2= t(:events)
-        - @events.sort_by{|x| x.start_at }.reverse.each do |event|
-          = link_to event do
-            .row.event
-              .small-12.columns
-                = image_tag event.image.url(:box) if event.image?
-    .small-4.columns
-      - unless @posts.empty?
-        %h2= t :posts
-        - @posts.sort_by(&:published_at).reverse.in_groups_of(4).each do |post_group|
-          .row
-            - post_group.each do |post|
-              - next if post.nil?
-              .small-3.columns
-                = link_to post do
-                  = image_tag post.image.url(:logo) if post.image?
+    /   - unless @festival.blank?
+    /     %h2= link_to @festival.name, @festival
+    /     .tagline= @festival.subtitle
+    /     = image_tag @festival.image.url(:standard) if @festival.image?
+    /
+    /     - @festival.events.each do |event|
+    /       .row
+    /         .small-12.columns
+    /           = image_tag event.image.url(:box) if event.image?
+    /
+    /
+    / .small-4.columns
+    /   - unless @events.empty?
+    /     %h2= t(:events)
+    /     - @events.sort_by{|x| x.start_at }.reverse.each do |event|
+    /       = link_to event do
+    /         .row.event
+    /           .small-12.columns
+    /             = image_tag event.image.url(:box) if event.image?
+    / .small-4.columns
+    /   - unless @posts.empty?
+    /     %h2= t :posts
+    /     - @posts.sort_by(&:published_at).reverse.in_groups_of(4).each do |post_group|
+    /       .row
+    /         - post_group.each do |post|
+    /           - next if post.nil?
+    /           .small-3.columns
+    /             = link_to post do
+    /               = image_tag post.image.url(:logo) if post.image?
