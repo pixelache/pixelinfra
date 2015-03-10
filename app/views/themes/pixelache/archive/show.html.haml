@@ -55,26 +55,26 @@
                   .small-9.columns.title_container{ onmouseover: '$(this).closest(".row").find(".blue").css("display", "block");', onmouseout: '$(this).closest(".row").find(".blue").css("display", "none");'}
                     .name= link_to e.name, e, target: :_blank 
 
-        - unless @projects.empty?
-          .projects#projects_archive{:"data-magellan-destination" => "projects_archive" }
-            .row
-              .medium-9.columns.medium-offset-3
-                .section_title= t(:projects)
-                
-            .row
-              .medium-9.columns.medium-offset-3.project_list
-                - @projects.each do |p|
-                  .row
-                    .small-3.columns
-                      - if p.photos.empty?
-                        &nbsp;
-                      - else
-                        = link_to p, target: :_blank  do
-                          .archive_image_box{style: !p.photos.empty? ? "background-image: url(#{p.photos.first.filename.url(:thumb).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
-                            .blue
-                              
-                    .small-9.columns.title_container{onmouseover: '$(this).closest(".row").find(".blue").css("display", "block");', onmouseout: '$(this).closest(".row").find(".blue").css("display", "none");'}
-                      .name= link_to p.name, p, target: :_blank 
+      - unless @projects.empty?
+        .projects#projects_archive{:"data-magellan-destination" => "projects_archive" }
+          .row
+            .medium-9.columns.medium-offset-3
+              .section_title= t(:projects)
+              
+          .row
+            .medium-9.columns.medium-offset-3.project_list
+              - @projects.each do |p|
+                .row
+                  .small-3.columns
+                    - if p.photos.empty?
+                      &nbsp;
+                    - else
+                      = link_to p, target: :_blank  do
+                        .archive_image_box{style: !p.photos.empty? ? "background-image: url(#{p.photos.first.filename.url(:thumb).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
+                          .blue
+                            
+                  .small-9.columns.title_container{onmouseover: '$(this).closest(".row").find(".blue").css("display", "block");', onmouseout: '$(this).closest(".row").find(".blue").css("display", "none");'}
+                    .name= link_to p.name, p, target: :_blank 
 
       - unless @events.empty?
         .events#events_archive{:"data-magellan-destination" => "events_archive" }
@@ -96,59 +96,59 @@
                     .name= link_to e.name, e, target: :_blank 
                     
 
-        - unless @residencies.empty?
-          .residencies#residencies{:"data-magellan-destination" => :residencies }
-            .row
-              .medium-9.columns.medium-offset-3
-                .section_title= t(:residencies)
-                
-            .row
-              .medium-9.columns.medium-offset-3.project_list
-                - @residencies.each do |r|
-                  .row
-                    .small-3.columns
-                      - if !r.photo?
-                        &nbsp;
-                      - else
-                        = link_to  r, target: :_blank do
-                          .archive_image_box{style: r.photo? ? "background-image: url(#{r.photo.url(:thumb).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
-                            .blue
-                              .date= date_range(r.start_at, r.end_at).gsub(/\s\d\d\d\d/, '')
-                    .small-9.columns.title_container{onmouseover: '$(this).closest(".row").find(".blue").css("display", "block");', onmouseout: '$(this).closest(".row").find(".blue").css("display", "none");'}
-                      .name= link_to r.name, r
-
-        - unless @posts.empty?
-          .posts#posts{:"data-magellan-destination" => :posts }
-            .row
-              .medium-9.columns.medium-offset-3
-                .section_title= t(:news)
-                
-            .row
-              .medium-9.columns.medium-offset-3.post_list
+      - unless @residencies.empty?
+        .residencies#residencies{:"data-magellan-destination" => :residencies }
+          .row
+            .medium-9.columns.medium-offset-3
+              .section_title= t(:residencies)
+              
+          .row
+            .medium-9.columns.medium-offset-3.project_list
+              - @residencies.each do |r|
                 .row
-                  - @posts.each do |p|
-                    .columns.image_thumbnail
-                      = link_to p, target: :blank do
-                        .archive_image_box{style: p.image? ? "background-image: url(#{p.image.url(:thumb).gsub(/development/, 'production')});" : "background-image: url('/assets/pixelache/images/arch_sq_grey.png')" , onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
+                  .small-3.columns
+                    - if !r.photo?
+                      &nbsp;
+                    - else
+                      = link_to  r, target: :_blank do
+                        .archive_image_box{style: r.photo? ? "background-image: url(#{r.photo.url(:thumb).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
                           .blue
-                            .date= p.published_at.strftime('%d %b')
+                            .date= date_range(r.start_at, r.end_at).gsub(/\s\d\d\d\d/, '')
+                  .small-9.columns.title_container{onmouseover: '$(this).closest(".row").find(".blue").css("display", "block");', onmouseout: '$(this).closest(".row").find(".blue").css("display", "none");'}
+                    .name= link_to r.name, r
+
+      - unless @posts.empty?
+        .posts#posts{:"data-magellan-destination" => :posts }
+          .row
+            .medium-9.columns.medium-offset-3
+              .section_title= t(:news)
+              
+          .row
+            .medium-9.columns.medium-offset-3.post_list
+              .row
+                - @posts.each do |p|
+                  .columns.image_thumbnail
+                    = link_to p, target: :blank do
+                      .archive_image_box{style: p.image? ? "background-image: url(#{p.image.url(:thumb).gsub(/development/, 'production')});" : "background-image: url('/assets/pixelache/images/arch_sq_grey.png')" , onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
+                        .blue
+                          .date= p.published_at.strftime('%d %b')
                             
 
-        - unless @photos.empty?
-          .photos#photos{:"data-magellan-destination" => :photos }
-            .row
-              .medium-9.columns.medium-offset-3
-                .section_title= t(:photos)
-                
-            .row
-              .medium-9.columns.medium-offset-3.photo_list
-                .row
-                  - @photos.each do |p|
-                    .columns.image_thumbnail
-                      = link_to p.item, target: :_blank  do
-                        .archive_image_box{style: "background-image: url(#{p.filename.url(:thumb).gsub(/development/, 'production')});", onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
-                          .blue
-                            .date= p.image_date.strftime('%d %b')
+      - unless @photos.empty?
+        .photos#photos{:"data-magellan-destination" => :photos }
+          .row
+            .medium-9.columns.medium-offset-3
+              .section_title= t(:photos)
+              
+          .row
+            .medium-9.columns.medium-offset-3.photo_list
+              .row
+                - @photos.each do |p|
+                  .columns.image_thumbnail
+                    = link_to p.item, target: :_blank  do
+                      .archive_image_box{style: "background-image: url(#{p.filename.url(:thumb).gsub(/development/, 'production')});", onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
+                        .blue
+                          .date= p.image_date.strftime('%d %b')
                                             
                       
              
@@ -169,6 +169,7 @@
               
             - unless @residencies.empty?
               %dd{:"data-magellan-arrival" => "residencies"}= link_to t(:residencies), '#residencies'
+
             - unless @posts.empty?
               %dd{:"data-magellan-arrival" => "posts"}= link_to t(:news), '#posts'               
             - unless @photos.empty?

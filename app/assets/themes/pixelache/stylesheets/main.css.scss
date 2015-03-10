@@ -101,9 +101,13 @@ table.etherpads {
   }
 }
 .magellan-scrollnav {
-
+  [data-magellan-expedition-clone] {
+    dl.sub-nav {
+      display: none;
+    }
+  }
   [data-magellan-expedition], [data-magellan-expedition-clone] {
-    width: 100%;
+    width: 250px;
     min-width: 0;
     background: none;
     dl {
