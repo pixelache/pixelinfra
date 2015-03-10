@@ -11,6 +11,7 @@ class Archivalimage < ActiveRecord::Base
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['caption'].blank?  }
   validates_presence_of :subsite_id, :image
   scope :by_site, -> (x) { includes(:subsite).where(:subsite_id => x) }
+  scope :by_year, -> (x) { where(["image_date >= ? AND image_date <= ?", "#{x}-01-01", "#{x}-12-31"])}
   attr_accessor  :event_name, :project_name, :festival_name
   
   def activity
@@ -30,6 +31,11 @@ class Archivalimage < ActiveRecord::Base
   end
   def filename_identifier
     image_identifier
+  end
+  
+  
+  def item
+    activity
   end
   
   def name
@@ -55,6 +61,12 @@ class Archivalimage < ActiveRecord::Base
         self.image_size = image.file.size
         self.image_width, self.image_height = `identify -format "%wx%h" #{image.file.path}`.split(/x/)
       end
+    end
+    if self.festival
+      self.image_date = self.festival.start_at
+    end
+    if self.event
+      self.image_date = self.event.start_at
     end
   end
   

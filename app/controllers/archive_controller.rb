@@ -11,6 +11,9 @@ class ArchiveController < ApplicationController
     @projects = @projects.flatten.uniq.sort_by{|x| x.slug }
     
     @documents = Document.joins(:attachment).where(["date_of_release >= ? AND date_of_release <= ?", "#{@year}-01-01", "#{@year}-12-31"]).where("attachments.public = true")
+    @photos = Photo.by_year(params[:id]).to_a.delete_if{|x| x.item.class == Post }.delete_if{|x| x.item.subsite != @site }
+    @photos += Archivalimage.by_site(@site).by_year(params[:id])
+    @photos = @photos.flatten.shuffle
     set_meta_tags :title => t(:archive) + " " + @year
   end
   

@@ -45,6 +45,23 @@
     }
   }
 
+  .photo_list, .post_list { 
+    .image_thumbnail {
+      margin-right: 10px;
+      margin-bottom: 10px;
+      width: 90px;
+      float: left;
+      
+      .archive_image_box {
+        width: 90px;
+        height:90px;
+        .blue {
+          height: 90px;
+        }
+      }
+    }
+    
+  }
   .events, .project_list, .document_list, .residency_list {
     .row {
       margin-bottom: 0.5rem;

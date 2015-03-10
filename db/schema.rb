@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309102403) do
+ActiveRecord::Schema.define(version: 20150310195030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150309102403) do
     t.string   "credit",             limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "image_date"
   end
 
   add_index "archivalimages", ["event_id"], name: "index_archivalimages_on_event_id", using: :btree
@@ -166,7 +167,6 @@ ActiveRecord::Schema.define(version: 20150309102403) do
   add_index "document_translations", ["locale"], name: "index_document_translations_on_locale", using: :btree
 
   create_table "documents", force: :cascade do |t|
-    t.integer  "attachment_id"
     t.date     "date_of_release"
     t.integer  "subsite_id"
     t.datetime "created_at",      null: false
@@ -537,6 +537,7 @@ ActiveRecord::Schema.define(version: 20150309102403) do
     t.string   "wordpress_scope",       limit: 255
     t.string   "title",                 limit: 255
     t.string   "credit",                limit: 255
+    t.date     "image_date"
   end
 
   add_index "photos", ["item_type", "item_id"], name: "index_photos_on_item_type_and_item_id", using: :btree
