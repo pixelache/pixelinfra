@@ -89,6 +89,7 @@
         = ff.input :title
         = ff.input :description
         = ff.input :public, as: :boolean
+        = ff.input :year_of_publication, :hint => 'For project publications. Leave blank to show up on all years the project is active, or enter a specific year'
         = ff.link_to_remove 'Remove this attachment', class: [:button, :round, :alert, :tiny]
   = f.link_to_add 'Add an attachment', :attachments, class: [:button, :round, :tiny]
   .row

@@ -16,7 +16,7 @@ class Admin::DocumentsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:document => [ :date_of_release, :subsite_id,   translations_attributes: [:id, :locale, :title, :description], attachment_attributes: [:id, :attachedfile,:title, :description, :public, :item_type, :item_id, :documenttype_id,  :_destroy]  ] )
+    params.permit(:document => [ :date_of_release, :subsite_id,   translations_attributes: [:id, :locale, :title, :description], attachment_attributes: [:id, :year_of_publication, :attachedfile,:title, :description, :public, :item_type, :item_id, :documenttype_id,  :_destroy]  ] )
   end 
   
 end

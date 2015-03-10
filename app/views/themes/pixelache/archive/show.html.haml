@@ -13,7 +13,7 @@
         .medium-9.columns.medium-offset-3
           .year= @year
           
-      - unless @documents.empty?
+      - unless @documents.empty? && @project_publications.empty?
         .documents#publications{:"data-magellan-destination" => :publications }
           .row
             .medium-9.columns.medium-offset-3
@@ -27,7 +27,13 @@
                     
                   .small-9.columns.title_container{onmouseover: "$(this).closest('.row').find('img').attr('src', '/assets/pixelache/images/arch_doc_blue.png')", onmouseout: "$(this).closest('.row').find('img').attr('src', '/assets/pixelache/images/arch_doc_grey.png')" }
                     .name= link_to d.title, d.attachment.attachedfile.url  
-                      
+              - @project_publications.each do |d|
+                .row
+                  .small-3.columns
+                    .doc_icon= link_to image_tag(theme_image_path('arch_doc_grey.png')), d.attachedfile.url, onmouseover: "$(this).find('img').attr('src', '/assets/pixelache/images/arch_doc_blue.png')", onmouseout: "$(this).find('img').attr('src', '/assets/pixelache/images/arch_doc_grey.png')"
+                    
+                  .small-9.columns.title_container{onmouseover: "$(this).closest('.row').find('img').attr('src', '/assets/pixelache/images/arch_doc_blue.png')", onmouseout: "$(this).closest('.row').find('img').attr('src', '/assets/pixelache/images/arch_doc_grey.png')" }
+                    .name= link_to d.title, d.attachedfile.url       
                                 
       - unless @festival.blank? 
         .festival#festival{:"data-magellan-destination" => :festival }

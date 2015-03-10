@@ -18,7 +18,7 @@ class Festival < ActiveRecord::Base
   translates :overview_text, :fallbacks_for_empty_translations => true
 
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['overview_text'].blank? }
-  accepts_nested_attributes_for :attachments, :reject_if => proc {|x| x['attachedfile'].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :attachments, :reject_if => proc {|x| x['id'].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :videos , reject_if: proc {|x| x['in_url'].blank? }, :allow_destroy => true
   
   before_save :update_image_attributes

@@ -83,6 +83,7 @@
             = ff.input :title
             = ff.input :description
             = ff.input :documenttype
+            = ff.input :year_of_publication, :hint => 'For project publications. Leave blank to show up on all years the project is active, or enter a specific year'
             = ff.link_to_remove 'Remove this attachment', class: [:button, :tiny, :alert, :round]
       
     .row
