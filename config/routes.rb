@@ -10,6 +10,7 @@ Pixelinfra::Application.routes.draw do
       get :autocomplete_festival_name, :on => :collection
       get :autocomplete_project_name, :on => :collection  
     end
+    resources :documents
     resources :documenttypes
     resources :dynamictaglines
     resources :etherpads do

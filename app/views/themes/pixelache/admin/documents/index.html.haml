@@ -1,0 +1,26 @@
+.row
+  .small-12.columns
+    %h1= t :documents
+    
+.row
+  .small-12.columns
+    %table
+      %thead
+        %th ID
+        %th Title
+        %th When?
+        %th
+      %tbody
+        - @documents.each do |doc|
+          %tr
+            %td= doc.id.to_s
+            %td
+              = doc.title.blank? ? doc.attachment.title : doc.title
+              %small= doc.subsite.name
+            %td= l doc.date_of_release
+            %td
+              = link_to t(:edit), edit_admin_document_path(doc), class: [:button, :tiny, :round]
+              - if can? :destroy, doc
+                = link_to t(:destroy), [:admin, doc], method: :delete, class: [:button, :tiny, :round, :alert], data: {confirm: 'Are you sure?'}
+.row
+  .small-12.columns= link_to t(:new), new_admin_document_path, class: [:button, :small, :round]

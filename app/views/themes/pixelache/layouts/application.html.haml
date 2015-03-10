@@ -28,7 +28,7 @@
     #container.container
       %header
         .top-bar-wrapper.sticky= render 'layouts/top_bar'
-        - unless @festival
+        - unless @festival && controller.controller_name != 'archive'
           .arrow-down.sticky
           .arrow-up
         .pixelache_nav_menu.sticky{:class => content_for?(:festival_menu) ? :festival_menu : :black, :style => content_for?(:festival_menu) ?  "background-color: #" + (@festival.background_colour.blank? ? "#FFF" : @festival.background_colour) + "; color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour) : false } 

@@ -7,24 +7,49 @@
   .year {
     font-size: 2.875rem;
     font-family: $quicksand;
-    margin: 2rem 0px;
+    margin-top: 2rem;
   }
 
   .section_title  {
     font-size: 1.625rem;
-    line-height: 2.875rem;
+    line-height: 2.1rem;
     text-transform: uppercase;
     border-bottom: 2px solid #999;
     margin-bottom: 0.5rem;
+    margin-top: 2.75rem;
+    font-family: $quicksand;
   }
   
 
+  .archive_image_box {
+    width: 100px;
+//    padding-bottom: 100%;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    .blue {
+      background-color: #32CCFF;
+      padding-bottom: 100%;
+      height: 100px;
+      width: 100%;
+      display: none;
+      overflow: hidden;
+      opacity: 0.7;
+      position: relative;
+      .date {
+        margin: 34px 15px;
+        font-family: $quicksand;
+        color: #FFF;
+      }
+    }
+  }
 
-  .events, .project_list  {
+  .events, .project_list, .document_list, .residency_list {
     .row {
       margin-bottom: 0.5rem;
       .title_container {
-        height: 120px;
+        height: 100px;
 
         .name {
           position: relative;
@@ -43,6 +68,14 @@
 
   }
   
+  .document_list {
+    .row {
+     .title_container {
+       height: 80px 
+     }
+ 
+    }
+  }
   
   
   .tagline {

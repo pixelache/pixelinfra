@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216112250) do
+ActiveRecord::Schema.define(version: 20150309102403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,26 @@ ActiveRecord::Schema.define(version: 20150216112250) do
 
   add_index "comments", ["item_id", "item_type"], name: "index_comments_on_item_id_and_item_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "document_translations", force: :cascade do |t|
+    t.integer  "document_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "title"
+    t.text     "description"
+  end
+
+  add_index "document_translations", ["document_id"], name: "index_document_translations_on_document_id", using: :btree
+  add_index "document_translations", ["locale"], name: "index_document_translations_on_locale", using: :btree
+
+  create_table "documents", force: :cascade do |t|
+    t.integer  "attachment_id"
+    t.date     "date_of_release"
+    t.integer  "subsite_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "documenttype_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id",   null: false
