@@ -208,8 +208,30 @@
       }
     }
   }
+  .outer {
+    padding-bottom: 0;
+  }
   
+  .posts_index_container {
+    .post_small {
+      margin-bottom: 3rem;
+    }
+    
+  }
   
+  .posts.show {
+    .post_single {
+      .categories {
+        font-size: 1rem;
+      }
+      .title {
+        font-size: 2rem;
+      }
+      .metadata {
+        font-size: 1.2rem;
+      }
+    }
+  }
 }
 
 // tablets

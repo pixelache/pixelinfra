@@ -119,7 +119,7 @@ module ApplicationHelper
     end
   end
   
-  def figure_width(resource, default = "small-12")
+  def figure_width(resource, default = "medium-12")
     if resource.image.nil?
       return default
     else
@@ -129,11 +129,11 @@ module ApplicationHelper
         if resource.image_width > 1200
           return default
         elsif resource.image_width > 999
-          return "small-10"
+          return "medium-10"
         elsif resource.image_width > 800
-          return "small-8"
+          return "medium-8"
         else
-          return "small-7"
+          return "medium-7"
         end
       end
     end
