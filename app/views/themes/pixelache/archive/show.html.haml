@@ -4,30 +4,54 @@
   %span.leaf
     %strong= @year
     
-
-.show-for-small-only{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:0;destination_threshold:20;fixed_top:100" }
-  %dl.sub-nav
-    - unless @documents.empty?
-      %dd{:"data-magellan-arrival" => "publications"}= link_to t(:publications), '#publications' 
-    - unless @festival.nil?
-      %dd{:"data-magellan-arrival" => "festival"}= link_to t(:festival), '#festival'
-    - unless @projects.empty?
-      %dd{:"data-magellan-arrival" => "projects_archive"}= link_to t(:projects), '#projects_archive'
-
-    - unless @events.empty?
-      %dd{:"data-magellan-arrival" => "events_archive"}= link_to t(:events), '#events_archive'              
-      
-    - unless @residencies.empty?
-      %dd{:"data-magellan-arrival" => "residencies"}= link_to t(:residencies), '#residencies'
-    - unless @posts.empty?
-      %dd{:"data-magellan-arrival" => "posts"}= link_to t(:news), '#posts'               
-    - unless @photos.empty?
-      %dd{:"data-magellan-arrival" => "photos"}= link_to t(:photos), '#photos'     
+/
+/ .show-for-small-only{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:0;destination_threshold:20;fixed_top:100" }
+/   %dl.sub-nav
+/     - unless @documents.empty?
+/       %dd{:"data-magellan-arrival" => "publications"}= link_to t(:publications), '#publications'
+/     - unless @festival.nil?
+/       %dd{:"data-magellan-arrival" => "festival"}= link_to t(:festival), '#festival'
+/     - unless @projects.empty?
+/       %dd{:"data-magellan-arrival" => "projects_archive"}= link_to t(:projects), '#projects_archive'
+/
+/     - unless @events.empty?
+/       %dd{:"data-magellan-arrival" => "events_archive"}= link_to t(:events), '#events_archive'
+/
+/     - unless @residencies.empty?
+/       %dd{:"data-magellan-arrival" => "residencies"}= link_to t(:residencies), '#residencies'
+/     - unless @posts.empty?
+/       %dd{:"data-magellan-arrival" => "posts"}= link_to t(:news), '#posts'
+/     - unless @photos.empty?
+/       %dd{:"data-magellan-arrival" => "photos"}= link_to t(:photos), '#photos'   
       
 .yearly_archive
     
   
   .row
+  
+    .medium-4.columns.right
+      .magellan-scrollnav
+        %div{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:0;destination_threshold:20;fixed_top:100" }
+          %dl.sub-nav
+            - unless @documents.empty?
+              %dd.active{:"data-magellan-arrival" => "publications"}= link_to t(:publications), '#publications' 
+            - unless @festival.nil?
+              %dd{:"data-magellan-arrival" => "festival"}= link_to t(:festival), '#festival'
+            - unless @projects.empty?
+              %dd{:"data-magellan-arrival" => "projects_archive"}= link_to t(:projects), '#projects_archive'
+
+            - unless @events.empty?
+              %dd{:"data-magellan-arrival" => "events_archive"}= link_to t(:events), '#events_archive'              
+              
+            - unless @residencies.empty?
+              %dd{:"data-magellan-arrival" => "residencies"}= link_to t(:residencies), '#residencies'
+
+            - unless @posts.empty?
+              %dd{:"data-magellan-arrival" => "posts"}= link_to t(:news), '#posts'               
+            - unless @photos.empty?
+              %dd{:"data-magellan-arrival" => "photos"}= link_to t(:photos), '#photos'    
+  
+  
     .small-12.medium-8.columns
       .row
         .medium-9.columns.medium-offset-3
@@ -85,16 +109,21 @@
             .medium-9.columns.medium-offset-3.project_list
               - @projects.each do |p|
                 .row
-                  .small-4.medium-3.columns
-                    - if p.photos.empty?
-                      &nbsp;
-                    - else
+                  - if p.photos.empty?
+                    .small-4.medium-3.columns
+                      = link_to p, target: :_blank do
+                        .archive_image_box{style: "background-image: url('/assets/pixelache/images/arch_sq_grey_100x100.png')", onmouseover: '$(this).css("background-image", "url(\'/assets/pixelache/images/arch_sq_blue100x100.png\')");', onmouseout: '$(this).css("background-image", "url(\'/assets/pixelache/images/arch_sq_grey_100x100.png\')");'}
+                    .small-8.medium-9.columns.title_container{onmouseover: '$(this).closest(".row").find(".archive_image_box").css("background-image", "url(\'/assets/pixelache/images/arch_sq_blue100x100.png\')");', onmouseout: '$(this).closest(".row").find(".archive_image_box").css("background-image", "url(\'/assets/pixelache/images/arch_sq_grey_100x100.png\')");'}
+                      .name= link_to p.name, p, target: :_blank
+                                            
+                  - else
+                    .small-4.medium-3.columns
                       = link_to p, target: :_blank  do
                         .archive_image_box{style: !p.photos.empty? ? "background-image: url(#{p.photos.first.filename.url(:thumb).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
                           .blue
                             
-                  .small-8.medium-9.columns.title_container{onmouseover: '$(this).closest(".row").find(".blue").css("display", "block");', onmouseout: '$(this).closest(".row").find(".blue").css("display", "none");'}
-                    .name= link_to p.name, p, target: :_blank 
+                    .small-8.medium-9.columns.title_container{onmouseover: '$(this).closest(".row").find(".blue").css("display", "block");', onmouseout: '$(this).closest(".row").find(".blue").css("display", "none");'}
+                      .name= link_to p.name, p, target: :_blank 
 
       - unless @events.empty?
         .events#events_archive{:"data-magellan-destination" => "events_archive" }
@@ -173,27 +202,7 @@
                       
              
                 
-    .medium-4.columns.hide-for-small-only
-      .magellan-scrollnav
-        %div{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:0;destination_threshold:20;fixed_top:100" }
-          %dl.sub-nav
-            - unless @documents.empty?
-              %dd{:"data-magellan-arrival" => "publications"}= link_to t(:publications), '#publications' 
-            - unless @festival.nil?
-              %dd{:"data-magellan-arrival" => "festival"}= link_to t(:festival), '#festival'
-            - unless @projects.empty?
-              %dd{:"data-magellan-arrival" => "projects_archive"}= link_to t(:projects), '#projects_archive'
-
-            - unless @events.empty?
-              %dd{:"data-magellan-arrival" => "events_archive"}= link_to t(:events), '#events_archive'              
-              
-            - unless @residencies.empty?
-              %dd{:"data-magellan-arrival" => "residencies"}= link_to t(:residencies), '#residencies'
-
-            - unless @posts.empty?
-              %dd{:"data-magellan-arrival" => "posts"}= link_to t(:news), '#posts'               
-            - unless @photos.empty?
-              %dd{:"data-magellan-arrival" => "photos"}= link_to t(:photos), '#photos'                          
+                        
         
     /   - unless @festival.blank?
     /     %h2= link_to @festival.name, @festival

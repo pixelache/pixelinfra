@@ -1,5 +1,19 @@
 @import 'variables';
 
+.sub-nav {
+  dd.active {
+
+    background-color: #32CCFF;
+    a {
+      color: white;
+      background: none;
+      &:hover, &:focus {
+        background: none;
+      }
+    }
+  }
+}
+
 .yearly_archive {
   background-color: #333;
   padding: 3rem 0;
@@ -7,7 +21,7 @@
   .year {
     font-size: 2.875rem;
     font-family: $quicksand;
-    margin-top: 2rem;
+    margin-top: 3.25rem;
   }
 
   .section_title  {
