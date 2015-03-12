@@ -44,7 +44,7 @@
     font-family: $quicksand;
     a {
       color: #FFF;
-      a:hover {
+      &:hover {
         color: #32CCFF;
       }
     }
@@ -102,7 +102,7 @@
     }
     
   }
-  .events, .project_list, .document_list, .residency_list {
+  .events, .project_list, .document_list, .residency_list, .video_list {
     .row {
       margin-bottom: 0.5rem;
       .title_container {

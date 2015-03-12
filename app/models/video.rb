@@ -62,7 +62,17 @@ class Video < ActiveRecord::Base
       
   end
   
- 
+  def video_date
+    if event
+      event.start_at.to_date
+    elsif festival
+      festival.start_at.to_date
+    elsif project
+      nil
+    else
+      nil
+    end      
+  end
   
   def url
     videohost_id == 2 ? "http://www.youtube.com/watch?v=#{hostid}" : "http://vimeo.com/#{hostid}"

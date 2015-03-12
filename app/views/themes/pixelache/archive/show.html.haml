@@ -4,25 +4,7 @@
   %span.leaf
     %strong= @year
     
-/
-/ .show-for-small-only{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:0;destination_threshold:20;fixed_top:100" }
-/   %dl.sub-nav
-/     - unless @documents.empty?
-/       %dd{:"data-magellan-arrival" => "publications"}= link_to t(:publications), '#publications'
-/     - unless @festival.nil?
-/       %dd{:"data-magellan-arrival" => "festival"}= link_to t(:festival), '#festival'
-/     - unless @projects.empty?
-/       %dd{:"data-magellan-arrival" => "projects_archive"}= link_to t(:projects), '#projects_archive'
-/
-/     - unless @events.empty?
-/       %dd{:"data-magellan-arrival" => "events_archive"}= link_to t(:events), '#events_archive'
-/
-/     - unless @residencies.empty?
-/       %dd{:"data-magellan-arrival" => "residencies"}= link_to t(:residencies), '#residencies'
-/     - unless @posts.empty?
-/       %dd{:"data-magellan-arrival" => "posts"}= link_to t(:news), '#posts'
-/     - unless @photos.empty?
-/       %dd{:"data-magellan-arrival" => "photos"}= link_to t(:photos), '#photos'   
+
       
 .yearly_archive
     
@@ -50,6 +32,8 @@
               %dd{:"data-magellan-arrival" => "posts"}= link_to t(:news), '#posts'               
             - unless @photos.empty?
               %dd{:"data-magellan-arrival" => "photos"}= link_to t(:photos), '#photos'    
+            - unless @videos.empty?
+              %dd{:"data-magellan-arrival" => "videos"}= link_to t(:videos), '#videos'               
   
   
     .small-12.medium-8.columns
@@ -180,7 +164,7 @@
                           .blue
                             .date= date_range(r.start_at, r.end_at).gsub(/\s\d\d\d\d/, '')
                   .small-9.columns.title_container{onmouseover: '$(this).closest(".row").find(".blue").css("display", "block");', onmouseout: '$(this).closest(".row").find(".blue").css("display", "none");'}
-                    .name= link_to r.name, r
+                    .name= link_to r.name, r, target: :_blank
 
       - unless @posts.empty?
         .posts#posts{:"data-magellan-destination" => :posts }
@@ -214,19 +198,29 @@
                       .archive_image_box{style: "background-image: url(#{p.filename.url(:thumb).gsub(/development/, 'production')});", onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
                         .blue
                           .date= p.image_date.strftime('%d %b')
-                                            
-                      
 
-/ = content_for :jquery do
-/   :plain
-/     $( window ).scroll(function() {
-/       if ($('footer').is(':visible')) {
-/         if ($('.sub-nav').overlaps('footer')) {
-/
-/           $('[data-magellan-expedition]').css('position', 'relative');
-/         }
-/       }
-/       // else {
-/       //  $('[data-magellan-expedition]').css('position', 'fixed');
-/       // }
-/     });
+
+
+      - unless @videos.empty?
+        .videos#videos{:"data-magellan-destination" => :videos }
+          .row
+            .medium-9.columns.medium-offset-3
+              .section_title= t(:videos)
+              
+          .row
+            .medium-9.columns.medium-offset-3.video_list
+
+              - @videos.each do |v|
+                .row
+                  .small-3.columns
+                    = link_to v, target: :_blank do
+                      .archive_image_box{style: "background-image: url(#{v.thumbnail.url(:thumb).gsub(/development/, 'production')});", onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
+                        .blue
+                          - unless v.video_date.nil?
+                            .date= v.video_date.strftime('%d %b')
+                  .small-9.columns.title_container{onmouseover: '$(this).closest(".row").find(".blue").css("display", "block");', onmouseout: '$(this).closest(".row").find(".blue").css("display", "none");'}
+                    .name= link_to v.title, v, target: :blank
+                    
+
+                                                                      
+                      

@@ -12,7 +12,7 @@ class ArchiveController < ApplicationController
     @events = Event.by_subsite(@site).by_year(params[:id]).published.where(:festival_id => nil).order(:start_at)
     @documents = Document.joins(:attachment).where(["date_of_release >= ? AND date_of_release <= ?", "#{@year}-01-01", "#{@year}-12-31"]).where("attachments.public = true")
     @project_publications = @projects.map(&:attachments).flatten.compact.uniq.delete_if{|x| x.documenttype_id != 7}.delete_if{|x| x['public'] != true }.delete_if{|x| !x.year_of_publication.blank? && x.year_of_publication.to_s != @year }
-    
+    @videos = [ @events.map(&:videos), @festival.videos].flatten.compact.uniq
     @photos = Photo.by_year(params[:id]).to_a.delete_if{|x| x.item.class == Post }.delete_if{|x| x.item.subsite != @site }
     @photos += Archivalimage.by_site(@site).by_year(params[:id])
     @photos = @photos.flatten.shuffle
