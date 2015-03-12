@@ -120,7 +120,7 @@
           .row
             .medium-9.columns.medium-offset-3
               .section_title
-                = t :events
+                = link_to t(:events), archive_events_path(@year)
           .row
             .medium-9.columns.medium-offset-3.events
               - @events.each do |e|
@@ -170,7 +170,7 @@
         .posts#posts{:"data-magellan-destination" => :posts }
           .row
             .medium-9.columns.medium-offset-3
-              .section_title= t(:news)
+              .section_title= link_to t(:news), archive_posts_path(@year)
               
           .row
             .medium-9.columns.medium-offset-3.post_list

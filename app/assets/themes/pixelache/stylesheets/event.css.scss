@@ -23,7 +23,8 @@
   padding-bottom: 100%;
   height: 0;
   margin-bottom: 40px;
-
+  overflow: hidden;
+  cursor: pointer;
   .yellow {
 
     background-color: $our-yellow;
