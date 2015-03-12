@@ -10,6 +10,7 @@
       %span.leaf
         = link_to @residency.name, @residency
         = " : "
+
     - if @user
       %span.leaf
         = link_to t(:members), members_path
@@ -30,6 +31,10 @@
             = link_to p.name, p
             = " : "
     %strong= t :news
+    - if @year
+      = " : "
+      %span.leaf= @year 
+      
 - if @project
   = content_for :project_tree do
     = render :partial => 'shared/projects_tree'  

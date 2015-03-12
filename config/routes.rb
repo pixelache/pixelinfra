@@ -107,7 +107,10 @@ Pixelinfra::Application.routes.draw do
       get '/*page', :action => :page, :as => :festival_page
     end
   end
-  resources :archive
+  resources :archive do
+    resources :posts
+    resources :events
+  end
   
   resources :pages
   

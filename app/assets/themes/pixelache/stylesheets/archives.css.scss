@@ -3,7 +3,7 @@
 .sub-nav {
   dd.active {
 
-    background-color: #32CCFF;
+    background-color: $newblue;
     a {
       color: white;
       background: none;
@@ -29,7 +29,7 @@
       vertical-align: middle;
       padding-right: 0.5rem;
       &:hover {
-        color: #32CCFF;
+        color: $newblue;
       }
     }
   }
@@ -45,7 +45,7 @@
     a {
       color: #FFF;
       &:hover {
-        color: #32CCFF;
+        color: $newblue;
       }
     }
   }
@@ -59,7 +59,7 @@
     background-size: cover;
     
     .blue {
-      background-color: #32CCFF;
+      background-color: $newblue;
       padding-bottom: 100%;
       height: 100px;
       width: 100%;

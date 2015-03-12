@@ -90,6 +90,17 @@ nav.top-bar.admin {
   }
 }
 
+// pagination
+ul.pagination { 
+  li.current a { 
+    background-color: $newblue !important;
+  }
+  li.next, li.first, li.last, li.prev {
+    margin-top: 33px;
+  }
+}
+
+
 
 
 table.etherpads {

@@ -18,7 +18,12 @@ class EventsController < InheritedResources::Base
       events += @residency.project.events.published if @residency.project
       @events = Kaminari.paginate_array(events.flatten.uniq.sort_by{|x| x.start_at}.reverse).page(params[:page]).per(12)
       set_meta_tags title: @residency.name + " " + t(:events) 
-            
+
+    elsif params[:archive_id]
+      @year = params[:archive_id]
+      @events = Event.by_site(@site).by_year(@year).published.order('start_at DESC').page(params[:page]).per(12)
+      set_meta_tags title: t(:events) + " #{@year}"
+      
     else
       @events = Event.by_site(@site).published.order('start_at DESC').page(params[:page]).per(12)
       set_meta_tags title: t(:events)

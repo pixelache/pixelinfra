@@ -7,6 +7,11 @@ class PostsController < ApplicationController
       @posts = Post.by_site(@site).by_festival(@festival).published.order('published_at DESC').page(params[:page]).per(12)
       set_meta_tags title: @festival.name + " " + t(:posts)
       
+    elsif params[:archive_id]
+      @year = params[:archive_id]
+      @posts = Post.by_site(@site).by_year(@year).published.order('published_at DESC').page(params[:page]).per(12)
+      set_meta_tags title: t(:news) + " #{@year}"
+      
     elsif params[:project_id]
       @project = Project.find(params[:project_id])
       @posts = Kaminari.paginate_array(@project.self_and_descendants.visible.map{|x| x.posts.by_site(@site).published }.flatten.sort_by(&:published_at).reverse).page(params[:page]).per(12)
