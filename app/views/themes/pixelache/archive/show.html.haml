@@ -29,7 +29,7 @@
   
   .row
   
-    .medium-4.columns.right
+    .medium-4.small-12.columns.right.archive_nav
       .magellan-scrollnav
         %div{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:0;destination_threshold:20;fixed_top:100" }
           %dl.sub-nav
@@ -55,7 +55,12 @@
     .small-12.medium-8.columns
       .row
         .medium-9.columns.medium-offset-3
-          .year= @year
+          .year
+            - unless @year.to_i == 2002
+              = link_to '<< ', archive_path(@year.to_i - 1)
+            = @year
+            - unless @year.to_i == Time.now.year
+              = link_to '>> ', archive_path(@year.to_i + 1)
           
       - unless @documents.empty? && @project_publications.empty?
         .documents#publications{:"data-magellan-destination" => :publications }
@@ -84,8 +89,9 @@
           .row
             .medium-9.columns.medium-offset-3
               .section_title
-                = @festival.name + " : "
-                = @festival.subtitle
+                = link_to @festival.name, @festival, target: :blank
+                = " : "
+                = link_to @festival.subtitle, @festival, target: :blank
           .row
             .medium-9.columns.medium-offset-3.events
               - @festival.events.published.each do |e|
@@ -135,14 +141,24 @@
             .medium-9.columns.medium-offset-3.events
               - @events.each do |e|
                 .row
-                  .small-4.medium-3.columns
-                    = link_to e, target: :_blank  do
-                      .archive_image_box{style: e.image? ? "background-image: url(#{e.image.url(:thumb).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
-                        .blue
-                          .date= e.start_at.strftime('%d %b')
+                  - if e.image?
+                    .small-4.medium-3.columns
+                      = link_to e, target: :_blank  do
+                        .archive_image_box{style: e.image? ? "background-image: url(#{e.image.url(:thumb).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
+                          .blue
+                            .date= e.start_at.strftime('%d %b')
 
-                  .small-8.medium-9.columns.title_container{ onmouseover: '$(this).closest(".row").find(".blue").css("display", "block");', onmouseout: '$(this).closest(".row").find(".blue").css("display", "none");'}
-                    .name= link_to e.name, e, target: :_blank 
+                    .small-8.medium-9.columns.title_container{ onmouseover: '$(this).closest(".row").find(".blue").css("display", "block");', onmouseout: '$(this).closest(".row").find(".blue").css("display", "none");'}
+                      .name= link_to e.name, e, target: :_blank 
+                  - else
+                    .small-4.medium-3.columns
+                      = link_to e, target: :_blank do
+                        .archive_image_box{style: "background-image: url('/assets/pixelache/images/arch_sq_grey_100x100.png')", onmouseover: '$(this).css("background-image", "url(\'/assets/pixelache/images/arch_sq_blue100x100.png\')");', onmouseout: '$(this).css("background-image", "url(\'/assets/pixelache/images/arch_sq_grey_100x100.png\')");'}
+                          .blue
+                            .date= e.start_at.strftime('%d %b')
+                            
+                    .small-8.medium-9.columns.title_container{onmouseover: '$(this).closest(".row").find(".blue").css("display", "block");$(this).closest(".row").find(".archive_image_box").css("background-image", "url(\'/assets/pixelache/images/arch_sq_blue100x100.png\')");', onmouseout: '$(this).closest(".row").find(".blue").css("display", "none");$(this).closest(".row").find(".archive_image_box").css("background-image", "url(\'/assets/pixelache/images/arch_sq_grey_100x100.png\')");'}
+                      .name= link_to e.name, e, target: :_blank                     
                     
 
       - unless @residencies.empty?
@@ -200,36 +216,17 @@
                           .date= p.image_date.strftime('%d %b')
                                             
                       
-             
-                
-                        
-        
-    /   - unless @festival.blank?
-    /     %h2= link_to @festival.name, @festival
-    /     .tagline= @festival.subtitle
-    /     = image_tag @festival.image.url(:standard) if @festival.image?
-    /
-    /     - @festival.events.each do |event|
-    /       .row
-    /         .small-12.columns
-    /           = image_tag event.image.url(:box) if event.image?
-    /
-    /
-    / .small-4.columns
-    /   - unless @events.empty?
-    /     %h2= t(:events)
-    /     - @events.sort_by{|x| x.start_at }.reverse.each do |event|
-    /       = link_to event do
-    /         .row.event
-    /           .small-12.columns
-    /             = image_tag event.image.url(:box) if event.image?
-    / .small-4.columns
-    /   - unless @posts.empty?
-    /     %h2= t :posts
-    /     - @posts.sort_by(&:published_at).reverse.in_groups_of(4).each do |post_group|
-    /       .row
-    /         - post_group.each do |post|
-    /           - next if post.nil?
-    /           .small-3.columns
-    /             = link_to post do
-    /               = image_tag post.image.url(:logo) if post.image?
+
+/ = content_for :jquery do
+/   :plain
+/     $( window ).scroll(function() {
+/       if ($('footer').is(':visible')) {
+/         if ($('.sub-nav').overlaps('footer')) {
+/
+/           $('[data-magellan-expedition]').css('position', 'relative');
+/         }
+/       }
+/       // else {
+/       //  $('[data-magellan-expedition]').css('position', 'fixed');
+/       // }
+/     });

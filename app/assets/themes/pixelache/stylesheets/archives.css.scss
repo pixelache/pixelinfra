@@ -22,6 +22,16 @@
     font-size: 2.875rem;
     font-family: $quicksand;
     margin-top: 3.25rem;
+    a {
+      letter-spacing: -0.2rem;
+      color: #fff;
+      font-size: 1.5rem;
+      vertical-align: middle;
+      padding-right: 0.5rem;
+      &:hover {
+        color: #32CCFF;
+      }
+    }
   }
 
   .section_title  {
@@ -32,6 +42,12 @@
     margin-bottom: 0.5rem;
     margin-top: 2.75rem;
     font-family: $quicksand;
+    a {
+      color: #FFF;
+      a:hover {
+        color: #32CCFF;
+      }
+    }
   }
   
 
@@ -52,9 +68,19 @@
       opacity: 0.7;
       position: relative;
       .date {
-        margin: 34px 15px;
+        margin: 41px 15px;
         font-family: $quicksand;
         color: #FFF;
+      }
+    }
+  }
+  
+  .residencies {
+    .archive_image_box {
+      .blue {
+        .date {
+          margin: 32px 15px;
+        }
       }
     }
   }

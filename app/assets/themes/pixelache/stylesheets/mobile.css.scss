@@ -232,6 +232,41 @@
       }
     }
   }
+  
+  .yearly_archive {
+    padding: 0;
+    .archive_nav {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .magellan-scrollnav {
+    [data-magellan-expedition-clone] {
+      dl.sub-nav {
+        display: none;
+      }
+    }
+    [data-magellan-expedition], [data-magellan-expedition-clone] {
+      width: 100% !important;
+      top: 70px !important;
+      left: 0px !important;
+      min-width: 0;
+      background: none;
+      dl {
+        background-color: whitesmoke;
+        dd {
+          display:inline;
+          float: none;
+          border-bottom: none;
+          padding: 0;
+          background-color: none;
+          a {
+            color: black;
+          }
+        }
+      }
+    }
+  }
 }
 
 // tablets

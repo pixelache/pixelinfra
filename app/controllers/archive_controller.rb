@@ -3,7 +3,7 @@ class ArchiveController < ApplicationController
   def show
     @year = params[:id]
     @events = Event.by_subsite(@site).by_year(params[:id]).where(:festival_id => nil)
-    @festival = Festival.by_node(Node.find_by(:name => 'Pixelache Helsinki')).by_year(params[:id]).first
+    @festival = Festival.by_node(Node.find_by(:name => 'Pixelache Helsinki')).by_year(params[:id]).published.first
     @projects = @events.map(&:project).compact.uniq
     @residencies = Residency.where(["(start_at >= ? AND start_at <= ?) OR (end_at >= ? AND end_at <= ?)",  "#{@year}-01-01", "#{@year}-12-31", "#{@year}-01-01", "#{@year}-12-31" ])
     @posts = Post.by_subsite(@site).published.by_year(params[:id]).order(:published_at)
