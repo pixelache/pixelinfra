@@ -6,6 +6,16 @@
 
 nav.top-bar {
   
+  li.menu_link {
+    color: white;
+    width: 4.5rem;
+    text-align: right;
+    a {
+      padding: 0 0.5rem 0 0;
+      color: white !important;
+      font-size: 0.9rem;
+    }
+  }
   form {
     input#search_term {
       top: 4px;

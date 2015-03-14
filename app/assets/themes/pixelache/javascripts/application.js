@@ -4,10 +4,11 @@
 
 function down_pixelache_menu() {
 
+  var t = parseInt($('.pixelache_nav_menu').css('height'));
   $('.pixelache_nav_menu').slideDown();
-  $('.arrow-up').css('display', 'block');
-
-
+  $('.page_tree').animate({top: (t + 40) + 'px'}, 400);
+  $('div.project_tree').animate({top: (t + 72) + 'px'}, 400);
+  
 }
 
 
@@ -26,7 +27,7 @@ function load_to_top(href) {
 function up_pixelache_menu() {
 
   $('.pixelache_nav_menu').slideUp();
-  $('.arrow-up').css('display', 'none');
+
 
 }
 

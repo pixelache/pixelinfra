@@ -29,8 +29,8 @@
       %header
         .top-bar-wrapper.sticky= render 'layouts/top_bar'
         - unless @festival && controller.controller_name != 'archive'
-          .arrow-down.sticky
-          .arrow-up
+          .arrow-down.fixed
+          -#.arrow-up
         .pixelache_nav_menu.sticky{:class => content_for?(:festival_menu) ? :festival_menu : :black, :style => content_for?(:festival_menu) ?  "background-color: #" + (@festival.background_colour.blank? ? "#FFF" : @festival.background_colour) + "; color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour) : false } 
           - if content_for? :festival_menu
             = yield :festival_menu
@@ -126,21 +126,33 @@
             $('button#mailing_list_submit').prop('disabled', true);
             $('.email_signup_form').fadeOut();
           });
-          $('.arrow-down').mouseover(function() {
-            var t = parseInt($('.pixelache_nav_menu').css('height'));
+          $('a.menu_link_anchor').click(function() {
+            
+            if ($('.pixelache_nav_menu').is(':visible')) {
+              up_pixelache_menu();
+              $('a.menu_link_anchor').text("#{t :menu}").mouseover(function () {
+                $(this).text("#{t :open}");
+              }).mouseout(function() { 
+                $(this).text("#{t :menu}");
+              });
+              
+            }
+            else  {
+              down_pixelache_menu();
+              $('a.menu_link_anchor').text("#{t :close}").mouseover(function () {
+                $(this).text("#{t :close}");
+              }).mouseout(function() { 
+                $(this).text("#{t :close}");
+              });
+            }
+            
+            
+          });
+          $('.arrow-down').click(function() {
+            $('a.menu_link_anchor').text("#{t :close}");
             down_pixelache_menu();
-            $('.page_tree').animate({top: (t + 40) + 'px'}, 400);
-            $('div.project_tree').animate({top: (t + 72) + 'px'}, 400);
-            // $(":animated").promise().done(function() {
-            //
-            //   $('.page_tree').css('top', (t + 40) + 'px');
-            // });
           });
-          $('.arrow-up').mouseover(function() {
-            up_pixelache_menu();
-            $('.page_tree').animate({top: '40px'}, 400);
-            $('div.project_tree').animate({top: '72px'}, 400);
-          });
+
           #{yield :jquery}
         });
     / ! end of #container

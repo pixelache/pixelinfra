@@ -108,12 +108,15 @@ td .date {
 	cursor: pointer;
 	border-top: 14px solid #000;
   position: fixed;
-  left: 12px;
+  right: 12px;
+  float: right;
   top: 40px;
   z-index: 13;
   &.fixed {
+    position: fixed;
     top: 40px;
-    left: 12px;
+    float: right;
+    left: inherit;
     z-index: 100;
     width: 0;
   }
