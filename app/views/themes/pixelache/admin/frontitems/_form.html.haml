@@ -20,6 +20,9 @@
      
       .row
         .small-2.columns= f.input :background_colour, :as => :string, :input_html => {:class => :colourpicker }
+      .row
+        .small-5.columns= f.input :background_on_title, as: :boolean, label: 'Put background colour behind title text'
+        .small-5.columns= f.input :background_on_text, as: :boolean, label: 'Put background colour behind main text'
         .small-3.left.columns
           - if f.object.bigimage?
             = image_tag f.object.bigimage.url(:thumb)

@@ -22,16 +22,17 @@
     .small-10.columns.large-offset-1 
       - if front.custom_title
         .row
-          .small-12.columns.custom_title= raw front.custom_title
+          .small-12.columns
+            .custom_title{:style => ["color: ##{front.text_colour};", front.background_on_title == true ? "background-color: ##{front.background_colour};opacity: 0.85;": false].join}= raw front.custom_title
       .smaller_posts.row
         - unless front.item.nil?
           .post.medium-6.small-12.columns
-            .title= link_to front.item.name, front.item
-            .body= truncate_html sanitize(front.item.body, tags: %w{strong b italic i em underline u bold}), :length => 300
-            .read_more= link_to t(:read_more), front.item
+            .title{:style => ["color: ##{front.text_colour};", front.background_on_title == true ? "background-color: ##{front.background_colour};opacity: 0.85;": false].join}= link_to front.item.name, front.item
+            .body{:style => ["color: ##{front.text_colour};", front.background_on_text == true ? "background-color: ##{front.background_colour};opacity: 0.85;": false].join}= truncate_html sanitize(front.item.body, tags: %w{strong b italic i em underline u bold}), :length => 300
+            .read_more{:style => ["color: ##{front.text_colour};", front.background_on_text == true ? "background-color: ##{front.background_colour};opacity: 0.85;": false].join}= link_to t(:read_more), front.item
         - if front.seconditem
           .post.medium-6.small-12.columns
-            .title= link_to front.seconditem.name, front.seconditem
-            .body= truncate_html sanitize(front.seconditem.body, tags: %w{strong b italic i em underline u bold}), :length => 300
-            .read_more= link_to t(:read_more), front.seconditem
+            .title{:style => ["color: ##{front.text_colour};", front.background_on_title == true ? "background-color: ##{front.background_colour};opacity: 0.85;": false].join}= link_to front.seconditem.name, front.seconditem
+            .body{:style => ["color: ##{front.text_colour};", front.background_on_text == true ? "background-color: ##{front.background_colour};opacity: 0.85;": false].join}= truncate_html sanitize(front.seconditem.body, tags: %w{strong b italic i em underline u bold}), :length => 300
+            .read_more{:style => ["color: ##{front.text_colour};", front.background_on_text == true ? "background-color: ##{front.background_colour};opacity: 0.85;": false].join}= link_to t(:read_more), front.seconditem
             

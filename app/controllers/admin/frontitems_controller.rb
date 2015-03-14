@@ -26,7 +26,7 @@ class Admin::FrontitemsController < Admin::BaseController
   protected 
   
   def permitted_params
-    params.permit(:frontitem => [:item_type, :subsite_id, :seconditem_type, :seconditem_id, :custom_title, :item_id, :frontmodule_id, :position, :custom_follow_text, :external_url, :remove_bigimage, :background_colour, :bigimage, :text_colour, :active])
+    params.permit(:frontitem => [:item_type, :subsite_id, :seconditem_type, :seconditem_id, :custom_title, :item_id, :frontmodule_id, :position, :custom_follow_text, :external_url, :remove_bigimage, :background_colour, :bigimage, :background_on_title, :background_on_text, :text_colour, :active])
     
   end
 end

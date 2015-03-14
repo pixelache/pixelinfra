@@ -109,6 +109,8 @@
     text-transform: uppercase;
     line-height: 1.8rem;
     margin-bottom: 4.5rem; 
+    float: left;
+    padding: 0.4rem;
   }
   
   .top_post {
@@ -119,8 +121,9 @@
     .title {
       font-family: $quicksand;
       font-size: 3rem;
+      padding: 0.4rem;
       line-height: 3.5rem;
-      padding-bottom: 20px;
+      padding-bottom: 1.25rem;
       border-bottom: 1px solid #333;
       a {
         color: black;
@@ -149,15 +152,17 @@
     }
     .body {
       font-family: Open Sans, sans-serif;
-      font-size: 20px;
+      font-size: 1.25rem;
       font-weight: 300;
       color: #999;
-      line-height: 25px;
+      padding: 0.4rem;
+      line-height: 1.563rem;
       margin: 30px 0px;
     }
     .read_more {
       font-family: $quicksand;
       font-size: 1.4rem;
+      padding: 0.4rem;
       text-transform: lowercase;
       a {
         color: #000;
@@ -171,7 +176,8 @@
       font-family: $quicksand;
       font-size: 1.75rem;
       line-height: 2.25rem;
-      padding-bottom:15px;
+      padding: 0.4rem;
+      margin-bottom: 1rem;
       border-bottom: 1px solid #333;
       a {
         color: black;
@@ -205,10 +211,13 @@
       color: #999;
       line-height: 1.9rem;
       margin: 1rem 0;    
+      padding: 0.4rem;
     }
     .read_more {
       font-family: $quicksand;
       font-size: 1.4rem;
+      padding: 0.4rem;
+      float: left;
       text-transform: lowercase;
       a {
         color: #333;
@@ -221,16 +230,25 @@
 }
 
 .calendar {
+  .custom_title {
+    font-family: Open Sans, sans-serif;
+      font-size: 1.2rem;
+      font-weight: 300;
+      text-transform: uppercase;
+      line-height: 1.8rem;
+      margin-bottom: 3rem;
+  }
+  
   background-color: #5a4a42;
   font-family: $quicksand;
   color: white;
-  padding: 20px 0px;
+  padding: 1.25rem 0px;
   a {
     color: white;
   }
   .entry {
     border-bottom: 1px dashed #666;
-    padding: 20px 0px;
+    padding: 1.25rem 0px;
     &.last {
       border-bottom: none;
     }
@@ -264,28 +282,34 @@
   padding-top: 50%;
   .custom_title {
     font-family: Open Sans, sans-serif;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 300;
     text-transform: uppercase;
-    line-height: 25px;
-    margin-bottom: 240px; 
+    line-height: 1.563rem;
+    margin-bottom: 13rem;
+    float: left;
+    padding: 8px;
   }
   .title {
     font-size: 3rem;
     line-height: 3.5rem;
+    padding: 8px;
+    margin-bottom: 1rem;
     font-family: $quicksand;
   }
   .blurb {
     font-family: Open Sans, sans-serif;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 300;
     color: #999;
-    line-height: 25px;
-    margin-bottom: 15px;
+    line-height: 1.563rem;
+    padding: 8px;
+    margin-bottom: 1rem;
   }
   .read_more {
     font-family: $quicksand;
     font-size: 1.4rem;
+        padding: 8px;
     text-transform: lowercase;
   }
 }
@@ -314,7 +338,7 @@
     }
     .year {
       font-size: 10rem;
-      margin: 25px 0px;
+      margin: 1.563rem 0px;
       letter-spacing: -10px;
     }
     .description {
@@ -337,6 +361,8 @@
   }
   
   .calendar {
+
+    
     .entry {
       .date {
         font-size: 1.5rem;
@@ -430,7 +456,7 @@ form {
 }
 
 #recaptcha_area { 
-  margin: 20px 0px;
+  margin: 1.25rem 0px;
 }
 
 #local_signin_form {
