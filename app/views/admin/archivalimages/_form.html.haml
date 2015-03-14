@@ -26,6 +26,8 @@
   .row
     .small-6.columns= f.input :credit, :label => 'Photo credit'
   .row
+    .small-6.columns= f.input :cover_right, as: :boolean, :label => 'Put pink frontpage archive box on right half instead of left'
+  .row
     .small-6.columns
       %h5 Connected to an event?
       = f.input :event_name, :as => :autocomplete, :url =>  autocomplete_event_name_admin_archivalimages_path, :input_html => { :id_element => '#archivalimage_event_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the event name", :hint => raw("(If the event is not already the database, <a href=\"/admin/events/new\" target=\"_blank\">create it first.</a>)")

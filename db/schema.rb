@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310204117) do
+ActiveRecord::Schema.define(version: 20150314144239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20150310204117) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "image_date"
+    t.boolean  "cover_right",                    default: false, null: false
   end
 
   add_index "archivalimages", ["event_id"], name: "index_archivalimages_on_event_id", using: :btree
@@ -120,7 +121,7 @@ ActiveRecord::Schema.define(version: 20150310204117) do
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
   create_table "ckeditor_assets", force: :cascade do |t|
-    t.string   "data_file_name",    limit: 255, null: false
+    t.string   "data_file_name",    limit: 255,                 null: false
     t.string   "data_content_type", limit: 255
     t.integer  "data_file_size"
     t.integer  "assetable_id"
@@ -130,6 +131,8 @@ ActiveRecord::Schema.define(version: 20150310204117) do
     t.integer  "height"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "wordpress_url"
+    t.boolean  "missing",                       default: false, null: false
   end
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
@@ -405,13 +408,25 @@ ActiveRecord::Schema.define(version: 20150310204117) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "frontitem_translations", force: :cascade do |t|
+    t.integer  "frontitem_id",       null: false
+    t.string   "locale",             null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "custom_title"
+    t.string   "custom_follow_text"
+  end
+
+  add_index "frontitem_translations", ["frontitem_id"], name: "index_frontitem_translations_on_frontitem_id", using: :btree
+  add_index "frontitem_translations", ["locale"], name: "index_frontitem_translations_on_locale", using: :btree
+
   create_table "frontitems", force: :cascade do |t|
     t.string   "item_type",             limit: 255
     t.integer  "item_id"
     t.integer  "position"
     t.string   "external_url",          limit: 255
-    t.string   "background_colour",     limit: 255, default: "f05a28",    null: false
-    t.string   "text_colour",           limit: 255, default: "FFFFFF",    null: false
+    t.string   "background_colour",     limit: 255, default: "f05a28", null: false
+    t.string   "text_colour",           limit: 255, default: "FFFFFF", null: false
     t.boolean  "active"
     t.integer  "frontmodule_id"
     t.datetime "created_at"
@@ -424,8 +439,6 @@ ActiveRecord::Schema.define(version: 20150310204117) do
     t.string   "bigimage_content_type", limit: 255
     t.string   "seconditem_type",       limit: 255
     t.string   "seconditem_id",         limit: 255
-    t.string   "custom_title",          limit: 255
-    t.string   "custom_follow_text",    limit: 255, default: "Read more", null: false
   end
 
   add_index "frontitems", ["item_id", "item_type"], name: "index_frontitems_on_item_id_and_item_type", using: :btree

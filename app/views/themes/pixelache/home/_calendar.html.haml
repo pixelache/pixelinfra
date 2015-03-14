@@ -1,4 +1,8 @@
 .calendar
+  .small-10.columns.large-offset-1 
+    .row
+      .small-12.columns.custom_title= t :current_activities
+
   .row
     .small-10.columns.large-offset-1
       - @events.each_with_index do |event, index|

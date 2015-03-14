@@ -337,6 +337,71 @@ namespace :wordpress do
     end
   end
   
+
+  task migrate_images: :environment do
+    ActiveRecord::Base.record_timestamps = false
+    Post::Translation.all.each do |post|
+      next if post.body.nil?
+      matches = post.body.scan(/['"]((https?):\/\/(www\.:?)pixelache\.ac\/wp-content[^"]+)/).map(&:first).uniq
+      matches.each do |image_url|
+        # check to see if it's already in our database
+        existing = Ckeditor::Asset.find_by(wordpress_url: image_url)
+        
+        # new record so grab url and save and mark if missing
+        if existing.nil?
+          ck = Ckeditor.picture_model.new
+          
+          # if it ends in something like -660x371 try to get original
+          if image_url =~ /\-\d\d\dx\d\d\d\.(jpe?g|png|gif)$/
+            first_try = image_url.gsub(/\-\d\d\dx\d\d\d\./, '.')
+            ck.remote_data_url = first_try
+            ck.wordpress_url = image_url
+            if !ck.save
+              ck.remote_data_url = image_url
+            end
+          else
+            ck.remote_data_url = image_url
+          end
+          
+          ck.wordpress_url = image_url
+          begin
+            ck.save!
+          rescue ActiveRecord::RecordInvalid
+              ck.remote_data_url = 'http://www.pixelache.ac/helsinki/wp-content/uploads/2010/02/pixelache-1.gif'
+              ck.missing = true
+              ck.save!
+          end
+          existing = ck
+        end
+          
+        # already exists so just replace with correct URL  
+        post.body.gsub!(image_url, existing.data.url)
+        if existing.missing
+          puts "broken URL: #{image_url}"
+        else
+          puts "replaced #{image_url} with #{existing.data.url} for Post ##{post.post_id}"
+        end
+        # doc = Nokogiri::HTML.fragment(post.body)
+        # doc.search('figure').each do |a|
+        #   a.replace(a.content)
+        # end
+        # post.body = doc.to_html
+        post.body.gsub!(/<\/?figure>/, '')
+        
+        post.save(validate: false)
+      end  # end of matches.each loop
+      unless post.globalized_model.image? || matches.empty?
+        d = Ckeditor::Asset.find_by(wordpress_url: matches.first)
+        unless d.missing == true
+          post.globalized_model.remote_image_url = d.data.url
+          post.globalized_model.save!
+          puts "Post ##{post.post_id} was missing image, now has #{d.data.url}"
+        end
+      end
+         
+    end
+  end
+  
       
 
   task :convert_page_line_breaks => :environment do

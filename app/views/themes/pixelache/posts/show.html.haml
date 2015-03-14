@@ -49,7 +49,8 @@
               = raw "#{@post.creator.name}"
             - else
               = raw "#{link_to @post.creator.name, member_path(@post.creator)}"      
-        .body=raw Nokogiri::HTML.parse(@post.body.gsub(/(<(?!\/)[^>]+>)+(<\/[^>]+>)+/, '')).inner_html
+        .body=raw @post.body
+        // #Nokogiri::HTML.parse(@post.body.gsub(/(<(?!\/)[^>]+>)+(<\/[^>]+>)+/, '')).inner_html
     .row
       .small-12.columns.share_this= render :partial => 'shared/share_this_buttons'
 

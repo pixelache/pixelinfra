@@ -4,6 +4,7 @@ class Frontitem < ActiveRecord::Base
   belongs_to :subsite
   belongs_to :seconditem, polymorphic: true
   
+  translates :custom_title, :custom_follow_text, :fallbacks_for_empty_translations => true
   validates_presence_of :subsite_id
   
   scope :published, -> () { where(published: true) }
@@ -12,6 +13,8 @@ class Frontitem < ActiveRecord::Base
   
   mount_uploader :bigimage, ArchiveimageUploader
   before_save :update_image_attributes
+  
+  accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['custom_title'].blank? && x['custom_follow_text'].blank? }
   
   
   def item_name
