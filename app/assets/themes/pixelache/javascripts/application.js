@@ -27,7 +27,7 @@ function load_to_top(href) {
 function up_pixelache_menu() {
 
   $('.pixelache_nav_menu').slideUp();
-
+  $('.page_tree').animate({top: '40px'}, 400);
 
 }
 

@@ -11,7 +11,7 @@
         - if project.evolvedto
           .evolved= link_to t(:evolved_into, project: project.evolvedto.name, year: project.evolvedto.evolution_year), '#', onclick: "$('#project_#{project.evolvedto.id.to_s}').parent().slideDown(); scrollTo('#project_#{project.evolvedto.id.to_s}'); ", style: project.background_css
     - unless project.children.visible.empty?
-      .children_strip= link_to raw(pluralize(project.descendants.visible.flatten.size, t(:subproject)) + "&#9660;"), '#', style: "color: ##{project.project_text_colour}", onclick: "$('#subprojects_#{project.id.to_s}').slideToggle(); return false;"
+      .children_strip= link_to raw(pluralize(project.descendants.visible.flatten.size, t(:subproject)) + " &#9660;"), '#', style: "color: ##{project.project_text_colour}", onclick: "$('#subprojects_#{project.id.to_s}').slideToggle(); return false;"
       
   //.selector.trigger.columns{style: "background-color: rgb(#{project.colour_offset}); opacity: 1;"} &nbsp;
   .image_box.trigger{style: project.background_image_css}
@@ -59,7 +59,7 @@
           .arrow{style: "width: 0; height: 0; border-bottom: 14px solid transparent;	border-top: 14px solid transparent;	cursor: pointer;	border-left: 14px solid ##{project.project_bg_colour}; position: absolute; top; margin-top: 0.25rem"}
           .row
             .small-12.columns.text-center
-              = link_to t(:active_project) + ": ", '#',  onclick: "scrollTo('#project_#{subproject.id.to_s}')", style: subproject.background_css
+              %span.heading= link_to t(:active_project) + ": ", '#',  onclick: "scrollTo('#project_#{subproject.id.to_s}')", style: subproject.background_css
               = link_to subproject.name, '#', onclick: "scrollTo('#project_#{subproject.id.to_s}')", style: subproject.background_css
 
       - else

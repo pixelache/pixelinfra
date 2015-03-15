@@ -126,6 +126,15 @@
             $('button#mailing_list_submit').prop('disabled', true);
             $('.email_signup_form').fadeOut();
           });
+          $('.top-bar-wrapper').mouseover(function() {
+            
+              down_pixelache_menu();
+              $('a.menu_link_anchor').text("#{t :close}").mouseover(function () {
+                $(this).text("#{t :close}");
+              }).mouseout(function() { 
+                $(this).text("#{t :close}");
+              });
+          });
           $('a.menu_link_anchor').click(function() {
             
             if ($('.pixelache_nav_menu').is(':visible')) {

@@ -332,7 +332,7 @@ en:
   password: 'Please choose a secure password.'
   password_confirmation: 'Confirm your password:'
   past_members: 'Past members:'
-  past_projects: 'Past projects:'
+  past_projects: 'Past projects'
   people: 'People'
   people_expertise: 'People/expertise?'
   photo: 'photo'
