@@ -103,6 +103,7 @@ nav.top-bar.admin {
 // pagination
 ul.pagination { 
   margin-bottom: 2rem;
+  float: left;
   li.current a { 
     background-color: $newblue !important;
   }

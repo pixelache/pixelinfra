@@ -1,5 +1,21 @@
 fi:
   locale_name: 'Suomeksi'
+
+  helpers:
+    page_entries_info:
+      more_pages:
+        display_entries: 
+      one_page:
+        display_entries:
+          one: Näytetään <b>yksi</b> %{entry_name}
+          other: Näytetään <b>%{count}</b> %{entry_name}
+  views:
+    pagination:
+      first: "&laquo; Ensimmäinen"
+      last: Viimeinen &raquo;
+      next: Seuraava &rsaquo;
+      previous: "&lsaquo; Edellinen"
+      truncate: "&hellip;"
   date:
     abbr_day_names:
     - su
