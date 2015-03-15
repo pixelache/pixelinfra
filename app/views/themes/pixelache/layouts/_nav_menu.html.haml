@@ -9,7 +9,7 @@
     %ul.navhide#info_menu
       %li= link_to t(:about), page_path('about')
       %li= link_to t(:latest_news), posts_path, onmouseover: "javascript:toggleNavMenu('#news')", id: :news
-      -#%li= link_to t(:press), page_path('press')
+      %li= link_to t(:press), page_path('press')
     %ul.navhide#activities_menu
       %li= link_to t(:events), events_path, onmouseover: "javascript:toggleNavMenu('#events')", id: :events
       %li= link_to t(:projects), projects_path, onmouseover: "javascript:toggleNavMenu('#projects')" , id: :projects

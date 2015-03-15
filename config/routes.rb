@@ -156,4 +156,5 @@ Pixelinfra::Application.routes.draw do
   match '/oauth/authenticate' => 'authentications#create', :via => :get
   resources :authentications
   root :to => "home#index"
+  get '*unmatched_route', to: 'application#not_found'
 end

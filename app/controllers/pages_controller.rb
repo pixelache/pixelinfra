@@ -8,7 +8,7 @@ class PagesController < InheritedResources::Base
     else
       p = params[:id]
     end
- 
+
     if params[:project_id]
       @project = Project.find(params[:project_id])
       @page = Page.find(params[:id])
@@ -16,18 +16,25 @@ class PagesController < InheritedResources::Base
        set_meta_tags :title => @project.name + " - " + @page.name
       render :template => 'projects/page'
     else
-      @page = @site.pages.published.find(p)
-      if @page.has_project?
-        redirect_to project_page_path(:project_id => @page.parent_project)
-      else
-        set_meta_tags :title => @page.name
-        if @page.root == @page && @page.root.festival
-          redirect_to festival_path(@page.root.festival)
-        elsif @page.root == @page && @page.root.project
-          redirect_to project_page_path(@page.root.project, @page)
-        elsif @page.root != @page && @page.root.festival
-          redirect_to festival_page_festival_path(@page.root.festival, @page.id)
+      pages = @site.pages.published.where(slug: p)
+      # privilege root pages first
+      
+      if pages.roots.empty?
+        @page = pages.first
+        if @page.has_project?
+          redirect_to project_page_path(:project_id => @page.parent_project)
+        else
+          set_meta_tags :title => @page.name
+          if @page.root == @page && @page.root.festival
+            redirect_to festival_path(@page.root.festival)
+          elsif @page.root == @page && @page.root.project
+            redirect_to project_page_path(@page.root.project, @page)
+          elsif @page.root != @page && @page.root.festival
+            redirect_to festival_page_festival_path(@page.root.festival, @page.id)
+          end
         end
+      else
+        @page = pages.roots.first
       end
     end
     set_meta_tags :title => @page.name

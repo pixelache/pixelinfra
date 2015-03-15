@@ -68,6 +68,50 @@ class ApplicationController < ActionController::Base
     end
   end
   
+
+  def not_found
+    if params[:unmatched_route] =~ /\//
+      splits = params[:unmatched_route].split(/\//)
+      first = splits.first
+      params[:unmatched_route] = splits.last
+    end
+
+    # first look for a project
+    begin
+      @project = Project.find(params[:unmatched_route])
+      redirect_to @project, :status => :moved_permanently and return
+    rescue ActiveRecord::RecordNotFound
+      begin
+        @page = Page.find(params[:unmatched_route])
+        if @page.has_project?
+          redirect_to project_page_path(:project_id => @page.parent_project.id, id: @page.id), :status => :moved_permanently
+        else
+          redirect_to @page, :status => :moved_permanently
+        end
+      rescue ActiveRecord::RecordNotFound
+        if !first.nil?
+          # see if it's a festival 
+          begin
+            @festival = Festival.find(first)
+            if !@festival.pages.find(params[:unmatched_route]).empty?
+              redirect_to festival_page_path(@festival, @festival.pages.find(params[:unmatched_route]).first), :status => :moved_permanently
+            else
+              redirect_to @festival, :status => :moved_permanently
+            end
+          rescue ActiveRecord::RecordNotFound
+            if @festival
+              redirect_to @festival, :status => :moved_permanently
+            else
+              render '404'
+            end
+          end
+        else
+          render '404'
+        end
+      end
+    end
+  end
+  
   private
 
   # def after_sign_in_path_for(resource)
