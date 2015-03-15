@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   def new
     if Rails.env.production?
-      redirect_to 'http://auth.pixelache.ac/users/sign_in'
+      redirect_to 'http://pixelache.ac/users/sign_in'
     end
   end
 
