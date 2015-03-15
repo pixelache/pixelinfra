@@ -1,5 +1,5 @@
 = content_for :page_tree do
-  .row.left-collapse
+  .left-collapse
     - @page.self_and_ancestors.reverse.each do |p|
       - if p == @page
         %strong= p.name
@@ -13,7 +13,7 @@
     - unless @page.headings.empty?
       .medium-4.small-12.columns.right.page_nav
         .magellan-scrollnav
-          %div{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:100;destination_threshold:120;fixed_top:80" }
+          %div{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:220;destination_threshold:220;fixed_top:220" }
             %dl.sub-nav
               - @page.headings.each do |heading|
                 - next if heading.first == 'top'

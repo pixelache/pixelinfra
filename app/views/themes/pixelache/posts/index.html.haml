@@ -53,23 +53,26 @@
             .post_image{style: post.image? ? "background-image: url(#{post.image.url(:box).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".gray").css("display", "block");', onmouseout: '$(this).find(".gray").css("display", "none");'}
               .gray
                 .excerpt= link_to raw(truncate_html(strip_tags(post.body.gsub(/&nbsp;/, ' ')), :length => 260)), post
-                .read_more= link_to t(:read_more), post
+     
+
+                - if post.event || post.festival || post.project
+                  .hashtags
+                    - if post.event
+                      .hashtag= link_to(post.event.name, post.event)
+                    - if post.festival
+                      .hashtag= link_to post.festival.to_hashtag, post.festival
+                    - if post.project
+                      .hashtag= link_to post.project.to_hashtag, post.project
+
+                   
                   
             .lower{:"data-equalizer-watch" => ''}
               .title= link_to post.title, post
-              - if post.event || post.festival || post.project
-                .related
-                  - if post.event
-                    = link_to post.event.name, post.event
-                  - if post.festival
-                    = link_to post.festival.name, post.festival
-                  - if post.project
-                    = link_to post.project.name, post.project
+
+
               .metadata
                 %span.date=(l post.published_at.localtime.to_date, :format => :long) + ", "
-                - if post.creator.nil? 
-                  Pixelache
-                - else 
+                - unless post.creator.nil?
                   = "#{post.creator.name}"
                                           
     .row

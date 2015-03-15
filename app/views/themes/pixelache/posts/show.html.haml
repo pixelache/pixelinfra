@@ -3,7 +3,7 @@
     = render :partial => 'festivals/festival_menu', :locals => {festival: @festival}
 - else
   = content_for :page_tree do
-    .row.left-collapse
+    .left-collapse
       - if @post.event
         - if @post.event.project
           %strong= link_to @post.event.project.name, @post.event.project
