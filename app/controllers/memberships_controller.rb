@@ -9,7 +9,9 @@ class MembershipsController < ApplicationController
   
   def show
     @member = User.find(params[:id])
-    if @member.memberships.empty?
+    @memberships = @member.memberships.sort_by(&:year).reverse
+    @current_year = Membership.pluck(:year).uniq.sort.last
+    if @memberships.empty?
       flash[:error] = t(:this_user_is_not_a_member)
       redirect_to '/members'
     end

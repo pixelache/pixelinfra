@@ -176,9 +176,9 @@ GEM
     formatador (0.2.5)
     formtastic (2.3.1)
       actionpack (>= 3.0)
-    foundation-rails (5.3.0.0)
+    foundation-rails (5.5.0.0)
       railties (>= 3.1.0)
-      sass (>= 3.2.0)
+      sass (>= 3.2.0, < 3.4)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
     friendly_id-globalize (1.0.0.alpha1)
@@ -366,7 +366,7 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-footnotes (4.1.5)
       rails (>= 3.2)
-    rails-html-sanitizer (1.0.1)
+    rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
     rails4-autocomplete (1.1.1)
       rails (>= 3.0)
@@ -445,7 +445,7 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     thor (0.19.1)
-    thread_safe (0.3.4)
+    thread_safe (0.3.5)
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
@@ -518,7 +518,7 @@ DEPENDENCIES
   flickraw
   font-awesome-rails
   formtastic (~> 2.3.0.rc2)
-  foundation-rails (= 5.3.0)
+  foundation-rails
   friendly_id
   friendly_id-globalize
   geocoder

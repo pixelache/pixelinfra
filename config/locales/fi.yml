@@ -376,4 +376,9 @@ fi:
   residency: 'Residency'
   not_yet_published: 'Not yet published'
   video: "Video"
-  file: 'File'  
+  file: 'File'
+  current_activities: 'Current activities'
+  menu: 'Menu'
+  open: 'Open'
+  close: 'Close'
+  former_member: 'Former member'

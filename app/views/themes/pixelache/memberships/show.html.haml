@@ -9,41 +9,66 @@
 
 .membership_container
   .row
-    .small-12.columns
-      %h2
-        = t :member
-        = ": #{@member.name}"
-      - unless @member.twitter_name.blank?
-        .twitter_link= link_to "@#{@member.twitter_name.gsub(/^\@/, '')}", "http://twitter.com/@#{@member.twitter_name.gsub(/^\@/, '')}", target: :_blank
+    .small-10.small-offset-1.columns
+      %h2= @member.name
+      
+  .row
+    .small-10.small-offset-1.columns
+      .board_explanation
+        - if @memberships.find(year: @current_year).nil?
+          = t :former_member
+        - else
+          - membership = @memberships.find(year: @current_year).first
+          - if membership.hallitus == true
+            = t :on_hallitus
+          - if membership.hallitus_alternate == true
+            = t :on_hallitus_alternate
+        = ", " +  t(:active_member_years) + ": "
+        = @member.memberships.sort_by(&:year).map { |y| y.year.to_s + (y.hallitus == true ? '*' : '') + (y.hallitus_alternate == true ? '**' : '') }.join(', ')
 
   
-    .row
-      - if @member.avatar?
-        .small-12.medium-6.columns
+  .row
+    .small-7.small-offset-1.columns
+      .row
+        .small-12.columns
+          - unless @member.bio.blank?
+            %h2= t :about
+            .bio= auto_html(@member.bio) { simple_format; link(:target => 'blank') }
+      - unless @member.posts.published.empty?
+        .row
+          .small-12.columns
+            %h2= t(:recent_posts_by, member: @member.name)
+            - @member.posts.published.order("published_at DESC")[0..3].each do |post|
+              .member_post  
+                .title= link_to post.name, post
+                .date= l post.published_at, format: :long
+                .row
+                  .small-4.columns= image_tag post.image.url(:box)
+                  .small-8.columns.excerpt= raw truncate_html(sanitize(post.body, tags: %w{b bold strong i italic em underline u}), :length => 300)
+                .read_more= link_to t(:read_more), post
+            = link_to t(:see_all), user_posts_path(@member), class: [:button, :tiny, :secondary]
+                    
+    .small-3.columns.member_sidebar
+      .row
+        .small-12.columns
           = image_tag @member.avatar.url(:box)
-      .small-12.medium-6.columns
-        %h3= t :active_member_years
-        = @member.memberships.sort_by(&:year).map { |y| y.year.to_s + (y.hallitus == true ? '*' : '') + (y.hallitus_alternate == true ? '**' : '') }.join(', ')
-        - unless @member.memberships.to_a.delete_if{|x| x.hallitus != true && x.hallitus_alternate != true}.empty?
-          %p.metadata
-            = "* = " + t(:on_hallitus)
-            = ", ** = " + t(:on_hallitus_alternate)
-        - unless @member.bio.blank?
-          .bio= auto_html(@member.bio) { simple_format; link(:target => 'blank') }
-    .row
-      .small-12.medium-6.columns
+      %ul.accordion{:"data-accordion" => "", :"data-options" => "multi_expand:true"}
         - unless @member.website.blank?
-          %p= link_to @member.website, @member.website, target: :_blank
+          %li.accordion-navigation#personal_li
+            = link_to t(:personal_sites), "#personal"
+            .arrow 
+            #personal.content.active
+              = link_to @member.website, @member.website, target: :_blank 
+            
         - unless @member.feed_urls.blank?
-          = auto_html(@member.feed_urls) { simple_format; link(:target => 'blank') }
-      .small-12.medium-6.columns
-        - unless @member.posts.published.empty?
-          %h3= t(:recent_posts_by, member: @member.name)
-          - @member.posts.published.order("published_at DESC")[0..3].each do |post|
-            .member_post  
-              .title= link_to post.name, post
-              .date= l post.published_at, format: :long
-              .excerpt= raw truncate_html(sanitize(post.body, tags: %w{b bold strong i italic em underline u}), :length => 300)
-              .read_more= link_to t(:read_more), post
-          = link_to t(:see_all), user_posts_path(@member), class: [:button, :tiny, :secondary]
+          %li.accordion-navigation#feed_li
+            = link_to t(:feed), '#feed'
+            .arrow
+            #feed.content
+              = auto_html(@member.feed_urls) { simple_format; link(:target => 'blank') }
+        %li.accordion-navigation#contact_li
+          = link_to t(:contact), '#contact'
+          .arrow
+          #contact.content
+            contact form here
           

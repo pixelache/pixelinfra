@@ -38,7 +38,7 @@ gem 'flickraw'
 
 gem 'font-awesome-rails'
 gem 'formtastic', '~> 2.3.0.rc2'
-gem 'foundation-rails', '5.3.0'
+gem 'foundation-rails' #, '5.3.0'
 gem 'friendly_id'
 gem 'friendly_id-globalize'
 gem 'geocoder'
