@@ -121,7 +121,7 @@
 
   
   .event_image {
-    margin: 60px 0px 30px 0px;
+    margin: 0.5rem 0rem 2rem 0rem
 
   }
   
@@ -180,60 +180,49 @@
   
   .related {
     border-bottom: 1px solid #333;
-    padding-top: 20px;
-
-    &.event {
-      padding-top: 35px;
+    padding-bottom: 1.2rem;
+    margin: 1rem 0;
+    &.project {
+      .related_title {
+        margin-bottom: 0.8rem;
+      }
     }
-    .title {
+    .related_title {
       font-family: $quicksand;
-      border-bottom: none;
+      font-size: 1.3rem;
+      color: #333;
+      line-height : 1.8rem;
       a {
         color: #333;
-      }
-      font-size: 24px;
-      line-height: 30px;
-      margin-bottom: 20px;
-      padding-left: 0px;
-      padding-bottom: 0px;
-    }
-    .body {
-      font-family: $opensans;
-      font-size: 14px;
-      line-height: 26px;
-      color: #333;
-      border-bottom: none;
-      img {
-        display: block;
-        padding: 25px;
-        margin: 0px auto;
-      }
-      p {
-        margin: 0px 0px 10px 0px;
+        &:hover{ 
+          color: #999;
+        }
       }
     }
-    .related_metadata {
-      color: #1b75bb;
+    .related_date {
+      font-size: 0.8rem;
+      color: #999;
       font-family: $quicksand;
-      font-size: 14px;
-      line-height: 25px; 
-      margin-bottom: 10px;
-      margin-left: 0px;
-      padding-left: 0px;
-      span.date {
-        font-weight: bold;
-      } 
+      margin-bottom: 1rem;
+    }
+    .related_excerpt , .related_excerpt p {
+      font-size: 0.9rem;
+      color: #333;
+      line-height: 1.4rem;
     }
     .read_more {
-      margin: 25px 0px;
+      margin: 0.8rem 0;
       text-transform: lowercase;
       a {
-        color: #f05a28;
         font-family: $quicksand;
-        font-weight: bold;
-        font-size: 14px;
+        color: #333;
+        font-size: 1.2rem;
+        margin: 0.4rem 0;
+        &:hover {
+          color: #999;
+        }
+        
       }
-    
     }
   }
 }

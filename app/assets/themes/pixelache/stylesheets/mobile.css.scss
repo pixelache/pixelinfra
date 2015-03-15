@@ -26,6 +26,13 @@
     }
   }
   
+  .event_single, .post_single {
+    .related {
+      img {
+        margin-bottom: 0.8rem;
+      }
+    }
+  }
   .three_posts .top_post , .two_posts .top_post  {
     .title {
       font-size: 2rem;

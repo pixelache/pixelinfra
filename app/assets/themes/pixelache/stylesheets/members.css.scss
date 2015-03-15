@@ -79,6 +79,8 @@
   
   .member_post {
     margin: 2rem 0;
+    border-bottom: 1px solid #333;
+    padding-bottom: 1.2rem;
     .title {
       font-family: $quicksand;
       font-size: 1.3rem;
@@ -94,13 +96,12 @@
     .date {
       font-size: 0.8rem;
       color: #999;
-      font-style: italic;
       margin-bottom: 1rem;
     }
-    .excerpt {
+    .excerpt, .excerpt p {
       font-size: 0.9rem;
       color: #333;
-      line-height: 1.2rem;
+      line-height: 1.4rem;
     }
     .read_more {
       margin: 0.8rem 0;

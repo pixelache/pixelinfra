@@ -1,5 +1,5 @@
 = content_for :page_tree do
-  .row.left-collapse
+  .left-collapse
     %span.leaf
       = link_to t(:members), '/members/'
 
@@ -23,18 +23,19 @@
         .row.member_row
           - mg.each_with_index do |member, index|
             - next if member.nil?
-            .small-12.medium-4.columns
-              .member_square{class: mg[index+1].nil? ? :end : false, style:  "background: url(#{member.user.avatar.url(:box)}) no-repeat center center", onmouseover: "$(this).find('.membership_years').toggle();", onmouseout: "$(this).find('.membership_years').toggle();" }
-                .inner
-                  .name.text-center= link_to member.user.name, "/member/#{member.user.slug}"
+            = link_to  "/member/#{member.user.slug}" do
+              .small-12.medium-4.columns
+                .member_square{class: mg[index+1].nil? ? :end : false, style:  "background: url(#{member.user.avatar.url(:box)}) no-repeat center center", onmouseover: "$(this).find('.membership_years').toggle();", onmouseout: "$(this).find('.membership_years').toggle();" }
+                  .inner
+                    .name.text-center= member.user.name
 
-                  .membership_years.text-center
-                    - if member.hallitus == true
-                      .on_board= t :on_hallitus
-                    - if member.hallitus_alternate == true
-                      .on_board= t :on_hallitus_alternate
-                    = t :active_member_years
-                    = member.user.memberships.sort_by(&:year).map { |y| y.year.to_s + (y.hallitus == true ? '*' : '') + (y.hallitus_alternate == true ? '**' : '') }.join(', ')
+                    .membership_years.text-center
+                      - if member.hallitus == true
+                        .on_board= t :on_hallitus
+                      - if member.hallitus_alternate == true
+                        .on_board= t :on_hallitus_alternate
+                      = t :active_member_years
+                      = member.user.memberships.sort_by(&:year).map { |y| y.year.to_s + (y.hallitus == true ? '*' : '') + (y.hallitus_alternate == true ? '**' : '') }.join(', ')
   
 
   

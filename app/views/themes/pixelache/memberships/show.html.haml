@@ -1,6 +1,6 @@
 - unless @member.memberships.empty?
   = content_for :page_tree do
-    .row.left-collapse
+    .left-collapse
       %span.leaf
         = link_to t(:members), '/members/'
       = " : "
