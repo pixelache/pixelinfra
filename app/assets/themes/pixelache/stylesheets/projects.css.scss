@@ -80,17 +80,18 @@ button.slick-next, button.slick-prev {
     }
   }   
   .strip {
-
-
+    overflow: hidden;
+    cursor: pointer;
     max-height: 670px;
     
     .selector {
-      cursor: pointer;
+      
       width: 3%;
       padding-bottom: 31%;
       height: 0;
       z-index : 80;
     }
+
     .image_overlay {
       height: 0;
       padding-bottom: 45.8%;

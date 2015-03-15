@@ -1,5 +1,7 @@
 .strip{style: project.background_css, id: "project_#{project.id.to_s}"}
-
+  - unless arrow == false
+    .arrow{style: "width: 0; height: 0; border-bottom: 14px solid transparent;	border-top: 14px solid transparent;	cursor: pointer;	border-left: 14px solid ##{arrow}; position: absolute; top; margin-top: 172px; z-index: 99"}
+    
   .title_box.columns.hide-for-small-only{style: project.background_css}
     .row
       .large-10.columns.large-offset-1.titles.medium-12
@@ -11,8 +13,8 @@
     - unless project.children.visible.empty?
       .children_strip= link_to raw(pluralize(project.descendants.visible.flatten.size, t(:subproject)) + "&#9660;"), '#', style: "color: ##{project.project_text_colour}", onclick: "$('#subprojects_#{project.id.to_s}').slideToggle(); return false;"
       
-  .selector.trigger.columns{style: "background-color: rgb(#{project.colour_offset}); opacity: 1;"} &nbsp;
-  .image_box{style: project.background_image_css}
+  //.selector.trigger.columns{style: "background-color: rgb(#{project.colour_offset}); opacity: 1;"} &nbsp;
+  .image_box.trigger{style: project.background_image_css}
     .row.show-for-small-only{style: "background-color: transparent; color:##{project.project_text_colour};" }
       .small-10.columns.small-offset-1.titles
         
@@ -31,11 +33,11 @@
                 - counter += 1
                 - subproject.events.published.shuffle.take(2).each do |event|
                   - if counter < 7
-                    %li.event= link_to event.name, subproject
+                    %li.event= link_to t(:event) + ": " + event.name, subproject
                     - counter += 1
           - if counter < 7
             - project.events.published.take(6).each do |event|
-              %li.event= link_to event.name, project
+              %li.event= link_to t(:event) + ": " + event.name, project
               - counter += 1
           - if counter < 7
             - project.posts.published.take(4).each do |post|
@@ -49,14 +51,18 @@
                 - counter += 1
 
 - unless project.children.visible.flatten.empty?
-  .subprojects{id: "subprojects_#{project.id.to_s}"}                
+  .subprojects{id: "subprojects_#{project.id.to_s}", style: "border-left: 1.7rem solid ##{project.project_bg_colour}; "}
+
     - project.children.visible.flatten.each do |subproject|
       - if active_projects.include?(subproject)
         .active_strip{style: subproject.background_css}
+          .arrow{style: "width: 0; height: 0; border-bottom: 14px solid transparent;	border-top: 14px solid transparent;	cursor: pointer;	border-left: 14px solid ##{project.project_bg_colour}; position: absolute; top; margin-top: 0.25rem"}
           .row
             .small-12.columns.text-center
               = link_to t(:active_project) + ": ", '#',  onclick: "scrollTo('#project_#{subproject.id.to_s}')", style: subproject.background_css
               = link_to subproject.name, '#', onclick: "scrollTo('#project_#{subproject.id.to_s}')", style: subproject.background_css
+
       - else
-        = render :partial => 'project_strip', locals: {project: subproject, active_projects: active_projects}
+        = render :partial => 'project_strip', locals: {project: subproject, active_projects: active_projects, arrow: project.project_bg_colour}
+
     .end_strip.text-center{style: project.background_css}= t(:end_of_subprojects, project: project.name)

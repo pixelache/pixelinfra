@@ -5,20 +5,20 @@
 
 .project_index      
   - @active_projects.shuffle.each do |project|
-    = render :partial => 'project_strip', locals: {project: project, active_projects: @active_projects }
+    = render :partial => 'project_strip', locals: {project: project, active_projects: @active_projects, arrow: false }
   .dividing_strip
     .row  
       .small-12.columns.text-center= t :past_projects
   - @inactive_projects.sort_by(&:name).each do |project|
-    = render :partial => 'project_strip', locals: {project: project, active_projects: @active_projects }
+    = render :partial => 'project_strip', locals: {project: project, active_projects: @active_projects, arrow: false }
     
 = content_for :jquery do
   :plain
-    $('.trigger').hover(function() {
+    $('.strip').hover(function() {
       $('.image_overlay').css('opacity', 0.2);
       $('.occluded').css('display', 'none');
-      $(this).next().children('.image_overlay').css('opacity', '0.9');
-      $(this).next().children('.image_overlay').children('.occluded').css('display', 'block');
+      $(this).find('.image_overlay').css('opacity', '0.9');
+      $(this).find('.image_overlay').children('.occluded').css('display', 'block');
       
     }, function() {
 
