@@ -2,7 +2,9 @@
 @import 'foundation_and_overrides';
 
 // index
-
+body.festivals {
+  padding-top: 0 !important;
+}
 .festival_index {
   font-family: $quicksand;
   

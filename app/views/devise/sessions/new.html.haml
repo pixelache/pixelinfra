@@ -6,15 +6,15 @@
   = semantic_form_for(resource, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f|
     .row
       .small-3.columns.text-center.option
-        = link_to(Rails.env.production? ? 'http://1.25rempixelache.ac/auth/facebook' : '/auth/facebook') do
+        = link_to(Rails.env.production? ? 'http://pixelache.ac/auth/facebook' : '/auth/facebook') do
           = image_tag(theme_image_path('facebook_icon.png'))
           %p= t(:connect_via_facebook)
       .small-3.columns.text-center.option
-        = link_to 'http://1.25rempixelache.ac/auth/google_oauth2' do
+        = link_to 'http://pixelache.ac/auth/google_oauth2' do
           = image_tag(theme_image_path('google_icon.png'))
           %p= t(:connect_via_google)
       .small-3.columns.text-center.option
-        = link_to 'http://1.25rempixelache.ac/auth/twitter' do
+        = link_to 'http://pixelache.ac/auth/twitter' do
           = image_tag(theme_image_path('twitter_icon.png'))
           %p= t(:connect_via_twitter)
       .small-3.columns.text-center.option

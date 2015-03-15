@@ -121,8 +121,13 @@
 
   
   .event_image {
-    margin: 0.5rem 0rem 2rem 0rem
-
+    margin: 0.5rem 0rem 2rem 0rem;
+    &.landscape {
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
   }
   
   .metadata {

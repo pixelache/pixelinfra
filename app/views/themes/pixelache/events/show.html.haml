@@ -33,7 +33,7 @@
     - if @event.has_documentation?
       .metadata= link_to t(:scroll_down_for_documentation), '#', onclick: 'scrollTo("#documentation");'
     - if @event.image?
-      .event_image= best_image(@event)
+      .event_image{class: dimension(@event)}= best_image(@event)
         
     .body= raw @event.description
 
