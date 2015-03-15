@@ -59,40 +59,71 @@
     }
     
   }
+  .board_explanation {
+    border-top: 1px solid #333;
+    padding: 1.15rem 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #333;  
+    margin-bottom: 2rem;  
+  }
   .member_row {
     margin-bottom: 2rem;
 
     .member_square {
       margin-bottom: 2rem;
-      .name {
-        margin: 2rem 0 1rem 0;
-        font-family: $quicksand;
-        font-size: 1.2rem;
-        color: #333;
-        a {
-          color: #333;
-          &:hover {
+      background-size: cover;
+      padding-bottom: 100%;
+      height: 0;
+      max-height: 400px;
+      overflow: hidden;
+      cursor: pointer;
+      .inner {
+
+        backgrond: none;
+        opacity: 1;
+        padding-bottom: 100%;
+        height: 0;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 30px;
+
+        &:hover { 
+         opacity: 0.75; 
+        }        
+        .name {
+          margin: 0;
+          padding: 0.6rem;
+          font-family: $quicksand;
+          font-size: 1.2rem;
+          background-color: black;
+          color: #FFF;
+          a {
+            color: #FFF;
+            &:hover {
+              color: #666;
+            }
+          }
+        }
+
+        .membership_years {
+          color: #fFF;
+          background-color: black;
+          margin: 0; padding: 0.6rem;
+          font-family: $quicksand;
+          font-size: 0.8rem;
+          bottom: 0;
+          position: absolute;
+          width: 100%;
+          display: none;
+          .on_board {
+            text-transform: uppercase;
             color: #666;
+            margin: 0.5rem;
+            font-size: 0.9rem;
           }
         }
       }
-      .avatar {
-        img {
-          max-height: 300px;
-        }
-      }
-      .on_board {
-        text-transform: uppercase;
-        color: #666;
-        margin: 0.5rem;
-        font-size: 0.9rem;
-      }
-      .membership_years {
-        color: #666;
-        margin: 0.5rem;
-        font-size: 0.9rem;
-      }
     }
-    
   }
 }

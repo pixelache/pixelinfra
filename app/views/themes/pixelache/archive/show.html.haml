@@ -13,7 +13,7 @@
   
     .medium-4.small-12.columns.right.archive_nav
       .magellan-scrollnav
-        %div{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:0;destination_threshold:20;fixed_top:100" }
+        %div{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:100;destination_threshold:120;fixed_top:80" }
           %dl.sub-nav
             - unless @documents.empty?
               %dd.active{:"data-magellan-arrival" => "publications"}= link_to t(:publications), '#publications' 
