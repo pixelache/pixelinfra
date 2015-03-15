@@ -240,6 +240,16 @@
       margin: 0;
     }
   }
+  
+  .residency_container {
+    .magellan-scrollnav [data-magellan-expedition] dl {
+      background: inherit;
+    }
+    [data-magellan-expedition] {
+      position: initial !important;
+    }
+  }
+  
   .magellan-scrollnav {
     [data-magellan-expedition-clone] {
       dl.sub-nav {

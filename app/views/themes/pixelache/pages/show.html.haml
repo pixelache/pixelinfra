@@ -10,63 +10,31 @@
 
 .page
   .row
-    .small-12.medium-10.medium-offset-1.columns
+    - unless @page.headings.empty?
+      .medium-4.small-12.columns.right.page_nav
+        .magellan-scrollnav
+          %div{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:100;destination_threshold:120;fixed_top:80" }
+            %dl.sub-nav
+              - @page.headings.each do |heading|
+                - next if heading.first == 'top'
+                %dd{:"data-magellan-arrival" => heading.first}= link_to heading.last, "##{heading.first}"
+
+    .small-12.medium-7.medium-offset-1.columns
       .row
-        .small-12.medium-7.columns.medium-offset-1.title
+        .small-12.columns.title
           = raw @page.name
       
           - if can? :edit, @page
             %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id), class: [:button, :tiny, :secondary]
       .row
-        .small-12.medium-7.columns.medium-offset-1.body= raw simple_format(@page.body)
-        - unless @page.headings.empty?
-          .small-3.columns.children.hide-for-small-only#side_nav
-            .child.top= link_to t(:top), '#', onclick: 'scrollTo("body");'
-            - @page.headings.each do |heading|
-              - next if heading.first == 'top'
-              .child= link_to heading.last, "#", onclick: "scrollTo('a[name=#{heading.first}]');"
-            - @page.children.each do |child|
-              .child= link_to child.name, child
+        .small-12.columns.body= raw (magellanise(@page.body, @page.headings))
+
+
           
 = content_for :jquery do
   :plain
 
-    var stickyNavTop = $('.children').offset().top;  
-    var stickyPageTop = $('.page').offset().top;  
-    var startingwidth = $('#side_nav').width();
-    var stickyNavLeft = $('#side_nav').offset().left
-    var stickyNav = function(){  
-      var scrollTop = $(window).scrollTop();  
-       
-      if (scrollTop > stickyNavTop && $('.children:not(.sticky_side_nav)')) { 
-     
-          $('.children').addClass('sticky_side_nav');  
-          $('.children').css('left', stickyNavLeft);
-          $('.children').css('top', stickyPageTop);  
-          $('.children .top').css('display', 'block');
-   
-          $('.sticky_side_nav').css('width', startingwidth);
-      } else {  
-          $('.children').removeClass('sticky_side_nav');   
-          $('.children').css('left', '');
-          $('.children').css('top', '');
-          $('.children .top').css('display', 'none');
-      }  
-    };  
-  
-    stickyNav();  
-    $(window).on('resize', function() {
-      if ($('.children .top').css('display') == "block") {
-        $('.children').css('left',  35 + ($('.body').offset().left + $('.body').outerWidth()));
-      }
-    })
-    $(window).scroll(function() {  
-      if ($('.children .top').css('display') == "block") {
-        $('.children').css('left',  35 + ($('.body').offset().left + $('.body').outerWidth()));
-      } else {
-        stickyNav();  
-      }
-    });
+
     $('.arrow-down').mouseover(function() {
       if ($('.children .top').css('display') == "block") {
         $('.children').css('top',$('.page_tree').offset().top + $('.page_tree').css('height'));

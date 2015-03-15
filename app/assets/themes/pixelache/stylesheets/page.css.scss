@@ -5,6 +5,56 @@
 
 .page {
   // background-color: #f9ec31;
+  .magellan-scrollnav {
+    [data-magellan-expedition-clone] {
+      dl.sub-nav {
+        display: none;
+      }
+    }
+    [data-magellan-expedition], [data-magellan-expedition-clone] {
+      width: 250px;
+      min-width: 0;
+      background: none;
+      dl {
+
+      }
+      dd {
+        background-color: none;
+        float: none;
+        display: block;
+        padding: 1.1rem;
+        border-bottom: 1px solid #333;
+        &.last {
+          border-bottom: none;
+        }
+        a {
+        
+          font-family: $quicksand;
+          font-weight: 300;
+          text-transform: uppercase;
+          font-size: 1.125rem;
+          color: #333;
+        }
+      }
+    }
+  }
+  
+
+  .sub-nav {
+    dd.active {
+
+      background-color: #333;
+      a {
+        color: #FFF;
+        background: none;
+        &:hover, &:focus {
+          background: none;
+        }
+      }
+    }
+  }
+  
+  
   padding-top: 2rem;
   .title_wrapper {
     padding: 1.5rem 0rem 3rem 0rem;
@@ -31,11 +81,12 @@
     margin-bottom: 1rem;
     
     padding: 1.5rem 0px;
-    h2 {
+    h2, a.section_heading {
       font-family: $quicksand;
       color: #333;
       font-size: 2.250rem;
       font-weight: normal;
+      line-height: 4rem;
     }
     h3 {
       font-family: $opensans;

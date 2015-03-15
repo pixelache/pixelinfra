@@ -142,11 +142,15 @@
             var ldBottomYPosition = (ldBottom-window_top_offset); // Calculate ld bottom position
 
             // If expedition bottom passes ld bottom
-            if(ldBottomYPosition <= (expedition.height() - settings.destination_threshold)) {
+            //alert('ldBottomYPosition is ' + ldBottomYPosition + ' and expedition.height() is ' + expedition.height() + ' and settings.destination_threshold is ' + settings.destination_threshold);
+            if(ldBottomYPosition <= (expedition.height() + settings.destination_threshold)) {
+
               // Position expedition top so bottom lines up with last destination
               // For different behavior, replace next line with your code
               expedition.css({position:'fixed', top: ldBottomYPosition - expedition.height(), minWidth: 0, width: expedition.outerWidth() + 'px'});
+              
             } else {
+
               // Magellan as .side-nav width fix: http://foundation.zurb.com/forum/posts/13831-fixed-sidebar
               expedition.css({position:'fixed', top: settings.fixed_top, minWidth: 0, width: expedition.outerWidth() + 'px'});
             }
