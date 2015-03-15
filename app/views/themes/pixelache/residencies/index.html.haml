@@ -40,10 +40,10 @@
     .small-12.medium-7.medium-offset-1.columns
       
       .row{:"data-magellan-destination" => :top }
-        .small-12.columns.title= raw @page.name
+        .small-11.small-centered.medium-12.medium-left.columns.title= raw @page.name
 
       .row{:"data-magellan-destination" => :top2 }
-        .small-12.columns.body
+        .small-11.small-centered.medium-12.medium-left.columns.body
           = raw simple_format(@page.body)
 
       - if can? :edit, @page
