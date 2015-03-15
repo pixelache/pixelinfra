@@ -78,6 +78,14 @@
                 = link_to @festival.subtitle, @festival, target: :blank
           .row
             .medium-9.columns.medium-offset-3.events
+              - @festival.attachments.public_files.each do |d|
+                .row
+                  .small-3.columns
+                    .doc_icon= link_to image_tag(theme_image_path('arch_doc_grey.png')), d.attachedfile.url, onmouseover: "$(this).find('img').attr('src', '/assets/pixelache/images/arch_doc_blue.png')", onmouseout: "$(this).find('img').attr('src', '/assets/pixelache/images/arch_doc_grey.png')"
+                  
+                  .small-9.columns.title_container{onmouseover: "$(this).closest('.row').find('img').attr('src', '/assets/pixelache/images/arch_doc_blue.png')", onmouseout: "$(this).closest('.row').find('img').attr('src', '/assets/pixelache/images/arch_doc_grey.png')" }
+                    .name= link_to d.title, d.attachedfile.url
+              
               - @festival.events.published.each do |e|
                 .row
                   .small-4.medium-3.columns
