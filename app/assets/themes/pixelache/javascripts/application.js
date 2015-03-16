@@ -14,6 +14,7 @@ function down_pixelache_menu() {
 
   $('.page_tree').animate({top: (t + 40) + 'px'}, 400);
   $('div.project_tree').animate({top: (t + 69) + 'px'}, 400);
+  $('#main').css('top', $('header').height());
 }
 
 
