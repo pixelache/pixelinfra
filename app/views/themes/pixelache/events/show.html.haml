@@ -79,11 +79,13 @@
                   .video_description= raw v.description
 
   
-  - unless @event.related_content.empty?
+- unless @event.related_content.empty?
+  .related_container.event
     .row
-      .small-12.medium-8.columns.small-centered.related_container
-        .related_title.small-12.columns
-          %h1= t(:related_content)
+      .small-12.medium-8.columns.small-centered
+        .row
+          .small-12.columns.related_title
+            %h1= t(:related_content)
     - unless @event.related_content.empty?
       - @event.related_content[0..5].each do |related|
         .row

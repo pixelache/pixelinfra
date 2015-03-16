@@ -1,16 +1,13 @@
 - if related.class == Event
-  .row
-    .related.event
-      .related_metadata
-        %span.date= date_range(related.start_at, related.end_at)
-      .related_title= link_to t(:event) + ": " + related.name, related
-      .row
-        .small-12.medium-4.columns  
-          - if related.image?
-            .image= image_tag related.image.url(:box)
-        .small-12.medium-8.columns
-          .body= raw truncate_html(related.description, :length => 250)
-      .read_more= link_to t(:read_more), related
+  .related.related_event.column
+    .related_title= link_to t(:event) + ": " + related.name, related
+    .related_date= date_range(related.start_at, related.end_at)
+    .row
+      .small-12.medium-4.columns  
+        - if related.image?
+          = image_tag related.image.url(:box)
+      .small-12.medium-8.columns.related_excerpt= raw truncate_html(related.description, :length => 600)
+    .read_more= link_to t(:read_more), related
       
 - elsif related.class == Post
 
@@ -27,36 +24,30 @@
 
 - elsif related.class == Project
   .related.project.column
-    .related_title= link_to t(:project) + ": " + item.project.name, item.project
-    - unless item.project.description.blank?
+    .related_title= link_to t(:project) + ": " + related.name, related
+    - unless related.description.blank?
       .row
-        - if item.project.photos.empty?
-          .small-12.columns.related_excerpt= raw truncate_html(item.project.description, :length => 600)
+        - if related.photos.empty?
+          .small-12.columns.related_excerpt= raw truncate_html(related.description, :length => 600)
         - else
-          .medium-4.small-12.columns= image_tag item.project.photos.first.filename.url(:box)
-          .medium-8.small-12.columns.related_excerpt= raw truncate_html(item.project.description, :length => 600)
+          .medium-4.small-12.columns= image_tag related.photos.first.filename.url(:box)
+          .medium-8.small-12.columns.related_excerpt= raw truncate_html(related.description, :length => 600)
       .read_more= link_to t(:read_more), related
         
             
 - elsif related.class == Page
-  .row
-    .related.related_page
-      .related_metadata
-      .related_title= link_to  t(:page) + ": " + related.related_title, related
-      .row
-        .small-12.columns.body= raw truncate_html(strip_tags(related.body), :length => 350)
-      .row
-        .small-12.columns.read_more= link_to t(:read_more), related
+  .related.related_page.column
+    .related_title= link_to  t(:page) + ": " + related.title, related
+    .row
+      .small-12.columns.related_excerpt= raw truncate_html(strip_tags(related.body), :length => 600)
+    .read_more= link_to t(:read_more), related
         
 - elsif related.class == Residency
-  .row
-    .related.related_page
-      .related_metadata
-      .related_title= link_to  t(:residency) + ": " + related.name, related
-      .row
-        .medium-4.small-12.columns
-          - if related.photo?
-            = image_tag related.photo.url(:box)
-        .small-12.medium-8.columns.body= raw truncate_html(strip_tags(related.description), :length => 350)
-      .row
-        .small-12.columns.read_more= link_to t(:read_more), related
+  .related.related_page.columns
+    .related_title= link_to  t(:residency) + ": " + related.name, related
+    .row
+      .medium-4.small-12.columns
+        - if related.photo?
+          = image_tag related.photo.url(:box)
+      .small-12.medium-8.columns.related_excerpt= raw truncate_html(strip_tags(related.description), :length => 600)
+    .read_more= link_to t(:read_more), related

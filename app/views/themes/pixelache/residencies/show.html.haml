@@ -8,94 +8,62 @@
 
 .residency_container
   .row
-    .small-10.medium-7.columns.small-offset-1.title
-      = raw @residency.name
-      .country= @residency.country_override.blank? ? (@residency.country.size == 2 ?  Country[@residency.country].name : @residency.country ) : @residency.country_override
-      .date
-        = l @residency.start_at, format: "%B %Y"
-        - if [@residency.end_at.month, @residency.end_at.year] != [@residency.start_at.month, @residency.start_at.year]
-          = " - " + l(@residency.end_at, format: "%B %Y")
-  .row
-    .small-10.small-offset-1.medium-7.columns.large-offset-1.body
-      - if @residency.photo?
-        = image_tag @residency.photo.url
-      %p= raw simple_format(@residency.description)
-      - if can? :edit, @residency
-        %small.hide-for-small-only= link_to t(:edit), edit_admin_residency_path(@residency), class: [:button, :secondary, :tiny]
+    .small-12.medium-3.columns.right.residencies_nav
+      .magellan-scrollnav
+        %div{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:100;destination_threshold:120;fixed_top:80" }
+          %dl.sub-nav.accordion{:"data-accordion" => "", :"data-options" => "multi_expand:false"}
+            %dd.accordion-navigation{:"data-magellan-arrival" => :top }
+              = link_to t(:production_residencies), "#production"
+              .content#production
+                - @production.each_with_index do |res, index|
+                  .subchild{:class => index == (@production.size - 1) ? :last : false}
+                    = link_to res.name, res
+                    %p.metadata
+                      = l res.start_at, format: "%B %Y"
+                      - if [res.end_at.month, res.end_at.year] != [res.start_at.month, res.start_at.year]
+                        = " - " + l(res.end_at, format: "%B %Y")
+            %dd.accordion-navigation{:"data-magellan-arrival" => :top2 }
+              = link_to t(:microresidencies), "#microresidencies"
+              .content#microresidencies
+                - @microresidencies.each_with_index do |res, index|
+                  .subchild{:class => index == (@microresidencies.size - 1) ? :last : false}
+                    = link_to res.name, res
+                    %p.metadata
+                      = l res.start_at, format: "%B %Y"
+                      - if [res.end_at.month, res.end_at.year] != [res.start_at.month, res.start_at.year]
+                        = " - " + l(res.end_at, format: "%B %Y")  
+  
+  
+  
+    .small-10.left.medium-8.columns.small-offset-1.medium-offset-1
+      .row
+        .small-12.columns.title
+          = raw @residency.name
+          .country= @residency.country_override.blank? ? (@residency.country.size == 2 ?  Country[@residency.country].name : @residency.country ) : @residency.country_override
+          .date
+            = l @residency.start_at, format: "%B %Y"
+            - if [@residency.end_at.month, @residency.end_at.year] != [@residency.start_at.month, @residency.start_at.year]
+              = " - " + l(@residency.end_at, format: "%B %Y")
+      .row
+        .small-12.columns.body
+          - if @residency.photo?
+            = image_tag @residency.photo.url
+          %p= raw simple_format(@residency.description)
+          - if can? :edit, @residency
+            %small.hide-for-small-only= link_to t(:edit), edit_admin_residency_path(@residency), class: [:button, :secondary, :tiny]
       - unless @residency.related_content.empty?
-        .row.related_title
+        .related_container.row.post
           .small-12.columns
-            %h1= t(:related_content)
-            .links_to_all.small-12.columns
-              %ul
-                - unless @residency.events.published.empty?
-                  %li{class: @residency.posts.published.empty? ? :end : ''}= link_to t(:all_events), residency_events_path(@residency)
-                - unless @residency.posts.published.empty?
-                  %li{class: @residency.events.published.empty? ? '' : :end}= link_to t(:all_posts), residency_posts_path(@residency)
-                  
-            - @residency.related_content.each do |related|
-              - if related.class == Project
-                .related.row
-                  .small-12.columns
-                    .related_title= link_to t(:project) + ": " + related.name, related
-                    - unless related.description.blank?
-                      .row{:style => 'padding-bottom: 1.8rem'}
-                        - if related.photos.empty?
-                          .small-12.columns.body= raw truncate_html(related.description, :length => 350)
-                        - else
-                          .small-4.columns= link_to image_tag(related.photos.first.filename.url(:box)), related
-                          .small-8.columns
-                            = raw truncate_html(related.description, :length => 350)
-                            .read_more= link_to t(:read_more), related
-                            
-              - if related.class == Post
-                .related.row
-                  .small-12.columns
-                    .related_title= link_to t(:post) + ": " + related.name, related
-                    - unless related.description.blank?
-                      .row{:style => 'padding-bottom: 1.8rem'}
-                        .small-12.medium-4.columns
-                          - if related.image?
-                            = link_to image_tag(related.image.url(:box)), related
-                        .small-12.medium-8.columns.body
-                          = raw truncate_html(related.description, :length => 350)
-                          .read_more= link_to t(:read_more), related
-                            
-              - if related.class == Event
-                .related.row
-                  .small-12.columns
-                    .related_title
-                      = link_to t(:event) + ": " + related.name, related
-                      .date= date_range(related.start_at,related.end_at)
-                    - unless related.description.blank?
-                      .row{:style => 'padding-bottom: 1.8rem'}
-                        .medium-4.small-12.columns
-                          - if related.image?
-                            = link_to image_tag(related.image.url(:box)), related
-                        .medium-8.small-12.columns.body
-                          = raw truncate_html(related.description, :length => 350)
-                          .read_more= link_to t(:read_more), related  
+            .row
+              .small-12.columns.related_title
+                %h1= t(:related_content)
+            .row
+              .small-12.columns
+                - @residency.related_content[0..5].each do |related|
+                  .row
+                    = render :partial => 'shared/related', locals: {item: @residency, related: related }
+                
+                
+
                                               
         
-    .small-12.medium-3.columns.children
-      %dl.accordion{:"data-accordion" => "", :"data-options" => "multi_expand:true"}
-        %dd.accordion-navigation
-          = link_to t(:production_residencies), "#production"
-          .content#production{class: @residency.is_micro == true ? '' : :active}
-            - @production.each_with_index do |res, index|
-              .subchild{:class => index == (@production.size - 1) ? :last : false}
-                = link_to res.name, res
-                %p.metadata
-                  = l res.start_at, format: "%B %Y"
-                  - if [res.end_at.month, res.end_at.year] != [res.start_at.month, res.start_at.year]
-                    = " - " + l(res.end_at, format: "%B %Y")
-        %dd.accordion-navigation
-          = link_to t(:microresidencies), "#microresidencies"
-          .content#microresidencies{class: @residency.is_micro == true ? :active : ''}
-            - @microresidencies.each_with_index do |res, index|
-              .subchild{:class => index == (@microresidencies.size - 1) ? :last : false}
-                = link_to res.name, res
-                %p.metadata
-                  = l res.start_at, format: "%B %Y"
-                  - if [res.end_at.month, res.end_at.year] != [res.start_at.month, res.start_at.year]
-                    = " - " + l(res.end_at, format: "%B %Y")

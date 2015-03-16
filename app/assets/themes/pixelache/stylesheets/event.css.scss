@@ -183,53 +183,7 @@
     }
   }
   
-  .related {
-    border-bottom: 1px solid #333;
-    padding-bottom: 1.2rem;
-    margin: 1rem 0;
-    &.project {
-      .related_title {
-        margin-bottom: 0.8rem;
-      }
-    }
-    .related_title {
-      font-family: $quicksand;
-      font-size: 1.3rem;
-      color: #333;
-      line-height : 1.8rem;
-      a {
-        color: #333;
-        &:hover{ 
-          color: #999;
-        }
-      }
-    }
-    .related_date {
-      font-size: 0.8rem;
-      color: #999;
-      font-family: $quicksand;
-      margin-bottom: 1rem;
-    }
-    .related_excerpt , .related_excerpt p {
-      font-size: 0.9rem;
-      color: #333;
-      line-height: 1.4rem;
-    }
-    .read_more {
-      margin: 0.8rem 0;
-      text-transform: lowercase;
-      a {
-        font-family: $quicksand;
-        color: #333;
-        font-size: 1.2rem;
-        margin: 0.4rem 0;
-        &:hover {
-          color: #999;
-        }
-        
-      }
-    }
-  }
+ 
 }
 
 .documentation {
