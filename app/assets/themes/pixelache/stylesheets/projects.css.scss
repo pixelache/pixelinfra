@@ -45,6 +45,13 @@ button.slick-next, button.slick-prev {
     position: absolute;
     bottom: 2px;
     right: 10px;
+
+    &.closed:after {
+      content: " \25BA ";
+    }
+    &:after {
+      content: " \25BC ";
+    }
   }
   .active_strip {
     padding: 8px 0px;
