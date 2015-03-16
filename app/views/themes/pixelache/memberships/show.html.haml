@@ -10,8 +10,10 @@
 .membership_container
   .row
     .small-10.small-offset-1.columns
-      %h2= @member.name
-      
+      %h2
+        = @member.name
+        - unless @member.twitter_name.blank? 
+          %span.twitter= link_to "@" + @member.twitter_name.gsub(/^@/, ''), "http://twitter.com/#{@member.twitter_name.gsub(/^@/, '')}", target: :_blank
   .row
     .small-10.small-offset-1.columns
       .board_explanation
@@ -20,15 +22,16 @@
         - else
           - membership = @memberships.find(year: @current_year).first
           - if membership.hallitus == true
-            = t :on_hallitus
+            = t(:on_hallitus) + " | "
           - if membership.hallitus_alternate == true
-            = t :on_hallitus_alternate
-        = ", " +  t(:active_member_years) + ": "
-        = @member.memberships.sort_by(&:year).map { |y| y.year.to_s + (y.hallitus == true ? '*' : '') + (y.hallitus_alternate == true ? '**' : '') }.join(', ')
+            = t(:on_hallitus_alternate) + " | "
+        = t(:active_member_years)
+        = @member.memberships.sort_by(&:year).map { |y| y.year.to_s  }.join(', ')
 
   
   .row
     .small-7.small-offset-1.columns
+      &nbsp;
       .row
         .small-12.columns
           - unless @member.bio.blank?
@@ -52,23 +55,37 @@
       .row
         .small-12.columns
           = image_tag @member.avatar.url(:box)
-      %ul.accordion{:"data-accordion" => "", :"data-options" => "multi_expand:true"}
+      %dl.accordion{:"data-accordion" => "", :"data-options" => "multi_expand:true"}
         - unless @member.website.blank?
-          %li.accordion-navigation#personal_li
+          %dd.accordion-navigation#personal_li
             = link_to t(:personal_sites), "#personal"
             .arrow 
             #personal.content.active
               = link_to @member.website, @member.website, target: :_blank 
             
         - unless @member.feed_urls.blank?
-          %li.accordion-navigation#feed_li
+          %dd.accordion-navigation#feed_li
             = link_to t(:feed), '#feed'
             .arrow
             #feed.content
               = auto_html(@member.feed_urls) { simple_format; link(:target => 'blank') }
-        %li.accordion-navigation#contact_li
+        %dd.accordion-navigation#contact_li
           = link_to t(:contact), '#contact'
           .arrow
-          #contact.content
-            contact form here
+          #contact.content{class: @contact_form.name.blank? && @contact_form.email.blank? && @contact_form.message.blank? ? false : :active}
+            = form_for @contact_form, url: contact_member_path(@member) do |f|
+              .row
+                .small-12.columns= t :your_name
+                .small-12.columns= f.text_field :name
+              .row
+                .small-12.columns= t :your_email
+                .small-12.columns= f.text_field :email
+              .row
+                .small-12.columns= t :your_message
+                .small-12.columns= f.text_area :message
+              .row
+                .small-12.columns= t :please_verify_your_humanity
+                .small-12.columns= recaptcha_tags
+              .row
+                .small-12.columns= f.submit t(:send_message)
           

@@ -6,10 +6,10 @@
 
 
   .member_sidebar {
-    ul.accordion {
+    dl.accordion {
       margin: 0;
       padding: 0;
-      li {
+      dd {
         a {
           color: #FFF;
         }
@@ -53,6 +53,13 @@
   }
   h2 {
     font-weight: 300;
+    span.twitter {
+      font-size: 0.5em;
+      padding-left: 1rem;
+      a { 
+        color: #666;
+      }
+    }
   }
   
   p.metadata {

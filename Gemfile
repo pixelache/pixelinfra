@@ -53,7 +53,7 @@ gem 'inherited_resources' #, github: 'josevalim/inherited_resources'
 gem "jquery-slick-rails"
 gem 'lazybox'
 gem 'kaminari'
-
+gem 'mail_form'
 gem 'meta-tags', require: 'meta_tags'
 gem 'mini_magick'
 gem 'nested_form'

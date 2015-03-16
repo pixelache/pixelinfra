@@ -31,18 +31,18 @@
 
 
           
-= content_for :jquery do
-  :plain
-
-
-    $('.arrow-down').mouseover(function() {
-      if ($('.children .top').css('display') == "block") {
-        $('.children').css('top',$('.page_tree').offset().top + $('.page_tree').css('height'));
-      }
-    });
-    $('.arrow-up').mouseover(function() {
-      if ($('.children .top').css('display') == "block") {
-        $('.children').css('top',$('.page').offset().top );
-      }
-    });
- 
+/ = content_for :jquery do
+/   :plain
+/
+/
+/     $('.arrow-down').mouseover(function() {
+/       if ($('.children .top').css('display') == "block") {
+/         $('.children').css('top',$('.page_tree').offset().top + $('.page_tree').css('height'));
+/       }
+/     });
+/     $('.arrow-up').mouseover(function() {
+/       if ($('.children .top').css('display') == "block") {
+/         $('.children').css('top',$('.page').offset().top );
+/       }
+/     });
+/
