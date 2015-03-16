@@ -5,10 +5,15 @@
 function down_pixelache_menu() {
 
   var t = parseInt($('.pixelache_nav_menu').css('height'));
+  $('.page_tree').addClass('fixed');
+  $('div.project_tree').addClass('fixed');
+  $('.pixelache_nav_menu').addClass('fixed');
+  $('.top-bar-wrapper').addClass('fixed');
   $('.pixelache_nav_menu').slideDown();
+
+
   $('.page_tree').animate({top: (t + 40) + 'px'}, 400);
   $('div.project_tree').animate({top: (t + 69) + 'px'}, 400);
-  
 }
 
 
@@ -28,7 +33,7 @@ function up_pixelache_menu() {
 
   $('.pixelache_nav_menu').slideUp();
   $('.page_tree').animate({top: '40px'}, 400);
-
+  $('div.project_tree').animate({top: '69px'}, 400);
 }
 
 function toggleWideNavMenu(div, linklevel) {
