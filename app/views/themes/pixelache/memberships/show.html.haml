@@ -63,12 +63,23 @@
             #personal.content.active
               = link_to @member.website, @member.website, target: :_blank 
             
-        - unless @member.feed_urls.blank?
+        - unless @member.feedcaches.empty?
           %dd.accordion-navigation#feed_li
             = link_to t(:feed), '#feed'
             .arrow
             #feed.content
-              = auto_html(@member.feed_urls) { simple_format; link(:target => 'blank') }
+              - @member.feedcaches.sort_by{|x| x.issued_at }.reverse.take(5).each_with_index do |feed, index|
+                .feed_container.row
+                  - if feed.source == 'twitter'
+                    .small-3.columns= image_tag @member.avatar.url(:thumb)
+                    .small-9.columns
+                      %strong= @member.name
+                      %span.twitter_name= link_to "@" + @member.twitter_name.gsub(/^@/, ''), "http://twitter.com/#{@member.twitter_name.gsub(/^@/, '')}"
+                      %p= auto_html(feed.content) { simple_format; link(:target => 'blank') }
+                      - if feed[index+1].nil?
+                        %p.right= link_to t(:see_all), member_feed_path(@member)
+                      
+                      
         %dd.accordion-navigation#contact_li
           = link_to t(:contact), '#contact'
           .arrow

@@ -36,6 +36,36 @@
           .arrow {
             border-top: 14px solid #fe7d27; 
           }
+          #feed {
+            padding-top: 0;
+            padding-bottom: 0;
+            .feed_container {
+              padding-top: 0.3rem;
+              background-color: #EEE;
+              margin-bottom: 0.2rem;
+              font-size: 0.8rem;
+              strong {
+                float: left;
+              }
+              span.twitter_name a {
+                padding-left: 0.4rem;
+                font-size: 0.8rem;
+                color: #AAA;
+              }
+              p  {
+                font-size: 0.7rem;
+                line-height: 1rem;
+                color: #333;
+                margin: 0.4rem 0;
+                a  {
+                  color: $newblue;
+                  font-size: 0.7rem;
+                  line-height: 1rem;
+                }
+              }
+            }
+            
+          }
         }
         &#contact_li {
           a { background-color: #3dbedc; }

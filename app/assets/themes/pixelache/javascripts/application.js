@@ -34,6 +34,7 @@ function up_pixelache_menu() {
   $('.pixelache_nav_menu').slideUp();
   $('.page_tree').animate({top: '40px'}, 400);
   $('div.project_tree').animate({top: '69px'}, 400);
+  $('#main').css('top', '80px');
 }
 
 function toggleWideNavMenu(div, linklevel) {

@@ -151,6 +151,7 @@ Pixelinfra::Application.routes.draw do
   get '/members' => 'memberships#index', as: 'members'
   get '/members/feed' => 'memberships#feed', as: 'member_feeds'
   get '/member/:id' => 'memberships#show', as: 'member'
+  get '/member/:member_id/feed' => 'memberships#feed', as: 'member_feed'
   post '/member/:id/contact' => 'memberships#contact', as: 'contact_member'
   get '/admin' => 'admin/events#index'
   match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, via: :get

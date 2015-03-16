@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
   accepts_nested_attributes_for :authentications, :reject_if => proc { |attr| attr['username'].blank? }
   mount_uploader :avatar, AvatarUploader
-
+  has_many :feedcaches
   after_create :send_new_user_email_to_nathalie_and_john
   
   def apply_omniauth(omniauth)

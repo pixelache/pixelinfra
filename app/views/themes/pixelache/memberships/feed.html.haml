@@ -1,6 +1,22 @@
+= content_for :page_tree do
+  .left-collapse
+    %span.leaf
+      = link_to t(:members), '/members/'
+    = " : "
+    - if @member
+      = link_to t(:feed), member_feeds_path
+      = " : "
+      %strong
+        = @member.name
+    - else
+      %strong= t :feed
+        
 .row
   .small-12.columns
-    %h1= t :member_activity
+    %h1
+      = t :member_activity
+      - if @member
+        = " : #{@member.name}"
 
 .row
   .small-12.medium-6.columns#feed_table
@@ -12,7 +28,7 @@
             .member_name= link_to 'Pixelache', '#'
           - else
             =image_tag item.feed_origin.avatar.url(:thumb)
-            .member_name= link_to item.feed_origin.name, "/members/#{item.feed_origin.slug}"
+            .member_name= link_to item.feed_origin.name, "/member/#{item.feed_origin.slug}"
         .small-9.columns.content.end
           = auto_html(item.content) { simple_format; link(:target => 'blank') }
           .when= link_to time_ago_in_words(Time.at(item.issued_at).to_datetime) + t(:ago), item.link_url, target: :_blank

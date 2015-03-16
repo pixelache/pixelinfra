@@ -28,9 +28,15 @@ class MembershipsController < ApplicationController
   
   
   def feed
-    # get all member feeds
-    @feed = Feedcache.order(issued_at: :desc).page(params[:page]).per(30)
-    set_meta_tags title: t(:member_activity)
+    if params[:member_id]
+      @member = User.find(params[:member_id])
+      @feed = Feedcache.where(user_id: @member.id).order(issued_at: :desc).page(params[:page]).per(30)
+      set_meta_tags title: t(:member_activity) + " : #{@member.name}"
+    else
+      @feed = Feedcache.order(issued_at: :desc).page(params[:page]).per(30)
+      set_meta_tags title: t(:member_activity)
+    end
+    
   end
   
   def index
