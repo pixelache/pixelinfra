@@ -45,6 +45,14 @@ class User < ActiveRecord::Base
     item.subscriptions.map(&:user).include?(self)
   end
 
+  def current_member?
+    if memberships.paid.empty?
+      return false
+    else
+      return memberships.paid.sort_by(&:year).last.year == Membership.pluck(:year).uniq.sort.last
+    end
+  end
+  
   private
   
   def send_new_user_email_to_nathalie_and_john

@@ -194,3 +194,40 @@
     }
   }
 }
+
+#feed_table {
+  .row {
+    margin-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px dotted #999;
+    padding: 0.5rem;
+    
+    .member_name {
+      margin-top: 0.4rem;
+      a {
+        color: #333;
+        font-family: $quicksand;
+        font-size: 0.8rem;
+      }
+    }
+
+    .content {
+      p {
+        color: #333;
+        font-size:0.9rem;
+        margin: 0; padding: 0;
+      }
+      color: #333;
+      font-size: 1rem;
+      .metadata {
+        margin-top: 2rem;
+        font-size: 0.8rem;
+      }
+      .when {
+        font-size: 0.75rem;
+        color: #999;
+        margin: 0.8rem 0 1.5rem 0;
+      }
+    }
+  }
+}

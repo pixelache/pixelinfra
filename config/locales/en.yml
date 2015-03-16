@@ -425,3 +425,9 @@ en:
   your_message_was_delivered: 'Your email was delivered.'
   error_sending_message: 'There were errors in sending your message: '
   captcha_error: 'You did not enter the correct CAPTCHA. Please try again.'
+  member_activity: 'Member activity'
+  ago: ' ago'
+  twitter_follow: "Follow #{twitter_name}"
+  reply: 'Reply'
+  retweet: 'Retweet'
+  favourite: 'Favourite'

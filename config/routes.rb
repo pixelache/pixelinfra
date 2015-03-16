@@ -149,6 +149,7 @@ Pixelinfra::Application.routes.draw do
   get '/feed' => 'feeds#index', :defaults => { :format => 'rss' }
   get '/auth/failure' => 'sessions#failure'
   get '/members' => 'memberships#index', as: 'members'
+  get '/members/feed' => 'memberships#feed', as: 'member_feeds'
   get '/member/:id' => 'memberships#show', as: 'member'
   post '/member/:id/contact' => 'memberships#contact', as: 'contact_member'
   get '/admin' => 'admin/events#index'

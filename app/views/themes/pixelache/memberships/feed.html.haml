@@ -1,0 +1,31 @@
+.row
+  .small-12.columns
+    %h1= t :member_activity
+
+.row
+  .small-12.medium-6.columns#feed_table
+    - @feed.each do |item|    
+      .row
+        .small-3.columns
+          - if item.feed_origin == 'Pixelache'
+            = image_tag theme_image_path('pixelache_twitter_icon.png')
+            .member_name= link_to 'Pixelache', '#'
+          - else
+            =image_tag item.feed_origin.avatar.url(:thumb)
+            .member_name= link_to item.feed_origin.name, "/members/#{item.feed_origin.slug}"
+        .small-9.columns.content.end
+          = auto_html(item.content) { simple_format; link(:target => 'blank') }
+          .when= link_to time_ago_in_words(Time.at(item.issued_at).to_datetime) + t(:ago), item.link_url, target: :_blank
+          .metadata
+            - if item.source == 'twitter'
+              = link_to t(:reply), 'http://twitter.com/intent/tweet?in_reply_to=' + item.sourceid.to_s
+              &sdot;
+              = link_to t(:retweet), 'http://twitter.com/intent/retweet?tweet_id=' + item.sourceid.to_s
+              &sdot;
+              = link_to t(:favourite), 'http://twitter.com/intent/favorite?tweet_id=' + item.sourceid.to_s
+              %br/
+              = link_to t(:twitter_follow, twitter_name: "@#{item.feed_origin.class == String  ? item.feed_origin : item.feed_origin.twitter_name.gsub(/^@/, '')}"), "http://twitter.com/#{item.feed_origin.class == String  ? item.feed_origin : item.feed_origin.twitter_name.gsub(/^@/, '')}", :class => "twitter-follow-button"
+            
+%script{:src => "http://platform.twitter.com/widgets.js", :type => "text/javascript"}
+.row
+  .small-12.medium-6.columns= paginate @feed

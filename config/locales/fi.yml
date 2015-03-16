@@ -408,3 +408,4 @@ fi:
   your_message_was_delivered: 'Your email was delivered.'
   error_sending_message: 'There were errors in sending your message: '
   captcha_error: 'You did not enter the correct CAPTCHA. Please try again.'
+  member_activity: 'Member activity'

@@ -26,6 +26,13 @@ class MembershipsController < ApplicationController
     end
   end
   
+  
+  def feed
+    # get all member feeds
+    @feed = Feedcache.order(issued_at: :desc).page(params[:page]).per(30)
+    set_meta_tags title: t(:member_activity)
+  end
+  
   def index
     years = Membership.pluck(:year).sort
     @members = Membership.joins(:user).where(year: years.last)
