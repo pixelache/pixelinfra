@@ -4,8 +4,9 @@
 
             
 .festival
-  - if @festival.image?
-    .festival_banner
+  
+  .festival_banner
+    - if @festival.image?
       = image_tag @festival.image.url
 
   .row
