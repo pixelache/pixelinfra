@@ -17,8 +17,11 @@ class PagesController < InheritedResources::Base
       render :template => 'projects/page'
     else
       pages = @site.pages.published.where(slug: p)
-      # privilege root pages first
-      
+      if pages.size == 1 && pages.first.root?
+        if pages.first.festival
+          redirect_to pages.first.festival
+        end
+      end
       if pages.roots.empty?
         @page = pages.first
         if @page.has_project?
