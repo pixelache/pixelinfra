@@ -36,7 +36,19 @@ class PostsController < ApplicationController
   end
   
   def show
-    @post = @site.posts.friendly.find(params[:id])
+    begin
+      @post = @site.posts.friendly.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      @post = Post.find(params[:id])
+      if @post
+
+        if @post.subsite != @site
+          redirect_to "http://#{@post.subsite.subdomain}/posts/#{params[:id]}"
+          
+        end
+      end
+    end
+    
     set_meta_tags :title => @post.title
     if @post.festival
       @festival = @post.festival
