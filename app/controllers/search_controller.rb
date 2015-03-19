@@ -13,6 +13,7 @@ class SearchController < ApplicationController
     @hits += Page.by_site(@site).published.with_translations.advanced_search( { :page_translations => { name: @term}, :page_translations => {body: @term}}, false )
     @hits.flatten!
     @hits.uniq!
+    @hits = @hits.group_by{|x| x.class.to_s }
     set_meta_tags title: t(:search_results_for, result: @term)
   end
   
