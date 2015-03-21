@@ -2,14 +2,15 @@
 //= require pixelache/javascripts/jquery.clearfield
 //= require chosen-jquery
 function up_pixelache_menu() {
-
+  if ( $('.page_tree').length ) {
+    $('.page_tree').animate({top: 40}, 1000);
+  }
+  if ( $('div.project_tree').length ) {
+    $('div.project_tree').animate({top: 69}, 1000);
+  }
+  $('#main').animate({top: 40}, 1000);
   $('.pixelache_nav_menu').slideUp(1000, function() {
-    if ( $('.page_tree').length ) {
-      $('.page_tree').css('top', '40px');
-    }
-    if ( $('div.project_tree').length ) {
-      $('div.project_tree').css('top', '69px');
-    }
+
     
   });
   // $('.page_tree').animate({top: '40px'}, 400);
@@ -54,7 +55,7 @@ function down_pixelache_menu() {
     }
     $('.pixelache_nav_menu, .top-bar-wrapper').addClass('fixed');
     if ($(window).scrollTop() == 0) {
-      $('#main').css('top', mainstart);
+      $('#main').css('top', mainfinish + 55);
     }
 
   });
