@@ -431,4 +431,5 @@ en:
   reply: 'Reply'
   retweet: 'Retweet'
   favourite: 'Favourite'
+  hide: 'Hide'
   page_not_found: "We couldn't find that page. Check that the URL is right."

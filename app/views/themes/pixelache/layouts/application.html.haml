@@ -128,36 +128,27 @@
           });
           
           
-          $('ul.title-area li.name, a.menu_link_anchor, .top-bar-wrapper .arrow-down').mouseover(function() {      
-              down_pixelache_menu();
+          $('ul.title-area li.name, a.menu_link_anchor, .top-bar-wrapper .arrow-down').mouseover(function() {  
+              if ($('.pixelache_nav_menu').is(':hidden')) {
+                down_pixelache_menu();
+              }
               $('a.menu_link_anchor').text("#{t :close}").mouseover(function () {
-                $(this).text("#{t :close}");
+              $('a.menu_link_anchor').text("#{t :close}");
               }).mouseout(function() { 
-                $(this).text("#{t :close}");
+                $('a.menu_link_anchor').text("#{t :close}");
               });
-          });
-          
-          
+            });
           $('a.menu_link_anchor').click(function() {
-            
             if ($('.pixelache_nav_menu').is(':visible')) {
               up_pixelache_menu();
-              $('a.menu_link_anchor').text("#{t :menu}").mouseover(function () {
-                $(this).text("#{t :open}");
-              }).mouseout(function() { 
-                $(this).text("#{t :menu}");
-              });
-              
-            }
+              $('a.menu_link_anchor').text("#{t :menu}").mouseover(function() {
+                $('a.menu_link_anchor').text("#{t :open}") }).mouseout(function() {
+                  $('a.menu_link_anchor').text("#{t :menu}");
+                              });
+                  }
+                });
 
-            
-            
-          });
-          $('.arrow-down').click(function() {
-            $('a.menu_link_anchor').text("#{t :close}");
-            down_pixelache_menu();
-          });
 
           #{yield :jquery}
-        });
+          });
     / ! end of #container

@@ -43,7 +43,7 @@ html {
 #main {
 
   position: relative;
-
+  top: 40px;
   background-color: white;
   min-height: 550px;
 }
@@ -229,6 +229,7 @@ td .date {
 .pixelache_nav_menu {
   &.fixed {
     top: 40px;
+
   }
   .top_of_nav {
     padding: 0.8rem 0rem;
@@ -249,11 +250,14 @@ td .date {
   
   &.festival_menu {
     display: block;
+    .navhide {
+      display: none;
+    }
     #posts_menu {
       display: none;
       &.open {
         display: block;
-        ul.navhide {
+        .navhide {
           display: block;
           border-right: none;
         }

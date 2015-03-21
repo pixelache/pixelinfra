@@ -68,7 +68,7 @@
             %li= link_to @post.name, @post, class: :active
         %li= link_to t(:all_news), festival_posts_path(@festival)
   -# 2nd columns, depth of 2
-  .columns.small-12.nav_column_1{:class => (festival.festivalthemes.size <= 2) ? 'large-3 medium-3' : 'large-2 medium-2'}
+  .columns.small-12.nav_column_1{:class => (festival.festivalthemes.size <= 2) ? 'large-3 medium-3' : 'large-3 medium-3'}
 
     -# level 1 pages
     - unless festival.pages.published.empty?
@@ -129,17 +129,42 @@
           
           
   -# 3rd column
-  .small-12.large-3.medium-3.columns.nav_column_2
-    - if themelevel == 1
+  
+  - if themelevel == 1
+    .small-12.large-7.medium-7.columns.nav_column_2
       - festival.festivalthemes.each do |theme|
         - counter = 0
-        %ul.navhide.inner{id: "theme_#{theme.id}_menu", class: determine_hierarchy(:open, theme, [@page, @festivaltheme, @event])}
-          - theme.pages.published.each do |p|
-            - counter += 1
-            %li= link_to p.name, festival_page_festival_path(@festival, p),  class: determine_hierarchy(:active, p, [@page, @festivaltheme, @event])
-          - theme.events.published.sort_by(&:start_at).each do |e|
-            - counter += 1
-            %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
+        - themeitems = theme.pages.published + theme.events.published.sort_by(&:start_at)
+        .row.navhide{id: "theme_#{theme.id}_menu", class: determine_hierarchy(:open, theme, [@page, @festivaltheme, @event])}
+          - if themeitems.size > 6
+          
+            .medium-6.columns
+              %ul.inner
+                - themeitems.slice(0, themeitems.length / 2).each do |ti|
+                  - counter += 1
+                  - if ti.class == Page
+                    %li= link_to ti.name, festival_page_festival_path(@festival, ti),  class: determine_hierarchy(:active, ti, [@page, @festivaltheme, @event])
+                  - elsif ti.class == Event
+                    %li= link_to ti.name, ti, class: determine_hierarchy(:active, ti, [@page, @festivaltheme, @event])
+            .medium-6.columns
+              - counter = 0
+              %ul.inner
+                - themeitems[(themeitems.size / 2 )..-1].each do |ti|
+                  - counter += 1
+                  - if ti.class == Page
+                    %li= link_to ti.name, festival_page_festival_path(@festival, ti),  class: determine_hierarchy(:active, ti, [@page, @festivaltheme, @event])
+                  - elsif ti.class == Event
+                    %li= link_to ti.name, ti, class: determine_hierarchy(:active, ti, [@page, @festivaltheme, @event])   
+          - else
+            .small-12.columns
+              %ul.inner
+                - themeitems.each do |ti|
+                  - counter += 1
+                  - if ti.class == Page
+                    %li= link_to ti.name, festival_page_festival_path(@festival, ti),  class: determine_hierarchy(:active, ti, [@page, @festivaltheme, @event])
+                  - elsif ti.class == Event
+                    %li= link_to ti.name, ti, class: determine_hierarchy(:active, ti, [@page, @festivaltheme, @event])
+                           
         - highest = counter unless highest > counter
       - unless festival.events.published.to_a.delete_if{|x| x.festivalthemes.empty? }.empty?
         - counter = 0
@@ -147,7 +172,8 @@
           - festival.events.published.to_a.delete_if{|x| !x.festivalthemes.empty? }.sort_by(&:start_at).each do |e|
             - counter += 1
             %li= link_to e.name, e, class: determine_hierarchy(:active, e, [@page, @festivaltheme, @event])
-    - else
+  - else
+    .small-12.large-3.medium-3.columns.nav_column_2
       - if festival.festivalthemes.size <= 2 && !festival.festivalthemes.empty?
         - #themes are directly listed in last column, so put events
         - festival.festivalthemes.each do |theme|
@@ -232,8 +258,24 @@
 - highest_total = ((highest * 1.5) + 1.8 ).to_f.to_s + "rem"   
 - list = ((highest * 1.25)).to_f.to_s  + "rem" 
 = content_for :jquery do
-  
-  $('.festival_menu').css('height', '#{highest_total}');
-  $('.festival_menu ul').css('height', '#{list}');
-  //$('#main').css('margin-top', '#{highest_total}');
+  :plain
+    $('.festival_menu').css('height', '#{highest_total}');
+    $('.festival_menu ul').css('height', '#{list}');
+    $('a.menu_link_anchor').click(function() {      
+      if ($('.pixelache_nav_menu').is(':visible')) {
+        up_festival_menu();
+        $('a.menu_link_anchor').text("#{t :menu}").mouseover(function () {
+          $(this).text("#{t :open}");
+        }).mouseout(function() { 
+          $(this).text("#{t :menu}");
+        });
+      } else {
+        down_festival_menu();
+        $('a.menu_link_anchor').text("#{t :menu}").mouseover(function () {
+          $(this).text("#{t :hide}");
+        }).mouseout(function() { 
+          $(this).text("#{t :menu}");
+        });
+      }
+    });
                     

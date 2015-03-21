@@ -1,4 +1,4 @@
-%nav.top-bar{"data-topbar" => "", :role => "navigation", :"data-options" => "is_hover: false"}
+%nav.top-bar{"data-topbar" => "", :role => "navigation", :"data-options" => "scrolltop: false; is_hover: false"}
   %ul.title-area
     %li.name
       = link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), '/'
@@ -17,7 +17,7 @@
             = form_tag '/search' do 
               = text_field :search, :term, value:  (@term.nil? ? t(:search) : @term), class: :clearfield        
       %li.search_icon= link_to image_tag(theme_image_path('search.png')), '#', onclick: "$('#searchli').toggle('slide');$('li.search_icon').css('display', 'none');return false;"
-      %li.menu_link= link_to t(:menu), '#', onmouseover: "$(this).text('#{t :open}');", onmouseout: "$(this).text('#{t :menu}');", class: :menu_link_anchor
+      %li.menu_link= link_to t(:menu), '#', onmouseover: (content_for?(:festival_menu) ? "$(this).text('#{t :hide}');" : "$(this).text('#{t :open}')"), onmouseout: "$(this).text('#{t :menu}');", class: :menu_link_anchor
               
     - unless current_user
       %ul.right.lang
