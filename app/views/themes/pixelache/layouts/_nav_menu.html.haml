@@ -1,11 +1,11 @@
 .row.left-collapse.top_of_nav
-  .small-4.medium-2.columns
+  .small-6.medium-2.columns
     %ul.text-right.first
       %li= link_to t(:info), "#", onmouseover: "javascript:toggleNavMenu('#info')", id: :info
       %li= link_to t(:activities), "#", onmouseover: "javascript:toggleNavMenu('#activities')", id: :activities
       %li= link_to t(:people), "#", onmouseover: "javascript:toggleNavMenu('#people')", id: :people
       %li= link_to t(:archive), "#", onmouseover: "javascript:toggleNavMenu('#archive')", id: :archive
-  .small-4.medium-2.columns
+  .small-6.medium-2.columns
     %ul.navhide#info_menu
       %li= link_to t(:about), page_path('about')
       %li= link_to t(:latest_news), posts_path, onmouseover: "javascript:toggleNavMenu('#news')", id: :news

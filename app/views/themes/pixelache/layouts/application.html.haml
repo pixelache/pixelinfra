@@ -174,7 +174,12 @@
             $('button#mailing_list_submit').prop('disabled', true);
             $('.email_signup_form').fadeOut();
           });
+          if(!!('ontouchstart' in window)) {
+            $('a.menu_link_anchor').unbind('click');
+          }
+            
           #{yield :jquery}
+          
         });
 
     / ! end of #container

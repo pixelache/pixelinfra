@@ -3,7 +3,8 @@
     %li.name
       = link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), '/'
       &nbsp;
-
+    %li.menu_link.show-for-small-only= link_to t(:menu), '#', onmouseover: (content_for?(:festival_menu) ? "$(this).text('#{t :hide}');" : "$(this).text('#{t :open}')"), onmouseout: "$(this).text('#{t :menu}');", class: :menu_link_anchor
+    
 
   %section.top-bar-section
     %ul.left

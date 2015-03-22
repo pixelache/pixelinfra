@@ -6,7 +6,37 @@
 // mobiles
 
 @media only screen and (max-width: 40em)  { 
+  .f-topbar-fixed {
+    padding-top: 40px !important;
+  }
   
+  .top-bar-wrapper {
+    nav.top-bar {
+      ul.title-area {
+        li.name {
+          width: 150px;
+          float: left;
+        }
+        li.menu_link {
+          margin-top: 8px;
+          float: right;
+          height: 40px;
+          a {
+            height: 40px;
+            font-family: "Open Sans", sans-serif;
+            text-transform: uppercase;
+            padding: 15px;
+          }
+        }
+      }
+    }
+  }
+  
+  //   front modules
+  .thin_strip {
+    font-size: 1rem;
+    line-height: 1.7rem;
+  }
   //   residencies
   
   .residency_container {
@@ -165,6 +195,11 @@
         //border-bottom: 1px solid #999;
         margin-bottom: 0.3rem;
 
+      }
+      &.first {
+        li {
+          float: none;
+        }
       }
       li {
         
