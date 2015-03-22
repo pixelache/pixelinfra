@@ -2,16 +2,26 @@
 //= require pixelache/javascripts/jquery.clearfield
 //= require chosen-jquery
 function up_pixelache_menu() {
+  var mainfinish = 0;
   if ( $('.page_tree').length ) {
     $('.page_tree').animate({top: 40}, 1000);
+    mainfinish += parseInt($('.page_tree').height());
   }
   if ( $('div.project_tree').length ) {
     $('div.project_tree').animate({top: 69}, 1000);
+    mainfinish += parseInt($('.project_tree').height());
   }
-  $('#main').animate({top: 40}, 1000);
+  // $('#main').animate({top: 40}, 1000);
+  // 
+  console.log('mainfinish is ' + mainfinish);
+  $('#main').animate({ top: mainfinish   }, 1000);
   $('.pixelache_nav_menu').slideUp(1000, function() {
-
-    
+    $('#main').css('top', mainfinish + 40 );
+    $(window).scroll(function() {
+      if ($(window).scrollTop() == 0) {
+        $('#main').css('top', mainfinish );
+      }
+    });
   });
   // $('.page_tree').animate({top: '40px'}, 400);
   // $('div.project_tree').animate({top: '69px'}, 400);
@@ -23,7 +33,7 @@ function up_pixelache_menu() {
 function down_pixelache_menu() {
   var mainstart = parseInt($('#main').offset().top);
   var menuheight = parseInt($('.pixelache_nav_menu').css('height'));
-  var mainfinish = 40 + menuheight;
+  var mainfinish = menuheight;
   if ( $('.page_tree').length ) {
     // $('.page_tree').removeClass('sticky');
     // $('.page_tree').removeClass('fixed');
@@ -39,30 +49,24 @@ function down_pixelache_menu() {
     $('div.project_tree').animate( {top: projdest}, 1000);
     mainfinish += parseInt($('div.project_tree').height());
   }
-  
-
+  // console.log('mainfinish is ' + mainfinish);
+  $('#main').animate({ top: mainfinish   }, 1000);
   
   $('.pixelache_nav_menu').slideDown(1000, function( ) {
-    var start =  + 40 ;
     if ( $('.page_tree').length ) {
-
       $('.page_tree').addClass('fixed');
-      //$('.page_tree').css('top', start);
     }
     if ( $('div.project_tree').length ) {
       $('div.project_tree').addClass('fixed');
-      //$('div.project_tree').css('top', start + parseInt($('.page_tree').css('height')));
+      
     }
     $('.pixelache_nav_menu, .top-bar-wrapper').addClass('fixed');
-    if ($(window).scrollTop() == 0) {
-      $('#main').css('top', mainfinish + 55);
-    }
-
+    $('#main').css('top', mainfinish + 40 );
   });
   
   $(window).scroll(function() {
     if ($(window).scrollTop() == 0) {
-      $('#main').css('top', 40);
+      $('#main').css('top', mainfinish);
     }
   });
 

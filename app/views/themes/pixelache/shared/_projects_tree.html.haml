@@ -1,5 +1,5 @@
 .left_collapse
-  %ul.project_tree
+  %ul.project_trees
     - unless @project.children.visible.empty?
       %li{:"data-dropdown" => 'subprojects', :"aria-controls" => 'subprojects', :"aria-expanded" => false, :"data-options" => "is_hover:false;"}= link_to  t(:subprojects), '#'
       %ul#subprojects.f-dropdown{:"data-dropdown-content" => '', :"aria-hidden" => true, :tabindex => -1}
