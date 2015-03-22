@@ -238,9 +238,14 @@ td .date {
 
 .pixelache_nav_menu {
   position: absolute;
+    z-index: 12;
   &.fixed {
     top: 40px;
 
+  }
+  .festival_menu_wrapper {
+
+  
   }
   .top_of_nav {
     padding: 0.8rem 0rem;
@@ -250,6 +255,10 @@ td .date {
     }
   }
   display: none;
+  &.festival_menu {
+    display: block;
+
+  }
   .columns {
     padding-right: 1.4rem;
   }
@@ -317,6 +326,8 @@ td .date {
       height: 1.3rem;
       overflow: hidden;
       list-style-type: none;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       span.date {
         font-size: 0.75rem;
         color: #999;

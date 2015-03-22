@@ -29,15 +29,63 @@
       %header
         .top-bar-wrapper.sticky= render 'layouts/top_bar'
         - unless @festival && controller.controller_name != 'archive'
+          = content_for :jquery do
+            :plain
+              $('ul.title-area li.name, a.menu_link_anchor, .top-bar-wrapper .arrow-down').mouseover(function() {  
+                  if ($('.pixelache_nav_menu').is(':hidden')) {
+                    down_pixelache_menu();
+                  }
+                  $('a.menu_link_anchor').text("#{t :close}").mouseover(function () {
+                  $('a.menu_link_anchor').text("#{t :close}");
+                  }).mouseout(function() { 
+                    $('a.menu_link_anchor').text("#{t :close}");
+                  });
+              });
+              $('a.menu_link_anchor').click(function() {
+                if ($('.pixelache_nav_menu').is(':visible')) {
+                  up_pixelache_menu();
+                  $('a.menu_link_anchor').text("#{t :menu}").mouseover(function() {
+                    $('a.menu_link_anchor').text("#{t :open}") }).mouseout(function() {
+                      $('a.menu_link_anchor').text("#{t :menu}");
+                                  });
+                      }
+                  return false;  
+                    });
           .arrow-down.fixed
-          -#.arrow-up
+        - else
+          = content_for :jquery do
+            :plain
+              $('a.menu_link_anchor').click(function() {
+                if ($('.festival_main_menu').is(':visible')) {
+                  var mainto =  $('.festival_top_header').height() + 40;
+                  $('.festival_main_menu').slideUp(1000);
+                  $('#main').animate({top: mainto - 40});
+                  $('a.menu_link_anchor').text("#{t :menu}").mouseover(function () {
+                    $(this).text("#{t :open}");
+                  }).mouseout(function() { 
+                    $(this).text("#{t :menu}");
+                  });
+                } else {
+                  var mainto = $('.festival_top_header').height()  + $('.festival_main_menu').height()
+                  ;
+                  $('#main').animate({top: mainto});
+                  $('.festival_main_menu').slideDown(1000);
+                  $('a.menu_link_anchor').text("#{t :menu}").mouseover(function () {
+                    $(this).text("#{t :hide}");
+                  }).mouseout(function() { 
+                    $(this).text("#{t :menu}");
+                  });
+                }
+                return false;
+              });
+          
         .pixelache_nav_menu.sticky{:class => content_for?(:festival_menu) ? :festival_menu : :black, :style => content_for?(:festival_menu) ?  "background-color: #" + (@festival.background_colour.blank? ? "#FFF" : @festival.background_colour) + "; color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour) : false } 
           - if content_for? :festival_menu
-            = yield :festival_menu
+            .festival_menu_wrapper= yield :festival_menu
           - else
             = render :partial => 'layouts/nav_menu'
         - if content_for? :page_tree
-          .page_tree.sticky.sub
+          .page_tree.sticky.sub{class: @festival && controller.controller_name != 'archive' ? :festival_page_tree : false}
             = yield :page_tree
         - if content_for? :project_tree
           .project_tree.sticky.sub
@@ -126,30 +174,7 @@
             $('button#mailing_list_submit').prop('disabled', true);
             $('.email_signup_form').fadeOut();
           });
-          
-          
-          $('ul.title-area li.name, a.menu_link_anchor, .top-bar-wrapper .arrow-down').mouseover(function() {  
-              if ($('.pixelache_nav_menu').is(':hidden')) {
-                down_pixelache_menu();
-              }
-              $('a.menu_link_anchor').text("#{t :close}").mouseover(function () {
-              $('a.menu_link_anchor').text("#{t :close}");
-              }).mouseout(function() { 
-                $('a.menu_link_anchor').text("#{t :close}");
-              });
-            });
-          $('a.menu_link_anchor').click(function() {
-            if ($('.pixelache_nav_menu').is(':visible')) {
-              up_pixelache_menu();
-              $('a.menu_link_anchor').text("#{t :menu}").mouseover(function() {
-                $('a.menu_link_anchor').text("#{t :open}") }).mouseout(function() {
-                  $('a.menu_link_anchor').text("#{t :menu}");
-                              });
-                  }
-              return false;  
-                });
-
-
           #{yield :jquery}
-          });
+        });
+
     / ! end of #container

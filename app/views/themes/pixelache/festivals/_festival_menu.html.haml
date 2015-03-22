@@ -25,7 +25,7 @@
     
 
     
-.left-collapse.festival_main_menu
+.left-collapse.festival_main_menu.column
   
   .large-2.columns.small-12.medium-2#nav_column_0
     %ul.text-right.first
@@ -194,7 +194,9 @@
     
       - else
         -# themes need to be listed here and actual events bumped to column #4
-        - unless festival.festivalthemes.size < 2
+        - if festival.festivalthemes.size < 2
+          
+        - else
           - counter = 0
           %ul.navhide#themes_menu{class: (@event.nil? && @festivaltheme.nil?) ? false : :open}  
             - festival.festivalthemes.each do |theme|
@@ -205,23 +207,23 @@
               %li= link_to "Other activities", '#', onmouseover: "javascript:toggleNavMenu('#otherevents')", id: "otherevents", class: @event.nil? ? false : (@event.festivalthemes.empty? ? :active : false)
           - highest = counter unless highest > counter
 
-    - unless festival.pages.published.empty? 
-      - festival.pages.published.first.find_all_by_generation(2).each do |p|
-        - counter = 0
-        %ul.navhide{id: "page_#{p.id}_menu", class: [determine_hierarchy("open", p, [@page, @festivaltheme, @event]), p.children.map(&:children).flatten.empty? ? :inner: false] }  
-          - unless p.body.blank?
-            %li= link_to p.name + " overview", festival_page_festival_path(@festival, p), class:  @page.blank? ? false : (@page == p ? :active : false)
-            - counter += 1
-          - p.children.published.each do |pp|
-            - counter += 1
-            - if pp.children.empty?
-              %li= link_to pp.name, festival_page_festival_path(@festival, pp), class: determine_hierarchy(:active, pp, [@page, @festivaltheme, @event])
-            - else
-              %li= link_to pp.name, "#", onmouseover: "javascript:toggleNavMenu('#page_#{pp.id}')", id: "page_#{pp.id}", class: determine_hierarchy(:active, pp, [@page, @festivaltheme, @event] )
-        - highest = counter unless highest > counter
+      - unless festival.pages.published.empty? 
+        - festival.pages.published.first.find_all_by_generation(2).each do |p|
+          - counter = 0
+          %ul.navhide{id: "page_#{p.id}_menu", class: [determine_hierarchy("open", p, [@page, @festivaltheme, @event]), p.children.map(&:children).flatten.empty? ? :inner: false] }  
+            - unless p.body.blank? 
+              %li= link_to p.name + " overview", festival_page_festival_path(@festival, p), class:  @page.blank? ? false : (@page == p ? :active : false)
+              - counter += 1
+            - p.children.published.each do |pp|
+              - counter += 1
+              - if pp.children.empty?
+                %li= link_to pp.name, festival_page_festival_path(@festival, pp), class: determine_hierarchy(:active, pp, [@page, @festivaltheme, @event])
+              - else
+                %li= link_to pp.name, "#", onmouseover: "javascript:toggleNavMenu('#page_#{pp.id}')", id: "page_#{pp.id}", class: determine_hierarchy(:active, pp, [@page, @festivaltheme, @event] )
+          - highest = counter unless highest > counter
 
   -# make 4th column if needed
-  .small-12.columns.final.nav_column_3{:class => (festival.festivalthemes.size <= 2) ? 'large-4 medium-4' : 'large-5 medium-5'}
+  .small-12.columns.final.nav_column_3{:class => (festival.festivalthemes.size <= 2) ? 'large-4 medium-4' : 'large-4 medium-4'}
     - unless themelevel == 1
       - festival.festivalthemes.each do |theme|
         - counter = 0
@@ -259,23 +261,14 @@
 - list = ((highest * 1.25)).to_f.to_s  + "rem" 
 = content_for :jquery do
   :plain
-    $('.festival_menu').css('height', '#{highest_total}');
+    $('.festival_main_menu').css('height', '#{highest_total}');
+    $('#main').css('top', $('.festival_menu').height() - 2);
+    $('#main').css('margin-bottom', $('.festival_menu').height() - 2);
     $('.festival_menu ul').css('height', '#{list}');
-    $('a.menu_link_anchor').click(function() {      
-      if ($('.pixelache_nav_menu').is(':visible')) {
-        up_festival_menu();
-        $('a.menu_link_anchor').text("#{t :menu}").mouseover(function () {
-          $(this).text("#{t :open}");
-        }).mouseout(function() { 
-          $(this).text("#{t :menu}");
-        });
-      } else {
-        down_festival_menu();
-        $('a.menu_link_anchor').text("#{t :menu}").mouseover(function () {
-          $(this).text("#{t :hide}");
-        }).mouseout(function() { 
-          $(this).text("#{t :menu}");
-        });
-      }
-    });
+    if ( $('.page_tree').length ) {
+      $('.page_tree').css('top',  $('.festival_menu').height() + 38 );
+      $('#main').css('top', $('.festival_menu').height() + 38 + $('.page_tree').height());
+      $('#main').css('margin-bottom', $('.festival_menu').height() + 38 + $('.page_tree').height());
+    } 
+
                     

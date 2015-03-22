@@ -108,6 +108,9 @@ function up_festival_menu() {
 function toggleWideNavMenu(div, linklevel) {
   
   $(div).parent().parent().children('li').children('a').css('color', '');
+  for(var i = (linklevel + 1); i < 4; i++ ) {
+    $(".nav_column_" + i).children('.navhide').css('display', 'none');
+  }
   $(div + "_menu").children('ul.navhide').css('display', 'block');
   
   $(div + "_menu").parent('.columns').children('ul.navhide').css('display', 'none');
