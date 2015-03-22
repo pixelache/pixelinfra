@@ -121,17 +121,36 @@ function toggleWideNavMenu(div, linklevel) {
   
 }
 
+function reset_mobile_menu() {
+  $('ul.first').slideDown().removeClass('rolled');
+  $('.navhide').css('display', 'none');
+  $('.festival_menu ul').removeClass('open');
+  $('.nav_column_1, .nav_column_2, .nav_column_3').css('border-bottom', 'none');
+}
 
 function toggleNavMenu(div, linklevel) {
-  
+ 
   $(div).parent().parent().children('li').children('a').css('color', '');
   for(var i = (linklevel + 1); i < 4; i++ ) {
     $(".nav_column_" + i).children('.navhide').css('display', 'none');
   }
+  $('ul.first').addClass('rolled');
   $(div + "_menu").parent('.columns').children('.navhide').css('display', 'none');
   $(div + "_menu").parent('.columns').children('.navhide').removeClass('open');
   //$(div + "_menu").parents('.columns').siblings().children('ul.navhide').css('display', 'none');
 
-  $(div + "_menu").css('display', 'block');
+  $(div + "_menu li").css('display', 'block');
+  $(div).parents('ul').find('li a').removeClass('active');
+  $(div).addClass('active');
+  
+  if(!!('ontouchstart' in window)) {
+    $('ul.rolled').slideUp();
+    $(div).parents('ul').find('li :not(a.active)').parent('li').css('display', 'none');
+    $(div + "_menu").css('display', 'block');
+    $('.festival_menu .festival_top_header .menu_reset').css('display', 'inline');
+    // $(".nav_column_" + parseInt(linklevel + 1));
+    $('.festival_main_menu').css('height', 'auto');
+    $('.nav_column_' + linklevel + ' ul').css('height', 'auto')
+  }
   
 }

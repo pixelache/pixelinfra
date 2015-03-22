@@ -186,6 +186,45 @@
   
   
   .pixelache_nav_menu {
+    .festival_top_header {
+      .fest_header_wrapper {
+        float: left;
+      }
+      .menu_reset {
+
+        display: none;
+      }
+    }
+    &.festival_menu ul {
+      border-right: none;
+      &.first {
+        &.open {
+          margin-bottom: 0.4rem;
+          border-right: none;
+          li {
+
+            padding: 0.2rem 0.5rem;
+            border-right: 1px dotted #fff;
+          }
+        }
+        &.rolled {
+          
+        }
+        border-right-width: 1px;
+        border-right-style: solid;
+
+        li {
+          margin-right: initial;
+          border-right: none;
+          
+        }
+      }
+      li {
+        
+        padding: 0.1rem 0.5rem;
+        border-right: 1px dotted #fff;
+      }
+    }
     
 
     ul {

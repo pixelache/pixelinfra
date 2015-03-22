@@ -269,6 +269,7 @@ td .date {
   }
   
   &.festival_menu {
+
     display: block;
     .navhide {
       display: none;
@@ -307,7 +308,7 @@ td .date {
     &.navhide {
       display: none;
       &.open {
-        display: block !important;
+        display: block;
       }
 
         
@@ -322,8 +323,8 @@ td .date {
     
     li {
       font-size: 0.9rem;
-      line-height: 1.3rem;
-      height: 1.3rem;
+      line-height: 1.2rem;
+      height: 1.4rem;
       overflow: hidden;
       list-style-type: none;
       text-overflow: ellipsis;
