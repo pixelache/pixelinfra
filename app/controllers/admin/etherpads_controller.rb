@@ -34,7 +34,7 @@ class Admin::EtherpadsController < Admin::BaseController
         "last_edited DESC"
       end
     end
-    @etherpads = apply_scopes(Etherpad).all.order(order)
+    @etherpads = apply_scopes(Etherpad).all.order(order).page(params[:page]).per(100)
     @etherpad_events = @etherpads.map(&:events).flatten.compact
   end
   
