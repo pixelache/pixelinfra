@@ -1,6 +1,45 @@
-.row.node
-  .small-2.columns.media.large-offset-1 &nbsp;
-  .small-7.columns.content.centered
-    %h2= @step.name
-    %h3= date_range(@step.start_at, @step.end_at)
+.row
+  .small-12.columns
+    %h1
+      Step:
+      = @step.name
 
+    %h3= date_range(@step.start_at, @step.end_at)
+  
+  
+- unless @step.description.blank?
+  .row
+    .small-12.columns
+      = raw @step.description
+
+
+- unless @step.all_events.empty?
+  .row  
+    .small-12.indented_title= t :events
+  .row
+    .event_index.small-12.columns
+      - @step.all_events.in_groups_of(3).each do |group|
+        .row.event_row.images
+          - group.each_with_index do |event, index|
+            - next if event.nil?
+            .medium-4.small-10.small-offset-1.medium-offset-0.column{class: group[index+1].nil? ? :end : false }
+              .event_image= link_to image_tag(event.image.url(:box).gsub(/development/, 'production')), event
+              .name.show-for-small-only= link_to event.name, event
+              .date.show-for-small-only= "#{date_range(event.start_at, event.end_at)}"
+              .blurb.show-for-small-only
+                = truncate_html(sanitize(event.description, tags: %w{bold strong b italic em }), :length => 170)
+                = link_to raw("&#9654;"), event
+        .row.event_row.hide-for-small-only{:"data-equalizer" => ''}
+          - group.each_with_index do |event, index|
+            - next if event.nil?
+            .medium-4.small-10.small-offset-1.medium-offset-0.columns{:"data-equalizer-watch" => '', class: group[index+1].nil? ? :end : false }
+              .name= link_to event.name, event
+              .date= "#{date_range(event.start_at, event.end_at)}"
+        .row.event_row.text_blurb.hide-for-small-only{:"data-equalizer" => ''}
+          - group.each_with_index do |event, index|
+            - next if event.nil?
+            .medium-4.columns{class: group[index+1].nil? ? :end : false }
+              .blurb{:"data-equalizer-watch" => ''}
+                = truncate_html(sanitize(event.description, tags: %w{bold strong b italic em }), :length => 170)
+                = link_to raw("&#9654;"), event
+  

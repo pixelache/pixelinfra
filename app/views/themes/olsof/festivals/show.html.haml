@@ -1,14 +1,44 @@
 .festival
-  %h1= @festival.name
+  %h1
+    Festival:
+    = @festival.name
   .metadata
-    = l @festival.start_at, :format => :long
-    - unless @festival.end_at.blank? || @festival.end_at == @festival.start_at
-      = " - #{l @festival.end_at, :format => :long}"
+    = date_range(@festival.start_at, @festival.end_at, :format => :long)
+
+  - unless @festival.website.blank?
+    %h3= link_to @festival.website, @festival.website, target: :_blank
   
-  %h3= link_to @festival.website, @festival.website
-  
+  - if @festival.step
+    %h5
+      Step:
+      = link_to @festival.step.name, "/steps/#step_#{@festival.step.id.to_s}"
+
   - unless @festival.events.empty?
-    %h2 Events:
-    %ul
-      - @festival.events.published.each do |event|
-        %li= link_to event.name, event
+    .row  
+      .small-12.indented_title= t :events
+    .row
+      .event_index.small-12.columns
+        - @festival.events.in_groups_of(3).each do |group|
+          .row.event_row.images
+            - group.each_with_index do |event, index|
+              - next if event.nil?
+              .medium-4.small-10.small-offset-1.medium-offset-0.column{class: group[index+1].nil? ? :end : false }
+                .event_image= link_to image_tag(event.image.url(:box).gsub(/development/, 'production')), event
+                .name.show-for-small-only= link_to event.name, event
+                .date.show-for-small-only= "#{date_range(event.start_at, event.end_at)}"
+                .blurb.show-for-small-only
+                  = truncate_html(sanitize(event.description, tags: %w{bold strong b italic em }), :length => 170)
+                  = link_to raw("&#9654;"), event
+          .row.event_row.hide-for-small-only{:"data-equalizer" => ''}
+            - group.each_with_index do |event, index|
+              - next if event.nil?
+              .medium-4.small-10.small-offset-1.medium-offset-0.columns{:"data-equalizer-watch" => '', class: group[index+1].nil? ? :end : false }
+                .name= link_to event.name, event
+                .date= "#{date_range(event.start_at, event.end_at)}"
+          .row.event_row.text_blurb.hide-for-small-only{:"data-equalizer" => ''}
+            - group.each_with_index do |event, index|
+              - next if event.nil?
+              .medium-4.columns{class: group[index+1].nil? ? :end : false }
+                .blurb{:"data-equalizer-watch" => ''}
+                  = truncate_html(sanitize(event.description, tags: %w{bold strong b italic em }), :length => 170)
+                  = link_to raw("&#9654;"), event

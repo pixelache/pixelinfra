@@ -24,4 +24,8 @@ class Step < ActiveRecord::Base
     festival.blank? ? nil : festival.name
   end
   
+  def all_events
+    [events, festival.nil? ? nil : festival.events].flatten.compact.uniq
+  end
+  
 end

@@ -6,7 +6,7 @@
       = image_tag = image_tag theme_image_path('i-steps.png')
     
       - @steps.order(:number).each do |step|
-        .step
+        .step[step]
           %h3
             = step.number.to_s + ":"
             = step.name
@@ -16,10 +16,10 @@
               %ul
                 %li= link_to step.festival.name, step.festival.website.blank? ? step.festival : step.festival.website
                   
-          - unless step.events.empty?
+          - unless step.all_events.empty?
             %h5= t(:events) +  ": "
             %ul
-              - step.events.each do |event|
+              - step.all_events.sort_by{|x| x.start_at }.each do |event|
                 %li= link_to event.name, event
           
   

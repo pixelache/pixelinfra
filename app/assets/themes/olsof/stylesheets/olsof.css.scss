@@ -330,6 +330,11 @@ ul.side-nav {
       padding: 0.8rem 0;
       border-top: 1px solid #333;
       border-bottom: 2px solid black;
+      margin-bottom: 1rem;
+      strong {
+        color: #000;
+        font-weight: normal;
+      }
     }
   }
   .event_image {
@@ -386,6 +391,7 @@ ul.side-nav {
     padding: 0.8rem 0;
     border-top: 1px solid #333;
     border-bottom: 2px solid black;
+    margin-bottom: 1rem;
   }
   
 }
@@ -519,6 +525,9 @@ footer {
     border-bottom: 1px solid #333;
     padding: 0.5rem 0;
     margin: 0.5rem 0;
+    .entry {
+      padding: 0.3rem 0;
+    }
   }
   .event_title {
     margin-top: 1rem;

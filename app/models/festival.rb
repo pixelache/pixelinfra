@@ -12,6 +12,7 @@ class Festival < ActiveRecord::Base
   has_event_calendar
   validates_presence_of :name, :node_id
   has_many :pages
+  has_one :step
   has_many :videos
   mount_uploader :image, ImageUploader
   mount_uploader :festivalbackdrop, AttachmentUploader

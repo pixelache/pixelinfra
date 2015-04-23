@@ -37,14 +37,21 @@
       .small-12.columns.large-10.large-offset-1
         .second_metadata
           - unless @event.festival.blank?
-            = t :festival
-            = link_to @event.festival
+            .entry
+              = t(:festival) + ": "
+              = link_to @event.festival.name, @event.festival
           - unless @event.facilitator_name.blank? && @event.facilitator_organisation.blank?
-            = t :facilitated_by
-            = link_to_unless(@event.facilitator_url.blank?, @event.facilitator_name, @event.facilitator_url)
-          - unless @event.step.blank?
-            = t :step
-            = @event.step.name
+            .entry
+              = t :facilitated_by
+              = link_to_unless(@event.facilitator_url.blank?, @event.facilitator_name, @event.facilitator_url)
+          - unless @event.step.blank? && @event.festival.blank?
+            .entry
+              = t(:step) + ": "
+              - if @event.step
+                = link_to @event.step.name, "/steps/#step_#{@event.step.id.to_s}"
+              - elsif @event.festival
+                - unless @event.festival.step.blank?
+                  = link_to @event.festival.step.name, "/steps/#step_#{@event.festival.step.id.to_s}"
       
 
   .row

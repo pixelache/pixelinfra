@@ -17,7 +17,7 @@ class Admin::StepsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:step => [:subsite_id, :festival_id, :node_id, :start_at, :end_at, :name, :number, :event_id, :slug])
+    params.permit(:step => [:subsite_id, :festival_id, :node_id, :description, :start_at, :end_at, :name, :number, :event_id, :slug])
   end
     
 end 

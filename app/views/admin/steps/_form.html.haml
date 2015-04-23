@@ -13,6 +13,10 @@
       = f.input :node, :label => 'Host partner', input_html: {required: ''}
 
   .row
+    .small-12.columns
+      = f.input :description
+      
+  .row
     .small-6.columns= f.input :start_at, :as => :string, :input_html => {:class => "datetime_picker", required: ''}
     .small-6.columns= f.input :end_at, :as => :string, :input_html => {:class => "datetime_picker", required: ''}
   .row
