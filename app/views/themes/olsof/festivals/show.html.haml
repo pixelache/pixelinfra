@@ -13,6 +13,13 @@
       Step:
       = link_to @festival.step.name, "/steps/#step_#{@festival.step.id.to_s}"
 
+  - unless @festival.description.blank?
+    .row  
+      .small-12.indented_title= t :about
+    .row
+      .small-12.columns.festival_description
+        = raw sanitize(@festival.description, tags: %w{ bold strong b i em italic u underline p br a h1 h2 h3 h4 h5 h6 ul li ol })
+      
   - unless @festival.events.empty?
     .row  
       .small-12.indented_title= t :events
@@ -27,7 +34,7 @@
                 .name.show-for-small-only= link_to event.name, event
                 .date.show-for-small-only= "#{date_range(event.start_at, event.end_at)}"
                 .blurb.show-for-small-only
-                  = truncate_html(sanitize(event.description, tags: %w{bold strong b italic em }), :length => 170)
+                  = truncate_html(sanitize(event.description.gsub(/\&nbsp;/, ' '), tags: %w{bold strong b italic em }), :length => 170)
                   = link_to raw("&#9654;"), event
           .row.event_row.hide-for-small-only{:"data-equalizer" => ''}
             - group.each_with_index do |event, index|
@@ -40,5 +47,5 @@
               - next if event.nil?
               .medium-4.columns{class: group[index+1].nil? ? :end : false }
                 .blurb{:"data-equalizer-watch" => ''}
-                  = truncate_html(sanitize(event.description, tags: %w{bold strong b italic em }), :length => 170)
+                  = truncate_html(sanitize(event.description.gsub(/\&nbsp;/, ' '), tags: %w{bold strong b italic em }), :length => 170)
                   = link_to raw("&#9654;"), event

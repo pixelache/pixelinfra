@@ -12,7 +12,7 @@
             .name.show-for-small-only= link_to event.name, event
             .date.show-for-small-only= "#{date_range(event.start_at, event.end_at)}"
             .blurb.show-for-small-only
-              = truncate_html(sanitize(event.description, tags: %w{bold strong b italic em }), :length => 170)
+              = truncate_html(sanitize(event.description.gsub(/\&nbsp;/, ' '), tags: %w{bold strong b italic em }), :length => 170)
               = link_to raw("&#9654;"), event
       .row.event_row.hide-for-small-only{:"data-equalizer" => ''}
         - group.each do |event|
@@ -25,7 +25,7 @@
           - next if event.nil?
           .medium-4.columns
             .blurb{:"data-equalizer-watch" => ''}
-              = truncate_html(sanitize(event.description, tags: %w{bold strong b italic em }), :length => 170)
+              = truncate_html(sanitize(event.description.gsub(/\&nbsp;/, ' '), tags: %w{bold strong b italic em }), :length => 170)
               = link_to raw("&#9654;"), event
     .row
       .small-10.small-offset-1.medium-12.medium-offset-0= paginate @events            
