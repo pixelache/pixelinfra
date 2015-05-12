@@ -135,7 +135,8 @@ function toggleNavMenu(div, linklevel) {
     $(".nav_column_" + i).children('.navhide:not(.open)').css('display', 'none');
   }
   $('ul.first').addClass('rolled');
-  // $(div + "_menu").parent('.columns').children('.navhide').css('display', 'none');
+  $(div + "_menu").parent().next('.columns').children('ul.navhide').css('display', 'none');
+  $(div + "_menu").parent('.columns').children('.navhide').css('display', 'none');
   //$(div + "_menu").parent('.columns').children('.navhide').removeClass('open');
   //$(div + "_menu").parents('.columns').siblings().children('ul.navhide').css('display', 'none');
 
@@ -159,6 +160,7 @@ function toggleNavMenu(div, linklevel) {
       $(".nav_column_" + i).children('.navhide').css('display', 'none');
     }
   }
+
   $(div + "_menu li").css('display', 'block');
   $(div + "_menu").css('display', 'block');
 }
