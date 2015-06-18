@@ -124,7 +124,14 @@ class ApplicationController < ActionController::Base
   # end
   
   def determine_site
-    @site = Subsite.find_by(:name => (request.host =~ /opensourcingfestivals/ || request.host =~ /^olsof\./ ? 'olsof' : 'pixelache'))
+    if Rails.env.development?
+      @site = Subsite.find_by(subdomain: request.host.gsub(/\.local$/, '')) 
+    else
+      @site = Subsite.find_by(:name => (request.host =~ /opensourcingfestivals/ || request.host =~ /^olsof\./ ? 'olsof' : 'pixelache'))
+    end
+    if @site.nil?
+      @site = Subsite.first
+    end
     if @site.name =='olsof'
       @calendar = Event.by_site(@site).where(['start_at >= ? OR end_at >= ?', Time.now, Time.now])
       @calendar += Step.by_site(@site).where(['start_at >= ? OR end_at >= ?', Time.now, Time.now])
