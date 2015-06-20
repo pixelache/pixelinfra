@@ -1,0 +1,129 @@
+/*
+ *= require livingspaces/stylesheets/foundation_overrides
+
+ */
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #333;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+}
+
+section.top-bar-section {
+  background-color: white;
+
+  width: 100%;
+}
+nav.livingspaces {
+  background: white;
+  padding: 0.4rem;
+  ul {
+    margin-bottom: 1.8rem;
+    padding: 0.4rem;
+    li {
+      
+      list-style-type: none;
+      float: left;
+      font-size: 1.4rem;
+      background: none;
+    }
+  }
+}
+.ls-menu {
+  background: #FFE;
+  border-top: 1px dotted #999;
+  padding: 0.4rem;
+  ul {
+    padding: 0.4rem;
+    li {  
+      list-style-type: none;
+      float: left;
+      font-size: 1rem;
+      
+      padding-right: 1.2rem;
+      background: none;
+    }
+  }  
+}
+
+.programme_carousel {
+
+  
+  .slick-prev, .slick-next {
+    display: none !Important;
+  }
+}
+
+.livingspaces {
+  
+
+  &.front_module {
+
+
+    
+    .title {
+      padding: 0.4rem 1rem;
+      position: absolute;
+      top: 15px;
+      background-color: white;
+      float: left;
+      opacity: 0.8;
+      margin-left: 15px;
+      h6 {
+        margin-bottom: 0;
+        border-bottom: 1px dotted #999;
+        float: left;
+      }
+      h2 {
+        clear:left;
+        margin-top: 0;
+        margin-bottom: 0.25rem;
+      }
+      .blurb {
+        max-width: 580px;
+      }
+      .blurb, .blurb p {
+        font-size: 0.8rem;
+        margin: 0; padding: 0;
+        line-height: 1.2rem;
+      }
+    }
+  }
+}
+
+.under_construction {
+  background: url('/assets/under_construction.png') no-repeat center center;
+  background-size: cover;
+
+  min-height: 500px;
+  .uctext {
+    opacity: 0.66;
+    padding: 150px 0;
+    height: 500px;
+    background-color: #F11;
+  }
+}
+
+footer {
+  background-color: black;
+  color: #bbbdbf;
+  min-height: 50px;
+  padding: 0.8rem;
+  .logo, .address {
+    float: left;
+    padding-right: 25px;
+  }
+  .address {
+    padding-top: 0.2rem;
+  }
+  .social {
+    a {
+      padding-right: 5px;
+    }
+  }
+  
+  font-size: 0.9rem;
+}

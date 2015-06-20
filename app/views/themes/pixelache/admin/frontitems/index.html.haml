@@ -1,5 +1,5 @@
 .row
-  .small-10.columns.large-offset-1
+  .small-10.columns
     %h2 
       Front page design
 .row
@@ -7,7 +7,24 @@
 
 .row
   .small-6.columns
-    %h4 Current frontpage:
+    %h4
+      Current frontpage:
+    %select#by_site
+      - Subsite.all.each do |site|
+        %option{:value => site.name, :selected => (params[:by_site] == site.name ? :selected : false)}= site.name
+    :javascript
+      $('select#by_site').change(function() {
+        var parts = "#{request.url}".split(/\?/, 2);
+        if (parts[1]) {
+          if ($(this).val() == '') {
+            window.location.href=parts[0] + "?" + parts[1].replace(new RegExp("\\&*" + $(this).attr('id') + "\=\\d+", "g"), '');
+          } else {
+            window.location.href=parts[0] + "?" + parts[1].replace(new RegExp("\\&*" + $(this).attr('id') + "\=\\d+", "g"), '') + "&" + $(this).attr('id') + "=" + $(this).val();
+          }
+        } else {
+          window.location.href=parts[0] + "?" + $(this).attr('id') + "=" + $(this).val();
+        }
+      });
     %p Images are samples; text describes actual content.
     %p Drag and drop vertically to arrange the order. The order auto-saves when you let go of the drag-and-drop.
 .row

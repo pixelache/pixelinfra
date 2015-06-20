@@ -1,0 +1,27 @@
+.programme_carousel
+  - @frontitems.shuffle.each do |fi|
+    - if fi.frontmodule
+      - unless fi.item.nil?
+      
+        = render :partial => fi.frontmodule.partial_name, :locals => {:front => fi}
+      - else
+        = render :partial => fi.frontmodule.partial_name, :locals => {:front => fi}
+
+.under_construction
+  .row
+    .columns.small-12.medium-6.text-center.uctext
+      .row
+        .columns.small-7.small-centered
+          %h4 
+            This site, like this festival, is
+            %strong under construction.
+      .row
+        .columns.small-9.small-centered
+          %h4
+            For more info, comments, questions, or to volunteer, please email
+            %strong festival at pixelache .ac
+= content_for :jquery do
+  :plain
+    $('.programme_carousel').slick({infinite: true,
+      slidesToShow: 1,   autoplay: true,
+  autoplaySpeed: 3400 });

@@ -1,0 +1,9 @@
+.livingspaces.front_module
+  = raw image_tag(front.bigimage.url(:full)).gsub('production', 'development')
+  .title
+    %h6
+      = t(:programme_preview)
+    %h2= front.item.name
+    .blurb
+      = truncate_html(sanitize(front.item.body, tags: %w{b bold em i italic u underline br}), length: 200)
+      = link_to t(:read_more), front.item

@@ -1,0 +1,64 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+    = display_meta_tags :site => 'Pixelache Festival 2015' 
+    
+    %meta{:content => content_for?(:description) ? yield(:description) : "Pixelache Festival 2015", :name => "description"}
+    %link{:href => "http://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "/feed", :rel => "alternate", :title => "RSS", :type => "application/rss+xml"}/
+    = stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag 'livingspaces/stylesheets/application', :media => :screen
+
+    = javascript_include_tag "application"
+    = javascript_include_tag "vendor/modernizr"
+
+
+    - if controller.controller_name == 'events' || controller.controller_name == 'home'
+      %script{:src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}", :type => "text/javascript"}
+    :javascript
+      var switchTo5x=true;
+    %script{:src => "http://w.sharethis.com/button/buttons.js", :type => "text/javascript"}
+    :javascript
+      stLight.options({publisher: "f1108f07-cb4f-4f90-a2a5-f66a2b227eb4", doNotHash: true, doNotCopy: true, hashAddressBar: false});
+    = csrf_meta_tags
+    = yield(:head)
+  %body{:class => "#{controller_name} #{action_name}"}
+    %header
+      %section
+        %nav.livingspaces.contain-to-grid
+          %ul
+            %li
+              Pixelache Festival 2015:
+              %em Living Spaces
+            %li.right 23-27 September 2015
+        .ls-menu
+          %ul
+            %li= link_to t(:about), page_path('about')
+            %li= link_to t(:locations), page_path('locations')
+            %li= link_to t(:programme), page_path('programme')
+            %li= link_to t(:contact), page_path('contact')
+              
+    %section
+      %article= yield
+
+    %footer
+      .logo= link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), 'http://pixelache.ac'
+      .address Kaasutehtaankatu 1/21, Suvilahti (Bldg. 7), 00540 Helsinki Finland
+      .social.right
+        = link_to image_tag(theme_image_path('follow_fb.png'), width: 25), 'https://www.facebook.com/pixelache'
+        = link_to image_tag(theme_image_path('follow_twitter.png'), width: 25), 'https://twitter.com/pixelache'
+        = link_to image_tag(theme_image_path('follow_vimeo.png'), width: 25), 'https://vimeo.com/pixelache'
+        = link_to image_tag(theme_image_path('follow_bambuser.png'), width: 25), 'http://bambuser.com/channel/pixelversity'
+        = link_to image_tag(theme_image_path('follow_flickr.png'), width: 25), 'https://www.flickr.com/photos/pixelache/'
+        = link_to image_tag(theme_image_path('follow_git.png'), width: 25), 'https://github.com/pixelache'
+        = link_to image_tag(theme_image_path('follow_rss.png'), width: 25), '/feed'
+      
+    :javascript
+      $(document).ready(function() {
+       
+          
+        #{yield :jquery}
+        
+      });    

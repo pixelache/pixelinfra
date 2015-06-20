@@ -4,9 +4,14 @@ class Admin::FrontitemsController < Admin::BaseController
   autocomplete :project, :name, :extra_data => [:name], :display_value => :name
   autocomplete :festival, :name, :extra_data => [:name], :display_value => :name
   autocomplete :residency, :name, :extra_data => [:name], :display_value => :name
+  has_scope :by_site
   
   def create
     create! { admin_frontitems_path }
+  end
+  
+  def index
+    @frontitems = apply_scopes(Frontitem).all
   end
   
   def sort

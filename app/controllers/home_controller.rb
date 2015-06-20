@@ -15,11 +15,12 @@ class HomeController < ApplicationController
       @events = Event.by_subsite(@site.id).published.order("start_at DESC").limit(4)
       @stream = Feed.by_subsite(@site.id).created.order('fed_at DESC').page(params[:page]).per(7)
 
-      @frontitems = Frontitem.by_site(@site.id).order(:position)
+      # @frontitems = Frontitem.by_site(@site.id).order(:position)
       @archive = Archivalimage.random(1).first
     elsif @site.name == 'olsof'
       @feed = Feed.by_subsite(@site.id).created.order('fed_at DESC').page(params[:page]).per(6)
     end
+    @frontitems = Frontitem.by_site(@site.id).order(:position)
   end
   
 end
