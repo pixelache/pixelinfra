@@ -1,7 +1,7 @@
 .page
   - unless @page.photos.blank?
     .carousel
-      .slide{style: "background: url(#{@page.photos.first.filename.url(:wide).gsub('production', 'development')}) center center no-repeat; background-size: cover"} &nbsp;
+      .slide{style: "background: url(#{@page.photos.first.filename.url(:wide)}) center center no-repeat; background-size: cover"} &nbsp;
         
 
   .row

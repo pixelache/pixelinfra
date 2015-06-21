@@ -1,6 +1,6 @@
 /*
  *= require livingspaces/stylesheets/foundation_overrides
-
+ *= require livingspaces/stylesheets/mobile
  */
 
 body {
@@ -50,7 +50,8 @@ nav.livingspaces {
 }
 
 .programme_carousel {
-
+  max-height: 800px;
+  overflow-y: hidden;
   
   .slick-prev, .slick-next {
     display: none !Important;
@@ -112,6 +113,10 @@ footer {
   color: #bbbdbf;
   min-height: 50px;
   padding: 0.8rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  
   .logo, .address {
     float: left;
     padding-right: 25px;
@@ -128,6 +133,11 @@ footer {
   font-size: 0.9rem;
 }
 
+.support {
+  img {
+    opacity: 0.75;
+  }
+}
 
 .page {
   .carousel {

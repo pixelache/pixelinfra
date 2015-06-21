@@ -7,6 +7,11 @@
       - else
         = render :partial => fi.frontmodule.partial_name, :locals => {:front => fi}
 
+.support
+  .row
+    .columns.small-12.small-centered.text-center
+      = image_tag theme_image_path('festival_logos.png')
+      
 .under_construction
   .row
     .columns.small-12.medium-6.text-center.uctext
@@ -23,5 +28,5 @@
 = content_for :jquery do
   :plain
     $('.programme_carousel').slick({infinite: true,
-      slidesToShow: 1,   autoplay: true,
-  autoplaySpeed: 3400 });
+      slidesToShow: 1,   autoplay: true, pauseOnHover: false,
+  autoplaySpeed: 4400 });
