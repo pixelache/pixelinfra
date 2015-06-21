@@ -13,6 +13,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   def store_dir
       "#{Rails.env.to_s}/images/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
+  version :wide do
+    process :resize_to_fill => [1200, 500]
+  end
   
   version :twelvehundred do
     process :resize_to_fit => [1200, 900]

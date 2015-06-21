@@ -36,6 +36,23 @@
   .small-4.columns
     %h4 Festival theme?
     = f.input :festivalthemes
+  .row
+    .small-12.columns.divider    
+.row
+  .small-12.columns
+    %label Images
+    .row
+      = f.semantic_fields_for :photos do |ff|
+
+        .small-3.columns
+          - if ff.object.filename?
+            = image_tag ff.object.filename.url(:thumb)
+          = ff.input :filename
+          = ff.input :title
+          = ff.input :credit
+          = ff.link_to_remove 'Remove this photo'
+    = f.link_to_add 'Add a photo', :photos
+          
 .row
   .small-3.columns= f.input :published
 .row

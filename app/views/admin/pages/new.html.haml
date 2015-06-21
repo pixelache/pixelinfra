@@ -1,2 +1,2 @@
-= semantic_form_for [:admin, @page], :html => {:class => "custom", :multipart => true} do |f|
+= semantic_nested_form_for [:admin, @page], :html => {:class => "custom", :multipart => true} do |f|
   = render :partial => 'form', :locals => {f: f}

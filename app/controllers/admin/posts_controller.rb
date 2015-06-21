@@ -83,7 +83,7 @@ class Admin::PostsController < ApplicationController
   protected
   
   def permitted_params
-    params.permit(:post => [:published, :slug, :subsite_id, :creator_id, :last_modified_id, :external,  :wordpress_id, :published_at, :image, :image_width, :image_height, :image_content_type, :image_size, :event_name, :event_id,  :project_name, :residency_id, :project_id, :festival_name, :festival_id, :hide_from_feed, :tag_list, post_category_ids: [],  translations_attributes: [:id, :locale, :title, :body, :excerpt], photos_attributes: [:id, :filename, :title, :credit], attachments_attributes: [:id, :documenttype_id, :attachedfile, :_destroy, :year_of_publication,  :title, :description, :public]])
+    params.permit(:post => [:published, :slug, :subsite_id, :creator_id, :last_modified_id, :external,  :wordpress_id, :published_at, :image, :image_width, :image_height, :image_content_type, :image_size, :event_name, :event_id,  :project_name, :residency_id, :project_id, :festival_name, :festival_id, :hide_from_feed, :tag_list, post_category_ids: [],  translations_attributes: [:id, :locale, :title, :body, :excerpt], photos_attributes: [:id, :filename, :title, :credit, :_destroy], attachments_attributes: [:id, :documenttype_id, :attachedfile, :_destroy, :year_of_publication,  :title, :description, :public, :_destroy]])
   end
   
 end

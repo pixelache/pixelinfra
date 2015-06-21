@@ -11,8 +11,9 @@ class Page < ActiveRecord::Base
   has_many :frontitems, as: :item, :dependent => :destroy
   has_many :festivalthemes,  through: :festivaltheme_relations
   has_many :festivaltheme_relations, as: :relation
+  has_many :photos, as: :item
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? && x['body'].blank? }
-
+  accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }, :allow_destroy => true
   attr_accessor :festival_name, :project_name
   
   validates_presence_of :subsite_id
