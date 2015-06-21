@@ -40,10 +40,12 @@
             .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
               = f.globalize_fields_for locale do |en|
                 .row
-                  .small-12.columns
-                    = en.text_field :custom_title, :hint => "Optional. Will replace title of post on thin strip, or appear at top of full-size module. Basic HTML tags are OK here."
+                  .small-8.columns
+                    %b Custom title
+                    %p.hint Optional. Will replace title of post on thin strip, or appear at top of full-size module. Basic HTML tags are OK here.
+                    = en.text_field :custom_title
                 .row
-                  .small-12.columns
+                  .small-8.columns
                     = en.text_field :custom_follow_text, :hint => "'Read more' text"        
   .row
     .small-6.columns= f.submit "Save" , :class => [:button, :round]
