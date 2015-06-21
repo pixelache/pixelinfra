@@ -25,6 +25,63 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
 
 @media #{$small-only} { 
   
+  nav.livingspaces {
+    ul {
+      height: 2.9rem;
+      margin: 0;
+      padding-bottom: 0.2rem;
+      li {
+        font-size: 0.8rem;
+
+      }
+    }
+  }
+  
+  .ls-menu {
+    ul {
+      padding: 0;
+      li {
+        font-size: 0.75rem;
+      }
+    }
+  }
+  
+  .livingspaces {
+    &.front_module {
+      .title {
+        position: relative;
+        width: 100%;
+        top: 0;
+        margin: 0;
+        h6 {
+          font-size: 0.6rem;
+        }
+        h2 {
+          font-size: 1.1rem;
+        }
+        .blurb, .blurb p {
+          font-size: 0.6rem;
+          line-height: 0.9rem;
+        }
+      }
+    }
+  }
+  
+  footer {
+    .logo {
+      img {
+        width: 90px;
+      }
+    }
+    .address {
+      font-size: 0.5rem;
+    }
+    .social {
+      img {
+        width: 15px;
+      }
+    }
+  }
 }
 
 @media #{$medium-only} { 
