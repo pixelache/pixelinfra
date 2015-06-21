@@ -38,7 +38,7 @@ nav.livingspaces {
 .programme_carousel {
   max-height: 800px;
   overflow-y: hidden;
-  
+  .slick-slide img { width: 100%; }
   .slick-prev, .slick-next {
     display: none !Important;
   }
@@ -133,5 +133,8 @@ footer {
       background-size: cover;
       min-height: 500px;
     }
+  }
+  .body-bottom {
+    padding-bottom: 10rem;
   }
 }
