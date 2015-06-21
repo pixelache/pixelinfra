@@ -36,9 +36,9 @@
         .ls-menu
           %ul
             %li= link_to t(:about), festival_page_festival_path('festival-2015', 'about')
-            %li= link_to t(:locations), page_path('locations')
-            %li= link_to t(:programme), page_path('preliminary-programme')
-            %li= link_to t(:contact), page_path('contact')
+            %li= link_to t(:locations), festival_page_festival_path('festival-2015','locations')
+            %li= link_to t(:programme), festival_page_festival_path('festival-2015','preliminary-programme')
+            %li= link_to t(:contact), festival_page_festival_path('festival-2015','contact')
               
     %section
       %article= yield
