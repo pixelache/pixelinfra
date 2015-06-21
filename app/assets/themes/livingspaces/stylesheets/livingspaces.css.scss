@@ -9,12 +9,16 @@ nav.livingspaces {
   ul {
     margin-bottom: 1.8rem;
     padding: 0.4rem;
+    a {
+      color: #333;
+    }
     li {
       
       list-style-type: none;
       float: left;
       font-size: 1.4rem;
       background: none;
+
     }
   }
 }
@@ -31,6 +35,7 @@ nav.livingspaces {
       
       padding-right: 1.2rem;
       background: none;
+
     }
   }  
 }
