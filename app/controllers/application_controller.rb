@@ -129,9 +129,7 @@ class ApplicationController < ActionController::Base
     else
       # put LS behind password for now
       if request.host =~ /livingspaces/
-        authenticate_or_request_with_http_basic('Festival planning eyes only! (for now)') do |username, password|
-          username == 'living' && password == 'spaces'
-        end
+
         @site = Subsite.find_by(:name => 'livingspaces')   
       else
         @site = Subsite.find_by(:name => (request.host =~ /opensourcingfestivals/ || request.host =~ /^olsof\./ ? 'olsof' : 'pixelache'))
