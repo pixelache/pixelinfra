@@ -46,13 +46,14 @@ class Admin::PagesController < Admin::BaseController
       when "site"
         "subsites.name #{direction}"
       else
-        "updated_at DESC"
+        "child_updated_at DESC"
       end
     end
     if params[:by_name]
       @pages = apply_scopes(Page).includes(:subsite).order(order).page(params[:page]).per(20)
     else
-      @pages = apply_scopes(Page).roots.includes(:subsite).order(order).page(params[:page]).per(20)
+      @pages = apply_scopes(Page).roots.order(order).includes(:subsite).page(params[:page]).per(20)
+
     end
   end
   

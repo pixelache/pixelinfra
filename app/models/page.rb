@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  acts_as_tree :order => 'sort_order'
+  has_closure_tree :order => 'child_updated_at DESC'
   translates :name, :body, :fallbacks_for_empty_translations => true
   belongs_to :subsite
   belongs_to :festival
