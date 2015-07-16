@@ -18,6 +18,8 @@ class Page < ActiveRecord::Base
   
   validates_presence_of :subsite_id
   
+  after_save :update_root_timestamp
+  
   scope :published, -> () { where(published: true) }
   scope :by_site, -> (x) { includes(:subsite).where(:subsite_id => x) }
   scope :festivals, ->  { where("festival_id is not null") }
@@ -25,6 +27,19 @@ class Page < ActiveRecord::Base
   scope :projects, ->  { where("project_id is not null") }
   scope :unlinked, ->  { where("project_id is null and festival_id is null")}
   scope :by_name, -> (name) { joins(:translations).where("page_translations.name ILIKE '%" + name + "%'")}
+  
+  
+  def update_root_timestamp
+    
+    if self.root?
+      update_column(:child_updated_at, Time.now)
+    else
+      
+      parent.update_column(:child_updated_at, Time.now)
+      root.update_column(:child_updated_at, Time.now)
+    end
+    update_column(:child_updated_at, Time.now)
+  end
   
   def festival_name
     festival.blank? ? nil : festival.name
