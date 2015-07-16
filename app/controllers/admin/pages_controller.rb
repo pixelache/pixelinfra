@@ -81,7 +81,7 @@ class Admin::PagesController < Admin::BaseController
   end
   
   def update
-    @page = Subsite.find(params[:page][:subsite_id]).pages.find(params[:id])
+    @page = Page.find(params[:id])
     update! { admin_pages_path }
   end
   
