@@ -23,25 +23,31 @@ nav.livingspaces {
   }
 }
 .ls-menu {
-  background: #FFE;
+  background: #444;
   border-top: 1px dotted #999;
-  padding: 0.4rem;
-  ul {
-    padding: 0.4rem;
+  padding: 0.2rem;
+    ul {
+    padding: 0.2rem 1rem;
     li {  
       list-style-type: none;
       float: left;
       font-size: 1rem;
-      
+
       padding-right: 1.2rem;
       background: none;
-
+      &.name, span.name {
+        color: #FFF;
+      }
+      color: #CCC;
+      a {
+        color: #FFF;
+      }
     }
   }  
 }
 
 .programme_carousel {
-  max-height: 800px;
+  max-height: 550px;
   overflow-y: hidden;
   .slick-slide img { width: 100%; }
   .slick-prev, .slick-next {
@@ -101,12 +107,18 @@ nav.livingspaces {
   }
 }
 
+.top_banner {
+  padding: 2.5rem 0;
+  img {
+    padding: 0.5rem;
+  }
+}
 footer {
-  background-color: black;
+  background-color: #444;
   color: #bbbdbf;
   min-height: 50px;
   padding: 0.8rem;
-  position: fixed;
+
   bottom: 0;
   width: 100%;
   
@@ -127,6 +139,7 @@ footer {
 }
 
 .support {
+  padding: 1.5rem 0;
   img {
     opacity: 0.75;
   }
@@ -137,7 +150,7 @@ footer {
     margin-bottom: 1rem;
     .slide {
       background-size: cover;
-      min-height: 500px;
+      min-height: 300px;
     }
   }
   .body-bottom {

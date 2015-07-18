@@ -36,12 +36,18 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
       }
     }
   }
+  .top-bar .toggle-topbar.menu-icon {
+    margin-top: 0;
+  }
   
   .ls-menu {
     ul {
       padding: 0;
       li {
         font-size: 0.75rem;
+        span.name {
+          font-size: 0.75rem;
+        }
       }
     }
   }

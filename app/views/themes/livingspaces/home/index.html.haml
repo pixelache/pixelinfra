@@ -1,3 +1,9 @@
+.top_banner
+  .row
+    .small-12.columns.small-centered.text-center
+      = image_tag theme_image_path('logo_LS_s.png')
+      = image_tag theme_image_path('caption.png')
+  
 .programme_carousel
   - @frontitems.shuffle.each do |fi|
     - if fi.frontmodule
@@ -7,10 +13,7 @@
       - else
         = render :partial => fi.frontmodule.partial_name, :locals => {:front => fi}
 
-.support
-  .row
-    .columns.small-12.small-centered.text-center
-      = image_tag theme_image_path('festival_logos.png')
+
       
 .under_construction
   .row
@@ -25,6 +28,13 @@
           %h4
             For more info, comments, questions, or to volunteer, please email
             %strong festival at pixelache .ac
+            
+.support
+  .row
+    .columns.small-12.small-centered.text-center
+      = image_tag theme_image_path('festival_logos.png')
+      
+                  
 = content_for :jquery do
   :plain
     $('.programme_carousel').slick({infinite: true,

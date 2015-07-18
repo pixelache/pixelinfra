@@ -35,31 +35,39 @@
       ga('send', 'pageview');
     %header
       %section
-        %nav.livingspaces.contain-to-grid
-          %ul
-            = link_to '/' do
-              %li
-                Pixelache Festival 2015:
-                %em Living Spaces
-              %li.show-for-small-only 23-27 September 2015
-              %li.hide-for-small-only.right 23-27 September 2015
+        / .livingspaces.contain-to-grid
+        /   %ul
+        /     = link_to '/' do
+        /       
 
             
-        .ls-menu
-          %ul
-            %li= link_to t(:about), festival_page_festival_path('festival-2015', 'about')
-            %li= link_to t(:locations), festival_page_festival_path('festival-2015','locations')
-            %li= link_to t(:programme), festival_page_festival_path('festival-2015','preliminary-programme')
-            %li= link_to t(:contact), festival_page_festival_path('festival-2015','contact')
-              
+        .fixed
+          %nav.top-bar.ls-menu{:"data-topbar" => '', role: :navigation}
+            %ul.title-area
+              %li.name.hide-for-small-only
+                Pixelache 2015:
+                %em Living Spaces
+              %li.show-for-small-only
+                %span.name Pixelache 2015:
+                %em Living Spaces
+                %br/
+                %span.name 23-27 September, Helsinki
+              %li.hide-for-small-only.right 23-27 September, Helsinki
+              %li.toggle-topbar.menu-icon
+                %a{:href => "#"}
+                  %span
+            %ul.right.hide-for-small-only
+              %li= link_to t(:about), festival_page_festival_path('festival-2015', 'about')
+              %li= link_to t(:locations), festival_page_festival_path('festival-2015','locations')
+              %li= link_to t(:programme), festival_page_festival_path('festival-2015','preliminary-programme')
+              %li= link_to t(:contact), festival_page_festival_path('festival-2015','contact')
+
     %section
       %article= yield
 
     %footer
       .logo= link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), 'http://pixelache.ac'
       .address
-        Kaasutehtaankatu 1/21, Suvilahti (Bldg. 7), 00540 Helsinki, Finland
-        %br/
         festival at pixelache .ac
       .social.right
         = link_to image_tag(theme_image_path('follow_fb.png'), width: 25), 'https://www.facebook.com/pixelache'
