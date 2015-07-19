@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716125207) do
+ActiveRecord::Schema.define(version: 20150719192446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -360,7 +360,11 @@ ActiveRecord::Schema.define(version: 20150716125207) do
     t.string   "tertiary_colour",    limit: 255, default: "FFFFFF",            null: false
     t.boolean  "has_listserv",                   default: false,               null: false
     t.string   "listservname"
+    t.integer  "subsite_id"
+    t.string   "redirect_to"
   end
+
+  add_index "festivals", ["subsite_id"], name: "index_festivals_on_subsite_id", using: :btree
 
   create_table "festivaltheme_relations", force: :cascade do |t|
     t.integer "relation_id"

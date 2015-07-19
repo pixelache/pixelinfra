@@ -25,8 +25,9 @@ class FestivalsController < InheritedResources::Base
   end
   
   def page
-    
     @festival = Festival.find(params[:id])
+
+    
     if params[:page] =~ /\//
       p = params[:page].split(/\//).last
     else
@@ -35,11 +36,23 @@ class FestivalsController < InheritedResources::Base
     potential = p =~ /^\d+$/ ? Page.where(:id => p) : Page.where(:slug => p)
     
     @page = @festival.pages.map(&:self_and_descendants).flatten.delete_if{|x| !potential.include?(x) }.first
+    
+    redirect_to action: action_name, id: @festival.friendly_id, page: @page.friendly_id, status: 301 unless @page.friendly_id == params[:page]
+    if @festival.subsite
+      if !request.host.split(/\./).include?(@festival.subsite.subdomain)
+        redirect_to festival_page_festival_url(@festival.slug, @page.friendly_id, subdomain: @festival.subsite.subdomain)
+      end
+    end
     set_meta_tags :title => [@festival.name, @page.name].join(" - ")
   end
   
   def show
     @festival = Festival.find(params[:id])
+    if !@festival.redirect_to.blank?
+      redirect_to "http://#{@festival.redirect_to}"
+    elsif @festival.subsite
+      redirect_to "http://#{@festival.subsite.subdomain}.pixelache.ac"
+    end
     set_meta_tags :title => @festival.name
   end
   

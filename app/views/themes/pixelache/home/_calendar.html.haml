@@ -8,6 +8,10 @@
       - @events.each_with_index do |event, index|
         .row.entry{:class => index == (@events.size - 1) ? :last : false}
           .small-3.columns
-            .date= link_to event.start_at.strftime('%b %d.'), event
+            .date
+              - if event.class == Festival
+                = link_to event.start_at.strftime('%b %d') + '-' + event.end_at.strftime("%d."), event
+              - else
+                = link_to event.start_at.strftime('%b %d.'), event
           .small-8.small-offset-1.columns
             .name= link_to event.name, event

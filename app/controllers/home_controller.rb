@@ -13,6 +13,11 @@ class HomeController < ApplicationController
     @users = User.all
     if @site.name == 'pixelache'
       @events = Event.by_subsite(@site.id).published.order("start_at DESC").limit(4)
+      festivals = Festival.published.where(["start_at >= ? ",@events.last.start_at])
+      @events = @events.to_a.delete_if{|x| festivals.include?(x.festival) }
+      @events += festivals
+      @events.flatten!
+      @events.sort_by!(&:start_at).reverse!
       @stream = Feed.by_subsite(@site.id).created.order('fed_at DESC').page(params[:page]).per(7)
 
       # @frontitems = Frontitem.by_site(@site.id).order(:position)

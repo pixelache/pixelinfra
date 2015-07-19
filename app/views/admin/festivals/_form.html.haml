@@ -34,6 +34,12 @@
     .small-6.columns
       = f.input :slug, :label => 'Override slug'
   .row
+    .small-6.columns
+      = f.input :subsite, as: :select
+  .row
+    .small-6.columns
+      = f.input :redirect_to
+  .row
     .small-2.columns= f.input :background_colour, :as => :string, :input_html => {:class => :colourpicker }, :label => 'Main colour for archive page background'
   .row
     .small-2.columns= f.input :primary_colour, :as => :string, :input_html => {:class => :colourpicker }, :label => 'Secondary colour for archive page text'
