@@ -34,6 +34,11 @@ class EventsController < InheritedResources::Base
     @event = Event.find(params[:id])
     if @event.festival
       @festival = @event.festival
+      if @festival.subsite
+        if !request.host.split(/\./).include?(@festival.subsite.subdomain)
+          redirect_to subdomain: @festival.subsite.subdomain
+        end
+      end
     end
     if request.xhr?
       render :template => 'events/ajax_event', layout: false

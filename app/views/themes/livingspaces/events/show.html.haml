@@ -1,0 +1,124 @@
+.event_single
+  - if @event.image?
+    .carousel
+      .slide{style: "background: url(#{@event.image.url.gsub('development', 'production')}) center bottom no-repeat; "} &nbsp;
+      - unless @event.photos.blank?
+        .slide{style: "background: url(#{@event.photos.first.filename.url.gsub('development', 'production')}) center bottom no-repeat; background-size: cover"} &nbsp;
+  .overlapping_divider 
+    .text= @event.name
+    
+  .event_inner.row.outer{class: @event.festival ? :festival : false}
+
+
+    .columns.small-10.medium-7.small-centered
+      - if can? :edit , @event
+        = link_to t(:edit_event), edit_admin_event_path(@event), class: [:tiny, :button, :secondary]
+      .metadata= date_range(@event.start_at, @event.end_at, :format => :long)
+      .metadata
+        = @event.place.try(:name)
+        - unless @event.place.blank?
+          %p.place_address
+            = @event.place.address
+          - unless @event.place.latitude.blank?
+            %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));});return false;"
+            .google_map#mapcontainer= render partial: 'shared/small_map'
+      - if @event.has_documentation?
+        .metadata= link_to t(:scroll_down_for_documentation), '#', onclick: 'scrollTo("#documentation");'
+
+        
+      = raw @event.description
+
+      .row
+        .columns.small-12.small-centered= render :partial => 'shared/share_this_buttons'
+
+      - if @event.has_documentation?
+
+        .documentation#documentation
+          .row.related_title
+            .small-12.columns.small-centered
+              %h1= t(:documentation)
+          - unless @event.all_documentation["images"].empty?
+            .image_carousel
+              - @event.all_documentation["images"].each do |i|
+                .img
+                  = link_to image_tag(i.filename.url(:standard)), i.filename.url, rel: :lazybox
+                  .thumb= image_tag i.filename.url(:thumb)
+          - unless @event.flickrsets.empty?
+            .flickr_galleries
+              .subtitle= t(@event.all_documentation["images"].empty? ? :image_galleries : :additional_images)
+              - @event.flickrsets.each do |set|
+                %p= link_to set.title, set.flickr_url, target: :_blank
+            
+          - if @event.all_documentation["videos"].empty?
+            - if @event.project
+              - unless @event.project.videos.empty?
+                .subtitle= t :videos_from_this_project, project: @event.project.name
+                .video_container
+                  - @event.project.videos.each do |v|
+                    .video.row{:style => v.thumbnail? ? "background: url(#{v.thumbnail.url}) no-repeat center center" : false }
+                      .large-6.columns.flex-video= raw figure_video_type(v, v.video_width.blank? ? 580 : v.video_width, v.video_height.blank? ? 390 : v.video_height)
+                      .large-6.columns
+                        .video_title= v.title
+                        .video_description= raw v.description
+          - else
+            .video_container
+              - @event.all_documentation["videos"].each do |v|
+                .video.row
+                  .large-7.columns= raw figure_video_type(v, 400, 300)
+                  .large-5.columns
+                    .video_title= v.title
+                    .video_description= raw v.description
+
+  
+  - unless @event.related_content.empty?
+    .related_container.event
+      .row
+        .small-12.medium-8.columns.small-centered
+          .row
+            .small-12.columns.related_title
+              %h1= t(:related_content)
+      - unless @event.related_content.empty?
+        - @event.related_content[0..5].each do |related|
+          .row
+            .small-12.medium-8.columns.small-centered.related_container
+              = render :partial => 'shared/related', locals: {item: @event, related: related }
+
+  = content_for :jquery do
+    :plain
+      $('.image_carousel').slick({infinite: true,
+        slidesToShow: 1,
+
+        dots: true,
+        customPaging: function(slick,index) {
+           return slick.$slides.eq(index).find('.thumb').html();
+        },
+        arrows: true,
+        slide: '.img',
+        variableWidth: false,
+        autoplay: true,
+        autoplaySpeed: 2400,
+        slidesToScroll: 1,
+      });
+      $('.video_description').readmore();
+
+    - unless @event.place.latitude.blank?
+      :plain
+
+        function initialize() {
+          var myLatlng = new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude});
+          var myOptions = { zoom: 14, 
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+             }
+
+
+          map = new google.maps.Map(document.getElementById('mapcontainer'), myOptions);
+          var marker = new google.maps.Marker({  position: myLatlng, map: map, 
+            title: '#{escape_javascript(@event.name)}', 
+            map: map
+          });
+          return map;
+        }
+        //map = initialize();
+        map = google.maps.event.addDomListener(window, 'load', initialize);
+    
