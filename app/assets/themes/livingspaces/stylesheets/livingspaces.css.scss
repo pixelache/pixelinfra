@@ -1,5 +1,15 @@
 @import 'variables';
 
+$festival-orange: #ec9f43;
+$festival-blue: #5095cc;
+
+a {
+  color: $festival-blue;
+  &:hover {
+    color: $festival-orange;
+  }
+}
+
 section.top-bar-section {
   background-color: white;
 
@@ -52,7 +62,7 @@ nav.livingspaces {
 }
 
 .programme_carousel {
-  border-top: 2px solid black;
+  border-top: 2px solid #444;
   max-height: 550px;
   overflow-y: hidden;
   .slick-slide img { width: 100%; }
@@ -64,13 +74,14 @@ nav.livingspaces {
 
 .overlapping_divider {
   float: left;
-    position: relative;
+  position: relative;
   left: 50%;
   height: 0;
   .text {
+    background: url('/assets/livingspaces/images/littlearrows.png') center 2.5rem no-repeat;
     z-index: 22;
-    border: 2px solid black;
-    padding: 0.8rem;
+    border: 2px solid #444;
+    padding: 0.8rem 0.8rem 1.4rem 0.8rem;
     float: left;
     background-color: white;
     font-size: 1.4rem;
@@ -84,9 +95,53 @@ nav.livingspaces {
     font-family: $quicksand;
   }
 }
+
+.tram {
+  border-top: 2px solid #444;
+  clear: left;
+  height: 398px;
+  overflow: hidden;
+  .left {
+    width: 50%;
+    float: left;
+    
+  }
+  .right {
+    width: 50%;
+    float: left;
+    padding: 3rem;
+  }
+}
+
+.inside_out_in {
+  padding: 3rem;
+  float: left;
+  border-top: 2px solid #444;
+  .one-third {
+
+    padding: 1.5rem;
+    h2 {
+      color: $festival-orange;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      border-bottom: 1px dotted $festival-blue;
+    }
+    .text {
+      color: #444;
+      font-weight: 300;
+      p {
+        color: #444;
+        font-weight: 300;
+        font-size: 0.9rem;
+        
+      }
+    }
+  }
+}
+
+
 .livingspaces {
   
-
   &.front_module {
 
     .wrapper_wrapper {
@@ -147,7 +202,7 @@ nav.livingspaces {
 }
 
 .top_banner {
-  padding: 2.5rem 0;
+  padding: 2.5rem 0 4rem 0;
   img {
     padding: 0.5rem;
   }
@@ -216,7 +271,7 @@ footer {
       
     }
     h2 {
-      border-top: 8px solid #ec9f43;
+      border-top: 4px solid #ec9f43;
       margin-top: 2rem;
       padding-top: 2rem;
       text-transform: uppercase;

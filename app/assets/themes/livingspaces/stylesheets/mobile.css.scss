@@ -47,27 +47,62 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
         font-size: 0.75rem;
         span.name {
           font-size: 0.75rem;
+          color: #CCC;
         }
       }
     }
   }
+  .overlapping_divider {
+    z-index: 990;
+    .text {
+
+      background-position-y: 2rem;
+      z-index: 22;
+      padding: 0.8rem 0.8rem 1rem 0.8rem;
+      font-size: 1.125rem;
+    }
+  }
+  .inside_out_in {
+    padding: 1.5rem 0 3rem 0;
+  }
   
+  .tram {
+    height: auto;
+    .left {
+      width: 100%;
+    }
+    .right {
+      float: left;
+      width: 100%;
+      padding: 1.5rem 0.8rem 3rem 0.8rem;
+    }
+  }
   .livingspaces {
     &.front_module {
-      .title {
-        position: relative;
-        width: 100%;
-        top: 0;
-        margin: 0;
-        h6 {
-          font-size: 0.6rem;
-        }
-        h2 {
-          font-size: 1.1rem;
-        }
-        .blurb, .blurb p {
-          font-size: 0.6rem;
-          line-height: 0.9rem;
+      .wrapper_wrapper {
+        max-height: 180px;
+
+        .title_wrapper {
+          width: 200px;
+      
+          .title {
+            position: relative;
+            width: 100%;
+            top: 0;
+            margin: 0;
+            h6 {
+              font-size: 0.6rem;
+            }
+            h3 {
+              font-size: 0.8rem;
+              line-height: 1rem;
+            }
+
+            .blurb, .blurb p {
+              font-size: 0.6rem;
+              line-height: 0.9rem;
+            }
+          }
         }
       }
     }

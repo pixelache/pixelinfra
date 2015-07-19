@@ -16,25 +16,47 @@
       - else
         = render :partial => fi.frontmodule.partial_name, :locals => {:front => fi, index: index}
 
-            
-.blurb_lower
-  .row
-    .small-12.columns.small-centered.text-center
-      %h4= link_to 'The programme so far....', festival_page_festival_path('festival-2015','preliminary-programme')
+
+.overlapping_divider 
+  .text= raw "Inside&sdot;Outside&sdot;In"
+  
+.inside_out_in.row
+  .one-third.column.small-12.medium-4
+    %h2= raw " Helsinki Outside&sdot;In"
+    .text
+      %p
+        The
+        %em= raw "Outside&sdot;In"
+        programme collects a range of cultural activities that utilise space in creative ways. This year, we've curated a selection of projects - performances, walks, and more - that showcase some of Helsinki's most creative minds.
+        
+  .one-third.column.small-12.medium-4
+    %h2 Participate and interact
+    .text
+      %p
+        Pixelache 2015: 
+        %em Living Spaces
+        is primarily a festival for participation. The city is created by its inhabitants and the festival aims to reflect this with workshops, discussions, and other forms of interaction.
+  .one-third.columns.small-12.medium-4
+    %h2= raw "Helsinki Inside&sdot;Out"
+    .text
+      %p
+        This year, Pixelache Festival experiments with the Camp Pixelache format of previous festivals, asking festival-goers to programme their own activities in their own spaces. This empowers the public in the creation of culture activities, showcases the ideas and talents already in the city, and challenges the boundary between public and private space.
+    
+
+.overlapping_divider 
+  .text The tram  
+  
+.tram
+  .left
+    = image_tag theme_image_path('bluetram.png')
+  .right
+    %h3 Our festival center
+    
+    .blurb
+      %p Pixelache 2015's "centre" is an HKL tram, featuring media and technology-based works by  Merja Puustinen, Victor Khashchanskiy , Andy Best, and Robert Pugliese as well as other impromptu activities and presentations.
       
-/ .under_construction
-/   .row
-/     .columns.small-12.medium-6.text-center.uctext
-/       .row
-/         .columns.small-7.small-centered
-/           %h4
-/             This site, like this festival, is
-/             %strong under construction.
-/       .row
-/         .columns.small-9.small-centered
-/           %h4
-/             For more info, comments, questions, or to volunteer, please email
-/             %strong festival at pixelache .ac
+    .blurb
+      %p The Pixelache tram is part of the Taidelinja project.
 
 .overlapping_divider 
   .text Partners & support
@@ -50,7 +72,16 @@
     $('.programme_carousel').slick({infinite: true,
       slidesToShow: 1, slide: '.image',   autoplay: true, pauseOnHover: false,
       autoplaySpeed: 6400 });
-    $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 450) / 2);
+    if ($(window).width() <= 480) { 
+      $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 200) / 2);
+    } else {
+      $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 450) / 2);
+    }
+      
     $( window ).resize(function() {
-     $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 450) / 2);
+      if ($(window).width() <= 480) {
+        $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 200) / 2);
+      } else {
+        $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 450) / 2);
+      }
      });
