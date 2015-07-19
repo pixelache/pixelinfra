@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719192446) do
+ActiveRecord::Schema.define(version: 20150719211711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -391,7 +391,12 @@ ActiveRecord::Schema.define(version: 20150719192446) do
     t.integer  "festival_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slug",        limit: 255
+    t.string   "slug",               limit: 255
+    t.string   "image"
+    t.integer  "image_file_size",    limit: 8
+    t.string   "image_content_type"
+    t.integer  "image_height"
+    t.integer  "image_width"
   end
 
   add_index "festivalthemes", ["festival_id"], name: "index_festivalthemes_on_festival_id", using: :btree

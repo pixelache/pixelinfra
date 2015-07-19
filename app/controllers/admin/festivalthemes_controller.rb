@@ -15,7 +15,7 @@ class Admin::FestivalthemesController < Admin::BaseController
   private
   
   def permitted_params
-    params.permit(:festivaltheme => [:festival_id, translations_attributes: [:id, :locale, :name, :description]])
+    params.permit(:festivaltheme => [:festival_id, :image, translations_attributes: [:id, :locale, :name, :description]])
   end
   
 end

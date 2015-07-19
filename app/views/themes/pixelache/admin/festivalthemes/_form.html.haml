@@ -19,6 +19,11 @@
               .small-12.columns
                 %b= "Theme description/overview in #{t :locale_name, :locale => locale}"
                 = en.cktext_area :description
-                
+
+  .row
+    .small-12.columns
+      - if f.object.image?
+        = image_tag f.object.image.url
+      = f.input :image, label: 'Banner image', hint: 'For 2015 festival or other future ones'
   .row
     .small-6.columns= f.submit t(:save),  class: [:button, :small, :round]

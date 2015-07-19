@@ -1,0 +1,10 @@
+.theme
+  .carousel
+    - unless @festivaltheme.image.blank?
+      .slide{style: "background: url(#{@festivaltheme.image.url.gsub('development', 'production')}) center bottom no-repeat; background-size: cover"} &nbsp;
+      
+  .overlapping_divider 
+    .text= @festivaltheme.name
+
+  .row.theme-text
+    .columns.small-10.medium-7.small-centered= raw @festivaltheme.description

@@ -292,7 +292,8 @@ footer {
   }
 }
 
-.page {
+
+.page, .theme {
   .carousel {
     min-height: 3rem;
     border-bottom: 2px solid #444;
@@ -301,7 +302,7 @@ footer {
       min-height: 300px;
     }
   }
-  .body-bottom {
+  .body-bottom, .theme-text {
     padding: 5rem 0 10rem 0;
     font-weight: 300;
     color: #444;
