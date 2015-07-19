@@ -1,13 +1,12 @@
 .page
-  - unless @page.photos.blank?
-    .carousel
-      .slide{style: "background: url(#{@page.photos.first.filename.url(:wide)}) center center no-repeat; background-size: cover"} &nbsp;
+  .carousel
+    - unless @page.photos.blank?
+      .slide{style: "background: url(#{@page.photos.first.filename.url.gsub('development', 'production')}) center bottom no-repeat; background-size: cover"} &nbsp;
         
 
-  .row
-    .columns.small-12
-      %h1= @page.title
+  .overlapping_divider 
+    .text= @page.title
     
   .row.body-bottom
-    .columns.small-12.medium-10
+    .columns.small-10.medium-7.small-centered
       = raw @page.body

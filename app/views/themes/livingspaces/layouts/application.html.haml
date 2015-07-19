@@ -8,6 +8,7 @@
     %link{:href => "http://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/feed", :rel => "alternate", :title => "RSS", :type => "application/rss+xml"}/
+    = favicon_link_tag theme_image_path('favicon.ico')
     = stylesheet_link_tag "application", :media => "all"
     = stylesheet_link_tag 'livingspaces/stylesheets/application', :media => :screen
 
@@ -35,23 +36,20 @@
       ga('send', 'pageview');
     %header
       %section
-        / .livingspaces.contain-to-grid
-        /   %ul
-        /     = link_to '/' do
-        /       
-
             
         .fixed
           %nav.top-bar.ls-menu{:"data-topbar" => '', role: :navigation}
             %ul.title-area
               %li.name.hide-for-small-only
-                Pixelache 2015:
-                %em Living Spaces
+                = link_to '/' do 
+                  Pixelache 2015:
+                  %em Living Spaces
               %li.show-for-small-only
-                %span.name Pixelache 2015:
-                %em Living Spaces
-                %br/
-                %span.name 23-27 September, Helsinki
+                = link_to '/' do
+                  %span.name Pixelache 2015:
+                  %em Living Spaces
+                  %br/
+                  %span.name 23-27 September, Helsinki
               %li.hide-for-small-only.right 23-27 September, Helsinki
               %li.toggle-topbar.menu-icon
                 %a{:href => "#"}

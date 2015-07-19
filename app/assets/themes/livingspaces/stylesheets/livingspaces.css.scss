@@ -1,3 +1,5 @@
+@import 'variables';
+
 section.top-bar-section {
   background-color: white;
 
@@ -25,9 +27,9 @@ nav.livingspaces {
 .ls-menu {
   background: #444;
   border-top: 1px dotted #999;
-  padding: 0.2rem;
+  padding: 0.45rem;
     ul {
-    padding: 0.2rem 1rem;
+    padding: 0.35rem 1rem;
     li {  
       list-style-type: none;
       float: left;
@@ -36,6 +38,9 @@ nav.livingspaces {
       padding-right: 1.2rem;
       background: none;
       &.name, span.name {
+        height: 0;
+        margin: 0;
+
         color: #FFF;
       }
       color: #CCC;
@@ -47,6 +52,7 @@ nav.livingspaces {
 }
 
 .programme_carousel {
+  border-top: 2px solid black;
   max-height: 550px;
   overflow-y: hidden;
   .slick-slide img { width: 100%; }
@@ -55,38 +61,71 @@ nav.livingspaces {
   }
 }
 
+
+.overlapping_divider {
+  float: left;
+    position: relative;
+  left: 50%;
+  height: 0;
+  .text {
+    z-index: 22;
+    border: 2px solid black;
+    padding: 0.8rem;
+    float: left;
+    background-color: white;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    margin-left: auto;
+    position: relative;
+    margin-right: auto;
+    text-align: center;
+    left: -50%;
+    margin-top: -25px;
+    font-family: $quicksand;
+  }
+}
 .livingspaces {
   
 
   &.front_module {
 
-
-    
-    .title {
-      padding: 0.4rem 1rem;
-      position: absolute;
-      top: 15px;
-      background-color: white;
-      float: left;
-      opacity: 0.8;
-      margin-left: 15px;
-      h6 {
-        margin-bottom: 0;
-        border-bottom: 1px dotted #999;
+    .wrapper_wrapper {
+        position: absolute;
+        top: 30px;
+      .title_wrapper {
         float: left;
-      }
-      h2 {
-        clear:left;
-        margin-top: 0;
-        margin-bottom: 0.25rem;
-      }
-      .blurb {
-        max-width: 580px;
-      }
-      .blurb, .blurb p {
-        font-size: 0.8rem;
-        margin: 0; padding: 0;
-        line-height: 1.2rem;
+        position: relative;
+        width: 450px;
+  
+          
+        .title {
+          padding: 0.4rem 1rem;
+  //        position: absolute;
+          top: 15px;
+          background-color: white;
+          float: left;
+          position: relative;
+          opacity: 0.8;
+          margin-top: 35px;
+          h6 {
+            margin-bottom: 0;
+            border-bottom: 1px dotted #999;
+            float: left;
+          }
+          h2 {
+            clear:left;
+            margin-top: 0;
+            margin-bottom: 0.25rem;
+          }
+          .blurb {
+            max-width: 580px;
+          }
+          .blurb, .blurb p {
+            font-size: 0.8rem;
+            margin: 0; padding: 0;
+            line-height: 1.2rem;
+          }
+        }
       }
     }
   }
@@ -139,21 +178,57 @@ footer {
 }
 
 .support {
+  border-top: 2px solid black;
   padding: 1.5rem 0;
   img {
     opacity: 0.75;
+  } 
+}
+
+.blurb_lower {
+  padding-bottom: 3.5rem;
+  a {
+    color: #444;
   }
 }
 
 .page {
   .carousel {
-    margin-bottom: 1rem;
+    min-height: 3rem;
+    border-bottom: 2px solid #444;
     .slide {
       background-size: cover;
       min-height: 300px;
     }
   }
   .body-bottom {
-    padding-bottom: 10rem;
+    padding: 5rem 0 10rem 0;
+    font-weight: 300;
+    color: #444;
+    li {
+      list-style-type: circle;
+    }
+    
+    h3 {
+      text-transform: uppercase;
+      color: #444;
+      font-size: 1.18rem;
+      
+    }
+    h2 {
+      border-top: 8px solid #ec9f43;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      text-transform: uppercase;
+      font-size: 1.5rem;
+      a {
+        color: black;
+
+      }
+    }
+    p {
+      font-weight: 300;
+      color: #444;
+    }
   }
 }

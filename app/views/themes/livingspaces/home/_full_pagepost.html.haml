@@ -1,18 +1,22 @@
 .livingspaces.front_module
-  .title
-    %h6
-      = t(:programme_preview)
-    %h2
-      - if front.custom_title.blank?
-        = front.item.name
-      - else
-        = front.custom_title
-    .blurb
-      = truncate_html(sanitize(front.item.body, tags: %w{b bold em i italic u underline br}), length: 200)
-      = link_to front.custom_follow_text.blank? ? t(:read_more) : front.custom_follow_text, front.item
-  - if Rails.env.development?
-    = raw image_tag(front.bigimage.url(:full)).gsub('production', 'development')
-  - else  
-    = raw image_tag(front.bigimage.url(:full))
+  .image
+    - if Rails.env.development?
+      = raw image_tag(front.bigimage.url(:full)).gsub('development', 'production')
+    - else  
+      = raw image_tag(front.bigimage.url(:full))
+  .wrapper_wrapper
+    .title_wrapper
+      .title
+
+        %h2
+          - if front.custom_title.blank?
+            = front.item.name
+          - else
+            = front.custom_title
+        .blurb
+          = truncate_html(sanitize(front.item.body, tags: %w{b bold em i italic u underline br}), length: 200)
+          = link_to front.custom_follow_text.blank? ? t(:read_more) : front.custom_follow_text, front.item
+        
+
 
     

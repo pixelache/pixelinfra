@@ -4,31 +4,41 @@
       = image_tag theme_image_path('logo_LS_s.png')
       = image_tag theme_image_path('caption.png')
   
+.overlapping_divider 
+  .text Programme preview
+  
 .programme_carousel
-  - @frontitems.shuffle.each do |fi|
+  - @frontitems.shuffle.each_with_index do |fi, index|
     - if fi.frontmodule
       - unless fi.item.nil?
       
-        = render :partial => fi.frontmodule.partial_name, :locals => {:front => fi}
+        = render :partial => fi.frontmodule.partial_name, :locals => {:front => fi, index: index}
       - else
-        = render :partial => fi.frontmodule.partial_name, :locals => {:front => fi}
+        = render :partial => fi.frontmodule.partial_name, :locals => {:front => fi, index: index}
 
-
-      
-.under_construction
-  .row
-    .columns.small-12.medium-6.text-center.uctext
-      .row
-        .columns.small-7.small-centered
-          %h4 
-            This site, like this festival, is
-            %strong under construction.
-      .row
-        .columns.small-9.small-centered
-          %h4
-            For more info, comments, questions, or to volunteer, please email
-            %strong festival at pixelache .ac
             
+.blurb_lower
+  .row
+    .small-12.columns.small-centered.text-center
+      %h4= link_to 'The programme so far....', festival_page_festival_path('festival-2015','preliminary-programme')
+      
+/ .under_construction
+/   .row
+/     .columns.small-12.medium-6.text-center.uctext
+/       .row
+/         .columns.small-7.small-centered
+/           %h4
+/             This site, like this festival, is
+/             %strong under construction.
+/       .row
+/         .columns.small-9.small-centered
+/           %h4
+/             For more info, comments, questions, or to volunteer, please email
+/             %strong festival at pixelache .ac
+
+.overlapping_divider 
+  .text Partners & support
+              
 .support
   .row
     .columns.small-12.small-centered.text-center
@@ -38,5 +48,9 @@
 = content_for :jquery do
   :plain
     $('.programme_carousel').slick({infinite: true,
-      slidesToShow: 1,   autoplay: true, pauseOnHover: false,
-  autoplaySpeed: 4400 });
+      slidesToShow: 1, slide: '.image',   autoplay: false, pauseOnHover: false,
+      autoplaySpeed: 4400 });
+    $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 450) / 2);
+    $( window ).resize(function() {
+     $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 450) / 2);
+     });
