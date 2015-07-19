@@ -7,10 +7,14 @@
     .text= @festivaltheme.name
 
   .row.theme-text
-    .columns.small-10.medium-7.small-centered= raw @festivaltheme.description
+    .columns.small-10.medium-7.small-centered
+      = raw @festivaltheme.description
+      - if @festivaltheme.slug == 'helsinki-inside-out'
+        %h2 What would you like to do?
     
   - if @festivaltheme.slug == 'helsinki-inside-out'
     .row.experience_form
+    
       = semantic_form_for([@festival, @festivaltheme, Experience.new], html: {:"data-abide" => ''}) do |f|
         .columns.small-10.medium-7.small-centered
           .row
