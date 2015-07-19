@@ -8,6 +8,7 @@ class Festivaltheme < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   before_save :update_image_attributes
   validates_presence_of :festival_id
+  has_many :experiences
   
   extend FriendlyId
   friendly_id :name_en, use: [:slugged, :finders, :scoped], :scope => :festival

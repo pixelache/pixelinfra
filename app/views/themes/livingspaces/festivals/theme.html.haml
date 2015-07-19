@@ -8,3 +8,32 @@
 
   .row.theme-text
     .columns.small-10.medium-7.small-centered= raw @festivaltheme.description
+    
+  - if @festivaltheme.slug == 'helsinki-inside-out'
+    .row.experience_form
+      = semantic_form_for([@festival, @festivaltheme, Experience.new], html: {:"data-abide" => ''}) do |f|
+        .columns.small-10.medium-7.small-centered
+          .row
+            .small-10.columns= f.input :festivaltheme_id, data: {value: @festivaltheme.id}, as: :hidden
+          .row
+            .small-10.columns= f.input :name, label: "Your name", hint: 'This will not be shared with the public (unless you want it to be!)', input_html: {required: :required}
+          .row
+            .small-10.columns= f.input :email, label: 'Your email', hint: 'This will not be shared with the public!', input_html: {required: :required}
+          .row
+            .small-10.columns= f.input :phone, label: 'Your phone #', hint: 'This will not be shared with the public!', input_html: {required: :required}
+          .row
+            .small-10.columns= f.input :experience_type, as: :select, collection: [['I would like to offer an experience', 0], ['I would like to offer a place', 1], ['I would like to offer an experience AND a place', 2] ], include_blank: false, input_html: {required: :required}
+          .row
+            .small-10.columns= f.input :description, label: 'Please describe your experience in just a few short sentences.', input_html: {required: :required}
+          .row
+            .small-10.columns= f.input :when_text, label: 'When will this take place?', hint: 'Inside⋅Out hours are between 10:00 - 17:00, Sunday 27 September', input_html: {required: :required}
+          .row
+            .small-10.columns= f.input :location, label: 'Where will this take place?', hint: 'Leave blank if you would like Pixelache to help find a venue. No promises!'
+          .row
+            .small-10.columns= f.input :other_activities, label: 'Is there room for other activities in this location during the InsideOut times?'
+          .row
+            .small-10.columns= f.input :special_instructions, label: 'Are there any special instructions for people who wish to attend?'
+          .row
+            .small-10.columns= recaptcha_tags
+          .row
+            .small-10.columns= f.submit 'Submit'

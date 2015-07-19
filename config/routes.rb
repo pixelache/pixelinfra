@@ -101,6 +101,9 @@ Pixelinfra::Application.routes.draw do
     resources :posts
     resources :events
     resources :attachments, as: :publications
+    resources :festivalthemes do
+      resources :experiences
+    end
     member do
       get :archive
       get '/theme/:theme_id', :controller => :festivals, :action => :theme, :as => :festival_theme

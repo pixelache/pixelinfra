@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719211711) do
+ActiveRecord::Schema.define(version: 20150719213331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -291,6 +291,28 @@ ActiveRecord::Schema.define(version: 20150719211711) do
 
   add_index "events", ["place_id"], name: "index_events_on_place_id", using: :btree
   add_index "events", ["subsite_id"], name: "index_events_on_subsite_id", using: :btree
+
+  create_table "experiences", force: :cascade do |t|
+    t.integer  "festivaltheme_id"
+    t.string   "name"
+    t.string   "phone"
+    t.text     "description"
+    t.integer  "experience_type"
+    t.string   "location"
+    t.integer  "place_id"
+    t.boolean  "approved"
+    t.boolean  "other_activities"
+    t.text     "special_instructions"
+    t.string   "email"
+    t.string   "when_text"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "experiences", ["festivaltheme_id"], name: "index_experiences_on_festivaltheme_id", using: :btree
+  add_index "experiences", ["place_id"], name: "index_experiences_on_place_id", using: :btree
 
   create_table "feedcaches", force: :cascade do |t|
     t.string   "source"
@@ -933,6 +955,8 @@ ActiveRecord::Schema.define(version: 20150719211711) do
   add_index "videos", ["festival_id"], name: "index_videos_on_festival_id", using: :btree
   add_index "videos", ["project_id"], name: "index_videos_on_project_id", using: :btree
 
+  add_foreign_key "experiences", "festivalthemes"
+  add_foreign_key "experiences", "places"
   add_foreign_key "feedcaches", "users"
   add_foreign_key "subscriptions", "users"
 end
