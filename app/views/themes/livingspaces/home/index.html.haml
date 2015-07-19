@@ -48,8 +48,8 @@
 = content_for :jquery do
   :plain
     $('.programme_carousel').slick({infinite: true,
-      slidesToShow: 1, slide: '.image',   autoplay: false, pauseOnHover: false,
-      autoplaySpeed: 4400 });
+      slidesToShow: 1, slide: '.image',   autoplay: true, pauseOnHover: false,
+      autoplaySpeed: 6400 });
     $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 450) / 2);
     $( window ).resize(function() {
      $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 450) / 2);
