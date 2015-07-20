@@ -19,7 +19,7 @@
 //= require foundation
 //= require jquery_nested_form
 //= require ckeditor/init
-//= require jquery.slick
+//= require slick
 //= require lazybox
 //= require_tree .
 

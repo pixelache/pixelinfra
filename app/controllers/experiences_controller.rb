@@ -16,7 +16,7 @@ class ExperiencesController < ApplicationController
   protected
   
   def permitted_params
-    params.require(:experience).permit(:name, :phone, :email, :descriptions, :other_activities, :when_text, :location, :experience_type, :special_instructions, :festivaltheme_id)
+    params.require(:experience).permit(:name, :phone, :email, :description, :other_activities, :when_text, :location, :experience_type, :special_instructions, :festivaltheme_id)
   end
   
 end

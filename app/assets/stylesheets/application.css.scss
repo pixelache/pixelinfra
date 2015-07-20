@@ -8,13 +8,16 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require foundation
+ *= require pixelache/stylesheets/foundation_overrides
  *= require_self
+ *= require slick
  *= require lazybox
 */
 
-@import 'slick';
+
+
 @import "font-awesome";
-@import 'foundation_and_overrides';
 
 .brand {
   float: left;
@@ -54,14 +57,14 @@ ul.nav li {
 .left-collapse {
   .columns {
     padding-left: 0;
-    padding-right: $column-gutter;
+    padding-right: rem-calc(30);
   }
 }
 
 .right-collapse {
   .columns {
     padding-right: 0;
-    padding-right: $column-gutter;
+    padding-right: rem-calc(30);
   }
 }
 
