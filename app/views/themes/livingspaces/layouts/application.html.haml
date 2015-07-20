@@ -9,20 +9,20 @@
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/feed", :rel => "alternate", :title => "RSS", :type => "application/rss+xml"}/
     = favicon_link_tag theme_image_path('favicon.ico')
-    = stylesheet_link_tag "application", :media => "all"
+    -#= stylesheet_link_tag "application", :media => "all"
     = stylesheet_link_tag 'livingspaces/stylesheets/application', :media => :screen
 
-    = javascript_include_tag "application"
+    = javascript_include_tag "livingspaces/javascripts/application"
     = javascript_include_tag "vendor/modernizr"
 
 
     - if controller.controller_name == 'events' || (controller.action_name == 'page' || params[:id] == 'locations')
       %script{:src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}", :type => "text/javascript"}
-    :javascript
-      var switchTo5x=true;
-    %script{:src => "http://w.sharethis.com/button/buttons.js", :type => "text/javascript"}
-    :javascript
-      stLight.options({publisher: "f1108f07-cb4f-4f90-a2a5-f66a2b227eb4", doNotHash: true, doNotCopy: true, hashAddressBar: false});
+    // :javascript
+    //   var switchTo5x=true;
+    // %script{:src => "http://w.sharethis.com/button/buttons.js", :type => "text/javascript"}
+    // :javascript
+    //   stLight.options({publisher: "f1108f07-cb4f-4f90-a2a5-f66a2b227eb4", doNotHash: true, doNotCopy: true, hashAddressBar: false});
     = csrf_meta_tags
     = yield(:head)
   %body{:class => "#{controller_name} #{action_name}"}
@@ -53,12 +53,13 @@
               %li.hide-for-small-only.right 23-27 September, Helsinki
               %li.toggle-topbar.menu-icon
                 %a{:href => "#"}
-                  %span
-            %ul.right.hide-for-small-only
-              %li= link_to t(:about), festival_page_festival_path('festival-2015', 'about')
-              %li= link_to t(:locations), festival_page_festival_path('festival-2015','locations')
-              %li= link_to t(:programme), festival_page_festival_path('festival-2015','preliminary-programme')
-              %li= link_to t(:contact), festival_page_festival_path('festival-2015','contact')
+                  %span m
+            %section.top-bar-section
+              %ul.right
+                %li= link_to t(:about), festival_page_festival_path('festival-2015', 'about')
+                %li= link_to t(:locations), festival_page_festival_path('festival-2015','locations')
+                %li= link_to t(:programme), festival_page_festival_path('festival-2015','preliminary-programme')
+                %li= link_to t(:contact), festival_page_festival_path('festival-2015','contact')
 
     %section
       %article= yield

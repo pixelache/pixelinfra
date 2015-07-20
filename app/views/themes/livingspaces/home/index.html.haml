@@ -41,7 +41,8 @@
     .text
       %p
         This year, Pixelache Festival experiments with the Camp Pixelache format of previous festivals, asking festival-goers to programme their own activities in their own spaces. This empowers the public in the creation of culture activities, showcases the ideas and talents already in the city, and challenges the boundary between public and private space.
-    
+      %p
+        = link_to 'Learn more >>>', '/festivals/festival-2015/theme/helsinki-inside-out'
 
 .overlapping_divider 
   .text The tram  
@@ -76,7 +77,7 @@
 = content_for :jquery do
   :plain
     $('.programme_carousel').slick({infinite: true,
-      slidesToShow: 1, slide: '.image',   autoplay: true, pauseOnHover: false,
+      slidesToShow: 1,    autoplay: true, pauseOnHover: false,
       autoplaySpeed: 6400 });
     if ($(window).width() <= 480) { 
       $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 200) / 2);

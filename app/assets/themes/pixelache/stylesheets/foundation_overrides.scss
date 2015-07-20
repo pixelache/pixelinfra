@@ -931,7 +931,7 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
  $topbar-bg: $topbar-bg-color;
 
 // Height and margin
-  $topbar-height: 40px;
+  $topbar-height: rem-calc(40);
 // $topbar-margin-bottom: 0;
 
 // Control Input height for top bar

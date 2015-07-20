@@ -36,11 +36,17 @@ nav.livingspaces {
   }
 }
 .ls-menu {
-  background: #444;
+
   border-top: 1px dotted #999;
-  padding: 0.45rem;
+  overflow : hidden;
     ul {
-    padding: 0.35rem 1rem;
+     &.right {
+       padding: 0;
+     }
+     &.title-area {
+       line-height: 3.125rem;
+       padding-left: 0.8rem;
+     }
     li {  
       list-style-type: none;
       float: left;
@@ -56,6 +62,7 @@ nav.livingspaces {
       }
       color: #CCC;
       a {
+
         color: #FFF;
         &:hover {
           color: $festival-orange;
@@ -114,12 +121,21 @@ nav.livingspaces {
     width: 50%;
     float: left;
     padding: 3rem;
+    .blurb {
+      font-weight: 300;
+      color: #444;
+      p {
+        font-weight: 300;
+        color: #444;
+      }
+    }
   }
 }
 
 .inside_out_in {
   padding: 3rem;
-  float: left;
+  margin: 0;
+  max-width: 100%;
   border-top: 2px solid #444;
   .one-third {
 
