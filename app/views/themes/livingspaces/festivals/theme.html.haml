@@ -38,6 +38,6 @@
           .row
             .small-10.columns= f.input :special_instructions, label: 'Are there any special instructions for people who wish to attend?'
           .row
-            .small-10.columns= recaptcha_tags
+            .small-10.columns= recaptcha_tags hl: I18n.locale.to_s
           .row
             .small-10.columns= f.submit 'Submit'

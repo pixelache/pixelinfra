@@ -108,7 +108,31 @@
           = ff.link_to_remove t(:remove_video), class: [:button, :round, :alert, :tiny]
         = f.link_to_add 'Add a video....', :videos, class: [:button, :round, :tiny]
               
-              
+  .row#registration
+    .small-8.columns
+      = f.input :registration_required, as: :boolean
+  .row
+    .small-8.columns= f.input :max_attendees
+
+  .row
+    .small-8.columns= f.input :email_registrations_to
+  .row
+    .small-8.columns= f.input :question_motivation, label: 'Additional question #1:'
+  .row
+    .small-8.columns= f.input :question_description, label: 'Additional question #2:'
+  .row
+    .small-8.columns= f.input :question_creators, label: 'Additional question 3:'
+  .row
+    .small-8.columns
+      = f.input :require_approval, as: :boolean
+  .row
+    .small-8.columns
+      = f.input :hide_registrants, as: :boolean, label: 'Don\'t show number of spaces left?'
+  .row
+    .small-8.columns
+      = f.input :show_guests_to_public, as: :boolean            
+      
+      
   .row#olsof_stuff
     .small-8.columns
       %fieldset

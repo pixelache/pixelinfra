@@ -94,7 +94,9 @@ Pixelinfra::Application.routes.draw do
 
 
   resources :dynamictaglines
-  resources :events
+  resources :events do
+    resources :attendees
+  end
   resources :etherpads
   resources :festivals do
     get :attendees

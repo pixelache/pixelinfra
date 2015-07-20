@@ -14,6 +14,7 @@ class Event < ActiveRecord::Base
   has_many :festivaltheme_relations, as: :relation, foreign_key: :relation_id
   belongs_to :residency
   has_many :photos, as: :item
+  has_many :attendees, as: :item
   has_many :archivalimages
   has_many :videos
   extend FriendlyId

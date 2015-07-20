@@ -357,72 +357,74 @@ footer {
       color: #444;
     }
   }
-  .experience_form {
-    padding-bottom: 10rem;
-    font-family: $opensans;
-    li {
-      list-style-type: none;
-      font-weight: 300;
-      margin-bottom: 1rem;
-      font-family: $opensans;
-      .label {
-        background: none;
-        font-family: $opensans;
-        color: #222;
-        &.error {
-          color: red;
-        }
-        font-weight: 300;
-        font-size: 0.9rem;
-        padding: 0.2rem 0;
-        margin-bottom: 0.2rem;
-      }
-      input {
-        margin: 0rem 0 0.5rem 0;
-        border: 1px solid $festival-blue;
-        &.error {
-          border: 1px solid red;
+}
 
-        }
-        font-family: $opensans;
-        &:focus {
-          border: 1px solid $festival-orange;
-          &.focus {
-            border: 1px solid red;
-          }
-        }
+.experience_form, #registration_form {
+  padding-bottom: 10rem;
+  font-family: $opensans;
+  li {
+    list-style-type: none;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    font-family: $opensans;
+    .label {
+      background: none;
+      font-family: $opensans;
+      color: #222;
+      &.error {
+        color: red;
       }
-      select, textarea {
-        border: 1px solid $festival-blue;
-        font-family: $opensans;
-        &:focus {
-          border: 1px solid $festival-orange;
+      font-weight: 300;
+      font-size: 0.9rem;
+      padding: 0.2rem 0;
+      margin-bottom: 0.2rem;
+    }
+    input {
+      margin: 0rem 0 0.5rem 0;
+      border: 1px solid $festival-blue;
+      &.error {
+        border: 1px solid red;
+
+      }
+      font-family: $opensans;
+      &:focus {
+        border: 1px solid $festival-orange;
+        &.focus {
+          border: 1px solid red;
         }
-      }
-      
-      textarea {
-        height: 120px;
-      }
-      
-      p.inline-hints {
-        font-size: 0.7rem;
-        color: #555;
-        font-weight: 300;
-        font-family: $opensans;
       }
     }
-    input[type=submit] {
-      margin: 1.5rem 0 0 0;
-      border: 1px solid #444;
-      padding:  0.8rem;
-      font-family: $quicksand;
-      text-transform: uppercase;
-      background: none;
-      color: #444;
-      font-size: 1.1rem;
+    select, textarea {
+      border: 1px solid $festival-blue;
+      font-family: $opensans;
+      &:focus {
+        border: 1px solid $festival-orange;
+      }
+    }
+    
+    textarea {
+      height: 120px;
+    }
+    
+    p.inline-hints {
+      font-size: 0.7rem;
+      color: #555;
+      font-weight: 300;
+      font-family: $opensans;
     }
   }
+  input[type=submit] {
+    margin: 1.5rem 0 0 0;
+    border: 1px solid #444;
+    padding:  0.8rem;
+    font-family: $quicksand;
+    text-transform: uppercase;
+    background: none;
+    color: #444;
+    font-size: 1.1rem;
+  }
 }
+
 .theme {
   .theme-text {
     padding-bottom: 1rem;

@@ -31,6 +31,38 @@
       .row
         .columns.small-12.small-centered= render :partial => 'shared/share_this_buttons'
 
+      - if @event.registration_required?
+        #registration_form
+          %h2 Register to participate!
+          - if @event.max_attendees
+            - if @event.hide_registrants
+              %p There are only limited places available.
+            - else
+              %p
+                There are only
+                = pluralize(@event.max_attendees - @event.attendees.size, 'place')
+                left.
+          = semantic_form_for([@event, @attendee = Attendee.new], html: {:"data-abide" => ''}) do |f|
+            .row
+              .small-10.columns= f.input :name, label: 'Your name:', input_html: {required: :required}
+            .row
+              .small-10.columns= f.input :email, label: 'Your email:', input_html: {required: :required}              
+            .row
+              .small-10.columns= f.input :phone, label: 'Your phone number:', input_html: {required: :required}
+            - unless @event.question_motivation.blank?
+              .row
+                .small-10.columns= f.input :motivation_statement, label: @event.question_motivation, input_html: {required: :required}
+            - unless @event.question_creators.blank?
+              .row
+                .small-10.columns= f.input :project_creators, label: @event.question_creators, input_html: {required: :required}
+            - unless @event.question_description.blank?
+              .row
+                .small-10.columns= f.input :project_description, label: @event.question_description, input_html: {required: :required}
+            .row
+              .small-10.columns= recaptcha_tags hl: I18n.locale.to_s
+            .row
+              .small-10.columns= f.submit 'Submit'
+                              
       - if @event.has_documentation?
 
         .documentation#documentation
