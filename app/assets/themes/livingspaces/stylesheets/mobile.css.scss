@@ -36,27 +36,43 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
       }
     }
   }
+  .top-bar.expanded {
+    background-color: #444;
+  }
   .top-bar .toggle-topbar.menu-icon {
-    margin-top: 0;
+    position: relative;
+    margin: 0px;
+    margin-top: 8px;
+    
   }
   
   .ls-menu {
     ul {
       padding: 0;
+      &.title-area {
+        float: left;
+        width: 100%;
+      }
       li {
         font-size: 0.75rem;
+        &.show-for-small-only {
+          padding-top: 0.25rem;
+          line-height: 1.3rem;
+          width: 60%;
+          a { color: #CCC; }
+        }
         span.name {
           font-size: 0.75rem;
-          color: #CCC;
+          color: #FFF;
         }
       }
     }
   }
   .overlapping_divider {
-    z-index: 990;
+    z-index: 98;
     .text {
 
-      background-position-y: 2rem;
+      background-position-y: 2.4rem;
       z-index: 22;
       padding: 0.8rem 0.8rem 1rem 0.8rem;
       font-size: 1.125rem;
@@ -77,9 +93,14 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
       padding: 1.5rem 0.8rem 3rem 0.8rem;
     }
   }
+  .programme_carousel {
+    max-height: 220px;
+    .slick-slide img { width: 100%; min-height: 220px;}
+  }
   .livingspaces {
     &.front_module {
       .wrapper_wrapper {
+        top: 40px;
         max-height: 180px;
 
         .title_wrapper {
@@ -109,6 +130,7 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
   }
   
   footer {
+    min-height: 60px;
     .logo {
       img {
         width: 90px;
@@ -118,6 +140,9 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
       font-size: 0.5rem;
     }
     .social {
+      clear: left;
+      width: 100%;
+      padding-bottom: 0.2rem;
       img {
         width: 15px;
       }
