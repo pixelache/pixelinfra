@@ -1,5 +1,7 @@
 en:
   locale_name: 'English'
+  recaptcha:
+    errors: 'There was an error with the CAPTCHA.'
   date_range:
     long:
       same_day: "%{from_day} %{from_month} %{year} %{start_time} %{sep} %{end_time}"
@@ -435,3 +437,5 @@ en:
   page_not_found: "We couldn't find that page. Check that the URL is right."
   reset_menu: 'Reset menu'
   programme_preview: 'Programme preview:'
+  livingspaces:
+    programme: 'Programme'

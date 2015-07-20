@@ -58,9 +58,13 @@
               %ul.right
                 %li= link_to t(:about), festival_page_festival_path('festival-2015', 'about')
                 %li= link_to t(:locations), festival_page_festival_path('festival-2015','locations')
-                %li= link_to t(:programme), festival_page_festival_path('festival-2015','preliminary-programme')
+                %li= link_to t("livingspaces.programme"), festival_page_festival_path('festival-2015','preliminary-programme')
                 %li= link_to t(:contact), festival_page_festival_path('festival-2015','contact')
-
+    - if flash
+      - flash.each do |key, value|
+        .alert.text-center{ :class => "alert-#{key}" }
+          %strong= value
+            
     %section
       %article= yield
 

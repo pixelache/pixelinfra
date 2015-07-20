@@ -10,6 +10,15 @@ a {
   }
 }
 
+.alert {
+  padding: 0.4rem;
+  background-color: red;
+  color: white;
+  font-size: 1.2rem;
+  &.alert-notice {
+    background-color: $festival-orange;
+  }
+}
 section.top-bar-section {
   background-color: white;
 
@@ -62,7 +71,7 @@ nav.livingspaces {
       }
       color: #CCC;
       a {
-
+        font-family: $opensans;
         color: #FFF;
         &:hover {
           color: $festival-orange;

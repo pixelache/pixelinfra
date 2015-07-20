@@ -26,9 +26,9 @@
           .row
             .small-10.columns= f.input :phone, label: 'Your phone #', hint: 'This will not be shared with the public!', input_html: {required: :required}
           .row
-            .small-10.columns= f.input :experience_type, as: :select, collection: [['I would like to offer an experience', 0], ['I would like to offer a place', 1], ['I would like to offer an experience AND a place', 2] ], include_blank: false, input_html: {required: :required}
+            .small-10.columns= f.input :experience_type, as: :select,  :include_blank => false, collection: [['I would like to offer an experience', 0], ['I would like to offer a place', 1], ['I would like to offer an experience AND a place', 2] ],  input_html: { required: :required}
           .row
-            .small-10.columns= f.input :description, label: 'Please describe your experience in just a few short sentences.', input_html: {required: :required}
+            .small-10.columns= f.input :description, label: 'Please describe your experience (and/or place) in just a few short sentences.', input_html: {required: :required}
           .row
             .small-10.columns= f.input :when_text, label: 'When will this take place?', hint: 'Inside⋅Out hours are between 10:00 - 17:00, Sunday 27 September', input_html: {required: :required}
           .row
