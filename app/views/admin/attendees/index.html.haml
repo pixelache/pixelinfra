@@ -32,7 +32,7 @@
               = att.name
               - if att.waiting_list
                 %strong WAITING LIST
-            %td= l att.created_at unless att.created_at.nil?
+            %td= att.created_at.strftime("%d %B %Y %H:%M") unless att.created_at.nil?
             %td
               - if can? :destroy, att
                 = link_to 'Delete', [:admin, att], :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => [:button, :round, :alert, :tiny]

@@ -4,7 +4,7 @@ class Admin::AttendeesController < Admin::BaseController
   has_scope :by_event
   
   def index
-    @attendees = apply_scopes(Attendee).page(params[:page])
+    @attendees = apply_scopes(Attendee).order(created_at: :desc).page(params[:page]).per(50)
     @filters = Attendee.all.map(&:item).uniq.sort_by(&:feed_time).reverse
   end
   
