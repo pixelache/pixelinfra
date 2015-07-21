@@ -8,6 +8,7 @@ class Residency < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: [:finders, :slugged]
   mount_uploader :photo, ImageUploader
+  validates_presence_of :start_at, :name
   
   scope :micro, -> { where(is_micro: true) }
   scope :production, -> { where("is_micro is not true")}
@@ -23,6 +24,10 @@ class Residency < ActiveRecord::Base
   
   def body
     description
+  end
+  
+  def feed_time
+    start_at
   end
   
   private

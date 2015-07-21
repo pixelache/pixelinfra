@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721115308) do
+ActiveRecord::Schema.define(version: 20150721120203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -296,6 +296,7 @@ ActiveRecord::Schema.define(version: 20150721115308) do
     t.boolean  "require_approval"
     t.boolean  "hide_registrants"
     t.boolean  "show_guests_to_public"
+    t.boolean  "location_tbd"
   end
 
   add_index "events", ["place_id"], name: "index_events_on_place_id", using: :btree

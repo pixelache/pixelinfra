@@ -15,13 +15,17 @@
         = link_to t(:edit_event), edit_admin_event_path(@event), class: [:tiny, :button, :secondary]
       .metadata= date_range(@event.start_at, @event.end_at, :format => :long)
       .metadata
-        = @event.place.try(:name)
-        - unless @event.place.blank?
-          %p.place_address
-            = @event.place.address
-          - unless @event.place.latitude.blank?
-            %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));});return false;"
-            .google_map#mapcontainer= render partial: 'shared/small_map'
+        - if @event.location_tbd
+          %p= t :location_to_be_announced
+        - else
+          = @event.place.try(:name)
+          - unless @event.place.blank?
+            %p.place_address
+              = @event.place.address
+            - unless @event.place.latitude.blank?
+              %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));});return false;"
+              .google_map#mapcontainer= render partial: 'shared/small_map'
+              
       - if @event.has_documentation?
         .metadata= link_to t(:scroll_down_for_documentation), '#', onclick: 'scrollTo("#documentation");'
 

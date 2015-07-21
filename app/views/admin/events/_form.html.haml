@@ -8,12 +8,15 @@
       = f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false, :label => ' Which website should this appear on?'
   .row
     .small-4.columns
-      = f.input :festival, :label => 'Part of a festival?'
+      = f.input :festival, :label => 'Part of a festival?', collection: Festival.all.order(start_at: :desc)
       = f.input :festivalthemes, :label => 'If so, part of a festival theme?', :member_label => :name_and_festival, :hint => 'Make sure you match the right festival!'
     .small-4.columns
-      = f.input :residency, :label => 'Attached to a residency?'
+      = f.input :residency, :label => 'Attached to a residency?', collection: Residency.all.order(start_at: :desc)
     .small-4.columns
       = f.input :project, :collection => Project.active_menu, :label => ' Part of a project?'
+  .row
+    .small-8.columns
+      = f.input :location_tbd, label: 'Location not yet announced?'
   .row
     .small-6.columns
       = f.input :place_name, :as => :autocomplete, :url =>  autocomplete_place_name_admin_events_path, :input_html => { :required => '', :id_element => '#event_place_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Where does this take place?", :hint => raw("(If it's a place not already the database, <a href=\"/admin/places/new\" target=\"_blank\">create it first.</a>)")
