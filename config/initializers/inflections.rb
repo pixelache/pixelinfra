@@ -6,6 +6,7 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
 
   inflect.irregular 'feedcache', 'feedcaches'
+  inflect.irregular "is", "are"
 
 end
 

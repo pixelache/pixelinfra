@@ -4,15 +4,18 @@ class AttendeesController < ApplicationController
     if params[:event_id]
       @event = Event.find(params[:event_id])
       @attendee = Attendee.new(permitted_params)
+      if @event.is_full?
+        @attendee.waiting_list = true
+      end
       @event.attendees << @attendee
     end
     if verify_recaptcha && @event.save!
-      AttendeeMailer.registration_notification(@attendee).deliver
-      if @event.is_full?
-        AttendeeMailer.waitinglist_notification(@attendee).deliver
-      else
-        AttendeeMailer.enduser_notification(@attendee).deliver
-      end
+      AttendeeMailer.registration_notification(@attendee).deliver_now
+      # if @event.is_full?
+      #   AttendeeMailer.waitinglist_notification(@attendee).deliver
+      # else
+      AttendeeMailer.enduser_notification(@attendee).deliver_now
+      # end
       flash[:notice] = 'Thank you for registering. You should receive a confirmation email.'  
 
     else

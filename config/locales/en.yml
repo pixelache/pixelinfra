@@ -437,6 +437,9 @@ en:
   page_not_found: "We couldn't find that page. Check that the URL is right."
   reset_menu: 'Reset menu'
   programme_preview: 'Programme preview:'
+  workshop_place_count: "There is %{count} place left."
+  workshop_place_count_plural: "There are %{count} places left."
   confirmation: 'Registration confirmation:'
+  space_now_available: 'Space now available:'
   livingspaces:
     programme: 'Programme'

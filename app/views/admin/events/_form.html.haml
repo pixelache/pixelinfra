@@ -115,7 +115,7 @@
     .small-8.columns= f.input :max_attendees
 
   .row
-    .small-8.columns= f.input :email_registrations_to
+    .small-8.columns= f.input :email_registrations_to, as: :string, input_html: {type: :text}
   .row
     .small-8.columns= f.input :question_motivation, label: 'Additional question #1:'
   .row

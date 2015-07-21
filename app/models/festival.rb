@@ -48,6 +48,9 @@ class Festival < ActiveRecord::Base
     '/admin/festivals/' + self.slug + '/unsubscribe'
   end
 
+  def feed_time
+    start_at
+  end
   
   def happens_on?(day)
     if end_at.blank?

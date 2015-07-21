@@ -47,10 +47,8 @@
                     %strong FULL.
                     However, you may still register for our waiting list and you will receive notification if a place frees up.
                 - else
-                  %p
-                    There are only
-                    = pluralize(@event.max_attendees - @event.attendees.size, 'place')
-                    left.
+                  %p= pluralize_sentence(@event.max_attendees - @event.attendees.not_waiting.size, "workshop_place_count")                  
+                    
           = semantic_form_for([@event, @attendee = Attendee.new], html: {:"data-abide" => ''}) do |f|
             .row
               .small-10.columns= f.input :name, label: 'Your name:', input_html: {required: :required}
