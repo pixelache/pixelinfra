@@ -38,10 +38,19 @@
             - if @event.hide_registrants
               %p There are only limited places available.
             - else
-              %p
-                There are only
-                = pluralize(@event.max_attendees - @event.attendees.size, 'place')
-                left.
+              - if @event.require_approval == true
+                %p There are limited places available. Please fill out the registration form and we will contact you if you are selected.
+              - else
+                - if @event.is_full?
+                  %p
+                    This event is
+                    %strong FULL.
+                    However, you may still register for our waiting list and you will receive notification if a place frees up.
+                - else
+                  %p
+                    There are only
+                    = pluralize(@event.max_attendees - @event.attendees.size, 'place')
+                    left.
           = semantic_form_for([@event, @attendee = Attendee.new], html: {:"data-abide" => ''}) do |f|
             .row
               .small-10.columns= f.input :name, label: 'Your name:', input_html: {required: :required}

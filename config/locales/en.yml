@@ -437,5 +437,6 @@ en:
   page_not_found: "We couldn't find that page. Check that the URL is right."
   reset_menu: 'Reset menu'
   programme_preview: 'Programme preview:'
+  confirmation: 'Registration confirmation:'
   livingspaces:
     programme: 'Programme'

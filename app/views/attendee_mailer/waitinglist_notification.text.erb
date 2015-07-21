@@ -1,0 +1,38 @@
+Hello <%= @attendee.name %>,
+
+You were registered on the waiting list for <%= @event.name %>!
+
+A space is now available for you, if you can still attend.
+
+If you CANNOT attend, please contact office@pixealache.ac as soon as possible so someone else can have your space.
+
+Event information:
+
+<%= @event.name %>
+<%= @event.place.address%>
+<%= date_range @event.start_at, @event.end_at %>
+
+Your info:
+
+Name: <%= @attendee.name %>
+Email: <%= @attendee.email %>
+Phone: <%= @attendee.phone %>
+
+<% unless @attendee.motivation_statement.blank? %>
+ <%= @event.question_motivation %>: <%= @attendee.motivation_statement %> 
+<% end %>
+
+<% unless @attendee.project_creators.blank? %>
+ <%= @event.question_project %>: <%= @attendee.project_creators %> 
+<% end %>
+
+<% unless @attendee.project_description.blank? %>
+ <%= @event.question_description %>: <%= @attendee.project_description %> 
+<% end %>
+
+
+-- registered at <%= @attendee.created_at.strftime('%d %b %Y %H:%M') %>
+
+Again, if you are unable to attend, please contact office@pixelache.ac as soon as possible.
+
+Thank you!

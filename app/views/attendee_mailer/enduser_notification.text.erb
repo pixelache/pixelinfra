@@ -1,0 +1,38 @@
+Hello <%= @attendee.name %>,
+
+This is to confirm that you have registered for the event <%= @event.name %>!
+
+<% if @attendee.waiting_list == true %>
+The event is already full, but you are on the waiting list. As soon as a space becomes available, we will notify you.
+<% end %>
+
+Event information:
+
+<%= @event.name %>
+<%= @event.place.address%>
+<%= date_range @event.start_at, @event.end_at %>
+
+
+Your info:
+
+Name: <%= @attendee.name %>
+Email: <%= @attendee.email %>
+Phone: <%= @attendee.phone %>
+
+<% unless @attendee.motivation_statement.blank? %>
+ <%= @event.question_motivation %>: <%= @attendee.motivation_statement %> 
+<% end %>
+
+<% unless @attendee.project_creators.blank? %>
+ <%= @event.question_project %>: <%= @attendee.project_creators %> 
+<% end %>
+
+<% unless @attendee.project_description.blank? %>
+ <%= @event.question_description %>: <%= @attendee.project_description %> 
+<% end %>
+
+-- registered at <%= @attendee.created_at.strftime('%d %b %Y %H:%M') %>
+
+If you are unable to attend, please contact office@pixelache.ac as soon as possible.
+
+Thank you!

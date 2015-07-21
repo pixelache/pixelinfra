@@ -3,9 +3,16 @@ class AttendeesController < ApplicationController
   def create
     if params[:event_id]
       @event = Event.find(params[:event_id])
-      @event.attendees << Attendee.new(permitted_params)
+      @attendee = Attendee.new(permitted_params)
+      @event.attendees << @attendee
     end
     if verify_recaptcha && @event.save!
+      AttendeeMailer.registration_notification(@attendee).deliver
+      if @event.is_full?
+        AttendeeMailer.waitinglist_notification(@attendee).deliver
+      else
+        AttendeeMailer.enduser_notification(@attendee).deliver
+      end
       flash[:notice] = 'Thank you for registering. You should receive a confirmation email.'  
 
     else
@@ -17,6 +24,13 @@ class AttendeesController < ApplicationController
       
   end
 
+  def index
+    if params[:event_id]
+      @event = Event.find(params[:event_id])
+      redirect_to @event
+    end
+    
+  end
   
   protected
   

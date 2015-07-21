@@ -1,0 +1,24 @@
+Hello,
+
+<%= @attendee.name %> has registered for the event <%= @event.name %>!
+
+Info:
+
+Name: <%= @attendee.name %>
+Email: <%= @attendee.email %>
+Phone: <%= @attendee.phone %>
+
+<% unless @attendee.motivation_statement.blank? %>
+ <%= @event.question_motivation %>: <%= @attendee.motivation_statement %> 
+<% end %>
+
+<% unless @attendee.project_creators.blank? %>
+ <%= @event.question_project %>: <%= @attendee.project_creators %> 
+<% end %>
+
+<% unless @attendee.project_description.blank? %>
+ <%= @event.question_description %>: <%= @attendee.project_description %> 
+<% end %>
+
+
+-- registered at <%= @attendee.created_at.strftime('%d %b %Y %H:%M') %>

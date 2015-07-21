@@ -107,6 +107,30 @@ class Event < ActiveRecord::Base
     self.name + " (#{self.start_at.strftime("%d.%m.%Y")})"
   end
   
+  def future?
+    self.start_at >= Date.parse(Time.now.strftime('%Y/%m/%d'))
+  end
+  
+
+  def is_full?
+    if registration_required
+      if future?
+        if !max_attendees.blank?
+          if max_attendees - self.attendees.to_a.delete_if{|x| x.waiting_list == true}.size.to_i <= 0
+            return true
+          else
+            return false
+          end
+        else 
+          return false
+        end
+      else 
+        return false
+      end
+    else
+      return false
+    end
+  end    
 
   
   def feed_time
