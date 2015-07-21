@@ -22,8 +22,12 @@ namespace :pixelache do
       # check if they are a current member
       member = User.find(member_with_twitter.first)
       if member.current_member?
-        twitter_client.user_timeline(member_with_twitter.last.gsub(/^@/, '')).each do |tweet|
-          Feedcache.where(source: 'twitter', issued_at: tweet.created_at.to_i, official: false, user: member_with_twitter.first, sourceid: tweet.id, title: tweet.text, content: tweet.text, link_url: tweet.uri.to_s).first_or_create
+        begin
+          twitter_client.user_timeline(member_with_twitter.last.gsub(/^@/, '')).each do |tweet|
+            Feedcache.where(source: 'twitter', issued_at: tweet.created_at.to_i, official: false, user: member_with_twitter.first, sourceid: tweet.id, title: tweet.text, content: tweet.text, link_url: tweet.uri.to_s).first_or_create
+          end
+        rescue Twitter::Error::NotFound
+          next
         end
       end
     end
