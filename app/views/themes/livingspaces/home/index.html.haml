@@ -51,18 +51,20 @@
   .left
     = image_tag theme_image_path('bluetram.png')
   .right
-    %h3= raw "Our &ldquo;festival centre&rdquo;"
+    .row
+      .small-12.columns
+        %h4= raw "Our &ldquo;festival centre&rdquo;"
     
-    .blurb
-      %p 
-        Pixelache 2015's "centre" is an HKL tram, featuring 
-        = link_to 'media and technology-based works', '/festivals/festival-2015/tram-installations-presented-by-kruks', target: :_blank
-        by  Merja Puustinen, Victor Khashchanskiy , Andy Best, and Robert Pugliese as well as other impromptu activities and presentations.
+        .blurb
+          %p 
+            Pixelache 2015's "centre" is an HKL tram, featuring 
+            = link_to 'media and technology-based works', '/festivals/festival-2015/tram-installations-presented-by-kruks', target: :_blank
+            by  Merja Puustinen, Victor Khashchanskiy , Andy Best, and Robert Pugliese as well as other impromptu activities and presentations.
       
-    .blurb
-      %p 
-        The Pixelache tram is part of the 
-        = link_to 'Taidelinja project.', 'http://www.taidelinja.fi/'
+        .blurb
+          %p 
+            The Pixelache tram is part of the 
+            = link_to 'Taidelinja project.', 'http://www.taidelinja.fi/'
         
 
 .overlapping_divider 

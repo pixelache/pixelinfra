@@ -119,12 +119,13 @@ nav.livingspaces {
 .tram {
   border-top: 2px solid #444;
   clear: left;
-  height: 398px;
+  height: 0;
+  padding-bottom: 31.25%;
   overflow: hidden;
   .left {
     width: 50%;
     float: left;
-    
+ 
   }
   .right {
     width: 50%;
@@ -133,8 +134,10 @@ nav.livingspaces {
     .blurb {
       font-weight: 300;
       color: #444;
+
       p {
         font-weight: 300;
+        font-size: 0.875rem;
         color: #444;
       }
     }
