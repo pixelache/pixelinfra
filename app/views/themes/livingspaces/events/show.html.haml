@@ -13,24 +13,33 @@
     .columns.small-10.medium-7.small-centered
       - if can? :edit , @event
         = link_to t(:edit_event), edit_admin_event_path(@event), class: [:tiny, :button, :secondary]
-      .metadata= date_range(@event.start_at, @event.end_at, :format => :long)
-      .metadata
-        - if @event.location_tbd
-          %p= t :location_to_be_announced
-        - else
-          = @event.place.try(:name)
-          - unless @event.place.blank?
-            %p.place_address
-              = @event.place.address
-            - unless @event.place.latitude.blank?
-              %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));});return false;"
-              .google_map#mapcontainer= render partial: 'shared/small_map'
-              
-      - if @event.has_documentation?
-        .metadata= link_to t(:scroll_down_for_documentation), '#', onclick: 'scrollTo("#documentation");'
+      .metadata.row
+        .small-12.columns.text-center.date.small-centered= date_range(@event.start_at, @event.end_at, :format => :long)
+        .small-12.columns.text-center.location.small-centered
+          - if @event.location_tbd
+            %p= t :location_to_be_announced
+          - else
+            = @event.place.try(:name)
+            - unless @event.place.blank?
+              %p.place_address
+                = @event.place.address
 
-        
-      = raw @event.description
+        .small-12.columns.text-center.cost.small-centered
+          - if @event.cost
+            = number_to_currency(@event.cost)
+          - else
+            = t :free_entrance
+        - unless @event.place.latitude.blank?
+          .small-12.columns.text-center.map_container.small-centered
+            %p.map_link= link_to t(:map), '#', onclick: "$('.google_map').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));            $('p.map_link a').text($('.google_map').is(':visible') ? 'Hide map' : 'View on map');             });return false;"
+
+          
+        - if @event.has_documentation?
+          .small-12.columns= link_to t(:scroll_down_for_documentation), '#', onclick: 'scrollTo("#documentation");'
+
+      .row.google_map#mapcontainer= render partial: 'shared/small_map'
+      .content.row
+        = raw @event.description
 
       .row
         .columns.small-12.small-centered= render :partial => 'shared/share_this_buttons'
@@ -127,23 +136,6 @@
               = render :partial => 'shared/related', locals: {item: @event, related: related }
 
   = content_for :jquery do
-    :plain
-      $('.image_carousel').slick({infinite: true,
-        slidesToShow: 1,
-
-        dots: true,
-        customPaging: function(slick,index) {
-           return slick.$slides.eq(index).find('.thumb').html();
-        },
-        arrows: true,
-        slide: '.img',
-        variableWidth: false,
-        autoplay: true,
-        autoplaySpeed: 2400,
-        slidesToScroll: 1,
-      });
-      $('.video_description').readmore();
-
     - unless @event.place.latitude.blank?
       :plain
 
@@ -151,7 +143,8 @@
           var myLatlng = new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude});
           var myOptions = { zoom: 14, 
                 center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text","stylers":[{"visibility":"on"},{"color":"#ec9f43"},{"weight":"0.01"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#f0d8bc"},{"lightness":"0"}]},{"featureType":"landscape","elementType":"labels.text","stylers":[{"weight":"0.64"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"visibility":"on"},{"weight":"1"},{"lightness":"63"},{"color":"#dfc4a3"}]},{"featureType":"poi","elementType":"labels","stylers":[{"color":"#ec9f43"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#f4c58e"},{"lightness":"1"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#ec870f"},{"weight":"0.62"},{"lightness":"53"}]},{"featureType":"road.highway","elementType":"labels.text","stylers":[{"visibility":"on"},{"color":"#c7cece"},{"weight":"0.01"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"weight":"0.01"}]},{"featureType":"road.highway","elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"},{"visibility":"on"},{"weight":"0.01"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#bfdbf1"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#cde1f0"},{"lightness":"-3"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"weight":"0.25"},{"color":"#888d8d"}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"weight":"0.80"}]}]
              }
 
 

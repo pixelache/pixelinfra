@@ -441,6 +441,7 @@ en:
   workshop_place_count_plural: "There are %{count} places left."
   confirmation: 'Registration confirmation:'
   location_to_be_announced: 'Location to be confirmed!'
+  free_entrance: 'Free entrance'
   space_now_available: 'Space now available:'
   livingspaces:
     programme: 'Programme'

@@ -292,6 +292,46 @@ footer {
     padding: 5rem 0 10rem 0;
     font-weight: 300;
     color: #444;
+    
+    .metadata {
+      color: #222;
+      border-bottom: 4px solid $festival-orange;
+      margin-bottom: 0;
+      .date, .location {
+        font-size: 1.3rem;
+        font-weight: 300;
+        p {
+          margin-bottom: 0;
+        }
+      }
+      .cost {
+        font-size: 0.9rem;
+        font-style: italic;
+        color: #808080;
+        text-transform: lowercase;
+        margin: 1rem auto;
+      }
+      .map_container {
+        p.map_link {
+          margin: 0.3rem auto;
+          text-transform: uppercase;
+          font-family: $quicksand;
+          font-weight: 400;
+
+      
+          a { color: $festival-orange; }
+        }
+      }
+    }
+    .google_map {
+      display: none;
+    }
+    #mapcontainer {
+      height: 200px;
+    }
+    .content {
+      margin-top: 1rem;
+    }
     li {
       list-style-type: circle;
     }
