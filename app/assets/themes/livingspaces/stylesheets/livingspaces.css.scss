@@ -24,6 +24,23 @@ section.top-bar-section {
 
   width: 100%;
 }
+
+.error_page {
+  padding: 5.5rem 0;
+  img {
+    padding: 2rem 0;
+    margin: 0 auto;
+  }
+  a {
+
+    margin: 2rem 0;
+    color: $festival-orange;
+    border: 2px solid $festival-orange;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    padding: 0.4rem;
+  }
+}
 nav.livingspaces {
   background: white;
   padding: 0.4rem;

@@ -6,6 +6,14 @@ class ApplicationController < ActionController::Base
   before_filter :get_locale
   before_filter :populate_nav
   
+  rescue_from StandardError, :with => :render_500
+  
+  def render_500(exception)
+    @exception = exception
+    render :template => "application/500", :status => 500
+  end
+  
+  
   def add_to_mailchimp   # change when we get API key
     h = Hominid::Base.new({:api_key => ENV['mailchimp_api_key']})
     list = h.find_list_id_by_name("Pixelache Helsinki Newsletter")
@@ -92,7 +100,7 @@ class ApplicationController < ActionController::Base
           redirect_to @page, :status => :moved_permanently
         end
       rescue ActiveRecord::RecordNotFound
-
+        
         if !first.nil?
           # see if it's a festival 
           begin
@@ -105,7 +113,7 @@ class ApplicationController < ActionController::Base
             end
           rescue ActiveRecord::RecordNotFound
             if @festival
-              redirect_to @festival, :status => :moved_permanently
+               redirect_to @festival, :status => :moved_permanently
             else
               render '404'
             end

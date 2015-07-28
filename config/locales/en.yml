@@ -430,6 +430,7 @@ en:
   member_activity: 'Member activity'
   ago: ' ago'
   twitter_follow: "Follow %{twitter_name}"
+  error: 'There was an error with this site.'
   reply: 'Reply'
   retweet: 'Retweet'
   favourite: 'Favourite'

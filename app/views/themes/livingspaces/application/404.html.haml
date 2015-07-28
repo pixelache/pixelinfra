@@ -1,0 +1,14 @@
+.error_page
+  .row
+    .small-12.small-centered.text-center
+      %h1
+        something went wrong
+  .row
+    .small-12.small-centered.text-center
+      %h4 page not found, but you can at least watch these circles turn 404 times
+  .row
+    .small-12.small-centered.text-center    
+      = image_tag 'https://s3-eu-west-1.amazonaws.com/pixelache/media/error.gif'
+  .row
+    .small-12.small-centered.text-center
+      =link_to 'return to the main page', '/'
