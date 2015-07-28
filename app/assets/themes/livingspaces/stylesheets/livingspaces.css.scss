@@ -387,16 +387,29 @@ footer {
           list-style-type: none;
           clear: both;
           margin-bottom: 1.3rem;
-          line-height: 1.3rem;
+          line-height: 1.5rem;
+          ul {
+            margin-left: 3rem;
+            li {
+              color: #666;
+              kbd {
+                font-weight: 300;
+                height: 5rem;
+              }
+            }
+          }
           kbd {
             background: none;
-            font-weight: 600;
+            font-weight: 400;
             font-family: $opensans;
             color: #000;
             border: none;
             width: 130px;
             display: block;
             float: left;
+            padding-right: 25px;
+            text-align: right;
+            height: 3rem;
             
           }
         }
