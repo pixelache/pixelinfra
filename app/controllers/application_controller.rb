@@ -6,11 +6,12 @@ class ApplicationController < ActionController::Base
   before_filter :get_locale
   before_filter :populate_nav
   
-  rescue_from StandardError, :with => :render_500
+  rescue_from StandardError, :with => :render_500 unless Rails.env.development?
   
   def render_500(exception)
     @exception = exception
     render :template => "application/500", :status => 500
+
   end
   
   
