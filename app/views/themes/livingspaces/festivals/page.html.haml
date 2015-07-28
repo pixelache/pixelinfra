@@ -1,4 +1,4 @@
-.page
+.page{class: @page.slug}
   .carousel
     - unless @page.photos.blank?
       .slide{style: "background: url(#{@page.photos.first.filename.url.gsub('development', 'production')}) center bottom no-repeat; background-size: cover"} &nbsp;
