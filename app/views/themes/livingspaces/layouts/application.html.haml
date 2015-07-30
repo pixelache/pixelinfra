@@ -61,9 +61,9 @@
                 %li= link_to t("livingspaces.programme"), festival_page_festival_path('festival-2015','preliminary-programme')
                 %li= link_to t(:contact), festival_page_festival_path('festival-2015','contact')
                 %li.lang
-                  = link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
+                  %span.eng= link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
                   %span.bar= " | "
-                  = link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
+                  %span.fin= link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
                 
     - if flash
       - flash.each do |key, value|
