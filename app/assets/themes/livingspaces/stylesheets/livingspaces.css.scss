@@ -25,6 +25,10 @@ section.top-bar-section {
   width: 100%;
 }
 
+p {
+  line-height: 1.75rem;
+}
+
 .error_page {
   padding: 5.5rem 0;
   img {
@@ -80,6 +84,24 @@ nav.livingspaces {
 
       padding-right: 1.2rem;
       background: none;
+      &.lang {
+        line-height: 3.125rem;
+        font-size: 0.8rem;
+        a {
+          font-size: 0.7rem;
+          float:left;
+          padding: 0 !important;
+          width: auto;
+          color: yellow;
+        }
+        span.bar {
+          border: none;
+          color: #FFF;
+          float: left;
+          padding: 0 0.3rem;
+          display: inline;
+        }
+      }
       &.name, span.name {
         height: 0;
         margin: 0;
