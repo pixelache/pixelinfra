@@ -15,4 +15,7 @@ class Place < ActiveRecord::Base
     [address1 , address2, city, country, postcode].delete_if {|x| x.blank? }.compact.join(', ')
   end
   
+  def address_no_country
+    [address1 , address2, city].delete_if {|x| x.blank? }.compact.join(', ')
+  end
 end

@@ -22,7 +22,7 @@
             = @event.place.try(:name)
             - unless @event.place.blank?
               %p.place_address
-                = @event.place.address
+                = @event.place.address_no_country
 
         .small-12.columns.text-center.cost.small-centered
           - if @event.cost
@@ -30,8 +30,9 @@
           - else
             = t :free_entrance
         - unless @event.place.latitude.blank?
-          .small-12.columns.text-center.map_container.small-centered
-            %p.map_link= link_to t(:map), '#', onclick: "$('.google_map').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));            $('p.map_link a').text($('.google_map').is(':visible') ? 'Hide map' : 'View on map');             });return false;"
+          - unless @event.place.slug =~ /^various-locations/
+            .small-12.columns.text-center.map_container.small-centered
+              %p.map_link= link_to t(:map), '#', onclick: "$('.google_map').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));            $('p.map_link a').text($('.google_map').is(':visible') ? 'Hide map' : 'View on map');             });return false;"
 
           
         - if @event.has_documentation?
