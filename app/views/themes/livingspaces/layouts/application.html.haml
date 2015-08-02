@@ -52,9 +52,9 @@
             %section.top-bar-section
               %ul.right
                 %li= link_to t("livingspaces.about"), festival_page_festival_path('festival-2015', 'about')
-                %li= link_to t(:locations), festival_page_festival_path('festival-2015','locations')
+                %li= link_to t("livingspaces.locations"), festival_page_festival_path('festival-2015','locations')
                 %li= link_to t("livingspaces.programme"), festival_page_festival_path('festival-2015','preliminary-programme')
-                %li= link_to t(:contact), festival_page_festival_path('festival-2015','contact')
+                %li= link_to t("livingspaces.contact"), festival_page_festival_path('festival-2015','contact')
                 %li.lang
                   %span.eng= link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
                   %span.bar= " | "
