@@ -25,7 +25,7 @@
               = exp.start_at.strftime("%H:%M") + " - " + exp.end_at.strftime("%H:%M")
             %p= exp.description
             %p= link_to 'Show on map', '#', onclick: "javascript:google.maps.event.trigger(markers[#{exp.id.to_s}], 'click');return false;"
-  
+    %h2= link_to "Create an event!", '/festivals/festival-2015/theme/helsinki-inside-out#register'
   
     = content_for :jquery do
       :plain

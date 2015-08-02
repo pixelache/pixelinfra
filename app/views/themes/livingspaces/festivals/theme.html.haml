@@ -10,6 +10,8 @@
     .columns.small-10.medium-7.small-centered
       = raw @festivaltheme.description
       - if @festivaltheme.slug == 'helsinki-inside-out'
+        #register
+        %h3= link_to 'See all activities', festival_theme_activities_festival_path(@festival, @festivaltheme)
         %h2 What would you like to do?
     
   - if @festivaltheme.slug == 'helsinki-inside-out'
