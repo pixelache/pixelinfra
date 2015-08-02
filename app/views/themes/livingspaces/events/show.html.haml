@@ -152,6 +152,7 @@
           map = new google.maps.Map(document.getElementById('mapcontainer'), myOptions);
           var marker = new google.maps.Marker({  position: myLatlng, map: map, 
             title: '#{escape_javascript(@event.name)}', 
+            icon: '/assets/livingspaces/images/pin.png',
             map: map
           });
           return map;
