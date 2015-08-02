@@ -368,7 +368,7 @@ en:
   save: 'Save'
   scroll_down_for_documentation: 'Documentation'
   search: 'Search...'
-  search_results_for: 'Search results for "%{result}:"'
+  search_results_for: 'Search results for: '
   see_activities: 'See activities'
   see_all: 'See all'
   short_project_description: 'Short project description (max 100 words):'

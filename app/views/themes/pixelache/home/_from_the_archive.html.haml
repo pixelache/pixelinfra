@@ -12,3 +12,7 @@
     .row
       .small-12.medium-9.columns.medium-offset-1
         .description= raw truncate_html(sanitize(@archive.activity.description.gsub('%nbsp;', ''), tags: %w{strong b bold i em italic underline u}), :length => 300)
+        
+= content_for :jquery do
+  :plain
+    $('.from_the_archive').css('height', $('.from_the_archive .pink').height());

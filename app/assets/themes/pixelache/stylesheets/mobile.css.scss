@@ -358,6 +358,9 @@
   }
 }
 
+
+
+
 // tablets
 @media only screen and (min-width: 40.063em) and (max-width:  59em) {
   nav.top-bar li.tagline a {
@@ -367,6 +370,18 @@
     font-size: 0.75rem;
   }
   
+  .from_the_archive {
+    .pink {
+     
+      .title {
+        font-size: 1.3rem;
+        margin-top: 2rem;
+      }
+      .year {
+        letter-spacing: initial;
+      }
+    }
+  }
   .project_index {
     .strip {
       .title_box {

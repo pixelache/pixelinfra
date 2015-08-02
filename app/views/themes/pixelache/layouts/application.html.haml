@@ -142,7 +142,7 @@
 
       .bottom_footer.container
         .row
-          .medium-2.small-12.columns.fine_print.small-text-center.medium-text-left
+          .medium-3.small-12.columns.fine_print.small-text-center.medium-text-left
             = link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), '/'
             %p office@pixelache.ac
             %p +358-50-5643463
@@ -151,11 +151,11 @@
             %p Suvilahti (Bldg. 7)
             %p 00540 Helsinki
             %p Finland
-          .small-12.medium-10.columns.right.footer_menu
+          .small-12.medium-9.columns.footer_menu
             .row
-              .small-6.medium-3.columns.text-left.medium-offset-2
+              .small-6.medium-3.columns.text-left.large-offset-1
                 .heading.medium-text-right.small-text-center= link_to t(:about), page_path('about')
-              .small-6.medium-2.columns.text-left
+              .small-6.medium-3.columns.text-left
                 .heading.medium-text-left.small-text-center= t(:activities)
                 %ul
                   %li= link_to t(:events), events_path
