@@ -61,19 +61,20 @@ class Event < ActiveRecord::Base
     if self.user_id.nil?
       self.user_id = 0
     end
-    if published == true && hide_from_feed != true
+    if published == true && hide_from_feed != "1"
+
       if self.new_record? 
         add_to_feed('created') unless hide_from_feed == "1"
       else
         add_to_feed('edited') unless hide_from_feed == "1"
       end
     else
-      unless feeds.empty?
-        feeds.map(&:destroy)
-      end
+      
+      feeds.delete_all
+      
     end
     if hide_from_feed == "1"
-      feeds.map(&:destroy)
+      feeds.delete_all
     end
   end
   

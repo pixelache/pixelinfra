@@ -32,7 +32,7 @@
         - unless @event.place.latitude.blank?
           - unless @event.place.slug =~ /^various-locations/
             .small-12.columns.text-center.map_container.small-centered
-              %p.map_link= link_to t(:map), '#', onclick: "$('.google_map').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));            $('p.map_link a').text($('.google_map').is(':visible') ? 'Hide map' : 'View on map');             });return false;"
+              %p.map_link= link_to t(:map), '#', onclick: "$('.google_map').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));            $('p.map_link a').text($('.google_map').is(':visible') ? '#{t(:hide_map)}' : '#{t(:map)}');});return false;"
 
           
         - if @event.has_documentation?
@@ -47,10 +47,10 @@
 
       - if @event.registration_required?
         #registration_form.row
-          %h2 Register to participate!
+          %h2= t "livingspaces.register_to_participate"
           - if @event.max_attendees
             - if @event.hide_registrants
-              %p There are only limited places available.
+              %p= t "livingspaces.limited_places"
             - else
               - if @event.require_approval == true
                 %p There are limited places available. Please fill out the registration form and we will contact you if you are selected.

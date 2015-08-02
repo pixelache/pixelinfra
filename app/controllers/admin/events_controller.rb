@@ -14,6 +14,9 @@ class Admin::EventsController < Admin::BaseController
     
   def edit
     @event = Event.friendly.find(params[:id])
+    if @event.feeds.empty?
+      @event.hide_from_feed = true
+    end
     super
   end
 

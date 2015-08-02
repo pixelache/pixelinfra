@@ -5,8 +5,12 @@ module Feedable
     Feed.create(:action => action, :subsite_id => self.subsite_id, :user_id => self.user_id, :item_id => self.id, :item_type => self.class.to_s, :fed_at => self.feed_time)
   end
   
+  def delete_feeds
+    self.feeds.delete_all
+  end
+  
   def check_for_feed
-    self.feeds.each(&:destroy)
+    self.feeds.delete_all
     unless self.hide_from_feed == true || self.published != true      
       self.add_to_feed
     end

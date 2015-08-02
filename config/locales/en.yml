@@ -438,12 +438,14 @@ en:
   page_not_found: "We couldn't find that page. Check that the URL is right."
   reset_menu: 'Reset menu'
   programme_preview: 'Programme preview:'
+  limited_places: 'There are only limited places available.'
   workshop_place_count: "There is %{count} place left."
   workshop_place_count_plural: "There are %{count} places left."
   confirmation: 'Registration confirmation:'
   location_to_be_announced: 'Location to be confirmed!'
   free_entrance: 'Free entrance'
   space_now_available: 'Space now available:'
+  hide_map: 'Hide map'
   livingspaces:
     about: 'About'
     locations: 'Locations'
@@ -462,3 +464,4 @@ en:
     partners_and_support: "Partners & support"
     contact: 'Contact'
     participate_and_interact: 'Participate and interact'
+    register_to_participate: 'Register to participate!'
