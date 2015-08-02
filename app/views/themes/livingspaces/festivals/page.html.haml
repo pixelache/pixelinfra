@@ -63,7 +63,7 @@
           });
           
       - if @festival.festivalthemes.find('helsinki-inside-out')
-        - experiences = @festival.festivalthemes.find('helsinki-inside-out').experiences
+        - experiences = @festival.festivalthemes.find('helsinki-inside-out').experiences.approved
           - unless experiences.blank?
             - experiences.each do |e|
             :plain
