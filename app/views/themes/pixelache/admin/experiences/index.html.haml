@@ -1,0 +1,41 @@
+.row
+  .small-12.medium-9.columns
+    %h2
+      Proposals for festival theme
+      %em= @festivaltheme.name
+      
+.row
+  .small-12.columns
+    %table
+      %thead
+        %th What?
+        %th Who?
+        %th Description
+        %th Where?
+        %th When?
+        %th Approved?
+        %th &nbsp;
+      %tbody
+        - @experiences.each do |exp|
+          %tr
+            %td= exp.try(:title)
+            %td
+              = exp.name
+              %p.small= exp.phone
+              %p.small= exp.email
+            %td.readmore= exp.description 
+            -# truncate(exp.description, length: 100
+            %td= exp.location
+            %td= exp.when_text
+            %td= exp.approved == true ? t(:yes) : (exp.approved == false ? t(:no) : t(:not_yet))
+            %td
+              = link_to t(:details), admin_festival_festivaltheme_experience_path(@festival, @festivaltheme, exp), class: [:button, :round, :tiny]
+              - if can? :edit, exp
+                = link_to t(:edit), edit_admin_festival_festivaltheme_experience_path(@festival, @festivaltheme, exp), class: [:button, :round, :tiny]
+              - if can? :destroy, exp
+                = link_to t(:delete), [:admin, @festival, @festivaltheme, exp], method: :delete, data: {confirm: t(:are_you_sure)}, class: [:button, :round, :tiny, :alert]
+
+= content_for :jquery do
+  :plain
+    $('.readmore').readmore();
+                

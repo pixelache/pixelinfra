@@ -28,9 +28,13 @@ Pixelinfra::Application.routes.draw do
         post :subscribe_other
         post :unsubscribe_other
       end
-      resources :festivalthemes
+      resources :festivalthemes do
+        resources :experiences
+      end
+      
     end
     resources :festivalthemes
+    
     resources :flickrsets do
       get :autocomplete_event_name, :on => :collection
     end
@@ -109,6 +113,7 @@ Pixelinfra::Application.routes.draw do
     member do
       get :archive
       get '/theme/:theme_id', :controller => :festivals, :action => :theme, :as => :festival_theme
+      get '/theme/:theme_id/activities', :controller => :experiences, :action => :index, :as => :festival_theme_activities
       get '/*page', :action => :page, :as => :festival_page
     end
   end

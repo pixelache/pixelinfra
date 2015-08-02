@@ -111,8 +111,9 @@ form {
 
 table {
   td {
-    .small {
-      font-size: 0.8rem;
+    .small, p.small {
+      margin: 0;
+      font-size: 0.7rem;
       text-transform: uppercase;
       a {
         font-weight: 600;

@@ -8,6 +8,9 @@
       - festival.festivalthemes.each do |ft|
         .theme
           = ft.name
+          - unless ft.experiences.empty?
+            = link_to t(:manage_proposals), admin_festival_festivaltheme_experiences_path(festival, ft)
+            |
           - if can? :manage, ft
             = link_to t(:edit),  edit_admin_festivaltheme_path(ft)
             |

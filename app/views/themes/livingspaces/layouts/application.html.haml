@@ -16,7 +16,7 @@
     = javascript_include_tag "vendor/modernizr"
 
 
-    - if controller.controller_name == 'events' || (controller.action_name == 'page' || params[:id] == 'locations')
+    - if controller.controller_name == 'events' || (controller.action_name == 'page' || params[:id] == 'locations') || (controller.controller_name == 'experiences')
       %script{:src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}", :type => "text/javascript"}
     // :javascript
     //   var switchTo5x=true;

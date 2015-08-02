@@ -3,6 +3,11 @@ class Admin::AttendeesController < Admin::BaseController
   has_scope :by_festival
   has_scope :by_event
   
+  def edit
+    @attendee = Attendee.find(params[:id])
+    @filters = Attendee.all.map(&:item).uniq.sort_by(&:feed_time).reverse
+  end
+  
   def index
     @attendees = apply_scopes(Attendee).order(created_at: :desc).page(params[:page]).per(50)
     @filters = Attendee.all.map(&:item).uniq.sort_by(&:feed_time).reverse
@@ -22,6 +27,16 @@ class Admin::AttendeesController < Admin::BaseController
     end
     @attendee.destroy
     redirect_to "/admin/attendees?by_#{@attendee.item_type.downcase}=#{@attendee.item_id}"
+  end
+  
+  def update
+    update! { admin_attendees_path }
+  end
+  
+  protected
+  
+  def permitted_params
+    params.permit(:attendee  => [:name, :phone, :email, :item_id, :motivation_statement, :project_creators, :project_description])
   end
   
 end

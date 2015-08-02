@@ -1,0 +1,39 @@
+.row
+  .small-8.columns
+    %h2
+      = @experience.festivaltheme.name
+      proposal:
+    
+= semantic_form_for [:admin, @experience.festivaltheme.festival, @experience.festivaltheme, @experience] do |f|
+  .row
+    .small-12.medium-9.columns= f.input :name
+  .row
+    .small-12.medium-9.columns= f.input :phone
+  .row
+    .small-12.medium-9.columns= f.input :email  
+  .row
+    .small-12.medium-9.columns= f.input :description
+  .row
+    .small-12.medium-9.columns= f.input :experience_type
+  .row
+    .small-12.medium-9.columns= f.input :location
+  .row
+    .small-12.medium-9.columns= f.input :when_text
+  .row
+    .small-12.medium-9.columns= f.input :other_activities
+  .row
+    .small-12.medium-9.columns= f.input :special_instructions          
+  .row
+    .small-12.medium-9.columns= f.input :approved, as: :boolean
+  .row
+    .small-12.medium-9.columns= f.input :start_at, as: :string, label: 'Exact start time for database (if approved)', input_html: {class: :datetime_picker, value: f.object.new_record? ? '' : f.object.start_at.strftime('%Y-%m-%d %H:%M')}
+  .row
+    .small-12.medium-9.columns= f.input :end_at, as: :string, label: 'Exact end time for database (if approved)', input_html: {class: :datetime_picker, value: f.object.new_record? ? '' : f.object.end_at.strftime('%Y-%m-%d %H:%M')}
+  .row
+    .small-12.medium-9.columns= f.input :latitude
+  .row
+    .small-12.medium-9.columns= f.input :longitude
+  .row
+    .small-12.medium-9.columns= f.input :title
+  .row
+    .small-12.medium-9.columns= f.submit t(:save), class: [:button, :small, :round]

@@ -34,6 +34,8 @@
                 %strong WAITING LIST
             %td= att.created_at.strftime("%d %B %Y %H:%M") unless att.created_at.nil?
             %td
+              - if can? :edit, att
+                = link_to 'Edit', edit_admin_attendee_path(att),  :class => [:button, :round, :tiny]
               - if can? :destroy, att
                 = link_to 'Delete', [:admin, att], :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => [:button, :round, :alert, :tiny]
 .row

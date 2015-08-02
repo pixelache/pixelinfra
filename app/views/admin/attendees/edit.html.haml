@@ -1,0 +1,22 @@
+= semantic_nested_form_for [:admin, @attendee], :html => {:class => "custom" } do |f|
+  .row
+    .small-9.columns
+      %h2= @attendee.name
+  .row
+    .small-9.columns= f.input :name
+  .row
+    .small-9.columns= f.input :email
+  .row
+    .small-9.columns= f.input :phone
+    
+  .row
+    .small-9.columns= f.input :item, collection: @filters
+  
+  .row
+    .small-9.columns= f.input :motivation_statement
+  .row
+    .small-9.columns= f.input :project_description
+  .row
+    .small-9.columns= f.input :project_creators
+  .row
+    .small-9.columns= f.submit 'Save', class: [:button, :round]
