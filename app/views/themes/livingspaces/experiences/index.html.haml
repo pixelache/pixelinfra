@@ -65,6 +65,8 @@
           google.maps.event.addListener(marker#{e.id.to_s}, 'click', function() {
             infowindow#{e.id.to_s}.open(map,marker#{e.id.to_s});
           });
+          
+          
       :plain
           map.fitBounds(bounds);
           zoomChangeBoundsListener = 
