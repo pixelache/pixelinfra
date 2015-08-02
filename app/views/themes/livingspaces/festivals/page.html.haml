@@ -42,7 +42,7 @@
           var contentString#{e.id.to_s} = '<div class="infowindow_content">'+
                 '<h4 class="firstHeading">#{escape_javascript(e.name)}</h4>'+
                 '<div class="bodyContent">'+
-                '<p>#{escape_javascript(raw(truncate_html(e.description, :length => 150)))}'+
+                '<p>#{escape_javascript(truncate_html(e.description, :length => 150))}'+
                 '<a href="#{url_for(e)}" target="blank">#{t(:read_more)}</a></p>'+
                 '<p>Where: #{e.place.name}</p>'+
                 '<p>When: #{date_range(e.start_at, e.end_at)}</p>'+
