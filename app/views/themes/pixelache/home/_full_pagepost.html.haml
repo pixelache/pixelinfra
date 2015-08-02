@@ -1,20 +1,24 @@
-- if front.bigimage?
+- if front.bigimage? && front.dont_scale != true
   - style = "background: url(#{front.bigimage.url(:full)})  no-repeat center center; background-size: cover;"
+- elsif front.bigimage? && front.dont_scale == true
+  - style = "background: url(#{front.bigimage.url})  no-repeat top center; height: #{front.bigimage_height}px;"
 - else
   - style = "background-color: ##{front.background_colour};"
 - if front.custom_title
   - style += "padding-top: " + (front.custom_title ? "70px" : "30%;")
-.full_page_or_post.fullscreen{:style => style }
-  - if front.custom_title
-    .row
-      .medium-10.small-12.medium-offset-1.columns
-        .custom_title{:style => ["color: ##{front.text_colour};", front.background_on_title == true ? "background-color: ##{front.background_colour};": false].join}= raw front.custom_title
-  .row
-    .small-12.medium-8.columns.medium-offset-1
-      .title= link_to front.item.name, front.item, :style => ["color: ##{front.text_colour};", front.background_on_title == true ? "background-color: ##{front.background_colour};": false]
-  .row
-    .small-12.medium-8.columns.medium-offset-1
-      .blurb{:style => ["color: ##{front.text_colour};", front.background_on_text == true ? "background-color: ##{front.background_colour};": false].join}= raw truncate_html(front.item.body, :length => 200)
-  .row
-    .small-12.medium-8.columns.medium-offset-1
-      .read_more= link_to t(:read_more), front.item, :style => ["color: ##{front.text_colour};", front.background_on_text == true ? "background-color: ##{front.background_colour};": false]
+= link_to front.external_url.blank? ? front.item : front.external_url do
+  .full_page_or_post.fullscreen{:style => style }
+    - unless front.no_text == true
+      - if front.custom_title
+        .row
+          .medium-10.small-12.medium-offset-1.columns
+            .custom_title{:style => ["color: ##{front.text_colour};", front.background_on_title == true ? "background-color: ##{front.background_colour};": false].join}= raw front.custom_title
+      .row
+        .small-12.medium-8.columns.medium-offset-1
+          .title= link_to front.item.name, front.item, :style => ["color: ##{front.text_colour};", front.background_on_title == true ? "background-color: ##{front.background_colour};": false]
+      .row
+        .small-12.medium-8.columns.medium-offset-1
+          .blurb{:style => ["color: ##{front.text_colour};", front.background_on_text == true ? "background-color: ##{front.background_colour};": false].join}= raw truncate_html(front.item.body, :length => 200)
+      .row
+        .small-12.medium-8.columns.medium-offset-1
+          .read_more= link_to t(:read_more), front.item, :style => ["color: ##{front.text_colour};", front.background_on_text == true ? "background-color: ##{front.background_colour};": false]

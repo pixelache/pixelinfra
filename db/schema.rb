@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802111926) do
+ActiveRecord::Schema.define(version: 20150802161030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -503,6 +503,8 @@ ActiveRecord::Schema.define(version: 20150802111926) do
     t.string   "seconditem_id",         limit: 255
     t.boolean  "background_on_title",               default: false,    null: false
     t.boolean  "background_on_text",                default: false,    null: false
+    t.boolean  "dont_scale"
+    t.boolean  "no_text"
   end
 
   add_index "frontitems", ["item_id", "item_type"], name: "index_frontitems_on_item_id_and_item_type", using: :btree
