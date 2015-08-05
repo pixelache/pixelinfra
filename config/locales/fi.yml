@@ -405,7 +405,35 @@ fi:
   your_email: 'Your email'
   your_message: 'Your message'
   send_message: 'Send message'
+  programme_preview: 'Ohjelman esikatselu'
   your_message_was_delivered: 'Your email was delivered.'
   error_sending_message: 'There were errors in sending your message: '
   captcha_error: 'You did not enter the correct CAPTCHA. Please try again.'
   member_activity: 'Member activity'
+  workshop_place_count: " %{count} paikka vapaana."
+  workshop_place_count_plural: " %{count} paikkaa vapaana."
+  confirmation: 'Ilmoittautumisen vahvistaminen:'
+  location_to_be_announced: 'Paikka ilmoitetaan myöhemmin'
+  free_entrance: 'Ilmainen sisäänpääsy!'
+  space_now_available: 'Tilaa nyt tarjolla:'
+  hide_map: 'Hide map'
+  livingspaces:
+    about: 'Lisätietoja'
+    locations: 'Kohteet'
+    programme_preview: 'Ohjelman esikatselu'
+    inside_out_blurb: 'Tämän vuoden Pixelache-festivaali jatkaa Camp Pixelache -kokeilua innostamalla festivaaliosallistujia tarjoamaan omaa ohjelmaansa omissa tiloissaan. Tavoitteena on kannustaa yleisöä omien kulttuuritapahtumiensa toteuttamisessa. Julkisen ja yksityisen tilan välistä rajaa haastamalla saatetaan yleisön koettavaksi kaupungissa piileviä ideoita ja lahjakkuuksia. '
+    outside_in_blurb: "Outside⋅In -ohjelma esittelee tilaa luovasti hyödyntävien kulttuuriaktiviteettien kirjoa. Olemme kuratoineet kokoelman projekteja osalta Helsingin luovimmista mielistä: performansseja, kävelyitä ja paljon muuta."
+    participation_blurb: "Pixelache 2015: Living Spaces on osallistumisen juhla, joka kutsuu pohtimaan 'Kaupungin luovat sen asukkaat' -väitettä työpajoin, keskusteluin ja muun vuorovaikutuksen keinoin."
+    programme: 'Ohjelma'
+    participate: 'Osallistu!'
+    learn_more: 'Lue lisää'
+    submit_an_activity: 'Ilmoita toiminnastasi!'
+    the_tram: 'Raitiovaunu'
+    our_festival_centre: '"Festivaalikeskuksemme"'
+    tram_blurb: "Tämänkertaisen Pixelache-festivaalin 'keskuksena' liikennöi HKL:n raitiovaunu, jossa on nähtävissä media- ja teknologia-perusteisia teoksia Merja Puustiselta,  Victor Khashchanskiyltä, Andy Bestiltä ja Robert Puglieselta muiden imrovisoitujen tilaisuuksien ja esitysten lisäksi."
+    taidelinja: 'Pixelache-raitiovaunu on osa %{href}.'
+    taidelinja_project: 'Taidelinja-projektia'
+    partners_and_support: "Kumppanit ja tukijat"
+    contact: 'Ota yhteyttä'
+    participate_and_interact: 'Participate and interact'
+    register_to_participate: 'Register to participate!'

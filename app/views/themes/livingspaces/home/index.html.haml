@@ -5,7 +5,7 @@
       = image_tag theme_image_path('caption.png')
   
 .overlapping_divider 
-  .text Programme preview
+  .text= t :programme_preview
   
 .programme_carousel
   - @frontitems.shuffle.each_with_index do |fi, index|
@@ -41,7 +41,7 @@
         = link_to t("livingspaces.submit_an_activity") + ' >>>', '/festivals/festival-2015/theme/helsinki-inside-out'
 
 .overlapping_divider 
-  .text The tram  
+  .text= t("livingspaces.the_tram")
   
 .tram
   .left
@@ -49,22 +49,21 @@
   .right
     .row
       .small-12.columns
-        %h4= raw "Our &ldquo;festival centre&rdquo;"
+        %h4= raw t("livingspaces.our_festival_centre")
     
         .blurb
-          %p 
-            Pixelache 2015's "centre" is an HKL tram, featuring 
-            = link_to 'media and technology-based works', '/festivals/festival-2015/tram-installations-presented-by-kruks', target: :_blank
-            by  Merja Puustinen, Victor Khashchanskiy , Andy Best, and Robert Pugliese as well as other impromptu activities and presentations.
+          %p
+            = t "livingspaces.tram_blurb" 
+            %br/
+            = link_to t(:read_more) + ' >>>', '/festivals/festival-2015/tram-installations-presented-by-kruks'
+
       
         .blurb
-          %p 
-            The Pixelache tram is part of the 
-            = link_to 'Taidelinja project.', 'http://www.taidelinja.fi/'
+          %p= raw t("livingspaces.taidelinja", href: link_to(t("livingspaces.taidelinja_project"), 'http://www.taidelinja.fi/'))
         
 
 .overlapping_divider 
-  .text Partners & support
+  .text= t("livingspaces.partners_and_support")
               
 .support
   .row

@@ -80,7 +80,7 @@
               .row
                 .small-10.columns= f.input :project_description, label: @event.question_description, input_html: {required: :required}
             .row
-              .small-10.columns= recaptcha_tags hl: I18n.locale.to_s
+              .small-10.columns= recaptcha_tags hl: I18n.locale.to_s, :display => { :theme => 'clean' }
             .row
               .small-10.columns= f.submit 'Submit'
                               

@@ -460,7 +460,8 @@ en:
     the_tram: 'The tram'
     our_festival_centre: 'Our "festival centre"'
     tram_blurb: "Pixelache 2015's 'centre' is an HKL tram, featuring media and technology-based works by Merja Puustinen, Victor Khashchanskiy , Andy Best, and Robert Pugliese as well as other impromptu activities and presentations."
-    taidelinja: 'The Pixelache tram is part of the Taidelinja project.'
+    taidelinja: 'The Pixelache tram is part of the %{href}.'
+    taidelinja_project: 'Taidelinja project'
     partners_and_support: "Partners & support"
     contact: 'Contact'
     participate_and_interact: 'Participate and interact'
