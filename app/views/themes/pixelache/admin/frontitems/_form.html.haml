@@ -7,8 +7,8 @@
   #hidden{:style => !f.object.new_record? ? "display: block" : false}
     .small-12.columns
       .row
-        .small-3.columns= f.input :item_type, :as => :select, :collection => ['Page', 'Post', 'Project', 'Festival', 'Residency'], :label => 'Choose type of content:'
-        .small-3.columns.second= f.input :seconditem_type, :as => :select, :collection => ['Page', 'Post', 'Project'], :label => 'Choose type of content (right):'
+        .small-3.columns= f.input :item_type, :as => :select, :collection => ['Page', 'Post', 'Event', 'Project', 'Festival', 'Residency'], :label => 'Choose type of content:'
+        .small-3.columns.second= f.input :seconditem_type, :as => :select, :collection => ['Page', 'Post', 'Event', 'Project', 'Festival', 'Residency'], :label => 'Choose type of content (right):'
       .row.page_selector
         .small-12.columns
           = f.input :item_id, :as => :hidden

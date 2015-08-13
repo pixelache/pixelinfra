@@ -1,6 +1,7 @@
 class Admin::FrontitemsController < Admin::BaseController
   autocomplete :post, :title, :extra_data => [:published, :published_at], :display_value => :name_with_date
   autocomplete :page, :name, :extra_data => [:name], :display_value => :name
+  autocomplete :event, :name, :extra_data => [:name], :display_value => :name
   autocomplete :project, :name, :extra_data => [:name], :display_value => :name
   autocomplete :festival, :name, :extra_data => [:name], :display_value => :name
   autocomplete :residency, :name, :extra_data => [:name], :display_value => :name
