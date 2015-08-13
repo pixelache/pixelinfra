@@ -9,7 +9,7 @@
       - if @post.image?
         .carousel_post_container
           .carousel_post
-            .slide= raw image_tag(@post.image.url).gsub('production', 'development')
+            .slide= image_tag @post.image.url
             - unless @post.photos.blank?
               .slide= image_tag @post.photos.first.filename.url
             
