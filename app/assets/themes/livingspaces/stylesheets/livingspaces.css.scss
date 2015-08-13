@@ -326,7 +326,7 @@ footer {
 }
 
 
-.event_single {
+.event_single, .post_single {
   .carousel {
     min-height: 3rem;
     border-bottom: 2px solid #444;
@@ -334,10 +334,23 @@ footer {
       min-height: 300px;
     }
   }
-  .event_inner {
+  .event_inner, .post_inner {
     padding: 5rem 0 10rem 0;
     font-weight: 300;
     color: #444;
+    
+    .post_title {
+      color: #444;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    
+    .carousel_post_container {
+      padding-bottom: 1rem;
+      border-bottom:  4px solid $festival-orange;
+      margin-bottom: 2rem;
+    }
     
     .metadata {
       color: #222;
@@ -631,4 +644,71 @@ footer {
 }
 #recaptcha_response_field {
   margin: 12px 0 0 0!important;
+}
+
+.posts_index_container {
+  padding-top: 2rem;
+  h2 {
+    margin-bottom: 2rem;
+  }
+
+  .post_row {
+    margin-top: 2rem;
+    margin-bottom: 4rem !important;
+    .end {
+      float: left !important;
+    }
+    
+    .post_small {
+
+      .categories {
+        text-transform: uppercase;
+        border-bottom: 1px solid #191919;
+        font-family: $quicksand;
+        font-size: 0.8rem;
+
+        color: #333;
+      }
+  
+      .post_image {
+        padding-bottom: 100%;
+        height: 0;
+        margin: 0.5rem 0;
+        cursor: pointer;
+    
+        .gray {
+          display: none;
+          background-color: $festival-orange;
+          opacity: 1;
+          padding-bottom: 100%;
+          height: 0;
+          width: 100%;
+          overflow: hidden;
+          position: relative;
+
+          .excerpt {
+            font-size: 0.9rem;
+            line-height: 1.6rem;
+            font-family: $quicksand;
+            a { color: #fff; }
+            margin: 1.5rem;
+          }
+          .hashtags {
+            right: 15px;
+            font-size: 0.8rem;
+            bottom: 1rem;
+            .hashtag {
+              float: none;
+              text-align: right;
+              margin-bottom: 0.3rem;
+              a {
+                color: #fff;
+              }
+            }
+            position: absolute;
+          }
+        }
+      }
+    }
+  }
 }

@@ -152,6 +152,7 @@ class ApplicationController < ActionController::Base
       @calendar += Step.by_site(@site).where(['start_at >= ? OR end_at >= ?', Time.now, Time.now])
     end
     @site.name 
+
   end
   
   def get_locale 

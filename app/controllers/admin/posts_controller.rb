@@ -37,6 +37,9 @@ class Admin::PostsController < ApplicationController
   
   def edit
     @post = Subsite.find(params[:subsite_id]).posts.find(params[:id])
+    if @post.feeds.empty?
+      @post.hide_from_feed = true
+    end
     set_meta_tags :title => t(:edit_post)
   end
   

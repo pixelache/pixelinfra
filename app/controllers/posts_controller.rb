@@ -28,23 +28,35 @@ class PostsController < ApplicationController
       @user = User.find(params[:user_id])
       @posts = Post.by_site(@site).by_user(@user.id).published.order('published_at DESC').page(params[:page]).per(12)
       set_meta_tags title: t(:all_posts_by, member: @user.name)
-      
     else
       @posts = Post.by_site(@site).published.order('published_at DESC').page(params[:page]).per(12)
+      if @posts.empty?
+        if @site.festival
+          @posts = Post.by_festival(@site.festival).published.order(published_at: :desc).page(params[:page]).per(12)
+        end
+      end
       set_meta_tags title: t(:news)
+
     end
   end
   
   def show
+
     begin
       @post = @site.posts.friendly.find(params[:id])
     rescue ActiveRecord::RecordNotFound
+
       @post = Post.find(params[:id])
       if @post
-
-        if @post.subsite != @site
+        if @post.festival
+          @festival = @post.festival
+          if @festival.subsite
+            if !request.host.split(/\./).include?(@festival.subsite.subdomain)
+              redirect_to subdomain: @festival.subsite.subdomain
+            end
+          end
+        elsif @post.subsite != @site
           redirect_to "http://#{@post.subsite.subdomain}/posts/#{params[:id]}"
-          
         end
       end
     end
@@ -52,6 +64,13 @@ class PostsController < ApplicationController
     set_meta_tags :title => @post.title
     if @post.festival
       @festival = @post.festival
+ 
+      if @festival.subsite
+        if !request.host.split(/\./).include?(@festival.subsite.subdomain)
+          redirect_to subdomain: @festival.subsite.subdomain
+        end
+
+      end
     end
     if !@post.published
       flash[:notice] = 'This post is not published.'

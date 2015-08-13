@@ -23,6 +23,7 @@ class Post < ActiveRecord::Base
   accepts_nested_attributes_for :attachments, :reject_if => proc {|x| x['attachedfile'].blank? && x['title'].blank? && x['description'].blank? && x['documenttype_id'].blank? }, :allow_destroy => true
   before_save :update_image_attributes
   before_save :check_published
+  # before_save :check_festival_site
   validates_presence_of :subsite_id
   #validate :title_present_in_at_least_one_locale
   after_save :check_for_feed
@@ -41,7 +42,20 @@ class Post < ActiveRecord::Base
   scope :by_name, -> (name) { joins(:translations).where("post_translations.title ILIKE '%" + name + "%'")}
   scope :interviews, -> () { joins(:post_categories).where("post_categories.name ILIKE '%interviews'") }
   
-  
+  def check_festival_site
+    if self.festival
+      if self.festival.subsite
+        self.subsite = self.festival.subsite
+      end
+    elsif self.project
+      if self.project.subsite
+        self.subsite = self.project.subsite
+      end
+    end
+    
+  end
+          
+          
   def check_published
     if self.published == true
       self.published_at ||= Time.now
@@ -55,6 +69,9 @@ class Post < ActiveRecord::Base
     end
     if self.creator_id.blank?
       self.creator_id = self.last_modified_id
+    end
+    if hide_from_feed == "1"
+      feeds.delete_all
     end
   end
   

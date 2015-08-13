@@ -1,0 +1,25 @@
+.post_single
+  .carousel
+    .slide{style: "background: url(#{theme_image_path('banner11.jpg')}) center bottom no-repeat; "} &nbsp;
+  .overlapping_divider 
+    .text= t :news
+    
+  .post_inner.row.outer{class: @post.festival ? :festival : false}
+    .columns.small-10.medium-7.small-centered
+      - if @post.image?
+        .carousel_post_container
+          .carousel_post
+            .slide= raw image_tag(@post.image.url).gsub('production', 'development')
+            - unless @post.photos.blank?
+              .slide= image_tag @post.photos.first.filename.url
+            
+    .columns.small-10.medium-7.small-centered
+      .post_title= @post.title
+    .columns.small-10.medium-7.small-centered  
+      .post_body= raw @post.body
+
+- unless @post.photos.blank?    
+  = content_for :jquery do
+    :plain
+      $('.carousel_post').slick();
+      
