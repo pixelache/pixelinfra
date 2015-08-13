@@ -52,38 +52,39 @@ class PostsController < ApplicationController
           @festival = @post.festival
           if @festival.subsite
             if !request.host.split(/\./).include?(@festival.subsite.subdomain)
-              redirect_to subdomain: @festival.subsite.subdomain
+              redirect_to subdomain: @festival.subsite.subdomain unless request.xhr?
             end
           end
         elsif @post.subsite != @site
-          redirect_to "http://#{@post.subsite.subdomain}/posts/#{params[:id]}"
+          redirect_to "http://#{@post.subsite.subdomain}/posts/#{params[:id]}" unless request.xhr?
         end
-      end
-    end
-    
-    set_meta_tags :title => @post.title
-    if @post.festival
-      @festival = @post.festival
- 
-      if @festival.subsite
-        if !request.host.split(/\./).include?(@festival.subsite.subdomain)
-          redirect_to subdomain: @festival.subsite.subdomain
-        end
-
-      end
-    end
-    if !@post.published
-      flash[:notice] = 'This post is not published.'
-      if current_user
-        if !can? :read, @post
-          redirect_to posts_path
-        end
-      else
-        redirect_to posts_path
       end
     end
     if request.xhr?
+
       render template: 'posts/ajax_post', layout: false
+    else
+      set_meta_tags :title => @post.title
+      if @post.festival
+        @festival = @post.festival
+ 
+        if @festival.subsite
+          if !request.host.split(/\./).include?(@festival.subsite.subdomain)
+            redirect_to subdomain: @festival.subsite.subdomain
+          end
+
+        end
+      end
+      if !@post.published
+        flash[:notice] = 'This post is not published.'
+        if current_user
+          if !can? :read, @post
+            redirect_to posts_path
+          end
+        else
+          redirect_to posts_path
+        end
+      end
     end
   end
   

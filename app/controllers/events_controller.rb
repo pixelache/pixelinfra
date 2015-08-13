@@ -36,7 +36,7 @@ class EventsController < InheritedResources::Base
       @festival = @event.festival
       if @festival.subsite
         if !request.host.split(/\./).include?(@festival.subsite.subdomain)
-          redirect_to subdomain: @festival.subsite.subdomain
+          redirect_to subdomain: @festival.subsite.subdomain unless request.xhr?
         end
       end
     end

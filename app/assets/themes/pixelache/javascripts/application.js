@@ -89,7 +89,7 @@ function down_festival_menu() {
 function load_to_top(href) {
   var freezeheight = $('.multipost_selected').css('height');
   $('.multipost_selected').css('height', freezeheight);
-  $('.top_post').fadeOut();
+  $('.multipost_selected .top_post').fadeOut();
   $('.multipost_selected').load(href, function() {
     $('.multipost_selected').css('height', '');
     maps = initialize();
