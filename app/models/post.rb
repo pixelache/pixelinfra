@@ -16,6 +16,7 @@ class Post < ActiveRecord::Base
   has_paper_trail
   mount_uploader :image, ImageUploader
   resourcify
+  has_many :attendees, as: :item
   has_many :feeds, :as => :item, :dependent => :delete_all
   include Feedable
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['title'].blank? || x['body'].blank? }
@@ -98,6 +99,25 @@ class Post < ActiveRecord::Base
   def name
     title
   end
+  
+
+  def is_full?
+    if registration_required
+
+        if !max_attendees.blank?
+          if max_attendees - self.attendees.to_a.delete_if{|x| x.waiting_list == true}.size.to_i <= 0
+            return true
+          else
+            return false
+          end
+        else 
+          return false
+        end
+      else 
+        return false
+      end
+
+  end   
   
   def name_with_date
     self.title + (self.published != true ? ' (unpublished)' : " (#{self.published_at.strftime("%d.%m.%Y")})")

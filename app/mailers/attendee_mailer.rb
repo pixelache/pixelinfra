@@ -31,6 +31,13 @@ class AttendeeMailer < ApplicationMailer
     
   end
   
+  def volunteers(attendee)
+    @attendee = attendee
+    @post = attendee.item
+    to_address = 'office@pixelache.ac'
+    mail(:to => attendee.email, :from => to_address, :subject => "#{t(:thank_you_volunteering)}!")  
+  end
+  
   def waitinglist_notification(attendee)
     @attendee = attendee
     @event = attendee.item

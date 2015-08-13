@@ -111,6 +111,24 @@
       = f.input :residency
   .row
     .small-6.columns= f.input :tag_list
+  .row#registration
+    .small-12.columns.panel
+      .row
+        .small-8.columns
+          = f.input :registration_required, as: :boolean, label: 'Attach a registration form to this post?', hint: 'Used on rare occasions'
+      .row
+        .small-8.columns= f.input :max_attendees
+
+      .row
+        .small-8.columns= f.input :email_registrations_to, as: :string, input_html: {type: :text}
+      .row
+        .small-8.columns= f.input :question_motivation, label: 'Additional question #1:'
+      .row
+        .small-8.columns= f.input :question_description, label: 'Additional question #2:'
+      .row
+        .small-8.columns= f.input :question_creators, label: 'Additional question 3:'
+      .row
+        .small-8.columns= f.input :email_template, label: 'Send email using Rails email template view'
   .row
     .small-3.columns= f.input :hide_from_feed, :as => :boolean, :label => "Hide from news feeds?"
     .small-3.columns= f.input :published

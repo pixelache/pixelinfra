@@ -2,29 +2,47 @@ class AttendeesController < ApplicationController
   
   def create
     if params[:event_id]
-      @event = Event.find(params[:event_id])
+      @item = Event.find(params[:event_id])
       @attendee = Attendee.new(permitted_params)
-      if @event.is_full?
+      if @item.is_full?
         @attendee.waiting_list = true
       end
-      @event.attendees << @attendee
+      @item.attendees << @attendee
     end
-    if verify_recaptcha && @event.save!
-      AttendeeMailer.registration_notification(@attendee).deliver_now
-      # if @event.is_full?
-      #   AttendeeMailer.waitinglist_notification(@attendee).deliver
-      # else
-      AttendeeMailer.enduser_notification(@attendee).deliver_now
-      # end
-      flash[:notice] = 'Thank you for registering. You should receive a confirmation email.'  
+    if params[:post_id]
+      begin
+        @post = @site.posts.friendly.find(params[:post_id])
 
+      rescue ActiveRecord::RecordNotFound
+        if @site.festival
+          @item = @site.festival.posts.friendly.find(params[:post_id])
+        end
+      end
+      @attendee = Attendee.new(permitted_params)
+      if @item.is_full?
+        @attendee.waiting_list = true
+      end
+      @item.attendees << @attendee
+    end
+    
+    if verify_recaptcha && @item.save!
+      if @item.class == Post
+        if !@item.email_template.blank?
+
+          eval("AttendeeMailer.#{@item.email_template}(@attendee).deliver_now")
+        end
+      else
+        AttendeeMailer.registration_notification(@attendee).deliver_now
+        AttendeeMailer.enduser_notification(@attendee).deliver_now
+      end
+      flash[:notice] = 'Thank you for registering. You should receive a confirmation email.'  
     else
       
       flash[:error] = 'There was an error submitting your registration. Please try again or contact Pixelache if it continues to fail.'
      
     end
-   render template: 'events/show'
-      
+   # render template: "#{@item.class.to_s.tableize}/show"
+   redirect_to @item
   end
 
   def index

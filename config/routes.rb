@@ -136,11 +136,14 @@ Pixelinfra::Application.routes.draw do
     end
   end
   resources :publications
+  
   resources :users do
     resources :posts
   end
   resources :nodes
-  resources :posts
+  resources :posts do
+    resources :attendees
+  end
 
   resources :residencies do
     resources :posts

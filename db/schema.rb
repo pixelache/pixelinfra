@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150813153348) do
+ActiveRecord::Schema.define(version: 20150813161251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -670,28 +670,35 @@ ActiveRecord::Schema.define(version: 20150813153348) do
   add_index "post_translations", ["post_id"], name: "index_post_translations_on_post_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.string   "slug",               limit: 255
+    t.string   "slug",                   limit: 255
     t.integer  "subsite_id"
     t.boolean  "published"
     t.integer  "creator_id"
     t.integer  "last_modified_id"
     t.datetime "published_at"
     t.integer  "wordpress_id"
-    t.string   "image",              limit: 255
+    t.string   "image",                  limit: 255
     t.integer  "image_width"
     t.integer  "image_height"
-    t.string   "image_content_type", limit: 255
-    t.integer  "image_size",         limit: 8
+    t.string   "image_content_type",     limit: 255
+    t.integer  "image_size",             limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "wordpress_author",   limit: 255
-    t.string   "wordpress_scope",    limit: 255
+    t.string   "wordpress_author",       limit: 255
+    t.string   "wordpress_scope",        limit: 255
     t.integer  "event_id"
     t.integer  "project_id"
     t.integer  "festival_id"
-    t.boolean  "external",                       default: false, null: false
+    t.boolean  "external",                           default: false, null: false
     t.integer  "eventr_id"
     t.integer  "residency_id"
+    t.boolean  "registration_required"
+    t.string   "email_registrations_to"
+    t.string   "question_description"
+    t.string   "question_creators"
+    t.string   "question_motivation"
+    t.string   "email_template"
+    t.integer  "max_attendees"
   end
 
   add_index "posts", ["subsite_id"], name: "index_posts_on_subsite_id", using: :btree

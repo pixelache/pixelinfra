@@ -1,0 +1,30 @@
+Hello <%= @attendee.name %>,
+
+You have offered to volunteer for Pixelache.
+
+You are a kind and generous person; without people like you, this festival would be impossible. We will be in touch with you shortly with further information. 
+
+Thank you again for your interest and enthusiasm, and we look forward to meeting you!
+
+
+Your info:
+
+Name: <%= @attendee.name %>
+Email: <%= @attendee.email %>
+Phone: <%= @attendee.phone %>
+
+<% unless @attendee.motivation_statement.blank? %>
+ <%= @post.question_motivation %>: <%= @attendee.motivation_statement %> 
+<% end %>
+
+<% unless @attendee.project_creators.blank? %>
+ <%= @post.question_creators %>: <%= @attendee.project_creators %> 
+<% end %>
+
+<% unless @attendee.project_description.blank? %>
+ <%= @post.question_description %>: <%= @attendee.project_description %> 
+<% end %>
+
+
+-- entered at <%= @attendee.created_at.strftime('%d %b %Y %H:%M') %>
+
