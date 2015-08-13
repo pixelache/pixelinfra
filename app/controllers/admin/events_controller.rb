@@ -14,8 +14,8 @@ class Admin::EventsController < Admin::BaseController
     
   def edit
     @event = Event.friendly.find(params[:id])
-    if @event.feeds.empty?
-      @event.hide_from_feed = true
+    unless @event.feeds.empty?
+      @event.add_to_newsfeed = true
     end
     super
   end
@@ -48,7 +48,7 @@ class Admin::EventsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:event => [:subsite_id, :place_id, :start_at, :end_at, :step_id, :published, :image, :image_width, :place_name, :image_height, :image_content_type, :image_size, :residency_id, :facebook_link, :cost, :cost_alternate, :cost_alternate_reason, :project_id, :festival_id, :facilitator_name, :facilitator_url, :facilitator_organisation, :user_id, :hide_from_feed, :user_id, :resources_needed, :protocol, 
+    params.permit(:event => [:subsite_id, :place_id, :start_at, :end_at, :step_id, :published, :image, :image_width, :place_name, :image_height, :image_content_type, :image_size, :residency_id, :facebook_link, :cost, :cost_alternate, :cost_alternate_reason, :project_id, :festival_id, :facilitator_name, :facilitator_url, :facilitator_organisation, :user_id, :add_to_newsfeed, :user_id, :resources_needed, :protocol, 
       :facilitator_organisation_url, :tag_list, :technology_list, :location_tbd,
       :registration_required, :email_registrations_to, :question_description,
       :question_creators, :question_motivation, :require_approval, 

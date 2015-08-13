@@ -28,7 +28,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :subsite_id
   #validate :title_present_in_at_least_one_locale
   after_save :check_for_feed
-  attr_accessor  :event_name, :project_name, :festival_name, :hide_from_feed
+  attr_accessor  :event_name, :project_name, :festival_name, :add_to_newsfeed
   
   scope :published, -> () { where(published: true) }
   scope :by_site, -> (x) { includes(:subsite).where(:subsite_id => x) }
@@ -60,7 +60,7 @@ class Post < ActiveRecord::Base
   def check_published
     if self.published == true
       self.published_at ||= Time.now
-      unless self.persisted? || hide_from_feed != false
+      unless self.persisted? || add_to_newsfeed == "1"
         add_to_feed('created')
       end
     else
@@ -71,7 +71,7 @@ class Post < ActiveRecord::Base
     if self.creator_id.blank?
       self.creator_id = self.last_modified_id
     end
-    if hide_from_feed == "1"
+    if add_to_newsfeed != "1"
       feeds.delete_all
     end
   end

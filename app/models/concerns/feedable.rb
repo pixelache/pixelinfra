@@ -11,7 +11,7 @@ module Feedable
   
   def check_for_feed
     self.feeds.delete_all
-    unless self.hide_from_feed == true || self.published != true      
+    if self.add_to_newsfeed == "1" || self.published == true      
       self.add_to_feed
     end
   end

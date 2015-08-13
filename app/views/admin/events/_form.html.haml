@@ -153,7 +153,7 @@
   .row 
     .small-5.columns= f.input :user_id, :as => :select, :collection => User.all.order(:name), :label => "Event created by?", :hint => "Leave blank for 'Pixelache'", :include_blank => true
   .row
-    .small-12.columns= f.input :hide_from_feed, :as => :boolean, :label => "Hide from news feeds?"
+    .small-12.columns= f.input :add_to_newsfeed, :as => :boolean, :label => "Add to newsfeed on Pixelache frontpage?"
   .row
     .small-12.columns= f.input :published, :hint => 'Tick this box to publish this on the site, or else the public will never see it'
     

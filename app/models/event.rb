@@ -28,7 +28,7 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? && x['description'].blank? }
   accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :videos , reject_if: proc {|x| x['in_url'].blank? }, :allow_destroy => true
-  attr_accessor  :place_name, :hide_from_feed
+  attr_accessor  :place_name, :add_to_newsfeed
   before_save :update_image_attributes
   validates_presence_of :subsite_id, :place_id, :start_at
   #validate :name_present_in_at_least_one_locale
@@ -62,19 +62,19 @@ class Event < ActiveRecord::Base
     if self.user_id.nil?
       self.user_id = 0
     end
-    if published == true && hide_from_feed != "1"
+    if published == true && add_to_newsfeed == "1"
 
       if self.new_record? 
-        add_to_feed('created') unless hide_from_feed == "1"
+        add_to_feed('created') unless add_to_newsfeed != "1"
       else
-        add_to_feed('edited') unless hide_from_feed == "1"
+        add_to_feed('edited') unless add_to_newsfeed != "1"
       end
     else
       
       feeds.delete_all
       
     end
-    if hide_from_feed == "1"
+    if add_to_newsfeed != "1"
       feeds.delete_all
     end
   end

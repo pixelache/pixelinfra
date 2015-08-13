@@ -37,8 +37,8 @@ class Admin::PostsController < ApplicationController
   
   def edit
     @post = Subsite.find(params[:subsite_id]).posts.find(params[:id])
-    if @post.feeds.empty?
-      @post.hide_from_feed = true
+    unless @post.feeds.empty?
+      @post.add_to_newsfeed = true
     end
     set_meta_tags :title => t(:edit_post)
   end
@@ -91,7 +91,7 @@ class Admin::PostsController < ApplicationController
        :image_content_type, :image_size, :event_name, :event_id,  :project_name, :residency_id, :project_id, 
        :registration_required, :email_registrations_to, :question_description,
        :question_creators, :question_motivation, :email_template, :max_attendees,
-       :festival_name, :festival_id, :hide_from_feed, :tag_list, post_category_ids: [], 
+       :festival_name, :festival_id, :add_to_newsfeed, :tag_list, post_category_ids: [], 
         translations_attributes: [:id, :locale, :title, :body, :excerpt],
          photos_attributes: [:id, :filename, :title, :credit, :_destroy],
           attachments_attributes: [:id, :documenttype_id, :attachedfile, 
