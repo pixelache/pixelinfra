@@ -418,6 +418,7 @@ fi:
   space_now_available: 'Tilaa nyt tarjolla:'
   hide_map: 'Hide map'
   multiple_events_here: 'Multiple events here:'
+  see_all_news: 'See all news...'
   livingspaces:
     about: 'Lisätietoja'
     locations: 'Kohteet'

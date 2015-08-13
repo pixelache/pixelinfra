@@ -42,13 +42,13 @@ Pixelinfra::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 end
 
-module ActionView
-  module Helpers
-    module AssetTagHelper
-      def image_tag(source, options = {})
-        options[:src] = "#{source}".gsub(/development/, 'production')
-        tag("img", options)
-      end
-    end
-  end
-end
+# module ActionView
+#   module Helpers
+#     module AssetTagHelper
+#       def image_tag(source, options = {})
+#         options[:src] = "#{source}".gsub(/development/, 'production')
+#         tag("img", options)
+#       end
+#     end
+#   end
+# end

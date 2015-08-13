@@ -646,6 +646,44 @@ footer {
   margin: 12px 0 0 0!important;
 }
 
+.news_container {
+  padding: 2rem 0;
+  border-top: 2px solid black;
+  .news_image {
+    border-bottom: 4px solid $festival-orange;
+    margin-bottom: 1rem;
+  }
+  .text_box {
+    .title {
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      font-weight: 300;
+      margin-bottom: 0.6rem;
+      a { color: #444; 
+        &:hover {
+          color: $festival-orange;
+        }
+      }
+    }
+    .body, .body p {
+      color: #444;
+      font-weight: 300;
+      font-size: 0.9rem;
+
+    }
+  }
+  .more_news {
+    margin: 1rem 0 2rem 0;
+    font-weight: 300;
+    a {
+      color: $festival-blue;
+      &:hover {
+        color: $festival-orange;
+      }
+    }
+  }
+}
+
 .posts_index_container {
   padding-top: 2rem;
   h2 {

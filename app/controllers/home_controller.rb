@@ -29,6 +29,8 @@ class HomeController < ApplicationController
 
       # @frontitems = Frontitem.by_site(@site.id).order(:position)
       @archive = Archivalimage.random(1).first
+    elsif @site.name == 'livingspaces'
+      @posts = Post.by_festival(@site.festival).published.order(published_at: :desc).limit(3)
     elsif @site.name == 'olsof'
       @feed = Feed.by_subsite(@site.id).created.order('fed_at DESC').page(params[:page]).per(6)
     end

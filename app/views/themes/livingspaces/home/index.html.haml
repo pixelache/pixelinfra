@@ -16,7 +16,25 @@
       - else
         = render :partial => fi.frontmodule.partial_name, :locals => {:front => fi, index: index}
 
+.overlapping_divider
+  .text= t :news
 
+.news_container
+  .row{:"data-equalizer" => ''}
+    - @posts.each_with_index do |news, index|
+      .small-10.medium-6.large-4.columns{class: @posts[index+1].nil? ? :end : false, :"data-equalizer-watch" => ''}
+        .news_image
+          - if news.image?
+            = image_tag news.image.url(:box)
+        .text_box
+          .title= link_to news.title, news
+          .body
+            = raw truncate_html(sanitize(news.body, tags: %w{em b bold strong i italic u underline br a }), length: 250)
+            = link_to ' >>>', news
+  .row
+    .small-12.small-centered.text-center
+      .more_news= link_to t(:see_all_news), posts_path
+          
 .overlapping_divider 
   .text= raw "Inside&sdot;Outside&sdot;In"
   
