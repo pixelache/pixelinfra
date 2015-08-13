@@ -53,7 +53,8 @@
         - else
           :plain
             var contentString#{p.id.to_s} = '<div class="infowindow_content">'+
-                  '<h4 class="firstHeading">#{escape_javascript(t(:multiple_events_here))}</h4>'+
+                  '<h4 class="firstHeading">#{p.name}</h4>'+
+                  '<h6>#{escape_javascript(t(:multiple_events_here))}</h6>'+
                   '<div class="bodyContent">';
           - p.events.published.by_festival(@festival).each do |e|
             :plain
