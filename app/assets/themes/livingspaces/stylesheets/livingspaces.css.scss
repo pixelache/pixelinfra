@@ -584,16 +584,68 @@ footer {
 }
 
 .inside_out_container {
-  margin: -9rem 0 0 0;
-  min-height: 930px;
-  .left_half {
-    float: left;
-    width: 50%;
-    #mapcontainer {
-      width: 100%;
-      height: 750px;  
+  padding: 4rem 0 0 0;
+
+  .short_description {
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 4px solid $festival-orange;
+  }
+  .activities {
+    .title {
+      text-transform: uppercase;
+      font-family: $quicksand;
+      font-weight: 300;
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        font-size: 1.1rem;
+        list-style-type: none;
+        a {
+          color: $festival-orange;
+        }
+        .experience_info {
+          margin-left: 1rem;
+          display: none;
+          padding-bottom: 1.5rem;
+          p {
+            margin: 0;
+            font-size: 0.75rem;
+            color: #444;
+            line-height: 1.2rem;
+            font-weight: 300;
+          }
+        }
+      }
     }
   }
+  .submit_button {
+    margin: 2.5rem 0;
+    a.btn {
+      border: 2px solid $festival-blue;
+      padding:  0.8rem;
+      cursor: pointer;
+      font-family: $quicksand;
+      text-transform: uppercase;
+      background: none;
+      color: $festival-blue;
+
+      font-size: 1.1rem;
+      &:hover {
+        border: 2px solid $festival-orange;
+        color: $festival-orange;
+      }
+    }
+  }
+    #mapcontainer {
+      width: 100%;
+      height: 450px;  
+    }
+
   
   .right_half {
     padding: 4.5rem 1.5rem;
@@ -607,16 +659,7 @@ footer {
           color: $festival-orange;
           &:hover { color: $festival-blue;}
         }
-        .experience_info {
-          display: none;
-          p {
-            margin: 0;
-            font-size: 0.75rem;
-            color: #444;
-            line-height: 1.2rem;
-            font-weight: 300;
-          }
-        }
+
       }
     }
   }

@@ -19,7 +19,10 @@
               .small-12.columns
                 %b= "Theme description/overview in #{t :locale_name, :locale => locale}"
                 = en.cktext_area :description
-
+            .row
+              .small-12.columns
+                %b= "Short theme description in #{t :locale_name, :locale => locale}"
+                = en.cktext_area :short_description
   .row
     .small-12.columns
       - if f.object.image?

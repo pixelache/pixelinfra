@@ -6,34 +6,59 @@
   .overlapping_divider 
     .text= @festivaltheme.name
 .inside_out_container
-  .left_half
-    #mapcontainer
+  .row
+    .columns.small-10.medium-7.small-centered
+      .short_description
+        = raw @festivaltheme.short_description
+      
+
+      .activities
+        .title Activities
     
-  .right_half
-    %h2 Activities
+        %ul
+          - @experiences.approved.sort_by(&:start_at).each do |exp|
+            %li
+              = link_to "#", onclick: "javascript:return false;" do
+                %span.symbol +
+                = exp.title
+                -#, '#', onclick: "javscript:$('#experience_#{exp.id.to_s}').slideToggle();$(this).html('sdgsdgds');return false;"
+              .experience_info[exp]
+                %p  
+                  %strong= t("livingspaces.where")
+                  = exp.location
+                %p
+                  %strong= t("livingspaces.when")
+                  = exp.start_at.strftime("%H:%M") + " - " + exp.end_at.strftime("%H:%M")
+                %p= exp.description
+                %p= link_to 'Show on map', '#', onclick: "javascript:google.maps.event.trigger(markers[#{exp.id.to_s}], 'click');return false;"
+  .row
+    .columns.small-12.small-centered.text-center
+      .submit_button= link_to "Create an event!", '/festivals/festival-2015/theme/helsinki-inside-out#register', class: :btn
     
-    %ul
-      - @experiences.approved.sort_by(&:start_at).each do |exp|
-        %li
-          = link_to exp.title + " >>", '#', onclick: "javscript:$('#experience_#{exp.id.to_s}').slideToggle();return false;"
-          .experience_info[exp]
-            %p  
-              %strong= t("livingspaces.where")
-              = exp.location
-            %p
-              %strong= t("livingspaces.when")
-              = exp.start_at.strftime("%H:%M") + " - " + exp.end_at.strftime("%H:%M")
-            %p= exp.description
-            %p= link_to 'Show on map', '#', onclick: "javascript:google.maps.event.trigger(markers[#{exp.id.to_s}], 'click');return false;"
-    %h2= link_to "Create an event!", '/festivals/festival-2015/theme/helsinki-inside-out#register'
-  
+  #mapcontainer  
+    
     = content_for :jquery do
       :plain
+        $(".activities ul li").click(function () {
+          //$(".activities > ul >li").not($(this).siblings()).slideUp();
+             $(this).children('.experience_info').slideToggle();
+
+             // toggle open/close symbol
+             if($(this).find('span.symbol').text() == '-'){
+               $(this).find('span.symbol').text('+');   
+             } else {
+               $(this).find('span.symbol').text('-');
+             }
+        }).on('click','.experience_info',function(e) {
+          e.stopPropagation();
+        });;
+      
         var gmarkers = [];
         function initialize() {
           var myLatlng = new google.maps.LatLng(60.186349, 24.971247);
           var myOptions = { zoom: 13, 
                 center: myLatlng,
+                scrollwheel: false,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text","stylers":[{"visibility":"on"},{"color":"#ec9f43"},{"weight":"0.01"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#f0d8bc"},{"lightness":"0"}]},{"featureType":"landscape","elementType":"labels.text","stylers":[{"weight":"0.64"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"visibility":"on"},{"weight":"1"},{"lightness":"63"},{"color":"#dfc4a3"}]},{"featureType":"poi","elementType":"labels","stylers":[{"color":"#ec9f43"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#f4c58e"},{"lightness":"1"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#ec870f"},{"weight":"0.62"},{"lightness":"53"}]},{"featureType":"road.highway","elementType":"labels.text","stylers":[{"visibility":"on"},{"color":"#c7cece"},{"weight":"0.01"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"weight":"0.01"}]},{"featureType":"road.highway","elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"},{"visibility":"on"},{"weight":"0.01"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#bfdbf1"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#cde1f0"},{"lightness":"-3"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"weight":"0.25"},{"color":"#888d8d"}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"weight":"0.80"}]}]
              }
@@ -45,8 +70,8 @@
       - @experiences.each do |e|
         :plain
           var contentString#{e.id.to_s} = '<div id="content">'+
-                '<h3 id="firstHeading" class="firstHeading">#{escape_javascript(e.title)}</h3>'+
-                '<div id="bodyContent">'+
+                '<h4 id="firstHeading" class="firstHeading">#{escape_javascript(e.title)}</h4>'+
+                '<div class="bodyContent">'+
                 '<p>#{escape_javascript(e.description)}</p>'+
                 '<p>Where: #{e.location}</p>'+
                 '<p>When: #{e.start_at.strftime("%H:%M")} - #{e.end_at.strftime("%H:%M")}</p>'+

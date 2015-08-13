@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802161030) do
+ActiveRecord::Schema.define(version: 20150813153348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -411,12 +411,13 @@ ActiveRecord::Schema.define(version: 20150802161030) do
   add_index "festivaltheme_relations", ["relation_id", "relation_type"], name: "index_festivaltheme_relations_on_relation_id_and_relation_type", using: :btree
 
   create_table "festivaltheme_translations", force: :cascade do |t|
-    t.integer  "festivaltheme_id",             null: false
-    t.string   "locale",           limit: 255, null: false
+    t.integer  "festivaltheme_id",              null: false
+    t.string   "locale",            limit: 255, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name",             limit: 255
+    t.string   "name",              limit: 255
     t.text     "description"
+    t.text     "short_description"
   end
 
   add_index "festivaltheme_translations", ["festivaltheme_id"], name: "index_festivaltheme_translations_on_festivaltheme_id", using: :btree
