@@ -34,6 +34,28 @@
   .row
     .small-12.small-centered.text-center
       .more_news= link_to t(:see_all_news), posts_path
+
+.overlapping_divider 
+  .text= t("livingspaces.the_tram")
+  
+.tram
+  .left
+    = image_tag theme_image_path('bluetram.png')
+  .right
+    .row
+      .small-12.columns
+        %h4= raw t("livingspaces.our_festival_centre")
+    
+        .blurb
+          %p
+            = t "livingspaces.tram_blurb" 
+            %br/
+            = link_to t(:read_more) + ' >>>', '/festivals/festival-2015/tram-installations-presented-by-kruks'
+
+      
+        .blurb
+          %p= raw t("livingspaces.taidelinja", href: link_to(t("livingspaces.taidelinja_project"), 'http://www.taidelinja.fi/'))
+        
           
 .overlapping_divider 
   .text= raw "Inside&sdot;Outside&sdot;In"
@@ -59,27 +81,7 @@
       %p
         = link_to t("livingspaces.submit_an_activity") + ' >>>', '/festivals/festival-2015/theme/helsinki-inside-out'
 
-.overlapping_divider 
-  .text= t("livingspaces.the_tram")
-  
-.tram
-  .left
-    = image_tag theme_image_path('bluetram.png')
-  .right
-    .row
-      .small-12.columns
-        %h4= raw t("livingspaces.our_festival_centre")
-    
-        .blurb
-          %p
-            = t "livingspaces.tram_blurb" 
-            %br/
-            = link_to t(:read_more) + ' >>>', '/festivals/festival-2015/tram-installations-presented-by-kruks'
 
-      
-        .blurb
-          %p= raw t("livingspaces.taidelinja", href: link_to(t("livingspaces.taidelinja_project"), 'http://www.taidelinja.fi/'))
-        
 
 .overlapping_divider 
   .text= t("livingspaces.partners_and_support")
