@@ -25,7 +25,7 @@
       .small-10.medium-6.large-4.columns{class: @posts[index+1].nil? ? :end : false, :"data-equalizer-watch" => ''}
         .news_image
           - if news.image?
-            = image_tag news.image.url(:box)
+            = image_tag news.image.url
         .text_box
           .title= link_to news.title, news
           .body
