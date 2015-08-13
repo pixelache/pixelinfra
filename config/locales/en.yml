@@ -446,6 +446,7 @@ en:
   free_entrance: 'Free entrance'
   space_now_available: 'Space now available:'
   hide_map: 'Hide map'
+  multiple_events_here: 'Multiple events here:'
   livingspaces:
     about: 'About'
     locations: 'Locations'

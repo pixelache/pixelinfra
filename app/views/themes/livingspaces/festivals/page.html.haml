@@ -34,35 +34,50 @@
           map = new google.maps.Map(document.getElementById('mapcontainer'), myOptions);
           var bounds = new google.maps.LatLngBounds();
         
-      - @festival.events.published.each do |e|
-        - next unless e.place
-        - next unless e.place.latitude
-        - next if e.location_tbd == true
-        - next if e.place.slug =~ /^various-locations/
-        :plain
-          var contentString#{e.id.to_s} = '<div class="infowindow_content">'+
-                '<h4 class="firstHeading">#{escape_javascript(e.name)}</h4>'+
-                '<div class="bodyContent">'+
-                '<p>#{escape_javascript(truncate_html(e.description, :length => 150))}'+
-                '<a href="#{url_for(e)}" target="blank">#{t(:read_more)}</a></p>'+
-                '<p>Where: #{e.place.name}</p>'+
-                '<p>When: #{date_range(e.start_at, e.end_at)}</p>'+
-                '</div>'+
-                '</div>';
-          var infowindow#{e.id.to_s} = new google.maps.InfoWindow({
-                content: contentString#{e.id.to_s},
-                maxWidth: 350
-          });                
-          var ll#{e.id.to_s} =  new google.maps.LatLng(#{e.place.latitude}, #{e.place.longitude});
-          bounds.extend(ll#{e.id.to_s});
-          var marker#{e.id.to_s} = new google.maps.Marker({  position: ll#{e.id.to_s}, map: map, 
-            icon: '/assets/livingspaces/images/pin.png',
-            title: '#{escape_javascript(e.name)}'  });
-          gmarkers[#{e.id.to_s}] = marker#{e.id.to_s};
-          google.maps.event.addListener(marker#{e.id.to_s}, 'click', function() {
-            infowindow#{e.id.to_s}.open(map,marker#{e.id.to_s});
-          });
-          
+      - @festival.events.published.map(&:place).compact.uniq.each do |p|
+        - next unless p.latitude
+        - next unless p.city =~ /Helsinki/i || p.city =~ /Espoo/i || p.city == /Vantaa/i
+        - next if p.slug =~ /^various-locations/
+        - if p.events.published.by_festival(@festival).size == 1
+          - e = p.events.first
+          :plain
+            var contentString#{p.id.to_s} = '<div class="infowindow_content">'+
+                  '<h4 class="firstHeading">#{escape_javascript(e.name)}</h4>'+
+                  '<div class="bodyContent">'+
+                  '<p>#{escape_javascript(truncate_html(e.description, :length => 150))}'+
+                  '<a href="#{url_for(e)}" target="blank">#{t(:read_more)}</a></p>'+
+                  '<p>Where: #{e.place.name}</p>'+
+                  '<p>When: #{date_range(e.start_at, e.end_at)}</p>'+
+                  '</div>'+
+                  '</div>';
+        - else
+          :plain
+            var contentString#{p.id.to_s} = '<div class="infowindow_content">'+
+                  '<h4 class="firstHeading">#{escape_javascript(t(:multiple_events_here))}</h4>'+
+                  '<div class="bodyContent">';
+          - p.events.published.by_festival(@festival).each do |e|
+            :plain
+              contentString#{p.id.to_s} += '<div><p>#{date_range(e.start_at, e.end_at)}: #{escape_javascript(e.name)}'+
+              ' <a href="#{url_for(e)}" target="blank">#{t(:read_more)}</a></p>'+
+              '</div>';
+          :plain  
+            contentString#{p.id.to_s} += '</div>';
+        :plain                  
+          var infowindow#{p.id.to_s} = new google.maps.InfoWindow({
+                  content: contentString#{p.id.to_s},
+                  maxWidth: 350
+            });                
+            var ll#{p.id.to_s} =  new google.maps.LatLng(#{p.latitude}, #{p.longitude});
+            bounds.extend(ll#{p.id.to_s});
+            var marker#{p.id.to_s} = new google.maps.Marker({  position: ll#{p.id.to_s}, map: map, 
+              icon: '/assets/livingspaces/images/pin.png',
+              title: '#{escape_javascript(p.name)}'  });
+            gmarkers[#{p.id.to_s}] = marker#{p.id.to_s};
+            google.maps.event.addListener(marker#{p.id.to_s}, 'click', function() {
+              infowindow#{p.id.to_s}.open(map,marker#{p.id.to_s});
+            });
+
+              
       - if @festival.festivalthemes.find('helsinki-inside-out')
         - experiences = @festival.festivalthemes.find('helsinki-inside-out').experiences.approved
           - unless experiences.blank?

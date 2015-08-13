@@ -417,6 +417,7 @@ fi:
   free_entrance: 'Ilmainen sisäänpääsy!'
   space_now_available: 'Tilaa nyt tarjolla:'
   hide_map: 'Hide map'
+  multiple_events_here: 'Multiple events here:'
   livingspaces:
     about: 'Lisätietoja'
     locations: 'Kohteet'
