@@ -43,7 +43,8 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
     position: relative;
     margin: 0px;
     margin-top: 8px;
-    
+    float: right;
+    padding: 0;
   }
   
   .ls-menu {
@@ -150,7 +151,72 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
   }
 }
 
+// tablet portrait mode 
+
+@media #{$portrait} {
+  nav.top-bar {
+    ul.title-area {
+      li {
+        line-height: 1.5rem;
+      }
+    }
+    li.dates {
+      clear: left;
+    }
+    #menu {
+      ul.right {
+        float: left !important;
+        margin-left: 1.2rem;
+        max-width: 70%;
+        li {
+          padding-right: 0.5rem;
+          a {
+            padding: 0 0.5rem;
+          }
+        }
+        li.lang {
+
+          font-size: 0.8rem;
+          a { font-size: 0.8rem; }
+          padding-right: 0.3rem;
+          padding-left: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
 @media #{$medium-only} { 
+
+  nav.top-bar {
+    ul.title-area {
+      line-height: 3.125rem;
+      li {
+        font-size: 0.8rem;
+      }
+      li.name
+      {
+        font-size: 0.9rem;
+        height: 1.5rem;
+      }
+    }
+    #menu {
+      ul.right {
+        li {
+          font-size: 0.5rem;
+        }
+      }
+    }
+    
+  }
+//  .top-bar .toggle-topbar.menu-icon {
+//    display: block;
+//    position: relative;
+//    margin: 0px;
+//    margin-top: 8px;
+//    float: right;
+//    padding: 0;
+//  }
   footer {
     .address {
       font-size: 0.5rem;

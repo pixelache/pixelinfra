@@ -44,13 +44,15 @@
                   %span.name Pixelache 2015:
                   %em Living Spaces
                   %br/
-                  %span.name 23-27 September, Helsinki
-              %li.hide-for-small-only.right 23-27 September, Helsinki
+                  %span.name.dates 23-27 September, Helsinki
+              %li.show-for-large-only.right.dates 23-27 September, Helsinki
+              %li.show-for-medium-only.dates 23-27 September, Helsinki
               %li.toggle-topbar.menu-icon
                 %a{:href => "#"}
                   %span
-            %section.top-bar-section
+            %section.top-bar-section#menu
               %ul.right
+
                 %li= link_to t("livingspaces.about"), festival_page_festival_path('festival-2015', 'about')
                 %li= link_to t("livingspaces.programme"), festival_page_festival_path('festival-2015','programme')
                 %li= link_to t(:news), posts_path
