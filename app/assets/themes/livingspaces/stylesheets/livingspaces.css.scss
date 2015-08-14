@@ -793,3 +793,39 @@ footer {
     }
   }
 }
+
+.posts_index_container {
+  .post_row {
+    .post_image {
+      .gray {
+        .excerpt {
+          color: $festival-blue;
+        }
+      }
+    }
+    .lower {
+      .metadata {
+        span.date {
+          color: #444;
+          font-weight: 300;
+          font-size: 0.8rem;
+        }
+      }
+      .text_box {
+        .title {
+          font-size: 1.3rem;
+          line-height: 1.75rem;
+          text-transform: uppercase;
+          font-weight: 300;
+          margin-bottom: 0rem;
+          a { color: #444; 
+            &:hover {
+              color: $festival-orange;
+            }
+          }
+        }
+
+      }
+    }
+  }
+}

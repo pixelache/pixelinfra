@@ -1,0 +1,34 @@
+.row
+  .small-12.columns
+    %h2
+      Proposal for
+      = "#{@experience.festivaltheme.name}: "
+      = @experience.name
+  
+    %p
+      Contact:
+      = @experience.email
+      = ' / '
+      = @experience.phone
+    %p
+      Type:
+      - case @experience.experience_type 
+        - when 0
+          experience
+        - when 1
+          place
+        - when 2
+          experience AND place
+    %p= @experience.when_text
+    %p= @experience.try(:title)
+    %p= raw @experience.description
+    - unless @experience.start_at.blank?
+      %p= date_range(@experience.start_at, @experience.end_at)
+    %p= @experience.try(:location)
+    %p= @experience.try(:special_instructions)
+    %p= @experience.try(:other_activities)
+    %p= @experience.approved == true ? "approved" : (@experience.approved == false ? "not approved" : "not yet approved")
+    - if can? :edit, @experience
+      = link_to t(:edit), edit_admin_festival_festivaltheme_experience_path(@experience.festivaltheme.festival, @experience.festivaltheme, @experience), class: [:button, :round, :tiny]
+    - if can? :destroy, @experience
+      = link_to t(:delete), [:admin, @experience.festivaltheme.festival, @experience.festivaltheme, @experience], method: :delete, data: {confirm: t(:are_you_sure)}, class: [:button, :round, :tiny, :alert]  
