@@ -436,6 +436,10 @@ footer {
           clear: both;
           margin-bottom: 1.3rem;
           line-height: 1.5rem;
+          small {
+            font-size: 75%;
+            font-weight: 400;
+          }
           ul {
             margin-left: 3rem;
             li {
