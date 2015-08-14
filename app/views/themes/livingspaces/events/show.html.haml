@@ -26,7 +26,7 @@
 
         .small-12.columns.text-center.cost.small-centered
           - if @event.cost
-            = number_to_currency(@event.cost)
+            = number_to_currency(@event.cost, format: "%n%u", unit: raw("&euro;"))
           - else
             = t :free_entrance
         - unless @event.place.latitude.blank?
