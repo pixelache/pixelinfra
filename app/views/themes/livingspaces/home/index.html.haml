@@ -5,7 +5,7 @@
       = image_tag theme_image_path('caption.png')
   
 .overlapping_divider 
-  .text= t :programme
+  .text= link_to  t(:programme), page_path('programme')
   
 .programme_carousel
   - @frontitems.shuffle.each_with_index do |fi, index|
@@ -22,7 +22,7 @@
 .news_container
   .row{:"data-equalizer" => ''}
     - @posts.each_with_index do |news, index|
-      .small-10.medium-6.large-4.columns{class: @posts[index+1].nil? ? :end : false, :"data-equalizer-watch" => ''}
+      .small-12.medium-6.large-4.post.columns{class: @posts[index+1].nil? ? "hide-for-medium-only end" : false,  :"data-equalizer-watch" => ''}
         .news_image
           - if news.image?
             = image_tag news.image.url

@@ -159,6 +159,12 @@ nav.livingspaces {
     left: -50%;
     margin-top: -25px;
     font-family: $quicksand;
+    a { 
+      color: #444;
+      &:hover { 
+        color: $festival-blue;
+      }
+    }
   }
 }
 

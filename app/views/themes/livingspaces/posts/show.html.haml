@@ -5,7 +5,7 @@
     .text= t :news
     
   .post_inner.row.outer{class: @post.festival ? :festival : false}
-    .columns.small-10.medium-7.small-centered
+    .columns.small-12.medium-7.small-centered
       - if @post.image?
         .carousel_post_container
           .carousel_post
@@ -13,38 +13,38 @@
             - unless @post.photos.blank?
               .slide= image_tag @post.photos.first.filename.url
             
-    .columns.small-10.medium-7.small-centered
+    .columns.small-12.medium-7.small-centered
       .post_title= @post.title
-    .columns.small-10.medium-7.small-centered  
+    .columns.small-12.medium-7.small-centered  
       .post_body= raw @post.body
       
       - if @post.registration_required?
         #registration_form.row
-          .columns.small-10.medium-7.small-centered  
+          .columns.small-12.medium-7.small-centered  
           %h2= t "livingspaces.register_to_participate"
           - if @post.max_attendees
             %p= pluralize_sentence(@post.max_attendees - @post.attendees.not_waiting.size, "workshop_place_count")                  
                     
           = semantic_form_for([@post, @attendee = Attendee.new], html: {:"data-abide" => ''}) do |f|
             .row
-              .small-10.columns= f.input :name, label: 'Your name:', input_html: {required: :required}
+              .small-12.columns= f.input :name, label: 'Your name:', input_html: {required: :required}
             .row
-              .small-10.columns= f.input :email, label: 'Your email:', input_html: {required: :required}              
+              .small-12.columns= f.input :email, label: 'Your email:', input_html: {required: :required}              
             .row
-              .small-10.columns= f.input :phone, label: 'Your phone number:', input_html: {required: :required}
+              .small-12.columns= f.input :phone, label: 'Your phone number:', input_html: {required: :required}
             - unless @post.question_motivation.blank?
               .row
-                .small-10.columns= f.input :motivation_statement, label: @post.question_motivation, input_html: {required: :required}
+                .small-12.columns= f.input :motivation_statement, label: @post.question_motivation, input_html: {required: :required}
             - unless @post.question_creators.blank?
               .row
-                .small-10.columns= f.input :project_creators, label: @post.question_creators, input_html: {required: :required}
+                .small-12.columns= f.input :project_creators, label: @post.question_creators, input_html: {required: :required}
             - unless @post.question_description.blank?
               .row
-                .small-10.columns= f.input :project_description, label: @post.question_description, input_html: {required: :required}
+                .small-12.columns= f.input :project_description, label: @post.question_description, input_html: {required: :required}
             .row
-              .small-10.columns= recaptcha_tags hl: I18n.locale.to_s, :display => { :theme => 'clean' }
+              .small-12.columns= recaptcha_tags hl: I18n.locale.to_s, :display => { :theme => 'clean' }
             .row
-              .small-10.columns= f.submit 'Submit'      
+              .small-12.columns= f.submit 'Submit'      
 
 - unless @post.photos.blank?    
   = content_for :jquery do

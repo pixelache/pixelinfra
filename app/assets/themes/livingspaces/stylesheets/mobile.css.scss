@@ -17,14 +17,133 @@ $small-only: "#{$screen} and (max-width: #{upper-bound($small-range)})" !default
 
 $medium-up: "#{$screen} and (min-width:#{lower-bound($medium-range)})" !default;
 $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max-width:#{upper-bound($medium-range)})" !default;
-
+$medium-portrait-only:"#{$screen} and (orientation: portrait) and (min-width:#{lower-bound($medium-range)}) and (max-width:#{upper-bound($medium-range)})" !default;
 
 @media #{$small-up} { 
 
 }
 
 @media #{$small-only} { 
+
+  #recaptcha_challenge_image{
+   margin: 0 !important;
+   width: 100% !important;
+   }
+   #recaptcha_response_field
+   {
+   margin: 0 !important;
+   width: 100% !important;
+   }
+   .recaptchatable #recaptcha_image {
+   margin: 0 !important;
+   width: 100% !important;
+   }
+   .recaptchatable .recaptcha_r1_c1, 
+   .recaptchatable .recaptcha_r3_c1, 
+   .recaptchatable .recaptcha_r3_c2, 
+   .recaptchatable .recaptcha_r7_c1, 
+   .recaptchatable .recaptcha_r8_c1, 
+   .recaptchatable .recaptcha_r3_c3, 
+   .recaptchatable .recaptcha_r2_c1, 
+   .recaptchatable .recaptcha_r4_c1, 
+   .recaptchatable .recaptcha_r4_c2, 
+   .recaptchatable .recaptcha_r4_c4, 
+   .recaptchatable .recaptcha_image_cell {
+
+   margin: 0 !important;
+   width: 100% !important;
+   background: none !important;
+   }
   
+  form {
+    .label {
+      white-space: normal;
+      text-align: left;
+    }
+  }
+  
+  .inside_out_container {
+    padding: 1.5rem 0 0rem 0;
+  }
+  .news_container {
+    padding: 2rem 0.5rem;
+    .post {
+      margin-bottom: 2.5rem;
+      .text_box {
+        .title {
+          font-size: 1.1rem;
+          line-height: 1.6rem;
+        }
+        .body {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+  .page, .theme, .post_single, .event_single {
+    .post_inner, .event_inner {
+      padding: 2.5rem 0 5rem 0;
+      .metadata {
+        .date, .location {
+          font-size: 1rem;
+        }
+      }
+      h2 {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+      }
+      ul, ol {
+        li {
+          font-size: 0.8rem;
+        }
+      }
+    }
+    .post_row {
+      .post_small {
+        margin-bottom: 2rem;
+      }
+    }
+    
+    .programme, .theme-text {
+      h2 {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+      }
+      
+      .body-bottom {
+        padding: 2.5rem 0 5rem 0;
+        h2 {
+          font-size: 1.2rem;
+          margin-top: 1rem;
+          padding-top: 1rem;
+        }
+
+        ul, ol {
+          li {
+            font-size: 0.9rem;
+            kbd {
+              width: 100%;
+              font-size: 1rem;
+              clear: both;
+              max-height: 25px;
+              text-align: left;
+            }
+          }
+        }
+      }
+      
+    }
+    .carousel {
+      .slide {
+        min-height: 150px;
+      }
+    }
+
+  }
+  
+
   nav.livingspaces {
     ul {
       height: 2.9rem;
@@ -41,12 +160,17 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
   }
   .top-bar .toggle-topbar.menu-icon {
     position: relative;
-    margin: 0px;
-    margin-top: 8px;
+    margin: 8px 16px 0 0;
     float: right;
     padding: 0;
+    height: 34px;
+    line-height: 33px;
   }
-  
+
+  p {
+    font-size: 0.8rem;
+    line-height: 1.3rem;
+  }
   .ls-menu {
     ul {
       padding: 0;
@@ -72,11 +196,9 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
   .overlapping_divider {
     z-index: 98;
     .text {
-
-      background-position-y: 2.4rem;
       z-index: 22;
-      padding: 0.8rem 0.8rem 1rem 0.8rem;
-      font-size: 1.125rem;
+      padding: 0.8rem 0.5rem 0.7rem 0.5rem;
+      font-size: 0.9rem;
     }
   }
   .inside_out_in {
@@ -85,6 +207,7 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
   
   .tram {
     height: auto;
+    padding-bottom: 0;
     .left {
       width: 100%;
     }
@@ -94,10 +217,12 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
       padding: 1.5rem 0.8rem 3rem 0.8rem;
     }
   }
+  
   .programme_carousel {
     max-height: 220px;
     .slick-slide img { width: 100%; min-height: 220px;}
   }
+  
   .livingspaces {
     &.front_module {
       .wrapper_wrapper {
@@ -153,7 +278,7 @@ $medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max
 
 // tablet portrait mode 
 
-@media #{$portrait} {
+@media #{$medium-portrait-only} {
   nav.top-bar {
     ul.title-area {
       li {

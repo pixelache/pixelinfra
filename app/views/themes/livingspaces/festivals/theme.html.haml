@@ -7,7 +7,7 @@
     .text= @festivaltheme.name
 
   .row.theme-text
-    .columns.small-10.medium-7.small-centered
+    .columns.small-12.medium-7.small-centered
       = raw @festivaltheme.description
       - if @festivaltheme.slug == 'helsinki-inside-out'
         #register
@@ -18,7 +18,7 @@
     .row.experience_form
     
       = semantic_form_for([@festival, @festivaltheme, Experience.new], html: {:"data-abide" => ''}) do |f|
-        .columns.small-10.medium-7.small-centered
+        .columns.small-12.medium-7.small-centered
           .row
             .small-10.columns= f.input :festivaltheme_id, data: {value: @festivaltheme.id}, as: :hidden
           .row
@@ -40,6 +40,6 @@
           .row
             .small-10.columns= f.input :special_instructions, label: 'Are there any special instructions for people who wish to attend?'
           .row
-            .small-10.columns= recaptcha_tags  hl: I18n.locale.to_s
+            .small-12.columns= recaptcha_tags  hl: I18n.locale.to_s
           .row
             .small-10.columns= f.submit 'Submit'
