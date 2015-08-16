@@ -64,7 +64,24 @@ class PostsController < ApplicationController
 
       render template: 'posts/ajax_post', layout: false
     else
-      set_meta_tags :title => @post.title
+      # build translation alternates in URL
+      if @post.body(:en) != @post.body(:fi)
+        a = Hash.new
+        a["en"] = url_for(@post) + "?locale=en"
+        a["fi"] = url_for(@post) + "?locale=fi"
+      else
+        a = {}
+      end
+
+      
+      set_meta_tags :title => @post.title, 
+                    canonical: url_for(@post),
+                    og: {image: (@post.image? ? @post.image.url(:box) : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
+                          title: @post.title, type: 'website', url: url_for(@post)
+                        }, 
+                    twitter: {card: 'summary', site: '@pixelache'},
+                    alternate: a
+        
       if @post.festival
         @festival = @post.festival
  
