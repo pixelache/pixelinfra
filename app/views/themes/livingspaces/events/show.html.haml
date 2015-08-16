@@ -1,3 +1,6 @@
+= content_for :description do
+  = truncate(strip_tags(@event.description), length: 200)
+  
 .event_single
   - if @event.image?
     .carousel

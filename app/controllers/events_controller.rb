@@ -43,7 +43,23 @@ class EventsController < InheritedResources::Base
     if request.xhr?
       render :template => 'events/ajax_event', layout: false
     end
-    set_meta_tags :title => @event.name
+    if @event.description(:en) != @event.description(:fi)
+      a = Hash.new
+      a["en"] = url_for(@event) + "?locale=en"
+      a["fi"] = url_for(@event) + "?locale=fi"
+    else
+      a = {}
+    end
+
+    
+    set_meta_tags :title => @event.name, 
+                  canonical: url_for(@event),
+                  og: {image: (@event.image? ? @event.image.url(:box) : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
+                        title: @event.name, type: 'website', url: url_for(@event)
+                      }, 
+                  twitter: {card: 'summary', site: '@pixelache'},
+                  alternate: a
+
   end
   
 end
