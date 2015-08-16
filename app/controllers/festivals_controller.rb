@@ -43,7 +43,22 @@ class FestivalsController < InheritedResources::Base
         redirect_to festival_page_festival_url(@festival.slug, @page.friendly_id, subdomain: @festival.subsite.subdomain)
       end
     end
-    set_meta_tags :title => [@festival.name, @page.name].join(" - ")
+    # build translation alternates in URL
+    if @page.body(:en) != @page.body(:fi)
+      a = Hash.new
+      a["en"] = url_for(@page) + "?locale=en"
+      a["fi"] = url_for(@page) + "?locale=fi"
+    else
+      a = {}
+    end
+    set_meta_tags title: (@festival.subsite ? @page.name : [@festival.name, @page.name].join(" - ") ),
+    canonical: url_for(@page),
+      og: {image: (@page.photos.empty? ? 'http://pixelache.ac/assets/pixelache/images/PA_logo.png' :[@page.photos.map{|x| x.filename.url(:box)}, {secure_url: @page.photos.map{|x| x.filename.url(:box)} } ]), 
+            title: @page.name, type: 'website', url: url_for(@page)
+          }, 
+      twitter: {card: 'summary', site: '@pixelache'},
+      alternate: a
+    
   end
   
   def show

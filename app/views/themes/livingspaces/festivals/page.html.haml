@@ -1,3 +1,5 @@
+= content_for :description do
+  = truncate(strip_tags(@page.body), length: 200)
 .page{class: @page.slug}
   .carousel
     - unless @page.photos.blank?

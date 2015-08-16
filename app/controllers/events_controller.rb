@@ -54,7 +54,7 @@ class EventsController < InheritedResources::Base
     
     set_meta_tags :title => @event.name, 
                   canonical: url_for(@event),
-                  og: {image: (@event.image? ? @event.image.url(:box) : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
+                  og: {image: (@event.image? ? [@event.image.url(:box), {secure_url: @event.image.url(:box) }] : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
                         title: @event.name, type: 'website', url: url_for(@event)
                       }, 
                   twitter: {card: 'summary', site: '@pixelache'},

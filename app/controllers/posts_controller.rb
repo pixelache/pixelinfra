@@ -35,8 +35,13 @@ class PostsController < ApplicationController
           @posts = Post.by_festival(@site.festival).published.order(published_at: :desc).page(params[:page]).per(12)
         end
       end
-      set_meta_tags title: t(:news)
-
+      set_meta_tags title: t(:news),
+        canonical: posts_url,
+        og: {image:'http://pixelache.ac/assets/pixelache/images/PA_logo.png', 
+              title: t(:news), type: 'website', url: posts_path
+            }, 
+        twitter: {card: 'summary', site: '@pixelache'},
+        alternate: {"en" => posts_url(locale: :en), "fi" => posts_url(locale: :fi)}
     end
   end
   
@@ -76,7 +81,7 @@ class PostsController < ApplicationController
       
       set_meta_tags :title => @post.title, 
                     canonical: url_for(@post),
-                    og: {image: (@post.image? ? @post.image.url(:box) : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
+                    og: {image: (@post.image? ?  [ @post.image.url(:box), { secure_url: @post.image.url(:box) } ] : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
                           title: @post.title, type: 'website', url: url_for(@post)
                         }, 
                     twitter: {card: 'summary', site: '@pixelache'},
