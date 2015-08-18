@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
   has_many :frontitems, as: :item, :dependent => :destroy
   belongs_to :residency
   has_many :photos, as: :item
-  has_many :attendees, as: :item
+  has_many :attendees, as: :item, dependent: :destroy
   has_many :archivalimages
   has_many :videos
   extend FriendlyId

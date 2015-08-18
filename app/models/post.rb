@@ -16,7 +16,7 @@ class Post < ActiveRecord::Base
   has_paper_trail
   mount_uploader :image, ImageUploader
   resourcify
-  has_many :attendees, as: :item
+  has_many :attendees, as: :item, dependent: :destroy
   has_many :feeds, :as => :item, :dependent => :delete_all
   include Feedable
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['title'].blank? || x['body'].blank? }
