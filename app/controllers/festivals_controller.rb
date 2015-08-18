@@ -53,7 +53,7 @@ class FestivalsController < InheritedResources::Base
     end
     set_meta_tags title: (@festival.subsite ? @page.name : [@festival.name, @page.name].join(" - ") ),
     canonical: url_for(@page),
-      og: {image: (@page.photos.empty? ? 'http://pixelache.ac/assets/pixelache/images/PA_logo.png' :[@page.photos.map{|x| x.filename.url(:box)}, {secure_url: @page.photos.map{|x| x.filename.url(:box)} } ]), 
+      og: {image: (@page.photos.empty? ? 'http://pixelache.ac/assets/pixelache/images/PA_logo.png' :[@page.photos.map{|x| x.filename.url(:standard).gsub(/^https/, 'http')}, {secure_url: @page.photos.map{|x| x.filename.url(:box)} } ]), 
             title: @page.name, type: 'website', url: url_for(@page)
           }, 
       twitter: {card: 'summary', site: '@pixelache'},

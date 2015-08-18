@@ -81,7 +81,7 @@ class PostsController < ApplicationController
       
       set_meta_tags :title => @post.title, 
                     canonical: url_for(@post),
-                    og: {image: (@post.image? ?  [ @post.image.url(:box), { secure_url: @post.image.url(:box) } ] : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
+                    og: {image: (@post.image? ?  [ @post.image.url(:standard).gsub(/^https/, 'http'), { secure_url: @post.image.url(:box) } ] : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
                           title: @post.title, type: 'website', url: url_for(@post)
                         }, 
                     twitter: {card: 'summary', site: '@pixelache'},
