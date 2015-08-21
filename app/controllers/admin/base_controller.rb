@@ -1,7 +1,7 @@
 class Admin::BaseController < InheritedResources::Base
   layout 'admin'
   before_filter :force_english
-  
+  before_filter :fix_subdomain unless Rails.env.development?
   before_filter :authenticate_user!
   #load_and_authorize_resource
   # check_authorization
@@ -9,6 +9,13 @@ class Admin::BaseController < InheritedResources::Base
   skip_before_filter :require_no_authentication
   before_filter :set_meta_tagz
   
+  def fix_subdomain
+    if Rails.env.production?
+      unless request.host == 'pixelache.ac' 
+        redirect_to host: 'pixelache.ac' and return
+      end
+    end
+  end
   
   def force_english
     I18n.locale = 'en'

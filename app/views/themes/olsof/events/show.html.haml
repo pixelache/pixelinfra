@@ -57,7 +57,23 @@
   .row
     .small-12.columns.large-10.large-offset-1
       .body= raw @event.description
-  
+  - unless @event.protocol.blank? && @event.resources_needed.blank? && @event.technologies.blank?
+    .row
+      .small-12.columns.large-10.large-offset-1
+        .olsof_info
+          - unless @event.protocol.blank?
+            %p
+              %strong Protocol:
+              = raw @event.protocol
+          - unless @event.resources_needed.blank?
+            %p
+              %strong Resources needed:
+              = raw @event.resources_needed
+          - unless @event.technologies.blank?
+            %p
+              %strong Technologies:
+              = raw @event.technology_list
+          
   - unless @event.posts.published.interviews.empty?
     .row
       .small-12.columns.large-10.large-offset-1
