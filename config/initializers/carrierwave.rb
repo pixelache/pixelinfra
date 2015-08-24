@@ -6,7 +6,7 @@ CarrierWave.configure do |config|
     }
     config.aws_acl    = :public_read
     # config.s3_region = 'eu-west-1'
-    config.aws_bucket  = "pixelache"
+    config.aws_bucket  = "pixelache-#{Rails.env.to_s}"
 
 
   # config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}  # optional, defaults to {}

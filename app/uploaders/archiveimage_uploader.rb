@@ -7,7 +7,7 @@ class ArchiveimageUploader < CarrierWave::Uploader::Base
   storage :aws
 
   def store_dir
-      "#{Rails.env.to_s}/images/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+      "images/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
   
   version :standard do
