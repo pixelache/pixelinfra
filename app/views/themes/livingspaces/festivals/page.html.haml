@@ -193,7 +193,7 @@
               origin: lat_lng[5],
               destination: lat_lng[8],
               waypoints: [ {location: lat_lng[6]}, {location: lat_lng[7]} ],
-              travelMode: google.maps.DirectionsTravelMode.DRIVING
+              travelMode: google.maps.DirectionsTravelMode.WALKING
           }, function (result, status) {
               if (status == google.maps.DirectionsStatus.OK) {
                   for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
