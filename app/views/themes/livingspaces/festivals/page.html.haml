@@ -159,9 +159,38 @@
 
           //Initialize the Direction Service
           var service = new google.maps.DirectionsService();
-
+          var lineSymbol = {
+              path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+            };
           //Set the Path Stroke Color
-          var poly = new google.maps.Polyline({ map: map, strokeColor: '#669D6B', strokeOpacity: '0.8' });
+          var poly = new google.maps.Polyline({ map: map, strokeColor: '#669D6B', strokeOpacity: '0.8',
+            icons: [{
+                 icon: lineSymbol,
+                 offset: '15%'
+               },
+               {
+                icon: lineSymbol,
+                offset: '30%'
+                },
+                {
+                icon: lineSymbol,
+                offset: '45%'
+                },
+                {
+                icon: lineSymbol,
+                offset: '60%'
+                },
+                {
+                icon: lineSymbol,
+                offset: '75%'
+                },
+                {
+                icon: lineSymbol,
+                offset: '90%'
+                }
+
+               ]
+             });
 
           //Loop and Draw Path Route between the Points on MAP -- first six stops
           // for (var i = 0; i < 5; i++) {
@@ -186,7 +215,34 @@
           // second loop change color 
           var path2 = new google.maps.MVCArray();
           var service2 = new google.maps.DirectionsService();
-          var poly2 = new google.maps.Polyline({ map: map, strokeColor: '#6DF378', strokeOpacity: '0.8' });
+          var poly2 = new google.maps.Polyline({ map: map, strokeColor: '#6DF378', strokeOpacity: '0.8' ,
+            icons: [{
+                 icon: lineSymbol,
+                 offset: '15%'
+               },
+               {
+                icon: lineSymbol,
+                offset: '30%'
+                },
+                {
+                icon: lineSymbol,
+                offset: '45%'
+                },
+                {
+                icon: lineSymbol,
+                offset: '60%'
+                },
+                {
+                icon: lineSymbol,
+                offset: '75%'
+                },
+                {
+                icon: lineSymbol,
+                offset: '90%'
+                }
+
+               ]
+          });
           path2.push(lat_lng[5]);
           poly2.setPath(path2);
           service.route({
@@ -206,7 +262,31 @@
           // third part of loop
           var path3 = new google.maps.MVCArray();
           var service3 = new google.maps.DirectionsService();
-          var poly3 = new google.maps.Polyline({ map: map, strokeColor: '#C2F36D', strokeOpacity: '0.8' });
+          var poly3 = new google.maps.Polyline({ map: map, strokeColor: '#C2F36D', strokeOpacity: '0.8',
+          icons: [{
+               icon: lineSymbol,
+               offset: '5%'
+             },
+             {
+              icon: lineSymbol,
+              offset: '25%'
+              },
+              {
+              icon: lineSymbol,
+              offset: '40%'
+              },
+              {
+              icon: lineSymbol,
+              offset: '70%'
+              },
+
+              {
+              icon: lineSymbol,
+              offset: '90%'
+              }
+
+             ]
+           });
           path3.push(lat_lng[8]);
           poly3.setPath(path3);
           service3.route({
@@ -225,7 +305,34 @@
           // last part of loop
           var path4 = new google.maps.MVCArray();
           var service4 = new google.maps.DirectionsService();
-          var poly4 = new google.maps.Polyline({ map: map, strokeColor: '#8FB056', strokeOpacity: '0.8' });
+          var poly4 = new google.maps.Polyline({ map: map, strokeColor: '#8FB056', strokeOpacity: '0.8',
+            icons: [{
+                 icon: lineSymbol,
+                 offset: '15%'
+               },
+               {
+                icon: lineSymbol,
+                offset: '30%'
+                },
+                {
+                icon: lineSymbol,
+                offset: '45%'
+                },
+                {
+                icon: lineSymbol,
+                offset: '60%'
+                },
+                {
+                icon: lineSymbol,
+                offset: '75%'
+                },
+                {
+                icon: lineSymbol,
+                offset: '90%'
+                }
+
+               ]
+            });
           path4.push(lat_lng[13]);
           poly4.setPath(path4);
           service4.route({
