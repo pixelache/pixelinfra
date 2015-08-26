@@ -24,7 +24,103 @@
       :plain
         var gmarkers = [];
         var imarkers = [];
-        
+        var tram = [
+          {
+            'title': 'Paavalin kirkko',
+            'lat': '60.196453',
+            'lng': '24.962482',
+            'description':  "The tram starts and finishes its loop here. The times are 13:00, 14:30, and 16:00 on Friday, Saturday and Sunday."
+          },
+
+          {
+            'lat': '60.193328',
+            'lng': '24.964499',
+            'description': '1'
+          },
+          {
+            'title': 'Kurvi',
+            'lat': '60.187851',
+            'lng': '24.962424',
+            'description': 'Sörnäinen tram stop'
+          },
+          {
+            'title': 'Hakaniemi',
+            'lat': '60.179236',
+            'lng': '24.950134',
+            'description': 'The tram crosses Hakaniemi four times during each loop.<br /><br />Paavalin kirkko to Mikonkatu: 13:12, 14:42, 16:12<Br />Mikonkatu to Diakonissalaitos: 13:40, 15:10, 16:40<br />Diakonissalaitos to Kauppatori: 13:49, 15:19, 16:49<br />Kauppatori to Paavalin kirkko: 14:10, 15:40, 17:10'
+          },
+          {
+            'title': 'Varsapuistikko',
+            'lat': '60.173635',
+            'lng': '24.949556',
+            'description': 'The tram stops at Varsapuistikko going towards Mikonkatu at 13:16, 14:46 and 16:16. The tram stops here going towards Diakonissalaitos at 13:45, 15:15 and 16:45. (Fri-Sun 25-27 September)'
+          },  
+          {
+            'title': 'Mikonkatu',
+            'lat': '60.170209',
+            'lng': '24.945397',
+            'description': 'Mikonkatu tram stop. Times: 13:30, 15:00, 16:30 from 25-27 September (Fri, Sat & Sun)'
+          },
+          {
+            'lat': '60.173635',
+            'lng': '24.949556',
+            'description': '6'
+          },
+          {
+            'lat': '60.179236',
+            'lng': '24.950134'
+          },
+          {
+            'title': 'Diakonissalaitos',
+            'lat': '60.184259',
+            'lng': '24.940145',
+            'description': 'Diakonissalaitos tram stop. Times: 13:45, 15:15, 16:45, only on 25-27 September (Fri, Sat & Sun)'
+          },
+          {
+            'lat': '60.183406',
+            'lng': '24.940703'
+          },
+          {
+            'lat': '60.182627',
+            'lng': '24.945724'
+          },
+          {
+            'lat': '60.179236',
+            'lng': '24.950134'
+          },
+          {
+            'title': 'Hallituskatu tram stop',
+            'lat': '60.170256',
+            'lng': '24.953541',
+            'description': 'The tram stops here heading to Kauppatori at 13:56, 15:26, and 16:56, only on 25-27 September (Fri, Sat & Sun). The tram stop here from Kauppatori (towards Paavalin kirkko) at 14:03, 15:33, and 17:03 on the same days.'
+          },
+          {
+            'title': 'Kauppatori tram stop', 
+            'lat': '60.167421',
+            'lng': '24.952232',
+            'description': 'Kauppatori tram stop. Times: 14:00, 15:30 and 17:00, only on 25-27 September (Fri, Sat & Sun).'
+          },
+          {
+            'lat': '60.170256',
+            'lng': '24.953541'
+          },
+          {
+            'lat': '60.179236',
+            'lng': '24.950134'
+          },
+          {
+            'lat': '60.187950',  // Kurvi on the way back
+            'lng': '24.963148'
+          },
+          {
+            'lat': '60.193328',
+            'lng': '24.964499'
+          },
+          {
+            'lat': '60.196453',
+            'lng': '24.962482'
+          }
+        ];
         function initialize() {
           var myLatlng = new google.maps.LatLng(60.186349, 24.971247);
           var myOptions = { zoom: 13, 
@@ -35,7 +131,116 @@
              }
           map = new google.maps.Map(document.getElementById('mapcontainer'), myOptions);
           var bounds = new google.maps.LatLngBounds();
-        
+          var infoWindow = new google.maps.InfoWindow();
+          var lat_lng = new Array();
+          for (i = 0; i < tram.length; i++) {
+            var data = tram[i];
+            var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+            lat_lng.push(myLatlng);
+            
+            if (data.title) {
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  map: map,
+                  icon: '/assets/livingspaces/images/tram_stop.png',
+                  title: data.title
+              });
+ 
+              (function (marker, data) {
+                  google.maps.event.addListener(marker, "click", function (e) {
+                      infoWindow.setContent(data.description);
+                      infoWindow.open(map, marker);
+                  });
+              })(marker, data);
+            }
+          }
+          //Initialize the Path Array
+          var path = new google.maps.MVCArray();
+
+          //Initialize the Direction Service
+          var service = new google.maps.DirectionsService();
+
+          //Set the Path Stroke Color
+          var poly = new google.maps.Polyline({ map: map, strokeColor: '#669D6B', strokeOpacity: '0.8' });
+
+          //Loop and Draw Path Route between the Points on MAP -- first six stops
+          // for (var i = 0; i < 5; i++) {
+          //    if ((i + 1) < 4) {
+          //       var src = lat_lng[i];
+          //       var des = lat_lng[i+1];
+                 path.push(lat_lng[0]);
+                 poly.setPath(path);
+                 service.route({
+                     origin: lat_lng[0],
+                     destination: lat_lng[5],
+                     travelMode: google.maps.DirectionsTravelMode.DRIVING
+                 }, function (result, status) {
+                     if (status == google.maps.DirectionsStatus.OK) {
+                         for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+                             path.push(result.routes[0].overview_path[i]);
+                         }
+                     }
+                 });
+          //    }
+          // }
+          // second loop change color 
+          var path2 = new google.maps.MVCArray();
+          var service2 = new google.maps.DirectionsService();
+          var poly2 = new google.maps.Polyline({ map: map, strokeColor: '#6DF378', strokeOpacity: '0.8' });
+          path2.push(lat_lng[5]);
+          poly2.setPath(path2);
+          service.route({
+              origin: lat_lng[5],
+              destination: lat_lng[8],
+              waypoints: [ {location: lat_lng[6]}, {location: lat_lng[7]} ],
+              travelMode: google.maps.DirectionsTravelMode.DRIVING
+          }, function (result, status) {
+              if (status == google.maps.DirectionsStatus.OK) {
+                  for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+                      path2.push(result.routes[0].overview_path[i]);
+                  }
+              }
+          });
+
+
+          // third part of loop
+          var path3 = new google.maps.MVCArray();
+          var service3 = new google.maps.DirectionsService();
+          var poly3 = new google.maps.Polyline({ map: map, strokeColor: '#C2F36D', strokeOpacity: '0.8' });
+          path3.push(lat_lng[8]);
+          poly3.setPath(path3);
+          service3.route({
+              origin: lat_lng[8],
+              destination: lat_lng[13],
+              waypoints: [{location: lat_lng[9]}, {location: lat_lng[10]}, {location: lat_lng[11]}, {location: lat_lng[12]}],
+              travelMode: google.maps.DirectionsTravelMode.DRIVING
+          }, function (result, status) {
+              if (status == google.maps.DirectionsStatus.OK) {
+                  for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+                      path3.push(result.routes[0].overview_path[i]);
+                  }
+              }
+          });
+          
+          // last part of loop
+          var path4 = new google.maps.MVCArray();
+          var service4 = new google.maps.DirectionsService();
+          var poly4 = new google.maps.Polyline({ map: map, strokeColor: '#8FB056', strokeOpacity: '0.8' });
+          path4.push(lat_lng[13]);
+          poly4.setPath(path4);
+          service4.route({
+              origin: lat_lng[13],
+              waypoints: [{location: lat_lng[14]}, {location: lat_lng[15]}, {location: lat_lng[16]}, {location: lat_lng[17]}],
+              destination: lat_lng[18],
+              travelMode: google.maps.DirectionsTravelMode.WALKING
+          }, function (result, status) {
+              if (status == google.maps.DirectionsStatus.OK) {
+                  for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+                      path4.push(result.routes[0].overview_path[i]);
+                  }
+              }
+          });
+          
       - @festival.events.published.map(&:place).compact.uniq.each do |p|
         - next unless p.latitude
         - next unless p.city =~ /Helsinki/i || p.city =~ /Espoo/i || p.city == /Vantaa/i
