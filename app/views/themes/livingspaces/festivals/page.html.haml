@@ -122,7 +122,7 @@
           }
         ];
         function initialize() {
-          var myLatlng = new google.maps.LatLng(60.186349, 24.971247);
+          var myLatlng = new google.maps.LatLng(60.174134, 24.940317);
           var myOptions = { zoom: 13, 
                 center: myLatlng,
                 scrollwheel: false,
@@ -426,7 +426,7 @@
           zoomChangeBoundsListener = 
               google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
                   if (this.getZoom()){
-                      this.setZoom(12);
+                      this.setZoom(13);
                   }
           });
           setTimeout(function(){google.maps.event.removeListener(zoomChangeBoundsListener)}, 2000);

@@ -16,7 +16,7 @@
             = link_to post do
               .medium-4.small-12.columns.post_small{class: post_group[index+1].nil? ? :end : false}
                 .categories
-                  = post.category
+                  = post.post_categories.map(&:name).delete_if{|x| x == 'Pixelache Festival' }.join(' / ')
 
                 .post_image{style: post.image? ? "background-image: url(#{post.image.url(:box).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".gray").css("display", "block");', onmouseout: '$(this).find(".gray").css("display", "none");'}
                   .gray
