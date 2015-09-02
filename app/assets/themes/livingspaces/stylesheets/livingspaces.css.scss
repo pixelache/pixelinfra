@@ -333,6 +333,31 @@ footer {
 
 
 .event_single, .post_single {
+  
+  .post_body {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid $festival-orange;
+    margin-bottom: .5rem;
+  }
+  .related_event, .related_content {
+    font-size: 0.9rem;
+    a {
+
+      .related_image_box {
+        width: 100%;
+        height: 250px;
+        border-bottom: 4px solid $festival-orange;
+        margin: 1.5rem 0 1rem 0;
+      }
+      .blurb, .blurb p {
+        font-size: 0.8rem;
+        line-height: 1.4rem;
+        color: #444;
+        margin-bottom: 0.7rem;
+      }
+    }
+    border-top: 3px solid $festival-orange;
+  }
   .carousel {
     min-height: 3rem;
     border-bottom: 2px solid #444;
@@ -344,7 +369,9 @@ footer {
     padding: 5rem 0 10rem 0;
     font-weight: 300;
     color: #444;
-    
+    .content {
+      border-bottom: 1px solid $festival-orange;
+    }
     .post_title {
       color: #444;
       font-size: 1.2rem;
@@ -408,6 +435,11 @@ footer {
     }
     h2 {
       border-top: 4px solid #ec9f43;
+      &.no_bar {
+        border-top: none;
+        padding-top: 0.5rem;
+        margin-top: 1rem;
+      }
       margin-top: 2rem;
       padding-top: 2rem;
       text-transform: uppercase;
@@ -508,8 +540,9 @@ footer {
   }
 }
 
+
 .experience_form, #registration_form {
-  padding-bottom: 10rem;
+  padding-bottom: 4rem;
   font-family: $opensans;
   li {
     list-style-type: none;
@@ -579,6 +612,11 @@ footer {
   }
 }
 
+.share_bar {
+  margin: 0;
+  padding: .6rem 0;
+
+}
 .theme {
   .theme-text {
     padding-bottom: 1rem;

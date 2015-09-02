@@ -47,26 +47,27 @@
       .row.post_row{:"data-equalizer" => ''}
         - post_group.compact.each_with_index do |post, index|
           .medium-4.small-12.columns.post_small{class: post_group[index+1].nil? ? :end : false}
-            .categories
-              = post.category
+            = link_to post do
+              .categories{:"data-equalizer-watch" => ''}
+                = post.category
 
-            .post_image{style: post.image? ? "background-image: url(#{post.image.url(:box).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".gray").css("display", "block");', onmouseout: '$(this).find(".gray").css("display", "none");'}
-              .gray
-                .excerpt= link_to raw(truncate_html(strip_tags(post.body.gsub(/&nbsp;/, ' ')), :length => 260)), post
+              .post_image{style: post.image? ? "background-image: url(#{post.image.url(:box).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".gray").css("display", "block");', onmouseout: '$(this).find(".gray").css("display", "none");'}
+                .gray
+                  .excerpt= raw(truncate_html(strip_tags(post.body.gsub(/&nbsp;/, ' ')), :length => 260))
      
 
-                - if post.event || post.festival || post.project
-                  .hashtags
-                    - if post.event
-                      .hashtag= link_to(post.event.name, post.event)
-                    - if post.festival
-                      .hashtag= link_to post.festival.to_hashtag, post.festival
-                    - if post.project
-                      .hashtag= link_to post.project.to_hashtag, post.project
+                  - if post.event || post.festival || post.project
+                    .hashtags
+                      - if post.event
+                        .hashtag= post.event.name
+                      - if post.festival
+                        .hashtag= post.festival.to_hashtag
+                      - if post.project
+                        .hashtag= post.project.to_hashtag
 
                    
                   
-            .lower{:"data-equalizer-watch" => ''}
+            .lower
               .title= link_to post.title, post
 
 

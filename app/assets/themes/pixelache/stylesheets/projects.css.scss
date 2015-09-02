@@ -25,6 +25,9 @@ button.slick-next, button.slick-prev {
 .project_index {
   padding-top: 1rem;
   .dividing_strip {
+    &.top {
+      margin-top: 10px;
+    }
     background-color: #49a2fc;
     padding: 15px 0px 10px 0px;
     font-size: 1.8rem;

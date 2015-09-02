@@ -54,7 +54,7 @@
           .body=raw @post.body
           // #Nokogiri::HTML.parse(@post.body.gsub(/(<(?!\/)[^>]+>)+(<\/[^>]+>)+/, '')).inner_html
       .row
-        .small-12.columns.share_this= render :partial => 'shared/share_this_buttons'
+        .small-12.columns.share_this= render :partial => 'shared/share_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@post)}"), title: CGI::escape(@post.title)}
 
   - unless @post.related_content.empty?
     .related_container.post

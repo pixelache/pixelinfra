@@ -5,7 +5,7 @@ namespace :archive do
   task :listservs => :environment do
     Subscription.all.map(&:item).uniq.map(&:listservname).each do |list|
       listname = "#{list}@#{ENV['PIXELACHE_MAILMAN_SERVER']}"
-      system("/usr/local/bin/mhonarc -outdir /var/www/mailer_archives/#{listname} -mhpattern '^[^\.]' /var/www/mailer_archives/prototype/#{listname}/new")
+      system("/usr/local/bin/mhonarc -add -outdir /var/www/mailer_archives/#{listname} -mhpattern '^[^\.]' /var/www/mailer_archives/prototype/#{listname}/new")
       system("/usr/local/sbin/markMHread #{listname}")
     end
   end

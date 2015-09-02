@@ -45,8 +45,6 @@
       .content.row
         = raw @event.description
 
-      .row
-        .columns.small-12.small-centered= render :partial => 'shared/share_this_buttons'
 
       - if @event.registration_required?
         #registration_form.row
@@ -124,21 +122,18 @@
                   .large-5.columns
                     .video_title= v.title
                     .video_description= raw v.description
-
-  
-  / - unless @event.related_content.empty?
-  /   .related_container.event
-  /     .row
-  /       .small-12.medium-8.columns.small-centered
-  /         .row
-  /           .small-12.columns.related_title
-  /             %h1= t(:related_content)
-  /     - unless @event.related_content.empty?
-  /       - @event.related_content[0..5].each do |related|
-  /         .row
-  /           .small-12.medium-8.columns.small-centered.related_container
-  /             = render :partial => 'shared/related', locals: {item: @event, related: related }
-
+      .row
+        .columns.small-12.small-centered.share_bar= render partial: 'shared/share_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@event)}"), title: CGI::escape(@event.name)}
+      - unless @event.posts.published.empty?
+        .related_content
+          .small-12.medium-6
+            %h2.no_bar= t :related_content
+            - @event.posts.published.sort_by(&:published_at).reverse.each do |post|
+              = link_to post do
+                .related_image_box{style: "background: url(#{post.image.url(:box).gsub('development', 'production')}) no-repeat center center;"}
+                %h3= post.title
+                .blurb= raw truncate_html(sanitize(post.body, tags: %w{em i italic b bold strong u}), length: 200)
+              = link_to t("read_more") + " >>>", post
   = content_for :jquery do
     - unless @event.place.latitude.blank?
       :plain

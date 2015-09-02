@@ -13,29 +13,33 @@
       .board_explanation
         = "* = " + t(:on_hallitus)
         = ", ** = " + t(:on_hallitus_alternate)      
+        
   .row
     .small-10.small-offset-1.columns
       %p= t :membership_info
+      %p= link_to 'Member feeds', '/members/feed/'
       %h4= t :current_members
-  .row
-    .small-10.small-offset-1.columns
-      - @members.sort_by{|x| x.user.name.split(/\s/).last.downcase }.in_groups_of(3) do |mg|
-        .row.member_row
-          - mg.each_with_index do |member, index|
-            - next if member.nil?
-            = link_to  "/member/#{member.user.slug}" do
-              .small-12.medium-4.columns
-                .member_square{class: mg[index+1].nil? ? :end : false, style:  "background: url(#{member.user.avatar.url(:box)}) no-repeat center center", onmouseover: "$(this).find('.membership_years').toggle();", onmouseout: "$(this).find('.membership_years').toggle();" }
-                  .inner
-                    .name.text-center= member.user.name
 
-                    .membership_years.text-center
-                      - if member.hallitus == true
-                        .on_board= t :on_hallitus
-                      - if member.hallitus_alternate == true
-                        .on_board= t :on_hallitus_alternate
-                      = t :active_member_years
-                      = member.user.memberships.sort_by(&:year).map { |y| y.year.to_s + (y.hallitus == true ? '*' : '') + (y.hallitus_alternate == true ? '**' : '') }.join(', ')
+  .row.member_row
+    .small-10.small-offset-1.columns
+      - @members.sort_by{|x| x.user.name.split(/\s/).last.downcase }.each do |member|
+        -# - @members.sort_by{|x| x.user.name.split(/\s/).last.downcase }.in_groups_of(3) do |mg|
+        -#  .row.member_row
+        -#    - mg.each_with_index do |member, index|
+        -#      - next if member.nil?
+        = link_to  "/member/#{member.user.slug}" do
+          .small-12.medium-6.large-4.columns
+            .member_square{class: member.nil? ? :end : false, style:  "background: url(#{member.user.avatar.url(:box)}) no-repeat center center", onmouseover: "$(this).find('.membership_years').toggle();", onmouseout: "$(this).find('.membership_years').toggle();" }
+              .inner
+                .name.text-center= member.user.name
+
+                .membership_years.text-center
+                  - if member.hallitus == true
+                    .on_board= t :on_hallitus
+                  - if member.hallitus_alternate == true
+                    .on_board= t :on_hallitus_alternate
+                  = t :active_member_years
+                  = member.user.memberships.sort_by(&:year).map { |y| y.year.to_s + (y.hallitus == true ? '*' : '') + (y.hallitus_alternate == true ? '**' : '') }.join(', ')
   
 
   

@@ -47,7 +47,17 @@
               .small-12.columns= recaptcha_tags hl: I18n.locale.to_s, :display => { :theme => 'clean' }
             .row
               .small-12.columns= f.submit 'Submit'      
-
+              
+      .share_bar= render partial: 'shared/share_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@post)}"), title: CGI::escape(@post.title)}
+      - if @post.event
+        .related_event
+          .small-12.medium-6
+            %h2.no_bar= t :related_content
+            = link_to @post.event do
+              .related_image_box{style: "background: url(#{@post.event.image.url}) no-repeat center center;"}
+              %h3= @post.event.name
+              .blurb= raw truncate_html(@post.event.description, length: 200)
+            = link_to t("livingspaces.learn_more") + " >>>", @post.event
 - unless @post.photos.blank?    
   = content_for :jquery do
     :plain

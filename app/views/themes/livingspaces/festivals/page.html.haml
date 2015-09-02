@@ -426,7 +426,7 @@
           zoomChangeBoundsListener = 
               google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
                   if (this.getZoom()){
-                      this.setZoom(13);
+                      this.setZoom(12);
                   }
           });
           setTimeout(function(){google.maps.event.removeListener(zoomChangeBoundsListener)}, 2000);
