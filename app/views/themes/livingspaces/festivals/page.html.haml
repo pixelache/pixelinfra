@@ -14,7 +14,7 @@
   .row.body-bottom
     .columns.small-12.large-7.medium-9.small-centered
       = raw @page.body
-
+      .share_bar.lined= render partial: 'shared/share_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@page)}"), title: CGI::escape(@page.name)}
   - if @page.slug == 'locations'
 
     .map
@@ -436,3 +436,5 @@
         //map = initialize();
         map = google.maps.event.addDomListener(window, 'load', initialize);
         markers = gmarkers;
+
+    
