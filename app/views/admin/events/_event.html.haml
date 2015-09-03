@@ -3,7 +3,25 @@
     - if event.image?
       = image_tag event.image.url(:thumb), :width => 60
     = event.name
-
+    - if event.registration_required
+      .registrations
+        %b Registrations:
+        - if event.max_attendees
+          - if event.attendees.size >= event.max_attendees
+            = event.max_attendees
+            %b (FULL!)
+            - if event.attendees.size > event.max_attendees
+              %br/
+              %em
+                = " + " + (event.attendees.size - event.max_attendees).to_s + " on waiting list"
+          - else
+            = event.attendees.size.to_s
+            %em
+              = "(#{(event.max_attendees - event.attendees.size).to_s} remaining)"
+        - else
+          = event.attendees.size.to_s
+        %br/
+        = link_to 'See all', attendees_admin_event_path(event), class: [:button, :tiny, :secondary], target: :_blank
     - unless event.project.blank?
       %p.metadata
         Project:

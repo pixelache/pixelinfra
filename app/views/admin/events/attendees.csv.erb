@@ -1,0 +1,6 @@
+ID,Note,Name,Email,Phone,When,1,2,3
+<%= CSV.generate do |csv|
+   @attendees.each do |cs|
+     csv << [cs.id, cs.waiting_list == true ? 'WAITING LIST' : '', cs.name, cs.email, cs.phone, cs.created_at.strftime("%d %b %Y %H:%M"), cs.motivation_statement, cs.project_creators, cs.project_description]
+   end
+ end .html_safe %>

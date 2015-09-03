@@ -17,6 +17,9 @@ Pixelinfra::Application.routes.draw do
       get :autocomplete_event_name, :on => :collection
     end
     resources :events do
+      member do
+        get :attendees
+      end
       get :autocomplete_place_name, :on => :collection
       get :autocomplete_event_name, :on => :collection      
     end

@@ -8,6 +8,11 @@ class Admin::EventsController < Admin::BaseController
   has_scope :by_year
   has_scope :by_name
   
+  def attendees
+    @event = Event.friendly.find(params[:id])
+    @attendees = @event.attendees.order(:created_at)
+  end
+  
   def create
     create! { admin_events_path }
   end

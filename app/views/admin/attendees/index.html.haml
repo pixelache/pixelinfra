@@ -9,6 +9,14 @@
       - @filters.each do |filter|
         %option{:value => "by_#{filter.class.to_s.downcase}=#{filter.id}", :selected => (params["by_#{filter.class.to_s.downcase}"] == filter.id.to_s ? :selected : false)}= "#{filter.name} (#{l filter.feed_time, format: :long})"
 
+  - if params[:by_event]
+    .event_info.small-12.columns
+      - event = Event.find(params[:by_event])
+      - if event.max_attendees
+        %p= pluralize(event.attendees.size, 'registration')
+        %p= pluralize(event.max_attendees, 'total place')
+      %p= link_to 'See all', attendees_admin_event_path(event), class: [:button, :tiny, :round ]
+      %p= link_to 'Download as .csv', attendees_admin_event_path(event, format: :csv), class: [:button, :tiny, :secondary]
   :javascript
     $('.filter_box select').change(function() {
       var parts = "#{request.url}".split(/\?/, 2);

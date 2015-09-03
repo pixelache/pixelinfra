@@ -114,7 +114,20 @@ table {
     span.page_margin {
       padding-left: 1.5rem;
     }
-    
+    .registrations {
+      margin: 0.4rem 0.2rem;
+      float: right;
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: #444;
+      a.button.tiny {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        padding: 0.4rem 0.9rem;
+        font-size: 0.5rem;
+        background-color: rgba(241, 236, 191, 0.85);
+      }
+    }
     .small, p.small {
       margin: 0;
       font-size: 0.7rem;
@@ -154,6 +167,14 @@ table {
 
 .filter_box {
   .filter_title { float: left;}
+  .event_info {
+    p {
+      margin: 0.2rem 0;
+      font-weight: 300;
+      font-size: 0.8rem;
+      color: #444;
+    }
+  }
 }
 
 .front_item {
