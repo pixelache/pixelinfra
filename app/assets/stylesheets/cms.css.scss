@@ -111,6 +111,10 @@ form {
 
 table {
   td {
+    span.page_margin {
+      padding-left: 1.5rem;
+    }
+    
     .small, p.small {
       margin: 0;
       font-size: 0.7rem;
@@ -119,6 +123,7 @@ table {
         font-weight: 600;
         font-size: 0.7rem;
       }
+
     }
     p.metadata {
       font-size: 0.65rem;

@@ -16,8 +16,11 @@ class PagesController < InheritedResources::Base
        set_meta_tags :title => @project.name + " - " + @page.name
       render :template => 'projects/page'
     else
-      pages = @site.pages.published.where(slug: p)
-
+      if user_signed_in?
+        pages = @site.pages.where(slug: p)
+      else
+        pages = @site.pages.published.where(slug: p)
+      end
       if pages.size == 1 && pages.first.root?
         if pages.first.festival
           redirect_to pages.first.festival

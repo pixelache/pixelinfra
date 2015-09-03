@@ -2,10 +2,12 @@
   %td= page.id
   %td
     - page.depth.times do
+      %span.page_margin &nbsp;
+    - if page.depth.size > 0
       = "--"
     = page.name
     - unless page.children.empty?
-      %span.small= link_to '+ expand '  + pluralize(page.children.size, 'subpage'), "javascript:$('.child.children_#{page.id.to_s}').toggle();"
+      %span.small= link_to '+ expand '  + pluralize(page.children.size, 'subpage'), '#', onclick: "javascript:$('.child.children_#{page.id.to_s}').toggle();"
       |
       %span.small= link_to 'order subpages', order_admin_page_path(page.id)
     - unless page.project.blank?
