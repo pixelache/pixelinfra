@@ -403,7 +403,7 @@
                     '<div><em><a href="/festivals/festival-2015/theme/helsinki-inside-out" target="_blank">Helsinki Inside&sdot;Out programme</a></em></div>'+
                     '<div class="bodyContent">'+
                     '<p>#{escape_javascript(e.description)}</p>'+
-                    '<p>Where: #{e.location}</p>'+
+                    '<p>Where: #{escape_javascript(e.location)}</p>'+
                     '<p>When: #{e.start_at.strftime("%H:%M")} - #{e.end_at.strftime("%H:%M")}</p>'+
                     '</div>'+
                     '</div>';

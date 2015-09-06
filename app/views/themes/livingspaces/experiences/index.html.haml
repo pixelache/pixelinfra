@@ -14,6 +14,9 @@
 
       .activities
         .title Activities
+        %p 
+          All activities take place on Sunday, 27 September. If you would like to register your own event, please fill out the
+          = link_to 'registration form.', '/festivals/festival-2015/theme/helsinki-inside-out'
     
         %ul
           - @experiences.approved.sort_by(&:start_at).each do |exp|
@@ -73,7 +76,7 @@
                 '<h4 id="firstHeading" class="firstHeading">#{escape_javascript(e.title)}</h4>'+
                 '<div class="bodyContent">'+
                 '<p>#{escape_javascript(e.description)}</p>'+
-                '<p>Where: #{e.location}</p>'+
+                '<p>Where: #{escape_javascript(e.location)}</p>'+
                 '<p>When: #{e.start_at.strftime("%H:%M")} - #{e.end_at.strftime("%H:%M")}</p>'+
                 '</div>'+
                 '</div>';
