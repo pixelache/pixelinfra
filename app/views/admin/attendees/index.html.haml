@@ -17,6 +17,16 @@
         %p= pluralize(event.max_attendees, 'total place')
       %p= link_to 'See all', attendees_admin_event_path(event), class: [:button, :tiny, :round ]
       %p= link_to 'Download as .csv', attendees_admin_event_path(event, format: :csv), class: [:button, :tiny, :secondary]
+      
+  - if params[:by_post]
+    .event_info.small-12.columns
+      - post = Post.find(params[:by_post])
+      - if post.max_attendees
+        %p= pluralize(post.attendees.size, 'registration')
+        %p= pluralize(post.max_attendees, 'total place')
+      %p= link_to 'See all', attendees_admin_post_path(post), class: [:button, :tiny, :round ]
+      %p= link_to 'Download as .csv', attendees_admin_post_path(post, format: :csv), class: [:button, :tiny, :secondary]
+            
   :javascript
     $('.filter_box select').change(function() {
       var parts = "#{request.url}".split(/\?/, 2);

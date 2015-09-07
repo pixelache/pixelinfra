@@ -1,0 +1,38 @@
+
+.row
+  .small-12.columns
+    %h2 Registrations for:
+    %h3= @post.title
+    %h6= "published at #{l @post.published_at}"
+    %p.no_print= link_to 'Export as CSV', attendees_admin_post_path(@post, format: :csv), class: [:button, :small, :secondary]
+.row.no_print
+  .small-18.columns
+    %p
+      All emails (to copy and paste):
+      %br/
+      %small= @attendees.to_a.delete_if{|x| x.waiting_list == true }.map(&:email).join(', ')
+.row
+  .small-12.columns 
+    %table
+      %thead
+        %th Name
+        %th Email
+        %th Phone
+        %th Date registred
+        %th.no_print Actions
+      %tbody
+        - @attendees.sort_by(&:created_at).each_with_index do |att, index|
+          %tr
+            %td
+              = (index+1).to_s + "."
+              = att.name
+              - if att.waiting_list
+                %strong WAITING LIST
+            %td= att.email
+            %td= att.phone
+            %td= att.created_at.strftime("%d %B %Y %H:%M") unless att.created_at.nil?
+            %td.no_print
+              - if can? :edit, att
+                = link_to 'Edit', edit_admin_attendee_path(att),  :class => [:button, :round, :tiny]
+              - if can? :destroy, att
+                = link_to 'Delete', [:admin, att], :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => [:button, :round, :alert, :tiny]

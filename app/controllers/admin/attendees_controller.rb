@@ -2,6 +2,7 @@ class Admin::AttendeesController < Admin::BaseController
   has_scope :page, :default => 1
   has_scope :by_festival
   has_scope :by_event
+  has_scope :by_post 
   
   def edit
     @attendee = Attendee.find(params[:id])

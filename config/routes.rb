@@ -66,6 +66,9 @@ Pixelinfra::Application.routes.draw do
     end
     resources :places
     resources :posts do
+      member do
+        get :attendees
+      end
       get :options, :on => :collection
       get :autocomplete_event_name, :on => :collection
       get :autocomplete_festival_name, :on => :collection

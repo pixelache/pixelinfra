@@ -21,6 +21,12 @@ class Admin::PostsController < ApplicationController
   autocomplete :festival, :name, :extra_data => [:name], :display_value => :name
   autocomplete :post, :title, :extra_data => [:title], :display_value => :title
   
+  def attendees
+    @post = Post.friendly.find(params[:id])
+    @attendees = @post.attendees.order(:created_at)
+
+  end
+  
   def check_permissions
     authorize! :create, resource
   end
