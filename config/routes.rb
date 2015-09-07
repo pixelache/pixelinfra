@@ -163,6 +163,7 @@ Pixelinfra::Application.routes.draw do
   post '/search' => 'search#create'
   get '/pages/*id' => 'pages#show'
   get '/news' => 'posts#index'
+  get '/helsinki/feed' => 'feeds#index', :defaults => { :format => 'rss' }
   get '/helsinki/*url', :controller => :application, :action => :reroute
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout
