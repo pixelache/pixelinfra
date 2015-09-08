@@ -371,6 +371,9 @@ footer {
     color: #444;
     .content {
       border-bottom: 1px solid $festival-orange;
+      &.noborder {
+        border-bottom: none;
+      }
     }
     .post_title {
       color: #444;

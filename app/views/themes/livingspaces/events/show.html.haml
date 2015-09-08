@@ -42,7 +42,7 @@
           .small-12.columns= link_to t(:scroll_down_for_documentation), '#', onclick: 'scrollTo("#documentation");'
 
       .row.google_map#mapcontainer= render partial: 'shared/small_map'
-      .content.row
+      .content.row{class: @event.registration_required? ? :noborder : ''}
         = raw @event.description
 
 
