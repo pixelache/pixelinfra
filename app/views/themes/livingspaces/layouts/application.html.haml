@@ -33,26 +33,17 @@
       %section
             
         .fixed
-          %nav.top-bar.ls-menu{:"data-topbar" => '', role: :navigation}
+          %nav.top-bar{:"data-topbar" => '', role: :navigation}
             %ul.title-area
-              %li.name.hide-for-small-only
-                = link_to '/' do 
-                  Pixelache 2015:
-                  %em Living Spaces
-              %li.show-for-small-only
-                = link_to '/' do
-                  %span.name Pixelache 2015:
-                  %em Living Spaces
-                  %br/
-                  %span.name.dates 23-27 September, Helsinki
-              %li.show-for-large-only.right.dates 23-27 September, Helsinki
-              %li.show-for-medium-only.dates 23-27 September, Helsinki
+              %li.name
+                = link_to 'Pixelache 2015: Living Spaces', '/'
+                %span.date 23-27 September 
+                .small_date 23-27 September 
               %li.toggle-topbar.menu-icon
                 %a{:href => "#"}
                   %span
-            %section.top-bar-section#menu
+            %section.top-bar-section
               %ul.right
-
                 %li= link_to t("livingspaces.about"), festival_page_festival_path('festival-2015', 'about')
                 %li= link_to t("livingspaces.programme"), festival_page_festival_path('festival-2015','programme')
                 %li= link_to t(:news), posts_path

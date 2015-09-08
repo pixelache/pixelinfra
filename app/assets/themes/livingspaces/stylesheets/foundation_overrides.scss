@@ -941,7 +941,7 @@
 // Controlling the styles for the title in the top bar
  $topbar-title-weight: bold;
  $topbar-title-color: white;
-// $topbar-title-font-size: rem-calc(17);
+ //$topbar-title-font-size: rem-calc(17);
 
 // Style the top bar dropdown elements
   $topbar-dropdown-bg: $topbar-bg-color;
@@ -952,7 +952,7 @@
 // $topbar-dropdown-toggle-alpha: 0.4;
 
 // Set the link colors and styles for top-level nav
- $topbar-link-color: #000;
+ $topbar-link-color: #FFF;
 // $topbar-link-color-hover: #fff;
 // $topbar-link-color-active: #fff;
 // $topbar-link-weight: normal;
@@ -972,13 +972,13 @@
 // $topbar-dropdown-label-bg: #333;
 
 // Top menu icon styles
-// $topbar-menu-link-transform: uppercase;
-// $topbar-menu-link-font-size: rem-calc(13);
-// $topbar-menu-link-weight: bold;
-// $topbar-menu-link-color: #fff;
-// $topbar-menu-icon-color: #fff;
-// $topbar-menu-link-color-toggled: #888;
-// $topbar-menu-icon-color-toggled: #888;
+ $topbar-menu-link-transform: uppercase;
+ $topbar-menu-link-font-size: rem-calc(12);
+ $topbar-menu-link-weight: bold;
+ $topbar-menu-link-color: #fff;
+ $topbar-menu-icon-color: #fff;
+ $topbar-menu-link-color-toggled: #888;
+ $topbar-menu-icon-color-toggled: #888;
 
 // Transitions and breakpoint styles
 // $topbar-transition-speed: 300ms;

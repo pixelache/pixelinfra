@@ -158,14 +158,14 @@ $medium-portrait-only:"#{$screen} and (orientation: portrait) and (min-width:#{l
   .top-bar.expanded {
     background-color: #444;
   }
-  .top-bar .toggle-topbar.menu-icon {
-    position: relative;
-    margin: 8px 16px 0 0;
-    float: right;
-    padding: 0;
-    height: 34px;
-    line-height: 33px;
-  }
+//  .top-bar .toggle-topbar.menu-icon {
+//    position: relative;
+//    margin: 8px 16px 0 0;
+//    float: right;
+//    padding: 0;
+//    height: 34px;
+//    line-height: 33px;
+//  }
 
   p {
     font-size: 0.8rem;
@@ -180,7 +180,8 @@ $medium-portrait-only:"#{$screen} and (orientation: portrait) and (min-width:#{l
       }
       li {
         font-size: 0.75rem;
-        &.show-for-small-only {
+        padding-right: 0.2rem;
+        &.hide-for-large-only {
           padding-top: 0.25rem;
           line-height: 1.3rem;
           width: 60%;
@@ -279,10 +280,14 @@ $medium-portrait-only:"#{$screen} and (orientation: portrait) and (min-width:#{l
 // tablet portrait mode 
 
 @media #{$medium-portrait-only} {
+
   nav.top-bar {
+ 
     ul.title-area {
+      
       li {
         line-height: 1.5rem;
+        
       }
     }
     li.dates {
@@ -290,7 +295,8 @@ $medium-portrait-only:"#{$screen} and (orientation: portrait) and (min-width:#{l
     }
     #menu {
       ul.right {
-        float: left !important;
+//        float: left !important;
+        padding-right: 0.4rem;
         margin-left: 1.2rem;
         max-width: 70%;
         li {
@@ -310,10 +316,49 @@ $medium-portrait-only:"#{$screen} and (orientation: portrait) and (min-width:#{l
     }
   }
 }
+@media only screen and (max-width: 50em) {
+  nav.top-bar {
+    ul.title-area {
+      li.name {
+        a { padding-left: 0.2rem; }
+        span.date {
+          display: none;
+        }
+      }
+    }
+    section.top-bar-section {
+     ul.right {
+       li.lang {
+         padding-left: 1rem;
+       }
+     } 
+    }
+  }
+}
+@media only screen and (min-width: 641px) {
+  nav.top-bar {
+    ul.title-area {
+      li.name {
+        .small_date {
+          display: none;
+        }
+      }
+    }
+ 
+  }
+}
+@media only screen and (min-width: 641px) and (max-width: 60em) {
+  .top-bar-section li:not(.has-form) a:not(.button) {
+    padding: 0 0.7rem;
+  }
+}
 
 @media #{$medium-only} { 
 
+
   nav.top-bar {
+
+   
     ul.title-area {
       line-height: 3.125rem;
       li {
