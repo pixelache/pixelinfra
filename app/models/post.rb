@@ -13,6 +13,8 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :post_categories, join_table: :posts_post_categories
   has_many :photos, as: :item
   has_many :attachments, as: :item
+  has_many :festivalthemes,  through: :festivaltheme_relations
+  has_many :festivaltheme_relations, as: :relation, foreign_key: :relation_id
   has_paper_trail
   mount_uploader :image, ImageUploader
   resourcify

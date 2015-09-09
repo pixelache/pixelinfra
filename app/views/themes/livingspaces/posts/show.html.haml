@@ -53,13 +53,33 @@
       .share_bar= render partial: 'shared/share_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@post)}"), title: CGI::escape(@post.title)}
       - if @post.event
         .related_event
-          .small-12.medium-6
+          .small-12.medium-6.related
             %h2.no_bar= t :related_content
             = link_to @post.event do
               .related_image_box{style: "background: url(#{@post.event.image.url}) no-repeat center center;"}
               %h3= @post.event.name
               .blurb= raw truncate_html(@post.event.description, length: 200)
             = link_to t("livingspaces.learn_more") + " >>>", @post.event
+      - unless @post.festivalthemes.empty?
+        .related_event
+          .small-12.medium-6
+            %h2.no_bar= t :related_content
+        .related_event   
+          - @post.festivalthemes.each do |ft|
+            .small-12.medium-6.related{class: cycle('odd', 'even')}
+              = link_to festival_festivaltheme_path(ft.festival, ft) do
+                .related_image_box{style: "background: url(#{ft.image.url(:box).gsub('development', 'production')}) no-repeat center center;"}
+                %h3= ft.name
+                .blurb= raw truncate_html(ft.description, length: 200)
+              = link_to t("livingspaces.learn_more") + " >>>", festival_festivaltheme_path(ft.festival, ft)
+            - ft.events.published.shuffle.each do |event|
+              .small-12.medium-6.related{class: cycle('odd', 'even')}
+                = link_to event do
+                  .related_image_box{style: "background: url(#{event.image.url(:box).gsub('development', 'production')}) no-repeat center center;"}
+                  %h3= event.name
+                  .blurb= raw truncate_html(strip_tags(event.description), length: 200)
+                = link_to t("livingspaces.learn_more") + " >>>", event
+          
 - unless @post.photos.blank?    
   = content_for :jquery do
     :plain

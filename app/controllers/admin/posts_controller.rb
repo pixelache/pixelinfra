@@ -100,6 +100,7 @@ class Admin::PostsController < ApplicationController
        :festival_name, :festival_id, :add_to_newsfeed, :tag_list, post_category_ids: [], 
         translations_attributes: [:id, :locale, :title, :body, :excerpt],
          photos_attributes: [:id, :filename, :title, :credit, :_destroy],
+         festivaltheme_ids: [], 
           attachments_attributes: [:id, :documenttype_id, :attachedfile, 
             :_destroy, :year_of_publication,  :title, :description, :public, :_destroy]])
   end

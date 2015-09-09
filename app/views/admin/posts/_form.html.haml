@@ -104,7 +104,9 @@
     .small-6.columns
       %h5 Connected to a festival?
       = f.input :festival_name, :as => :autocomplete, :url =>  autocomplete_festival_name_admin_posts_path, :input_html => { :id_element => '#post_festival_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the festival name", :hint => raw("(If this is related to a specific event that is part of a festival, you should just populate the event relation above, no need for the festival as a whole.)")
-    .small-6.columns= f.input :festival_id, :as => :hidden    
+      = f.input :festivalthemes, :label => 'If so, part of a festival theme?', :member_label => :name_and_festival, :hint => 'Make sure you match the right festival!'  
+    .small-6.columns= f.input :festival_id, :as => :hidden
+
   .row
     .small-6.columns
       %h5 Connected to a residency?
@@ -135,3 +137,6 @@
     .small-3.columns= f.input :published_at, :as => :string, :input_html => {:class => "datetime_picker"}
   .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]
+= content_for :jquery do
+  :plain
+    $('select#post_festivaltheme_ids').chosen();    

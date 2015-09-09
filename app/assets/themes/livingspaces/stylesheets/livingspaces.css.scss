@@ -413,6 +413,12 @@ footer {
   }
   .related_event, .related_content {
     font-size: 0.9rem;
+    .related {
+      float: left;
+      &.odd {
+        padding-right: 0.5rem;
+      }
+    }
     a {
 
       .related_image_box {
