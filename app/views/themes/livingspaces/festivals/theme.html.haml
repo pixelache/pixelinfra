@@ -44,23 +44,26 @@
           .row
             .small-10.columns= f.submit 'Submit'
             
-  .row.theme_single
-    .columns.small-11.medium-7.small-centered
-      .related_content.row
-        .small-12.related_heading
-          %h2.no_bar= t :news_and_events
-        - @festivaltheme.posts.published.each do |post|
-          .small-12.medium-6.columns.related{class: cycle('odd', 'even')}
-            = link_to post do
-              .related_image_box{style: "background: url(#{post.image.url(:standard)}) no-repeat center center;"}
-              %h3= post.title
-              .blurb= raw truncate_html(sanitize(post.body, tags: %w{em i italic b bold strong u}), length: 200)
-            = link_to t("read_more") + " >>>", post
+  - unless @festivaltheme.posts.published.empty? && @festivaltheme.events.published.empty?
+    .row.theme_single
+      .columns.small-11.medium-7.small-centered
+        .related_content.row
+          .small-12.related_heading
+            %h2.no_bar= t :news_and_events
+          - @festivaltheme.posts.published.each do |post|
+            .small-12.medium-6.columns.related{class: cycle('odd', 'even')}
+              = link_to post do
+                .related_image_box{style: "background: url(#{post.image.url(:standard)}) no-repeat center center;"}
+                %h3= post.title
+                .blurb= raw truncate_html(sanitize(post.body, tags: %w{em i italic b bold strong u}), length: 200)
+              = link_to t("read_more") + " >>>", post
             
-        - @festivaltheme.events.published.shuffle.each do |event|
-          .small-12.medium-6.columns.related{class: cycle('odd', 'even')}
-            = link_to event do
-              .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
-              %h3= event.name
-              .blurb= raw truncate_html(strip_tags(event.description), length: 200)
-            = link_to t("livingspaces.learn_more") + " >>>", event
+          - @festivaltheme.events.published.shuffle.each do |event|
+            .small-12.medium-6.columns.related{class: cycle('odd', 'even')}
+              = link_to event do
+                .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
+                %h3= event.name
+                .blurb= raw truncate_html(strip_tags(event.description), length: 200)
+              = link_to t("livingspaces.learn_more") + " >>>", event
+  .row.theme_single
+    .columns.small-11.medium-7.small-centered.share_bar= render partial: 'shared/share_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}/festivals/#{@festivaltheme.festival.slug}/theme/#{@festivaltheme.slug}"), title: CGI::escape(@festivaltheme.name)}              

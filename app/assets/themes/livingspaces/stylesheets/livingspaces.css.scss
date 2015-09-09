@@ -400,6 +400,10 @@ footer {
 }
 
 .theme_single {
+  .share_bar {
+    border-top: 1px solid $festival-orange;
+  }
+  
   h2 {
     border-top: 4px solid #ec9f43;
     &.no_bar {
@@ -700,10 +704,12 @@ footer {
   }
 }
 
-
+#registration_form {
+  border-bottom: 1px solid $festival-orange;
+}
 .experience_form, #registration_form {
   padding-bottom: 4rem;
-  border-bottom: 1px solid $festival-orange;
+
   font-family: $opensans;
   li {
     list-style-type: none;

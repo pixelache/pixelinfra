@@ -74,6 +74,24 @@ class FestivalsController < InheritedResources::Base
   def theme
     @festival = Festival.find(params[:id])
     @festivaltheme = @festival.festivalthemes.find(params[:theme_id])
+    if @festivaltheme.description(:en) != @festivaltheme.description(:fi)
+      a = Hash.new
+      a["en"] = "http://#{request.host}/festivals/#{@festival.slug}/theme/#{@festivaltheme.slug}" + "?locale=en"
+      a["fi"] = "http://#{request.host}/festivals/#{@festival.slug}/theme/#{@festivaltheme.slug}" + "?locale=fi"
+    else
+      a = {}
+    end
+
+    
+    set_meta_tags :title => "#{@festival.name} | #{@festivaltheme.name}", 
+                  canonical: "http://#{request.host}/festivals/#{@festival.slug}/theme/#{@festivaltheme.slug}",
+                  og: {image: (@festivaltheme.image? ?  [ @festivaltheme.image.url(:standard).gsub(/^https/, 'http'), { secure_url: @festivaltheme.image.url(:standard) } ] : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
+                        title: "#{@festival.name} | #{@festivaltheme.name}", type: 'website', 
+                        url: "http://#{request.host}/festivals/#{@festival.slug}/theme/#{@festivaltheme.slug}",
+                        description: @festivaltheme.short_description.blank? ?  @festivaltheme.description[0...200] : @festivaltheme.short_description
+                      }, 
+                  twitter: {card: 'summary', site: '@pixelache'},
+                  alternate: a
     set_meta_tags :title => "#{@festival.name} | #{@festivaltheme.name}"
   end
       
