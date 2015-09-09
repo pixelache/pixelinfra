@@ -68,14 +68,14 @@
           - @post.festivalthemes.each do |ft|
             .small-12.medium-6.related{class: cycle('odd', 'even')}
               = link_to "/festivals/#{ft.festival.slug}/theme/#{ft.slug}" do
-                .related_image_box{style: "background: url(#{ft.image.url(:standard).gsub('development', 'production')}) no-repeat center center;"}
+                .related_image_box{style: "background: url(#{ft.image.url(:standard)}) no-repeat center center;"}
                 %h3= ft.name
                 .blurb= raw truncate_html(ft.description, length: 200)
               = link_to t("livingspaces.learn_more") + " >>>", "/festivals/#{ft.festival.slug}/theme/#{ft.slug}"
             - ft.events.published.shuffle.each do |event|
               .small-12.medium-6.related{class: cycle('odd', 'even')}
                 = link_to event do
-                  .related_image_box{style: "background: url(#{event.image.url(:standard).gsub('development', 'production')}) no-repeat center center;"}
+                  .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
                   %h3= event.name
                   .blurb= raw truncate_html(strip_tags(event.description), length: 200)
                 = link_to t("livingspaces.learn_more") + " >>>", event

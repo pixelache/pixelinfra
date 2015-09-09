@@ -129,12 +129,13 @@
                     .video_description= raw v.description
       .row
         .columns.small-12.small-centered.share_bar= render partial: 'shared/share_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@event)}"), title: CGI::escape(@event.name)}
+        
       - unless @event.posts.published.empty? && @event.festivalthemes.empty?
-        .related_content
+        .related_content.row
           .small-12.medium-6
             %h2.no_bar= t :related_content
       - unless @event.posts.published.empty?
-        .related_event
+        .related_event.row
           .small-12.medium-6.related{class: cycle('odd', 'even')}
             - @event.posts.published.sort_by(&:published_at).reverse.each do |post|
               = link_to post do
@@ -145,7 +146,7 @@
               
       - unless @event.festivalthemes.empty?
 
-        .related_event   
+        .related_event.row
           - @event.festivalthemes.each do |ft|
             .small-12.medium-6.related{class: cycle('odd', 'even')}
               = link_to "/festivals/festival-2015/theme/#{ft.slug}" do
