@@ -172,6 +172,17 @@
                   .blurb= raw truncate_html(strip_tags(event.description), length: 200)
                 = link_to t("livingspaces.learn_more") + " >>>", event
               
+      - unless @event.find_related_tags.blank?
+        .related_event.by_tag.row
+          - @event.find_related_tags.each_with_index do |event, i|
+            - unless @event.festivalthemes.empty?
+              - next if @event.festivalthemes.map(&:events).flatten.include?(event)
+              .small-12.medium-6.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
+                = link_to event do
+                  .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
+                  %h3= event.name
+                  .blurb= raw truncate_html(strip_tags(event.description), length: 200)
+                = link_to t("livingspaces.learn_more") + " >>>", event
               
   = content_for :jquery do
     - unless @event.place.latitude.blank?

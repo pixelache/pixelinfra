@@ -444,6 +444,9 @@ footer {
       &.even {
         padding-right: 0;
       }
+      &.end {
+        clear: both;
+      }
   
       a {
 
@@ -482,7 +485,13 @@ footer {
     .related {
       float: left;
       &.odd {
-        padding-right: 0.5rem;
+        padding-right: 3rem;
+      }
+      &.even {
+        padding-left: 3rem;
+      }
+      &.end {
+        clear:both;
       }
     }
     a {
@@ -502,6 +511,9 @@ footer {
       }
     }
     border-top: 3px solid $festival-orange;
+    &.by_tag {
+      border-top: none;
+    }
   }
   .carousel {
     min-height: 3rem;

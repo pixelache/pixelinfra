@@ -10,6 +10,7 @@
     .small-4.columns
       = f.input :festival, :label => 'Part of a festival?', collection: Festival.all.order(start_at: :desc)
       = f.input :festivalthemes, :label => 'If so, part of a festival theme?', :member_label => :name_and_festival, :hint => 'Make sure you match the right festival!'
+      = f.input :tag_list, :label => 'Festival tags', :hint => 'separate by commas'
     .small-4.columns
       = f.input :residency, :label => 'Attached to a residency?', collection: Residency.all.order(start_at: :desc)
     .small-4.columns
