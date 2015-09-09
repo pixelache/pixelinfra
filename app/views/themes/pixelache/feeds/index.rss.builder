@@ -18,7 +18,7 @@ xml.rss :version => "2.0" do
           xml.guid "http://pixelache.ac" + event_path(article.item)
         else
           xml.title article.item.title
-          xml.author article.item.creator.email + " #{article.item.creator.name})"
+          xml.author article.item.creator.name
           xml.link "http://pixelache.ac" + post_path(article.item)
           xml.guid "http://pixelache.ac" + post_path(article.item)
         end
