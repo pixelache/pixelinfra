@@ -4,9 +4,9 @@
 .event_single
   - if @event.image?
     .carousel
-      .slide{style: "background: url(#{@event.image.url.gsub('development', 'production')}) center bottom no-repeat; "} &nbsp;
+      .slide{style: "background: url(#{@event.image.url}) center bottom no-repeat; "} &nbsp;
       - unless @event.photos.blank?
-        .slide{style: "background: url(#{@event.photos.first.filename.url.gsub('development', 'production')}) center bottom no-repeat; background-size: cover"} &nbsp;
+        .slide{style: "background: url(#{@event.photos.first.filename.url}) center bottom no-repeat; background-size: cover"} &nbsp;
   .overlapping_divider 
     .text= @event.name
     
@@ -32,6 +32,11 @@
             = number_to_currency(@event.cost, format: "%n%u", unit: raw("&euro;"))
           - else
             = t :free_entrance
+          - unless @event.festivalthemes.empty?
+            .festival_themes
+              Part of:
+              - @event.festivalthemes.each do |ft|
+                %span.theme= link_to ft.name, "/festivals/#{ft.festival.slug}/theme/#{ft.slug}"
         - unless @event.place.latitude.blank?
           - unless @event.place.slug =~ /^various-locations/
             .small-12.columns.text-center.map_container.small-centered
@@ -124,16 +129,49 @@
                     .video_description= raw v.description
       .row
         .columns.small-12.small-centered.share_bar= render partial: 'shared/share_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@event)}"), title: CGI::escape(@event.name)}
-      - unless @event.posts.published.empty?
+      - unless @event.posts.published.empty? && @event.festivalthemes.empty?
         .related_content
           .small-12.medium-6
             %h2.no_bar= t :related_content
+      - unless @event.posts.published.empty?
+        .related_event
+          .small-12.medium-6.related{class: cycle('odd', 'even')}
             - @event.posts.published.sort_by(&:published_at).reverse.each do |post|
               = link_to post do
-                .related_image_box{style: "background: url(#{post.image.url(:box).gsub('development', 'production')}) no-repeat center center;"}
+                .related_image_box{style: "background: url(#{post.image.url(:box)}) no-repeat center center;"}
                 %h3= post.title
                 .blurb= raw truncate_html(sanitize(post.body, tags: %w{em i italic b bold strong u}), length: 200)
               = link_to t("read_more") + " >>>", post
+              
+      - unless @event.festivalthemes.empty?
+
+        .related_event   
+          - @event.festivalthemes.each do |ft|
+            .small-12.medium-6.related{class: cycle('odd', 'even')}
+              = link_to "/festivals/festival-2015/theme/#{ft.slug}" do
+                .related_image_box{style: "background: url(#{ft.image.url(:standard)}) no-repeat center center;"}
+                %h3= ft.name
+                .blurb= raw truncate_html(ft.description, length: 200)
+              = link_to t("livingspaces.learn_more") + " >>>", "/festivals/festival-2015/theme/#{ft.slug}"
+              
+            - ft.posts.published.each do |post|
+              .small-12.medium-6.related{class: cycle('odd', 'even')}
+                = link_to post do
+                  .related_image_box{style: "background: url(#{post.image.url(:standard)}) no-repeat center center;"}
+                  %h3= post.title
+                  .blurb= raw truncate_html(sanitize(post.body, tags: %w{em i italic b bold strong u}), length: 200)
+                = link_to t("read_more") + " >>>", post
+                
+            - ft.events.published.shuffle.each do |event|
+              - next if event == @event
+              .small-12.medium-6.related{class: cycle('odd', 'even')}
+                = link_to event do
+                  .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
+                  %h3= event.name
+                  .blurb= raw truncate_html(strip_tags(event.description), length: 200)
+                = link_to t("livingspaces.learn_more") + " >>>", event
+              
+              
   = content_for :jquery do
     - unless @event.place.latitude.blank?
       :plain

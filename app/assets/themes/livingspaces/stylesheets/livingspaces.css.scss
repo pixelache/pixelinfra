@@ -399,8 +399,70 @@ footer {
   }
 }
 
+.theme_single {
+  h2 {
+    border-top: 4px solid #ec9f43;
+    &.no_bar {
+      border-top: none;
+      padding-top: 0;
+      margin: 0.6rem 0;
+      
+    }
+    margin-top: 2rem;
+    padding-top: 2rem;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    a {
+      color: black;
 
-.event_single, .post_single {
+    }
+  }
+  .related_content {
+    padding-bottom: 2rem;
+    .related_heading {
+      width: 100%;
+      border-bottom: 3px solid $festival-orange;
+    }
+    .related {
+      h3 {
+        text-transform: uppercase;
+        color: #444;
+        font-size: 1.18rem;
+      
+      }
+      font-size: 0.9rem;
+      float: left;
+      &.odd {
+        padding-right: 0.5rem;
+        padding-left: 0;
+        clear: both;
+      }
+      &.even {
+        padding-right: 0;
+      }
+  
+      a {
+
+        .related_image_box {
+          width: 100%;
+          height: 250px;
+          background-size: cover !important;
+          border-bottom: 4px solid $festival-orange;
+          margin: 1.5rem 0 1rem 0;
+        }
+        .blurb, .blurb p {
+          font-weight: 300;
+          font-size: 0.8rem;
+          line-height: 1.4rem;
+          color: #444;
+          margin-bottom: 0.7rem;
+        }
+      }
+    }
+    
+  }
+}
+.event_single, .post_single, .theme_single {
   
   .post_body {
     padding-bottom: 1.5rem;
@@ -424,6 +486,7 @@ footer {
       .related_image_box {
         width: 100%;
         height: 250px;
+        background-size: cover !important;
         border-bottom: 4px solid $festival-orange;
         margin: 1.5rem 0 1rem 0;
       }
@@ -477,6 +540,22 @@ footer {
           margin-bottom: 0;
         }
       }
+      .festival_themes {
+        text-transform: none;
+        font-style: normal;
+        font-size: 1.1rem;
+        margin-top: 0.4rem;
+        span.theme {
+
+          text-transform: none;
+          font-style: normal;
+          font-size: 1.1rem;
+          a {
+      
+          }
+       
+        }
+      }
       .cost {
         font-size: 0.9rem;
         font-style: italic;
@@ -518,8 +597,8 @@ footer {
       border-top: 4px solid #ec9f43;
       &.no_bar {
         border-top: none;
-        padding-top: 0.5rem;
-        margin-top: 1rem;
+        padding-top: 0;;
+        margin: 0.6rem 0;
       }
       margin-top: 2rem;
       padding-top: 2rem;

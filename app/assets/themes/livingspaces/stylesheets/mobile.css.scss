@@ -80,6 +80,13 @@ $medium-portrait-only:"#{$screen} and (orientation: portrait) and (min-width:#{l
       }
     }
   }
+  .theme_single {
+    .related_content {
+      .related {
+        padding: 0;
+      }
+    }
+  }
   .page, .theme, .post_single, .event_single {
     .post_inner, .event_inner {
       padding: 2.5rem 0 5rem 0;
