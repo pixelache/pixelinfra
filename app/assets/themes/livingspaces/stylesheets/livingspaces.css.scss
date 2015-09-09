@@ -486,13 +486,14 @@ footer {
       float: left;
       &.odd {
         padding-right: 3rem;
+        &.end {
+          clear:both;
+        }
       }
       &.even {
         padding-left: 3rem;
       }
-      &.end {
-        clear:both;
-      }
+
     }
     a {
 

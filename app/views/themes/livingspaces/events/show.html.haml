@@ -30,6 +30,12 @@
         .small-12.columns.text-center.cost.small-centered
           - if @event.cost
             = number_to_currency(@event.cost, format: "%n%u", unit: raw("&euro;"))
+          -  if @event.cost_alternate
+            .alternate_cost
+              = "("
+              = number_to_currency(@event.cost_alternate, format: "%n%u", unit: raw("&euro;"))
+              = @event.cost_alternate_reason
+              = ")"
           - else
             = t :free_entrance
           - unless @event.festivalthemes.empty?
@@ -130,7 +136,7 @@
       .row
         .columns.small-12.small-centered.share_bar= render partial: 'shared/share_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@event)}"), title: CGI::escape(@event.name)}
         
-      - unless @event.posts.published.empty? && @event.festivalthemes.empty?
+      - unless @event.posts.published.empty? && @event.festivalthemes.empty? && @event.find_related_tags.blank?
         .related_content.row
           .small-12.medium-6
             %h2.no_bar= t :related_content
@@ -173,16 +179,17 @@
                 = link_to t("livingspaces.learn_more") + " >>>", event
               
       - unless @event.find_related_tags.blank?
+
         .related_event.by_tag.row
           - @event.find_related_tags.each_with_index do |event, i|
             - unless @event.festivalthemes.empty?
               - next if @event.festivalthemes.map(&:events).flatten.include?(event)
-              .small-12.medium-6.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
-                = link_to event do
-                  .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
-                  %h3= event.name
-                  .blurb= raw truncate_html(strip_tags(event.description), length: 200)
-                = link_to t("livingspaces.learn_more") + " >>>", event
+            .small-12.medium-6.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
+              = link_to event do
+                .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
+                %h3= event.name
+                .blurb= raw truncate_html(strip_tags(event.description), length: 200)
+              = link_to t("livingspaces.learn_more") + " >>>", event
               
   = content_for :jquery do
     - unless @event.place.latitude.blank?
