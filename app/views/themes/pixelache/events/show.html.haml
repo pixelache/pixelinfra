@@ -38,7 +38,7 @@
     .body= raw @event.description
 
     .row
-      .small-12.centered.columns.share_this= render :partial => 'shared/share_this_buttons'
+      .small-12.centered.columns.share_this= render :partial => 'shared/share_this_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@event)}"), title: CGI::escape(@event.name) }
 
     - if @event.has_documentation?
 
