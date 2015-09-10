@@ -140,56 +140,57 @@
         .related_content.row
           .small-12.medium-6
             %h2.no_bar= t :related_content
-      - unless @event.posts.published.empty?
-        .related_event.row
-          .small-12.medium-6.related{class: cycle('odd', 'even')}
-            - @event.posts.published.sort_by(&:published_at).reverse.each do |post|
-              = link_to post do
-                .related_image_box{style: "background: url(#{post.image.url(:box)}) no-repeat center center;"}
-                %h3= post.title
-                .blurb= raw truncate_html(sanitize(post.body, tags: %w{em i italic b bold strong u}), length: 200)
-              = link_to t("read_more") + " >>>", post
-              
-      - unless @event.festivalthemes.empty?
-
-        .related_event.row
-          - @event.festivalthemes.each do |ft|
-            .small-12.medium-6.related{class: cycle('odd', 'even')}
-              = link_to "/festivals/festival-2015/theme/#{ft.slug}" do
-                .related_image_box{style: "background: url(#{ft.image.url(:standard)}) no-repeat center center;"}
-                %h3= ft.name
-                .blurb= raw truncate_html(ft.description, length: 200)
-              = link_to t("livingspaces.learn_more") + " >>>", "/festivals/festival-2015/theme/#{ft.slug}"
-              
-            - ft.posts.published.each do |post|
+        .row
+          - unless @event.posts.published.empty?
+            .related_event
               .small-12.medium-6.related{class: cycle('odd', 'even')}
-                = link_to post do
-                  .related_image_box{style: "background: url(#{post.image.url(:standard)}) no-repeat center center;"}
-                  %h3= post.title
-                  .blurb= raw truncate_html(sanitize(post.body, tags: %w{em i italic b bold strong u}), length: 200)
-                = link_to t("read_more") + " >>>", post
+                - @event.posts.published.sort_by(&:published_at).reverse.each do |post|
+                  = link_to post do
+                    .related_image_box{style: "background: url(#{post.image.url(:box)}) no-repeat center center;"}
+                    %h3= post.title
+                    .blurb= raw truncate_html(sanitize(post.body, tags: %w{em i italic b bold strong u}), length: 200)
+                  = link_to t("read_more") + " >>>", post
+              
+          - unless @event.festivalthemes.empty?
+
+            .related_event
+              - @event.festivalthemes.each do |ft|
+                .small-12.medium-6.related{class: cycle('odd', 'even')}
+                  = link_to "/festivals/festival-2015/theme/#{ft.slug}" do
+                    .related_image_box{style: "background: url(#{ft.image.url(:standard)}) no-repeat center center;"}
+                    %h3= ft.name
+                    .blurb= raw truncate_html(ft.description, length: 200)
+                  = link_to t("livingspaces.learn_more") + " >>>", "/festivals/festival-2015/theme/#{ft.slug}"
+              
+                - ft.posts.published.each do |post|
+                  .small-12.medium-6.related{class: cycle('odd', 'even')}
+                    = link_to post do
+                      .related_image_box{style: "background: url(#{post.image.url(:standard)}) no-repeat center center;"}
+                      %h3= post.title
+                      .blurb= raw truncate_html(sanitize(post.body, tags: %w{em i italic b bold strong u}), length: 200)
+                    = link_to t("read_more") + " >>>", post
                 
-            - ft.events.published.shuffle.each do |event|
-              - next if event == @event
-              .small-12.medium-6.related{class: cycle('odd', 'even')}
-                = link_to event do
-                  .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
-                  %h3= event.name
-                  .blurb= raw truncate_html(strip_tags(event.description), length: 200)
-                = link_to t("livingspaces.learn_more") + " >>>", event
+                - ft.events.published.shuffle.each do |event|
+                  - next if event == @event
+                  .small-12.medium-6.related{class: cycle('odd', 'even')}
+                    = link_to event do
+                      .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
+                      %h3= event.name
+                      .blurb= raw truncate_html(strip_tags(event.description), length: 200)
+                    = link_to t("livingspaces.learn_more") + " >>>", event
               
-      - unless @event.find_related_tags.blank?
+          - unless @event.find_related_tags.blank?
 
-        .related_event.by_tag.row
-          - @event.find_related_tags.each_with_index do |event, i|
-            - unless @event.festivalthemes.empty?
-              - next if @event.festivalthemes.map(&:events).flatten.include?(event)
-            .small-12.medium-6.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
-              = link_to event do
-                .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
-                %h3= event.name
-                .blurb= raw truncate_html(strip_tags(event.description), length: 200)
-              = link_to t("livingspaces.learn_more") + " >>>", event
+            .related_event.by_tag
+              - @event.find_related_tags.each_with_index do |event, i|
+                - unless @event.festivalthemes.empty?
+                  - next if @event.festivalthemes.map(&:events).flatten.include?(event)
+                .small-12.medium-6.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
+                  = link_to event do
+                    .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
+                    %h3= event.name
+                    .blurb= raw truncate_html(strip_tags(event.description), length: 200)
+                  = link_to t("livingspaces.learn_more") + " >>>", event
               
   = content_for :jquery do
     - unless @event.place.latitude.blank?

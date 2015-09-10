@@ -480,12 +480,19 @@ footer {
     
     margin-bottom: .5rem;
   }
+  .related_content {
+    border-bottom: 3px solid $festival-orange;
+    border-top: 3px solid $festival-orange;
+  }
+
   .related_event, .related_content {
     font-size: 0.9rem;
     .related {
       float: left;
+      padding-bottom: 1.8rem;
       &.odd {
         padding-right: 1rem;
+        clear: both;
         &.end {
           clear:both;
         }
@@ -511,7 +518,7 @@ footer {
         margin-bottom: 0.7rem;
       }
     }
-    border-top: 3px solid $festival-orange;
+    
     &.by_tag {
       border-top: none;
     }
