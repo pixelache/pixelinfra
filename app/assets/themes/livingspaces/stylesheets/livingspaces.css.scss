@@ -485,13 +485,13 @@ footer {
     .related {
       float: left;
       &.odd {
-        padding-right: 3rem;
+        padding-right: 1rem;
         &.end {
           clear:both;
         }
       }
       &.even {
-        padding-left: 3rem;
+        padding-left: 1rem;
       }
 
     }
