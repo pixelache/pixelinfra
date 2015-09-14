@@ -1086,3 +1086,16 @@ footer {
     }
   }
 }
+
+// tram map
+
+table.tram_map {
+   border: 1px solid $festival-orange;
+   border-collapse: collapse;
+  tr {
+    &:nth-of-type(even) {
+      background-color: #EBF1F5;
+    }
+    td {}
+  }
+}
