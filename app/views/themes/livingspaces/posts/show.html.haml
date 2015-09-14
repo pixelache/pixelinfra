@@ -78,7 +78,15 @@
                       %h3= event.name
                       .blurb= raw truncate_html(strip_tags(event.description), length: 200)
                     = link_to t("livingspaces.learn_more") + " >>>", event
-          
+
+      - unless @post.previous_post_by_festival.nil? && @post.next_post_by_festival.nil?
+        .prev_next
+          .previous
+            - unless @post.previous_post_by_festival.nil?
+              = link_to "<<< #{t :previous_post}: #{@post.previous_post_by_festival.title}", @post.previous_post_by_festival
+          .next
+            - unless @post.next_post_by_festival.nil?
+              = link_to "#{t :next_post}: #{@post.next_post_by_festival.title} >>>", @post.next_post_by_festival
 - unless @post.photos.blank?    
   = content_for :jquery do
     :plain

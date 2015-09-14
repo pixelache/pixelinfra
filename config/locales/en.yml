@@ -450,6 +450,8 @@ en:
   see_all_news: 'See all news...'
   news_and_events: 'News and events'
   thank_you_volunteering: 'Thank you for your interest in volunteering!'
+  previous_post: 'Previous post'
+  next_post: 'Next post'
   livingspaces:
     about: 'About'
     locations: 'Locations'

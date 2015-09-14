@@ -58,7 +58,22 @@ class Post < ActiveRecord::Base
     
   end
           
-          
+  def previous_post
+    self.class.where("published is true and published_at < ?", published_at).order("published_at desc").first
+  end
+
+  def next_post
+    self.class.where("published is true and published_at > ?", published_at).order("published_at asc").first
+  end
+  
+  def previous_post_by_festival
+    self.class.where("published is true and festival_id = ? and published_at < ?", festival_id, published_at).order("published_at desc").first
+  end
+
+  def next_post_by_festival
+    self.class.where("published is true and festival_id = ? and published_at > ?", festival_id, published_at).order("published_at asc").first
+  end
+  
   def check_published
     if self.published == true
       self.published_at ||= Time.now
