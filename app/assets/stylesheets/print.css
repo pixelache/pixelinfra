@@ -1,3 +1,7 @@
 .no_print {
   display: none;
 }
+
+nav.top-bar {
+  display: none;
+}

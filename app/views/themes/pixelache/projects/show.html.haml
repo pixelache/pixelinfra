@@ -30,7 +30,7 @@
       .small-12.columns.description= raw @project.description
     .row
       .small-12.columns
-        .share_this= render :partial => 'shared/share_this_buttons'
+        .share_this= render :partial => 'shared/share_this_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@project)}"), title: CGI::escape(@project.name) }
 
         
     .row
