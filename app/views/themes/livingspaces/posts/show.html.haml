@@ -57,11 +57,12 @@
             %h2.no_bar= t :related_content
 
           - if @post.event
-            = link_to @post.event do
-              .related_image_box{style: "background: url(#{@post.event.image.url(:standard)}) no-repeat center center;"}
-              %h3= @post.event.name
-              .blurb= raw truncate_html(@post.event.description, length: 200)
-            = link_to t("livingspaces.learn_more") + " >>>", @post.event
+            .small-12.medium-6.related{class: cycle('odd', 'even')}
+              = link_to @post.event do
+                .related_image_box{style: "background: url(#{@post.event.image.url(:standard)}) no-repeat center center;"}
+                %h3= @post.event.name
+                .blurb= raw truncate_html(@post.event.description, length: 200)
+              = link_to t("livingspaces.learn_more") + " >>>", @post.event
           - unless @post.festivalthemes.empty?
             .related_event   
               - @post.festivalthemes.each do |ft|
@@ -72,6 +73,8 @@
                     .blurb= raw truncate_html(ft.description, length: 200)
                   = link_to t("livingspaces.learn_more") + " >>>", "/festivals/#{ft.festival.slug}/theme/#{ft.slug}"
                 - ft.events.published.shuffle.each do |event|
+                  - if @post.event 
+                    - next if event == @post.event
                   .small-12.medium-6.related{class: cycle('odd', 'even')}
                     = link_to event do
                       .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
