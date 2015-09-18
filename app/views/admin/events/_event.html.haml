@@ -8,7 +8,7 @@
         %b Registrations:
         - if event.max_attendees
           - if event.attendees.size >= event.max_attendees
-            = event.max_attendees
+            = event.attendees.size
             %b (FULL!)
             - if event.attendees.size > event.max_attendees
               %br/

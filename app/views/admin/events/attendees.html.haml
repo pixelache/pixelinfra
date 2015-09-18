@@ -10,7 +10,7 @@
     %p
       All emails (to copy and paste):
       %br/
-      %small= @attendees.to_a.delete_if{|x| x.waiting_list == true }.map(&:email).join(', ')
+      %small= @attendees.to_a.reject{|x| x.waiting_list == true }.map(&:email).join(', ')
 .row
   .small-12.columns 
     %table
@@ -27,6 +27,7 @@
               = (index+1).to_s + "."
               = att.name
               - if att.waiting_list
+                %br/
                 %strong WAITING LIST
             %td= att.email
             %td= att.phone
