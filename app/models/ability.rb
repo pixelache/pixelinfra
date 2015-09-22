@@ -36,6 +36,10 @@ class Ability
       can :manage, Festival
       can :manage, Project
       cannot :manage, Step
+    elsif user.has_role? :guest_poster
+      can :create, Post
+      can :update, Post, creator_id: user.id
+      can :destroy, Post, creator_id: user.id
     end
     
     
