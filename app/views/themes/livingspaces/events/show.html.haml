@@ -57,7 +57,7 @@
         = raw @event.description
 
 
-      - if @event.registration_required?
+      - if @event.registration_required? && @event.start_at >= Time.now
         #registration_form.row
           %h2= t "livingspaces.register_to_participate"
           - if @event.max_attendees
@@ -95,7 +95,10 @@
               .small-10.columns= recaptcha_tags hl: I18n.locale.to_s, :display => { :theme => 'clean' }
             .row
               .small-10.columns= f.submit 'Submit'
-                              
+      - elsif @event.registration_required? && @event.start_at < Time.now                   
+        #registration_form.row
+          %h2= t :registration_is_closed
+          
       - if @event.has_documentation?
 
         .documentation#documentation
