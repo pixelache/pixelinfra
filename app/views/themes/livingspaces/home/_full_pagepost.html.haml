@@ -14,8 +14,8 @@
           - else
             = front.custom_title
         .blurb
-          = truncate_html(sanitize(front.item.body, tags: %w{b bold em i italic u underline br}), length: 175)
-          = link_to front.custom_follow_text.blank? ? t(:read_more) : front.custom_follow_text, front.item
+          = truncate_html(sanitize(front.item.nil? ? front.custom_follow_text : front.item.body, tags: %w{b bold em i italic u underline br}), length: 175)
+          = link_to  t(:read_more),  front.item.nil? ? front.external_url : front.item
         
 
 
