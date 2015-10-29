@@ -124,7 +124,7 @@
           - unless @event.all_documentation["images"].empty?
             .image_carousel
               - @event.all_documentation["images"].each do |i|
-                .img{:"data-thumb" => i.filename.url(:thumb)
+                .img{:"data-thumb" => i.filename.url(:thumb)}
                   = link_to image_tag(i.filename.url(:standard)), i.filename.url, rel: :lazybox
               
           - unless @event.flickrsets.empty?
