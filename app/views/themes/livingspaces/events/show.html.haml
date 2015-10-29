@@ -96,21 +96,37 @@
             .row
               .small-10.columns= f.submit 'Submit'
       - elsif @event.registration_required? && @event.start_at < Time.now                   
-        #registration_form.row
+        #registration_form.row{class: @event.has_documentation? ? :hasdoc : false}
           %h2= t :registration_is_closed
           
       - if @event.has_documentation?
+        = content_for :jquery do
+          :plain
+            $('.image_carousel').slick({infinite: true,
+              slidesToShow: 1,
 
-        .documentation#documentation
+              dots: true,
+              customPaging : function(slider, i) {
+                var thumb = $(slider.$slides[i]).data('thumb');
+                return '<a><img src="'+thumb+'"></a>';
+              },
+              arrows: true,
+              slide: '.img',
+              variableWidth: false,
+              autoplay: true,
+              autoplaySpeed: 3600,
+              slidesToScroll: 1,
+            });
+        .documentation.row#documentation
           .row.related_title
             .small-12.columns.small-centered
-              %h1= t(:documentation)
+              %h2= t(:documentation)
           - unless @event.all_documentation["images"].empty?
             .image_carousel
               - @event.all_documentation["images"].each do |i|
-                .img
+                .img{:"data-thumb" => i.filename.url(:thumb)
                   = link_to image_tag(i.filename.url(:standard)), i.filename.url, rel: :lazybox
-                  .thumb= image_tag i.filename.url(:thumb)
+              
           - unless @event.flickrsets.empty?
             .flickr_galleries
               .subtitle= t(@event.all_documentation["images"].empty? ? :image_galleries : :additional_images)

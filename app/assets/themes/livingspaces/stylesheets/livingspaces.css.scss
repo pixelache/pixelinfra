@@ -194,14 +194,46 @@ nav.top-bar {
   }
 }
 
-
 .programme_carousel {
-  border-top: 2px solid #444;
   max-height: 550px;
   overflow-y: hidden;
+}
+
+.programme_carousel, .image_carousel {
+  border-top: 2px solid #444;
+
   .slick-slide img { width: 100%; }
   .slick-prev, .slick-next {
     display: none !Important;
+  }
+}
+.image_carousel {
+  .img {
+    .thumb {
+      display: block;
+     
+      
+    }
+  }
+  .slick-slide {
+    max-height: 550px;
+    overflow-y: hidden;
+    .thumb {
+      img {
+        width: 65px;
+        height: auto;
+      }
+    }
+  }
+  ul.slick-dots {
+    margin: 5px 0 0 0;
+
+    li {
+      width: 75px;
+      height: 75px;
+      list-style-type: none;
+      float: left;
+    }
   }
 }
 
@@ -744,6 +776,9 @@ footer {
 
 #registration_form {
   border-bottom: 1px solid $festival-orange;
+  &.hasdoc {
+    border-bottom: none;
+  }
 }
 .experience_form, #registration_form {
   padding-bottom: 4rem;
@@ -1097,5 +1132,11 @@ table.tram_map {
       background-color: #EBF1F5;
     }
     td {}
+  }
+}
+
+#documentation {
+  h2 {
+
   }
 }
