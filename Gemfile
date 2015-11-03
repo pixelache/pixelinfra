@@ -35,7 +35,7 @@ gem 'etherpad-lite'
 gem 'event-calendar', :require => 'event_calendar'
 gem 'figaro'
 gem 'flickraw'
-
+gem 'flickr_fu'
 gem 'font-awesome-rails'
 gem 'formtastic', '~> 2.3.0.rc2'
 gem 'foundation-rails', '5.5.2.1'#, '5.3.0'

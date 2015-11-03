@@ -199,7 +199,7 @@ nav.top-bar {
   overflow-y: hidden;
 }
 
-.programme_carousel, .image_carousel {
+.programme_carousel, .image_carousel, .flickr_carousel {
   border-top: 2px solid #444;
 
   .slick-slide img { width: 100%; }
@@ -207,7 +207,9 @@ nav.top-bar {
     display: none !Important;
   }
 }
-.image_carousel {
+
+
+.image_carousel, .flickr_carousel {
   .img {
     .thumb {
       display: block;

@@ -5,7 +5,7 @@ set :application, 'pixelinfra'
 set :repo_url, 'git://github.com/pixelache/pixelinfra.git'
 set :rvm_ruby_version, '2.2.2'
 set :keep_releases, 3
-set :linked_files, %w{config/database.yml config/application.yml }
+set :linked_files, %w{config/database.yml config/application.yml config/flickr.yml }
 set :linked_dirs, %w{public/system public/uploads public/images public/assets log}
 set :rails_env, 'production'
 set :migrate_env, 'production'
