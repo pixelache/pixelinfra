@@ -5,8 +5,9 @@
   - if @event.image?
     .carousel
       .slide{style: "background: url(#{@event.image.url}) center bottom no-repeat; "} &nbsp;
-      - unless @event.photos.blank?
-        .slide{style: "background: url(#{@event.photos.first.filename.url}) center bottom no-repeat; background-size: cover"} &nbsp;
+  - else
+    - unless @event.photos.blank?
+      .slide{style: "background: url(#{@event.photos.first.filename.url}) center bottom no-repeat; background-size: cover"} &nbsp;
   .overlapping_divider 
     .text= @event.name
     
@@ -98,7 +99,7 @@
               .small-10.columns= recaptcha_tags hl: I18n.locale.to_s, :display => { :theme => 'clean' }
             .row
               .small-10.columns= f.submit 'Submit'
-      - elsif @event.registration_required? && @event.start_at < Time.now                   
+      - elsif @event.registration_required? && @event.start_at >= Time.now                   
         #registration_form.row{class: @event.has_documentation? ? :hasdoc : false}
           %h2= t :registration_is_closed
           
@@ -133,26 +134,27 @@
           - unless @event.flickrsets.empty?
             .flickr_galleries
               .subtitle= t(@event.all_documentation["images"].empty? ? :image_galleries : :additional_images)
-              
-              - @event.flickrsets.each do |set|
-                = render_flickr_sidebar_widget set
-              = content_for :jquery do
-                :plain
-                  $('.flickr_carousel').slick({infinite: true,
-                    slidesToShow: 1,
-
-                    dots: true,
-                    customPaging : function(slider, i) {
-                      var thumb = $(slider.$slides[i]).data('thumb');
-                      return '<a><img src="'+thumb+'"></a>';
-                    },
-                    arrows: true,
-                    slide: '.img',
-                    variableWidth: false,
-                    autoplay: true,
-                    autoplaySpeed: 3600,
-                    slidesToScroll: 1,
-                  });
+              - @event.flickrsets.each do |flickrset|
+                %p= link_to  flickrset.title, flickrset.flickr_url, target: :_blank
+              / - @event.flickrsets.each do |set|
+              /   = render_flickr_sidebar_widget set
+              / = content_for :jquery do
+              /   :plain
+              /     $('.flickr_carousel').slick({infinite: true,
+              /       slidesToShow: 1,
+              /
+              /       dots: true,
+              /       customPaging : function(slider, i) {
+              /         var thumb = $(slider.$slides[i]).data('thumb');
+              /         return '<a><img src="'+thumb+'"></a>';
+              /       },
+              /       arrows: true,
+              /       slide: '.img',
+              /       variableWidth: false,
+              /       autoplay: true,
+              /       autoplaySpeed: 3600,
+              /       slidesToScroll: 1,
+              /     });
             
           - if @event.all_documentation["videos"].empty?
             - if @event.project
