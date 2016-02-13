@@ -88,7 +88,7 @@ class FestivalsController < InheritedResources::Base
                   og: {image: (@festivaltheme.image? ?  [ @festivaltheme.image.url(:standard).gsub(/^https/, 'http'), { secure_url: @festivaltheme.image.url(:standard) } ] : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
                         title: "#{@festival.name} | #{@festivaltheme.name}", type: 'website', 
                         url: "http://#{request.host}/festivals/#{@festival.slug}/theme/#{@festivaltheme.slug}",
-                        description: @festivaltheme.short_description.blank? ?  @festivaltheme.description[0...200] : @festivaltheme.short_description
+                        description: @festivaltheme.short_description.blank? ?  @festivaltheme.try(:description) : @festivaltheme.short_description
                       }, 
                   twitter: {card: 'summary', site: '@pixelache'},
                   alternate: a

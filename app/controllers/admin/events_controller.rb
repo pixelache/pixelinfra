@@ -16,6 +16,8 @@ class Admin::EventsController < Admin::BaseController
   def create
     create! { admin_events_path }
   end
+  
+
     
   def edit
     @event = Event.friendly.find(params[:id])
