@@ -2,6 +2,13 @@
 @import 'foundation_overrides';
 
 #festival_archive_slider {
+  .header {
+    background-color: black;
+    color: $our-yellow;
+    font-family: $quicksand;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+  }
   .slick-list {
     width: 100%;
   }

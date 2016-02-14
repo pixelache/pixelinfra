@@ -1,0 +1,33 @@
+#festival_archive_slider
+  .header.row
+    .small-6.columns.small-centered.text-center
+      = t :past_festival_archive
+  - Festival.by_node(1).order(end_at: :desc).each do |festival|
+    - next unless festival.festivalbackdrop?
+    .festival_slide.columns.small-6.medium-3{style: "background: url(#{festival.festivalbackdrop.url.gsub('development', 'production')}) center bottom;"}
+      = link_to festival do
+        .text
+          .year.text-center= festival.start_at.to_date.year
+          .text-center.subtitle= festival.subtitle
+      
+      
+= content_for :jquery do      
+  :plain
+    $('#festival_archive_slider').slick({infinite: true,
+      slidesToShow: 4,
+      slide: '.festival_slide',
+      responsive: [
+
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2
+            }
+          }
+          ],
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 1400,
+      slidesToScroll: 2
+    });

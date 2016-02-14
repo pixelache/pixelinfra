@@ -329,6 +329,7 @@ en:
   override_country: 'Enter text here that will display instead of the country from the above dropdown'
   overview: 'Overview'
   page: 'Page'
+  past_festival_archive: 'Past festivals:'
   part_of_existing_project: 'Will this be under an existing project?'
   partners: 'Partners'
   password: 'Please choose a secure password.'

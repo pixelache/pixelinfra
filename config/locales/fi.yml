@@ -423,6 +423,7 @@ fi:
   thank_you_volunteering: 'Kiitos tarjoutumisestasi vapaaehtoiseksi!'
   previous_post: 'Edellinen'
   next_post: 'Seuraava'
+  past_festival_archive: 'Festivaaliarkisto:'
   registration_is_closed: 'Rekisteröinti on loppunut.'
   livingspaces:
     about: 'Lisätietoja'
