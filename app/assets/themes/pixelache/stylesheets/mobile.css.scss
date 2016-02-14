@@ -80,7 +80,24 @@
     }
   }
 
-
+  .multipost_selected {
+    .top_post {
+      .title {
+        font-size: 1.7rem;
+        line-height: 1.9rem;
+      }
+      .metadata {
+        font-size: 0.9rem;
+      }
+      .body, .body p {
+        font-size: 0.8rem;
+      }
+      .read_more {
+        font-size: 1rem;
+      }
+    }
+  }
+  
   .three_posts .smaller_posts {
     .metadata {
       margin-bottom: 0.5rem;

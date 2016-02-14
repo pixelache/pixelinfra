@@ -1,14 +1,19 @@
-- if front.bigimage? && front.dont_scale != true
+- if front.no_text == true
+  - style = "background-color: ##{front.background_colour};"
+- elsif front.bigimage? && front.dont_scale != true
   - style = "background: url(#{front.bigimage.url(:full)})  no-repeat center center; background-size: cover;"
 - elsif front.bigimage? && front.dont_scale == true
-  - style = "background: url(#{front.bigimage.url})  no-repeat top center; height: #{front.bigimage_height}px;"
+  - style = "background: url(#{front.bigimage.url.gsub('development', 'production')})  no-repeat top center; height: #{front.bigimage_height}px; "
 - else
   - style = "background-color: ##{front.background_colour};"
-- if front.custom_title
-  - style += "padding-top: " + (front.custom_title ? "70px" : "30%;")
+/ - if front.custom_title
+/   - style += "padding-top: " + (front.custom_title ? "70px" : "30%;")
 = link_to front.external_url.blank? ? front.item : front.external_url do
-  .full_page_or_post.fullscreen{:style => style }
-    - unless front.no_text == true
+  .full_page_or_post.fullscreen.text-center{:style => style }
+    - if front.no_text == true
+      - if front.bigimage?
+        = image_tag front.bigimage.url(:full)
+    - else
       - if front.custom_title
         .row
           .medium-10.small-12.medium-offset-1.columns

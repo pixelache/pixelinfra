@@ -69,7 +69,11 @@ class Admin::FestivalsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:festival => [:name, :website, :slug, :start_at, :has_listserv, :subsite_id, :redirect_to, :listservname, :festival_location, :tertiary_colour, :remove_festivalbackdrop,  :node_id, :remove_image, :festival_id, :end_at, :background_colour, :primary_colour, :image, :published, :subtitle, :slug, :festivalbackdrop, translations_attributes: [:id, :locale, :overview_text],  attachments_attributes: [:id, :year_of_publication, :attachedfile,:title, :description, :public, :item_type, :item_id, :documenttype_id,  :_destroy], videos_attributes: [:id, :in_url, :_destroy]] )
+    params.permit(:festival => [:name, :website, :slug, :start_at, :has_listserv, :subsite_id, :redirect_to, :listservname,
+       :festival_location, :tertiary_colour, :remove_festivalbackdrop,  :node_id, :remove_image, :festival_id, :end_at, 
+       :background_colour, :primary_colour, :image, :published, :subtitle, :slug, :festivalbackdrop,
+        translations_attributes: [:id, :locale, :overview_text], 
+         attachments_attributes: [:id, :year_of_publication, :attachedfile, :title, :description, :public, :item_type, :item_id, :documenttype_id,  :_destroy], videos_attributes: [:id, :in_url, :_destroy]] )
   end
     
 end 

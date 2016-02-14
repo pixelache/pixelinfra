@@ -337,9 +337,13 @@
       }
     }
     .year {
-      font-size: 10rem;
+      font-size: 8rem;
+
       margin: 1.563rem 0px;
       letter-spacing: -10px;
+      a {
+        color: #fff;
+      }
     }
     .description {
       margin: 1rem 0 3rem 0;
