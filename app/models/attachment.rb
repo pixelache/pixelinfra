@@ -1,6 +1,7 @@
 class Attachment < ActiveRecord::Base
   belongs_to :item, polymorphic: true
   mount_uploader :attachedfile, AttachmentUploader
+  validates_presence_of :attachedfile
   before_save :get_metadata
   belongs_to :documenttype
   
