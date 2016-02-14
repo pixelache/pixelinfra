@@ -1,6 +1,36 @@
 @import 'variables';
 @import 'foundation_overrides';
 
+#festival_archive_slider {
+  .slick-list {
+    width: 100%;
+  }
+
+  .festival_slide {
+    min-height: 300px;
+    padding: 0;
+    overflow-y: hidden;
+    .text {
+      margin-top: 30%;
+      height: 33%;
+      width: 100%;
+      background-color: #FFF;
+      opacity: 0.8;
+      .year {
+        color: #32CCFF;
+
+        font-family: $quicksand;
+        font-size: 2.4rem;
+      }
+      .subtitle {
+        color: #32CCFF;
+        font-family: $quicksand;
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
 .three_posts {
   background-color: #FFF;
 }

@@ -10,7 +10,7 @@ class Project < ActiveRecord::Base
   translates :description, :short_description
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['description'].blank? && x['short_description'].blank? }
   accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :attachments, :reject_if => proc {|x| x['id'].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :attachments, :reject_if => proc {|x| x['attachedfile'].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :videos , reject_if: proc {|x| x['in_url'].blank? }, :allow_destroy => true
   extend FriendlyId
   friendly_id :name , :use => [ :slugged, :finders ]
