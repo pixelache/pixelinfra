@@ -58,7 +58,7 @@
   .row
     .small-12.columns
       %h4 Upload attachments to project
-      = semantic_nested_form_for [:admin, @festival] do |f|
+      = semantic_nested_form_for [:admin, @festival], html: {multipart: true } do |f|
         = f.fields_for :attachments do |ff|
           .medium-4.columns.small-12.panel
             = ff.input :attachedfile
