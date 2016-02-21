@@ -16,6 +16,9 @@ class PagesController < InheritedResources::Base
        set_meta_tags :title => @project.name + " - " + @page.name
       render :template => 'projects/page'
     else
+      if params[:id] =~ /^\d*$/
+        @page = Page.find(params[:id])
+      end
       if user_signed_in?
         pages = @site.pages.where(slug: p)
       else
@@ -27,7 +30,11 @@ class PagesController < InheritedResources::Base
         end
       end
       if pages.roots.empty?
-        @page = pages.first
+        if pages.empty? && !@page.nil?
+          @page = @page
+        else
+          @page = pages.first
+        end
         if @page.has_project?
           redirect_to project_page_path(:project_id => @page.parent_project)
         else

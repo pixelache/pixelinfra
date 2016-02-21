@@ -4,6 +4,12 @@
   height: 40px;
   &.fixed {
     z-index:110;
+    .top-bar {
+      height: 40px;
+      .top-bar-section li a, .top-bar-section li {
+        height: 40px !important;
+      }
+    }
   }
 }
 
