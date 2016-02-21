@@ -25,8 +25,10 @@ button.slick-next, button.slick-prev {
 .project_index {
   padding-top: 1rem;
   .dividing_strip {
+    width: 100%;
     &.top {
       margin-top: 10px;
+
     }
     background-color: #49a2fc;
     padding: 15px 0px 10px 0px;
@@ -286,10 +288,34 @@ button.slick-next, button.slick-prev {
     border-top: 1px solid #333;
     padding-top: 0.5rem;
   }
+  .news_link {
+    .read_more {
+      font-family: $quicksand;
+      text-transform: lowercase;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      a {
+        &:hover {
+          color: $newblue;
+        }
+      }
+    }
+  }
   
   .events_wrapper {
     margin: 3rem 0px;
     border-bottom: 1px solid #333;
+    .read_more {
+      font-family: $quicksand;
+      text-transform: lowercase;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      a {
+        &:hover {
+          color: $newblue;
+        }
+      }
+    }
     .wrapper_title {
       font-family: $quicksand;
       font-weight: 300;

@@ -183,12 +183,16 @@ table.etherpads {
     }
   }
   .related {
+    &:hover {
+      background-color: #efefef;
+    }
     &.column {
       padding-left: 0;
     }
     border-bottom: 1px solid #333;
     padding-bottom: 1.2rem;
-    margin: 1rem 0;
+    margin: 0;
+    padding: 1rem 0;
 
     &.project {
       .related_title {

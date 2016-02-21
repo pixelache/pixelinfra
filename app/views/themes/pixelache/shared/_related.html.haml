@@ -6,7 +6,7 @@
       .small-12.medium-4.columns  
         - if related.image?
           = image_tag related.image.url(:box)
-      .small-12.medium-8.columns.related_excerpt= raw truncate_html(related.description, :length => 600)
+      .small-12.medium-8.columns.related_excerpt= raw truncate_html(sanitize(related.description, tags: %w{bold p br strong b i italic em underline u a}), :length => 600)
     .read_more= link_to t(:read_more), related
       
 - elsif related.class == Post
@@ -17,8 +17,9 @@
       = l(related.published_at, format: :long) + ","
       = related.creator.name
     .row
-      .small-12.medium-4.columns= image_tag related.image.url(:box)
-      .small-12.medium-8.columns.related_excerpt= raw truncate_html(sanitize(related.body, tags: %w{b bold strong i italic em underline u}), :length => 600)
+      - if related.image?
+        .small-12.medium-4.columns= image_tag related.image.url(:box)
+      .small-12.columns.related_excerpt{class: related.image? ? "medium-8" : "medium-12"}= raw truncate_html(sanitize(related.body, tags: %w{b bold strong i italic em underline u}), :length => 600)
     .read_more= link_to t(:read_more), related
 
 
@@ -31,7 +32,7 @@
           .small-12.columns.related_excerpt= raw truncate_html(related.description, :length => 600)
         - else
           .medium-4.small-12.columns= image_tag related.photos.first.filename.url(:box)
-          .medium-8.small-12.columns.related_excerpt= raw truncate_html(related.description, :length => 600)
+          .medium-8.small-12.columns.related_excerpt= raw truncate_html(sanitize(related.description, tags: %w{b bold strong i italic em underline u}), :length => 600)
       .read_more= link_to t(:read_more), related
         
             

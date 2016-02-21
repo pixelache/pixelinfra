@@ -298,6 +298,7 @@ en:
   is_microresidency: 'Is this a microresidency?'
   is_paid: 'Paid?'
   join: 'Join'
+  last_events: 'Recent events'
   last_modified:  "Last edited on %{when}"
   latest_news: 'Latest news'
   led_to_new_project: 'Did this proposal lead to the creation of a project?'
@@ -359,6 +360,7 @@ en:
   publications: 'Publications'
   publications_coming_soon: 'Publications coming soon!'
   read_more: 'Read more'
+  recent_activity: 'Recent activity'
   recent_posts_by: "Latest posts by %{member}:"
   related_content: 'Related content'
   related_event: 'Related event'

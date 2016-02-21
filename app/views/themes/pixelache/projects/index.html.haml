@@ -3,7 +3,7 @@
   %span.leaf
     %strong= link_to t(:projects), projects_path
 
-.project_index 
+.project_index
   .dividing_strip.top
     .row  
       .small-12.columns.text-center= t :active_projects     
@@ -17,6 +17,7 @@
     
 = content_for :jquery do
   :plain
+
     $('.strip').hover(function() {
       $('.image_overlay').css('opacity', 0.2);
       $('.occluded').css('display', 'none');

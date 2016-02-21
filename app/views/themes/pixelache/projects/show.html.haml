@@ -39,21 +39,27 @@
           .events_wrapper
             .row
               .small-12.columns.text-left
-                .wrapper_title= t :all_events
+                .wrapper_title= t :last_events
           
                 .events_carousel.row
                   - @project.self_and_descendants.map{|x| x.events.published }.flatten.sort_by{|x| x.start_at }.reverse[0..8].each do |e| 
                     - if e.image?
                       = render :partial => 'events/event_cube', locals: {event: e }
 
+            .row
+              .small-3.columns.right.end.text-right
+                .read_more= link_to t(:all_events), project_events_path(@project)
+                
         - unless @activities.empty?
           .activities_wrapper.row
             .small-12.columns
               .row
-                .small-12.columns.wrapper_title= t :all_activity
+                .small-12.columns.wrapper_title= t :recent_activity
               #activities.related_container= render :partial => 'activities'
 
-
+          .row.news_link
+            .small-3.columns.right.end.text-right
+              .read_more= link_to t(:all_news), project_posts_path(@project)
 
 
                       
