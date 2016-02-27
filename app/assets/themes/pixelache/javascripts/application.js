@@ -1,7 +1,7 @@
 //= require pixelache/javascripts/jstree.min
 //= require pixelache/javascripts/jquery.clearfield
-
 //= require chosen-jquery
+
 function up_pixelache_menu() {
   var mainfinish = 0;
   if ( $('.page_tree').length ) {
@@ -63,15 +63,17 @@ function down_pixelache_menu() {
     }
     $('.pixelache_nav_menu, .top-bar-wrapper').addClass('fixed');
     $('#main').css('top', mainfinish + 40 );
-  });
+  }
+  );
   
   $(window).scroll(function() {
     if ($(window).scrollTop() == 0) {
       $('#main').css('top', mainfinish);
     }
   });
-
 }
+
+
 function down_festival_menu() {
 
   // var t = parseInt($('.pixelache_nav_menu').css('height'));
@@ -106,6 +108,7 @@ function up_festival_menu() {
 
   $('#main').css('top', '70px');
 }
+
 function toggleWideNavMenu(div, linklevel) {
   
   $(div).parent().parent().children('li').children('a').css('color', '');

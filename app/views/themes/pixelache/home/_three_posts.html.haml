@@ -1,3 +1,4 @@
+- @stream = @stream.take(3)
 .three_posts
   .row
     .small-12.medium-10.columns.medium-offset-1 
@@ -35,4 +36,4 @@
             .read_more= link_to 'Read More', post
 
 = content_for :jquery do
-  = render :partial => "google_maps_scraps", locals: {places: @stream.map(&:item).delete_if{|x| x.class != Event}.delete_if{|x| x.place.nil?}.delete_if{|x| x.place.latitude.blank? } }
+  = render :partial => "google_maps_scraps", locals: {places: @stream.map(&:item).to_a.delete_if{|x| x.class != Event}.delete_if{|x| x.place.nil?}.delete_if{|x| x.place.latitude.blank? } }
