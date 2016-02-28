@@ -83,7 +83,7 @@ class PostsController < ApplicationController
                     canonical: url_for(@post),
                     og: {image: (@post.image? ?  [ @post.image.url(:box).gsub(/^https/, 'http'), { secure_url: @post.image.url(:box) } ] : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
                           title: @post.title, type: 'website', url: url_for(@post),
-                          description: @post.description[0..220] + "..."
+                          description: ActionView::Base.full_sanitizer.sanitize(@post.description[0..500]) + "..."
                         }, 
                     twitter: {card: 'summary', site: '@pixelache'},
                     alternate: a
