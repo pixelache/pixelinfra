@@ -640,7 +640,7 @@ footer {
         margin: 1rem auto;
       }
       .map_container {
-        p.map_link {
+        p.map_link, p.documentation_link {
           margin: 0.3rem auto;
           text-transform: uppercase;
           font-family: $quicksand;

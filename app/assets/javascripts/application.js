@@ -248,7 +248,7 @@ $(function(){ $(document).foundation();
 
 
 function scrollTo(target) { 
-  alert('foo');
+
   $('html, body').stop().animate({
       'scrollTop': $(target).offset().top - 40
   }, 900, 'swing', function () {

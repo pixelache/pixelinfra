@@ -6,6 +6,9 @@
 // mobiles
 
 @media only screen and (max-width: 40em)  { 
+  #main {
+    padding-top: 2rem;
+  }
   .f-topbar-fixed {
     padding-top: 40px !important;
   }
@@ -36,6 +39,14 @@
   .thin_strip {
     font-size: 1rem;
     line-height: 1.7rem;
+  }
+  .related_container {
+    .releated_title {
+      h1 {
+        font-size: 2rem;
+        line-height: 2.5rem;
+      }
+    }
   }
   //   residencies
   
@@ -322,9 +333,10 @@
       }
       .title {
         font-size: 2rem;
+        line-height: 2.6rem;
       }
       .metadata {
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
     }
   }

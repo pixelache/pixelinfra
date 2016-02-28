@@ -21,6 +21,7 @@ function up_pixelache_menu() {
     $(window).scroll(function() {
       if ($(window).scrollTop() == 0) {
         $('#main').css('top', mainfinish );
+      
       }
     });
   });
@@ -50,7 +51,7 @@ function down_pixelache_menu() {
     $('div.project_tree').animate( {top: projdest}, 1000);
     mainfinish += parseInt($('div.project_tree').height());
   }
-  // console.log('mainfinish is ' + mainfinish);
+
   $('#main').animate({ top: mainfinish   }, 1000);
   
   $('.pixelache_nav_menu').slideDown(1000, function( ) {

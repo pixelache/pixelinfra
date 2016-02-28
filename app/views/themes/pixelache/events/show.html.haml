@@ -56,7 +56,9 @@
           .flickr_galleries
             .subtitle= t(@event.all_documentation["images"].empty? ? :image_galleries : :additional_images)
             - @event.flickrsets.each do |set|
-              %p= link_to set.title, set.flickr_url, target: :_blank
+              %p
+                = link_to set.title, set.flickr_url, target: :_blank
+                on Flickr
             
         - if @event.all_documentation["videos"].empty?
           - if @event.project
@@ -101,6 +103,8 @@
       customPaging: function(slick,index) {
          return slick.$slides.eq(index).find('.thumb').html();
       },
+      prevArrow: '<a data-role="none" class="slick-prev slick-arrow" aria-label="Previous" role="button" style="display: block;"><</a>',
+      nextArrow: '<a data-role="none" class="slick-next slick-arrow" aria-label="Next" role="button" style="display: block;">></a>',
       arrows: true,
       slide: '.img',
       variableWidth: false,

@@ -150,6 +150,48 @@
       width: 100%;
       height: auto;
     }
+    &.image_carousel {
+
+      &.slick-slider {
+        .slick-prev
+        { 
+          font-size: 3.4rem;
+          position: absolute;
+          left: -3rem;
+          bottom: 50%;
+        }
+        .slick-next
+        {
+          font-size: 3.4rem;
+          position: absolute;
+          right: -36px;
+          bottom: 50%;
+        }
+  
+      }
+    
+      .slick-slide {
+          display: flex; align-items:center;
+      }
+      .slide {
+        .thumb {
+          display: none;
+        }
+      }
+  
+      ul.slick-dots {
+        bottom: -75px;
+        height: 75px;
+        margin: 0 2.4rem;
+        li {
+          width: 75px;
+          height: 75px;
+          list-style-type: none;
+          float: left;
+        }
+      }
+  
+    }
   }
   
 
@@ -157,9 +199,9 @@
     a { color: #1b75bb; }
     color: #333;
     font-family: $quicksand;
-    font-size: 1.2rem;
-    padding-top: 1rem;
-    margin-bottom: 2.5rem;
+    font-size: 1rem;
+    padding-top: 0.8rem;
+    margin-bottom: 2rem;
 
   }
   

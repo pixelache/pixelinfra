@@ -51,7 +51,7 @@
                 = link_to t(:map), '#', onclick: "$('.google_map').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));            $('p.map_link a').text($('.google_map').is(':visible') ? '#{t(:hide_map)}' : '#{t(:map)}');});return false;"
           - if @event.has_documentation?
             .small-12.columns.text-center.map_container.small-centered
-              %p.map_link
+              %p.documentation_link
                 = link_to t(:scroll_down_for_documentation), '#', onclick: "myScroll('#documentation');"
           
 

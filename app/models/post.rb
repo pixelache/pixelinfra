@@ -157,7 +157,6 @@ class Post < ActiveRecord::Base
   def related_content
     related = []
     if event
-      related << event
       unless event.posts.empty?
         related << event.posts.published.reject{|x| x == self}
       end
@@ -183,8 +182,12 @@ class Post < ActiveRecord::Base
     end
     unless tags.empty?
     end
-    related.flatten.uniq.delete_if{|x| x == self }.shuffle
-
+ 
+    if event
+      related.flatten.uniq.delete_if{|x| x == self }.delete_if{|x| x.blank? }.unshift(event)
+    else
+      related.flatten.uniq.delete_if{|x| x == self }.delete_if{|x| x.blank? }
+    end
   end
   
   def stream_date

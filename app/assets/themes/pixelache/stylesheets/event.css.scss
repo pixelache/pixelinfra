@@ -186,13 +186,17 @@
  
 }
 
+body.events.show .outer {
+  padding-bottom: 0;
+}
+
 .documentation {
   margin-bottom: 3rem;
   border-bottom: 1px solid black;
   padding-bottom: 3rem;
 
   .flickr_galleries {
-    margin: 85px 0px 2rem 0px;
+    margin: 2rem 0 0 0;
     clear: left;
     .subtitle {
       font-family: $quicksand;
@@ -212,7 +216,7 @@
     ul.slick-dots {
       bottom: -75px;
       height: 75px;
-
+      margin: 0 2.4rem;
       li {
         width: 75px;
         height: 75px;
@@ -240,4 +244,22 @@
       }
     }
   }
+}
+
+.slick-slider {
+  .slick-prev
+  { 
+    font-size: 3.4rem;
+    position: absolute;
+    left: 0px;
+    bottom: 0;
+  }
+  .slick-next
+  {
+    font-size: 3.4rem;
+    position: absolute;
+    right: 0px;
+    bottom: 0;
+  }
+  
 }
