@@ -188,6 +188,9 @@ table.etherpads {
       margin: 1.25rem 0;
     }
   }
+  .last.row .related {
+    border-bottom: none;
+  }
   .related {
     &:hover {
       background-color: #efefef;

@@ -53,7 +53,13 @@
               - if @post.creator.memberships.empty?
                 = raw "#{@post.creator.name}"
               - else
-                = raw "#{link_to @post.creator.name, member_path(@post.creator)}"      
+                = raw "#{link_to @post.creator.name, member_path(@post.creator)}"
+            - if @post.event
+              - if @post.event.published
+               
+                %span.event
+                  = t(:event) + ": "
+                  = link_to @post.event.name, @post.event
           .body=raw @post.body
           // #Nokogiri::HTML.parse(@post.body.gsub(/(<(?!\/)[^>]+>)+(<\/[^>]+>)+/, '')).inner_html
       .row
@@ -69,7 +75,7 @@
       .row
         .columns.small-centered.small-10{:class => figure_width(@post, "medium-8")}
           - @post.related_content[0..5].each do |related|
-            .row
+            .row{class: related == @post.related_content[5] ? :last : false}
               = render :partial => 'shared/related', locals: {item: @post, related: related }
 
     / - unless @post.related_content.empty?
