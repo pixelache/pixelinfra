@@ -1,7 +1,7 @@
 @import 'variables';
 
 .residency_container {
-  
+
   .magellan-scrollnav [data-magellan-expedition] dd a {
     font-size: 0.9rem;
     color: #333;
@@ -40,7 +40,9 @@
     padding-top: 0.4rem;
   }
   .residencies_nav {
+    padding-top: 8rem;
     .magellan-scrollnav {
+
       [data-magellan-expedition-clone] {
         dl.sub-nav {
           display: none;
@@ -63,7 +65,17 @@
           &:hover {
             background: #AAA;
           }
+          &.active {
+            background-color: black;
+            padding: 0.3rem;
+            a {
+              color: #f9ec31;
+              font-weight: bold;
+            }
+          
+          }
           font-size: 0.9rem;
+
           p.metadata {
             font-family: $quicksand;
             color: #666;

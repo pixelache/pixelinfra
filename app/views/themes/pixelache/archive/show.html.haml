@@ -17,7 +17,7 @@
           %dl.sub-nav
             - unless @documents.empty?
               %dd.active{:"data-magellan-arrival" => "publications"}= link_to t(:publications), '#publications' 
-            - unless @festival.nil?
+            - unless @festival.name.blank?
               %dd{:"data-magellan-arrival" => "festival"}= link_to t(:festival), '#festival'
             - unless @projects.empty?
               %dd{:"data-magellan-arrival" => "projects_archive"}= link_to t(:projects), '#projects_archive'
@@ -68,7 +68,7 @@
                   .small-9.columns.title_container{onmouseover: "$(this).closest('.row').find('img').attr('src', '/assets/pixelache/images/arch_doc_blue.png')", onmouseout: "$(this).closest('.row').find('img').attr('src', '/assets/pixelache/images/arch_doc_grey.png')" }
                     .name= link_to d.title, d.attachedfile.url       
                                 
-      - unless @festival.blank? 
+      - unless @festival.name.blank? 
         .festival#festival{:"data-magellan-destination" => :festival }
           .row
             .medium-9.columns.medium-offset-3

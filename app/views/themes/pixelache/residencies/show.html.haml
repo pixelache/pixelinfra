@@ -14,9 +14,9 @@
           %dl.sub-nav.accordion{:"data-accordion" => "", :"data-options" => "multi_expand:false"}
             %dd.accordion-navigation{:"data-magellan-arrival" => :top }
               = link_to t(:production_residencies), "#production"
-              .content#production
+              .content#production{class: @production.include?(@residency) ? :active : false}
                 - @production.each_with_index do |res, index|
-                  .subchild{:class => index == (@production.size - 1) ? :last : false}
+                  .subchild{:class => [index == (@production.size - 1) ? :last : false, @residency == res ? :active : false]}
                     = link_to res.name, res
                     %p.metadata
                       = l res.start_at, format: "%B %Y"
@@ -24,9 +24,9 @@
                         = " - " + l(res.end_at, format: "%B %Y")
             %dd.accordion-navigation{:"data-magellan-arrival" => :top2 }
               = link_to t(:microresidencies), "#microresidencies"
-              .content#microresidencies
+              .content#microresidencies{class: @microresidencies.include?(@residency) ? :active : false}
                 - @microresidencies.each_with_index do |res, index|
-                  .subchild{:class => index == (@microresidencies.size - 1) ? :last : false}
+                  .subchild{:class => [index == (@microresidencies.size - 1) ? :last : false, @residency == res ? :active : false] }
                     = link_to res.name, res
                     %p.metadata
                       = l res.start_at, format: "%B %Y"
@@ -35,7 +35,7 @@
   
   
   
-    .small-10.left.medium-8.columns.small-offset-1.medium-offset-1
+    .small-10.left.medium-7.columns.small-offset-1.medium-offset-0
       .row
         .small-12.columns.title
           = raw @residency.name

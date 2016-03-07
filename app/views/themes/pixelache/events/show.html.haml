@@ -90,7 +90,7 @@
             %h1= t(:related_content)
     - unless @event.related_content.empty?
       - @event.related_content[0..5].each do |related|
-        .row
+        .row{class: related == @event.related_content[5] ? :last : false}
           .small-12.medium-8.columns.small-centered.related_container
             = render :partial => 'shared/related', locals: {item: @event, related: related }
 

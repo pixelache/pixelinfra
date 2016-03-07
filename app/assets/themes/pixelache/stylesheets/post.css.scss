@@ -149,6 +149,12 @@
     img {
       width: 100%;
       height: auto;
+      
+    }
+    .slide {
+      .thumb {
+        display: none;
+      }
     }
     &.image_carousel {
 
