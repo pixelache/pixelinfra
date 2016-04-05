@@ -14,6 +14,9 @@ class Admin::ArchivalimagesController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:archivalimage => [:image, :subsite_id, :event_name, :cover_right, :event_id,  :project_name, :project_id, :festival_name, :festival_id, :credit, translations_attributes: [:id, :locale, :caption]])
+    params.permit(:archivalimage => [:image, :subsite_id, :event_name, :cover_right, :event_id, 
+                                      :project_name, :project_id, :festival_name, :festival_id, :credit, 
+                                 
+                                      translations_attributes: [:id, :locale, :caption]])
   end
 end

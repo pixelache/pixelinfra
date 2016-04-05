@@ -53,6 +53,7 @@ Pixelinfra::Application.routes.draw do
     resources :frontmodules
     resources :memberships
     resources :nodes
+    resources :opencalls
     resources :pages do
       get :options, :on => :collection
       get :autocomplete_event_name, :on => :collection
@@ -129,6 +130,9 @@ Pixelinfra::Application.routes.draw do
     resources :events
   end
   
+  resources :opencalls do
+    resources :opencallsubmissions
+  end
   resources :pages
   
   resources :projects do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150813161251) do
+ActiveRecord::Schema.define(version: 20160405081049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -564,6 +564,75 @@ ActiveRecord::Schema.define(version: 20150813161251) do
     t.integer "subsite_id"
   end
 
+  create_table "opencallanswers", force: :cascade do |t|
+    t.integer  "opencallsubmission_id"
+    t.integer  "opencallquestion_id"
+    t.text     "answer"
+    t.string   "attachment_file_name"
+    t.integer  "attachment_file_size"
+    t.string   "attachment_content_type"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "opencallanswers", ["opencallquestion_id"], name: "index_opencallanswers_on_opencallquestion_id", using: :btree
+  add_index "opencallanswers", ["opencallsubmission_id", "opencallquestion_id"], name: "ocqs_index", unique: true, using: :btree
+  add_index "opencallanswers", ["opencallsubmission_id"], name: "index_opencallanswers_on_opencallsubmission_id", using: :btree
+
+  create_table "opencallquestion_translations", force: :cascade do |t|
+    t.integer  "opencallquestion_id", null: false
+    t.string   "locale",              null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "question_text"
+  end
+
+  add_index "opencallquestion_translations", ["locale"], name: "index_opencallquestion_translations_on_locale", using: :btree
+  add_index "opencallquestion_translations", ["opencallquestion_id"], name: "index_opencallquestion_translations_on_opencallquestion_id", using: :btree
+
+  create_table "opencallquestions", force: :cascade do |t|
+    t.integer  "opencall_id"
+    t.integer  "question_type"
+    t.integer  "sort_order"
+    t.integer  "character_limit"
+    t.boolean  "is_required",     default: false, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "opencallquestions", ["opencall_id"], name: "index_opencallquestions_on_opencall_id", using: :btree
+
+  create_table "opencalls", force: :cascade do |t|
+    t.integer  "subsite_id"
+    t.boolean  "published"
+    t.boolean  "is_open"
+    t.integer  "page_id"
+    t.text     "submitted_text"
+    t.string   "name"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "slug"
+  end
+
+  add_index "opencalls", ["page_id"], name: "index_opencalls_on_page_id", using: :btree
+  add_index "opencalls", ["subsite_id"], name: "index_opencalls_on_subsite_id", using: :btree
+
+  create_table "opencallsubmissions", force: :cascade do |t|
+    t.integer  "opencall_id"
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "city"
+    t.string   "postcode"
+    t.string   "country"
+    t.string   "website"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "opencallsubmissions", ["opencall_id"], name: "index_opencallsubmissions_on_opencall_id", using: :btree
+
   create_table "page_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id",   null: false
     t.integer "descendant_id", null: false
@@ -600,6 +669,7 @@ ActiveRecord::Schema.define(version: 20150813161251) do
     t.integer  "sort_order"
     t.integer  "festivaltheme_id"
     t.datetime "child_updated_at"
+    t.integer  "opencall_id"
   end
 
   add_index "pages", ["festival_id"], name: "index_pages_on_festival_id", using: :btree
@@ -981,5 +1051,11 @@ ActiveRecord::Schema.define(version: 20150813161251) do
   add_foreign_key "experiences", "festivalthemes"
   add_foreign_key "experiences", "places"
   add_foreign_key "feedcaches", "users"
+  add_foreign_key "opencallanswers", "opencallquestions"
+  add_foreign_key "opencallanswers", "opencallsubmissions"
+  add_foreign_key "opencallquestions", "opencalls"
+  add_foreign_key "opencalls", "pages"
+  add_foreign_key "opencalls", "subsites"
+  add_foreign_key "opencallsubmissions", "opencalls"
   add_foreign_key "subscriptions", "users"
 end

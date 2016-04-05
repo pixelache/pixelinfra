@@ -1,0 +1,69 @@
+= semantic_form_for [@opencall, @opencallsubmission], html: {multipart: true, :"data-abide" => ''} do |f|
+  = f.input :opencall_id, as: :hidden
+  .row
+    .small-10.medium-6.columns
+      = f.input :name, label: t(:your_name), input_html: {required: ''}
+  .row
+    .small-10.medium-6.columns
+      = f.input :email, label: t(:your_email), input_html: {required: ''}
+  .row
+    .small-10.medium-6.columns
+      = f.input :phone, input_html: {required: ''}
+  .row
+    .small-10.medium-6.columns
+      = f.input :address, label: t(:your_address), input_html: {required: ''}
+  .row
+    .small-5.medium-3.columns
+      = f.input :city, input_html: {required: ''}
+  .row
+    .small-5.medium-3.columns
+      = f.input :postcode, input_html: {required: ''}
+  .row
+    .small-10.medium-6.columns
+      = f.input :country, input_html: {required: ''}
+  .row
+    .small-10.medium-6.columns
+      = f.input :website, input_html: {required: ''}
+      
+  = f.fields_for :opencallanswers do |ff|
+    .row{class: ff.object.opencallquestion.question_type == 1 ? :has_topline : false }
+      .medium-2.small-offset-1.small-4.columns.text-left.left_form
+        .form_label
+          %label= ff.object.opencallquestion.question_text
+        = ff.input :opencallquestion_id, as: :hidden
+      .small-7.end.columns{class: [ "ocqtype_" + ff.object.opencallquestion.question_type.to_s, ff.object.opencallquestion.question_type == 1 ? "medium-7" : "medium-4"] }
+        - if ff.object.opencallquestion.question_type == 3
+          %label.file
+            = ff.input :attachment, label: false, input_html: { required: ff.object.opencallquestion.is_required == true ? '' : false }
+            %span Upload
+            .selected_file
+        - elsif ff.object.opencallquestion.question_type == 4
+          = ff.input :answer, label: false,  as: :boolean
+        - elsif ff.object.opencallquestion.question_type == 1
+          = ff.input :answer, label: false,  as: :text, input_html: { required: ff.object.opencallquestion.is_required == true ? '' : false }
+          - unless ff.object.opencallquestion.character_limit.blank?
+            .limit= ff.object.opencallquestion.character_limit
+            %p.counter= ff.object.new_record? ? "#{ff.object.opencallquestion.character_limit} characters remaining" : "#{ff.object.opencallquestion.character_limit - ff.object.answer.length} characters remaining"
+             
+             
+        - else
+          = ff.input :answer, label: false,  as: :string
+        
+        
+  .row
+    .small-12.columns
+      = f.submit 'Save'
+      
+= content_for :jquery do
+  :plain
+
+    $('textarea').keyup(function () {
+      
+        var left = parseInt($(this).parents('li').next('.limit').text()) - $(this).val().length;
+
+        if (left < 0) {
+            left = "<span style='color: red;'>" + left + "</span>";
+        }
+   
+        $(this).parents('li').next().next('.counter').html(left + ' characters remaining');
+    });      

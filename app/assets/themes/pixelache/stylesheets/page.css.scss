@@ -4,6 +4,34 @@
 
 
 .page {
+  
+  
+  .opencall_page_container {
+    form {
+      label {
+        font-size: 0.9rem;
+        padding-left: 0;
+        margin-left: 0;
+      }
+      textarea {
+        height: 100px;
+      }
+      .long textarea {
+        height: 300px;
+      }
+      p.counter {
+        font-size: .75rem;
+        color: #444;
+        margin: 0 0 1.8rem 0;
+      }
+      .ocqtype_3 {
+        float: left;
+      }
+    }
+    
+    
+    
+  }
   // background-color: #f9ec31;
   .magellan-scrollnav {
     [data-magellan-expedition-clone] {

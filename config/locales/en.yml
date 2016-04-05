@@ -408,7 +408,7 @@ en:
   your_comment_was_added: 'Your comment was added'
   your_comment_was_not_added: 'There was an error saving your comment'
   your_email: 'Your email address:'
-  
+  your_address: 'Your postal address:'
   evolved_into: 'Evolved into %{project} in %{year}'
   documents: 'Documents'
   residency: 'Residency'

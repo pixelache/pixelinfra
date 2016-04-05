@@ -89,8 +89,9 @@ class Admin::PagesController < Admin::BaseController
   
   def page_params
     params.require(:page).permit( [:published, :slug, :festival_id, :parent_id, :festival_name, 
-      :project_name, :project_id, :subsite_id,
-       subsite_ids: [], translations_attributes: [:id, :locale, :name, :body],      photos_attributes: [:id, :filename, :title, :credit, :_destroy],
+      :project_name, :project_id, :subsite_id, :opencall_id,
+       subsite_ids: [], translations_attributes: [:id, :locale, :name, :body],
+        photos_attributes: [:id, :filename, :title, :credit, :_destroy],
         festivaltheme_ids: []] )
   end
   

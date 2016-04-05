@@ -1,0 +1,37 @@
+= semantic_nested_form_for [:admin, @opencall], :html => {:class => "custom", :multipart => false} do |f|
+  .row
+    .small-12.columns
+      = f.input :subsite
+      = f.input :name, label: 'Name of this open call?'
+  .row
+    .small-12.columns      
+      = f.input :published
+  .row
+    .small-12.columns
+      = f.input :is_open
+  .row
+    .small-12.columns
+      %h3 Questions
+      = f.fields_for :opencallquestions do |ff|
+        .row
+          .small-6.columns
+            %dl.tabs{"data-tab" => ""}
+              - I18n.available_locales.each_with_index do |locale, i|
+                %dd{:class => (i == 0 ? :active : false)}
+                  = link_to t(:locale_name, :locale => locale), "##{locale}"
+            .tabs-content
+              - I18n.available_locales.each_with_index do |locale, i|
+                .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+                  = ff.globalize_fields_for locale do |en|
+                    Enter the question:
+                    = en.text_field :question_text, :required => (locale == :en ? '' : false)
+            = ff.input :is_required, label: 'Is this question required?'
+            = ff.input :question_type, as: :select, collection: [['Text', 1], ['Short text', 2], ['File upload', 3], ['URL/link', 4], ['True/false', 5]]
+            = ff.input :character_limit, hint: 'Leave blank for unlimited'
+            = ff.link_to_remove "Remove this question"
+      = f.link_to_add 'Add a question....', :opencallquestions, :class => [:button, :round, :tiny]
+  .row
+    .small-12.columns
+      = f.input :submitted_text, label: 'Thank you/followup text to display after person submits an application'
+  
+  = f.submit 'Save', class: [:button, :round, :small]

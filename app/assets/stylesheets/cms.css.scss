@@ -65,15 +65,15 @@ dl.tabs {
 }
 
 form {
-  fieldset {
-    .fields {
-      padding: 10px 0px;
-      img { 
-        float: left;
-      }
-      border-bottom: 1px solid $secondary-color;
+
+  .fields {
+    padding: 10px 0px;
+    img { 
+      float: left;
     }
+    border-bottom: 1px solid $secondary-color;
   }
+
   li {
     list-style-type: none;
     input.colourpicker {
@@ -371,3 +371,6 @@ table.project_proposals {
     }
   }
 }
+
+
+ 

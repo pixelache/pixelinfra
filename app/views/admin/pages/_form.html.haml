@@ -51,8 +51,10 @@
           = ff.input :title
           = ff.input :credit
           = ff.link_to_remove 'Remove this photo'
-    = f.link_to_add 'Add a photo', :photos
-          
+    = f.link_to_add 'Add a photo', :photos, class: [:button, :tiny, :round]
+.row
+  .small-6.columns
+    = f.input :opencall, label: 'Attach an open call form to bottom?'
 .row
   .small-3.columns= f.input :published
 .row

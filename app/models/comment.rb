@@ -6,6 +6,8 @@ class Comment < ActiveRecord::Base
   validates_presence_of :user_id, :item_id, :item_type, :content
   before_save :update_image_attributes, :update_attachment_attributes
   
+
+  
   def update_image_attributes
     if image.present? && image_changed?
       if image.file.exists?

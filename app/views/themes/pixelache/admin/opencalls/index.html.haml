@@ -1,0 +1,24 @@
+.row
+  .small-10.columns
+    %h2 Open call designer  
+    %p= link_to 'Create new open call', new_admin_opencall_path, :class => [:button, :small, :round]
+    %table.table.table-condensed
+      %thead
+        %tr
+          %th
+          %th Name
+          %th Open?
+          %th{:colspan => 2}
+      %tbody
+        - @opencalls.sort_by(&:name).each do |opencall|
+          %tr
+            %td= opencall.name
+            %td= opencall.is_open == true ? "yes" : "no"
+            %td.actions
+              = link_to t(:view), opencall, :class => [:button, :round, :tiny], :target => :_blank
+              - if can? :edit, Project
+                = link_to 'Edit', edit_admin_opencall_path(opencall), :class => [:button, :round, :tiny]
+              - if can? :destroy, Project
+                = link_to 'Destroy', [:admin, opencall], :method => :delete, :data => {:confirm => "Are you sure?"}, :class => [:button, :round, :tiny, :alert]
+
+    %p= link_to 'Create new open call', new_admin_opencall_path, :class => [:button, :small, :round]

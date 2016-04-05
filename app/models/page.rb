@@ -2,6 +2,7 @@ class Page < ActiveRecord::Base
   has_closure_tree :order => 'child_updated_at DESC'
   translates :name, :body, :fallbacks_for_empty_translations => true
   belongs_to :subsite
+  belongs_to :opencall
   belongs_to :festival
   belongs_to :project
   extend FriendlyId
@@ -14,6 +15,7 @@ class Page < ActiveRecord::Base
   has_many :photos, as: :item
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? && x['body'].blank? }
   accepts_nested_attributes_for :photos, :reject_if => proc {|x| x['filename'].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :opencall
   attr_accessor :festival_name, :project_name
   
   validates_presence_of :subsite_id

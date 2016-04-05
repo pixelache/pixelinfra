@@ -51,6 +51,13 @@ class PagesController < InheritedResources::Base
         @page = pages.roots.first
       end
     end
+    if @page.opencall
+      @opencall = @page.opencall
+      @opencallsubmission = Opencallsubmission.new(opencall: @opencall)
+      @opencall.opencallquestions.sort_by(&:created_at).each do |qs|
+        @opencallsubmission.opencallanswers.build(opencallquestion: qs)
+      end
+    end
     set_meta_tags :title => @page.name
   end
   

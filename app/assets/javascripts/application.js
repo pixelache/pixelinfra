@@ -247,7 +247,7 @@ $(function(){ $(document).foundation();
 });
 
 
-function scrollTo(target) { 
+function scroll_To(target) { 
 
   $('html, body').stop().animate({
       'scrollTop': $(target).offset().top - 40
