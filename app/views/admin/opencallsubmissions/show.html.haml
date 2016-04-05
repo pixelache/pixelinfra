@@ -1,0 +1,31 @@
+.row
+  .small-12.columns
+    %h3
+      Submission for
+      = @opencall.name
+      
+.row
+  .small-12.columns
+    %h4= @submission.name
+    %p
+      = @submission.email
+      %br/
+      = @submission.phone
+      %br/
+      = @submission.address
+      %br
+      = @submission.postcode + " " + @submission.city
+      %br
+      = Country[@submission.country].name rescue @submission.country.to_s
+      %br/
+      = @submission.website
+      
+- @submission.opencallanswers.each do |answer|      
+  .row
+    .small-12.columns
+      %label.label= answer.opencallquestion.question_text
+      - if answer.attachment?
+        = link_to answer.attachment, answer.attachment.url, target: :_blank
+      -else
+        = raw answer.answer
+    

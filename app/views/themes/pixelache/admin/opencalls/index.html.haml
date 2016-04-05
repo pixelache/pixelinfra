@@ -12,13 +12,18 @@
       %tbody
         - @opencalls.sort_by(&:name).each do |opencall|
           %tr
-            %td= opencall.name
+            %td
+              = opencall.name
+              - unless opencall.opencallsubmissions.empty?
+                %br/
+                = pluralize(opencall.opencallsubmissions.size, 'submission')
+                = link_to 'See submissions', admin_opencallsubmissions_path(opencall), class: [:button, :secondary, :tiny, :round]
             %td= opencall.is_open == true ? "yes" : "no"
             %td.actions
               = link_to t(:view), opencall, :class => [:button, :round, :tiny], :target => :_blank
-              - if can? :edit, Project
+              - if can? :edit, opencall
                 = link_to 'Edit', edit_admin_opencall_path(opencall), :class => [:button, :round, :tiny]
-              - if can? :destroy, Project
-                = link_to 'Destroy', [:admin, opencall], :method => :delete, :data => {:confirm => "Are you sure?"}, :class => [:button, :round, :tiny, :alert]
+              - if can? :destroy, opencall
+                = link_to 'Destroy', [:admin, opencall], :method => :delete, :data => {:confirm => "Are you sure? This will delete the open call, all of the questions you created, and all submissions!"}, :class => [:button, :round, :tiny, :alert]
 
     %p= link_to 'Create new open call', new_admin_opencall_path, :class => [:button, :small, :round]

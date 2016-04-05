@@ -1,0 +1,26 @@
+.row
+  .small-12.columns
+    %h3
+      Submissions for:
+      = @opencall.name
+      
+.row
+  .small-12.columns
+    %table
+      %thead
+        %th Who?
+        %th When?
+        %th &nbsp;
+      %tbody
+        - @submissions.each do |sub|
+          %tr
+            %td
+              = sub.name
+              %br/
+              = sub.email + ' / ' + sub.phone
+            %td= l sub.created_at, format: :long
+            %td
+              = link_to 'View', admin_opencallsubmission_path(@opencall.slug, sub), class: [:button, :tiny,  :round]
+              - if can? :destroy, sub
+                = link_to 'Delete', [:admin, sub], method: :delete, data: {confirm: 'Are you sure? The person who submitted this will be really sad if they knew you were doing this.'}, class: [:button, :tiny, :alert, :round]
+    
