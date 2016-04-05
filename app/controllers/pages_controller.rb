@@ -58,6 +58,7 @@ class PagesController < InheritedResources::Base
         @opencallsubmission.opencallanswers.build(opencallquestion: qs)
       end
     end
+    redirect_to action: action_name, id: @page.friendly_id, status: 301 unless @page.friendly_id == params[:id]
     set_meta_tags :title => @page.name
   end
   

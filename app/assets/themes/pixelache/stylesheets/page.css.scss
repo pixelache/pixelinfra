@@ -8,10 +8,12 @@
   
   .opencall_page_container {
     form {
+
       label {
         font-size: 0.9rem;
         padding-left: 0;
         margin-left: 0;
+    
       }
       textarea {
         height: 100px;
@@ -88,7 +90,7 @@
     padding: 1.5rem 0rem 3rem 0rem;
   }
   .title {
-    
+    line-height: 3.6rem;
     font-size: 2.875rem;
     background-color: white;
     color: #333;

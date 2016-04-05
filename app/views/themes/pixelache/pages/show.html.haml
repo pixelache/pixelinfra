@@ -65,16 +65,16 @@
       
                 = f.fields_for :opencallanswers do |ff|
                   .row{class: ff.object.opencallquestion.question_type == 1 ? :has_topline : false }
-                    .medium-4.small-8.columns.text-left.left_form
+                    .medium-12.small-8.columns.text-left.left_form
                       .form_label
                         %label.label= ff.object.opencallquestion.question_text
                       = ff.input :opencallquestion_id, as: :hidden
-                    .small-12.columns{class: [ ff.object.opencallquestion.character_limit ? (ff.object.opencallquestion.character_limit > 1000 ? :long : false ) : false, "ocqtype_" + ff.object.opencallquestion.question_type.to_s, ff.object.opencallquestion.question_type == 1 ? "medium-12" : "medium-4"] }
+                    .small-12.columns{class: [ ff.object.opencallquestion.character_limit ? (ff.object.opencallquestion.character_limit > 1000 ? :long : false ) : false, "ocqtype_" + ff.object.opencallquestion.question_type.to_s, ff.object.opencallquestion.question_type == 1 ? "medium-12" : "medium-12"] }
                       - if ff.object.opencallquestion.question_type == 3
-                        %label.file
+                        %label.label
                           = ff.input :attachment, label: false, input_html: { required: ff.object.opencallquestion.is_required == true ? '' : false }
 
-                      - elsif ff.object.opencallquestion.question_type == 4
+                      - elsif ff.object.opencallquestion.question_type == 5
                         = ff.input :answer, label: false,  as: :boolean
                       - elsif ff.object.opencallquestion.question_type == 1
                         = ff.input :answer, label: false,  as: :text, input_html: { required: ff.object.opencallquestion.is_required == true ? '' : false }
