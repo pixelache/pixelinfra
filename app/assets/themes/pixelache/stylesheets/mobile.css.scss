@@ -35,6 +35,21 @@
     }
   }
   
+  form label.label {
+    white-space: normal;
+    text-align: left;
+    line-height: 1.2rem;
+  }
+  //   pages
+  .page {
+    .page_banner {
+      margin-bottom: 1rem;
+    }
+    .title {
+      font-size: 1.6rem;
+      line-height: 2.15rem;
+    }
+  }
   //   front modules
   .thin_strip {
     font-size: 1rem;

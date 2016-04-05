@@ -65,7 +65,7 @@
       
                 = f.fields_for :opencallanswers do |ff|
                   .row{class: ff.object.opencallquestion.question_type == 1 ? :has_topline : false }
-                    .medium-12.small-8.columns.text-left.left_form
+                    .medium-12.small-12.columns.text-left.left_form
                       .form_label
                         %label.label= ff.object.opencallquestion.question_text
                       = ff.input :opencallquestion_id, as: :hidden
