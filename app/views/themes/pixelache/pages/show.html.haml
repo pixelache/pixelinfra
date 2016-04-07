@@ -61,7 +61,7 @@
                     = f.input :country, input_html: {required: ''}
                 .row
                   .small-10.medium-6.columns
-                    = f.input :website, input_html: {required: ''}
+                    = f.input :website
       
                 = f.fields_for :opencallanswers do |ff|
                   .row{class: ff.object.opencallquestion.question_type == 1 ? :has_topline : false }
