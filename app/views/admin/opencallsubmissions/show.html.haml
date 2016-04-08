@@ -22,7 +22,7 @@
       
 - @submission.opencallanswers.each do |answer|      
   .row
-    .small-12.columns
+    .small-12.columns.opencall_answers
       %label.label= answer.opencallquestion.question_text
       %br/
       - if answer.attachment?
@@ -30,6 +30,8 @@
           = link_to image_tag(answer.attachment.url), answer.attachment.url, target: :_blank
         - else
           = link_to answer.attachment, answer.attachment.url, target: :_blank
-      -else
+      - elsif answer.answer =~ /http/i && answer.opencallquestion.question_type == 4
+        = link_to answer.answer, answer.answer, target: :_blank
+      - else
         = raw simple_format(answer.answer)
     
