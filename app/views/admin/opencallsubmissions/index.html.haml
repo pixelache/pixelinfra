@@ -20,7 +20,7 @@
               = sub.email + ' / ' + sub.phone
             %td= l sub.created_at, format: :long
             %td
-              = link_to 'View', admin_opencallsubmission_path(@opencall.slug, sub), class: [:button, :tiny,  :round]
+              = link_to 'View', admin_opencall_opencallsubmission_path(@opencall.slug, sub), class: [:button, :tiny,  :round]
               - if can? :destroy, sub
                 = link_to 'Delete', [:admin, sub], method: :delete, data: {confirm: 'Are you sure? The person who submitted this will be really sad if they knew you were doing this.'}, class: [:button, :tiny, :alert, :round]
     

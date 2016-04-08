@@ -3,12 +3,12 @@ class Admin::OpencallsubmissionsController < Admin::BaseController
   handles_sortable_columns
   
   def index
-    @opencall = Opencall.friendly.find(params[:id])
+    @opencall = Opencall.friendly.find(params[:opencall_id])
     @submissions = @opencall.opencallsubmissions
   end
   
   def show
-    @opencall = Opencall.friendly.find(params[:id])
+    @opencall = Opencall.friendly.find(params[:opencall_id])
     @submission = Opencallsubmission.find(params[:id])
     
   end
