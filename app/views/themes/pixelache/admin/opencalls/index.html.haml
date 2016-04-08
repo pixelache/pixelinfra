@@ -17,7 +17,7 @@
               - unless opencall.opencallsubmissions.empty?
                 %br/
                 = pluralize(opencall.opencallsubmissions.size, 'submission')
-                = link_to 'See submissions', admin_opencallsubmissions_path(opencall), class: [:button, :secondary, :tiny, :round]
+                = link_to 'See submissions', admin_opencall_opencallsubmissions_path(opencall), class: [:button, :secondary, :tiny, :round]
             %td= opencall.is_open == true ? "yes" : "no"
             %td.actions
               = link_to t(:view), opencall, :class => [:button, :round, :tiny], :target => :_blank
