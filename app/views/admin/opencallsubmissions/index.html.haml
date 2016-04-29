@@ -6,6 +6,9 @@
       
 .row
   .small-12.columns
+    %p= link_to "Export as CSV", admin_opencall_opencallsubmissions_path(@opencall, format: :csv)
+.row
+  .small-12.columns
     %table
       %thead
         %th Who?
