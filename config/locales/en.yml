@@ -456,6 +456,7 @@ en:
   previous_post: 'Previous post'
   registration_is_closed: 'Registration is now closed.'
   next_post: 'Next post'
+  opencall_is_closed: 'This open call is no longer open. Thank you for your submissions.'
   livingspaces:
     about: 'About'
     locations: 'Locations'

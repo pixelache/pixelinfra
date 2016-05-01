@@ -36,61 +36,63 @@
           
           - if @page.opencall
             .opencall_page_container
-              = semantic_form_for [@opencall, @opencallsubmission], html: {multipart: true, :"data-abide" => ''} do |f|
-                = f.input :opencall_id, as: :hidden
-                .row
-                  .small-10.medium-6.columns
-                    = f.input :name, label: t(:your_name), input_html: {required: ''}
-                .row
-                  .small-10.medium-6.columns
-                    = f.input :email, label: t(:your_email), input_html: {required: ''}
-                .row
-                  .small-10.medium-6.columns
-                    = f.input :phone, input_html: {required: ''}
-                .row
-                  .small-10.medium-6.columns
-                    = f.input :address, label: t(:your_address), input_html: {required: ''}
-                .row
-                  .small-5.medium-3.columns
-                    = f.input :city, input_html: {required: ''}
-                .row
-                  .small-5.medium-3.columns
-                    = f.input :postcode, input_html: {required: ''}
-                .row
-                  .small-10.medium-6.columns
-                    = f.input :country, input_html: {required: ''}
-                .row
-                  .small-10.medium-6.columns
-                    = f.input :website
+              - if @page.opencall.is_open?
+                = semantic_form_for [@opencall, @opencallsubmission], html: {multipart: true, :"data-abide" => ''} do |f|
+                  = f.input :opencall_id, as: :hidden
+                  .row
+                    .small-10.medium-6.columns
+                      = f.input :name, label: t(:your_name), input_html: {required: ''}
+                  .row
+                    .small-10.medium-6.columns
+                      = f.input :email, label: t(:your_email), input_html: {required: ''}
+                  .row
+                    .small-10.medium-6.columns
+                      = f.input :phone, input_html: {required: ''}
+                  .row
+                    .small-10.medium-6.columns
+                      = f.input :address, label: t(:your_address), input_html: {required: ''}
+                  .row
+                    .small-5.medium-3.columns
+                      = f.input :city, input_html: {required: ''}
+                  .row
+                    .small-5.medium-3.columns
+                      = f.input :postcode, input_html: {required: ''}
+                  .row
+                    .small-10.medium-6.columns
+                      = f.input :country, input_html: {required: ''}
+                  .row
+                    .small-10.medium-6.columns
+                      = f.input :website
       
-                = f.fields_for :opencallanswers do |ff|
-                  .row{class: ff.object.opencallquestion.question_type == 1 ? :has_topline : false }
-                    .medium-12.small-12.columns.text-left.left_form
-                      .form_label
-                        %label.label= ff.object.opencallquestion.question_text
-                      = ff.input :opencallquestion_id, as: :hidden
-                    .small-12.columns{class: [ ff.object.opencallquestion.character_limit ? (ff.object.opencallquestion.character_limit > 1000 ? :long : false ) : false, "ocqtype_" + ff.object.opencallquestion.question_type.to_s, ff.object.opencallquestion.question_type == 1 ? "medium-12" : "medium-12"] }
-                      - if ff.object.opencallquestion.question_type == 3
-                        %label.label
-                          = ff.input :attachment, label: false, input_html: { required: ff.object.opencallquestion.is_required == true ? '' : false }
+                  = f.fields_for :opencallanswers do |ff|
+                    .row{class: ff.object.opencallquestion.question_type == 1 ? :has_topline : false }
+                      .medium-12.small-12.columns.text-left.left_form
+                        .form_label
+                          %label.label= ff.object.opencallquestion.question_text
+                        = ff.input :opencallquestion_id, as: :hidden
+                      .small-12.columns{class: [ ff.object.opencallquestion.character_limit ? (ff.object.opencallquestion.character_limit > 1000 ? :long : false ) : false, "ocqtype_" + ff.object.opencallquestion.question_type.to_s, ff.object.opencallquestion.question_type == 1 ? "medium-12" : "medium-12"] }
+                        - if ff.object.opencallquestion.question_type == 3
+                          %label.label
+                            = ff.input :attachment, label: false, input_html: { required: ff.object.opencallquestion.is_required == true ? '' : false }
 
-                      - elsif ff.object.opencallquestion.question_type == 5
-                        = ff.input :answer, label: false,  as: :boolean
-                      - elsif ff.object.opencallquestion.question_type == 1
-                        = ff.input :answer, label: false,  as: :text, input_html: { required: ff.object.opencallquestion.is_required == true ? '' : false }
-                        - unless ff.object.opencallquestion.character_limit.blank?
-                          .limit= ff.object.opencallquestion.character_limit
-                          %p.counter= ff.object.new_record? ? "#{ff.object.opencallquestion.character_limit} characters remaining" : "#{ff.object.opencallquestion.character_limit - ff.object.answer.length} characters remaining"
+                        - elsif ff.object.opencallquestion.question_type == 5
+                          = ff.input :answer, label: false,  as: :boolean
+                        - elsif ff.object.opencallquestion.question_type == 1
+                          = ff.input :answer, label: false,  as: :text, input_html: { required: ff.object.opencallquestion.is_required == true ? '' : false }
+                          - unless ff.object.opencallquestion.character_limit.blank?
+                            .limit= ff.object.opencallquestion.character_limit
+                            %p.counter= ff.object.new_record? ? "#{ff.object.opencallquestion.character_limit} characters remaining" : "#{ff.object.opencallquestion.character_limit - ff.object.answer.length} characters remaining"
              
              
-                      - else
-                        = ff.input :answer, label: false,  as: :string
+                        - else
+                          = ff.input :answer, label: false,  as: :string
         
         
-                .row
-                  .small-12.columns
-                    = f.submit 'Submit', class: [:button, :small, :round]
-      
+                  .row
+                    .small-12.columns
+                      = f.submit 'Submit', class: [:button, :small, :round]
+              - else
+                %h4= t :opencall_is_closed
             = content_for :jquery do
               :plain
 
