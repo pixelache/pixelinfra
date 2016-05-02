@@ -20,7 +20,7 @@
       %br/
       = @submission.website
       
-- @submission.opencallanswers.each do |answer|      
+- @submission.opencallanswers.sort_by{|x| x.opencallquestion.id}.each do |answer|      
   .row
     .small-12.columns.opencall_answers
       %label.label= answer.opencallquestion.question_text
