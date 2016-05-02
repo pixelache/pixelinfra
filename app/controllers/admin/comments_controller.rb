@@ -4,6 +4,9 @@ class Admin::CommentsController < Admin::BaseController
     if params[:projectproposal_id]
       @master = Projectproposal.find(params[:projectproposal_id])
     end
+    if params[:opencallsubmission_id]
+      @master = Opencallsubmission.find(params[:opencallsubmission_id])
+    end
     @master.comments << Comment.new(permitted_params[:comment])
     if @master.save!
       flash[:notice] = t(:your_comment_was_added)

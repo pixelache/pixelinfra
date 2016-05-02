@@ -11,17 +11,24 @@
   .small-12.columns
     %table
       %thead
-        %th Who?
-        %th When?
+        %th= sortable_column "ID"
+        %th= sortable_column "Name"
+        %th= sortable_column "When"
+        %th= sortable_column "Comments"
         %th &nbsp;
       %tbody
         - @submissions.each do |sub|
           %tr
+            %td= sub.id.to_s
             %td
               = sub.name
               %br/
               = sub.email + ' / ' + sub.phone
             %td= l sub.created_at, format: :long
+            %td
+              = sub.comments.size.to_s
+              - unless sub.comments.empty?
+                %p.metadata= t(:posted_by, :poster => sub.comments.order(:created_at).last.user.name, :when => l( sub.comments.order(:created_at).last.created_at, format: :short))
             %td
               = link_to 'View', admin_opencall_opencallsubmission_path(@opencall.slug, sub), class: [:button, :tiny,  :round]
               - if can? :destroy, sub

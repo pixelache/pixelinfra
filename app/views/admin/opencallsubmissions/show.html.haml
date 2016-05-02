@@ -34,4 +34,45 @@
         = link_to answer.answer, answer.answer, target: :_blank
       - else
         = raw simple_format(answer.answer)
-    
+
+- unless @submission.comments.empty?
+  .row#comments_list
+    .small-12.columns
+      %a{:name => :comments}
+      %h1{:"data-magellan-destination" => "comments"}= t :member_discussion_of_proposal
+  - @submission.comments.sort_by(&:created_at).each do |comment|
+    .row.comment
+      .small-3.columns
+        = image_tag comment.user.avatar.url(:thumb)
+        %p
+          %strong= t(:user_says, :user => comment.user.name)
+      .small-9.columns
+        .comment= simple_format(comment.content)
+        - if comment.image?
+          = image_tag comment.image.url
+        - if comment.attachment?
+          .row
+            .small-12.columns
+              %p= link_to t(:download) + ' ' + File.basename(URI.parse(comment.attachment.url).path), comment.attachment.url, class: [:button, :round, :tiny]
+                  
+- if can? :create, Comment        
+  .row#comments
+    .small-12.columns
+      %h1= t :what_do_you_think_about_this
+
+  .row#comment_form
+    .small-8.columns
+      .row
+        .small-3.columns
+          = image_tag current_user.avatar.url(:thumb)
+        
+          %p= link_to t(:edit_profile), edit_admin_user_path(current_user), class: [:button, :tiny, :secondary, :round]
+          %p
+            %strong= t(:user_says, :user => current_user.name)
+        .small-9.columns
+          = semantic_form_for [:admin, @submission,  @comment = @submission.comments.build], html: {multipart: true, :"data-abide" => '' } do |f|
+            = f.input :user_id, as: :hidden, value: current_user.id
+            = f.input :content, :label => t(:your_comment),input_html: { :required => ''}
+            = f.input :image, :label => t(:attach_image_to_comment)
+            = f.input :attachment, :label => t(:attach_attachment_to_comment)
+            = f.submit t(:save), :class => [:button, :tiny, :round]    
