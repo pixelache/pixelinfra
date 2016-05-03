@@ -22,7 +22,7 @@ class Admin::UsersController < Admin::BaseController
       when "last_sign_in_at"
         "last_sign_in_at #{direction}"
       else
-        "last_sign_in_at DESC"
+        "last_sign_in_at DESC NULLS LAST"
       end
     end
     @users = apply_scopes(User).includes(:roles).order(order).page(params[:page]).per(30)

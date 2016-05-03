@@ -23,6 +23,14 @@ class Ability
       can :manage, Flickrset
       can :manage, user
       can :manage, Comment
+      can :manage, Opencallsubmission
+      can :manage, Opencall
+      can :manage, Opencallquestion
+    elsif user.has_role? :advisor
+      can :read, Opencallsubmission
+      can :manage, Comment
+      can :manage, Event
+      can :read, Opencall
     elsif user.has_role? :olsof_staff
       can :manage, Event, :subsite => {:name => 'olsof' }
       can :manage, Page, :subsite => {:name => 'olsof' }
