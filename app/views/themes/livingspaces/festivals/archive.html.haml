@@ -23,15 +23,27 @@
                 = link_to t(:photos), url_for(e) + "#documentation", target: :_blank, class: [:button, :tiny, :secondary]
               - unless e.all_documentation['videos'].empty?
                 = link_to t(:videos), url_for(e) + "#documentation", target: :_blank, class: [:button, :tiny, :secondary]
-                
+      - unless @otherimages.empty?
+        %h2= t :other_images
+        %ul.archive
+          - @otherimages.each do |e|
+            %li
+              = link_to e.title, e.flickr_url, target: :_blank
+              
       - unless @videos.empty?
         %h2= t :videos
         %ul.archive
           - @videos.each do |v|
             %li.video
+              .flex-video= raw figure_video_type(v, v.video_width.blank? ? 580 : v.video_width, v.video_height.blank? ? 390 : v.video_height)
+              %br/
               .video_title= link_to v.title, v.url, target: :_blank
               .video_description= raw v.description
-
+      - unless @interviews.empty?
+        %h2= t :interviews
+        %ul.archive
+          - @interviews.each do |p|
+            %li= link_to p.name, p, target: :_blank
       - unless @documents.empty?
         %h2= t :documents
         %ul.archive

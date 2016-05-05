@@ -1147,10 +1147,15 @@ table.tram_map {
 }
 .festival-2015_archive {
   ul {
+    margin: 0.2rem;
     li {
+      list-style-type: none;
       margin-bottom: 1rem;
       a.button.tiny {
         margin-bottom: 0;
+      }
+      &.video {
+        list-style-type: none;
       }
       .sub_info {
         color: #777;

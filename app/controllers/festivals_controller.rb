@@ -6,7 +6,11 @@ class FestivalsController < InheritedResources::Base
     @events = @festival.events.published
     @videos = Video.where(:festival => @festival)
     @videos += Video.joins(:event).where(["events.festival_id = ?", @festival.id])
+    @videos.uniq!
+    @otherimages = Flickrset.by_festival(@festival).where(event_id: nil)
     @documents = @festival.attachments.public_files
+    @interviews = Post.by_festival(@festival).interviews.published.order(published_at: :asc)
+
     set_meta_tags :title => @festival.name + " " + t(:archive)
   end
   

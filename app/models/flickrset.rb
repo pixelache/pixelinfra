@@ -9,6 +9,8 @@ class Flickrset < ActiveRecord::Base
   
   before_save :get_last_mod_date
   
+  scope :by_festival, -> festival { where(festival_id: festival) }
+    
   def get_last_mod_date
     if last_modified_date.blank?
       FlickRaw.api_key= ENV['FLICKR_API_KEY']
