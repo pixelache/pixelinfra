@@ -66,6 +66,7 @@ class Admin::PostsController < ApplicationController
     end
     set_meta_tags :title => t(:posts)
     @posts = apply_scopes(Post).includes(:subsite).order(order).page(params[:page]).per(20)
+
   end
   
   def new

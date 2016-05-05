@@ -46,10 +46,11 @@
               %ul.right
                 %li= link_to t("livingspaces.about"), festival_page_festival_path('festival-2015', 'about')
                 %li= link_to t("livingspaces.programme"), festival_page_festival_path('festival-2015','programme')
-                %li= link_to t(:news), posts_path
+                %li= link_to t(:news), festival_posts_path('festival-2015')
                 %li= link_to t("livingspaces.locations"), festival_page_festival_path('festival-2015','locations')
 
                 %li= link_to t("livingspaces.contact"), festival_page_festival_path('festival-2015','contact')
+                %li= link_to t("archive"), festival_page_festival_path('festival-2015','archive')
                 %li.lang
                   %span.eng= link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
                   %span.bar= " | "
@@ -60,7 +61,7 @@
         .alert.text-center{ :class => "alert-#{key}" }
           %strong= value
             
-    %section
+    %section.lscontainer
       %article= yield
 
     %footer

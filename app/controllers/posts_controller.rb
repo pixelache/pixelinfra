@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   def index
     if params[:festival_id]
       @festival = Festival.find(params[:festival_id])
-      @posts = Post.by_site(@site).by_festival(@festival).published.order('published_at DESC').page(params[:page]).per(12)
+      @posts = Post.by_festival(@festival).published.order('published_at DESC').page(params[:page]).per(12)
       set_meta_tags title: @festival.name + " " + t(:posts)
       
     elsif params[:archive_id]
@@ -30,6 +30,7 @@ class PostsController < ApplicationController
       set_meta_tags title: t(:all_posts_by, member: @user.name)
     else
       @posts = Post.by_site(@site).published.order('published_at DESC').page(params[:page]).per(12)
+      die
       if @posts.empty?
         if @site.festival
           @posts = Post.by_festival(@site.festival).published.order(published_at: :desc).page(params[:page]).per(12)

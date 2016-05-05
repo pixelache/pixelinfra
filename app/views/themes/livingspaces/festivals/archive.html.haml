@@ -1,0 +1,42 @@
+.page{class: @festival.slug + "_archive"}
+  .carousel
+    .slide{style: "background: url(https://pixelache-production.s3.amazonaws.com/images/photo/filename/1640/banner1.jpg) center bottom no-repeat; background-size: cover"} &nbsp;
+      
+  .overlapping_divider 
+    .text= t(:archive_and_documentation)
+
+    
+  .row
+    .small-8.small-offset-2.columns
+
+      %br/
+      %br/
+      %h2= t :events
+      %ul.archive
+        - @events.sort_by(&:start_at).each do |e|
+          %li
+            = link_to e.name, e, target: :_blank
+            .sub_info
+              = date_range(e.start_at, e.end_at)
+            - if e.has_documentation?
+              - unless e.all_documentation['images'].empty? && e.flickrsets.empty?
+                = link_to t(:photos), url_for(e) + "#documentation", target: :_blank, class: [:button, :tiny, :secondary]
+              - unless e.all_documentation['videos'].empty?
+                = link_to t(:videos), url_for(e) + "#documentation", target: :_blank, class: [:button, :tiny, :secondary]
+                
+      - unless @videos.empty?
+        %h2= t :videos
+        %ul.archive
+          - @videos.each do |v|
+            %li.video
+              .video_title= link_to v.title, v.url, target: :_blank
+              .video_description= raw v.description
+
+      - unless @documents.empty?
+        %h2= t :documents
+        %ul.archive
+          - @documents.each do |d|
+            %li.video
+              .video_title= link_to d.title, d.attachedfile.url
+              .video_description= raw d.description
+

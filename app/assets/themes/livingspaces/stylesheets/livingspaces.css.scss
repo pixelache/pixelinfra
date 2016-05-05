@@ -1141,4 +1141,30 @@ table.tram_map {
   h2 {
 
   }
+  .flickr_galleries {
+    clear: left;
+  }
+}
+.festival-2015_archive {
+  ul {
+    li {
+      margin-bottom: 1rem;
+      a.button.tiny {
+        margin-bottom: 0;
+      }
+      .sub_info {
+        color: #777;
+        font-size: 0.8rem;
+
+      }
+    }
+  }
+}
+
+.lscontainer {
+    min-height: 70%;
+    min-height: -webkit-calc(100% - 50px);
+    min-height: -moz-calc(100% - 50px);
+    min-height: calc(100% - 50px);
+
 }
