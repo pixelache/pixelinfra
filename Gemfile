@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
-gem 'rails', '4.2.2'
+gem 'rails', '4.2.6'
 gem 'pg'
 
 gem 'mysql2' # for data migration
@@ -79,7 +79,8 @@ gem 'twitter'
 gem 'unicorn'
 gem 'unf' 
 gem 'vimeo'
-gem 'youtube_it'
+gem 'yt'
+# gem 'youtube_it'
 
 group :development do
   gem 'better_errors'
