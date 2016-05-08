@@ -18,10 +18,10 @@
               - @page.headings.each do |heading|
                 - next if heading.first == 'top'
                 %dd{:"data-magellan-arrival" => heading.first}= link_to heading.last, "##{heading.first}"
-  - unless @page.photos.empty?
-    - unless @page.photos.first.filename_width.blank?
-      - unless @page.photos.first.filename_width < 1200
-        .page_banner= image_tag @page.photos.first.filename.url(:wide)
+    - unless @page.photos.empty?
+      - unless @page.photos.first.filename_width.blank?
+        - unless @page.photos.first.filename_width < 1200
+          .page_banner= image_tag @page.photos.first.filename.url(:wide)
         
     .small-12.medium-7.medium-offset-1.columns
       .row
