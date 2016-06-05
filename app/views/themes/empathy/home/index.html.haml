@@ -1,0 +1,133 @@
+.top_banner
+  .row
+    .large-4.medium-6.small-12.columns.text-center= image_tag theme_image_path('pattern-strng.png')
+    .large-4.medium-6.hide-for-small-only.columns.text-center= image_tag theme_image_path('pattern-strng.png')
+    .large-4.hide-for-medium-down.columns.text-center= image_tag theme_image_path('pattern-strng.png')
+  .row.front_blurb_row
+    .medium-5.medium-push-7.small-12.columns= image_tag(theme_image_path('title_nologo.png'))
+    .medium-6.small-12.medium-pull-6.columns
+      .dotted_blurb.text-center
+        = t "empathy.front_blurb"
+.news_front
+  .centered_title
+    = image_tag theme_image_path('news_title.png')
+  .row
+    - @posts.each_with_index do |news, index|
+      .post.large-3.medium-5.small-10.columns{class: @posts[index+1].nil? ? "end" : false,  :"data-equalizer-watch" => ''}
+        .news_image
+          -#{style: news.image? ? "background: url(#{news.image.url(:box).gsub('development', 'production')}) no-repeat center center" : false }
+          - if news.image?
+            = image_tag news.image.url(:box)
+          = link_to news do
+            .overlay &nbsp;
+        .text_box
+          .title= link_to news.title, news
+          .body
+            = raw truncate_html(sanitize(news.body, tags: %w{em b bold strong i italic u underline br a }), length: 250)
+            = link_to ' >>>', news
+/ .overlapping_divider
+/   .text= link_to  t(:programme), page_path('programme')
+/
+/ .programme_carousel
+/   - @frontitems.shuffle.each_with_index do |fi, index|
+/     - if fi.frontmodule
+/       - unless fi.item.nil?
+/
+/         = render :partial => fi.frontmodule.partial_name, :locals => {:front => fi, index: index}
+/       - else
+/         = render :partial => fi.frontmodule.partial_name, :locals => {:front => fi, index: index}
+/
+/ .overlapping_divider
+/   .text= t :news
+/
+/ .news_container
+/   .row{:"data-equalizer" => ''}
+/     - @posts.each_with_index do |news, index|
+/       .small-12.medium-6.large-4.post.columns{class: @posts[index+1].nil? ? "hide-for-medium-only end" : false,  :"data-equalizer-watch" => ''}
+/         .news_image
+/           - if news.image?
+/             = image_tag news.image.url(:box)
+/         .text_box
+/           .title= link_to news.title, news
+/           .body
+/             = raw truncate_html(sanitize(news.body, tags: %w{em b bold strong i italic u underline br a }), length: 250)
+/             = link_to ' >>>', news
+/   .row
+/     .small-12.small-centered.text-center
+/       .more_news= link_to t(:see_all_news), posts_path
+/
+/ .overlapping_divider
+/   .text= t("livingspaces.the_tram")
+/
+/ .tram
+/   .left
+/     = image_tag theme_image_path('bluetram.png')
+/   .right
+/     .row
+/       .small-12.columns
+/         %h4= raw t("livingspaces.our_festival_centre")
+/
+/         .blurb
+/           %p
+/             = t "livingspaces.tram_blurb"
+/             %br/
+/             = link_to t(:read_more) + ' >>>', '/festivals/festival-2015/tram-installations-presented-by-kruks'
+/
+/
+/         .blurb
+/           %p= raw t("livingspaces.taidelinja", href: link_to(t("livingspaces.taidelinja_project"), 'http://www.taidelinja.fi/'))
+/
+/
+/ .overlapping_divider
+/   .text= raw "Inside&sdot;Outside&sdot;In"
+/
+/ .inside_out_in.row
+/   .one-third.column.small-12.medium-4
+/     %h2= raw " Helsinki Outside&sdot;In"
+/     .text
+/       %p
+/         = t("livingspaces.outside_in_blurb")
+/
+/       %p= link_to t("livingspaces.learn_more") + " >>>", '/festivals/festival-2015/theme/helsinki-outside-in'
+/   .one-third.column.small-12.medium-4
+/     %h2= t("livingspaces.participate_and_interact")
+/     .text
+/       %p= t("livingspaces.participation_blurb")
+/       %p= link_to t("livingspaces.learn_more") + " >>>", '/posts/signups-open-for-workshops-and-other-interactions-at-pixelache-festival'
+/   .one-third.columns.small-12.medium-4
+/     %h2= raw "Helsinki Inside&sdot;Out"
+/     .text
+/       %p= t("livingspaces.inside_out_blurb")
+/
+/       %p
+/         = link_to t("livingspaces.submit_an_activity") + ' >>>', '/festivals/festival-2015/theme/helsinki-inside-out'
+/
+/
+/
+/ .overlapping_divider
+/   .text= t("livingspaces.partners_and_support")
+/
+/ .support
+/   .row
+/     .columns.small-12.small-centered.text-center
+/       = image_tag theme_image_path('festival_logos.png')
+/
+/
+/ = content_for :jquery do
+/   :plain
+/     $('.programme_carousel').slick({infinite: true,
+/       slidesToShow: 1,    autoplay: true, pauseOnHover: false,
+/       autoplaySpeed: 6400 });
+/     if ($(window).width() <= 480) {
+/       $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 200) / 2);
+/     } else {
+/       $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 450) / 2);
+/     }
+/
+/     $( window ).resize(function() {
+/       if ($(window).width() <= 480) {
+/         $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 200) / 2);
+/       } else {
+/         $('.wrapper_wrapper .title_wrapper').css('margin-left',  ($(window).width() - 450) / 2);
+/       }
+/      });

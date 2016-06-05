@@ -42,6 +42,7 @@ module Pixelinfra
 
     config.session_store :cookie_store, :key => '_pixelache_session', :domain => :all
     config.time_zone = 'Helsinki'
+    config.assets.paths << Rails.root.join("app", "assets", "themes", "empathy", "fonts")
   end
 end
 I18n.enforce_available_locales = false

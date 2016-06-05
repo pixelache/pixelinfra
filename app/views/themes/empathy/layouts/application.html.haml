@@ -1,0 +1,77 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+    = display_meta_tags :site => 'Pixelache Festival 2016' 
+    
+    %meta{:content => content_for?(:description) ? yield(:description) : "Pixelache Festival 2016", :name => "description"}
+    %link{:href => "http://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "/feed", :rel => "alternate", :title => "RSS", :type => "application/rss+xml"}/
+    = favicon_link_tag theme_image_path('favicon.ico')
+    -#= stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag 'empathy/stylesheets/application', :media => :screen
+    = stylesheet_link_tag 'print', media: :print
+    = javascript_include_tag "empathy/javascripts/application"
+    = javascript_include_tag "vendor/modernizr"
+
+
+    - if controller.controller_name == 'events' || (controller.action_name == 'page' || params[:id] == 'locations') || (controller.controller_name == 'experiences')
+      %script{:src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}", :type => "text/javascript"}
+    = csrf_meta_tags
+    = yield(:head)
+  %body{:class => "#{controller_name} #{action_name}"}
+    :javascript
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-40681531-2', 'auto');
+      ga('send', 'pageview');
+    %header
+      %section
+            
+        .fixed
+          %nav.top-bar{:"data-topbar" => '', role: :navigation}
+            %ul.title-area
+              %li.name
+                = link_to image_tag(theme_image_path('logo_basic.png')), '/'
+            %ul.left
+              %li= link_to t("empathy.about"), festival_page_festival_path('festival-2016', 'about')
+              %li= link_to t("empathy.preliminary_programme"), festival_page_festival_path('festival-2016', 'preliminary-programme')
+              %li= link_to t("empathy.news"), festival_posts_path('festival-2016')
+              %li= link_to t("empathy.locations"), festival_page_festival_path('festival-2016', 'locations')
+              %li= link_to t("empathy.contact"), festival_page_festival_path('festival-2016', 'contact')
+            %ul.right.social
+              %li= link_to image_tag(theme_image_path('twitter.png')), 'https://twitter.com/pixelache', target: :_blank
+              %li= link_to image_tag(theme_image_path('flickr.png')), 'https://www.flickr.com/photos/pixelache/', target: :_blank
+              %li= link_to image_tag(theme_image_path('fb.png')), 'https://www.facebook.com/pixelache', target: :_blank
+    - if flash
+      - flash.each do |key, value|
+        .alert.text-center{ :class => "alert-#{key}" }
+          %strong= value
+            
+    %section.empathy_container
+      %article= yield
+
+    / %footer
+    /   .logo= link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), 'http://pixelache.ac'
+    /   .address
+    /     festival at pixelache .ac
+    /   .social.right
+    /     = link_to image_tag(theme_image_path('follow_fb.png'), width: 25), 'https://www.facebook.com/pixelache'
+    /     = link_to image_tag(theme_image_path('follow_twitter.png'), width: 25), 'https://twitter.com/pixelache'
+    /     = link_to image_tag(theme_image_path('follow_vimeo.png'), width: 25), 'https://vimeo.com/pixelache'
+    /     = link_to image_tag(theme_image_path('follow_bambuser.png'), width: 25), 'http://bambuser.com/channel/pixelversity'
+    /     = link_to image_tag(theme_image_path('follow_flickr.png'), width: 25), 'https://www.flickr.com/photos/pixelache/'
+    /     = link_to image_tag(theme_image_path('follow_git.png'), width: 25), 'https://github.com/pixelache'
+    /     = link_to image_tag(theme_image_path('follow_rss.png'), width: 25), '/feed'
+      
+    :javascript
+      $(document).ready(function() {
+       
+          
+        #{yield :jquery}
+        
+      });    

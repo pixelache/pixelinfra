@@ -1,0 +1,53 @@
+/*
+ *= require foundation
+ *= require empathy/stylesheets/foundation_overrides
+ *= require empathy/stylesheets/empathy
+ *= require slick
+
+ *= require empathy/stylesheets/mobile
+ */
+
+
+@font-face {
+  font-family: 'Elephant Medium';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/assets/empathy/fonts/Elephant-Medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Liberation Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/assets/empathy/fonts/LiberationSans-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Liberation Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('LiberationSans-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Liberation Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: url('LiberationSans-Italic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Liberation Sans';
+  font-style: italic;
+  font-weight: 700;
+  src: url('LiberationSans-BoldItalic.ttf') format('truetype');
+}
+
+
+
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #333;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+}
+

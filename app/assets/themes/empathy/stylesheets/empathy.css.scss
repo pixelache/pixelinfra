@@ -1,0 +1,106 @@
+@import 'variables';
+
+.empathy_container {
+  padding-top: 180px;
+}
+
+.top-bar {
+  background-color: $grey;
+  padding: 30px;
+  ul.left {
+    li {
+      font-family: 'Liberation Sans', sans-serif;
+      font-weight: bold;
+      font-size: 1rem;
+      text-transform: uppercase;
+      float: left;
+      padding-right: 3rem;
+      a { 
+        color: $pink;
+        &:hover {
+          border-bottom: 2px solid $pink;
+        };
+      }
+    }
+  }
+  ul.social {
+    li {
+      float: left;
+      padding-right: 0.4rem;
+    }
+  }
+}
+
+
+.top_banner {
+  background-color: $grey;
+
+}
+
+.front_blurb_row {
+  padding: 2.5rem 0;
+  .dotted_blurb {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    font-size: 0.9rem;
+    font-family: 'Elephant Medium';
+    border: 3px dotted $pink;
+    color: $pink;
+  }
+}
+
+.news_front {
+  .centered_title {
+    padding: 2rem 0;
+    position: relative;
+    margin-right: auto;
+    text-align: center;
+  }
+  
+  background-color: $purple;
+  color: $grey;
+  font-family: 'Elephant Medium';
+  .post {
+    margin-bottom: 2rem;
+  
+    .news_image {
+      width: 100%;
+      overflow: hidden;
+      .overlay {
+        background: rgba(238, 30, 70, 0.62);
+        
+        width: 100%;
+        padding-bottom: 95%;
+        margin-top: -104%;
+        position: relative;
+        z-index: 2;
+        &:hover {
+          background: none;
+          cursor: pointer;
+        }
+      }
+      margin-bottom: 1.5rem;
+    }
+    .text_box {
+      .title {
+        text-transform: uppercase;
+        a { 
+          color: $grey;
+        }
+        padding-bottom: 0.6rem;
+        margin-bottom: 0.6rem;
+        border-bottom: 3px dotted $grey;
+      }
+      .body {
+        font-weight: 300;
+        font-size: 0.8rem;
+        a { 
+          color: $grey;
+          &:hover {
+            color: $pink;
+          }
+        }
+      }
+    }
+  }
+}

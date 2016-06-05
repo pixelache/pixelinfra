@@ -459,6 +459,8 @@ en:
   registration_is_closed: 'Registration is now closed.'
   next_post: 'Next post'
   opencall_is_closed: 'This open call is no longer open. Thank you for your submissions.'
+  empathy:
+    front_blurb: "Pixelache Festival 2016 will take place in September. The festival, named 'Interfaces for Empathy', explored possibilities of the societal shift towards the understanding and consciouness of human species as a balanced part of the ecosystem we live in."
   livingspaces:
     about: 'About'
     locations: 'Locations'
