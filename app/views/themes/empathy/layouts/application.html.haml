@@ -37,22 +37,31 @@
             %ul.title-area
               %li.name
                 = link_to image_tag(theme_image_path('logo_basic.png')), '/'
-            %ul.left
+            %ul.left.hide-for-small-only
               %li= link_to t("empathy.about"), festival_page_festival_path('festival-2016', 'about')
               %li= link_to t("empathy.preliminary_programme"), festival_page_festival_path('festival-2016', 'preliminary-programme')
               %li= link_to t("empathy.news"), festival_posts_path('festival-2016')
               %li= link_to t("empathy.locations"), festival_page_festival_path('festival-2016', 'locations')
               %li= link_to t("empathy.contact"), festival_page_festival_path('festival-2016', 'contact')
-            %ul.right.social
+            %ul.right.social.hide-for-small-only
               %li= link_to image_tag(theme_image_path('twitter.png')), 'https://twitter.com/pixelache', target: :_blank
               %li= link_to image_tag(theme_image_path('flickr.png')), 'https://www.flickr.com/photos/pixelache/', target: :_blank
               %li= link_to image_tag(theme_image_path('fb.png')), 'https://www.facebook.com/pixelache', target: :_blank
+          .row
+            .small-8.small-offset-2.show-for-small-only
+              %nav.mobie-menu
+                %select
+                  %option About
+                  %option Preliminary programme
+                  %option News
+                  %option Locations
+                  %option Contact
     - if flash
       - flash.each do |key, value|
         .alert.text-center{ :class => "alert-#{key}" }
           %strong= value
             
-    %section.empathy_container
+    %section.empathy_container{class: [controller.controller_name, controller.action_name]}
       %article= yield
 
     / %footer

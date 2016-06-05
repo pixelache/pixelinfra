@@ -2,6 +2,20 @@
 
 .empathy_container {
   padding-top: 180px;
+      height: 100%;
+  &.posts {
+    background-color: $purple;
+  }
+  &.page {
+
+    padding-top: 150px;
+    background: url('/assets/empathy/images/about_bg.png') no-repeat center bottom fixed;
+    background-color: $grey;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+  }
 }
 
 .top-bar {
@@ -48,14 +62,15 @@
     color: $pink;
   }
 }
+.centered_title {
+  padding: 2rem 0;
+  position: relative;
+  margin-right: auto;
+  text-align: center;
+}
 
 .news_front {
-  .centered_title {
-    padding: 2rem 0;
-    position: relative;
-    margin-right: auto;
-    text-align: center;
-  }
+
   
   background-color: $purple;
   color: $grey;
@@ -101,6 +116,28 @@
           }
         }
       }
+    }
+  }
+}
+
+.page {
+
+
+  color: $pink;
+  
+  .page_text {
+    border: 3px dotted $pink;
+    padding: 2rem 3rem;
+    max-height: 55vH;
+    font-size: 0.8rem;
+    line-height: 1rem;
+    overflow: auto;
+    font-family: "Farnham Display Medium";
+    h3 {
+      font-family: 'Elephant Medium';
+      color: $pink;
+      text-transform: uppercase;
+      font-size: 1.4rem;
     }
   }
 }

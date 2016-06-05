@@ -1,0 +1,17 @@
+.news_front
+  .centered_title
+    = image_tag theme_image_path('news_title.png')
+  .row
+    - @posts.each_with_index do |news, index|
+      .post.large-3.medium-4.medium-offset-1.small-10.columns{class: @posts[index+1].nil? ? "end" : false,  :"data-equalizer-watch" => ''}
+        .news_image
+          -#{style: news.image? ? "background: url(#{news.image.url(:box).gsub('development', 'production')}) no-repeat center center" : false }
+          - if news.image?
+            = image_tag news.image.url(:box)
+          = link_to news do
+            .overlay &nbsp;
+        .text_box
+          .title= link_to news.title, news
+          .body
+            = raw truncate_html(sanitize(news.body, tags: %w{em b bold strong i italic u underline br a }), length: 250)
+            = link_to ' >>>', news

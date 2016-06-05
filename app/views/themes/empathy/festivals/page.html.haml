@@ -1,0 +1,8 @@
+= content_for :description do
+  = truncate(strip_tags(@page.body), length: 200)
+.page{class: @page.slug}
+  - unless @page.photos.blank?
+    .centered_title= image_tag @page.photos.first.filename.url.gsub('production', 'development')
+  .row
+    .large-6.large-offset-3.medium-8.medium-offset-2.small-10.small-offset-1.columns.page_text
+      = raw @page.body
