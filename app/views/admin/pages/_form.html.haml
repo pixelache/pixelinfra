@@ -46,7 +46,7 @@
 
         .small-3.columns
           - if ff.object.filename?
-            = image_tag ff.object.filename.url(:thumb)
+            = image_tag ff.object.filename.url(:logo)
           = ff.input :filename
           = ff.input :title
           = ff.input :credit
