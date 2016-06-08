@@ -3,7 +3,7 @@
  *= require empathy/stylesheets/foundation_overrides
  *= require empathy/stylesheets/empathy
  *= require slick
-
+ *= require empathy/stylesheets/jquery.mCustomScrollbar 
  *= require empathy/stylesheets/mobile
  */
 
@@ -12,38 +12,26 @@
   font-family: 'Elephant Medium';
   font-style: normal;
   font-weight: 400;
-  src: url('/assets/empathy/fonts/Elephant-Medium.otf') format('opentype');
+  src: url('/assets/Elephant-Medium.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'Farnham Display Medium';
   font-style: normal;
   font-weight: 200;
-  src: url('/assets/empathy/fonts/FarnhamDisplay-Medium.otf') format('opentype');
+  src: url('/assets/FarnhamDisplay-Medium.otf') format('opentype');
 }
 @font-face {
-  font-family: 'Liberation Sans';
+  font-family: 'Farnham Display Medium';
+  font-style: italic;
+  font-weight: 200;
+  src: url('/assets/FarnhamDisplay-MediumItal.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Helvetica Neue Bold Condensed';
   font-style: normal;
   font-weight: 400;
-  src: url('/assets/empathy/fonts/LiberationSans-Regular.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Liberation Sans';
-  font-style: normal;
-  font-weight: 700;
-  src: url('LiberationSans-Bold.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Liberation Sans';
-  font-style: italic;
-  font-weight: 400;
-  src: url('LiberationSans-Italic.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Liberation Sans';
-  font-style: italic;
-  font-weight: 700;
-  src: url('LiberationSans-BoldItalic.ttf') format('truetype');
+  src: url('/assets/HelveticaNeueLTCom-BdCn.ttf') format('truetype');
 }
 
 

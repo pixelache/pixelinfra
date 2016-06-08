@@ -23,16 +23,62 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
 
 @media #{$small-only} { 
   nav.top-bar {
+    height: 8.25rem;
+    .name {
+      max-height: 8.25rem;
+    }
     ul.title-area {
       max-width:90%;
+    }
+  }
+  
+  
+  .empathy_container {
+    &.page {
+      overflow: auto;
+      .centered_title {
+        img {
+          max-height: 60px;
+        }
+      }
+      .page_text {
+        border: none;
+        max-height: 90%;
+        padding: 1rem 1rem 10rem 1rem;
+
+      }
+    }
+  }
+  
+  footer {
+    .logo {
+      max-width: 48%;
+    }
+    .text {
+      max-width: 48%;
+      font-size: 0.8rem;
+    }
+    .social {
+      text-align: center;
+      a {
+        padding: 0 0.5rem;
+        img {
+          max-height: 18px;
+        }
+      }
     }
   }
 }
 
 @media only screen and (min-width: 40.0625em) and (max-width:64em) {
   nav.top-bar {
+    max-height: 120px;
     ul.title-area {
-      max-width: 20%;
+      max-width: 28%;
+    }
+    .name{
+      max-height: 120px;
+      overflow:hidden;
     }
   }
   ul.left {
@@ -47,8 +93,47 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
     position: absolute;
     top: 10px;
     right: 10px;
+    li {
+      a {
+        img {
+          max-height: 12px;
+          max-width: 18px;
+        }
+      }
+    }
+  }
+  
+  .empathy_container { 
+    padding-top: 120px;
+    &.page {
+      padding-top: 130px;
+      background-position: center bottom;
+      .preliminary-programme, &.preliminary-programme {
+        background-position: center center;
+        background-size: contain;
+      }
+    }
+  }
+  footer {
+    .logo {
+      max-width: 28%;
+    }
+    .text {
+      font-size: 0.8rem;
+    }
+    .social {
+      a {
+        padding: 0 0.5rem;
+        img {
+          max-height: 18px;
+        }
+      }
+    }
   }
 }
+
+
+// medium
 
 @media only screen and (min-width:64.025em) and (max-width: 73.3em) {
   nav.top-bar {
@@ -74,5 +159,6 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
       
     }
   }
+
 }
 

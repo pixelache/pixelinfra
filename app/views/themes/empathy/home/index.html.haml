@@ -1,8 +1,6 @@
 .top_banner
-  .row
-    .large-4.medium-6.small-12.columns.text-center= image_tag theme_image_path('pattern-strng.png')
-    .large-4.medium-6.hide-for-small-only.columns.text-center= image_tag theme_image_path('pattern-strng.png')
-    .large-4.hide-for-medium-down.columns.text-center= image_tag theme_image_path('pattern-strng.png')
+  .text-center= image_tag theme_image_path('pattern-main-page-1540px.png')
+
   .row.front_blurb_row
     .medium-5.medium-push-7.small-12.columns= image_tag(theme_image_path('title_nologo.png'))
     .medium-6.small-12.medium-pull-6.columns
@@ -13,7 +11,7 @@
     = image_tag theme_image_path('news_title.png')
   .row
     - @posts.each_with_index do |news, index|
-      .post.large-3.medium-5.small-10.columns{class: @posts[index+1].nil? ? "end" : false,  :"data-equalizer-watch" => ''}
+      .post.large-3.medium-4.medium-offset-1.large-offset-0.small-10.columns{class: @posts[index+1].nil? ? "end" : false,  :"data-equalizer-watch" => ''}
         .news_image
           -#{style: news.image? ? "background: url(#{news.image.url(:box).gsub('development', 'production')}) no-repeat center center" : false }
           - if news.image?

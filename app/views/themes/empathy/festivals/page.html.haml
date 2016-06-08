@@ -1,8 +1,17 @@
 = content_for :description do
   = truncate(strip_tags(@page.body), length: 200)
-.page{class: @page.slug}
+.page{class:  @page.slug}
   - unless @page.photos.blank?
     .centered_title= image_tag @page.photos.first.filename.url.gsub('production', 'development')
   .row
-    .large-6.large-offset-3.medium-8.medium-offset-2.small-10.small-offset-1.columns.page_text
+    .large-7.medium-8.small-10.columns.page_text.small-centered
       = raw @page.body
+      
+= content_for :jquery do
+  :plain
+    $(window).load(function(){
+      $(".page_text").mCustomScrollbar({
+      theme:"inset-3",
+      scrollButtons:{ enable: true }
+      });
+    });      

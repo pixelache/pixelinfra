@@ -33,7 +33,7 @@
       %section
             
         .fixed
-          %nav.top-bar{:"data-topbar" => '', role: :navigation}
+          %nav.top-bar{:"data-topbar" => '', role: :navigation, class: [@page.nil? ? false : @page.slug]}
             %ul.title-area
               %li.name
                 = link_to image_tag(theme_image_path('logo_basic.png')), '/'
@@ -47,9 +47,9 @@
               %li= link_to image_tag(theme_image_path('twitter.png')), 'https://twitter.com/pixelache', target: :_blank
               %li= link_to image_tag(theme_image_path('flickr.png')), 'https://www.flickr.com/photos/pixelache/', target: :_blank
               %li= link_to image_tag(theme_image_path('fb.png')), 'https://www.facebook.com/pixelache', target: :_blank
-          .row
-            .small-8.small-offset-2.show-for-small-only
-              %nav.mobie-menu
+          .row.show-for-small-only
+            .small-8.small-offset-2
+              %nav.mobile-menu
                 %select
                   %option About
                   %option Preliminary programme
@@ -61,21 +61,22 @@
         .alert.text-center{ :class => "alert-#{key}" }
           %strong= value
             
-    %section.empathy_container{class: [controller.controller_name, controller.action_name]}
+    %section.empathy_container{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
       %article= yield
 
-    / %footer
-    /   .logo= link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), 'http://pixelache.ac'
-    /   .address
-    /     festival at pixelache .ac
-    /   .social.right
-    /     = link_to image_tag(theme_image_path('follow_fb.png'), width: 25), 'https://www.facebook.com/pixelache'
-    /     = link_to image_tag(theme_image_path('follow_twitter.png'), width: 25), 'https://twitter.com/pixelache'
-    /     = link_to image_tag(theme_image_path('follow_vimeo.png'), width: 25), 'https://vimeo.com/pixelache'
-    /     = link_to image_tag(theme_image_path('follow_bambuser.png'), width: 25), 'http://bambuser.com/channel/pixelversity'
-    /     = link_to image_tag(theme_image_path('follow_flickr.png'), width: 25), 'https://www.flickr.com/photos/pixelache/'
-    /     = link_to image_tag(theme_image_path('follow_git.png'), width: 25), 'https://github.com/pixelache'
-    /     = link_to image_tag(theme_image_path('follow_rss.png'), width: 25), '/feed'
+    %footer{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
+      .logo= link_to image_tag(theme_image_path('footer/logo.png'), :alt => "Pixelache"), 'http://pixelache.ac'
+      .text= link_to 'www.pixelache.ac', 'http://pixelache.ac'
+      .social
+        = link_to image_tag(theme_image_path('footer/facebook.png'), width: 25), 'https://www.facebook.com/pixelache'
+        = link_to image_tag(theme_image_path('footer/flickr.png'), width: 25), 'https://www.flickr.com/photos/pixelache/'        
+        = link_to image_tag(theme_image_path('footer/twitter.png'), width: 25), 'https://twitter.com/pixelache'
+        = link_to image_tag(theme_image_path('footer/vimeo.png'), width: 25), 'https://vimeo.com/pixelache'
+        = link_to image_tag(theme_image_path('footer/instagram.png'), width: 25), 'https://github.com/pixelache'        
+        = link_to image_tag(theme_image_path('footer/bamboozer.png'), width: 25), 'http://bambuser.com/channel/pixelversity'
+
+
+
       
     :javascript
       $(document).ready(function() {

@@ -50,7 +50,13 @@ namespace :deploy do
     end
   end
 
-  after :finishing, "deploy:migrate"
+  desc 'copy protected fonts'
+  task :fonts do
+    run "cp #{shared_path}/fonts/* #{release_path}/app/assets/fonts/"
+  end
+      
+  after :finishing, "deploy:fonts"
+  after "deploy:fonts", "deploy:migrate"
   after "deploy:migrate", "deploy:cleanup"
   after "deploy:cleanup", "deploy:restart"
   after :restart, :clear_cache do

@@ -1,17 +1,14 @@
-.news_front
+.news_index
   .centered_title
-    = image_tag theme_image_path('news_title.png')
-  .row
+    = image_tag theme_image_path('news-title-red.png')
+  .row{:"data-equalizer" => ''}
     - @posts.each_with_index do |news, index|
-      .post.large-3.medium-4.medium-offset-1.small-10.columns{class: @posts[index+1].nil? ? "end" : false,  :"data-equalizer-watch" => ''}
-        .news_image
-          -#{style: news.image? ? "background: url(#{news.image.url(:box).gsub('development', 'production')}) no-repeat center center" : false }
-          - if news.image?
-            = image_tag news.image.url(:box)
-          = link_to news do
-            .overlay &nbsp;
-        .text_box
-          .title= link_to news.title, news
-          .body
-            = raw truncate_html(sanitize(news.body, tags: %w{em b bold strong i italic u underline br a }), length: 250)
-            = link_to ' >>>', news
+      = link_to news do
+        .post.large-3.medium-6.small-offset-1.medium-offset-0.small-10.columns{class: @posts[index+1].nil? ? "end" : false}
+          .news_image{style: news.image? ? "background-image: url(#{news.image.url(:box).gsub('development', 'production')});" : false, onmouseover: '$(this).find(".overlay").css("display", "block");$(this).css("background-image", "none");', onmouseout: '$(this).find(".overlay").css("display", "none");$(this).css("background-image", "url(' + news.image.url(:box).gsub("development", "production") + ')");'}
+
+            .overlay
+              = truncate_html(strip_tags(news.body), length: 400)
+          .text_box{:"data-equalizer-watch" => ''}
+            .title= link_to news.title, news
+            .date= news.published_at.strftime('%d %B %Y')

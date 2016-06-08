@@ -43,7 +43,7 @@ class Post < ActiveRecord::Base
   scope :is_external, -> () { where(external: true) }
   scope :by_tag, -> tag{ joins(:taggings).where(:taggings => {:tag_id => tag}) }
   scope :by_name, -> (name) { joins(:translations).where("post_translations.title ILIKE '%" + name + "%'")}
-  scope :interviews, -> () { joins(:post_categories).where("post_categories.name ILIKE '%interviews'") }
+  scope :interviews, -> () { joins(:festivalgories).where("post_categories.name ILIKE '%interviews'") }
   
   def check_festival_site
     if self.festival
@@ -67,11 +67,11 @@ class Post < ActiveRecord::Base
   end
   
   def previous_post_by_festival
-    self.class.where("published is true and festival_id = ? and published_at < ?", festival_id, published_at).order("published_at desc").first
+    self.class.where("published is true and festival_id = ? and published_at <= ? and id != ?", festival_id, published_at, id).order("published_at desc").first
   end
 
   def next_post_by_festival
-    self.class.where("published is true and festival_id = ? and published_at > ?", festival_id, published_at).order("published_at asc").first
+    self.class.where("published is true and festival_id = ? and published_at >= ? and id != ?", festival_id, published_at, id).order("published_at asc").first
   end
   
   def check_published

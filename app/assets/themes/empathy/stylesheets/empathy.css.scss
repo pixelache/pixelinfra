@@ -1,16 +1,44 @@
 @import 'variables';
 
+
+// main site
+
+body {
+  background-color: $grey;
+  min-height:100%;
+  position:relative;
+}
+a {
+  color: $purple;
+  &:hover {
+    color: $pink;
+  }
+}
+
 .empathy_container {
   padding-top: 180px;
-      height: 100%;
+  height: 100%;
   &.posts {
+    background-color: $grey;
+    height: initial;
+  }    
+ &.preliminary-programme {
+
     background-color: $purple;
   }
   &.page {
 
-    padding-top: 150px;
-    background: url('/assets/empathy/images/about_bg.png') no-repeat center bottom fixed;
+    padding-top: 180px;
+    background: url('/assets/empathy/images/about_bg.png') no-repeat center 100px  fixed;
     background-color: $grey;
+    .preliminary-programme, &.preliminary-programme {
+      background: url('/assets/empathy/images/programme_bg.png') no-repeat center 140px fixed;
+      background-color: $purple;
+      background-size: cover;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+    }
     -webkit-background-size: contain;
     -moz-background-size: contain;
     -o-background-size: contain;
@@ -20,14 +48,18 @@
 
 .top-bar {
   background-color: $grey;
-  padding: 30px;
+  padding: 30px 30px 0 30px;
+  &.preliminary-programme {
+    background-color: $purple;
+  }
   ul.left {
     li {
-      font-family: 'Liberation Sans', sans-serif;
+      font-family: 'Helvetica Neue Bold Condensed', sans-serif;
       font-weight: bold;
       font-size: 1rem;
       text-transform: uppercase;
       float: left;
+      letter-spacing: 0.22rem;
       padding-right: 3rem;
       a { 
         color: $pink;
@@ -63,15 +95,17 @@
   }
 }
 .centered_title {
-  padding: 2rem 0;
+  padding: 0 0 2rem 0;
   position: relative;
   margin-right: auto;
   text-align: center;
 }
 
 .news_front {
-
-  
+  .centered_title {
+    margin-bottom: 2rem;
+  }
+  padding: 2.5rem 0 12rem 0;
   background-color: $purple;
   color: $grey;
   font-family: 'Elephant Medium';
@@ -120,15 +154,113 @@
   }
 }
 
+
+// news/posts index
+
+.news_index {
+  width: 100%;
+  padding-bottom: 18rem;
+  overflow: hidden;
+  .post{
+    .text_box {
+      .title {
+        font-family: 'Elephant Medium';
+        text-transform: uppercase;
+        a { 
+          color: $pink;
+        }
+        padding-bottom: 0.6rem;
+        margin-bottom: 0.6rem;
+        border-bottom: 2px dotted $pink;
+      }
+      .date {
+        font-weight: 300;
+        font-size: 0.8rem;
+        color: $pink;
+        a { 
+          color: $pink;
+
+        }
+        font-family: 'Elephant Medium';
+      }
+    }
+    .news_image {
+      background-size: cover;
+      padding-bottom: 100%;
+      height: 0;
+      overflow: hidden;
+      cursor: pointer;
+      margin-bottom: 1rem;
+
+      .overlay {
+        display: none;
+        opacity: 1;
+        padding-bottom: 100%;
+        height: 0;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 30px;
+        padding: 10px 10px 100% 10px;
+        background-image: none;
+        color: $pink;
+        font-family: 'Elephant Medium';
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.news_post {
+  color: $pink;
+  margin-bottom: 3rem;
+  .title {
+    font-family: 'Elephant Medium';
+    font-size: 2.250rem;
+    text-transform: uppercase;
+    line-height: 2.75rem;
+    margin-bottom: 1.5rem;
+
+  }
+  .date {
+    font-size: 1.5rem;
+    font-family: 'Elephant Medium';
+  }
+  .news_image {
+    margin: 1.5rem 0 1.5rem 0;
+  }
+  .news_body, .news_body p {
+    font-family: 'Farnham Display Medium';
+    font-size: 1rem;
+    h3 {
+      font-family: 'Elephant Medium';
+      color: $pink;
+      text-transform: uppercase;
+      font-size: 1.4rem;
+    }
+  }
+  .post {
+    margin-bottom: 2.5rem;
+  }
+  .next, .prev {
+    font-family: 'Elephant Medium';
+    a { color: $pink; }
+    font-size: 1.125rem;
+  }
+}
+
+
+
+
 .page {
 
-
+  overflow: hidden;
   color: $pink;
   
   .page_text {
-    border: 3px dotted $pink;
-    padding: 2rem 3rem;
-    max-height: 55vH;
+    border: 2px dotted $pink;
+    padding: 2rem 1rem 2rem 3rem;
+    max-height: 45vH;
     font-size: 0.8rem;
     line-height: 1rem;
     overflow: auto;
@@ -140,4 +272,94 @@
       font-size: 1.4rem;
     }
   }
+}
+
+
+// footer
+
+footer {
+  position:fixed; 
+  left:0px; 
+  bottom:0px; 
+  min-height: 40px;
+  max-height: 85px; 
+  width:100%;
+  padding: 3vH 0;
+  background-color: $fuschia;
+  color: $grey;
+  z-index: 99;
+  &.posts {
+    position: relative;
+    bottom: initial;
+    padding: 6px 0;
+
+      width:100%;
+  }
+  .logo {
+    float: left;
+    padding: 0 25px;
+  }
+  .social {
+    float: right;
+    a {
+      img {
+        max-height: 25px;
+        width: auto;
+      }
+      padding: 0 1rem;
+    }
+    padding: 0 2rem;
+  }
+
+  .text {
+    float: left;
+    padding: 0.25rem 1rem;
+    font-family: 'Elephant Medium';
+    font-weight: 200;
+    a {
+      color: $grey;
+    }
+    font-size: 1rem;
+    text-transform: lowercase;
+  }
+}
+
+
+// scrollbars
+
+
+.mCSB_scrollTools .mCSB_draggerRail {
+  display: none;
+}
+.mCSB_scrollTools  .mCSB_dragger_bar{   display: none;
+}
+
+
+.mCSB_scrollTools{
+	width: 16px; /* change the width of the main container of the scrollbar to fit your resized buttons */
+}
+
+.mCSB_inside > .mCSB_container{
+    /* change the right margin of the content container to fit your resized buttons (if needed) */
+    margin-right: 40px; 
+}
+
+.mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown{
+	/* set buttons height to 26 pixels (their width is 100% so it fits .mCSB_scrollTools width we set above) */
+	height: 81px; 
+	/* change their background-position to use your own separate custom images */
+	background-position: center; 
+}
+
+.mCSB_scrollTools a + .mCSB_draggerContainer{
+    /* change the dragger container top/bottom margin so it doesn't overlap the resized buttons */
+    margin: 16px 0; 
+}
+
+
+
+.mCSB_scrollTools .mCSB_buttonDown {
+  background-position: 0px !important;
+	background-image: url(/assets/empathy/images/arrow.png) ;
+  height: 81px !important;
 }

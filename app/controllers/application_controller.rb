@@ -31,7 +31,11 @@ class ApplicationController < ActionController::Base
   end
   
   def populate_nav
+    if @site.name == 'empathy'
+      protect_with_staging_password
+    end
     return if @site.name != 'pixelache'
+
     return if request.fullpath =~ /^admin/
     @recent_events = Event.by_site(@site).published.order('start_at DESC').limit(3)
     @active_projects = Project.active.order_by_rand.limit(7)
@@ -124,6 +128,12 @@ class ApplicationController < ActionController::Base
           render '404'
         end
       end
+    end
+  end
+  
+  def protect_with_staging_password
+    authenticate_or_request_with_http_basic('Developer only! (for now)') do |username, password|
+      username == Figaro.env.staging_username && password == Figaro.env.staging_password
     end
   end
   

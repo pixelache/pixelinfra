@@ -30,7 +30,7 @@ class PostsController < ApplicationController
       set_meta_tags title: t(:all_posts_by, member: @user.name)
     else
       @posts = Post.by_site(@site).published.order('published_at DESC').page(params[:page]).per(12)
-      die
+
       if @posts.empty?
         if @site.festival
           @posts = Post.by_festival(@site.festival).published.order(published_at: :desc).page(params[:page]).per(12)
