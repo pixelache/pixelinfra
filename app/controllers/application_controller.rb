@@ -150,7 +150,9 @@ class ApplicationController < ActionController::Base
       # put LS behind password for now
       if request.host =~ /livingspaces/
 
-        @site = Subsite.find_by(:name => 'livingspaces')   
+        @site = Subsite.find_by(:name => 'livingspaces')  
+      elsif request.host =~ /empathy/ || request.host =~ /^festival/
+        @site = Subsite.find_by(name: 'empathy') 
       else
         @site = Subsite.find_by(:name => (request.host =~ /opensourcingfestivals/ || request.host =~ /^olsof\./ ? 'olsof' : 'pixelache'))
       end

@@ -52,7 +52,10 @@ namespace :deploy do
 
   desc 'copy protected fonts'
   task :fonts do
-    run "cp #{shared_path}/fonts/* #{release_path}/app/assets/fonts/"
+    on roles(:app) do
+      execute "mkdir #{release_path}/app/assets/fonts"
+      execute "cp #{shared_path}/fonts/* #{release_path}/app/assets/fonts/"
+    end
   end
       
   after :finishing, "deploy:fonts"
