@@ -1,0 +1,35 @@
+.news_post
+  .centered_title
+    = image_tag theme_image_path('news-title-red.png')
+    
+  .row
+    .large-6.medium-9.small-10.columns.small-centered
+      .title.text-left= @post.title
+      .date.text-left
+        - if @post.published?
+          = @post.published_at.strftime("%d %B %Y")
+        - else
+          not yet published!
+        
+      - if @post.image?
+        .news_image
+          = image_tag @post.image.url(:twelvehundred).gsub('development', 'production')
+      .news_body
+        = raw @post.body
+      
+  .row
+    .large-3.medium-9.small-12.columns.text-right
+      - if @post.previous_post_by_festival.nil? 
+        &nbsp;
+      - else
+        .prev
+          - unless @post.previous_post_by_festival.nil?
+            = link_to "<<< #{t :previous_post}: #{@post.previous_post_by_festival.title}", @post.previous_post_by_festival
+    .large-6.medium-9.small-10.columns.text-left
+      - if @post.event || !@post.festivalthemes.empty?
+        .title= t :related_content
+
+    .large-3.medium-9.small-12.columns.text-left
+      - unless @post.next_post_by_festival.nil?
+        .next
+          = link_to "#{t :next_post}: #{@post.next_post_by_festival.title} >>>", @post.next_post_by_festival
