@@ -2,7 +2,7 @@
   = truncate(strip_tags(@page.body), length: 200)
 .page{class:  @page.slug}
   - unless @page.photos.blank?
-    .centered_title= image_tag @page.photos.first.filename.url.gsub('production', 'development')
+    .centered_title= image_tag @page.photos.first.filename.url
   .row
     .large-7.medium-8.small-10.columns.page_text.small-centered
       = raw @page.body

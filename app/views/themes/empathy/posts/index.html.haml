@@ -5,7 +5,7 @@
     - @posts.each_with_index do |news, index|
       = link_to news do
         .post.large-3.medium-6.small-offset-1.medium-offset-0.small-10.columns{class: @posts[index+1].nil? ? "end" : false}
-          .news_image{style: news.image? ? "background-image: url(#{news.image.url(:box).gsub('development', 'production')});" : false, onmouseover: '$(this).find(".overlay").css("display", "block");$(this).css("background-image", "none");', onmouseout: '$(this).find(".overlay").css("display", "none");$(this).css("background-image", "url(' + news.image.url(:box).gsub("development", "production") + ')");'}
+          .news_image{style: news.image? ? "background-image: url(#{news.image.url(:box)});" : false, onmouseover: '$(this).find(".overlay").css("display", "block");$(this).css("background-image", "none");', onmouseout: '$(this).find(".overlay").css("display", "none");$(this).css("background-image", "url(' + news.image.url(:box) + ')");'}
 
             .overlay
               = truncate_html(strip_tags(news.body), length: 400)

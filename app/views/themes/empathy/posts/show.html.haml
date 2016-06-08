@@ -13,7 +13,7 @@
         
       - if @post.image?
         .news_image
-          = image_tag @post.image.url(:twelvehundred).gsub('development', 'production')
+          = image_tag @post.image.url(:twelvehundred)
       .news_body
         = raw @post.body
       
