@@ -45,7 +45,12 @@ a {
     background-size: contain;
   }
 }
-
+nav.top-bar {
+text-align:center;
+}
+section.top-bar-section {
+display: inline-block;
+}
 .top-bar {
   background-color: $grey;
   padding: 30px 30px 0 30px;
@@ -53,6 +58,7 @@ a {
     background-color: $purple;
   }
   ul.left {
+    margin-left: 12%;
     li {
       font-family: 'Helvetica Neue Bold Condensed', sans-serif;
       font-weight: bold;
