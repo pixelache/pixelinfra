@@ -22,7 +22,7 @@ a {
     background-color: $grey;
     height: initial;
   }    
- &.preliminary-programme {
+ &.contact, &.locations {
 
     background-color: $purple;
   }
@@ -31,7 +31,7 @@ a {
     padding-top: 180px;
     background: url('/assets/empathy/images/about_bg.png') no-repeat center 100px  fixed;
     background-color: $grey;
-    .preliminary-programme, &.preliminary-programme {
+    .contact, .locations, &.contact, &.locations {
       background: url('/assets/empathy/images/programme_bg.png') no-repeat center 140px fixed;
       background-color: $purple;
       background-size: cover;
@@ -49,7 +49,7 @@ a {
 .top-bar {
   background-color: $grey;
   padding: 30px 30px 0 30px;
-  &.preliminary-programme {
+  &.locations, &.contact {
     background-color: $purple;
   }
   ul.left {
@@ -256,9 +256,14 @@ a {
 
   overflow: hidden;
   color: $pink;
-  
+  &.locations, &.contact {
+    .page_text {
+      background-color: $purple;
+    }
+  }
   .page_text {
     border: 2px dotted $pink;
+    background-color: $grey;
     padding: 2rem 1rem 2rem 3rem;
     max-height: 45vH;
     font-size: 0.8rem;
@@ -281,10 +286,10 @@ footer {
   position:fixed; 
   left:0px; 
   bottom:0px; 
-  min-height: 40px;
-  max-height: 85px; 
+  min-height: 20px;
+  max-height: 45px; 
   width:100%;
-  padding: 3vH 0;
+  padding: 1vH 0;
   background-color: $fuschia;
   color: $grey;
   z-index: 99;
@@ -361,5 +366,10 @@ footer {
 .mCSB_scrollTools .mCSB_buttonDown {
   background-position: 0px !important;
 	background-image: url(/assets/empathy/images/arrow.png) ;
+  height: 81px !important;
+}
+.mCSB_scrollTools .mCSB_buttonUp {
+  background-position: 0px !important;
+	background-image: url(/assets/empathy/images/up_arrow.png) ;
   height: 81px !important;
 }

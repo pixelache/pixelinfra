@@ -58,8 +58,8 @@ namespace :deploy do
     end
   end
       
-  before "assets:precompile", "deploy:fonts"
-  after "deploy:fonts", "deploy:migrate"
+  before "deploy:assets:precompile", "deploy:fonts"
+  after "deploy:assets:precompile", "deploy:migrate"
   after "deploy:migrate", "deploy:cleanup"
   after "deploy:cleanup", "deploy:restart"
   after :restart, :clear_cache do
