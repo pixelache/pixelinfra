@@ -74,7 +74,7 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
   nav.top-bar {
     max-height: 120px;
     ul.title-area {
-      max-width: 28%;
+      max-width: 20%;
     }
     .name{
       max-height: 120px;
@@ -104,9 +104,9 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
   }
   
   .empathy_container { 
-    padding-top: 120px;
+    padding-top: 170px;
     &.page {
-      padding-top: 130px;
+      padding-top: 200px;
       background-position: center bottom;
       .preliminary-programme, &.preliminary-programme {
         background-position: center center;
