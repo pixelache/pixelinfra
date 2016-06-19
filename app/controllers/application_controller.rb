@@ -31,9 +31,9 @@ class ApplicationController < ActionController::Base
   end
   
   def populate_nav
-    if @site.name == 'empathy'
-      protect_with_staging_password
-    end
+    # if @site.name == 'empathy'
+    #   protect_with_staging_password
+    # end
     return if @site.name != 'pixelache'
 
     return if request.fullpath =~ /^admin/
