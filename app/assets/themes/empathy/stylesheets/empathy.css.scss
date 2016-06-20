@@ -57,21 +57,40 @@ display: inline-block;
   &.locations, &.contact {
     background-color: $purple;
   }
-  ul.left {
-    margin-left: 12%;
-    li {
-      font-family: 'Helvetica Neue Bold Condensed', sans-serif;
-      font-weight: bold;
-      font-size: 1rem;
-      text-transform: uppercase;
-      float: left;
-      letter-spacing: 0.22rem;
-      padding-right: 3rem;
-      a { 
-        color: $pink;
-        &:hover {
-          border-bottom: 2px solid $pink;
-        };
+  .menu_wrapper {
+    float: left;
+    width: calc(100% - 275px);
+    ul.left {
+      clear:left;
+      float:left;
+      list-style:none;
+      margin:0;
+      padding:0;
+      position:relative;
+      left:50%;
+      text-align:center;
+      li {
+        font-family: 'Helvetica Neue Bold Condensed', sans-serif;
+        font-weight: bold;
+        font-size: 1rem;
+        text-transform: uppercase;
+        display:block;
+           float:left;
+           list-style:none;
+           margin:0;
+           padding:0;
+           position:relative;
+           right:50%;
+        letter-spacing: 0.22rem;
+        padding: 0 2rem;
+        a { 
+           display:inline-block;
+          color: $pink;
+          padding-right: 1.5rem 0;
+          &:hover {
+            border-bottom: 2px solid $pink;
+          };
+        }
       }
     }
   }
@@ -268,6 +287,10 @@ display: inline-block;
   &.locations, &.contact {
     .page_text {
       background-color: $purple;
+      color: $grey;
+      p {
+        color: $grey;
+      }
     }
   }
   .page_text {

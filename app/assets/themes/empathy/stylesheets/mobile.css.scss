@@ -104,9 +104,9 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
   }
   
   .empathy_container { 
-    padding-top: 170px;
+    padding-top: 220px;
     &.page {
-      padding-top: 200px;
+      padding-top: 240px;
       background-position: center bottom;
       .preliminary-programme, &.preliminary-programme {
         background-position: center center;
