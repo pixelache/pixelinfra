@@ -1,5 +1,5 @@
 @import "foundation/functions";
-
+@import 'variables';
 $small-range: (0em, 40em); /* 0, 640px */
 $medium-range: (40.063em, 121.714em); /* 641px, 1024px */
 $large-range: (121.857em, 167.571em); /* 1025px, 1173px */
@@ -22,6 +22,12 @@ $medium-portrait-only:"#{$screen} and (orientation: portrait) and (min-width:#{l
 $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-width: #{upper-bound($large-range)})" !default;
 
 @media #{$small-only} { 
+  header {
+    .fixed {
+      max-height: initial;
+      overflow: none;
+    }
+  }
   nav.top-bar {
     height: 8.25rem;
     .name {
@@ -30,11 +36,15 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
     ul.title-area {
       max-width:90%;
     }
+    .mobile_holder {
+      background-color: $grey;
+    }
   }
   
   
   .empathy_container {
     &.page {
+      padding-top: 220px;
       overflow: auto;
       .centered_title {
         img {
@@ -54,16 +64,16 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
     .logo {
       max-width: 48%;
     }
-    .text {
-      max-width: 48%;
-      font-size: 0.8rem;
-    }
+
     .social {
+      width: 50%;
       text-align: center;
+      padding: 0;
       a {
-        padding: 0 0.5rem;
+        float: left;
+        padding: 0 0.35rem;
         img {
-          max-height: 18px;
+          max-height: 15px;
         }
       }
     }
@@ -72,19 +82,26 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
 
 @media only screen and (min-width: 40.0625em) and (max-width:64em) {
   nav.top-bar {
-    max-height: 120px;
+    max-height: 14vH;
+    
     ul.title-area {
       max-width: 20%;
+
+      overflow:hidden;
+    }
+    .menu_wrapper {
+      width: 70%;
+      float: right;
     }
     .name{
-      max-height: 120px;
-      overflow:hidden;
+     
     }
   }
   ul.left {
     margin-left: 5rem;
-    max-width:60%;
+
     li {
+      padding: 0;
       margin-bottom: 1rem;
     }
   }
@@ -106,7 +123,7 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
   .empathy_container { 
     padding-top: 220px;
     &.page {
-      padding-top: 240px;
+      padding-top: 24vH;
       background-position: center bottom;
       .preliminary-programme, &.preliminary-programme {
         background-position: center center;

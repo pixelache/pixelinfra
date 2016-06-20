@@ -16,7 +16,12 @@ a {
 }
 
 
-
+header {
+  .fixed {
+    max-height: 24vH;
+    overflow: hidden;
+  }
+}
 .empathy_container {
   padding-top: 180px;
   height: 100%;
@@ -30,7 +35,7 @@ a {
   }
   &.page {
 
-    padding-top: 180px;
+    padding-top: 24vH;
     background: url('/assets/empathy/images/about_bg.png') no-repeat center 100px  fixed;
     background-color: $grey;
     .contact, .locations, &.contact, &.locations {
@@ -47,8 +52,17 @@ a {
     background-size: contain;
   }
 }
+.mobile_holder {
+  background-color: $grey;
+  &.locations, &.contact {
+    background-color: $purple;
+  }
+}
+
 nav.top-bar {
 text-align:center;
+
+
 }
 section.top-bar-section {
 display: inline-block;
@@ -101,6 +115,7 @@ display: inline-block;
         font-size: 1rem;
         text-transform: uppercase;
         display:block;
+        text-align: left;
            float:left;
            list-style:none;
            margin:0;
@@ -112,7 +127,7 @@ display: inline-block;
         a { 
            display:inline-block;
           color: $pink;
-          padding-right: 1.5rem 0;
+          padding: 0 1.5rem;
           &:hover {
             border-bottom: 2px solid $pink;
           };
@@ -150,6 +165,9 @@ display: inline-block;
   position: relative;
   margin-right: auto;
   text-align: center;
+  img {
+    max-height: 15vH;
+  }
 }
 
 .news_front {

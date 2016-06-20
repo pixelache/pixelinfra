@@ -11,7 +11,7 @@
     = image_tag theme_image_path('news_title.png')
   .row
     - @posts.each_with_index do |news, index|
-      .post.large-3.medium-4.medium-offset-1.large-offset-0.small-10.columns{class: @posts[index+1].nil? ? "end" : false,  :"data-equalizer-watch" => ''}
+      .post.large-3.medium-4.medium-offset-1.large-offset-0.small-10.columns.small-centered.medium-uncentered{class: @posts[index+1].nil? ? "end" : false,  :"data-equalizer-watch" => ''}
         .news_image
           -#{style: news.image? ? "background: url(#{news.image.url(:box).gsub('development', 'production')}) no-repeat center center" : false }
           - if news.image?

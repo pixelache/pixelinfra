@@ -460,10 +460,16 @@ en:
   next_post: 'Next post'
   opencall_is_closed: 'This open call is no longer open. Thank you for your submissions.'
   empathy:
+    preliminary_programme: 'Preliminary programme'
+    news: 'News'
+    contact: 'Contact'
+    locations: 'Locations'
+    about: 'About'
     front_blurb: "Could empathy be a key to reconnect us with our ecosystem and ourselves? Pixelache Festival 2016 - 'Interfaces for Empathy' explores the promise of this possible societal shift through macro-level direct experiences and the perspective of interconnectedness of all life."
   livingspaces:
     about: 'About'
     locations: 'Locations'
+    
     programme_preview: 'Programme preview'
     inside_out_blurb: 'This year, Pixelache Festival experiments with the Camp Pixelache format of previous festivals, asking festival-goers to programme their own activities in their own spaces. This empowers the public in the creation of culture activities, showcases the ideas and talents already in the city, and challenges the boundary between public and private space.'
     outside_in_blurb: "The Outside⋅In programme collects a range of cultural activities that utilise space in creative ways. We've curated a selection of existing projects - performances, walks, and more - that showcase some of Helsinki's most creative minds."

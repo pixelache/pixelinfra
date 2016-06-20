@@ -45,7 +45,7 @@
                 %li= link_to t("empathy.locations"), festival_page_festival_path('festival-2016', 'locations')
                 %li= link_to t("empathy.contact"), festival_page_festival_path('festival-2016', 'contact')
 
-          .row.show-for-small-only
+          .row.show-for-small-only.mobile_holder{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
             .small-8.small-offset-2
               %nav.mobile-menu
                 %select.main_nav_select{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
@@ -65,7 +65,7 @@
 
     %footer{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
       .logo= link_to image_tag(theme_image_path('footer/logo.png'), :alt => "Pixelache"), 'http://pixelache.ac'
-      .text= link_to 'www.pixelache.ac', 'http://pixelache.ac'
+      .text.hide-for-small-only= link_to 'www.pixelache.ac', 'http://pixelache.ac'
       .social
         = link_to image_tag(theme_image_path('footer/facebook.png'), width: 25), 'https://www.facebook.com/pixelache'
         = link_to image_tag(theme_image_path('footer/flickr.png'), width: 25), 'https://www.flickr.com/photos/pixelache/'        
