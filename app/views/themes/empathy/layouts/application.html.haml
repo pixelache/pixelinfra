@@ -38,22 +38,23 @@
               %li.name
                 = link_to image_tag(theme_image_path('logo_basic.png')), '/'
             .menu_wrapper
-              %ul.left.hide-for-small-only
-                %li= link_to t("empathy.about"), festival_page_festival_path('festival-2016', 'about')
-                %li= link_to t("empathy.preliminary_programme"), festival_page_festival_path('festival-2016', 'preliminary-programme')
-                %li= link_to t( "empathy.news"), festival_posts_path('festival-2016')
-                %li= link_to t("empathy.locations"), festival_page_festival_path('festival-2016', 'locations')
-                %li= link_to t("empathy.contact"), festival_page_festival_path('festival-2016', 'contact')
+            %ul.left.hide-for-small-only
+              %li= link_to t("empathy.about"), festival_page_festival_path('festival-2016', 'about')
+              %li= link_to t("empathy.preliminary_programme"), festival_page_festival_path('festival-2016', 'preliminary-programme')
+              %li= link_to t("empathy.news"), festival_posts_path('festival-2016')
+              %li= link_to t("empathy.locations"), festival_page_festival_path('festival-2016', 'locations')
+              %li= link_to t("empathy.contact"), festival_page_festival_path('festival-2016', 'contact')
 
           .row.show-for-small-only
             .small-8.small-offset-2
               %nav.mobile-menu
-                %select
-                  %option About
-                  %option Preliminary programme
-                  %option News
-                  %option Locations
-                  %option Contact
+                %select.main_nav_select{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
+                  %option{value: ''}  Go to ...
+                  %option{:value => festival_page_festival_path('festival-2016', 'about'), :selected => (request.path =~ /about$/ ? 'selected' : false)}= t("empathy.about")
+                  %option{:value => festival_page_festival_path('festival-2016', 'preliminary-programme'), :selected => (request.path =~ /preliminary-programme$/  ? 'selected' : false)}= t("empathy.preliminary_programme")
+                  %option{:value => festival_posts_path('festival-2016'), :selected => (controller.controller_name == :posts ? 'selected' : false)}= t("empathy.news")
+                  %option{:value => festival_page_festival_path('festival-2016', 'locations'), :selected => (request.path =~ /locations$/  ? 'selected' : false)}= t("empathy.locations")
+                  %option{:value => festival_page_festival_path('festival-2016', 'contact'), :selected => (request.path =~ /contact$/  ? 'selected' : false)}= t("empathy.contact")
     - if flash
       - flash.each do |key, value|
         .alert.text-center{ :class => "alert-#{key}" }
@@ -78,7 +79,10 @@
       
     :javascript
       $(document).ready(function() {
-       
+        $('select.main_nav_select').change(function() {
+          window.location = $(this).find("option:selected").val();
+        });
+
           
         #{yield :jquery}
         
