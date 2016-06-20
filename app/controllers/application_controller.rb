@@ -180,7 +180,7 @@ class ApplicationController < ActionController::Base
     else
       I18n.locale = session[:locale]
     end
-    if @site.name == 'olsof'
+    if @site.name == 'olsof' || @site.name == 'empathy'
       I18n.locale = 'en'
     end
     
