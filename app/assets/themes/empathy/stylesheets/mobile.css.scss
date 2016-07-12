@@ -29,15 +29,26 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
     }
   }
   nav.top-bar {
-    height: 8.25rem;
+   
     .name {
-      max-height: 8.25rem;
+      max-width: 75%;
     }
     ul.title-area {
-      max-width:90%;
+      text-align: left;
+      .toggle-topbar {
+        float: right;
+      }
     }
     .mobile_holder {
       background-color: $grey;
+    }
+    .menu_wrapper {
+      ul.menu_bar {
+        li {
+          font-size: 0.8rem;
+          padding: 0 1rem;
+        }
+      }
     }
   }
   
@@ -82,15 +93,14 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
 
 @media only screen and (min-width: 40.0625em) and (max-width:64em) {
   nav.top-bar {
-    max-height: 14vH;
-    
+ 
     ul.title-area {
-      max-width: 20%;
+      text-align: left;
 
       overflow:hidden;
     }
     .menu_wrapper {
-      width: 70%;
+
       float: right;
     }
     .name{
@@ -121,7 +131,6 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
   }
   
   .empathy_container { 
-    padding-top: 220px;
     &.page {
       padding-top: 24vH;
       background-position: center bottom;

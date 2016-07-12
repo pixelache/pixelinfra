@@ -23,7 +23,7 @@ header {
   }
 }
 .empathy_container {
-  padding-top: 180px;
+
   height: 100%;
   &.posts {
     background-color: $grey;
@@ -60,9 +60,16 @@ header {
 }
 
 nav.top-bar {
-text-align:center;
+  text-align:center;
 
-
+  .toggle-topbar.menu-icon a{
+    color: $pink;
+    padding: 0 1.625rem 0 2.5rem;
+    span::after {
+      box-shadow: 0 0 0 1px $pink, 0 7px 0 1px $pink, 0 14px 0 1px $pink;
+      right: 0;    
+    }
+  }
 }
 section.top-bar-section {
 display: inline-block;
@@ -89,6 +96,11 @@ display: inline-block;
   }
 }
 
+.top-bar.expanded {
+  .menu_wrapper {
+    max-width: initial;
+  }
+}
 
 .top-bar {
 
@@ -99,8 +111,8 @@ display: inline-block;
   }
   .menu_wrapper {
     float: left;
-    width: calc(100% - 275px);
-    ul.left {
+    max-width: calc(100% - 275px);
+    ul.menu_bar {
       clear:left;
       float:left;
       list-style:none;
