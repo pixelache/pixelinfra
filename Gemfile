@@ -11,6 +11,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-ui-themes'
+gem 'jquery-infinite-pages'
 gem 'jbuilder', '~> 1.2'
 gem 'execjs', :group => :production
 

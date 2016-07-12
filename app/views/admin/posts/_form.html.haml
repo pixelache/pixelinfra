@@ -134,7 +134,7 @@
   .row
     .small-3.columns= f.input :add_to_newsfeed, :as => :boolean, :label => "Add to newsfeed on Pixelache from page?"
     .small-3.columns= f.input :published
-    .small-3.columns= f.input :published_at, :as => :string, :input_html => {:class => "datetime_picker"}
+    .small-3.columns= f.input :published_at, :as => :string, :input_html => {:class => "datetime_picker", value: f.object.new_record? ? '' : (f.object.published_at.nil? ? '' : f.object.published_at.strftime('%Y-%m-%d %H:%M'))}
   .row
     .small-2.columns= f.submit 'Save', :class => [:button, :round]
 = content_for :jquery do

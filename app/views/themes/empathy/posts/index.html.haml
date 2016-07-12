@@ -14,3 +14,4 @@
               .text_box{:"data-equalizer-watch" => ''}
                 .title= link_to news.title, news
                 .date= news.published_at.strftime('%d %B %Y')
+  = paginate @posts                

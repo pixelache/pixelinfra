@@ -76,8 +76,9 @@ class Post < ActiveRecord::Base
   
   def check_published
     if self.published == true
+
       self.published_at ||= Time.now
-      unless self.persisted? || add_to_newsfeed == "1"
+      unless !self.persisted? || add_to_newsfeed == "1"
         add_to_feed('created')
       end
     else
