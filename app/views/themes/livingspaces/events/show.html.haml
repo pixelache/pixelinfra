@@ -136,25 +136,25 @@
               .subtitle= t(@event.all_documentation["images"].empty? ? :image_galleries : :additional_images)
               - @event.flickrsets.each do |flickrset|
                 %p= link_to  flickrset.title, flickrset.flickr_url, target: :_blank
-              / - @event.flickrsets.each do |set|
-              /   = render_flickr_sidebar_widget set
-              / = content_for :jquery do
-              /   :plain
-              /     $('.flickr_carousel').slick({infinite: true,
-              /       slidesToShow: 1,
-              /
-              /       dots: true,
-              /       customPaging : function(slider, i) {
-              /         var thumb = $(slider.$slides[i]).data('thumb');
-              /         return '<a><img src="'+thumb+'"></a>';
-              /       },
-              /       arrows: true,
-              /       slide: '.img',
-              /       variableWidth: false,
-              /       autoplay: true,
-              /       autoplaySpeed: 3600,
-              /       slidesToScroll: 1,
-              /     });
+              -# - @event.flickrsets.each do |set|
+              -#   = render_flickr_sidebar_widget set
+              -# = content_for :jquery do
+              -#   :plain
+              -#     $('.flickr_carousel').slick({infinite: true,
+              -#       slidesToShow: 1,
+              -#
+              -#       dots: true,
+              -#       customPaging : function(slider, i) {
+              -#         var thumb = $(slider.$slides[i]).data('thumb');
+              -#         return '<a><img src="'+thumb+'"></a>';
+              -#       },
+              -#       arrows: true,
+              -#       slide: '.img',
+              -#       variableWidth: false,
+              -#       autoplay: true,
+              -#       autoplaySpeed: 3600,
+              -#       slidesToScroll: 1,
+              -#     });
             
           - if @event.all_documentation["videos"].empty?
             - if @event.project
