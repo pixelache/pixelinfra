@@ -7,6 +7,9 @@ body {
   background-color: $grey;
   min-height:100%;
   position:relative;
+  &.contact, &.locations {
+    background-color: $purple;
+  }
 }
 a {
   color: $purple;
@@ -35,11 +38,10 @@ header {
   }
   &.page {
 
-    padding-top: 24vH;
-    background: url('/assets/empathy/images/about_bg.png') no-repeat center 100px  fixed;
+    background: url('/assets/empathy/images/about_bg.png') repeat-y center bottom ;
     background-color: $grey;
-    .contact, .locations, &.contact, &.locations {
-      background: url('/assets/empathy/images/programme_bg.png') no-repeat center 140px fixed;
+    &.contact, &.locations {
+      background: url('/assets/empathy/images/programme_bg.png') repeat-y center top;
       background-color: $purple;
       background-size: cover;
       -webkit-background-size: cover;
@@ -50,7 +52,11 @@ header {
     -moz-background-size: contain;
     -o-background-size: contain;
     background-size: contain;
+    article {
+      padding-bottom: 6rem;
+    }
   }
+  
 }
 .mobile_holder {
   background-color: $grey;
@@ -339,11 +345,10 @@ display: inline-block;
 
 .page {
 
-  overflow: hidden;
+
   color: $pink;
   &.locations, &.contact {
     .page_text {
-      background-color: $purple;
       color: $grey;
       p {
         color: $grey;
@@ -351,10 +356,9 @@ display: inline-block;
     }
   }
   .page_text {
-    border: 2px dotted $pink;
-    background-color: $grey;
+//    background-color: $grey;
     padding: 2rem 1rem 2rem 3rem;
-    max-height: 45vH;
+
     font-size: 0.8rem;
     line-height: 1rem;
     overflow: auto;

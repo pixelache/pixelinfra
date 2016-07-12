@@ -55,7 +55,7 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
   
   .empathy_container {
     &.page {
-      padding-top: 220px;
+
       overflow: auto;
       .centered_title {
         img {
@@ -65,7 +65,7 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
       .page_text {
         border: none;
         max-height: 90%;
-        padding: 1rem 1rem 10rem 1rem;
+        padding: 1rem 1rem 5rem 1rem;
 
       }
     }
@@ -132,8 +132,8 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
   
   .empathy_container { 
     &.page {
-      padding-top: 24vH;
-      background-position: center bottom;
+
+
       .preliminary-programme, &.preliminary-programme {
         background-position: center center;
         background-size: contain;
