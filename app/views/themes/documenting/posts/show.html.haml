@@ -1,0 +1,72 @@
+- images = 0
+.page
+          
+  - unless @post.image.blank? && @post.photos.empty?
+
+    .row
+      .small-12.columns.large-10.large-offset-1.image_carousel
+        - if @post.image?
+          - images += 1
+          .img= link_to image_tag(@post.image.url(:standard)), @post.image.url, rel: :lazybox
+        - unless @post.photos.empty?
+          - @post.photos.each do |i|
+            .img
+              - images += 1
+              = link_to image_tag(i.filename.url(:box)), i.filename.url(:standard), rel: :lazybox
+
+  .row
+    .small-12.columns.large-10.large-offset-1.event_title
+      %h2= @post.name
+      - if user_signed_in?
+        - if can? :edit, @post
+          = link_to t(:edit), edit_admin_post_path(@post), class: [:button, :tiny, :round]
+
+  .row
+    .small-12.columns.large-10.large-offset-1
+      .metadata
+        %p= l @post.published_at, :format => :long
+        %p= "posted by #{@post.creator.name}"
+
+
+  .row
+    .small-12.columns.large-10.large-offset-1
+      .body= raw @post.body
+    
+  - unless @post.attachments.empty?
+    .row
+      .small-12.columns.large-10.large-offset-1
+        %h4= t :downloads
+        %ul.downloads
+          - @post.attachments.each do |att|
+            %li
+              = att.title.blank? ? att['attachedfile'] : att.title
+              = link_to raw("&#9654;"), att.attachedfile.url
+              - unless att.attachedfile_size.blank?
+                %small= pluralize(att.attachedfile_size, 'byte')
+          
+    - unless @post.related_content.empty?
+      .row
+        .small-12.columns.large-10.large-offset-1
+          %h4= t :related_content
+          %ul.related
+            - @post.related_content.each do |rc|
+              - next if rc.class == Project || rc.class == Festival
+              %li
+                = rc.name
+                = link_to raw("&#9654;"), rc, target: :_blank
+
+
+- if images > 1
+
+  = content_for :jquery do
+    :plain
+      $('.image_carousel').slick({infinite: true,
+        adaptiveHeight: false,
+        arrows: false,
+        slide: '.img',
+        variableWidth: false,
+        autoplay: true,
+        autoplaySpeed: 2400,
+        slidesToScroll: 1,
+      });
+     
