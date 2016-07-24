@@ -1,0 +1,714 @@
+@import 'variables';
+
+body {
+  background-color: $yellow;
+  padding-top: 1.6rem;
+  font-family: $roboto;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: $roboto;
+}
+a {
+  color: $link;
+  &:hover {
+    color: $hover;
+  }
+}
+
+header {
+  margin-top: -1.6rem;
+  margin-bottom: 30px;
+  h1 {
+    a {
+      color: black;
+      &:hover {
+        color: black;
+      }
+    }
+  }
+}
+
+
+.right_wrap {
+  margin-bottom: 2.5rem !important;
+  .language {
+    display: none;
+    cursor: pointer;
+    float: right;
+    margin-left: 30px;
+    padding-top: 20px;
+    img {
+      z-index: -1;
+
+    }
+    .current {
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-left: 9px;
+      margin-top: -28px;
+      float: left;
+    }
+    .choices {
+      z-index: 32;
+      display: none;
+      position: absolute;
+      .choice {
+        a {
+          color: #000;
+          &:hover { 
+            color: #4a97c7;
+          }
+          
+        }
+        margin-top: 8px;
+      
+        .choice_circle {
+        
+        }
+        .choice_text {
+          text-transform: uppercase;
+          font-weight: bold;
+          margin-left: 9px;
+          margin-top: -28px;
+          float: left;
+          text-align: center;
+
+        }
+      }
+    }
+  }
+  .bar_menu {
+    #menutext {
+      display: block;
+      float: left;
+      padding-top: 33px;
+      margin-right: 10px;
+      font-weight: bold;
+      font-family: $roboto;
+      text-transform: lowercase;
+    }
+    float: right;
+    .bar {
+      margin-right: 5px;
+      float: left;
+      padding-top: 1.6rem;
+      a {
+        padding: 2px;
+      }
+      &:hover, &.active {
+        padding-top: 0px;
+        padding-bottom: 1.6rem;
+      }
+    }
+  }
+}
+
+#main {
+  clear: left;
+}
+
+#sidebar {  
+  .padding-top: 2.5rem;
+  .subtitle {
+    color: #6554f8;
+    text-transform: uppercase;
+    font-size: 22px;
+  }
+  .logo {
+    font-size: 3em;
+    clear: right;
+    line-height: 60px;
+    font-weight: 600;
+    text-transform: lowercase;
+    text-align: right;
+    letter-spacing: 8px;
+    font-family: $roboto;
+    a {
+      color: #000;
+      &:hover { 
+        color: #000; 
+      }
+    }
+    .first, .second, .third { 
+      float: right;
+      border-bottom: 3px dashed #000;
+    }
+    .third {
+      margin-bottom: 2rem;
+    }
+  }
+  
+  .nav_lines {
+    padding: 2rem 0;
+    position: relative;
+    float:  left;
+    img.navbg {
+      z-index: -1;
+      position: absolute;
+      left: 0;
+    }
+    .item {
+      z-index:100;
+      position:absolute;    
+      color:white;
+      font-size: 15px;
+      font-family: $roboto;
+
+      text-transform: uppercase;
+      a:hover { 
+        color: #999;
+      }
+      &.publications {
+        left: 29px;
+        top: 151px;
+      }
+      &.about {
+        top: 0px;
+        left: 69px;
+      }
+      &.partners {
+        left: 15px;
+        top: 73px;
+      }
+      &.events {
+        left: 169px;
+        top: 110px;
+      }
+      &.news {
+        left: 103px;
+        top: 53px;
+      }
+      &.steps {
+        left: 204px;
+        top: 47px;
+      }
+      a {
+        color: #000;
+      }
+    }
+  }
+  
+  .search {
+    margin: 0.5rem 0px;
+    float: left;
+    .heading {
+      font-size: 1em;
+      font-family: $roboto;
+      
+      text-transform: uppercase;
+    }
+    .square {
+      float: left;
+      padding-top: 4px;
+      margin-right: 3px;
+    }
+    input[type=text] {
+      background-color: $yellow;
+      border-top: none; border-right: none; border-left: none;
+      border-bottom: 1px solid black;
+      outline: none;
+      height: 1.2rem;
+      color: #333;
+      float: left;
+      padding: 0px;
+      box-shadow: none;
+      font-size: 0.8rem;
+      &:focus {
+        border-top: none; border-right: none; border-left: none;
+        border-bottom: 1px solid black;
+        outline: none;
+        box-shadow: none;
+      }
+      width: 12.5rem;
+      &:active {
+        border-top: none; border-right: none; border-left: none;
+        border-bottom: 1px solid black;
+        box-shadow: none;
+      }
+    }
+    input[type=submit] {
+      background-color: $yellow;
+      border: none;
+      color: #333;
+      outline: none;
+      margin-top: 4px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    
+    
+  }
+  .calendar {
+    margin: 3rem 0 2rem 0;
+    
+    .heading {
+      font-size: 1em;
+      font-family: $roboto;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    ul.calendar_events {
+      list-style-type: none;
+      margin-bottom: 1.5rem;
+      
+      li {
+        font-family: $roboto;
+        line-height: 1.4em;
+        padding-bottom: 1rem;
+   
+        .date {
+          font-size: 0.75rem;
+          color: #666;
+          font-style: italic;
+        }
+        .name {
+          font-size: 0.875rem;
+          line-height: 1.2rem;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}
+
+ul.side-nav {
+  li {
+
+    font-size: 16px;
+    font-weight: 200;
+    a:hover {
+      color: #0303df;
+    }
+    .date {
+      font-size: 13px;
+    }
+  }
+}
+
+.event, .event_index {
+  h2 {
+
+    line-height: 1.125;
+    margin-bottom: 15px;
+  }
+  h5 {
+    .smaller {
+      font-size: 1rem;
+      color: #666;
+    }
+    p {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+    }
+  }
+  .event_row {
+    &.images {
+      .blurb {
+        margin-bottom: 2.5rem;
+        border-bottom: none;
+      }
+    }
+    .text_blurb {
+      margin-bottom: 2.5rem;
+    }
+    .name {
+      font-size: 1rem;
+      line-height: 1.3rem;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+
+    }
+    .date {
+      font-size: 0.85rem;
+      line-height: 1.4em;
+      color: #666;
+      font-style: italic;
+      padding-bottom: 0.8rem;
+    }
+    .blurb {
+      font-size: 0.95rem;
+      color: #333;
+      line-height: 1.4em;
+      padding: 0.8rem 0;
+      border-top: 1px solid #333;
+      border-bottom: 2px solid black;
+      margin-bottom: 1rem;
+      strong {
+        color: #000;
+        font-weight: normal;
+      }
+    }
+  }
+  .event_image {
+    margin-bottom: 1.6rem;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+  }
+
+  .metadata {
+    margin: 15px 0px;
+    font-weight: 200;
+    font-size: 13px;
+  }
+  .body, .body p {
+    font-size: 0.875rem;
+    line-height: 1.2rem;
+
+  }
+}
+
+
+
+.home_page {
+  
+  .text_blurb {
+    margin-bottom: 2.5rem;
+  }
+  
+  .feed_image {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    margin-bottom: 1.6rem;
+  }
+  .title {
+    font-size: 1rem;
+    line-height: 1.3rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+  .date {
+    font-size: 0.85rem;
+    line-height: 1.4em;
+    color: #666;
+    font-style: italic;
+    padding-bottom: 0.8rem;
+
+  }
+  .blurb {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.4em;
+    padding: 0.8rem 0;
+    border-top: 1px solid #333;
+    border-bottom: 2px solid black;
+    margin-bottom: 1rem;
+  }
+  
+}
+
+.node_index {
+  padding-top: 2rem;
+  .node {
+    margin-bottom: 3rem;
+    .title {
+      font-size: 1.5em;
+      margin-bottom: 5px;
+      a {
+        color: #333;
+      }
+    }
+    .metadata {
+      .city {
+        color: #333;
+        margin: 5px 0px;
+      }
+      .website {
+        margin-bottom: 5px;
+      }
+    }
+    .description {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+footer {
+  margin-top: 1rem;
+  padding: 2rem 0px;
+  .logos {
+    padding: 3rem 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  .info_line {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 0.8rem 0;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    color: #666;
+    a {
+      color: #333;
+      &:hover {
+        color: #999;
+      }
+    }
+    text-transform: uppercase;
+  }
+
+}
+
+.post, .event {
+
+  h2 {
+
+    line-height: 1.125;
+    margin-bottom: 15px;
+  }
+  .metadata {
+    margin-bottom: 15px;
+    font-weight: 200;
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+  .body {
+    font-size: 0.875rem;
+    line-height: 1.2rem;
+  }
+  .media {
+    .image_carousel {
+      margin-bottom: 7px;
+        img {
+          width: 100%;
+          height: auto;
+        }
+        .img {
+          margin-bottom: 0px;
+        }
+      }
+    }
+  
+  
+  .related_post_link {
+    font-size: 1.2rem;
+    margin: 20px 0px;
+  }
+}
+
+.indented_title {
+  background-color: black;
+  color: $yellow;
+  font-family: $roboto;
+  font-weight: 300;
+  text-transform: uppercase;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+.page {
+  margin-top: 3.5rem;
+  
+  .image_carousel {
+    margin-bottom: 0.75rem;
+  }
+  
+  .title {
+    background-color: black;
+    color: $yellow;
+    font-family: $roboto;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+  .metadata {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    line-height: 1.4rem;
+    p {
+      font-size: 1rem;
+      line-height: 1.4rem;
+      margin-bottom: 0;
+    }
+  }
+  
+  .second_metadata {
+
+    border-bottom: 1px solid #333;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+    .entry {
+      padding: 0.3rem 0;
+    }
+  }
+  .event_title {
+    margin-top: 1rem;
+    h2 {
+      line-height: 2.5rem;
+    }
+  }
+  .body {
+    font-size: 0.875rem;
+    line-height: 1.2rem;
+    padding-top: 0.75rem;
+    p {
+      font-size: 0.875rem;
+      line-height: 1.2rem;
+    }
+  }
+  .olsof_info {
+    border-top: 1px solid #333;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+    font-size: 0.875rem;
+    line-height: 1.2rem;
+    p {
+      font-size: 0.875rem;
+      line-height: 1.2rem;
+    }
+  }
+  .node {
+    margin-left: 0;
+    margin: 1.5rem 0;
+    .logo {
+      padding: 0;
+    }
+    .metadata {
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
+      padding: 0.5rem 0;
+      margin: 0.5rem 0;
+    }
+    .body {
+      clear: left;
+      line-height: 1.2rem;
+      font-size: 0.875rem;
+  
+      p {
+        font-size: 0.875rem;
+        line-height: 1.2rem;
+      }
+    }
+  }
+  .content {
+    padding: 0;
+    h2, h3 {
+      font-size: 1rem;
+      line-height: 1.3rem;
+      padding: 0.5rem 0;
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
+      margin: 0.5rem 0;
+    }
+    p {
+      font-size: 0.875rem;
+      line-height: 1.2rem;
+    }
+  }
+  p.publication {
+    margin: 0 0 0.4rem 0;
+    
+  }
+  ul {
+    li {
+      list-style-type: none;
+      padding-left: 2rem;
+    }
+    &.related, &.downloads {
+      margin-left: 0;
+      padding-left: 0;
+      li {
+        padding-left: 0;
+      }
+    }
+  }
+
+}
+
+.node {
+  .content {
+    margin-top: 12.5rem;
+    h2, h3 {
+
+      line-height: 1.125;
+      margin-bottom: 15px;
+    }
+    
+    .metadata {
+      p {
+        font-size: 0.875rem;
+        line-height: 1.2rem;
+        margin: 0px;
+      }
+
+      margin: 35px 0px;
+    }
+    p, .body {
+      font-size: 0.875rem;
+      line-height: 1.2rem;
+    }
+  }
+}
+
+
+.step_index {
+  .step {
+    margin-bottom: 3.5rem;
+  }
+}
+
+ul.pagination {
+  margin-left: 0.5rem;
+  margin-top: 1rem;
+  li.page {
+    margin-top: 0;
+  }
+}
+ul.pagination li.current a {
+  background-color: $link;
+  &:hover {
+    background-color: $hover;
+  }
+  
+}
+
+.search_result {
+  .top_of_hit {
+    .title {
+      text-transform:uppercase;
+      font-size: 1rem;
+      line-height: 1.3rem;
+    }
+    .date {
+      font-size: 0.85rem;
+      line-height: 1.4em;
+      color: #666;
+      font-style: italic;
+      padding-bottom: 0.4rem;
+
+    }
+  }
+  .bottom_of_hit {
+    margin-bottom: 2.5rem;
+    .excerpt {
+      font-size: 0.95rem;
+      color: #333;
+      line-height: 1.4em;
+      padding: 0.8rem 0;
+      border-top: 1px solid #333;
+      border-bottom: 2px solid black;
+    }
+  }
+}
+
+.festival_description {
+  h1 {
+    font-size: 1.4rem;
+  }
+  h2 {
+    font-size: 1.3rem;
+  }
+  h3{
+    font-size: 1.2rem;
+  }
+  h4, h5, h5 {
+    font-size: 1.1rem;
+  }
+}

@@ -31,7 +31,7 @@ class HomeController < ApplicationController
       @archive = Archivalimage.random(1).first
     elsif @site.name == 'livingspaces' || @site.name == 'empathy'
       @posts = Post.by_festival(@site.festival).published.order(published_at: :desc).limit(4)
-    elsif @site.name == 'olsof'
+    elsif @site.name == 'olsof' || @site.name == 'documenting'  # hopefully change to just "else" soon
       @feed = Feed.by_subsite(@site.id).created.order('fed_at DESC').page(params[:page]).per(6)
     end
     @frontitems = Frontitem.by_site(@site.id).order(:position)
