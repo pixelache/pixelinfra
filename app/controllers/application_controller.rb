@@ -148,10 +148,12 @@ class ApplicationController < ActionController::Base
       @site = Subsite.find_by(subdomain: request.host.gsub(/\.local$/, '')) 
     else
       # put LS behind password for now
-      if request.host =~ /livingspaces/
+      if request.host =~ /^livingspaces/
 
         @site = Subsite.find_by(:name => 'livingspaces')  
-      elsif request.host =~ /empathy/ || request.host =~ /^festival/
+      elsif request.host =~ /^documenting/ 
+        @site = Subsite.find_by(name: 'documenting')
+      elsif request.host =~ /^empathy/ || request.host =~ /^festival/
         @site = Subsite.find_by(name: 'empathy') 
       else
         @site = Subsite.find_by(:name => (request.host =~ /opensourcingfestivals/ || request.host =~ /^olsof\./ ? 'olsof' : 'pixelache'))
