@@ -1,30 +1,30 @@
 .row
   .home_page.small-12.columns
-    - @feed.in_groups_of(3).each do |group|
+    - @pages.in_groups_of(3).each do |group|
       .row.feed_row.images
         - group.each_with_index do |feeditem, index|
           - next if feeditem.nil?
           .medium-4.small-10.small-offset-1.medium-offset-0.column{class: index == 2 ? :end : ''}
-            .feed_image= link_to image_tag(feeditem.item.image.url(:box).gsub('development', 'production')), feeditem.item
-            .title.show-for-small-only= link_to feeditem.item.name, feeditem.item
-            .date.show-for-small-only= l feeditem.fed_at.to_date, :format => :long
+            .feed_image= link_to image_tag(feeditem.photos.first.filename.url(:box).gsub('development', 'production')), feeditem
+            .title.show-for-small-only= link_to feeditem.title, feeditem
+            -#.date.show-for-small-only= l feeditem.created_at.to_date, :format => :long
             .blurb.show-for-small-only{:"data-equalizer-watch" => ''}
-              = truncate_html(sanitize(feeditem.item.description, tags: %w{bold strong b italic em }), :length => 150)
-              = link_to raw("&#9654;"), feeditem.item
+              = truncate_html(sanitize(feeditem.body, tags: %w{bold strong b italic em }), :length => 150)
+              = link_to raw("&#9654;"), feeditem
       .row.title_info.hide-for-small-only{:"data-equalizer" => ''}
         - group.each do |feeditem|
           - next if feeditem.nil?
           .medium-4.small-10.small-offset-1.medium-offset-0.columns{:"data-equalizer-watch" => ''}
-            .title= link_to feeditem.item.name, feeditem.item
-            .date= l feeditem.fed_at.to_date, :format => :long
+            .title= link_to feeditem.title, feeditem
+            -#.date= l feeditem.created_at.to_date, :format => :long
 
       .row.text_blurb.hide-for-small-only{:"data-equalizer" => ''}
         - group.each do |feeditem|
           -next if feeditem.nil?
           .small-4.columns
             .blurb{:"data-equalizer-watch" => ''}
-              = truncate_html(sanitize(feeditem.item.description, tags: %w{bold strong b italic em }), :length => 150)
-              = link_to raw("&#9654;"), feeditem.item
+              = truncate_html(sanitize(feeditem.body, tags: %w{bold strong b italic em }), :length => 150)
+              = link_to raw("&#9654;"), feeditem
     .row
-      .small-10.small-offset-1.medium-12.medium-offset-0= paginate @feed
+      .small-10.small-offset-1.medium-12.medium-offset-0= paginate @pages
   

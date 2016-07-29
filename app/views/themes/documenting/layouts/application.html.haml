@@ -27,24 +27,16 @@
             .logo
               .second= link_to 'dokumentointi', '/'
 
-            .small-8.columns.show-for-small-only.small-offset-4
-              %select#mobile_menu
-                %option= t :choose
-                %option{:selected => (controller.controller_name == 'pages' ? :selected : false), :value => page_path('about')}= t :about
-                %option{:selected => (controller.controller_name == 'nodes' ? :selected : false), :value => nodes_path}= t :partners
-                %option{:selected => (controller.controller_name == 'publications' ? :selected : false), :value => publications_path}= t :publications
-                %option{select: controller.controller_name == 'steps' ? :selected : false, value: steps_path}= t :steps
-          
-                %option{:selected =>  controller.controller_name == 'events' ? :selected : false, :value => events_path}= t :events
 
-                %option{:selected => (controller.controller_name == 'home'  || controller.controller_name == 'posts' ? :selected : false), :value => '/'}= t :news
-                :javascript 
-                  $('#mobile_menu').change(function() {
-                    window.location = $(this).find("option:selected").val();
-                  });
-        
-          .nav_lines.medium-6.large-12.large-offset-0.columns
+        .row
+          .logo_image.medium-6.large-12.large-offset-0.columns
             = image_tag current_theme_image_path('hybrid.png'), :class => :navbg
+        .row
+          .page_link.medium-6.large-12.large-offset-0.columns
+            = link_to 'Info', page_path('info')
+        .row
+          .page_link.medium-6.large-12.large-offset-0.columns.last
+            = link_to 'Yhteystiedot', page_path('yhteystiedot')              
             / .item.publications= link_to t(:publications), publications_path
             / .item.about= link_to t(:about), page_path('about')
             / .item.partners= link_to t(:partners), nodes_path

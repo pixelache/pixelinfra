@@ -138,6 +138,22 @@ header {
     }
   }
   
+  .logo_image {
+    padding: 2.5rem 0;
+  }
+  .page_link {
+    border-top: 1px solid black;
+    padding: 1rem 0;
+    
+    a {
+      color: black;
+    }
+    text-align: center;
+    text-transform: uppercase;
+    &.last {
+      border-bottom: 1px solid black;
+    }
+  }
   .nav_lines {
     padding: 2rem 0;
     position: relative;
@@ -662,7 +678,7 @@ ul.pagination {
   }
 }
 ul.pagination li.current a {
-  background-color: $link;
+  background-color: black;
   &:hover {
     background-color: $hover;
   }

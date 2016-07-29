@@ -1,0 +1,50 @@
+- images = 0
+.page
+          
+  / - unless @page.photos.empty?
+  /
+  /   .row
+  /     .small-12.columns.large-10.large-offset-1.image_carousel
+  /       - if !@page.photos.empty?
+  /         - images += 1
+  /         .img= link_to image_tag(@page.photos.first.filename.url(:standard)), @page.photos.first.filename.url, rel: :lazybox
+  /       - unless @page.photos.empty?
+  /         - @page.photos.each do |i|
+  /           .img
+  /             - images += 1
+  /             = link_to image_tag(i.filename.url(:box)), i.filename.url(:standard), rel: :lazybox
+
+  .row
+    .small-12.columns.large-10.large-offset-1.event_title
+      %h2= @page.name
+      - if user_signed_in?
+        - if can? :edit, @page
+          = link_to t(:edit), edit_admin_post_path(@page), class: [:button, :tiny, :round]
+
+  / .row
+  /   .small-12.columns.large-10.large-offset-1
+  /     .metadata
+  /       %p= l @page.published_at, :format => :long
+  /       %p= "posted by #{@page.creator.name}"
+
+
+  .row
+    .small-12.columns.large-10.large-offset-1
+      .body= raw @page.body
+    
+
+
+- if images > 1
+
+  = content_for :jquery do
+    :plain
+      $('.image_carousel').slick({infinite: true,
+        adaptiveHeight: false,
+        arrows: false,
+        slide: '.img',
+        variableWidth: false,
+        autoplay: true,
+        autoplaySpeed: 2400,
+        slidesToScroll: 1,
+      });
+     
