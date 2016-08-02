@@ -44,6 +44,11 @@
           - if @event.max_attendees
             - if @event.hide_registrants
               %p= t "limited_places"
+              - if @event.is_full?
+                %p
+                  This event is
+                  %strong FULL.
+                  However, you may still register for our waiting list and you will receive notification if a place frees up. 
             - else
               - if @event.require_approval == true
                 %p There are limited places available. Please fill out the registration form and we will contact you if you are selected.
