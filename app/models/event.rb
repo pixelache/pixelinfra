@@ -139,6 +139,22 @@ class Event < ActiveRecord::Base
     start_at
   end
   
+  def happens_on_festival_dates
+    if end_at.blank? || end_at.to_date == start_at.to_date
+      [start_at.to_date]
+
+    else
+      start = start_at.to_date
+      last = end_at.to_date
+      out = []
+      while (start < last)
+        out << start
+        start += 1.day
+      end
+      out
+    end
+  end
+  
   def happens_on?(day)
     if end_at.blank?
       return true if day.to_date == start_at.to_date

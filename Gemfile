@@ -92,6 +92,7 @@ group :development do
   gem 'html2haml'
   gem 'hub', :require => nil
   gem 'letter_opener'
+  gem 'meta_request'
   gem 'nifty-generators'
   gem 'pry-rails', :group => :development
   gem 'rails-footnotes',  '>= 3.7.9'

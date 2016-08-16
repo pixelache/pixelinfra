@@ -169,7 +169,7 @@ Pixelinfra::Application.routes.draw do
   
   resources :feeds
   resources :steps
-  
+  get '/programme', to: 'events#index', festival_id: 'festival-2016'# , constraints: { subdomain: 'festival'}
   get '/activities' => 'home#activities'
   post '/search' => 'search#create'
   get '/pages/*id' => 'pages#show'

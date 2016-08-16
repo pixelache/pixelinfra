@@ -1,0 +1,229 @@
+@import 'variables';
+
+.event_index {
+  .centered_title {
+    padding-bottom: 5.5rem;
+  }
+  .filters {
+    margin-bottom: 3rem;
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        float: left;
+        margin-right: 2rem;
+        color: $pink;
+        font-family: 'Elephant Medium';
+        font-size: 1.75rem;
+        list-style-type: none;
+        padding-bottom: 0rem;
+        &.active {
+          border-bottom: 5px solid $pink;
+          
+        }
+        a { 
+          &:hover {
+            color: $purple;
+            padding-bottom: 0.35rem;
+            border-bottom: 5px solid $purple;
+          }
+          color: $pink;
+        }
+      }
+    }
+  }
+  .event {
+    color: $pink;
+    .event_image {
+      .overlay {
+        background: rgba(238, 30, 70, 0.62);
+        width: 103%;
+        padding-bottom: 124%;
+        margin-top: -138%;
+        position: relative;
+        z-index: 2;
+        &:hover {
+          background: none;
+          cursor: pointer;
+        }
+      }
+      img {
+        max-width: 175px;
+        height: 235px;
+      }
+      padding-bottom: 5rem;
+    }
+    .title {
+      font-family: 'Elephant Medium';
+      color: $pink;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 3px dotted $pink;
+    }
+    .date {
+      color: $pink;
+      font-family: 'Elephant Medium';
+      padding: 1rem 0;
+    }
+  }
+}
+
+#registration_form {
+  background-color: $pink;
+  color: $grey;
+  padding: 3.125rem 0;
+  h2 {
+    text-transform: uppercase;
+    color: $grey;
+    font-family: 'Elephant Medium';
+  }
+  form {
+    .error input {
+      border: 3px solid black;
+    }
+    li {
+      padding-top: 1.5rem;
+      list-style-type: none;
+    }
+    label.label {
+      background-color: $pink;
+      color: $grey;
+      font-family: $opensans;
+      font-size: 1.15rem;
+      padding-bottom: 0.3rem;
+      padding: 0; margin: 0;
+    }
+    abbr[title=required] {
+      display: none;
+    }
+    input[type=text], input[type=email], input[type=tel], textarea {
+      background-color: $grey;
+    }
+    input[type=submit] {
+      float: right;
+      background-color: $pink;
+      color: $grey;
+      font-size: 1.7rem;
+      text-transform: uppercase;
+      font-family: 'Elephant Medium';
+      outline: none;
+      border: none;
+      cursor: pointer;
+      &:hover {
+        color: $purple;
+      }
+    }
+  }
+}
+
+
+.related_content {
+  padding: 4rem 0;
+  h2 {
+    text-transform: uppercase;
+    color: $pink;
+    font-family: 'Elephant Medium';
+    margin-bottom: 2.5rem;
+  }
+  .related {
+    .related_image_box {
+      .overlay {
+        background: rgba(238, 30, 70, 0.62);
+
+        padding-bottom: 100%;
+        position: relative;
+        z-index: 2;
+        &:hover {
+          background: none;
+          cursor: pointer;
+        }
+      }
+
+    }
+    h3 {
+      text-transform: uppercase;
+      color: $pink;
+      font-family: 'Elephant Medium';
+      border-bottom: 3px  dotted $pink;
+      padding: 1.25rem 0 0.5rem 0;
+    }
+    .blurb {
+      font-family: 'Farnham Display Medium';
+      font-size: 1rem;
+      text-align: left;
+      color: $pink;
+      padding: 0.5rem 0 2.5rem 0;
+    }
+  }
+}
+.event_single {
+  
+
+  .event {
+    .google_map {
+      display: none;
+    }
+    #mapcontainer {
+      height: 200px;
+    }
+    .event_image {
+      text-align: center;
+    }
+    .top_container {
+      .title {
+        font-family: 'Elephant Medium';
+        color: $pink;
+        text-transform: uppercase;
+        font-size: 2.25rem;
+        line-height: 2.9rem;
+        padding: 2rem 0;
+        border-bottom: 3px dotted $pink;
+      }
+    }
+    .metadata_container {
+      text-align: center;
+      color: $pink;
+      font-family: 'Elephant Medium';
+      border-bottom: 3px dotted $pink;
+      padding-bottom: 2rem;
+      .dates {
+        font-size: 1.5rem;
+        padding: 2rem 0;
+      }
+      .place {
+        font-size: 1.5rem;
+        p {
+          font-size: 1.5rem;
+        }
+        p.place_address {
+          font-size: 1.313rem;
+          padding: 0;
+          margin: 0;
+        }
+        p.map_link a  {
+          font-size: 1rem;
+          color: $pink;
+          text-decoration: underline;
+        }
+      }
+      .cost {
+        font-size: 1.313rem;
+      }
+    }
+    .body_container {
+      padding: 2rem 0;
+      font-family: 'Farnham Display Medium';
+      font-size: 1rem;
+      text-align: left;
+      color: $pink;
+      p {
+        font-family: 'Farnham Display Medium';
+        font-size: 1rem;
+        color: $pink;
+        text-align: left;
+      }
+    }
+
+  }
+}

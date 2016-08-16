@@ -1,22 +1,156 @@
-= content_for :description do
-  = truncate(strip_tags(@page.body), length: 200)
-.page{class:  @page.slug}
-  - unless @page.photos.blank?
-    .centered_title= image_tag @page.photos.first.filename.url
-  .row
-    .large-7.medium-8.small-10.columns.page_text.small-centered
-      = raw @page.body
+.event_single.row
+  
+  .small-10.medium-10.large-8.small-centered.columns.event
+    .top_container
+      .event_image= image_tag @event.image.url
+      .title.text-center= @event.title
+    .metadata_container 
+      .dates= date_range(@event.start_at, @event.end_at)
+      
+      .place
+        - if @event.location_tbd
+          %p= t :location_to_be_announced
+        - else
+          = @event.place.try(:name)
+          - unless @event.place.blank?
+            %p.place_address
+              = @event.place.address_no_country
+        - unless @event.place.latitude.blank?
+          - unless @event.place.slug =~ /^various-locations/
+            .small-12.columns.text-center.map_container.small-centered
+              %p.map_link
+                = link_to t(:map), '#', onclick: "javascript:$('.google_map').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));            $('p.map_link a').text($('.google_map').is(':visible') ? '#{t(:hide_map)}' : '#{t(:map)}');});return false;"
+        .row.google_map#mapcontainer= render partial: 'shared/small_map'
+      .cost.small-centered
+        - if @event.cost
+          = number_to_currency(@event.cost, format: "%n%u", unit: raw("&euro;"))
+          -  if @event.cost_alternate
+            .alternate_cost
+              = "("
+              = number_to_currency(@event.cost_alternate, format: "%n%u", unit: raw("&euro;"))
+              = @event.cost_alternate_reason
+              = ")"
+        - else
+          = t :free_entrance
+    .body_container= raw @event.description
 
-    
-   
-- if @page.slug == 'locations'      
-  .locations_map
-    #map_container
-  = content_for :jquery do
+- if @event.registration_required? && @event.start_at >= Time.now
+  #registration_form
+    .row
+      .small-10.medium-10.large-8.small-centered.columns
+        %h2= t "empathy.register"
+        - if @event.max_attendees
+          - if @event.hide_registrants
+            %p= t "empathy.limited_places"
+          - else
+            - if @event.require_approval == true
+              %p= t "empathy.limited_places"
+            - else
+              - if @event.is_full?
+                %p
+                  This event is
+                  %strong FULL.
+                  However, you may still register for our waiting list and you will receive notification if a place frees up.
+              - else
+                %p= pluralize_sentence(@event.max_attendees - @event.attendees.not_waiting.size, "workshop_place_count")                  
+              
+        = semantic_form_for([@event, @attendee = Attendee.new], html: {:"data-abide" => ''}) do |f|
+          .row
+            .small-10.medium-6.columns= f.input :name, label: t("empathy.name"), input_html: {required: :required}
+            .small-10.medium-6.columns= f.input :email, label: t("empathy.email"), input_html: {required: :required}              
+          .row
+            .small-10.medium-6.columns= f.input :phone, label: t("empathy.phone"), input_html: {required: :required}
+          - unless @event.question_motivation.blank?
+            .row
+              .small-12.columns= f.input :motivation_statement, label: @event.question_motivation, input_html: {required: :required}
+          - unless @event.question_creators.blank?
+            .row
+              .small-12.columns= f.input :project_creators, label: @event.question_creators, input_html: {required: :required}
+          - unless @event.question_description.blank?
+            .row
+              .small-12.columns= f.input :project_description, label: @event.question_description, input_html: {required: :required}
+          .row
+            .small-12.columns= recaptcha_tags hl: I18n.locale.to_s, :display => { :theme => 'clean' }
+          .row
+            .small-12.columns= f.submit t("empathy.send_registration")
+- elsif @event.registration_required? && @event.start_at >= Time.now                   
+  #registration_form
+    .row{class: @event.has_documentation? ? :hasdoc : false}
+      %h2= t :registration_is_closed    
+      
+.related_content
+  .row
+    .small-10.medium-10.large-8.small-centered.columns
+      %h2= t :related_content
+      .row
+        - unless @event.posts.published.empty?
+          .related_event
+            .small-12.medium-6.related{class: cycle('odd', 'even')}
+              - @event.posts.published.sort_by(&:published_at).reverse.each do |post|
+                = link_to post do
+                  .related_image_box{style: "background: url(#{post.image.url(:box)}) no-repeat center center;"}
+                  %h3= post.title
+                  .blurb= raw truncate_html(sanitize(post.body, tags: %w{em i italic b bold strong u}), length: 200)
+                = link_to t("read_more") + " >>>", post
+      
+        - unless @event.festivalthemes.empty?
+
+          .related_event
+            - @event.festivalthemes.each do |ft|
+              .small-12.medium-6.related{class: cycle('odd', 'even')}
+                = link_to "/festivals/festival-2015/theme/#{ft.slug}" do
+                  .related_image_box{style: "background: url(#{ft.image.url(:standard)}) no-repeat center center;"}
+                  %h3= ft.name
+                  .blurb= raw truncate_html(ft.description, length: 200)
+                = link_to t("livingspaces.learn_more") + " >>>", "/festivals/festival-2015/theme/#{ft.slug}"
+      
+              - ft.posts.published.each do |post|
+                .small-12.medium-6.related{class: cycle('odd', 'even')}
+                  = link_to post do
+                    .related_image_box{style: "background: url(#{post.image.url(:standard)}) no-repeat center center;"}
+                    %h3= post.title
+                    .blurb= raw truncate_html(sanitize(post.body, tags: %w{em i italic b bold strong u}), length: 200)
+                  = link_to t("read_more") + " >>>", post
+        
+              - ft.events.published.shuffle.each do |event|
+                - next if event == @event
+                .small-12.medium-6.related{class: cycle('odd', 'even')}
+                  = link_to event do
+                    .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
+                    %h3= event.name
+                    .blurb= raw truncate_html(strip_tags(event.description), length: 200)
+                  = link_to t("livingspaces.learn_more") + " >>>", event
+      
+        - if @event.find_related_tags.blank?
+          -# nothing related in db so just pull random shit
+          - @event.festival.events.shuffle.delete_if{|x| x== @event}.take(2).each_with_index do |event, i|
+            .small-10.medium-6.columns.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
+              = link_to event do
+                .related_image_box{style: "background: url(#{event.image.url(:standard).gsub(/development/, 'production')}) no-repeat center center;"}
+                  .overlay &nbsp;
+                %h3= event.name
+                .blurb= raw truncate_html(strip_tags(event.description), length: 200)
+          
+        - else
+          .related_event.by_tag
+            - @event.find_related_tags.each_with_index do |event, i|
+              - unless @event.festivalthemes.empty?
+                - next if @event.festivalthemes.map(&:events).flatten.include?(event)
+              .small-12.medium-6.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
+                = link_to event do
+                  .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
+                  %h3= event.name
+                  .blurb= raw truncate_html(strip_tags(event.description), length: 200)
+                = link_to t("livingspaces.learn_more") + " >>>", event
+      
+      
+= content_for :jquery do
+  - unless @event.place.latitude.blank?
     :plain
+
       function initialize() {
-        var myLatlng = new google.maps.LatLng(60.174134, 24.940317);
-        var myOptions = { zoom: 13, 
+        var myLatlng = new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude});
+        var myOptions = { zoom: 14, 
               center: myLatlng,
               mapTypeId: google.maps.MapTypeId.ROADMAP,
               styles: [
@@ -371,38 +505,13 @@
            }
 
 
-        map = new google.maps.Map(document.getElementById('map_container'), myOptions);
-        
-        var lapinlahden = new google.maps.LatLng(60.167691, 24.912903);
-        var muu = new google.maps.LatLng(60.161903, 24.902699);
-        var kiasma = new google.maps.LatLng(60.171487, 24.937111);
-        var talvi = new google.maps.LatLng(60.1855927, 24.9297184);
-      
-        var marker1 = new google.maps.Marker({  position: lapinlahden, 
-          title: 'Main location: Lapinlahti hospital', 
-          icon: '/assets/empathy/images/pin1.png',
-          map: map
-        });
-      
-        var marker2 = new google.maps.Marker({  position: muu, 
-          title: 'MUU Cable Factory', 
-          icon: '/assets/empathy/images/pin2.png',
-          map: map
-        });
-      
-        var marker3 = new google.maps.Marker({  position: kiasma,
-          title: 'Kiasma Museum of Contemporary Art', 
-          icon: '/assets/empathy/images/pin3.png',
-          map: map
-        });
-      
-        var marker4 = new google.maps.Marker({  position: talvi, 
-          title: 'Talvipuutarha', 
-          icon: '/assets/empathy/images/pin4.png',
+        map = new google.maps.Map(document.getElementById('mapcontainer'), myOptions);
+        var marker = new google.maps.Marker({  position: myLatlng, map: map, 
+          title: '#{escape_javascript(@event.name)}', 
+          icon: '/assets/empathy/images/pin.png',
           map: map
         });
         return map;
       }
       //map = initialize();
-      map = google.maps.event.addDomListener(window, 'load', initialize);
-    
+      map = google.maps.event.addDomListener(window, 'load', initialize);    

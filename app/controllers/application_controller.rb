@@ -145,7 +145,11 @@ class ApplicationController < ActionController::Base
   
   def determine_site
     if Rails.env.development?
-      @site = Subsite.find_by(subdomain: request.host.gsub(/\.local$/, '')) 
+      if request.host =~ /^empathy/ 
+        @site = Subsite.find_by(name: 'empathy')
+      else
+        @site = Subsite.find_by(subdomain: request.host.gsub(/\.local$/, '')) 
+      end
     else
       # put LS behind password for now
       if request.host =~ /^livingspaces/

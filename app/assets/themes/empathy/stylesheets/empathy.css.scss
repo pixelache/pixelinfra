@@ -55,6 +55,11 @@ header {
     article {
       padding-bottom: 6rem;
     }
+    &.locations {
+      article {
+        padding-bottom: 40px;
+      }
+    }
   }
   
 }
@@ -162,7 +167,12 @@ display: inline-block;
   }
 }
 
-
+.locations_map {
+  #map_container {
+    height: 450px;
+    width: 100%;
+  }
+}
 .top_banner {
   background-color: $grey;
 
