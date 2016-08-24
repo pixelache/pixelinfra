@@ -422,6 +422,52 @@ display: inline-block;
 
 .page {
 
+  &.schedule {
+    h2 {
+      font-family: 'Elephant Medium';
+      color: $pink;
+      text-transform: uppercase;
+      font-size: 1.7rem;
+    }
+    ul {
+      margin: 1.5rem 0;
+      li {
+        list-style-type: none;
+        clear: both;
+        margin-bottom: 1.3rem;
+        line-height: 1.5rem;
+        small {
+          font-size: 75%;
+          font-weight: 400;
+        }
+        ul {
+          margin-left: 3rem;
+          li {
+            color: #666;
+            kbd {
+              font-weight: 300;
+              height: 5rem;
+            }
+          }
+        }
+        kbd {
+          background: none;
+          font-weight: 400;
+          font-family: $opensans;
+          color: #000;
+          border: none;
+          width: 160px;
+          display: block;
+          float: left;
+          padding-right: 25px;
+          text-align: right;
+          height: 3rem;
+        
+        }
+      }
+    }
+  }
+
 
   color: $pink;
   &.locations, &.contact {

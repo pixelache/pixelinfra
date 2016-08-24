@@ -81,7 +81,7 @@
 .related_content
   .row
     .small-10.medium-10.large-8.small-centered.columns
-      %h2= t :related_content
+      %h2= t "empathy.also_see"
       .row
         - unless @event.posts.published.empty?
           .related_event
@@ -126,23 +126,19 @@
           - @event.festival.events.published.shuffle.delete_if{|x| x== @event}.take(2).each_with_index do |event, i|
             .small-10.medium-6.columns.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
               = link_to event do
-                .related_image_box{style: "background: url(#{event.image.url(:standard).gsub(/development/, 'production')}) no-repeat center center;"}
+                .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
                   .overlay &nbsp;
                 %h3= event.name
                 .blurb= raw truncate_html(strip_tags(event.description), length: 200)
           
         - else
-          .related_event.by_tag
-            - @event.find_related_tags.each_with_index do |event, i|
-              - unless @event.festivalthemes.empty?
-                - next if @event.festivalthemes.map(&:events).flatten.include?(event)
-              .small-12.medium-6.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
-                = link_to event do
-                  .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
-                  %h3= event.name
-                  .blurb= raw truncate_html(strip_tags(event.description), length: 200)
-                = link_to t("livingspaces.learn_more") + " >>>", event
-      
+          - @event.find_related_tags.each_with_index do |event, i|
+            .small-10.medium-6.columns.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
+              = link_to event do
+                .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
+                  .overlay &nbsp;
+                %h3= event.name
+                .blurb= raw truncate_html(strip_tags(event.description), length: 200)
       
 = content_for :jquery do
   - unless @event.place.latitude.blank?

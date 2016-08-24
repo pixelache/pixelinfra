@@ -245,7 +245,11 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
       }
     }
   }
-  
+  .empathy_container {
+    .centered_title {
+      margin-bottom: 2rem;
+    }
+  }
 
 
   footer {

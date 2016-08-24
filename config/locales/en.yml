@@ -470,6 +470,8 @@ en:
     name: 'Name'
     surname: 'Surname'
     phone: 'Phone'
+    programme: 'Programme'
+    also_see: 'Also see...'
     email: 'Email'
     schedule: 'Schedule'
     all_events: 'All events'
