@@ -4,7 +4,7 @@
     .small-12.columns.filters
       %ul
         %li.all.active= link_to t("empathy.all_events").upcase, '#', onclick: "javascript:$('.event_link').fadeIn();$('li').not('.all').removeClass('active');$('li.all').addClass('active');return false;"
-        - @events.map{|x| x.start_at.strftime("%d")}.sort.map{|x| x.to_i.ordinalize}.each do |date|
+        - (@festival.start_at..@festival.end_at).map{|x| x.day.ordinalize}.uniq.each do |date|
           %li{class: date}= link_to date, '#', onclick: "javascript:toggleEvent('.#{date}');return false;"
   .row
     - @events.each do |event|

@@ -35,23 +35,31 @@
   .event {
     color: $pink;
     .event_image {
+      height: 285px;
+      &:hover {
+        background: none;
+        cursor: pointer;
+        .overlay {
+          display: block;
+        }
+      }
       .overlay {
         background: rgba(238, 30, 70, 0.62);
         width: 103%;
+        display: none;
         padding-bottom: 124%;
-        margin-top: -138%;
+        margin-top: 0;
         position: relative;
         z-index: 2;
-        &:hover {
-          background: none;
-          cursor: pointer;
-        }
+
       }
       img {
-        max-width: 175px;
-        height: 235px;
+        height: 100%;
+        min-width: 300px;
+        clip: rect(0px, 175px, 235px, 0px);
+        position: absolute;
       }
-      padding-bottom: 5rem;
+
     }
     .title {
       font-family: 'Elephant Medium';
