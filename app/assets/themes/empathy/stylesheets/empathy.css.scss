@@ -22,7 +22,7 @@ a {
 header {
   .fixed {
     max-height: 24vH;
-    overflow: hidden;
+//    overflow: hidden;
   }
 }
 .empathy_container {
@@ -38,20 +38,16 @@ header {
   }
   &.page {
 
-    background: url('/assets/empathy/images/about_bg.png') repeat-y center bottom ;
+    background: url('/assets/empathy/images/red-on-grey-1519px.png') repeat-y center top ;
     background-color: $grey;
     &.contact, &.locations {
-      background: url('/assets/empathy/images/programme_bg.png') repeat-y center top;
+      background: url('/assets/empathy/images/grey-on-blue-1519px.png') repeat-y center top;
       background-color: $purple;
-      background-size: cover;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
+      .page_text a, a {
+        color: $pink;
+      }
     }
-    -webkit-background-size: contain;
-    -moz-background-size: contain;
-    -o-background-size: contain;
-    background-size: contain;
+
     article {
       padding-bottom: 6rem;
     }
@@ -114,49 +110,110 @@ display: inline-block;
 }
 
 .top-bar {
-
+  line-height: 1.8rem;
   background-color: $grey;
   padding: 30px 30px 0 30px;
+  .title-area {
+//    margin-right: 4rem;
+    width: 100%;
+    li {
+      list-style-type: none;
+    }
+    .name {
+      height: initial;
+      float: left;
+      margin-right: 3rem;
+    }
+  }
   &.locations, &.contact {
     background-color: $purple;
+    .menu_wrapper {
+      .languages {
+        color: $grey;
+      }
+    }
+    a {
+      color: $pink;
+    }
   }
-  .menu_wrapper {
+  .menu_wrapper  {
     float: left;
-    max-width: calc(100% - 275px);
-    ul.menu_bar {
+    width: calc(100% - 320px);
+    padding-top: 1.5rem;
+    .languages {
+      float: right;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: $purple;
+      font-family: 'Helvetica Neue Bold Condensed', sans-serif;
+      a {
+        color: $pink;
+        
+      }
+    }
+    .menu_bar {
       clear:left;
       float:left;
       list-style:none;
       margin:0;
       padding:0;
       position:relative;
-      left:50%;
+
+      height: initial !important;
       text-align:center;
-      li {
+      ul#info {
+        left: 2.5rem !important;
+      }
+      ul#programme {
+        left: 10.5rem !important;
+      }
+      .f-dropdown {
+        background-color: $grey;
+        border: none;
+        outline: none;
+
+      
+        &:after, &:before {
+          border-style: none;
+        }
+        &.f-open-dropdown {
+
+          &:after {
+            border-style: none;
+          }
+        }
+        li  a {
+          line-height: 1.8rem;
+          text-align: left;
+          clear: left;
+          margin: 0.5rem ;
+        }
+      }
+      
+      a, ul li a {
         font-family: 'Helvetica Neue Bold Condensed', sans-serif;
         font-weight: normal;
         font-size: 1rem;
-        text-transform: uppercase;
+        text-transform: uppercase !important;
+        letter-spacing: 0.22rem;
+        color: $pink;
+        border-bottom: 2px solid $grey;
+        &:hover {
+          border-bottom: 2px solid $pink;
+        }
+   
+      }
+      a {
         display:block;
         text-align: left;
-           float:left;
-           list-style:none;
-           margin:0;
-           padding:0;
-           position:relative;
-           right:50%;
-        letter-spacing: 0.22rem;
-        padding: 0 2.5rem;
-        height: 40px;
-        a { 
-           display:inline-block;
-          color: $pink;
-
-          &:hover {
-            border-bottom: 2px solid $pink;
-          };
-        }
+        float:left;
+        padding:0;
+        position:relative;
+        margin: 0 2.5rem;
+   
+        display:inline-block;
       }
+
     }
   }
   ul.social {
@@ -200,6 +257,9 @@ display: inline-block;
 }
 
 .news_front {
+  .logos {
+    padding-top: 4rem;
+  }
   .centered_title {
     margin-bottom: 2rem;
   }
@@ -237,6 +297,13 @@ display: inline-block;
         padding-bottom: 0.6rem;
         margin-bottom: 0.6rem;
         border-bottom: 3px dotted $grey;
+      }
+      .date {
+        font-weight: 300;
+        font-size: 0.8rem;
+        color: $grey;
+        margin-bottom: 0.6rem;
+        font-family: 'Elephant Medium';
       }
       .body {
         font-weight: 300;

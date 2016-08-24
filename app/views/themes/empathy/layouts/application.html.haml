@@ -8,7 +8,8 @@
     %link{:href => "http://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/feed", :rel => "alternate", :title => "RSS", :type => "application/rss+xml"}/
-    = favicon_link_tag theme_image_path('favicon.ico')
+    
+    = render partial: 'layouts/favicons'
     -#= stylesheet_link_tag "application", :media => "all"
     = stylesheet_link_tag 'empathy/stylesheets/application', :media => :screen
     = stylesheet_link_tag 'print', media: :print
@@ -34,20 +35,41 @@
       %section
             
         .fixed
-          %nav.top-bar{:"data-topbar" => '', role: :navigation, class: [@page.nil? ? false : @page.slug]}
-            %ul.title-area
+          %nav.top-bar{:"data-topbar" => '', :"data-options" => "scrolltop:false", role: :navigation, class: [@page.nil? ? false : @page.slug]}
+            .languages_mobile.show-for-medium-down
+              = link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
+              %span.divider= " | "
+              = link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
+            .title-area
               %li.name
                 = link_to image_tag(theme_image_path('logo_basic.png')), '/'
               %li.toggle-topbar.menu-icon
                 %a{href: '#'}
                   %span= t :menu
-            %section.menu_wrapper
-              %ul.menu_bar
-                %li= link_to t("empathy.about"), festival_page_festival_path('festival-2016', 'about')
-                %li= link_to t("empathy.preliminary_programme"), festival_page_festival_path('festival-2016', 'preliminary-programme')
-                %li= link_to t("empathy.news"), festival_posts_path('festival-2016')
-                %li= link_to t("empathy.locations"), festival_page_festival_path('festival-2016', 'locations')
-                %li= link_to t("empathy.contact"), festival_page_festival_path('festival-2016', 'contact')
+              .menu_wrapper
+                .menu_bar
+                  = link_to t(:info), '#', :"data-dropdown-init" => '', :"data-dropdown" => 'info', :"aria-controls" => 'info', :"aria-expanded" => false, :"data-options" => "align:bottom;ignore_repositioning:true;is_hover:true; hover_timeout:5000", class: :"hide-for-small-only"
+                  %ul#info{:class => "f-dropdown", :"data-dropdown-content" => '', :"aria-hidden" => "true", tabindex: -1}
+                    %li= link_to t("empathy.about"), festival_page_festival_path('festival-2016', 'about')
+                    %li= link_to t("empathy.contact"), festival_page_festival_path('festival-2016', 'contact')
+                    -# %li= link_to t("empathy.media"), festival_page_festival_path('festival-2016', 'media')
+                    %li= link_to t("empathy.locations"), festival_page_festival_path('festival-2016', 'locations')
+                  = link_to t("empathy.programme"), '/programme'
+                  -#, :"data-dropdown" => 'programme', :"aria-controls" => 'programme', :"aria-expanded" => false, :"data-options" => "align:bottom;ignore_repositioning:true;is_hover:true; hover_timeout:5000"
+                  -#%ul#programme.f-dropdown{:"data-dropdown-content" => '', :"aria-hidden" => "true", tabindex: -1}
+                  -#  %li= link_to t("empathy.schedule"),  festival_page_festival_path('festival-2016', 'schedule')
+                  %li.show-for-small-only= link_to t("empathy.about"), festival_page_festival_path('festival-2016', 'about')
+                  %li.show-for-small-only= link_to t("empathy.contact"), festival_page_festival_path('festival-2016', 'contact')
+                  -# %li.show-for-small-only= link_to t("empathy.media"), festival_page_festival_path('festival-2016', 'media')
+                  %li.show-for-small-only= link_to t("empathy.locations"), festival_page_festival_path('festival-2016', 'locations')
+
+                  = link_to t("empathy.news"), festival_posts_path('festival-2016')
+                .languages.show-for-large-up
+                  = link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
+                  %span.divider= " | "
+                  = link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
+
+                
 
 
     - if flash

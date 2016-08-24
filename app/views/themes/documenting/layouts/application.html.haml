@@ -20,8 +20,8 @@
     .row
       .large-4.medium-12.small-10.small-offset-1.columns.push.medium-offset-0#sidebar
         .row
-          .logo_container.medium-6.large-12.large-offset-0.columns
-            .subtitle tilallisen ja tapahtuallisen
+          .logo_container.medium-8.large-12.large-offset-0.columns.small-centered
+            .subtitle tilallisen ja tapahtumallisen
             .logo
               .first= link_to 'mediataiteen', '/'
             .logo
@@ -29,13 +29,13 @@
 
 
         .row
-          .logo_image.medium-6.large-12.large-offset-0.columns
+          .logo_image.text-center.medium-9.large-12.large-offset-0.columns.small-centered
             = image_tag current_theme_image_path('hybrid.png'), :class => :navbg
         .row
-          .page_link.medium-6.large-12.large-offset-0.columns
+          .page_link.medium-9.large-12.large-offset-0.columns.small-centered
             = link_to 'Info', page_path('info')
         .row
-          .page_link.medium-6.large-12.large-offset-0.columns.last
+          .page_link.medium-9.large-12.large-offset-0.columns.last.small-centered
             = link_to 'Yhteystiedot', page_path('yhteystiedot')              
             / .item.publications= link_to t(:publications), publications_path
             / .item.about= link_to t(:about), page_path('about')

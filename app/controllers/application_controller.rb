@@ -150,6 +150,7 @@ class ApplicationController < ActionController::Base
       else
         @site = Subsite.find_by(subdomain: request.host.gsub(/\.local$/, '')) 
       end
+      #@site = Subsite.find_by(name: 'empathy')
     else
       # put LS behind password for now
       if request.host =~ /^livingspaces/
@@ -170,8 +171,8 @@ class ApplicationController < ActionController::Base
       @calendar = Event.by_site(@site).where(['start_at >= ? OR end_at >= ?', Time.now, Time.now])
       @calendar += Step.by_site(@site).where(['start_at >= ? OR end_at >= ?', Time.now, Time.now])
     end
-    @site.name 
-
+    @site.name
+    
   end
   
   def get_locale 
@@ -186,7 +187,7 @@ class ApplicationController < ActionController::Base
     else
       I18n.locale = session[:locale]
     end
-    if @site.name == 'olsof' || @site.name == 'empathy'
+    if @site.name == 'olsof' 
       I18n.locale = 'en'
     end
     

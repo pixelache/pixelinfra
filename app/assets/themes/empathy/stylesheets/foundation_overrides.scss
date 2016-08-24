@@ -264,7 +264,7 @@
 // $f-dropdown-list-padding: rem-calc(5, 10);
 // $f-dropdown-line-height: rem-calc(18);
 // $f-dropdown-list-hover-bg: #eeeeee  ;
-// $dropdown-mobile-default-float: 0;
+$dropdown-mobile-default-float: 1;
 
 // We use this to control the styles for when the dropdown has custom content.
 // $f-dropdown-content-padding: rem-calc(20);
@@ -956,19 +956,19 @@
 // $topbar-link-color-hover: #fff;
 // $topbar-link-color-active: #fff;
 // $topbar-link-weight: normal;
-// $topbar-link-font-size: rem-calc(13);
+ $topbar-link-font-size: 1rem;
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
-// $topbar-link-bg-hover: #272727  ;
-// $topbar-link-bg-active: $primary-color;
+$topbar-link-bg-hover: transparent ;
+$topbar-link-bg-active: $primary-color;
 // $topbar-link-bg-active-hover: darken($primary-color, 5%);
-// $topbar-link-font-family: $body-font-family;
+ $topbar-link-font-family: 'Helvetica Neue Bold Condensed', sans-serif;
 
  $topbar-button-font-size: 1rem;
 
 // $topbar-dropdown-label-color: #777;
-// $topbar-dropdown-label-text-transform: uppercase;
+$topbar-dropdown-label-text-transform: uppercase;
 // $topbar-dropdown-label-font-weight: bold;
-// $topbar-dropdown-label-font-size: rem-calc(10);
+$topbar-dropdown-label-font-size: 1rem;
 // $topbar-dropdown-label-bg: #333;
 
 // Top menu icon styles

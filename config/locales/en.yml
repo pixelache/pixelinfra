@@ -471,6 +471,7 @@ en:
     surname: 'Surname'
     phone: 'Phone'
     email: 'Email'
+    schedule: 'Schedule'
     all_events: 'All events'
     limited_places: 'There are limited places available. Please fill out the registration form and we will contact you if you are selected.'
     front_blurb: "Could empathy be a key to reconnect us with our ecosystem and ourselves? Pixelache Festival 2016 - 'Interfaces for Empathy' explores the promise of this possible societal shift through macro-level direct experiences and the perspective of interconnectedness of all life."

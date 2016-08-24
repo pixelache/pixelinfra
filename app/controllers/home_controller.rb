@@ -34,7 +34,7 @@ class HomeController < ApplicationController
     elsif @site.name == 'olsof' 
       @feed = Feed.by_subsite(@site.id).created.order('fed_at DESC').page(params[:page]).per(6)
     elsif  @site.name == 'documenting'  # hopefully change to just "else" soon
-      @pages = Page.friendly.find('documenting-media-art').children.page(params[:page]).per(6)
+      @pages = Page.friendly.find('documenting-media-art').children.where.not(slug: 'info').order(:sort_order).page(params[:page]).per(6)
     end
     
     @frontitems = Frontitem.by_site(@site.id).order(:position)

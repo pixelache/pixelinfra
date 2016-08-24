@@ -123,7 +123,7 @@
       
         - if @event.find_related_tags.blank?
           -# nothing related in db so just pull random shit
-          - @event.festival.events.shuffle.delete_if{|x| x== @event}.take(2).each_with_index do |event, i|
+          - @event.festival.events.published.shuffle.delete_if{|x| x== @event}.take(2).each_with_index do |event, i|
             .small-10.medium-6.columns.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
               = link_to event do
                 .related_image_box{style: "background: url(#{event.image.url(:standard).gsub(/development/, 'production')}) no-repeat center center;"}
