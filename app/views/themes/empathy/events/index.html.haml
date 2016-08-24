@@ -12,7 +12,7 @@
         .large-4.medium-6.small-12.columns.event{class: event == @events.last ? :end : false}
           .row
             .small-6.columns.event_image
-              = image_tag event.image.url(:logo)
+              = image_tag event.image.url(:box)
               .overlay &nbsp;
             .small-6.columns.event_info
               .title= event.title
