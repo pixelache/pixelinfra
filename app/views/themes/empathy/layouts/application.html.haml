@@ -54,10 +54,9 @@
                     %li= link_to t("empathy.contact"), festival_page_festival_path('festival-2016', 'contact')
                     -# %li= link_to t("empathy.media"), festival_page_festival_path('festival-2016', 'media')
                     %li= link_to t("empathy.locations"), festival_page_festival_path('festival-2016', 'locations')
-                  = link_to t("empathy.programme"), '/programme'
-                  -#, :"data-dropdown" => 'programme', :"aria-controls" => 'programme', :"aria-expanded" => false, :"data-options" => "align:bottom;ignore_repositioning:true;is_hover:true; hover_timeout:5000"
-                  -#%ul#programme.f-dropdown{:"data-dropdown-content" => '', :"aria-hidden" => "true", tabindex: -1}
-                  -#  %li= link_to t("empathy.schedule"),  festival_page_festival_path('festival-2016', 'schedule')
+                  = link_to t("empathy.programme"), '/programme', :"data-dropdown" => 'programme', :"aria-controls" => 'programme', :"aria-expanded" => false, :"data-options" => "align:bottom;ignore_repositioning:true;is_hover:true; hover_timeout:5000"
+                  %ul#programme.f-dropdown{:"data-dropdown-content" => '', :"aria-hidden" => "true", tabindex: -1}
+                    %li= link_to t("empathy.schedule"),  festival_page_festival_path('festival-2016', 'schedule')
                   %li.show-for-small-only= link_to t("empathy.about"), festival_page_festival_path('festival-2016', 'about')
                   %li.show-for-small-only= link_to t("empathy.contact"), festival_page_festival_path('festival-2016', 'contact')
                   -# %li.show-for-small-only= link_to t("empathy.media"), festival_page_festival_path('festival-2016', 'media')
