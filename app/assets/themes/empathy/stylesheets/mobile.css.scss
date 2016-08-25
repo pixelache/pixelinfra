@@ -23,6 +23,22 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
 
 @media #{$small-only} { 
 
+  body {
+    &.locations, &.contact { 
+      header, header .expanded:not(.top-bar) { 
+        .top-bar {
+          background-color: $purple;
+          .title-area {
+            background-color: $purple;
+          }
+          .menu_wrapper {
+            background-color: $purple;
+          }
+        }
+      }
+    }
+  }
+  
   header {
     .fixed {
       max-height: initial;
@@ -30,8 +46,10 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
       
       &.expanded:not(.top-bar) {
         overflow-y: initial;
+        background-color: $grey;
         .title-area {
           width: 100%;
+          background-color: $grey;
         }
       }
     }
@@ -121,6 +139,7 @@ $large-only: "#{$screen} and (min-width: #{lower-bound($large-range)}) and (max-
   
   
   .empathy_container {
+    height: initial;
     .event_index {
       .centered_title {
         padding-bottom: 3rem;

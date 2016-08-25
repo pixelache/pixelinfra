@@ -15,7 +15,7 @@ set :rvm_type, :system
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/var/www/pixelinfra'
-
+set :ssh_options, :compression => false, :keepalive => true
 # Default value for :scm is :git
 # set :scm, :git
 

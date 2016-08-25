@@ -147,7 +147,7 @@ class Event < ActiveRecord::Base
       start = start_at.to_date
       last = end_at.to_date
       out = []
-      while (start < last)
+      while (start <= last)
         out << start
         start += 1.day
       end
