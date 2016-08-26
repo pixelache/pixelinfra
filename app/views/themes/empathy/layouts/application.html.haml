@@ -52,7 +52,7 @@
                   %ul#info{:class => "f-dropdown", :"data-dropdown-content" => '', :"aria-hidden" => "true", tabindex: -1}
                     %li= link_to t("empathy.about"), festival_page_festival_path('festival-2016', 'about')
                     %li= link_to t("empathy.contact"), festival_page_festival_path('festival-2016', 'contact')
-                    -# %li= link_to t("empathy.media"), festival_page_festival_path('festival-2016', 'media')
+                    %li= link_to t("empathy.media"), festival_page_festival_path('festival-2016', 'media')
                     %li= link_to t("empathy.locations"), festival_page_festival_path('festival-2016', 'locations')
                   = link_to t("empathy.programme"), '/programme', :"data-dropdown" => 'programme', :"aria-controls" => 'programme', :"aria-expanded" => false, :"data-options" => "align:bottom;ignore_repositioning:true;is_hover:true; hover_timeout:5000",  :"data-follow-click" => '', id: "programme_link"
                   %ul#programme.f-dropdown{:"data-dropdown-content" => '', :"aria-hidden" => "true", tabindex: -1}
@@ -60,7 +60,7 @@
                   %li.show-for-small-only= link_to t("empathy.about"), festival_page_festival_path('festival-2016', 'about')
                   %li.show-for-small-only= link_to t("empathy.schedule"),  festival_page_festival_path('festival-2016', 'schedule')
                   %li.show-for-small-only= link_to t("empathy.contact"), festival_page_festival_path('festival-2016', 'contact')
-                  -# %li.show-for-small-only= link_to t("empathy.media"), festival_page_festival_path('festival-2016', 'media')
+                  %li.show-for-small-only= link_to t("empathy.media"), festival_page_festival_path('festival-2016', 'media')
                   %li.show-for-small-only= link_to t("empathy.locations"), festival_page_festival_path('festival-2016', 'locations')
 
                   = link_to t("empathy.news"), festival_posts_path('festival-2016')
@@ -82,6 +82,7 @@
 
     %footer{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
       .logo= link_to image_tag(theme_image_path('footer/logo.png'), :alt => "Pixelache"), 'http://pixelache.ac'
+      .dates.hide-for-small-only= date_range(@festival.start_at, @festival.end_at)
       -#.text.hide-for-small-only= link_to 'www.pixelache.ac', 'http://pixelache.ac'
       .social
         = link_to image_tag(theme_image_path('footer/facebook.png'), width: 25), 'https://www.facebook.com/events/1019391098151871'

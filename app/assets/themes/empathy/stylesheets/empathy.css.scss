@@ -9,6 +9,20 @@ body {
   position:relative;
   &.contact, &.locations {
     background-color: $purple;
+    header {
+      .top-bar {
+          .menu_wrapper {
+            .languages {
+              color: $grey;
+            }
+            .menu_bar {
+              ul.f-dropdown {
+                background-color: $purple;
+              }
+            }
+          }
+       }
+    }
   }
 }
 a {
@@ -24,6 +38,7 @@ header {
 
 //    overflow: hidden;
   }
+  
 }
 .empathy_container {
 
@@ -35,6 +50,7 @@ header {
  &.contact, &.locations {
 
     background-color: $purple;
+
   }
   &.page {
 
@@ -127,11 +143,8 @@ display: inline-block;
   }
   &.locations, &.contact {
     background-color: $purple;
-    .menu_wrapper {
-      .languages {
-        color: $grey;
-      }
-    }
+
+
     a {
       color: $pink;
     }
@@ -447,6 +460,8 @@ display: inline-block;
             kbd {
               font-weight: 300;
               height: 5rem;
+              color: $pink;
+              font-family: 'Farnham Display Medium';
             }
           }
         }
@@ -462,7 +477,8 @@ display: inline-block;
           padding-right: 25px;
           text-align: right;
           height: 3rem;
-        
+          color: $pink;
+          font-family: 'Farnham Display Medium';
         }
       }
     }
@@ -519,6 +535,12 @@ footer {
   .logo {
     float: left;
     padding: 0 25px;
+  }
+  .dates {
+    color: $grey;
+    float: left;
+    font-family: 'Elephant Medium';
+    padding-top: 0.475rem;
   }
   .social {
     float: right;

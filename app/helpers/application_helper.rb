@@ -184,6 +184,16 @@ module ApplicationHelper
     
   end
   
+  def ordinalize_number number
+      case I18n.locale
+      when :en
+          return number.ordinalize
+      when :fi
+          return number.to_s + ".9"
+      else
+          return number
+      end
+  end  
 
   def pluralize_sentence(count, i18n_id, plural_i18n_id = nil)
     if count == 1
