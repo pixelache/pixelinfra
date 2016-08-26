@@ -4,11 +4,11 @@
     .small-12.columns.filters
       %ul
         %li.all.active= link_to t("empathy.all_events").upcase, '#', onclick: "javascript:$('.event_link').fadeIn();$('li').not('.all').removeClass('active');$('li.all').addClass('active');return false;"
-        - (@festival.start_at..@festival.end_at).map{|x| l(x, format: "%A") }.uniq.each do |date|
+        - (@festival.start_at..@festival.end_at).map{|x| l(x, format: "%a") }.uniq.each do |date|
           %li{class: date}= link_to date, '#', onclick: "javascript:toggleEvent('.#{date}');return false;"
   .row
     - @events.each do |event|
-      = link_to event, class: [:event_link, event.happens_on_festival_dates.delete_if{|x|  !(@festival.start_at..@festival.end_at).to_a.include?(x) }.map{|x|l(x, format: "%A")  }.join(' ')] do
+      = link_to event, class: [:event_link, event.happens_on_festival_dates.delete_if{|x|  !(@festival.start_at..@festival.end_at).to_a.include?(x) }.map{|x|l(x, format: "%a")  }.join(' ')] do
         .large-4.medium-6.small-12.columns.event{class: event == @events.last ? :end : false}
           .row
             .small-6.columns.event_image
