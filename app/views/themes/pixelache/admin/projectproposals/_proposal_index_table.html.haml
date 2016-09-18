@@ -1,0 +1,50 @@
+.row
+  .small-12.columns
+    %table.project_proposals
+      %thead
+        %th= sortable_column "Proposal #", :column => :id
+        %th= sortable_column "Proposer", :column => :user
+        %th= sortable_column "Name"
+        %th= sortable_column "Comments"
+        %th &nbsp;
+      %tbody
+        - dataset.each do |prop|
+          %tr
+            %td= prop.id.to_s
+            %td
+              - if prop.versions.size == 1
+                = prop.primary_initiator.name
+              - else
+                = User.find(prop.versions.first.whodunnit).name
+              %p.metadata
+                = t(:created_on, :when => l(prop.created_at, format: :short))
+              %p.metadata
+                = t(:last_modified, when: l(prop.updated_at, format: :short))
+                by
+                = prop.primary_initiator.name
+            %td
+              = prop.name
+              - if prop.project
+                %p
+                  %small
+                    to be a subproject of:
+                    = prop.project.name
+              - if prop.offspring
+                %p
+                  LED TO NEW PROJECT:
+                  = link_to prop.offspring.name, [:admin, prop.offspring], target: :_blank
+              - if prop.festival
+                %p
+                  LED TO FESTIVAL:
+                  = link_to prop.festival.name, [:admin, prop.festival], target: :_blank
+            %td
+              = prop.comments.size.to_s
+              - unless prop.comments.empty?
+                %p.metadata= t(:posted_by, :poster => prop.comments.order(:created_at).last.user.name, :when => l( prop.comments.order(:created_at).last.created_at, format: :short))
+            %td
+              = link_to t(:view), [:admin, prop], class: [:button, :round, :tiny]
+              - if can? :edit, prop
+                = link_to t(:edit), edit_admin_projectproposal_path(prop), class: [:button, :round, :tiny]
+              - if can? :destroy, prop
+                = link_to t(:destroy), [:admin, prop], :method => :delete, class: [:button, :alert, :round, :tiny], :data => { :confirm =>  t(:are_you_sure) }
+        

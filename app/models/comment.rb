@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  belongs_to :item, polymorphic: true
+  belongs_to :item, polymorphic: true, touch: true
   belongs_to :user
   mount_uploader :image, ImageUploader
   mount_uploader :attachment, AttachmentUploader

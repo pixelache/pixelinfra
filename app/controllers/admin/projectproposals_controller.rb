@@ -18,11 +18,12 @@ class Admin::ProjectproposalsController < Admin::BaseController
       when "name"
         "LOWER(name) #{direction}"
       else
-        "created_at DESC"
+        "updated_at DESC"
       end
     end
     set_meta_tags :title => t(:project_proposals)
-    @projectproposals = Projectproposal.joins(:primary_initiator).includes(:comments).order(order)
+    @current = Projectproposal.current.joins(:primary_initiator).includes(:comments).order(order)
+    @archived = Projectproposal.archived.joins(:primary_initiator).includes(:comments).order(order)
   end
   
   
@@ -34,7 +35,7 @@ class Admin::ProjectproposalsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:projectproposal => [:name, :project_id, :description, :long_description, :primary_initiator_id, :cosupporters, :producer, :treasurer, :documentation, :communication, :additional_experts, :reporting, :imagined_participants, :equipment, :offspring_id, :budget, :external_funding, :inkind, :people_expertise, :where, :when, :when_will_it_end, :slug, :why])
+    params.permit(:projectproposal => [:name, :project_id, :archived, :festival_id, :event_id, :description, :long_description, :primary_initiator_id, :cosupporters, :producer, :treasurer, :documentation, :communication, :additional_experts, :reporting, :imagined_participants, :equipment, :offspring_id, :budget, :external_funding, :inkind, :people_expertise, :where, :when, :when_will_it_end, :slug, :why])
   end
 
 end
