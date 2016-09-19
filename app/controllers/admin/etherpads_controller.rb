@@ -4,6 +4,7 @@ class Admin::EtherpadsController < Admin::BaseController
   has_scope :by_project
   has_scope :by_subsite
   has_scope :by_event
+  has_scope :by_meeting
   has_scope :by_documenttype
   handles_sortable_columns
   autocomplete :event, :name, :extra_data => [:start_at], :display_value => :event_with_date

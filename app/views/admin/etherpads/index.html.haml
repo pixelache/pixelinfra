@@ -15,30 +15,37 @@
     .filter_box.row
       .small-12.columns
         %b Filter by:
-      .small-1.columns
+      .small-6.medium-4.columns
         .filter_title Site:
         %select#by_subsite
           %option{:value => ""} &nbsp;
           - Subsite.all.each do |subsite|
             %option{:value => subsite.id, :selected => (params[:by_subsite] == subsite.id.to_s ? :selected : false)}= subsite.name
-      .small-2.columns 
+      .small-6.medium-4.columns 
         .filter_title Document type:
         %select#by_documenttype
           %option{:value => ""} &nbsp;
           = options_from_tree_collection_for_select(Documenttype.roots, :id, :name)            
-      .small-3.columns
+      .small-6.medium-4.columns
         .filter_title Event
         %select#by_event
           %option{:value => ""} &nbsp;
           - @etherpad_events.each do |e|
-            %option{:value => e.id, :selected => (params[:by_event] == e.id.to_s ? :selected : false)}= e.event_with_date            
-      .small-3.columns
+            %option{:value => e.id, :selected => (params[:by_event] == e.id.to_s ? :selected : false)}= e.event_with_date
+    .filter_box.row     
+      .small-6.medium-4.columns
+        .filter_title Meeting
+        %select#by_meeting
+          %option{:value => ""} &nbsp;
+          - Meeting.all.order(start_at: :desc).each do |meeting|
+            %option{:value => meeting.id, :selected => (params[:by_meeting] == meeting.id.to_s ? :selected : false)}= meeting.name     
+      .small-6.medium-4.columns
         .filter_title Festival
         %select#by_festival
           %option{:value => ""} &nbsp;
-          - Festival.all.each do |festival|
+          - Festival.all.order(start_at: :desc).each do |festival|
             %option{:value => festival.id, :selected => (params[:by_festival] == festival.id.to_s ? :selected : false)}= festival.name
-      .small-3.columns
+      .small-6.medium-4.columns
         .filter_title Project:
         %select#by_project
           %option{:value => ""} &nbsp;
