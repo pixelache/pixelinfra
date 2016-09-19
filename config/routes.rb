@@ -51,6 +51,8 @@ Pixelinfra::Application.routes.draw do
       get :autocomplete_residency_name, on: :collection
     end
     resources :frontmodules
+    resources :meetings
+    resources :meetingtypes
     resources :memberships
     resources :nodes
     resources :opencalls do

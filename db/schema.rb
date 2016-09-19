@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918091702) do
+ActiveRecord::Schema.define(version: 20160919090621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -232,6 +232,11 @@ ActiveRecord::Schema.define(version: 20160918091702) do
 
   add_index "etherpads_festivals", ["etherpad_id"], name: "index_etherpads_festivals_on_etherpad_id", using: :btree
   add_index "etherpads_festivals", ["festival_id"], name: "index_etherpads_festivals_on_festival_id", using: :btree
+
+  create_table "etherpads_meetings", id: false, force: :cascade do |t|
+    t.integer "meeting_id"
+    t.integer "etherpad_id"
+  end
 
   create_table "etherpads_projects", id: false, force: :cascade do |t|
     t.integer "etherpad_id"
@@ -517,6 +522,43 @@ ActiveRecord::Schema.define(version: 20160918091702) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "exampleimage", limit: 255
+  end
+
+  create_table "meeting_translations", force: :cascade do |t|
+    t.integer  "meeting_id", null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+  end
+
+  add_index "meeting_translations", ["locale"], name: "index_meeting_translations_on_locale", using: :btree
+  add_index "meeting_translations", ["meeting_id"], name: "index_meeting_translations_on_meeting_id", using: :btree
+
+  create_table "meetings", force: :cascade do |t|
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer  "meetingtype_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "meetings", ["meetingtype_id"], name: "index_meetings_on_meetingtype_id", using: :btree
+
+  create_table "meetingtype_translations", force: :cascade do |t|
+    t.integer  "meetingtype_id", null: false
+    t.string   "locale",         null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "name"
+  end
+
+  add_index "meetingtype_translations", ["locale"], name: "index_meetingtype_translations_on_locale", using: :btree
+  add_index "meetingtype_translations", ["meetingtype_id"], name: "index_meetingtype_translations_on_meetingtype_id", using: :btree
+
+  create_table "meetingtypes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -1056,6 +1098,7 @@ ActiveRecord::Schema.define(version: 20160918091702) do
   add_foreign_key "experiences", "festivalthemes"
   add_foreign_key "experiences", "places"
   add_foreign_key "feedcaches", "users"
+  add_foreign_key "meetings", "meetingtypes"
   add_foreign_key "opencallanswers", "opencallquestions"
   add_foreign_key "opencallanswers", "opencallsubmissions"
   add_foreign_key "opencallquestions", "opencalls"

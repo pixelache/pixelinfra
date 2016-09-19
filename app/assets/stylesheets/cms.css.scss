@@ -92,6 +92,16 @@ form {
       font-size: 0.8rem;
     }
   }
+  table#attachments {
+    td {
+      vertical-align: top;
+    }
+    tr.fields {
+      td {
+        border-top: 1px solid black;
+      }
+    }
+  }
   
   .label {
     float: left;

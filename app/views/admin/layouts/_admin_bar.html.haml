@@ -37,6 +37,8 @@
           %li= link_to 'Event registrations', admin_attendees_path
         - if can? :manage, Residency
           %li= link_to 'Residencies', admin_residencies_path
+        - if can? :manage, Meeting
+          %li= link_to 'Meetings', admin_meetings_path
 %ul.left
   %li.has-dropdown
     %a{:href => '#'} Posts / pages
