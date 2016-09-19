@@ -41,7 +41,7 @@ class Admin::EtherpadsController < Admin::BaseController
   protected
   
   def permitted_params
-    params.permit(:etherpad => [:name, :private_pad,  :event_name, :documenttype_id, subsite_ids: [], project_ids: [], festival_ids: [], event_ids: [] ])
+    params.permit(:etherpad => [:name, :private_pad,  :event_name, :documenttype_id, subsite_ids: [], meeting_ids: [],  project_ids: [], festival_ids: [], event_ids: [] ])
   end
   
 end

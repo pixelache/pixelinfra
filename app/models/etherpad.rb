@@ -4,6 +4,7 @@ class Etherpad < ActiveRecord::Base
   has_and_belongs_to_many :festivals
   has_and_belongs_to_many :events
   has_and_belongs_to_many :meetings
+  
   belongs_to :documenttype
   scope :by_festival, -> festival { joins(:festivals).where(["festivals.id = ?", festival]) }
   scope :by_subsite, -> subsite { joins(:subsites).where(["subsites.id = ?",  subsite]) }

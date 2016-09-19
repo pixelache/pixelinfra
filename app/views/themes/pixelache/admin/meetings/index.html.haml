@@ -1,0 +1,33 @@
+.row
+  .small-12.columns
+    %h2= t :meetings
+.row
+  .small-9.columns
+    %p= page_entries_info(@meetings)    
+.row
+  .small-6.columns= link_to t(:new_meeting), new_admin_meeting_path, class: [:button, :tiny, :round]
+.row
+  .small-12.columns
+    %table
+      %thead
+        %th Who?
+        %th When?
+        %th What?
+        %th
+      %tbody
+        - @meetings.each do |r|
+          %tr
+            %td
+              = r.name
+            %td
+              %p.metadata
+                = date_range(r.start_at, r.end_at)
+            %td
+              - if can? :edit, r
+                = link_to t(:edit), edit_admin_meeting_path(r), class: [:button, :round, :tiny]
+              - if can? :destroy, r
+                = link_to t(:delete), [:admin, r], method: :delete,  class: [:button, :alert, :round, :tiny], data: {confirm: t(:are_you_sure)}
+.row
+  .small-12.columns= paginate @meetings
+.row
+  .small-6.columns= link_to t(:new_meeting), new_admin_meeting_path, class: [:button, :tiny, :round]          

@@ -1,0 +1,51 @@
+= semantic_nested_form_for [:admin, @meeting], html: {:'data-abide' => '', multipart: true} do |f|
+  .row
+    .small-6.columns
+      = f.input :start_at, :as => :string, :input_html => {:required => '', :class => "datetime_picker"}
+      %small.error You must enter a start date and time.
+    .small-6.columns
+      = f.input :end_at, :as => :string, :input_html => {:class => "datetime_picker", required: ''}
+      %small.error You must enter a end date and time.
+  .row
+    .small-6.columns= f.input :meetingtype, as: :select, label: 'Type of meeting', input_html: {required: ''}
+  .row
+    .small-12.columns
+      %dl.tabs{"data-tab" => ""}
+        - I18n.available_locales.each_with_index do |locale, i|
+          %dd{:class => (i == 0 ? :active : false)}
+            = link_to t(:locale_name, :locale => locale), "##{locale}"
+      .tabs-content
+        - I18n.available_locales.each_with_index do |locale, i|
+          .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+            = f.globalize_fields_for locale do |en|
+              .row
+                .small-12.columns
+                  %b= "Name of meeting  in #{t :locale_name, :locale => locale}"
+                  = en.text_field :name, :required => (locale == :en ? '' : false)
+                  - if locale == :en
+                    %small.error You must enter an English name for this meeting.
+              
+  .row
+    .small-12.medium-10.columns
+      %table#attachments
+        = f.fields_for :attachments, wrapper: false do |att_form|
+          %tr.fields
+            %td
+              - if att_form.object.attachedfile?
+                %small= att_form.object.attachedfile
+                %br/
+                = link_to 'Download', att_form.object.attachedfile.url, :class => [:button, :round, :tiny]
+                = att_form.input :attachedfile, label: 'Replace file'
+              - else
+                = att_form.input :attachedfile, label: 'File'
+              = att_form.input :documenttype
+            %td
+              = att_form.input :title
+              %br/
+              = att_form.input :description
+          %tr{colspan: 2}
+            %td= att_form.link_to_remove 'Remove this attachment', class: [:button, :tiny]
+  .row
+    .small-10.medium-6.columns= f.link_to_add 'Add an attachment to this meeting +', :attachments, data: {target: '#attachments'}, class: [:button, :tiny, :secondary]
+  .row
+    .small-10.columns= f.submit t(:save), class: [:button, :round, :small]

@@ -2,8 +2,16 @@
   .small-12.columns
     %h2 Pixelache Etherpads
     
-    %p Note: Etherpads are synchronised every 20 minutes. If you create a new pad it may take up to 20 minutes to appear in this list
-    
+    %p Note: Etherpads are synchronised every 20 minutes. If you create a new pad it may take up to 20 minutes to appear in this list.
+.row
+  .small-8.columns    
+    %strong Search across all etherpads:
+    :plain
+      <form name="search_form" method="get" action="/" onsubmit="return search_call()">
+      <input value="" style="width: 65%; margin-right: 15px; float:left;" type="text" id="search_text_input"><button style="height: 2.4rem; padding: 0.4rem;" disabled="disabled" type="submit" id="search_text_button">Search</button>
+      </form>
+.row
+  .small-12.columns         
     .filter_box.row
       .small-12.columns
         %b Filter by:
@@ -50,8 +58,10 @@
             window.location.href=parts[0] + "?" + $(this).attr('id') + "=" + $(this).val();
           }
         });
-        
-    %table.table.table-condensed.etherpads
+
+.row
+  .small-12.columns           
+    %table.etherpads
       %thead
         %tr
           %th= sortable_column "Name", :column => "name"

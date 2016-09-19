@@ -1,0 +1,38 @@
+.row
+  .small-12.columns
+    %h1
+      = @meeting.name
+.row
+  .small-12.columns
+    %h3= date_range(@meeting.start_at, @meeting.end_at)
+- unless @meeting.etherpads.empty?
+  .row
+    .small-12.columns
+      %h4 Etherpads
+  .row
+    .medium-4.small-10.columns.panel.end.limited
+
+      - @meeting.etherpads.each do |etherpad|
+        .entry
+          = link_to etherpad.name, 'http://pad.pixelache.ac/p/' + etherpad.name, :target => :_blank
+          - if etherpad.private_pad == true
+            %small
+              %b PRIVATE!
+          %small= time_ago_in_words(etherpad.last_edited) + " ago"
+          .date= l etherpad.last_edited, :format => :long 
+            
+.row
+  .small-12.columns            
+    %h4 Documents and attachments
+
+    - unless @meeting.attachments.empty?
+      - @meeting.attachments.order('updated_at DESC').each do |doc|
+        .entry
+          - if doc.public
+            = fa_icon('eye')
+          = link_to doc.title.blank? ? doc.attachedfile : doc.title, doc.attachedfile.url
+          %small= time_ago_in_words(doc.updated_at) + " ago"
+          - unless doc.description.blank?
+            .description= doc.description
+          - unless doc.documenttype.blank?
+            .date= doc.documenttype.name    
