@@ -35,7 +35,7 @@ class AttendeesController < ApplicationController
         AttendeeMailer.registration_notification(@attendee).deliver_now
         AttendeeMailer.enduser_notification(@attendee).deliver_now
       end
-      flash[:notice] = 'Thank you for registering. You should receive a confirmation email.'  
+      flash[:notice] = 'Thank you for registering.'  
     else
       
       flash[:error] = 'There was an error submitting your registration. Please try again or contact Pixelache if it continues to fail.'

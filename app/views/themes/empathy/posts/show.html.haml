@@ -16,7 +16,35 @@
           = image_tag @post.image.url(:twelvehundred)
       .news_body
         = raw @post.body
-      
+  - if @post.registration_required?
+    #registration_form
+      .row
+        .small-10.medium-10.large-8.small-centered.columns
+          %h2= t "livingspaces.register_to_participate"
+          - if @post.max_attendees
+            %p= pluralize_sentence(@post.max_attendees - @post.attendees.not_waiting.size, "workshop_place_count")                  
+              
+          = semantic_form_for([@post, @attendee = Attendee.new], html: {:"data-abide" => ''}) do |f|
+            .row
+              .small-12.columns= f.input :name, label: 'Your name:', input_html: {required: :required}
+            .row
+              .small-12.columns= f.input :email, label: 'Your email:', input_html: {required: :required}              
+            .row
+              .small-12.columns= f.input :phone, label: 'Your phone number:', input_html: {required: :required}
+            - unless @post.question_motivation.blank?
+              .row
+                .small-12.columns= f.input :motivation_statement, label: @post.question_motivation, input_html: {required: :required}
+            - unless @post.question_creators.blank?
+              .row
+                .small-12.columns= f.input :project_creators, label: @post.question_creators, input_html: {required: :required}
+            - unless @post.question_description.blank?
+              .row
+                .small-12.columns= f.input :project_description, label: @post.question_description, input_html: {required: :required}
+            .row
+              .small-12.columns= recaptcha_tags hl: I18n.locale.to_s, :display => { :theme => 'clean' }
+            .row
+              .small-12.columns= f.submit 'Submit'
+                
   .row
     .large-3.medium-9.small-12.columns.text-right
       - if @post.previous_post_by_festival.nil? 
