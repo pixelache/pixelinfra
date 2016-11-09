@@ -11,7 +11,7 @@ class AttendeesController < ApplicationController
     end
     if params[:post_id]
       begin
-        @post = @site.posts.friendly.find(params[:post_id])
+        @item = @site.posts.friendly.find(params[:post_id])
 
       rescue ActiveRecord::RecordNotFound
         if @site.festival
