@@ -499,3 +499,6 @@ en:
     contact: 'Contact'
     participate_and_interact: 'Participate and interact'
     register_to_participate: 'Register to participate!'
+  documenting:
+    top_blurb: 'Tällä sivulla on koottuna keskusteluja ja luentoja, joissa käsitellään mediataiteen dokumentointia: hyviä käytäntöjä, käytännön vihjeitä, metadatan merkitystä. Hyvä ja tarkoituksenmukainen dokumentaatio auttaa taiteilijoita portfolion rakentamisessa ja omassa tiedottamisessa. Myös museot ja muut taiteenostajat ovat heränneet hyvän dokumentoinnin tarpeellisuuteen. '
+    read_more: 'Lue lisää'    
