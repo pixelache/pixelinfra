@@ -31,28 +31,17 @@
         .row
           .logo_image.text-center.medium-9.large-12.large-offset-0.columns.small-centered
             = image_tag current_theme_image_path('hybrid.png'), :class => :navbg
-        .row
-          .page_link.medium-9.large-12.large-offset-0.columns.small-centered
-            = link_to 'Info', page_path('info')
-        .row
-          .page_link.medium-9.large-12.large-offset-0.columns.last.small-centered
-            = link_to 'Yhteystiedot', page_path('yhteystiedot')              
-            / .item.publications= link_to t(:publications), publications_path
-            / .item.about= link_to t(:about), page_path('about')
-            / .item.partners= link_to t(:partners), nodes_path
-            / .item.steps= link_to t(:steps), steps_path
-            / .item.events= link_to t(:events), events_path
-            / .item.news= link_to t(:news), '/'
-        .row
-          /
-          / .search.medium-4.medium-offset-1.large-10.columns.large-offset-2.small-offset-2
-          /   .square= image_tag current_theme_image_path('littlesquare.jpg')
-          /   = form_tag '/search/' do
-          /     = text_field :search, :term
-          /     = submit_tag 'Search'
+
           = yield :sidebar
 
       .large-8.small-12.pull.columns#middle.medium-offset-0.large-offset-0
+        .row
+          .medium-12.columns.medium-offset-1
+            %p
+              = t "documenting.top_blurb"
+              %br/
+              = link_to t("documenting.read_more") + "...",  page_path('info')
+        
         = yield :middle
 
         .right_wrap.row.show-for-large-up

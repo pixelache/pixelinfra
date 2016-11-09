@@ -462,3 +462,6 @@ fi:
     all_events: 'Kaikki tapahtumat'
     limited_places: 'Tämä tapahtuma on täynnä. Täytä kuitenkin ilmoittautumislomake ja otamme sinuun yhteyttä, jos/kun paikkoja vapautuu.'
     front_blurb: "Voiko myötätunnon kokemuksen viedä toisenlaisiin ulottuvuuksiin ja näin löytää uuden yhteyden  ekosysteemiin ja itseemme? Pixelache Festival 2016 – 'Interfaces for Empathy' etsii muutoksen mahdollisuutta lähitason, suorien kehollisten kokemusten kautta sekä näkökulmaa kaiken elämän ykseyteen."    
+  documenting:
+    top_blurb: 'Tällä sivulla on koottuna keskusteluja ja luentoja, joissa käsitellään mediataiteen dokumentointia: hyviä käytäntöjä, käytännön vihjeitä, metadatan merkitystä. Hyvä ja tarkoituksenmukainen dokumentaatio auttaa taiteilijoita portfolion rakentamisessa ja omassa tiedottamisessa. Myös museot ja muut taiteenostajat ovat heränneet hyvän dokumentoinnin tarpeellisuuteen. '
+    read_more: 'Lue lisää'
