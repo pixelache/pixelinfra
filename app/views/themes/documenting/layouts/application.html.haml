@@ -35,12 +35,7 @@
           = yield :sidebar
 
       .large-8.small-12.pull.columns#middle.medium-offset-0.large-offset-0
-        .row
-          .medium-12.columns.medium-offset-1
-            %p
-              = t "documenting.top_blurb"
-              %br/
-              = link_to t("documenting.read_more") + "...",  page_path('info')
+
         
         = yield :middle
 

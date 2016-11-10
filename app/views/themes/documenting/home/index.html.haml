@@ -1,4 +1,10 @@
 .row
+  .medium-12.columns.medium-offset-1
+    %p
+      = t "documenting.top_blurb"
+      %br/
+      = link_to t("documenting.read_more") + "...",  page_path('info')
+.row
   .home_page.small-12.columns
     - @pages.in_groups_of(3).each do |group|
       .row.feed_row.images
