@@ -17,9 +17,9 @@
     - if user_signed_in?
       %header
         .contain-to-grid.sticky= render 'admin/layouts/navigation'
-    .row
+    .row.expanded
       .large-4.medium-12.small-10.small-offset-1.columns.push.medium-offset-0#sidebar
-        .row
+        .row.expanded
           .logo_container.medium-8.large-12.large-offset-0.columns.small-centered
             .subtitle tilallisen ja tapahtumallisen
             .logo
@@ -28,13 +28,13 @@
               .second= link_to 'dokumentointi', '/'
 
 
-        .row
+        .row.expanded
           .logo_image.text-center.medium-9.large-12.large-offset-0.columns.small-centered
             = image_tag current_theme_image_path('hybrid.png'), :class => :navbg
-        .row
+        .row.expanded
           .page_link.medium-9.large-12.large-offset-0.columns.small-centered
             = link_to 'Info', page_path('info')
-        .row
+        .row.expanded
           .page_link.medium-9.large-12.large-offset-0.columns.last.small-centered
             = link_to 'Yhteystiedot', page_path('yhteystiedot')              
             / .item.publications= link_to t(:publications), publications_path
@@ -43,7 +43,7 @@
             / .item.steps= link_to t(:steps), steps_path
             / .item.events= link_to t(:events), events_path
             / .item.news= link_to t(:news), '/'
-        .row
+        .row.expanded
           /
           / .search.medium-4.medium-offset-1.large-10.columns.large-offset-2.small-offset-2
           /   .square= image_tag current_theme_image_path('littlesquare.jpg')
@@ -55,7 +55,7 @@
       .large-8.small-12.pull.columns#middle.medium-offset-0.large-offset-0
         = yield :middle
 
-        .right_wrap.row.show-for-large-up
+        .right_wrap.row.expanded.show-for-large-up
           .small-12.columns
             .language
               .default
@@ -69,17 +69,17 @@
                       .choice_circle= image_tag(current_theme_image_path('black_circle.png'))
                       .choice_text= lang.to_s
           
-        .row
+        .row.expanded
           .small-10.small-offset-1.medium-10.medium-offset-1.columns#main= yield
     %footer.olsof-footer
-      .row  
+      .row.expanded  
         .small-12.columns.text-center.info_line
           = link_to 'Contact', 'mailto:office@pixelache.ac'
           |
           2016
           |
           = link_to 'GitHub', 'https://github.com/pixelache/pixelinfra'
-      .row 
+      .row.expanded 
         .small-12.medium-7.medium-centered.columns.logos
           = link_to image_tag(theme_image_path('pixelache_logo.png')), 'http://pixelache.ac/'
           = link_to image_tag(theme_image_path('avarkki_logo.png')), 'http://www.av-arkki.fi/'

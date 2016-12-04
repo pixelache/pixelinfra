@@ -677,8 +677,11 @@ ul.pagination {
     margin-top: 0;
   }
 }
-ul.pagination li.current a {
-  background-color: black;
+ul.pagination li.current {
+  background-color: $linkblue;
+  a {
+    color: white;
+  }
   &:hover {
     background-color: $hover;
   }
