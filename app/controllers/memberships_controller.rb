@@ -29,7 +29,7 @@ class MembershipsController < ApplicationController
   
   def feed
     if params[:member_id]
-      @member = User.find(params[:member_id])
+      @member = User.friendly.find(params[:member_id])
       @feed = Feedcache.where(user_id: @member.id).order(issued_at: :desc).page(params[:page]).per(30)
       set_meta_tags title: t(:member_activity) + " : #{@member.name}"
     else
@@ -47,7 +47,7 @@ class MembershipsController < ApplicationController
   end
   
   def show
-    @member = User.find(params[:id])
+    @member = User.friendly.find(params[:id])
     @memberships = @member.memberships.sort_by(&:year).reverse
     @current_year = Membership.pluck(:year).uniq.sort.last
     @contact_form = ContactForm.new

@@ -1,6 +1,5 @@
-class FestivalsController < InheritedResources::Base
-  actions :show, :index, :page, :attendees
-  
+class FestivalsController < ApplicationController
+
   def archive
     @festival = Festival.find(params[:id])
     @events = @festival.events.published
@@ -66,7 +65,7 @@ class FestivalsController < InheritedResources::Base
   end
   
   def show
-    @festival = Festival.find(params[:id])
+    @festival = Festival.friendly.find(params[:id])
     if !@festival.redirect_to.blank?
       redirect_to "http://#{@festival.redirect_to}"
     elsif @festival.subsite

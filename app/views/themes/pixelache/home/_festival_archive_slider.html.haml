@@ -1,7 +1,6 @@
 #festival_archive_slider
-  .header.row
-    .small-6.columns.small-centered.text-center
-      = t :past_festival_archive
+  .header.small-centered.text-center
+    = t :past_festival_archive
   - Festival.by_node(1).order(end_at: :desc).each do |festival|
     - next unless festival.festivalbackdrop?
     .festival_slide.columns.small-6.medium-3{style: "background: url(#{festival.festivalbackdrop.url.gsub('development', 'production')}) center bottom;"}

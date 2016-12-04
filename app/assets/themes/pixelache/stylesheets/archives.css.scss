@@ -1,14 +1,62 @@
 @import 'variables';
 
-.sub-nav {
-  dd.active {
-
-    background-color: $newblue;
-    a {
-      color: white;
+.archive_nav {
+  .magellan-scrollnav {
+    [data-magellan-expedition-clone] {
+      ul.sub-nav {
+        display: none;
+      }
+    }
+    [data-magellan], [data-magellan-clone] {
+      width: 250px;
+      min-width: 0;
       background: none;
-      &:hover, &:focus {
+      ul {
+
+      }
+      li {
+
+
+        float: none;
+        display: block;
+        padding: 0;
+        border-bottom: 1px solid white;
+        &.last {
+          border-bottom: none;
+        }
+        a {
+          padding: 1.1rem;
+          font-family: $quicksand;
+          font-weight: 400;
+          text-transform: uppercase;
+          font-size: 1.125rem;
+          color: white;
+          &.active {
+
+            background-color: $newblue;
+            color: #FFF;
+    
+            &:hover, &:focus {
+        
+              color: black;
+
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .sub-nav {
+    li.active {
+
+      background-color: $newblue;
+      a {
+        color: white;
         background: none;
+        &:hover, &:focus {
+          background: none;
+        }
       }
     }
   }
@@ -20,11 +68,12 @@
 
 .yearly_archive, .search_results_container {
 
-  padding: 3rem 0;
+  padding: 0 0 4rem 0;
   color: #fFf;
   .year {
     font-size: 2.875rem;
     font-family: $quicksand;
+    font-weight: 400;
     margin-top: 3.25rem;
     a {
       letter-spacing: -0.2rem;
@@ -41,6 +90,7 @@
   .section_title  {
     font-size: 1.625rem;
     line-height: 2.1rem;
+     font-weight: 400;
     text-transform: uppercase;
     border-bottom: 2px solid #999;
     margin-bottom: 0.5rem;
@@ -173,7 +223,7 @@
       }
       .description {
         font-size: 1rem;
-        font-weight: 300;
+        font-weight: 400;
         color: #666;
         margin-bottom: 0.8rem;
       }

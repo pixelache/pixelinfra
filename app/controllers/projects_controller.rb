@@ -1,8 +1,7 @@
-class ProjectsController < InheritedResources::Base
-  respond_to :html, :js
+class ProjectsController < ApplicationController
   
   def show
-    @project = Project.find(params[:id])
+    @project = Project.friendly.find(params[:id])
     unless @project.redirect_to.blank?
       redirect_to @project.redirect_to
     else
@@ -10,7 +9,7 @@ class ProjectsController < InheritedResources::Base
       @activities += @project.self_and_descendants.map{|x| x.events.published }.flatten.sort_by(&:start_at).reverse
       @activities = Kaminari.paginate_array(@activities.flatten.sort_by{|x| x.stream_date }.reverse).page(params[:page]).per(8)
       set_meta_tags :title => @project.name
-      super
+
     end
   end
   

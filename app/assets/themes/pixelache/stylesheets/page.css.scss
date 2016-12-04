@@ -43,52 +43,50 @@
   // background-color: #f9ec31;
   .magellan-scrollnav {
     [data-magellan-expedition-clone] {
-      dl.sub-nav {
+      ul.sub-nav {
         display: none;
       }
     }
-    [data-magellan-expedition], [data-magellan-expedition-clone] {
+    [data-magellan], [data-magellan-clone] {
       width: 250px;
       min-width: 0;
       background: none;
-      dl {
+      ul {
 
       }
-      dd {
-        background-color: none;
+      li {
+
+
         float: none;
         display: block;
-        padding: 1.1rem;
+        padding: 0;
         border-bottom: 1px solid #333;
         &.last {
           border-bottom: none;
         }
         a {
-        
+          padding: 1.1rem;
           font-family: $quicksand;
           font-weight: 300;
           text-transform: uppercase;
           font-size: 1.125rem;
           color: #333;
+          &.active {
+
+            background-color: #333;
+            color: #FFF;
+    
+            &:hover, &:focus {
+              background: none;
+              color: black;
+
+            }
+          }
         }
       }
     }
   }
-  
-
-  .sub-nav {
-    dd.active {
-
-      background-color: #333;
-      a {
-        color: #FFF;
-        background: none;
-        &:hover, &:focus {
-          background: none;
-        }
-      }
-    }
-  }
+ 
   
   
   padding-top: 2rem;
@@ -116,7 +114,7 @@
     line-height: 1.65rem;
     margin-bottom: 1rem;
     
-    padding: 1.5rem 0px;
+    padding: 1.5rem 0px 11rem 0;
     h2, a.section_heading {
       font-family: $quicksand;
       color: #333;

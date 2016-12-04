@@ -1,6 +1,7 @@
 /*
  *= require_self
  *= require pixelache/stylesheets/foundation_overrides
+ *= require pixelache/stylesheets/_settings
  *= require pixelache/stylesheets/style.min
  *= require pixelache/stylesheets/projects
  *= require pixelache/stylesheets/event_calendar
@@ -15,7 +16,7 @@
  *= require pixelache/stylesheets/residencies
  *= require pixelache/stylesheets/search
  *= require pixelache/stylesheets/members
-
+ *= require pixelache/stylesheets/mobile
  */
 
 @import 'slick';
@@ -54,28 +55,120 @@ span.translation_missing {
   color: white;
 }
 
-.top-bar {
-  height: 40px;
-  .name img {
-    padding: 10px 0px 0px 6px;
-  }
-  ul {
 
-    li.search_icon {
-       a {
-        height: 40px;
+
+nav#top_nav {
+  
+
+  height: 40px;
+  
+  .title-bar {
+    height: 40px;
+    z-index: 9999;
+    .menu > li.is-drilldown-submenu-parent > a::after {border-width: 0px;}
+    .menu > li.is-drilldown-submenu-parent > a {
+      padding: 10px;
+    }
+    ul {
+
+      .js-dropdown-active {
+  
+        li {
+          background-color: black;
+          font-size: 1.2rem;
+          a {
+            color: white;
+            &:hover {
+              color: $primary-color;
+            }
+          }
+          padding: 0.6rem 2rem 0.6rem 0.6rem;
+        }
       }
     }
   }
-  #searchli {
-//    float: right;
-    display: none;
-    &.open {
-      display: block;
+  
+  .top-bar {
+    z-index: 9999;
+    height: 40px;
+    padding: 0;
+    .dropdown.menu > li.is-dropdown-submenu-parent > a::after {border-width: 0px;}
+    .dropdown.menu > li.is-dropdown-submenu-parent > a {
+      padding: 10px;
+    }
+    li.menu-text {
+      padding-right: 1.5rem;
+      img {
+        padding: 10px 0px 0px 6px;
+      }
+    }
+    li.tagline {
+      padding-top: 0.6rem;
+      a {
+        font-family: Open Sans;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        color: #929497 !important;
+      }
+    }
+    ul.lang {
+      margin-right: 1rem;
+      li {
+        list-style-type: none;
+        float: left;
+        font-size: 1rem;
+        text-transform: uppercase;
+        color: white;
+        padding: 10px 0.2rem;
+        max-height: 40px;
+        span.divider {
+          padding: 10px 0.25rem;
+          color: #666;
+        }
+      }
+    }
+    div.is-drilldown {
+    height:auto;
+    }
+    ul {
+      .js-dropdown-active {
+        li {
+          &:hover {
+            background-color: $newblue;
+          }
+          font-size: 1.2rem;
+          a {
+            color: white;
+
+          }
+          padding: 0.6rem;
+        }
+      }
+      li.has-form {
+        list-style-type: none;
+
+        input[type=text]{
+          margin: 4px 0 0 0;
+          max-height: 32px;
+        }
+      }
+      li.search_icon {
+         a {
+          height: 40px;
+        }
+      }
+    }
+    #searchli {
+  //    float: right;
+      display: none;
+      &.open {
+        display: block;
+      }
     }
   }
-}
 
+}
 
 
 .outer {
@@ -176,8 +269,15 @@ td .date {
       font-size: 0.85rem;
       padding-right: 1rem;
     }
-    ul.f-dropdown {
+    ul.menu {
       li {
+        &:hover {
+          background-color: $newblue;
+
+          a { color: white;
+          }
+        }
+        padding: 0.4rem;
         float: none;
       }
     }
@@ -197,14 +297,11 @@ td .date {
   max-height: 4rem;
   overflow: visible;
   width: 100%;
-  top: 40px;
+  height: 40px;
   
-  z-index: 12;
+  z-index: 4 !important;
   font-size: 0.8rem;
-  &.fixed {
-    top: 40px;
-    z-index: 98;
-  }
+
   .larger {
     a {
       font-size: 0.9rem;

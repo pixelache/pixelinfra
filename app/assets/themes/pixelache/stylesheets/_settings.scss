@@ -49,8 +49,8 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #fded57,
-  secondary: #777,
+  primary: #008CBA,
+  secondary: #f9ec31,
   success: #3adb76,
   warning: #ffae00,
   alert: #ec5840,
@@ -378,7 +378,7 @@ $mediaobject-image-width-stacked: 100%;
 
 $menu-margin: 0;
 $menu-margin-nested: 1rem;
-$menu-item-padding: 0.7rem 1rem;
+$menu-item-padding: 0;
 $menu-item-color-active: white;
 $menu-item-background-active: map-get($foundation-palette, primary);
 $menu-icon-spacing: 0.25rem;
@@ -534,8 +534,8 @@ $thumbnail-radius: $global-radius;
 // 34. Title Bar
 // -------------
 
-$titlebar-background: #fded57;
-$titlebar-color: black;
+$titlebar-background: black;
+$titlebar-color: white;
 $titlebar-padding: 0.5rem;
 $titlebar-text-font-weight: bold;
 $titlebar-icon-color: $white;
@@ -558,10 +558,17 @@ $tooltip-radius: $global-radius;
 // 36. Top Bar
 // -----------
 
-$topbar-padding: 0.5rem;
-$topbar-background: $light-gray;
+$topbar-padding: 0;
+
+$topbar-background-color: #000;
+$topbar-background: $topbar-background-color;
 $topbar-submenu-background: $topbar-background;
 $topbar-title-spacing: 1rem;
 $topbar-input-width: 200px;
 $topbar-unstack-breakpoint: medium;
-
+$topbar-height: rem-calc(40);
+$topbar-title-weight: bold;
+$topbar-title-color: white;
+$topbar-dropdown-bg: $topbar-background;
+$topbar-dropdown-link-color: #fff100;
+$topbar-link-dropdown-padding: rem-calc(20);

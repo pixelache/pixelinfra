@@ -9,10 +9,8 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
 
- *= require pixelache/stylesheets/foundation_overrides
- *= require pixelache/stylesheets/_settings
- *= require_self
 
+ *= require_self
 
  *= require slick
  *= require lazybox

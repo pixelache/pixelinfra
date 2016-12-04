@@ -1,46 +1,122 @@
-%nav.top-bar{"data-topbar" => "", :role => "navigation", :"data-options" => "scrolltop: false; is_hover: false"}
-  %ul.title-area
-    %li.name
-      = link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), '/'
-      &nbsp;
-    %li.menu_link.show-for-small-only= link_to t(:menu), '#', onmouseover: (content_for?(:festival_menu) ? "$(this).text('#{t :hide}');" : "$(this).text('#{t :open}')"), onmouseout: "$(this).text('#{t :menu}');", class: :menu_link_anchor
+.show-for-small-only{:'data-sticky-container' => ''}
+
+  .title-bar{:"data-sticky" => '', style: "width:100%", :'data-margin-top' => '0', :'data-margin-bottom' => '0', :'data-sticky-on' => 'small'}
+    .title-bar-left
+      %ul.menu
+        %li.menu-text= link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), '/'
+    .title-bar-right
+      %ul.vertical.menu{:'data-dropdown-menu' => ''}
+        %li
+          = link_to '#' do
+            %button.menu-icon{type: :button}
+      
+          %ul.vertical.menu#top_menu
+            %li
+              = link_to t(:info), '#'
+              %ul.vertical.menu
+                %li= link_to t(:about), page_path('about')
+                %li= link_to t(:latest_news), posts_path
+                %li= link_to t(:press), page_path('press')
+            %li
+              = link_to t(:activities), '#'
+              %ul.vertical.menu
+                %li= link_to t(:events), events_path
+                %li= link_to t(:projects), projects_path
+                %li= link_to t(:festival), festivals_path
+                %li= link_to t(:residencies), residencies_path
+            %li
+              = link_to t(:people), "#"
+              %ul.vertical.menu
+                %li= link_to t(:members), '/members'
+                %li= link_to t(:network), 'http://network.pixelache.ac/'
+                %li= link_to t(:collaborators), '#'
+            %li
+              = link_to t(:archive), "#"
+              %ul.vertical.menu
+                %li= link_to t(:all_posts), posts_path
+                %li= link_to t(:festivals), festivals_path
+                %li
+                  = link_to t(:yearly_archive), "#"
+                  %ul.vertical.menu
+                    - (Time.now.year).downto(2002).to_a.each do |year|
+                      %li= link_to year, "/archive/#{year}"
+
+.hide-for-small-only{:'data-sticky-container' => ''}
     
+  .top-bar{:"data-sticky" => '', :'data-options' => "marginTop:0;", style: "width:100%"}
+    .top-bar-left
+      %ul.menu
+        %li.menu-text= link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), '/'
+        %li.tagline#dynamic_tagline= link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
+    .top-bar-right
+      %ul.dropdown.menu{:'data-dropdown-menu' => ''}
+        %li
+          = link_to '#' do
+            %button.menu-icon{type: :button}
+      
+          %ul.vertical.menu#top_menu
+            %li
+              = link_to t(:info), '#'
+              %ul.vertical.menu
+                %li= link_to t(:about), page_path('about')
+                %li= link_to t(:latest_news), posts_path
+                %li= link_to t(:press), page_path('press')
+            %li
+              = link_to t(:activities), '#'
+              %ul.vertical.menu
+                %li= link_to t(:events), events_path
+                %li= link_to t(:projects), projects_path
+                %li= link_to t(:festival), festivals_path
+                %li= link_to t(:residencies), residencies_path
+            %li
+              = link_to t(:people), "#"
+              %ul.vertical.menu
+                %li= link_to t(:members), '/members'
+                %li= link_to t(:network), 'http://network.pixelache.ac/'
+                %li= link_to t(:collaborators), '#'
+            %li
+              = link_to t(:archive), "#"
+              %ul.vertical.menu
+                %li= link_to t(:all_posts), posts_path
+                %li= link_to t(:festivals), festivals_path
+                %li
+                  = link_to t(:yearly_archive), "#"
+                  %ul.vertical.menu
+                    - (Time.now.year).downto(2002).to_a.each do |year|
+                      %li= link_to year, "/archive/#{year}"
 
-  %section.top-bar-section
-    %ul.left
-      %li.tagline#dynamic_tagline
-        = link_to @site.dynamictagline.tagline, dynamictaglines_path, :remote => true
-    
-    %ul.right
-      %li.has-form#searchli{class: (@term.nil? ? false : :open)}
-        .row.collapse
-          .medium-12.hide-for-small-only.columns
-            = form_tag '/search' do 
-              = text_field :search, :term, value:  (@term.nil? ? t(:search) : @term), class: :clearfield        
-      %li.search_icon= link_to image_tag(theme_image_path('search.png')), '#', onclick: "$('#searchli').toggle('slide');$('li.search_icon').css('display', 'none');return false;"
-      %li.menu_link= link_to t(:menu), '#', onmouseover: (content_for?(:festival_menu) ? "$(this).text('#{t :hide}');" : "$(this).text('#{t :open}')"), onmouseout: "$(this).text('#{t :menu}');", class: :menu_link_anchor
-              
-    - unless current_user
-      %ul.right.lang
-        = link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
-        %span.divider= " | "
-        = link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
-    - if current_user
-      %ul.right.user
-        %li.has-dropdown
-          %a{:href=> '#'}= current_user.username.gsub(/\@.*$/, '')
-          %ul.dropdown
-            - unless current_user.roles.empty?
-              %li= link_to 'Admin', '/admin'
-            %li= link_to 'Edit your profile', edit_user_path(current_user)
-            - unless session[:locale] == :en
-              %li= link_to 'Change to English',  {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}
-               
-            - unless session[:locale] == :fi
-              %li= link_to 'Change to Finnish', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} 
-            %li= link_to 'Sign out', '/signout'
+    .top-bar-right
+      %ul.search
+        %li.has-form#searchli{class: (@term.nil? ? false : :open)}
+          = form_tag '/search' do 
+            = text_field :search, :term, value:  (@term.nil? ? t(:search) : @term), class: :clearfield        
+        %li.search_icon= link_to image_tag(theme_image_path('search.png')), '#', onclick: "$('#searchli').toggle('slide');$('li.search_icon').css('display', 'none');return false;"
+                                
+    .top-bar-right
+      %ul.lang
+        - if current_user
+          %li.has-dropdown
+            %a{:href=> '#'}= current_user.username.gsub(/\@.*$/, '')
+            %ul.dropdown
+              - unless current_user.roles.empty?
+                %li= link_to 'Admin', '/admin'
+              %li= link_to 'Edit your profile', edit_user_path(current_user)
+              - unless session[:locale] == :en
+                %li= link_to 'Change to English',  {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}
+             
+              - unless session[:locale] == :fi
+                %li= link_to 'Change to Finnish', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} 
+              %li= link_to 'Sign out', '/signout'
+        - else
+          %li= link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
+          %li
+            %span.divider= " | "
+          %li= link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
 
 
-  
 
-        
+
+
+
+
+                            

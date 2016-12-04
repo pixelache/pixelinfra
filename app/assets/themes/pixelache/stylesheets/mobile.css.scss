@@ -1,7 +1,7 @@
 /*
  *= require_self
 */
-//@import 'foundation_overrides';
+
 
 // mobiles
 
@@ -12,7 +12,7 @@
   .f-topbar-fixed {
     padding-top: 40px !important;
   }
-  
+
   .top-bar-wrapper {
     nav.top-bar {
       ul.title-area {
@@ -87,6 +87,10 @@
       img {
         margin-bottom: 0.8rem;
       }
+    }
+    .title {
+      font-size: 2rem;
+      line-height: 2.5rem;
     }
   }
   .three_posts .top_post , .two_posts .top_post  {
@@ -289,7 +293,7 @@
       }
     }
   }
-  
+
   footer {
     .footer_menu {
       padding-top: 0.8rem;

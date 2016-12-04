@@ -1,5 +1,5 @@
-class EventsController < InheritedResources::Base
-  actions :index, :show
+class EventsController < ApplicationController
+
   
   def index
     if params[:festival_id]
@@ -32,7 +32,7 @@ class EventsController < InheritedResources::Base
   end
   
   def show
-    @event = Event.find(params[:id])
+    @event = Event.friendly.find(params[:id])
     if @event.festival
       @festival = @event.festival
       if @festival.subsite
