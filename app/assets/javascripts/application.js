@@ -12,12 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/core
-//= require jquery-ui/autocomplete
+//= require jquery-ui/widgets/autocomplete
 //= require autocomplete-rails
-//= require jquery-ui/sortable
-//= require foundation
+//= require jquery-ui/widgets/sortable
 //= require jquery_nested_form
+
 //= require ckeditor/init
 //= require slick
 //= require lazybox
@@ -236,7 +235,8 @@
 
 
 
-$(function(){ $(document).foundation(); 
+$(function(){
+   $(document).foundation(); 
   $('a[rel*=lazybox]').lazybox({overlay: true, esc: true, close: true, modal: true});
   $('.datetime_picker').fdatetimepicker({
       format: 'yyyy-mm-dd hh:ii'
@@ -256,4 +256,6 @@ function scroll_To(target) {
   });
   return false;
 }
+
+
 

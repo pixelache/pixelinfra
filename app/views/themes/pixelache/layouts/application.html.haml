@@ -11,8 +11,7 @@
     = stylesheet_link_tag "application", :media => "all"
     = stylesheet_link_tag 'pixelache/stylesheets/application', :media => :screen
     = stylesheet_link_tag 'pixelache/stylesheets/mobile', :media => :screen
-    = javascript_include_tag "application"
-    = javascript_include_tag "vendor/modernizr"
+    = javascript_include_tag "application"    
     = javascript_include_tag "pixelache/javascripts/application"
 
     - if controller.controller_name == 'events' || controller.controller_name == 'home'
