@@ -1,7 +1,7 @@
-%ul.left
-  %li.has-dropdown
+%ul.dropdown.menu{:"data-dropdown-menu" => ''}
+  %li
     %a{:href => '#'} Site configuration            
-    %ul.dropdown
+    %ul.menu
       - if can? :manage, Subsite
         %li= link_to 'Site/sub-sites', admin_subsites_path
       - if can? :manage, User
@@ -18,31 +18,31 @@
         %li= link_to 'Publications', admin_documents_path
       - if can? :manage, Documenttype
         %li= link_to 'Document types', admin_documenttypes_path
-%ul.left
-  %li.has-dropdown
-    %li.has-dropdown
-      %a{:href => '#'} Events / activities
-      %ul.dropdown
-        - if can? :manage, Event
-          %li= link_to 'Events', admin_events_path
-        - if can? :manage, Project
-          %li= link_to 'Projects', admin_projects_path
-        - if can? :read, Projectproposal
-          %li= link_to 'Project proposals', admin_projectproposals_path
-        - if can? :manage, Place
-          %li= link_to 'Places', admin_places_path
-        - if can? :manage, Festival
-          %li= link_to "Festivals", admin_festivals_path
-        - if can? :manage, Attendee
-          %li= link_to 'Event registrations', admin_attendees_path
-        - if can? :manage, Residency
-          %li= link_to 'Residencies', admin_residencies_path
-        - if can? :manage, Meeting
-          %li= link_to 'Meetings', admin_meetings_path
-%ul.left
-  %li.has-dropdown
+
+
+  %li
+    %a{:href => '#'} Events / activities
+    %ul.menu
+      - if can? :manage, Event
+        %li= link_to 'Events', admin_events_path
+      - if can? :manage, Project
+        %li= link_to 'Projects', admin_projects_path
+      - if can? :read, Projectproposal
+        %li= link_to 'Project proposals', admin_projectproposals_path
+      - if can? :manage, Place
+        %li= link_to 'Places', admin_places_path
+      - if can? :manage, Festival
+        %li= link_to "Festivals", admin_festivals_path
+      - if can? :manage, Attendee
+        %li= link_to 'Event registrations', admin_attendees_path
+      - if can? :manage, Residency
+        %li= link_to 'Residencies', admin_residencies_path
+      - if can? :manage, Meeting
+        %li= link_to 'Meetings', admin_meetings_path
+
+  %li
     %a{:href => '#'} Posts / pages
-    %ul.dropdown
+    %ul.menu
       - if can? :manage, Post
         %li= link_to 'Posts', admin_posts_path
       - if can? :manage, Page
@@ -51,10 +51,10 @@
         %li= link_to 'Frontpage design', admin_frontitems_path
       - if can? :read, Opencall
         %li= link_to 'Open calls', admin_opencalls_path        
-%ul.left
-  %li.has-dropdown
+
+  %li
     %a{:href => '#'} Archival
-    %ul.dropdown
+    %ul.menu
       - if can? :manage, Archivalimage
         %li= link_to 'Archival images', admin_archivalimages_path
       - if can? :manage, Etherpad

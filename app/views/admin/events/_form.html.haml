@@ -1,12 +1,12 @@
-.row  
+.row.expanded  
   .small-12.columns
     %h1 Event!
 = semantic_nested_form_for [:admin, @event], :html => {:class => "custom", :"data-abide" => '', :multipart => true} do |f|
 
-  .row
+  .row.expanded
     .small-3.columns
       = f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false, :label => ' Which website should this appear on?'
-  .row
+  .row.expanded
     .small-4.columns
       = f.input :festival, :label => 'Part of a festival?', collection: Festival.all.order(start_at: :desc)
       = f.input :festivalthemes, :label => 'If so, part of a festival theme?', :member_label => :name_and_festival, :hint => 'Make sure you match the right festival!'
@@ -15,70 +15,70 @@
       = f.input :residency, :label => 'Attached to a residency?', collection: Residency.all.order(start_at: :desc)
     .small-4.columns
       = f.input :project, :collection => Project.active_menu, :label => ' Part of a project?'
-  .row
+  .row.expanded
     .small-8.columns
       = f.input :location_tbd, label: 'Location not yet announced?'
-  .row
+  .row.expanded
     .small-6.columns
       = f.input :place_name, :as => :autocomplete, :url =>  autocomplete_place_name_admin_events_path, :input_html => { :required => '', :id_element => '#event_place_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Where does this take place?", :hint => raw("(If it's a place not already the database, <a href=\"/admin/places/new\" target=\"_blank\">create it first.</a>)")
       %small.error You must select a place for this event.
     .small-6.columns
       = f.input :place_id, :as => :hidden      
-  .row
+  .row.expanded
     .small-6.columns
       %label When?
-      .row
+      .row.expanded
         .small-6.columns
           = f.input :start_at, :as => :string, :input_html => {:required => '', :class => "datetime_picker", value: f.object.new_record? ? '' : f.object.start_at.strftime('%Y-%m-%d %H:%M')}
           %small.error You must enter a start date and time.
         .small-6.columns= f.input :end_at, :as => :string, :input_html => {:class => "datetime_picker", value: f.object.new_record? ? '' : (f.object.end_at.nil? ? '' : f.object.end_at.strftime('%Y-%m-%d %H:%M'))}
 
-  .row
-    %dl.tabs{"data-tab" => ""}
+  .row.expanded
+    %ul.tabs#languages{"data-tabs" => ""}
       - I18n.available_locales.each_with_index do |locale, i|
-        %dd{:class => (i == 0 ? :active : false)}
+        %li.tabs-title{:class => (i == 0 ? 'is-active' : false)}
           = link_to t(:locale_name, :locale => locale), "##{locale}"
-    .tabs-content
+    .tabs-content{:"data-tabs-content" => "languages"}
       - I18n.available_locales.each_with_index do |locale, i|
-        .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+        .tabs-panel{:class => (i == 0 ? 'is-active' : false), :id => "#{locale}"}
           = f.globalize_fields_for locale do |en|
-            .row
+            .row.expanded
               .small-12.columns
                 %b= "Name of event in #{t :locale_name, :locale => locale}"
                 = en.text_field :name, :required => (locale == :en ? '' : false)
                 - if locale == :en
                   %small.error You must enter an English name for the event.
-            .row
+            .row.expanded
               .small-12.columns
                 %b= "Description of event in #{t :locale_name, :locale => locale}"
                 = en.cktext_area :description
-            .row
+            .row.expanded
               .small-6.columns
                 %b= "Notes or other metadata in #{t :locale_name, :locale => locale}"
                 = en.text_area :notes
-  .row
+  .row.expanded
     .small-9.columns
       %label Who is responsibile?
-      .row
+      .row.expanded
         .small-6.columns= f.input :facilitator_name
         .small-6.columns= f.input :facilitator_url
-      .row
+      .row.expanded
         .small-6.columns= f.input :facilitator_organisation
         .small-6.columns= f.input :facilitator_organisation_url
-  .row
+  .row.expanded
     .small-6.columns
       - if f.object.image?
         = image_tag f.object.image.url(:thumb)
       = f.input :image, :hint => 'An image/icon to represent this event.'
     .small-6.columns= f.input :facebook_link, :hint => 'URL to the Facebook Event page', :as => :string
-  .row
+  .row.expanded
     .small-8.columns
       %fieldset
         %legend
           %strong Additional images
         %p Here you can upload additional images, such as archival photos, for an event. If you only have one image, put it above and leave this section blank.
         = f.fields_for :photos do |ff|
-          .row
+          .row.expanded
             .small-4.columns
               - if !ff.object.new_record?
                 - unless ff.object.filename.blank?
@@ -92,14 +92,14 @@
           = ff.link_to_remove t(:remove_photo), :class => [:button, :round, :alert, :tiny]
         = f.link_to_add 'Add a photo/image...', :photos, :class => [:button, :round, :tiny]
         
-  .row
+  .row.expanded
     .small-8.columns
       %fieldset
         %legend
           %strong Videos
         %p Add links to Vimeo or YouTube videos from the event here.
         = f.fields_for :videos do |ff|
-          .row
+          .row.expanded
             .small-8.columns
               - if !ff.object.new_record?
                 - unless ff.object.new_record?
@@ -112,32 +112,32 @@
           = ff.link_to_remove t(:remove_video), class: [:button, :round, :alert, :tiny]
         = f.link_to_add 'Add a video....', :videos, class: [:button, :round, :tiny]
               
-  .row#registration
+  .row.expanded#registration
     .small-8.columns
       = f.input :registration_required, as: :boolean
-  .row
+  .row.expanded
     .small-8.columns= f.input :max_attendees
 
-  .row
+  .row.expanded
     .small-8.columns= f.input :email_registrations_to, as: :string, input_html: {type: :text}
-  .row
+  .row.expanded
     .small-8.columns= f.input :question_motivation, label: 'Additional question #1:'
-  .row
+  .row.expanded
     .small-8.columns= f.input :question_description, label: 'Additional question #2:'
-  .row
+  .row.expanded
     .small-8.columns= f.input :question_creators, label: 'Additional question 3:'
-  .row
+  .row.expanded
     .small-8.columns
       = f.input :require_approval, as: :boolean
-  .row
+  .row.expanded
     .small-8.columns
       = f.input :hide_registrants, as: :boolean, label: 'Don\'t show number of spaces left?'
-  .row
+  .row.expanded
     .small-8.columns
       = f.input :show_guests_to_public, as: :boolean            
       
       
-  .row#olsof_stuff
+  .row.expanded#olsof_stuff
     .small-8.columns
       %fieldset
         %legend
@@ -146,20 +146,21 @@
         = f.input :resources_needed
         = f.input :protocol
         = f.input :technology_list, :label => 'Technologies (tags)', :hint => 'separate by commas'
-  .row
+  .row.expanded
     .small-2.columns= f.input :cost
-  .row
+  .row.expanded
     .small-2.columns= f.input :cost_alternate, :hint => 'Second (discounted) cost?'
     .small-6.columns= f.input :cost_alternate_reason, :hint => 'Reason for discount (example: student price, unemployed, etc.)'
-  .row 
+  .row.expanded 
     .small-5.columns= f.input :user_id, :as => :select, :collection => User.all.order(:name), :label => "Event created by?", :hint => "Leave blank for 'Pixelache'", :include_blank => true
-  .row
+  .row.expanded
     .small-12.columns= f.input :add_to_newsfeed, :as => :boolean, :label => "Add to newsfeed on Pixelache frontpage?"
-  .row
+  .row.expanded
     .small-12.columns= f.input :published, :hint => 'Tick this box to publish this on the site, or else the public will never see it'
     
     
-  .row
+  .row.expanded
     .small-7.columns= f.submit "Save", :class => [:button, :small, :round]
 :javascript
   $('select#event_festivaltheme_ids').chosen();
+  $('')

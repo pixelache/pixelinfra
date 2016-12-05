@@ -1,13 +1,44 @@
 class Admin::ProjectsController < Admin::BaseController
-  
-  def create
-    create! { admin_projects_path }
+
+
+
+    
+  def edit
+    @project = Project.friendly.find(params[:id])
+    
+  end
+
+  def index
+    @projects = Project.all
   end
   
-
+  def create
+    @project = Project.new(project_params)
+    if @project.save
+      flash[:notice] = 'Project created.'
+      redirect_to admin_projects_path
+    else
+      flash[:error] = 'Error saving project.'
+    end
+  end
+  
+  def update
+    @project = Project.friendly.find(params[:id])
+    if @project.update_attributes(project_params)
+      flash[:notice] = 'Project updated.'
+      redirect_to admin_projects_path
+    else
+      flash[:error] = 'Error updating project.'
+    end
+ 
+  end
   
   def destroy
-    destroy! { admin_projects_path }
+    @project = Project.friendly.find(params[:id])
+    if @project.destroy
+      flash[:notice] = 'Project deleted.'
+    end
+    redirect_to admin_projects_path
   end
   
   def subscribe

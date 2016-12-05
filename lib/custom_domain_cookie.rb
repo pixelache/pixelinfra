@@ -3,7 +3,8 @@ module OmniAuth
     def initialize(app, &block)
       @options = nil
       @default_domain = '.pixelache.ac'
-      if rack14?
+
+      if rack14? || rack2?
         super
       else
         @app = app

@@ -1,12 +1,12 @@
-.row
+.row.expanded
   .small-10.columns
     %h2 
       Posts
-.row
+.row.expanded
   .small-9.columns
     %p= page_entries_info(@posts)
     %p= link_to 'Create new post', new_admin_post_path, :class => [:button, :round, :tiny]
-.filter_box.row
+.filter_box.row.expanded
   .large-2.columns
     .filter_title Filter by site:
     %select#by_subsite
@@ -44,7 +44,7 @@
       %option{:value => "true", :selected => (params[:is_pixelache] == "true" ? :selected : false)} Only Pixelache
 
       %option{:value => "external", :selected => (params[:is_external] == "true" ? :selected : false) } Only external
-.row
+.row.expanded
   .small-8.columns
     .filter_title Find by text:
     = form_tag '/admin/posts', :method => :get do
@@ -65,7 +65,7 @@
         window.location.href=parts[0] + "?" + $(this).attr('id') + "=" + $(this).val();
       }
     }); 
-.row
+.row.expanded
   .columns
     = paginate @posts
     %table.table.table-condensed

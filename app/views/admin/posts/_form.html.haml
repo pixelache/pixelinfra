@@ -1,11 +1,11 @@
 %h1 Post
 = semantic_nested_form_for [:admin, @post], :html => {:class => "custom", :multipart => true} do |f|
-  .row
+  .row.expanded
     .small-12.columns= f.semantic_errors :base
-  .row
+  .row.expanded
     %label Which site:
     .small-6.columns= f.input :subsite,  :as => :select , :collection => Subsite.accessible_by(current_ability),  :include_blank => false
-  .row
+  .row.expanded
     .small-6.columns
       - if f.object.wordpress_scope
         %label Historical info: belongs to scope
@@ -16,44 +16,44 @@
 
       = f.input :external, :label => " External event (not about a Pixelache activity)"
     .small-6.columns= f.input :post_categories, as: :check_boxes
-  .row
-    %dl.tabs{"data-tab" => ""}
+  .row.expanded
+    %ul.tabs#languages{"data-tabs" => ""}
       - I18n.available_locales.each_with_index do |locale, i|
-        %dd{:class => (i == 0 ? :active : false)}
+        %li.tabs-title{:class => (i == 0 ? 'is-active' : false)}
           = link_to t(:locale_name, :locale => locale), "##{locale}"
-    .tabs-content
+    .tabs-content{:'data-tabs-content' => 'languages'}
       - I18n.available_locales.each_with_index do |locale, i|
-        .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+        .tabs-panel{:class => (i == 0 ? 'is-active' : false), :id => "#{locale}"}
           = f.globalize_fields_for locale do |en|
-            .row
+            .row.expanded
               .small-12.columns
                 %b= "Title of post in #{t :locale_name, :locale => locale}"
                 = en.text_field :title  
-            .row
+            .row.expanded
               .small-12.columns
                 %b= "Content in #{t :locale_name, :locale => locale}"
                 = en.cktext_area :body
-            .row
+            .row.expanded
               .small-6.columns
                 %b= "Optional excerpt in #{t :locale_name, :locale => locale}"
                 = en.text_area :excerpt                
-  .row
+  .row.expanded
     .small-6.columns
       - if f.object.image?
         = image_tag f.object.image.url(:thumb)
       = f.input :image, :hint => 'An image/icon to represent this event.'
-    .row
+    .row.expanded
       .small-6.columns
         %label Post author
-        .row
+        .row.expanded
           .small-6.columns= f.input :creator, :as => :select, :collection => User.all.order(:name), :label => false
     = f.input :last_modified_id, :as => :hidden, :input_html => {:value => current_user.id }
-  .row
+  .row.expanded
     .small-12.columns.divider    
-  .row
+  .row.expanded
     .small-12.columns
       %label Additional images
-      .row
+      .row.expanded
         = f.semantic_fields_for :photos do |ff|
 
           .small-3.columns
@@ -64,12 +64,12 @@
             = ff.input :credit
             = ff.link_to_remove 'Remove this photo'
       = f.link_to_add 'Add a photo', :photos
-  .row
+  .row.expanded
     .small-12.columns.divider
-  .row
+  .row.expanded
     .small-12.columns
       %label Attachments
-      .row
+      .row.expanded
         = f.semantic_fields_for :attachments do |ff|
 
           .large-3.columns
@@ -86,56 +86,57 @@
             = ff.input :year_of_publication, :hint => 'For project publications. Leave blank to show up on all years the project is active, or enter a specific year'
             = ff.link_to_remove 'Remove this attachment', class: [:button, :tiny, :alert, :round]
       
-    .row
+    .row.expanded
       .small-12.columns.add_attachment_button= f.link_to_add 'Add an attachment', :attachments, class: [:button, :small, :round]
-  .row
+  .row.expanded
     .divider
-  .row
+  .row.expanded
     .small-6.columns
       %h5 Connected to an event?
       = f.input :event_name, :as => :autocomplete, :url =>  autocomplete_event_name_admin_posts_path, :input_html => { :id_element => '#post_event_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the event name", :hint => raw("(If the event is not already the database, <a href=\"/admin/events/new\" target=\"_blank\">create it first.</a>)")
     .small-6.columns= f.input :event_id, :as => :hidden
-  .row
+  .row.expanded
     .small-6.columns
       %h5 Connected to a project?
       = f.input :project_name, :as => :autocomplete, :url =>  autocomplete_project_name_admin_posts_path, :input_html => { :id_element => '#post_project_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the project name", :hint => raw("(If the project is not already the database, <a href=\"/admin/projects/new\" target=\"_blank\">create it first.</a>)")
     .small-6.columns= f.input :project_id, :as => :hidden
-  .row
+  .row.expanded
     .small-6.columns
       %h5 Connected to a festival?
       = f.input :festival_name, :as => :autocomplete, :url =>  autocomplete_festival_name_admin_posts_path, :input_html => { :id_element => '#post_festival_id', :data => {:no_matches_label => 'Not in database yet'}}, :label => "Type the first few letters of the festival name", :hint => raw("(If this is related to a specific event that is part of a festival, you should just populate the event relation above, no need for the festival as a whole.)")
       = f.input :festivalthemes, :label => 'If so, part of a festival theme?', :member_label => :name_and_festival, :hint => 'Make sure you match the right festival!'  
     .small-6.columns= f.input :festival_id, :as => :hidden
 
-  .row
+  .row.expanded
     .small-6.columns
       %h5 Connected to a residency?
       = f.input :residency
-  .row
+  .row.expanded
     .small-6.columns= f.input :tag_list
-  .row#registration
+  .row.expanded#registration
     .small-12.columns.panel
-      .row
+      .row.expanded
         .small-8.columns
           = f.input :registration_required, as: :boolean, label: 'Attach a registration form to this post?', hint: 'Used on rare occasions'
-      .row
+      .row.expanded
         .small-8.columns= f.input :max_attendees
 
-      .row
+      .row.expanded
         .small-8.columns= f.input :email_registrations_to, as: :string, input_html: {type: :text}
-      .row
+      .row.expanded
         .small-8.columns= f.input :question_motivation, label: 'Additional question #1:'
-      .row
+      .row.expanded
         .small-8.columns= f.input :question_description, label: 'Additional question #2:'
-      .row
+      .row.expanded
         .small-8.columns= f.input :question_creators, label: 'Additional question 3:'
-      .row
+      .row.expanded
         .small-8.columns= f.input :email_template, label: 'Send email using Rails email template view'
-  .row
+  .row.expanded
     .small-3.columns= f.input :add_to_newsfeed, :as => :boolean, :label => "Add to newsfeed on Pixelache from page?"
     .small-3.columns= f.input :published
+  .row.expanded
     .small-3.columns= f.input :published_at, :as => :string, :input_html => {:class => "datetime_picker", value: f.object.new_record? ? '' : (f.object.published_at.nil? ? '' : f.object.published_at.strftime('%Y-%m-%d %H:%M'))}
-  .row
+  .row.expanded
     .small-2.columns= f.submit 'Save', :class => [:button, :round]
 = content_for :jquery do
   :plain
