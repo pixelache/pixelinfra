@@ -30,31 +30,51 @@
       ga('create', 'UA-40681531-2', 'auto');
       ga('send', 'pageview');
     %header
-      %section
-            
-        .fixed
-          %nav.top-bar{:"data-topbar" => '', role: :navigation}
-            %ul.title-area
-              %li.name
+      .hide-for-large{:'data-sticky-container' => ''}
+
+        .title-bar{:"data-sticky" => '', style: "width:100%", :'data-margin-top' => '0', :'data-margin-bottom' => '0', :'data-sticky-on' => 'medium'}
+          .title-bar-left
+            %ul.menu
+              %li.menu-text= link_to 'Pixelache 2015: Living Spaces', '/'
+          .title-bar-right
+            %ul.vertical.menu{:'data-dropdown-menu' => ''}
+              %li
+                = link_to '#' do
+                  %button.menu-icon{type: :button}
+                %ul.vertical.menu
+                  %li= link_to t("livingspaces.about"), festival_page_festival_path('festival-2015', 'about')
+                  %li= link_to t("livingspaces.programme"), festival_page_festival_path('festival-2015','programme')
+                  %li= link_to t(:news), festival_posts_path('festival-2015')
+                  %li= link_to t("livingspaces.locations"), festival_page_festival_path('festival-2015','locations')
+
+                  %li= link_to t("livingspaces.contact"), festival_page_festival_path('festival-2015','contact')
+                  %li= link_to t("archive"), festival_page_festival_path('festival-2015','archive')
+                  %li.mob_lang
+                    %span.eng= link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
+                    %span.bar= " | "
+                    %span.fin= link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
+                              
+      .show-for-large{:'data-sticky-container' => ''}              
+        .top-bar
+          .top-bar-left
+            %ul.title-area.menu
+              %li.menu-text
                 = link_to 'Pixelache 2015: Living Spaces', '/'
                 %span.date 23-27 September 
-                .small_date 23-27 September 
-              %li.toggle-topbar.menu-icon
-                %a{:href => "#"}
-                  %span
-            %section.top-bar-section
-              %ul.right
-                %li= link_to t("livingspaces.about"), festival_page_festival_path('festival-2015', 'about')
-                %li= link_to t("livingspaces.programme"), festival_page_festival_path('festival-2015','programme')
-                %li= link_to t(:news), festival_posts_path('festival-2015')
-                %li= link_to t("livingspaces.locations"), festival_page_festival_path('festival-2015','locations')
 
-                %li= link_to t("livingspaces.contact"), festival_page_festival_path('festival-2015','contact')
-                %li= link_to t("archive"), festival_page_festival_path('festival-2015','archive')
-                %li.lang
-                  %span.eng= link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
-                  %span.bar= " | "
-                  %span.fin= link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
+          .top-bar-right
+            %ul.horizontal.menu
+              %li= link_to t("livingspaces.about"), festival_page_festival_path('festival-2015', 'about')
+              %li= link_to t("livingspaces.programme"), festival_page_festival_path('festival-2015','programme')
+              %li= link_to t(:news), festival_posts_path('festival-2015')
+              %li= link_to t("livingspaces.locations"), festival_page_festival_path('festival-2015','locations')
+
+              %li= link_to t("livingspaces.contact"), festival_page_festival_path('festival-2015','contact')
+              %li= link_to t("archive"), festival_page_festival_path('festival-2015','archive')
+              %li.lang
+                %span.eng= link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
+                %span.bar= " | "
+                %span.fin= link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
                 
     - if flash
       - flash.each do |key, value|
@@ -68,7 +88,7 @@
       .logo= link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), 'http://pixelache.ac'
       .address
         festival at pixelache .ac
-      .social.right
+      .social.float-right
         = link_to image_tag(theme_image_path('follow_fb.png'), width: 25), 'https://www.facebook.com/pixelache'
         = link_to image_tag(theme_image_path('follow_twitter.png'), width: 25), 'https://twitter.com/pixelache'
         = link_to image_tag(theme_image_path('follow_vimeo.png'), width: 25), 'https://vimeo.com/pixelache'

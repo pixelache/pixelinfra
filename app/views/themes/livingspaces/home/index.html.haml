@@ -20,16 +20,17 @@
   .text= t :news
 
 .news_container
-  .row{:"data-equalizer" => ''}
+  .row.small-up-1.medium-up-2.large-up-4{:"data-equalizer" => ''}
     - @posts.each_with_index do |news, index|
-      .small-12.medium-6.large-4.post.columns{class: @posts[index+1].nil? ? "hide-for-medium-only end" : false,  :"data-equalizer-watch" => ''}
+      .post.column 
+        -# {class: @posts[index+1].nil? ? "hide-for-medium-only end" : false,  :"data-equalizer-watch" => ''}
         .news_image
           - if news.image?
             = image_tag news.image.url(:box)
         .text_box
           .title= link_to news.title, news
           .body
-            = raw truncate_html(sanitize(news.body, tags: %w{em b bold strong i italic u underline br a }), length: 250)
+            = raw truncate_html(sanitize(news.body.gsub(/&nbsp;/, ' '), tags: %w{em b bold strong i italic u underline br a }), length: 250)
             = link_to ' >>>', news
   .row
     .small-12.small-centered.text-center

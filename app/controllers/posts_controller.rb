@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   
   def index
     if params[:festival_id]
-      @festival = Festival.find(params[:festival_id])
+      @festival = Festival.friendly.find(params[:festival_id])
       @posts = Post.by_festival(@festival).published.order('published_at DESC').page(params[:page]).per(12)
       set_meta_tags title: @festival.name + " " + t(:posts)
       
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
       @post = @site.posts.friendly.find(params[:id])
     rescue ActiveRecord::RecordNotFound
 
-      @post = Post.find(params[:id])
+      @post = Post.friendly.find(params[:id])
       if @post
         if @post.festival
           @festival = @post.festival
