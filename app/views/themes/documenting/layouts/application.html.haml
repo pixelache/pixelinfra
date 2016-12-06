@@ -18,7 +18,7 @@
       %header
         .contain-to-grid.sticky= render 'admin/layouts/navigation'
     .row.expanded
-      .large-4.medium-12.small-10.small-offset-1.columns.push.medium-offset-0#sidebar
+      .large-4.small-12.columns.push.small-offset-0#sidebar
         .row.expanded
           .logo_container.medium-8.large-12.large-offset-0.columns.small-centered
             .subtitle tilallisen ja tapahtumallisen
@@ -54,7 +54,7 @@
                       .choice_text= lang.to_s
           
         .row.expanded
-          .small-10.small-offset-1.medium-10.medium-offset-1.columns#main= yield
+          .small-12.small-offset-0.medium-10.medium-offset-1.columns#main= yield
     %footer.olsof-footer
       .row.expanded  
         .small-12.columns.text-center.info_line

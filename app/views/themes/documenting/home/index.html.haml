@@ -10,7 +10,7 @@
       .row.feed_row.images
         - group.each_with_index do |feeditem, index|
           - next if feeditem.nil?
-          .medium-4.small-10.small-offset-1.medium-offset-0.column{class: (index == 2 || feeditem == @pages.last) ? :end : ''}
+          .medium-4.small-12.small-offset-0.medium-offset-0.column{class: (index == 2 || feeditem == @pages.last) ? :end : ''}
             .feed_image
               - unless feeditem.photos.empty?
                 = link_to image_tag(feeditem.photos.first.filename.url(:box).gsub('development', 'production')), feeditem
@@ -22,7 +22,7 @@
       .row.title_info.hide-for-small-only{:"data-equalizer" => ''}
         - group.each_with_index do |feeditem, index|
           - next if feeditem.nil?
-          .medium-4.small-10.small-offset-1.medium-offset-0.columns{:"data-equalizer-watch" => '', class: (index == 2 || feeditem == @pages.last) ? :end : ''}
+          .medium-4.small-12.small-offset-0.medium-offset-0.columns{:"data-equalizer-watch" => '', class: (index == 2 || feeditem == @pages.last) ? :end : ''}
             .title= link_to feeditem.title, feeditem
             -#.date= l feeditem.created_at.to_date, :format => :long
 
@@ -34,5 +34,5 @@
               = raw truncate_html(sanitize(feeditem.body, tags: %w{bold strong b italic em }), :length => 150)
               = link_to raw("&#9654;"), feeditem
     .row
-      .small-10.small-offset-1.medium-12.medium-offset-0= paginate @pages
+      .small-12.small-offset-0.medium-12.medium-offset-0= paginate @pages
   

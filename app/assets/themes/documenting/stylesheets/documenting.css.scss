@@ -1,4 +1,6 @@
 @import 'variables';
+@import '_settings';
+
 
 body {
   background-color: $yellow;
@@ -116,6 +118,9 @@ header {
   }
   .logo {
     font-size: 3em;
+    @include breakpoint(small only) {
+      font-size: 1.8rem;
+    }
     clear: right;
     line-height: 60px;
     font-weight: 600;
