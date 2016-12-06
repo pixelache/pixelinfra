@@ -1,4 +1,4 @@
-Pixelinfra::Application.configure do
+Rails.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -18,9 +18,9 @@ Pixelinfra::Application.configure do
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
   # config.action_dispatch.rack_cache = true
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
-  # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_files = false
+
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -34,6 +34,7 @@ Pixelinfra::Application.configure do
 
   # Version of your assets, change this if you want to expire all your assets.
   config.assets.version = '1.0'
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -44,6 +45,7 @@ Pixelinfra::Application.configure do
 
   # Set to :debug to see everything in the log.
   config.log_level = :info
+  config.log_tags = [ :request_id ]
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
@@ -71,16 +73,12 @@ Pixelinfra::Application.configure do
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
-  #
-  # config.action_mailer.smtp_settings = {
-  #   address: "smtp.gmail.com",
-  #   port: 587,
-  #   domain: ENV["DOMAIN_NAME"],
-  #   authentication: "plain",
-  #   enable_starttls_auto: true,
-  #   user_name: ENV["GMAIL_USERNAME"],
-  #   password: ENV["GMAIL_PASSWORD"]
-  # }
+
+  config.i18n.fallbacks = true
+
+
+  config.action_mailer.perform_caching = false
+
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.raise_delivery_errors = true
@@ -92,6 +90,20 @@ Pixelinfra::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
+    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger.formatter = config.log_formatter
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
+  end
+
+  # Do not dump schema after migrations.
+  config.active_record.dump_schema_after_migration = false
+  
   # config.middleware.use "CustomDomainCookie", ".pixelache.ac"
 end
-ENV['EXECJS_RUNTIME'] = 'Node'
+ActionMailer::Base.delivery_method = :sendmail
+ActionMailer::Base.perform_deliveries = true
+ActionMailer::Base.raise_delivery_errors = true
+ActionMailer::Base.default charset: "utf-8"
+
