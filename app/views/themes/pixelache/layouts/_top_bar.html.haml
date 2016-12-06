@@ -93,11 +93,11 @@
         %li.search_icon= link_to image_tag(theme_image_path('search.png')), '#', onclick: "$('#searchli').toggle('slide');$('li.search_icon').css('display', 'none');return false;"
                                 
     .top-bar-right
-      %ul.lang
-        - if current_user
+      - if current_user
+        %ul.dropdown.menu{:'data-dropdown-menu' => ''}
           %li.has-dropdown
             %a{:href=> '#'}= current_user.username.gsub(/\@.*$/, '')
-            %ul.dropdown
+            %ul.vertical.menu
               - unless current_user.roles.empty?
                 %li= link_to 'Admin', '/admin'
               %li= link_to 'Edit your profile', edit_user_path(current_user)
@@ -107,7 +107,8 @@
               - unless session[:locale] == :fi
                 %li= link_to 'Change to Finnish', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} 
               %li= link_to 'Sign out', '/signout'
-        - else
+      - else
+        %ul.horizontal.menu.lang
           %li= link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
           %li
             %span.divider= " | "
