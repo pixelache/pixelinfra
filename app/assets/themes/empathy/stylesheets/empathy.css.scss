@@ -1,4 +1,6 @@
 @import 'variables';
+@import '_settings';
+
 
 
 // main site
@@ -11,7 +13,8 @@ body {
     background-color: $purple;
     header {
       background-color: $purple;
-      .top-bar {
+      
+      .top-bar, .title-bar {
           background-color: $purple;
         
             .languages {
@@ -99,7 +102,7 @@ header {
   }
 }
 
-.top-bar {
+.top-bar, .title-bar {
   text-align:center;
   ul {
     background: none !important;
@@ -144,12 +147,27 @@ display: inline-block;
   }
 }
 
-.top-bar {
+.title-bar {
+  @include breakpoint(small only) {
+    padding: 1rem;
+  }
+  .title-bar-title  {
+    max-width: 80%;
+    margin: 0 1rem 0 0;
+    li {
+      list-style-type: none;
+    }
+  }
+}
+
+
+.top-bar, .title-bar {
   line-height: 1.8rem;
   background-color: $grey;
   padding: 30px 30px 0 30px;
+
   .title-area {
-//    margin-right: 4rem;
+
     width: 100%;
     li {
       list-style-type: none;
@@ -270,6 +288,24 @@ display: inline-block;
     }
   }
 }
+
+.top-bar {
+  @include breakpoint(small only) {
+    padding: 0 !important;
+  }
+  li[role=menuitem]  {
+    @include breakpoint(small only) {
+      margin: 0 0 0 1.2rem !important;
+    }
+    a {  
+      @include breakpoint(small only) {
+        padding: 0 1rem 0 0 !important;
+        margin: 0 0 1rem 1rem !important;
+      }
+    }
+  }
+}
+
 
 .locations_map {
   #map_container {
