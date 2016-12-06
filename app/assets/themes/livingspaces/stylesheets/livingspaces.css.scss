@@ -1,5 +1,5 @@
 @import 'variables';
-
+@import '_settings';
 $festival-orange: #ec9f43;
 $festival-blue: #5095cc;
 
@@ -97,6 +97,9 @@ nav.livingspaces {
   .top-bar-right {
     ul.menu {
       li {
+        @include breakpoint(small-only) {
+          display: block;
+        }
         a {
           color: white;
           &:hover {

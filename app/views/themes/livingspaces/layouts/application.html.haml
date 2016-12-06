@@ -32,31 +32,33 @@
     %header
       .hide-for-large{:'data-sticky-container' => ''}
 
-        .title-bar{:"data-sticky" => '', style: "width:100%", :'data-margin-top' => '0', :'data-margin-bottom' => '0', :'data-sticky-on' => 'medium'}
+        .title-bar{ :'data-hide-for' => 'medium', :"data-responsive-toggle" => 'ls_menu'}
           .title-bar-left
             %ul.menu
               %li.menu-text= link_to 'Pixelache 2015: Living Spaces', '/'
           .title-bar-right
-            %ul.vertical.menu{:'data-dropdown-menu' => ''}
-              %li
-                = link_to '#' do
-                  %button.menu-icon{type: :button}
-                %ul.vertical.menu
-                  %li= link_to t("livingspaces.about"), festival_page_festival_path('festival-2015', 'about')
-                  %li= link_to t("livingspaces.programme"), festival_page_festival_path('festival-2015','programme')
-                  %li= link_to t(:news), festival_posts_path('festival-2015')
-                  %li= link_to t("livingspaces.locations"), festival_page_festival_path('festival-2015','locations')
-
-                  %li= link_to t("livingspaces.contact"), festival_page_festival_path('festival-2015','contact')
-                  %li= link_to t("archive"), festival_page_festival_path('festival-2015','archive')
-                  %li.mob_lang
-                    %span.eng= link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
-                    %span.bar= " | "
-                    %span.fin= link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
+            %button.menu-icon{"data-toggle" => "", :type => "button"}              
+          / .title-bar-right
+          /   %ul.vertical.menu{:'data-dropdown-menu' => ''}
+          /     %li
+          /       = link_to '#' do
+          /         %button.menu-icon{type: :button}
+          /       %ul.vertical.menu
+          /         %li= link_to t("livingspaces.about"), festival_page_festival_path('festival-2015', 'about')
+          /         %li= link_to t("livingspaces.programme"), festival_page_festival_path('festival-2015','programme')
+          /         %li= link_to t(:news), festival_posts_path('festival-2015')
+          /         %li= link_to t("livingspaces.locations"), festival_page_festival_path('festival-2015','locations')
+          /
+          /         %li= link_to t("livingspaces.contact"), festival_page_festival_path('festival-2015','contact')
+          /         %li= link_to t("archive"), festival_page_festival_path('festival-2015','archive')
+          /         %li.mob_lang
+          /           %span.eng= link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'})
+          /           %span.bar= " | "
+          /           %span.fin= link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
                               
-      .show-for-large{:'data-sticky-container' => ''}              
+      #ls_menu{:'data-sticky-container' => ''}              
         .top-bar
-          .top-bar-left
+          .top-bar-left.show-for-medium
             %ul.title-area.menu
               %li.menu-text
                 = link_to 'Pixelache 2015: Living Spaces', '/'
