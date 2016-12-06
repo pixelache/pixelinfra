@@ -191,6 +191,10 @@ display: inline-block;
     .menu > li.is-dropdown-submenu-parent > a {
       padding: 16px;
     }
+    .menu > li.is-drilldown-submenu-parent > a::after {border-color: transparent transparent transparent $pink;   right: 0;}
+    .menu > li.is-drilldown-submenu-parent > a {
+      padding: 16px;
+    }
     ul.submenu {
       border: none;
       padding: 0 0 1rem 0;
@@ -226,12 +230,7 @@ display: inline-block;
 
       height: initial !important;
       text-align:center;
-      ul#info {
-        left: 2.5rem !important;
-      }
-      ul#programme {
-        left: 10.5rem !important;
-      }
+
       .f-dropdown {
         background-color: $grey;
         border: none;
@@ -303,6 +302,11 @@ display: inline-block;
         margin: 0 0 1rem 1rem !important;
       }
     }
+  }
+  .is-drilldown {
+     @include breakpoint(small only) {
+       overflow: initial;
+     }
   }
 }
 
@@ -605,6 +609,9 @@ footer {
   .logo {
     float: left;
     padding: 0 25px;
+    @include breakpoint(small-only) {
+      max-width: 40%;
+    }
   }
   .dates {
     color: $grey;
@@ -614,14 +621,22 @@ footer {
   }
   .social {
     float: right;
+     padding: 0 2rem;
+    @include breakpoint(small-only) {
+      max-width: 60%;
+      padding: 0;
+    }
     a {
       img {
         max-height: 25px;
         width: auto;
       }
+      @include breakpoint(small-only) {
+        padding: 0.0.25rem !important;
+      }
       padding: 0 1rem;
     }
-    padding: 0 2rem;
+   
   }
 
   .text {
