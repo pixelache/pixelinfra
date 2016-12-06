@@ -5,7 +5,7 @@ gem 'rails', '5.0.0.1'
 
 gem 'pg'
 
-gem 'mysql2' # for data migration
+# gem 'mysql2' # for data migration
 
 
 gem 'sass'

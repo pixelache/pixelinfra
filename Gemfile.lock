@@ -280,7 +280,6 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mysql2 (0.4.5)
     naught (1.1.0)
     nested_form (0.3.2)
     net-scp (1.2.1)
@@ -534,7 +533,6 @@ DEPENDENCIES
   mail_form
   meta-tags
   mini_magick
-  mysql2
   nested_form
   non-stupid-digest-assets
   oauth-client
