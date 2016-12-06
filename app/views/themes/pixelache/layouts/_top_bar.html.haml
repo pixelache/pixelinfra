@@ -4,11 +4,11 @@
     .title-bar-left
       %ul.menu
         %li.menu-text= link_to image_tag(theme_image_path('PA_logo.png'), :alt => "Pixelache"), '/'
-    .title-bar-right
-      %ul.vertical.menu{:'data-dropdown-menu' => '', :"data-force-follow" => true, :"data-alignment" => "right"}
-        %li
+    .title-bar-right{style: 'width: 50%; min-width: 50%'}
+      %ul.vertical.menu{:'data-drilldown' => '', :"data-force-follow" => true, :"data-alignment" => "right"}
+        %li{style: 'width: 100%; min-width: 50%'}
           = link_to '#' do
-            %button.menu-icon{type: :button}
+            %button.menu-icon{type: :button }
       
           %ul.vertical.menu#top_menu
             %li

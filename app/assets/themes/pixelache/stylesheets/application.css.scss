@@ -65,9 +65,32 @@ nav#top_nav {
   .title-bar {
     height: 40px;
     z-index: 9999;
-    .menu > li.is-drilldown-submenu-parent > a::after {border-width: 0px;}
+    .menu > li.is-drilldown-submenu-parent > a::after { 
+      right: 0rem;
+    }
+    li.is-drilldown-submenu-parent a[tabindex] {
+      &::after {
+        border-width: 0px;
+      }
+    }
+    
     .menu > li.is-drilldown-submenu-parent > a {
-      padding: 10px;
+     padding: 2px 1.2rem 0 0;
+     color: $newblue;
+    }
+    
+    .is-drilldown {
+      ul.is-drilldown-submenu {
+        a {
+          color: $newblue;
+        }
+        background-color: black;
+        li {
+          font-size: 1.2rem;
+          height: 2rem;
+          padding-right: 0.4rem;
+        }
+      }
     }
     ul {
 
