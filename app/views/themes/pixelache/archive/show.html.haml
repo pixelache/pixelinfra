@@ -9,35 +9,36 @@
 .yearly_archive
     
   
-  .row
+  .row.expanded
   
-    .medium-4.small-12.columns.right.archive_nav
-      .magellan-scrollnav
-        %div{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:100;destination_threshold:120;fixed_top:80" }
-          %dl.sub-nav
+    .medium-4.small-12.columns.float-right.archive_nav
+
+      .magellan-scrollnav{:"data-sticky-container" => ''}
+        %nav.sticky{:'data-sticky' => '', :'data-sticky-on' => 'medium', :'data-margin-top' => '7'}
+          %ul.vertical.menu.sub-nav{:"data-magellan" => '', :'data-bar-offset' => '100'}
             - unless @documents.empty?
-              %dd.active{:"data-magellan-arrival" => "publications"}= link_to t(:publications), '#publications' 
+              %li{:"data-magellan-arrival" => "publications"}= link_to t(:publications), '#publications' 
             - unless @festival.name.blank?
-              %dd{:"data-magellan-arrival" => "festival"}= link_to t(:festival), '#festival'
+              %li{:"data-magellan-arrival" => "festival"}= link_to t(:festival), '#festival'
             - unless @projects.empty?
-              %dd{:"data-magellan-arrival" => "projects_archive"}= link_to t(:projects), '#projects_archive'
+              %li{:"data-magellan-arrival" => "projects_archive"}= link_to t(:projects), '#projects_archive'
 
             - unless @events.empty?
-              %dd{:"data-magellan-arrival" => "events_archive"}= link_to t(:events), '#events_archive'              
+              %li{:"data-magellan-arrival" => "events_archive"}= link_to t(:events), '#events_archive'              
               
             - unless @residencies.empty?
-              %dd{:"data-magellan-arrival" => "residencies"}= link_to t(:residencies), '#residencies'
+              %li{:"data-magellan-arrival" => "residencies"}= link_to t(:residencies), '#residencies'
 
             - unless @posts.empty?
-              %dd{:"data-magellan-arrival" => "posts"}= link_to t(:news), '#posts'               
+              %li{:"data-magellan-arrival" => "posts"}= link_to t(:news), '#posts'               
             - unless @photos.empty?
-              %dd{:"data-magellan-arrival" => "photos"}= link_to t(:photos), '#photos'    
+              %li{:"data-magellan-arrival" => "photos"}= link_to t(:photos), '#photos'    
             - unless @videos.empty?
-              %dd{:"data-magellan-arrival" => "videos"}= link_to t(:videos), '#videos'               
+              %li{:"data-magellan-arrival" => "videos"}= link_to t(:videos), '#videos'               
   
   
     .small-12.medium-8.columns
-      .row
+      .row.expanded
         .medium-9.columns.medium-offset-3
           .year
             - unless @year.to_i == 2002
@@ -47,21 +48,21 @@
               = link_to '>> ', archive_path(@year.to_i + 1)
           
       - unless @documents.empty? && @project_publications.empty?
-        .documents#publications{:"data-magellan-destination" => :publications }
-          .row
+        %section.documents#publications{:"data-magellan-target" => :publications }
+          .row.expanded
             .medium-9.columns.medium-offset-3
               .section_title= t(:publications)
-          .row
+          .row.expanded
             .medium-9.columns.medium-offset-3.document_list
               - @documents.each do |d|
-                .row
+                .row.expanded
                   .small-4.medium-3.columns
                     .doc_icon= link_to image_tag(theme_image_path('arch_doc_grey.png')), d.attachment.attachedfile.url, onmouseover: "$(this).find('img').attr('src', '/assets/pixelache/images/arch_doc_blue.png')", onmouseout: "$(this).find('img').attr('src', '/assets/pixelache/images/arch_doc_grey.png')"
                     
                   .small-8.medium-9.columns.title_container{onmouseover: "$(this).closest('.row').find('img').attr('src', '/assets/pixelache/images/arch_doc_blue.png')", onmouseout: "$(this).closest('.row').find('img').attr('src', '/assets/pixelache/images/arch_doc_grey.png')" }
                     .name= link_to d.title, d.attachment.attachedfile.url  
               - @project_publications.each do |d|
-                .row
+                .row.expanded
                   .small-3.columns
                     .doc_icon= link_to image_tag(theme_image_path('arch_doc_grey.png')), d.attachedfile.url, onmouseover: "$(this).find('img').attr('src', '/assets/pixelache/images/arch_doc_blue.png')", onmouseout: "$(this).find('img').attr('src', '/assets/pixelache/images/arch_doc_grey.png')"
                     
@@ -69,17 +70,17 @@
                     .name= link_to d.title, d.attachedfile.url       
                                 
       - unless @festival.name.blank? 
-        .festival#festival{:"data-magellan-destination" => :festival }
-          .row
+        %section.festival#festival{:"data-magellan-target" => :festival }
+          .row.expanded
             .medium-9.columns.medium-offset-3
               .section_title
                 = link_to @festival.name, @festival, target: :blank
                 = " : "
                 = link_to @festival.subtitle, @festival, target: :blank
-          .row
+          .row.expanded
             .medium-9.columns.medium-offset-3.events
               - @festival.attachments.public_files.each do |d|
-                .row
+                .row.expanded
                   .small-3.columns
                     .doc_icon= link_to image_tag(theme_image_path('arch_doc_grey.png')), d.attachedfile.url, onmouseover: "$(this).find('img').attr('src', '/assets/pixelache/images/arch_doc_blue.png')", onmouseout: "$(this).find('img').attr('src', '/assets/pixelache/images/arch_doc_grey.png')"
                   
@@ -87,7 +88,7 @@
                     .name= link_to d.title, d.attachedfile.url
               
               - @festival.events.published.each do |e|
-                .row
+                .row.expanded
                   .small-4.medium-3.columns
                     = link_to e, target: :_blank  do
                       .archive_image_box{style: e.image? ? "background-image: url(#{e.image.url(:thumb).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
@@ -98,12 +99,12 @@
                     .name= link_to e.name, e, target: :_blank 
 
       - unless @projects.empty?
-        .projects#projects_archive{:"data-magellan-destination" => "projects_archive" }
-          .row
+        %section.projects#projects_archive{:"data-magellan-target" => "projects_archive" }
+          .row.expanded
             .medium-9.columns.medium-offset-3
               .section_title= t(:projects)
               
-          .row
+          .row.expanded
             .medium-9.columns.medium-offset-3.project_list
               - @projects.each do |p|
                 .row
@@ -124,15 +125,15 @@
                       .name= link_to p.name, p, target: :_blank 
 
       - unless @events.empty?
-        .events#events_archive{:"data-magellan-destination" => "events_archive" }
-          .row
+        %section.events#events_archive{:"data-magellan-target" => "events_archive" }
+          .row.expanded
             .medium-9.columns.medium-offset-3
               .section_title
                 = link_to t(:events), archive_events_path(@year)
-          .row
+          .row.expanded
             .medium-9.columns.medium-offset-3.events
               - @events.each do |e|
-                .row
+                .row.expanded
                   - if e.image?
                     .small-4.medium-3.columns
                       = link_to e, target: :_blank  do
@@ -154,12 +155,12 @@
                     
 
       - unless @residencies.empty?
-        .residencies#residencies{:"data-magellan-destination" => :residencies }
-          .row
+        %section.residencies#residencies{:"data-magellan-target" => :residencies }
+          .row.expanded
             .medium-9.columns.medium-offset-3
               .section_title= t(:residencies)
               
-          .row
+          .row.expanded
             .medium-9.columns.medium-offset-3.project_list
               - @residencies.each do |r|
                 .row
@@ -175,12 +176,12 @@
                     .name= link_to r.name, r, target: :_blank
 
       - unless @posts.empty?
-        .posts#posts{:"data-magellan-destination" => :posts }
-          .row
+        %section.posts#posts{:"data-magellan-target" => :posts }
+          .row.expanded
             .medium-9.columns.medium-offset-3
               .section_title= link_to t(:news), archive_posts_path(@year)
               
-          .row
+          .row.expanded
             .medium-9.columns.medium-offset-3.post_list
               .row
                 - @posts.each do |p|
@@ -192,14 +193,14 @@
                             
 
       - unless @photos.empty?
-        .photos#photos{:"data-magellan-destination" => :photos }
-          .row
+        %section.photos#photos{:"data-magellan-target" => :photos }
+          .row.expanded
             .medium-9.columns.medium-offset-3
               .section_title= t(:photos)
               
-          .row
+          .row.expanded
             .medium-9.columns.medium-offset-3.photo_list
-              .row
+              .row.expanded
                 - @photos.each do |p|
                   .columns.image_thumbnail
                     = link_to p.item, target: :_blank  do
@@ -210,16 +211,16 @@
 
 
       - unless @videos.empty?
-        .videos#videos{:"data-magellan-destination" => :videos }
-          .row
+        %section.videos#videos{:"data-magellan-target" => :videos }
+          .row.expanded
             .medium-9.columns.medium-offset-3
               .section_title= t(:videos)
               
-          .row
+          .row.expanded
             .medium-9.columns.medium-offset-3.video_list
 
               - @videos.each do |v|
-                .row
+                .row.expanded
                   .small-3.columns
                     = link_to v, target: :_blank do
                       .archive_image_box{style: "background-image: url(#{v.thumbnail.url(:thumb).gsub(/development/, 'production')});", onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}

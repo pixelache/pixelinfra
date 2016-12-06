@@ -13,16 +13,16 @@
     - unless @page.photos.first.filename_width.blank?
       - unless @page.photos.first.filename_width < 1200
         .page_banner= image_tag @page.photos.first.filename.url(:wide)
-  .row
+  .row.expanded
     
     - unless @page.headings.empty?
-      .medium-4.small-12.columns.right.page_nav
-        .magellan-scrollnav
-          %div{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:220;destination_threshold:220;fixed_top:220" }
-            %dl.sub-nav
+      .medium-4.small-12.columns.float-right.page_nav
+        .magellan-scrollnav{:"data-sticky-container" => ''}
+          %nav.sticky{:'data-sticky' => '', :'data-sticky-on' => 'medium', :'data-margin-top' => '7'}
+            %ul.vertical.menu.sub-nav{:"data-magellan" => '', :'data-bar-offset' => '100'}
               - @page.headings.each do |heading|
                 - next if heading.first == 'top'
-                %dd{:"data-magellan-arrival" => heading.first}= link_to heading.last, "##{heading.first}"
+                %li= link_to heading.last, "##{heading.first}"
 
         
     .small-12.medium-7.medium-offset-1.columns

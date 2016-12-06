@@ -1,18 +1,19 @@
-%nav.top-bar.admin{:"data-topbar" => ""}
-  %ul.title-area
-    %li.name
-      %h1= Admin
-    %li.toggle-topbar.menu-icon= link_to 'Menu', '#'
-  %section.top-bar-section
+.top-bar.admin{:"data-sticky" => '', style: "width:100%", :'data-margin-top' => '0', :'data-margin-bottom' => '0'}
+  .top-bar-left
+    %ul.menu
+      %li.menu-text
+        %h3 Admin
+    
+  .top-bar-left
     - if current_user
-      %ul.right
-        %li.has-dropdown
+      %ul.dropdown.menu{:'data-dropdown-menu' => ''}
+        %li
           %a{:href=> '#'}= current_user.username
-          %ul.dropdown
+          %ul.menu
             %li= link_to 'Public side', '/'
             %li= link_to 'Edit your profile', edit_user_path(current_user)
             %li= link_to 'Sign out', '/signout'
-      %ul.right
+     
         %li.has-form
           = form_tag('/admin/search') do |f|
             .row.collapse
@@ -24,8 +25,8 @@
       %ul.right
         %li.active= link_to 'Sign in', 'http://auth.pixelache.ac/users/sign_in'
     
-    - if current_user
-
+  - if current_user
+    .top-bar-left
       - unless current_user.roles.empty?
         = render :partial => 'admin/layouts/admin_bar'
 

@@ -8,11 +8,10 @@
     %link{:href => "http://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/feed", :rel => "alternate", :title => "RSS", :type => "application/rss+xml"}/
-    = stylesheet_link_tag "application", :media => "all"
+    -#= stylesheet_link_tag "application", :media => "all"
     = stylesheet_link_tag 'pixelache/stylesheets/application', :media => :screen
-    = stylesheet_link_tag 'pixelache/stylesheets/mobile', :media => :screen
-    = javascript_include_tag "application"
-    = javascript_include_tag "vendor/modernizr"
+    -#= stylesheet_link_tag 'pixelache/stylesheets/mobile', :media => :screen
+    = javascript_include_tag "application"    
     = javascript_include_tag "pixelache/javascripts/application"
 
     - if controller.controller_name == 'events' || controller.controller_name == 'home'
@@ -31,7 +30,7 @@
       ga('send', 'pageview');
     #container.container
       %header
-        .top-bar-wrapper.sticky= render 'layouts/top_bar'
+        %nav#top_nav= render 'layouts/top_bar'
         - unless @festival && controller.controller_name != 'archive'
           = content_for :jquery do
             :plain
@@ -55,7 +54,7 @@
                       }
                   return false;  
                     });
-          .arrow-down.fixed
+
         - else
           = content_for :jquery do
             :plain
@@ -83,17 +82,19 @@
                 return false;
               });
           
-        .pixelache_nav_menu.sticky{:class => content_for?(:festival_menu) ? :festival_menu : :black, :style => content_for?(:festival_menu) ?  "background-color: #" + (@festival.background_colour.blank? ? "#FFF" : @festival.background_colour) + "; color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour) : false } 
+        .pixelache_nav_menu.sticky{:class => content_for?(:festival_menu) ? :festival_menu : :black, :style => content_for?(:festival_menu) ?  "background-color: #" + (@festival.background_colour.blank? ? "#FFF" : @festival.background_colour) + "; color: #" + (@festival.primary_colour.blank? ? "#FFF" : @festival.primary_colour) : false }
           - if content_for? :festival_menu
             .festival_menu_wrapper= yield :festival_menu
-          - else
-            = render :partial => 'layouts/nav_menu'
+
+            
         - if content_for? :page_tree
-          .page_tree.sticky.sub{class: @festival && controller.controller_name != 'archive' ? :festival_page_tree : false}
-            = yield :page_tree
+          %div{:'data-sticky-container' => ''}
+            .page_tree.sub{class: @festival && controller.controller_name != 'archive' ? :festival_page_tree : false, :"data-sticky" => '', style: "width:100%; height: 40px;", :'data-sticky-on' => 'small', :'data-margin-top' => '3.1'}
+              = yield :page_tree
         - if content_for? :project_tree
-          .project_tree.sticky.sub
-            = yield :project_tree
+          %div{:'data-sticky-container' => ''}
+            .project_tree.sub{:"data-sticky" => '', style: "width:100%; height: 30px;", :'data-sticky-on' => 'small', :'data-margin-top' => '5'}
+              = yield :project_tree
 
         
         = render 'layouts/messages'

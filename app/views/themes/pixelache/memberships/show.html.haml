@@ -36,7 +36,9 @@
         .small-12.columns
           - unless @member.bio.blank?
             %h2= t :about
-            .bio= auto_html(@member.bio) { simple_format; link(:target => 'blank') }
+            .bio
+              - linkfilter = AutoHtml::Link.new
+              = raw linkfilter.call(@member.bio)
       - unless @member.posts.published.empty?
         .row
           .small-12.columns
@@ -55,19 +57,20 @@
       .row
         .small-12.columns
           = image_tag @member.avatar.url(:box)
-      %dl.accordion{:"data-accordion" => "", :"data-options" => "multi_expand:true"}
+      %ul.accordion{:"data-accordion" => "", :"data-multi-expand" => "true"}
         - unless @member.website.blank?
-          %dd.accordion-navigation#personal_li
-            = link_to t(:personal_sites), "#personal"
+          %li.accordion-item.is-active#personal_li{:"data-accordion-item" => ''}
+            = link_to t(:personal_sites), "#personal", class: 'accordion-title'
+            
             .arrow 
-            #personal.content.active
+            #personal.accordion-content{:'data-tab-content' => ''}
               = link_to @member.website, @member.website, target: :_blank 
             
         - unless @member.feedcaches.empty?
-          %dd.accordion-navigation#feed_li
-            = link_to t(:feed), '#feed'
+          %li.accordion-item#feed_li{:"data-accordion-item" => ''}
+            = link_to t(:feed), '#feed', class: 'accordion-title'
             .arrow
-            #feed.content
+            #feed.accordion-content{:'data-tab-content' => ''}
               - @member.feedcaches.sort_by{|x| x.issued_at }.reverse.take(5).each_with_index do |feed, index|
                 .feed_container.row
                   - if feed.source == 'twitter'
@@ -75,15 +78,17 @@
                     .small-9.columns
                       %strong= @member.name
                       %span.twitter_name= link_to "@" + @member.twitter_name.gsub(/^@/, ''), "http://twitter.com/#{@member.twitter_name.gsub(/^@/, '')}"
-                      %p= auto_html(feed.content) { simple_format; link(:target => 'blank') }
+                      %p
+                        - linkfilter = AutoHtml::Link.new
+                        = raw linkfilter.call(feed.content)
                       - if feed[index+1].nil?
                         %p.right= link_to t(:see_all), member_feed_path(@member)
                       
                       
-        %dd.accordion-navigation#contact_li
-          = link_to t(:contact), '#contact'
+        %li.accordion-item#contact_li{:"data-accordion-item" => ''}
+          = link_to t(:contact), '#contact', class: 'accordion-title'
           .arrow
-          #contact.content{class: @contact_form.name.blank? && @contact_form.email.blank? && @contact_form.message.blank? ? false : :active}
+          #contact.accordion-content{class: @contact_form.name.blank? && @contact_form.email.blank? && @contact_form.message.blank? ? false : :active, :'data-tab-content' => ''}
             = form_for @contact_form, url: contact_member_path(@member) do |f|
               .row
                 .small-12.columns= t :your_name

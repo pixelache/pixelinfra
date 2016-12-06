@@ -7,16 +7,16 @@
         
 
 .residency_container
-  .row
-    .small-12.medium-3.columns.right.residencies_nav
-      .magellan-scrollnav
-        %div{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:100;destination_threshold:120;fixed_top:80" }
-          %dl.sub-nav.accordion{:"data-accordion" => "", :"data-options" => "multi_expand:false"}
-            %dd.accordion-navigation{:"data-magellan-arrival" => :top }
+  .row.expanded
+    .small-12.medium-3.columns.float-right.residencies_nav
+      .magellan-scrollnav{:"data-sticky-container" => ''}
+        %nav.sticky{:'data-sticky' => '', :'data-sticky-on' => 'medium', :'data-margin-top' => '7'}
+          %ul.vertical.menu.sub-nav{:"data-magellan" => '', :'data-bar-offset' => '100', :"data-accordion-menu" => ''}
+            %li.accordion-navigation{:"data-magellan-arrival" => :top }
               = link_to t(:production_residencies), "#production"
-              .content#production{class: @production.include?(@residency) ? :active : false}
+              %ul.vertical.nested.menu.content#production{class: @production.include?(@residency) ? :active : false}
                 - @production.each_with_index do |res, index|
-                  .subchild{:class => [index == (@production.size - 1) ? :last : false, @residency == res ? :active : false]}
+                  %li.subchild{:class => [index == (@production.size - 1) ? :last : false, @residency == res ? :active : false]}
                     = link_to res.name, res
                     %p.metadata
                       = l res.start_at, format: "%B %Y"
@@ -36,15 +36,15 @@
   
   
     .small-10.left.medium-7.columns.small-offset-1.medium-offset-0
-      .row
+      .row.expanded
         .small-12.columns.title
           = raw @residency.name
-          .country= @residency.country_override.blank? ? (@residency.country.size == 2 ?  Country[@residency.country].name : @residency.country ) : @residency.country_override
+          .country= @residency.country_override.blank? ? (@residency.country.size == 2 ?  ISO3166::Country[@residency.country].name : @residency.country ) : @residency.country_override
           .date
             = l @residency.start_at, format: "%B %Y"
             - if [@residency.end_at.month, @residency.end_at.year] != [@residency.start_at.month, @residency.start_at.year]
               = " - " + l(@residency.end_at, format: "%B %Y")
-      .row
+      .row.expanded
         .small-12.columns.body
           - if @residency.photo?
             = image_tag @residency.photo.url
@@ -54,13 +54,13 @@
       - unless @residency.related_content.empty?
         .related_container.row.post
           .small-12.columns
-            .row
+            .row.expanded
               .small-12.columns.related_title
                 %h1= t(:related_content)
-            .row
+            .row.expanded
               .small-12.columns
                 - @residency.related_content[0..5].each do |related|
-                  .row
+                  .row.expanded
                     = render :partial => 'shared/related', locals: {item: @residency, related: related }
                 
                 

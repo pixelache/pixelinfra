@@ -31,7 +31,8 @@
               =image_tag item.feed_origin.avatar.url(:thumb)
               .member_name= link_to item.feed_origin.name, "/member/#{item.feed_origin.slug}"
           .small-9.columns.content.end
-            = auto_html(item.content) { simple_format; link(:target => 'blank') }
+            - linkfilter = AutoHtml::Link.new
+            = raw linkfilter.call(item.content) 
             .when= link_to time_ago_in_words(Time.at(item.issued_at).to_datetime) + t(:ago), item.link_url, target: :_blank
             .metadata
               - if item.source == 'twitter'

@@ -10,18 +10,27 @@ body {
   &.contact, &.locations {
     background-color: $purple;
     header {
+      background-color: $purple;
       .top-bar {
-          .menu_wrapper {
+          background-color: $purple;
+        
             .languages {
               color: $grey;
+              a {
+                color: $pink;
+              }
             }
             .menu_bar {
-              ul.f-dropdown {
+              ul {
+                border: none;
                 background-color: $purple;
+                li {
+                  background-color: $purple;
+                }
               }
             }
           }
-       }
+       
     }
   }
 }
@@ -32,6 +41,14 @@ a {
   }
 }
 
+p, li {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  text-rendering: optimizeLegibility;
+}
 
 header {
   .fixed {
@@ -82,9 +99,11 @@ header {
   }
 }
 
-nav.top-bar {
+.top-bar {
   text-align:center;
-
+  ul {
+    background: none !important;
+  }
   .toggle-topbar.menu-icon a{
     color: $pink;
     padding: 0 1.625rem 0 2.5rem;
@@ -150,6 +169,20 @@ display: inline-block;
     }
   }
   .menu_wrapper  {
+    .menu > li.is-dropdown-submenu-parent > a::after {border-color: $pink transparent transparent;}
+    .menu > li.is-dropdown-submenu-parent > a {
+      padding: 16px;
+    }
+    ul.submenu {
+      border: none;
+      padding: 0 0 1rem 0;
+      background-color: $grey;
+      li {
+        background-color: $grey;
+        padding: 1rem 0;
+        margin: 0;
+      }
+    }
     float: left;
     width: calc(100% - 320px);
     padding-top: 1.5rem;
@@ -158,6 +191,7 @@ display: inline-block;
       font-size: 0.8rem;
       text-transform: uppercase;
       color: $purple;
+      font-weight: bold;
       font-family: 'Helvetica Neue Bold Condensed', sans-serif;
       a {
         color: $pink;

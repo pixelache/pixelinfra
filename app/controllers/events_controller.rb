@@ -1,20 +1,20 @@
-class EventsController < InheritedResources::Base
-  actions :index, :show
+class EventsController < ApplicationController
+
   
   def index
     if params[:festival_id]
-      @festival = Festival.find(params[:festival_id])
+      @festival = Festival.friendly.find(params[:festival_id])
       @events = @festival.events.published.order('start_at ASC')
 
       set_meta_tags title: @festival.name + " " + t(:events)
       
     elsif params[:project_id]
-      @project = Project.find(params[:project_id])
+      @project = Project.friendly.find(params[:project_id])
       @events = Kaminari.paginate_array(@project.self_and_descendants.visible.map{|x| x.events.published }.flatten.sort_by(&:start_at).reverse).page(params[:page]).per(12)
       set_meta_tags title: @project.name + " " + t(:events)
       
     elsif params[:residency_id]
-      @residency = Residency.find(params[:residency_id])
+      @residency = Residency.friendly.find(params[:residency_id])
       events = @residency.events.published
       events += @residency.project.events.published if @residency.project
       @events = Kaminari.paginate_array(events.flatten.uniq.sort_by{|x| x.start_at}.reverse).page(params[:page]).per(12)
@@ -32,7 +32,7 @@ class EventsController < InheritedResources::Base
   end
   
   def show
-    @event = Event.find(params[:id])
+    @event = Event.friendly.find(params[:id])
     if @event.festival
       @festival = @event.festival
       if @festival.subsite

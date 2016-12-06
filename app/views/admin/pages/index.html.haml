@@ -1,12 +1,12 @@
-.row
+.row.expanded
   .small-10.columns
     %h2 Pages
-.row
+.row.expanded
   .small-9.columns
     %p= page_entries_info(@pages)
       
     %p= link_to 'Create new page', new_admin_page_path, :class => [:round, :button, :tiny]
-.filter_box.row
+.filter_box.row.expanded
   .large-2.columns
     .filter_title Filter by site:
     %select#by_subsite
@@ -49,7 +49,7 @@
         window.location.href=parts[0] + "?" + $(this).attr('id') + "=" + $(this).val();
       }
     });
-.row
+.row.expanded
   .columns
     = paginate @pages
     %table.table.table-condensed.pages

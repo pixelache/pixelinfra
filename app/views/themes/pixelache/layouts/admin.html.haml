@@ -2,19 +2,20 @@
 %html
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      = display_meta_tags site: "Pixelache CMS"
-      %meta{:content => content_for?(:description) ? yield(:description) : "Pixelinfra", :name => "description"}
-        = stylesheet_link_tag "application", :media => "all"
-        = stylesheet_link_tag "cms", :media => "all"
-        = stylesheet_link_tag "print", media: :print
-        = javascript_include_tag "vendor/modernizr"
-        = csrf_meta_tags
-        = yield(:head)
-  %body{:class => "#{controller_name} #{action_name}"}
+    = display_meta_tags site: "Pixelache CMS"
+    %meta{:content => content_for?(:description) ? yield(:description) : "Pixelinfra", :name => "description"}
+    = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
     = javascript_include_tag "pixelache/javascripts/application"
+    = stylesheet_link_tag "cms", :media => "all"
+    = stylesheet_link_tag "print", media: :print
+    = csrf_meta_tags
+    = yield(:head)
+  %body{:class => "#{controller_name} #{action_name}"}
+
+
     %header
-      = render 'admin/layouts/navigation'
+      %div{:'data-sticky-container' => ''}= render 'admin/layouts/navigation'
       = render 'layouts/messages'
       
     #main.container{:role => "main"}

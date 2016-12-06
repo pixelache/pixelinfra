@@ -174,12 +174,12 @@ module ApplicationHelper
     if sections.empty?
       return text
     else
-      toreturn = "<div data-magellan-destination=\"top\">" + text
+      toreturn = "<section data-magellan-target=\"top\">" + text
       sections.each do |s|
         next if s.first == 'top'
-        toreturn.gsub!(/<a id=\"#{s.first}\"/, "</div><div data-magellan-destination=\"#{s.first}\"><a class='section_heading' id=\"#{s.first}\"" )
+        toreturn.gsub!(/<a id=\"#{s.first}\"/, "</section><section data-magellan-target=\"#{s.first}\"><a class='section_heading' id=\"#{s.first}\"" )
       end
-      return toreturn + "</div>"
+      return toreturn + "</section>"
     end
     
   end

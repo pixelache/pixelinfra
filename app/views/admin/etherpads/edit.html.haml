@@ -1,30 +1,30 @@
 #etherpad_form
   = semantic_nested_form_for [:admin, @etherpad], :html => {:class => "custom" } do |f|
-    .row
+    .row.expanded
       .small-9.columns
         %h2
           Etherpad: 
           = @etherpad.name
-    .row
+    .row.expanded
       .small-10.columns= f.input :subsites, :as => :check_boxes, :label => "Which website?"
-    .row
+    .row.expanded
       .small-6.columns
         = f.input :meetings, collection: Meeting.all.order(start_at: :desc)
-    .row
+    .row.expanded
       .small-3.columns= f.input :festivals, collection: Festival.all.order(:start_at)
       .small-3.columns.small-offset-2= f.input :projects, :collection => Project.active_menu
-    .row
+    .row.expanded
       .small-6.columns
       
         = f.input :event_ids, :as => :select, :collection => Event.all.order('start_at desc').map{ |a| [ a.event_with_date, a.id ] }, :label => raw("<h5>Connected to events?</h5>"), :multiple => true
 
-    .row
+    .row.expanded
       .small-6.columns
         = f.input :documenttype, :as => :select, :collection => recurse_options_from_tree_collection_for_select(Documenttype.roots, :id, :name), label:'Document type:'
-    .row
+    .row.expanded
       .small-3.columns= f.input :private_pad, :label => "Make private?", :hint => "Tick this to remove this pad from the public list of pads"
   
-    .row
+    .row.expanded
       .small-10.columns
         = f.submit 'Save', :class => [:button, :small, :round]
   

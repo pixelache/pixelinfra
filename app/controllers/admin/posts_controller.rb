@@ -1,9 +1,9 @@
 class Admin::PostsController < ApplicationController
-  inherit_resources
+
   layout 'admin'
   authorize_resource
   before_filter :authenticate_user!
-  skip_before_filter :require_no_authentication
+
   
   has_scope :page, :default => 1
   has_scope :by_festival
@@ -32,9 +32,16 @@ class Admin::PostsController < ApplicationController
   end
   
   def create
-    create! { admin_posts_path }
+    @post = Post.new(post_params)
+    if @post.save
+      flash[:notice] = 'Post created.'
+      redirect_to admin_posts_path
+    else
+      flash[:error] = 'Error saving post.'
+    end
   end
   
+
   
   def destroy
     @post = Subsite.find(params[:subsite_id]).posts.find(params[:id])
@@ -70,8 +77,9 @@ class Admin::PostsController < ApplicationController
   end
   
   def new
+    @post = Post.new
     set_meta_tags :title => t(:new_post)
-    super
+    
   end
   
   def options
@@ -85,15 +93,15 @@ class Admin::PostsController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       @post = Post.find(params[:id])
     end
-    if @post.update_attributes(permitted_params[:post])
+    if @post.update_attributes(post_params)
       redirect_to  admin_posts_path 
     end
   end
   
   protected
   
-  def permitted_params
-    params.permit(:post => [:published, :slug, :subsite_id, :creator_id, 
+  def post_params
+    params.require(:post).permit(:published, :slug, :subsite_id, :creator_id, 
       :last_modified_id, :external,  :wordpress_id, :published_at, :image, :image_width, :image_height,
        :image_content_type, :image_size, :event_name, :event_id,  :project_name, :residency_id, :project_id, 
        :registration_required, :email_registrations_to, :question_description,
@@ -103,7 +111,7 @@ class Admin::PostsController < ApplicationController
          photos_attributes: [:id, :filename, :title, :credit, :_destroy],
          festivaltheme_ids: [], 
           attachments_attributes: [:id, :documenttype_id, :attachedfile, 
-            :_destroy, :year_of_publication,  :title, :description, :public, :_destroy]])
+            :_destroy, :year_of_publication,  :title, :description, :public, :_destroy])
   end
   
 end

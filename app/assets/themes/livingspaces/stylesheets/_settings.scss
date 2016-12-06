@@ -1,0 +1,25 @@
+$breakpoints: (
+  small: 0px,
+  medium: 640px,
+  large: 1024px,
+  xlarge: 1200px,
+  xxlarge: 1440px,
+);
+$breakpoint-classes: (small medium large xlarge);
+// 36. Top Bar
+// -----------
+
+$topbar-padding: 0;
+
+$topbar-background-color: #000;
+$topbar-background: $topbar-background-color;
+$topbar-submenu-background: $topbar-background;
+$topbar-title-spacing: 1rem;
+$topbar-input-width: 200px;
+$topbar-unstack-breakpoint: medium;
+$topbar-height: rem-calc(40);
+$topbar-title-weight: bold;
+$topbar-title-color: white;
+$topbar-dropdown-bg: $topbar-background;
+$topbar-dropdown-link-color: #fff100;
+$topbar-link-dropdown-padding: rem-calc(20);

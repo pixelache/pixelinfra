@@ -9,26 +9,30 @@
           = " : "
 
 .residency_container
-  .row
-    .medium-3.small-12.columns.right.residencies_nav
-      .magellan-scrollnav
-        %div{:"data-magellan-expedition" => :fixed, :"data-options" => "threshold:100;destination_threshold:120;fixed_top:80" }
-          %dl.sub-nav.accordion{:"data-accordion" => "", :"data-options" => "multi_expand:false"}
-            %dd.accordion-navigation{:"data-magellan-arrival" => :top }
+  .row.expanded
+    .medium-3.small-12.columns.float-right.residencies_nav
+    
+
+            
+      .magellan-scrollnav{:"data-sticky-container" => ''}
+        %nav.sticky{:'data-sticky' => '', :'data-sticky-on' => 'medium', :'data-margin-top' => '7'}
+          %ul.vertical.menu.sub-nav{:"data-magellan" => '', :'data-bar-offset' => '100', :"data-accordion-menu" => ''}
+            %li.accordion-navigation{:"data-magellan-arrival" => :top }
               = link_to t(:production_residencies), "#production"
-              .content#production
+              %ul.menu.vertical.nested.content#productio
                 - @production.each_with_index do |res, index|
-                  .subchild{:class => index == (@production.size - 1) ? :last : false}
+                  %li.subchild{:class => index == (@production.size - 1) ? :last : false}
                     = link_to res.name, res
                     %p.metadata
                       = l res.start_at, format: "%B %Y"
                       - if [res.end_at.month, res.end_at.year] != [res.start_at.month, res.start_at.year]
                         = " - " + l(res.end_at, format: "%B %Y")
-            %dd.accordion-navigation{:"data-magellan-arrival" => :top2 }
+                        
+            %li.accordion-navigation{:"data-magellan-arrival" => :top2 }
               = link_to t(:microresidencies), "#microresidencies"
-              .content#microresidencies
+              %ul.menu.vertical.nested.content#microresidencies
                 - @microresidencies.each_with_index do |res, index|
-                  .subchild{:class => index == (@microresidencies.size - 1) ? :last : false}
+                  %li.subchild{:class => index == (@microresidencies.size - 1) ? :last : false}
                     = link_to res.name, res
                     %p.metadata
                       = l res.start_at, format: "%B %Y"
@@ -37,17 +41,17 @@
                 
                 
                 
-    .small-12.medium-6.left.medium-offset-1.columns
+    .small-12.medium-8.left.large-offset-1.columns
       
-      .row{:"data-magellan-destination" => :top }
+      .row.expanded{:"data-magellan-destination" => :top }
         .small-11.small-centered.medium-12.medium-left.columns.title= raw @page.name
 
-      .row{:"data-magellan-destination" => :top2 }
+      .row.expanded{:"data-magellan-destination" => :top2 }
         .small-11.small-centered.medium-12.medium-left.columns.body
           = raw simple_format(@page.body)
 
       - if can? :edit, @page
-        .row
+        .row.expanded
           .small-12.columns
             %small.hide-for-small-only= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id), class: [:button, :secondary, :tiny]
         

@@ -15,49 +15,49 @@
   = content_for :project_tree do
     = render :partial => 'shared/projects_tree'
   
-.outer.project_detail.row
+.outer.project_detail.row.expanded
   .small-12.medium-8.medium-offset-2.small-centered
-    .row
+    .row.expanded
       .small-12.columns
         .title_wrapper  
           .project_title= @project.name
     - unless @project.photos.empty?
-      .row
+      .row.expanded
         .small-12.columns.image_carousel
           - @project.photos.each do |photo|
-            .slide= image_tag photo.filename.url(:standard)
-    .row
+            .slide= image_tag photo.filename.url(:twelvehundred)
+    .row.expanded
       .small-12.columns.description= raw @project.description
-    .row
+    .row.expanded
       .small-12.columns
         .share_this= render :partial => 'shared/share_this_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@project)}"), title: CGI::escape(@project.name) }
 
         
-    .row
+    .row.expanded
       .small-12.columns
         - if @project.self_and_descendants.map{|x| x.events.published }.flatten.size > 2
           .events_wrapper
-            .row
+            .row.expanded
               .small-12.columns.text-left
                 .wrapper_title= t :last_events
           
-                .events_carousel.row
+                .events_carousel.row.expanded
                   - @project.self_and_descendants.map{|x| x.events.published }.flatten.sort_by{|x| x.start_at }.reverse[0..8].each do |e| 
                     - if e.image?
                       = render :partial => 'events/event_cube', locals: {event: e }
 
-            .row
+            .row.expanded
               .small-3.columns.right.end.text-right
                 .read_more= link_to t(:all_events), project_events_path(@project)
                 
         - unless @activities.empty?
-          .activities_wrapper.row
+          .activities_wrapper.row.expanded
             .small-12.columns
-              .row
+              .row.expanded
                 .small-12.columns.wrapper_title= t :recent_activity
               #activities.related_container= render :partial => 'activities'
 
-          .row.news_link
+          .row.expanded.news_link
             .small-3.columns.right.end.text-right
               .read_more= link_to t(:all_news), project_posts_path(@project)
 
@@ -66,7 +66,7 @@
 
     
                   
-      .row
+      .row.expanded
         .small-12.columns#paginator=  paginate @activities, :remote => true
 
 = content_for :jquery do

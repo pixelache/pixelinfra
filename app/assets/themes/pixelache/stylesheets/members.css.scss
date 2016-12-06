@@ -6,33 +6,38 @@
 
 
   .member_sidebar {
-    dl.accordion {
+    ul.accordion {
       margin: 0;
       padding: 0;
-      dd {
+      li {
         a {
-          color: #FFF;
+          &.accordion-title {
+            color: #FFF;
+            &::before {
+              content: '';
+            }
+          }
         }
         .arrow {
 
-          position: absolute;
+          position: relative;
         	width: 0; 
         	height: 0; 
         	border-left: 14px solid transparent;
         	border-right: 14px solid transparent;
         	cursor: pointer;
-        	right: 35px;
+        	right: 20px;
           z-index: 15;
           float: right;
         }
         &#personal_li {
-          a { background-color: #f9d131;  }
+          a.accordion-title { background-color: #f9d131;  }
           .arrow {
             border-top: 14px solid #f9d131; 
           }
         }
         &#feed_li {
-          a { background-color: #fe7d27; }
+          a.accordion-title { background-color: #fe7d27; }
           .arrow {
             border-top: 14px solid #fe7d27; 
           }
@@ -68,7 +73,7 @@
           }
         }
         &#contact_li {
-          a { background-color: #3dbedc; }
+          a.accordion-title { background-color: #3dbedc; }
           .arrow {
             border-top: 14px solid #3dbedc; 
           }

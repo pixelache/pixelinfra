@@ -1,5 +1,5 @@
-class EtherpadsController < InheritedResources::Base
-  actions :index
+class EtherpadsController < ApplicationController
+ 
   has_scope :by_festival
   has_scope :by_project
   has_scope :by_subsite

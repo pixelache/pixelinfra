@@ -1,12 +1,12 @@
-.row
+.row.expanded
   .small-9.columns
     %h3 Events
-.row
+.row.expanded
   .small-9.columns
     %p= page_entries_info(@events)
-.row
+.row.expanded
   .small-9.columns= link_to 'Create new event', new_admin_event_path, :class => [:button, :small, :round]
-.filter_box.row
+.filter_box.row.expanded
   .large-3.columns
     .filter_title Filter by site:
     %select#by_subsite
@@ -31,7 +31,7 @@
       %option{value: ""} &nbsp;
       - Time.now.year.downto(2002).each do |year|
         %option{:value => year, :selected => (params[:by_year] == year.to_s ? :selected : false)}= year.to_s
-.row
+.row.expanded
   .small-8.columns
     .filter_title Find by text:
     = form_tag '/admin/events', :method => :get do
@@ -46,9 +46,9 @@
         window.location.href=parts[0] + "?" + $(this).attr('id') + "=" + $(this).val();
       }
     });    
-.row
+.row.expanded
   .columns= paginate @events
-.row
+.row.expanded
   %table.table.table-condensed
     %thead
       %tr
@@ -60,8 +60,8 @@
     %tbody
       - @events.each do |event|
         = render :partial => 'event', :locals => {:event => event}
-.row
+.row.expanded
   .columns= paginate @events
-.row
+.row.expanded
   .small-9.columns
     %p= link_to 'Create new event', new_admin_event_path, :class => [:button, :small, :round]

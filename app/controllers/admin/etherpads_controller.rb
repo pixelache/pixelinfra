@@ -8,6 +8,12 @@ class Admin::EtherpadsController < Admin::BaseController
   has_scope :by_documenttype
   handles_sortable_columns
   autocomplete :event, :name, :extra_data => [:start_at], :display_value => :event_with_date
+  skip_load_and_authorize_resource
+  load_and_authorize_resource
+
+  def edit
+    @etherpad = Etherpad.find(params[:id])
+  end
   
   def destroy
     @etherpad = Etherpad.find(params[:id])
@@ -21,8 +27,16 @@ class Admin::EtherpadsController < Admin::BaseController
   end
   
   def update
-    update! { admin_etherpads_path }
+    @etherpad = Etherpad.find(params[:id])
+    if @etherpad.update_attributes(etherpad_params)
+      flash[:notice] = 'Pad updated.'
+      redirect_to admin_etherpads_path
+    else
+      flash[:error] = 'Error updating etherpad.'
+    end
+ 
   end
+  
   
   def index
     order = sortable_column_order do |column, direction|
@@ -41,8 +55,8 @@ class Admin::EtherpadsController < Admin::BaseController
   
   protected
   
-  def permitted_params
-    params.permit(:etherpad => [:name, :private_pad,  :event_name, :documenttype_id, subsite_ids: [], meeting_ids: [],  project_ids: [], festival_ids: [], event_ids: [] ])
+  def etherpad_params
+    params.require(:etherpad).permit(:name, :private_pad,  :event_name, :documenttype_id, subsite_ids: [], meeting_ids: [],  project_ids: [], festival_ids: [], event_ids: [] )
   end
   
 end

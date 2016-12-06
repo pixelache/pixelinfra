@@ -2,17 +2,20 @@
 
 .residency_container {
 
-  .magellan-scrollnav [data-magellan-expedition] dd a {
+  .magellan-scrollnav  li {
     font-size: 0.9rem;
-    color: #333;
+    
     background: none;
     line-height: 1.1rem;
     cursor: pointer;
     padding: 0 0 0.6rem 0;
-    &:hover, &:focus {
-      background: none;
+    a {
+      color: #333;
+      &:hover, &:focus {
+        background: none;
+      }
     }
-    .subchild {
+    &.subchild {
       &:hover {
         background: #AAA;
       }
@@ -25,17 +28,17 @@
       }
     }
   }
-  .magellan-scrollnav [data-magellan-expedition] dd {
+  .magellan-scrollnav [data-magellan] li {
     border-bottom: 1px solid #333;
     
   }
   
-  .accordion .accordion-navigation > a, .accordion dd > a {
+  .magellan-scrollnav .accordion-navigation > a, .accordion li > a {
     background: none !important;  
     padding: 0;
     line-height: 1.45rem;
   }
-  .accordion .accordion-navigation > .content.active, .accordion dd > .content.active {
+  .magellan-scrollnav .accordion-navigation > .content.active, .accordion li > .content.active {
     border-top: 1px solid #333;
     padding-top: 0.4rem;
   }
@@ -43,25 +46,32 @@
     padding-top: 8rem;
     .magellan-scrollnav {
 
-      [data-magellan-expedition-clone] {
-        dl.sub-nav {
+      [data-magellan-clone] {
+        ul.sub-nav {
           display: none;
         }
       }
-      [data-magellan-expedition], [data-magellan-expedition-clone] {
-        dd {
+      [data-magellan], [data-magellan-clone], [data-accordion-menu] {
+        li {
+          &.subchild {
+            font-family: $quicksand;
+          }
           a {
             color: #333;
           }
         }
       }
     }
-    .magellan-scrollnav [data-magellan-expedition],  .sub-nav {
-      dd {
+    .magellan-scrollnav nav  ul.sub-nav {
+      li {
         border-bottom: 1px solid #333;
         background-color: #f9ec31;
-
-        .subchild {
+        &.accordion-navigation {
+          text-transform: uppercase;
+          font-size: 1.4rem;
+          font-family: $quicksand;
+        }
+        &.subchild {
           &:hover {
             background: #AAA;
           }
@@ -86,10 +96,10 @@
         a {
           color: #333;
           background: none;
-          font-size: 0.9rem;
+          font-size: 1.1rem;
           line-height: 1.1rem;
           cursor: pointer;
-          padding: 0 0 0.6rem 0;
+          padding: 1rem 2.5rem 0.6rem 0;
           &:hover, &:focus {
             background: none;
           }
@@ -137,7 +147,7 @@
   
   .sub-nav {
     background-color: #f9ec31;
-    .accordion dd > a {
+    .accordion li > a {
       
       background-color: #f9ec31;
       font-family: $quicksand;
@@ -168,6 +178,6 @@
     }
   }
 }
-.accordion .accordion-navigation > .content.active, .accordion dd > .content.active {
+.accordion .accordion-navigation > .content.active, .accordion li > .content.active {
   background-color: #f9ec31;
 }

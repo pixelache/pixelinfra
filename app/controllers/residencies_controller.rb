@@ -10,7 +10,7 @@ class ResidenciesController < ApplicationController
   
   
   def show
-    @residency = Residency.find(params[:id])
+    @residency = Residency.friendly.find(params[:id])
     @microresidencies = Residency.micro.order('end_at DESC')
     @production = Residency.production.order('end_at DESC')
     

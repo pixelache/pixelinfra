@@ -69,7 +69,7 @@
                 %option{value: nil}= t :calendar
                 - @calendar.sort_by(&:start_at).each do |cal|
                   %option{value: url_for(cal)}= " -- #{cal.name} (#{cal.start_at.strftime("%d %B")})"
-          .search.medium-4.medium-offset-1.large-10.columns.large-offset-2.small-offset-2
+          .search.medium-4.medium-offset-1.large-10.columns.large-offset-2.small-offset-2.float-right
             .square= image_tag current_theme_image_path('littlesquare.jpg')
             = form_tag '/search/' do
               = text_field :search, :term

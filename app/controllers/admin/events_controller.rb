@@ -14,7 +14,13 @@ class Admin::EventsController < Admin::BaseController
   end
   
   def create
-    create! { admin_events_path }
+    @event = Event.new(event_params)
+    if @event.save
+      flash[:notice] = 'Event created.'
+      redirect_to admin_events_path
+    else
+      flash[:error] = 'Error saving event.'
+    end
   end
   
 
@@ -24,7 +30,7 @@ class Admin::EventsController < Admin::BaseController
     unless @event.feeds.empty?
       @event.add_to_newsfeed = true
     end
-    super
+
   end
 
   def index
@@ -44,18 +50,29 @@ class Admin::EventsController < Admin::BaseController
   end
 
   def update
-    update! { admin_events_path }
+    @event = Event.friendly.find(params[:id])
+    if @event.update_attributes(event_params)
+      flash[:notice] = 'Event updated.'
+      redirect_to admin_events_path
+    else
+      flash[:error] = 'Error updating event.'
+    end
+ 
   end
   
   def destroy
-    destroy! { admin_events_path }
+    @event = Event.friendly.find(params[:id])
+    if @event.destroy
+      flash[:notice] = 'Event deleted.'
+    end
+    redirect_to admin_events_path
   end
   
 
   protected
   
-  def permitted_params
-    params.permit(:event => [:subsite_id, :place_id, :start_at, :end_at, :step_id, :published, :image, :image_width, :place_name, :image_height, :image_content_type, :image_size, :residency_id, :facebook_link, :cost, :cost_alternate, :cost_alternate_reason, :project_id, :festival_id, :facilitator_name, :facilitator_url, :facilitator_organisation, :user_id, :add_to_newsfeed, :user_id, :resources_needed, :protocol, 
+  def event_params
+    params.require(:event).permit(:subsite_id, :place_id, :start_at, :end_at, :step_id, :published, :image, :image_width, :place_name, :image_height, :image_content_type, :image_size, :residency_id, :facebook_link, :cost, :cost_alternate, :cost_alternate_reason, :project_id, :festival_id, :facilitator_name, :facilitator_url, :facilitator_organisation, :user_id, :add_to_newsfeed, :user_id, :resources_needed, :protocol, 
       :facilitator_organisation_url, :tag_list, :technology_list, :location_tbd, :tag_list,
       :registration_required, :email_registrations_to, :question_description,
       :question_creators, :question_motivation, :require_approval, 
@@ -63,7 +80,7 @@ class Admin::EventsController < Admin::BaseController
       photos_attributes: [:id, :filename, :filename_content_type, :title, :credit, :_destroy],
       videos_attributes: [:id, :in_url, :_destroy],
       festivaltheme_ids: [], 
-      translations_attributes: [:name, :description, :notes, :id, :locale, :_destroy]])
+      translations_attributes: [:name, :description, :notes, :id, :locale, :_destroy])
   end
     
 end 

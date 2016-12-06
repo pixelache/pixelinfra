@@ -15,34 +15,37 @@
         %h2 What would you like to do?
     
   - if @festivaltheme.slug == 'helsinki-inside-out'
-    .row.experience_form
     
-      = semantic_form_for([@festival, @festivaltheme, Experience.new], html: {:"data-abide" => ''}) do |f|
-        .columns.small-12.medium-7.small-centered
-          .row
-            .small-10.columns= f.input :festivaltheme_id, data: {value: @festivaltheme.id}, as: :hidden
-          .row
-            .small-10.columns= f.input :name, label: "Your name", hint: 'This will not be shared with the public (unless you want it to be!)', input_html: {required: :required}
-          .row
-            .small-10.columns= f.input :email, label: 'Your email', hint: 'This will not be shared with the public!', input_html: {required: :required}
-          .row
-            .small-10.columns= f.input :phone, label: 'Your phone #', hint: 'This will not be shared with the public!', input_html: {required: :required}
-          .row
-            .small-10.columns= f.input :experience_type, as: :select,  :include_blank => false, collection: [['I would like to offer an experience', 0], ['I would like to offer a place', 1], ['I would like to offer an experience AND a place', 2] ],  input_html: { required: :required}
-          .row
-            .small-10.columns= f.input :description, label: 'Please describe your experience (and/or place) in just a few short sentences.', input_html: {required: :required}
-          .row
-            .small-10.columns= f.input :when_text, label: 'When will this take place?', hint: 'Inside⋅Out hours are between 10:00 - 17:00, Sunday 27 September', input_html: {required: :required}
-          .row
-            .small-10.columns= f.input :location, label: 'Where will this take place?', hint: 'Leave blank if you would like Pixelache to help find a venue. No promises!'
-          .row
-            .small-10.columns= f.input :other_activities, label: 'Is there room for other activities in this location during the InsideOut times?'
-          .row
-            .small-10.columns= f.input :special_instructions, label: 'Are there any special instructions for people who wish to attend?'
-          .row
-            .small-12.columns= recaptcha_tags  hl: I18n.locale.to_s
-          .row
-            .small-10.columns= f.submit 'Submit'
+    .row
+      .small-12.medium-7.columns.small-centered
+        %p This festival took place in 2015; registration is now closed.
+        
+      / = semantic_form_for([@festival, @festivaltheme, Experience.new], html: {:"data-abide" => ''}) do |f|
+      /   .columns.small-12.medium-7.small-centered
+      /     .row
+      /       .small-10.columns= f.input :festivaltheme_id, data: {value: @festivaltheme.id}, as: :hidden
+      /     .row
+      /       .small-10.columns= f.input :name, label: "Your name", hint: 'This will not be shared with the public (unless you want it to be!)', input_html: {required: :required}
+      /     .row
+      /       .small-10.columns= f.input :email, label: 'Your email', hint: 'This will not be shared with the public!', input_html: {required: :required}
+      /     .row
+      /       .small-10.columns= f.input :phone, label: 'Your phone #', hint: 'This will not be shared with the public!', input_html: {required: :required}
+      /     .row
+      /       .small-10.columns= f.input :experience_type, as: :select,   collection: [['I would like to offer an experience', 0], ['I would like to offer a place', 1], ['I would like to offer an experience AND a place', 2] ],  input_html: { required: :required}
+      /     .row
+      /       .small-10.columns= f.input :description, label: 'Please describe your experience (and/or place) in just a few short sentences.', input_html: {required: :required}
+      /     .row
+      /       .small-10.columns= f.input :when_text, label: 'When will this take place?', hint: 'Inside⋅Out hours are between 10:00 - 17:00, Sunday 27 September', input_html: {required: :required}
+      /     .row
+      /       .small-10.columns= f.input :location, label: 'Where will this take place?', hint: 'Leave blank if you would like Pixelache to help find a venue. No promises!'
+      /     .row
+      /       .small-10.columns= f.input :other_activities, label: 'Is there room for other activities in this location during the InsideOut times?'
+      /     .row
+      /       .small-10.columns= f.input :special_instructions, label: 'Are there any special instructions for people who wish to attend?'
+      /     .row
+      /       .small-12.columns= recaptcha_tags  hl: I18n.locale.to_s
+      /     .row
+      /       .small-10.columns= f.submit 'Submit'
             
   - unless @festivaltheme.posts.published.empty? && @festivaltheme.events.published.empty?
     .row.theme_single
@@ -66,4 +69,4 @@
                 .blurb= raw truncate_html(strip_tags(event.description), length: 200)
               = link_to t("livingspaces.learn_more") + " >>>", event
   .row.theme_single
-    .columns.small-11.medium-7.small-centered.share_bar= render partial: 'shared/share_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}/festivals/#{@festivaltheme.festival.slug}/theme/#{@festivaltheme.slug}"), title: CGI::escape(@festivaltheme.name)}              
+    .columns.small-11.medium-7.small-centered.float-center.share_bar= render partial: 'shared/share_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}/festivals/#{@festivaltheme.festival.slug}/theme/#{@festivaltheme.slug}"), title: CGI::escape(@festivaltheme.name)}              

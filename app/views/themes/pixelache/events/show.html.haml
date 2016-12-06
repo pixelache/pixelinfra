@@ -13,7 +13,7 @@
             = " : "
         %strong= @event.name
     
-.event_single.row.outer{class: @event.festival ? :festival : false}
+.event_single.row.expanded.outer{class: @event.festival ? :festival : false}
 
 
   .internal.columns.small-12.medium-8.columns.small-centered.post
@@ -39,7 +39,7 @@
       = raw @event.description
 
       - if @event.registration_required? && @event.start_at >= Time.now
-        #registration_form.row
+        #registration_form.row.expanded
           %h2= t "livingspaces.register_to_participate"
           - if @event.max_attendees
             - if @event.hide_registrants
@@ -62,36 +62,36 @@
                   %p= pluralize_sentence(@event.max_attendees - @event.attendees.not_waiting.size, "workshop_place_count")                  
                     
           = semantic_form_for([@event, @attendee = Attendee.new], html: {:"data-abide" => ''}) do |f|
-            .row
+            .row.expanded
               .small-10.columns= f.input :name, label: 'Your name:', input_html: {required: :required}
-            .row
+            .row.expanded
               .small-10.columns= f.input :email, label: 'Your email:', input_html: {required: :required}              
-            .row
+            .row.expanded
               .small-10.columns= f.input :phone, label: 'Your phone number:', input_html: {required: :required}
             - unless @event.question_motivation.blank?
-              .row
+              .row.expanded
                 .small-10.columns= f.input :motivation_statement, label: @event.question_motivation, input_html: {required: :required}
             - unless @event.question_creators.blank?
-              .row
+              .row.expanded
                 .small-10.columns= f.input :project_creators, label: @event.question_creators, input_html: {required: :required}
             - unless @event.question_description.blank?
-              .row
+              .row.expanded
                 .small-10.columns= f.input :project_description, label: @event.question_description, input_html: {required: :required}
-            .row
+            .row.expanded
               .small-10.columns= recaptcha_tags hl: I18n.locale.to_s, :display => { :theme => 'white' }
-            .row
+            .row.expanded
               .small-10.columns= f.submit 'Submit', class: [:button, :round, :small]
       - elsif @event.registration_required? && @event.start_at >= Time.now                   
         #registration_form.row{class: @event.has_documentation? ? :hasdoc : false}
           %h2= t :registration_is_closed
           
-    .row
+    .row.expanded
       .small-12.centered.columns.share_this= render :partial => 'shared/share_this_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@event)}"), title: CGI::escape(@event.name) }
 
     - if @event.has_documentation?
 
       .documentation#documentation
-        .row.related_title
+        .row.expanded.related_title
           .small-12.columns.small-centered
             %h1= t(:documentation)
         - unless @event.all_documentation["images"].empty?
@@ -122,7 +122,7 @@
         - else
           .video_container
             - @event.all_documentation["videos"].each do |v|
-              .video.row
+              .video.row.expanded
                 .large-7.columns= raw figure_video_type(v, 400, 300)
                 .large-5.columns
                   .video_title= v.title
@@ -131,14 +131,14 @@
   
 - unless @event.related_content.empty?
   .related_container.event
-    .row
+    .row.expanded
       .small-12.medium-8.columns.small-centered
-        .row
+        .row.expanded
           .small-12.columns.related_title
             %h1= t(:related_content)
     - unless @event.related_content.empty?
       - @event.related_content[0..5].each do |related|
-        .row{class: related == @event.related_content[5] ? :last : false}
+        .row.expanded{class: related == @event.related_content[5] ? :last : false}
           .small-12.medium-8.columns.small-centered.related_container
             = render :partial => 'shared/related', locals: {item: @event, related: related }
 

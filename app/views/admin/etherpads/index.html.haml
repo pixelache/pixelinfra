@@ -1,18 +1,18 @@
-.row
+.row.expanded
   .small-12.columns
     %h2 Pixelache Etherpads
     
     %p Note: Etherpads are synchronised every 20 minutes. If you create a new pad it may take up to 20 minutes to appear in this list.
-.row
+.row.expanded
   .small-8.columns    
     %strong Search across all etherpads:
     :plain
       <form name="search_form" method="get" action="/" onsubmit="return search_call()">
       <input value="" style="width: 65%; margin-right: 15px; float:left;" type="text" id="search_text_input"><button style="height: 2.4rem; padding: 0.4rem;" disabled="disabled" type="submit" id="search_text_button">Search</button>
       </form>
-.row
+.row.expanded
   .small-12.columns         
-    .filter_box.row
+    .filter_box.row.expanded
       .small-12.columns
         %b Filter by:
       .small-6.medium-4.columns
@@ -32,7 +32,7 @@
           %option{:value => ""} &nbsp;
           - @etherpad_events.each do |e|
             %option{:value => e.id, :selected => (params[:by_event] == e.id.to_s ? :selected : false)}= e.event_with_date
-    .filter_box.row     
+    .filter_box.row.expanded     
       .small-6.medium-4.columns
         .filter_title Meeting
         %select#by_meeting
@@ -66,7 +66,7 @@
           }
         });
 
-.row
+.row.expanded
   .small-12.columns           
     %table.etherpads
       %thead
@@ -81,5 +81,5 @@
           = render :partial => 'etherpad', :locals => {:etherpad => pad}
     %p= link_to 'Create new Etherpad', 'http://pad.pixelache.ac/', class: [:button, :small, :round]
     
-.row
+.row.expanded
   .small-12.columns= paginate @etherpads

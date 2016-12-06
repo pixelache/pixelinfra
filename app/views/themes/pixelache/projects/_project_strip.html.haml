@@ -11,7 +11,7 @@
         - if project.evolvedto
           .evolved= link_to t(:evolved_into, project: project.evolvedto.name, year: project.evolvedto.evolution_year), '#', onclick: "$('#project_#{project.evolvedto.id.to_s}').parent().slideDown(); scrollTo('#project_#{project.evolvedto.id.to_s}'); ", style: project.background_css
     - unless project.children.visible.empty?
-      .children_strip.closed= link_to raw(pluralize(project.descendants.visible.flatten.size, t(:subproject))), '#', style: "color: ##{project.project_text_colour}", onclick: "$('#subprojects_#{project.id.to_s}').slideToggle(); $(this).parent().toggleClass('closed');return false;"
+      .children_strip.closed= link_to raw(pluralize(project.descendants.visible.to_a.flatten.size, t(:subproject))), '#', style: "color: ##{project.project_text_colour}", onclick: "$('#subprojects_#{project.id.to_s}').slideToggle(); $(this).parent().toggleClass('closed');return false;"
       
   //.selector.trigger.columns{style: "background-color: rgb(#{project.colour_offset}); opacity: 1;"} &nbsp;
   .image_box.trigger{style: project.background_image_css}
@@ -50,10 +50,10 @@
                 %li.project_page= link_to page.name, page
                 - counter += 1
 
-- unless project.children.visible.flatten.empty?
+- unless project.children.visible.to_a.flatten.empty?
   .subprojects{id: "subprojects_#{project.id.to_s}", style: "border-left: 1.7rem solid ##{project.project_bg_colour}; "}
 
-    - project.children.visible.flatten.each do |subproject|
+    - project.children.visible.to_a.flatten.each do |subproject|
       - if active_projects.include?(subproject)
         .active_strip{style: subproject.background_css}
           .arrow{style: "width: 0; height: 0; border-bottom: 14px solid transparent;	border-top: 14px solid transparent;	cursor: pointer;	border-left: 14px solid ##{project.project_bg_colour}; position: absolute; top; margin-top: 0.25rem"}

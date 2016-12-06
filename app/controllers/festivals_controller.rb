@@ -1,8 +1,7 @@
-class FestivalsController < InheritedResources::Base
-  actions :show, :index, :page, :attendees
-  
+class FestivalsController < ApplicationController
+
   def archive
-    @festival = Festival.find(params[:id])
+    @festival = Festival.friendly.find(params[:id])
     @events = @festival.events.published
     @videos = Video.where(:festival => @festival)
     @videos += Video.joins(:event).where(["events.festival_id = ?", @festival.id])
@@ -15,7 +14,7 @@ class FestivalsController < InheritedResources::Base
   end
   
   def attendees
-    @festival = Festival.find(params[:festival_id])
+    @festival = Festival.friendly.find(params[:festival_id])
     set_meta_tags :title => @festival.name + " " + t(:coming_future)
   end
   
@@ -29,7 +28,7 @@ class FestivalsController < InheritedResources::Base
   end
   
   def page
-    @festival = Festival.find(params[:id])
+    @festival = Festival.friendly.find(params[:id])
 
     
     if params[:page] =~ /\//
@@ -66,7 +65,7 @@ class FestivalsController < InheritedResources::Base
   end
   
   def show
-    @festival = Festival.find(params[:id])
+    @festival = Festival.friendly.find(params[:id])
     if !@festival.redirect_to.blank?
       redirect_to "http://#{@festival.redirect_to}"
     elsif @festival.subsite
@@ -76,8 +75,8 @@ class FestivalsController < InheritedResources::Base
   end
   
   def theme
-    @festival = Festival.find(params[:id])
-    @festivaltheme = @festival.festivalthemes.find(params[:theme_id])
+    @festival = Festival.friendly.find(params[:id])
+    @festivaltheme = @festival.festivalthemes.friendly.find(params[:theme_id])
     if @festivaltheme.description(:en) != @festivaltheme.description(:fi)
       a = Hash.new
       a["en"] = "http://#{request.host}/festivals/#{@festival.slug}/theme/#{@festivaltheme.slug}" + "?locale=en"

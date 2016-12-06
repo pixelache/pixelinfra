@@ -65,25 +65,50 @@ nav.livingspaces {
     }
   }
 }
-nav.top-bar {
+.top-bar {
+  background-color: black;
+  ul {
+    background-color: black;
+    li {
+      background-color: black;
+    }
+  }
   ul.title-area {
-    li.name {
-      padding-left: 0.4rem;
+    padding-left: 0.4rem;
+    li.menu-text {
+      padding: 0.7rem 1rem;
       span.date, .small_date {
         color: #CCC;
-        padding-left: 0.2rem;
+        padding: 0.45rem;
         font-size: 0.85rem;
       }
       a {
+        float: left;
+        padding: 0;
         color: #FFF;
+
         &:hover {
           color: $festival-orange; 
         }
       }
     }
+    
   }
-  
-  li.lang {
+  .top-bar-right {
+    ul.menu {
+      li {
+        a {
+          color: white;
+          &:hover {
+            color: $festival-orange;
+          }
+        }
+      }
+    }
+  }
+}
+.top-bar, .title-bar {
+  li.lang, li.mob_lang {
     padding-right: 0.4rem;
     line-height: 3.125rem;
     font-size: 0.8rem;
@@ -107,6 +132,14 @@ nav.top-bar {
       float: left;
       padding: 0 0.3rem;
       display: inline;
+    }
+  }
+  li.mob_lang {
+    span.bar {
+      color: black;
+    }
+    a {
+      color: $festival-orange;
     }
   }
 }
@@ -855,7 +888,7 @@ footer {
 }
 
 .share_bar {
-  margin: 0;
+  
   padding: .6rem 0;
   &.lined {
     border-top: 1px solid $festival-orange;
@@ -1005,7 +1038,7 @@ footer {
       color: #444;
       font-weight: 300;
       font-size: 0.9rem;
-
+      padding-bottom: 2.5rem;
     }
   }
   .more_news {

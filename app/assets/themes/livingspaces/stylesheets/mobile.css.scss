@@ -1,4 +1,4 @@
-@import "foundation/functions";
+//@import "foundation/functions";
 
 $small-range: (0em, 40em); /* 0, 640px */
 $medium-range: (40.063em, 64em); /* 641px, 1024px */
@@ -24,7 +24,7 @@ $medium-portrait-only:"#{$screen} and (orientation: portrait) and (min-width:#{l
 }
 
 @media #{$small-only} { 
-
+  
   #recaptcha_challenge_image{
    margin: 0 !important;
    width: 100% !important;
@@ -288,9 +288,9 @@ $medium-portrait-only:"#{$screen} and (orientation: portrait) and (min-width:#{l
 
 @media #{$medium-portrait-only} {
 
-  nav.top-bar {
+  .top-bar {
  
-    ul.title-area {
+    ul.menu {
       
       li {
         line-height: 1.5rem;
@@ -324,9 +324,22 @@ $medium-portrait-only:"#{$screen} and (orientation: portrait) and (min-width:#{l
   }
 }
 @media only screen and (max-width: 50em) {
-  nav.top-bar {
-    ul.title-area {
-      li.name {
+  .title-bar {
+    .title-bar-right {
+      ul {
+        li {
+          a {
+            .menu-icon {
+              margin-right: 1.25rem;
+            }
+          }
+        }
+      }
+    }
+    ul.menu {
+      li.menu-text {
+        font-size: 0.8rem;
+        padding: 0;
         a { padding-left: 0.2rem; }
         span.date {
           display: none;
@@ -343,9 +356,9 @@ $medium-portrait-only:"#{$screen} and (orientation: portrait) and (min-width:#{l
   }
 }
 @media only screen and (min-width: 641px) {
-  nav.top-bar {
-    ul.title-area {
-      li.name {
+  .top-bar {
+    ul.menu {
+      li.menu-text {
         .small_date {
           display: none;
         }
@@ -363,10 +376,10 @@ $medium-portrait-only:"#{$screen} and (orientation: portrait) and (min-width:#{l
 @media #{$medium-only} { 
 
 
-  nav.top-bar {
+  .top-bar {
 
    
-    ul.title-area {
+    ul.menu {
       line-height: 3.125rem;
       li {
         font-size: 0.8rem;
