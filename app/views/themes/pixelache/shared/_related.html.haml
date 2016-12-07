@@ -10,17 +10,17 @@
     .read_more= link_to t(:read_more), related
       
 - elsif related.class == Post
-
-  .related.post.column
-    .related_title= link_to t(:post) + ": " + related.name, related
-    .related_date
-      = l(related.published_at, format: :long) + ","
-      = related.creator.name
-    .row
-      - if related.image?
-        .small-12.medium-4.columns= image_tag related.image.url(:box)
-      .small-12.columns.related_excerpt{class: related.image? ? "medium-8" : "medium-12"}= raw truncate_html(sanitize(related.body, tags: %w{b bold strong i italic em underline u}), :length => 600)
-    .read_more= link_to t(:read_more), related
+  - unless related.nil?
+    .related.post.column
+      .related_title= link_to t(:post) + ": " + related.name, related
+      .related_date
+        = l(related.published_at, format: :long) + ","
+        = related.creator.name
+      .row
+        - if related.image?
+          .small-12.medium-4.columns= image_tag related.image.url(:box)
+        .small-12.columns.related_excerpt{class: related.image? ? "medium-8" : "medium-12"}= raw truncate_html(sanitize(related.body, tags: %w{b bold strong i italic em underline u}), :length => 600)
+      .read_more= link_to t(:read_more), related
 
 
 - elsif related.class == Project

@@ -8,9 +8,9 @@ class PagesController < ApplicationController
     end
 
     if params[:project_id]
-      @project = Project.find(params[:project_id])
-      @page = Page.find(params[:id])
-      @page = Page.find(params[:page]) if params[:page]
+      @project = Project.friendly.find(params[:project_id])
+      @page = Page.friendly.find(params[:id])
+      @page = Page.friendly.find(params[:page]) if params[:page]
        set_meta_tags :title => @project.name + " - " + @page.name
       render :template => 'projects/page'
     else
