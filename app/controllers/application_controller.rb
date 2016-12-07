@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   
   def render_500(exception)
     @exception = exception
+    logger.debug 'exception is ' + @exception.inspect
     render :template => "application/500", :status => 500
 
   end
