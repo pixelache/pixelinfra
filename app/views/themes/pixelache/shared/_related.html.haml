@@ -12,7 +12,7 @@
 - elsif related.class == Post
   - unless related.nil?
     .related.post.column
-      .related_title= link_to t(:post) + ": " + related.try(:name), related
+      .related_title= link_to t(:post) + ": " + related.try(:name), related rescue 'blah'
       .related_date
         = l(related.published_at, format: :long) + ","
         = related.creator.name
