@@ -2,9 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include ThemesForRails::ActionController 
   theme :determine_site
-  before_filter :configure_permitted_parameters, if: :devise_controller?
-  before_filter :get_locale
-  before_filter :populate_nav
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :get_locale
+  # before_action :populate_nav
   
   rescue_from StandardError, :with => :render_500 unless Rails.env.development?
   
