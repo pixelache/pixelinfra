@@ -19,7 +19,7 @@ class Admin::EventsController < Admin::BaseController
       flash[:notice] = 'Event created.'
       redirect_to admin_events_path
     else
-      flash[:error] = 'Error saving event.'
+      flash[:error] = 'Error saving event:' +  @event.errors.inspect
     end
   end
   
@@ -55,7 +55,7 @@ class Admin::EventsController < Admin::BaseController
       flash[:notice] = 'Event updated.'
       redirect_to admin_events_path
     else
-      flash[:error] = 'Error updating event.'
+      flash[:error] = 'Error updating event: ' + @event.errors.inspect
     end
  
   end
