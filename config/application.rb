@@ -38,7 +38,6 @@ module Pixelinfra
       g.view_specs false
       g.helper_specs false
     end
-
+    I18n.enforce_available_locales = false
   end
 end
-I18n.enforce_available_locales = false
