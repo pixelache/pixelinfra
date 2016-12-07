@@ -4,7 +4,7 @@ namespace :etherpad do
   desc 'Synchronise etherpads with pixelache database'
   task :sync_pads => :environment do
     existing_in_database = Etherpad.all.map(&:read_only_id)
-    ether = EtherpadLite.connect('http://pad.pixelache.ac', ENV['ETHERPAD_API_KEY'], '1.2.1')
+    ether = EtherpadLite.connect('http://pad.pixelache.ac', ENV['ETHERPAD_API_KEY'], '1.2.13')
     ether.pads.each do |pad|
       if existing_in_database.include?(pad.read_only_id)
         updatetimestamp = Etherpad.find_by(:read_only_id => pad.read_only_id)
