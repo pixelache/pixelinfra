@@ -187,13 +187,7 @@ display: inline-block;
     }
   }
   .menu_wrapper  {
-    .is-drilldown {
-      ul.menu {
-        li {
-          float: left;
-        }
-      }
-    }
+
     .menu > li.is-dropdown-submenu-parent > a::after {border-color: $pink transparent transparent;}
     .menu > li.is-dropdown-submenu-parent > a {
       padding: 16px;
@@ -291,6 +285,17 @@ display: inline-block;
     li {
       float: left;
       padding-right: 0.4rem;
+    }
+  }
+}
+
+.title-bar {
+  li[role=menuitem] {
+    a {  
+      @include breakpoint(small only) {
+        padding: 0 1rem 0 0 !important;
+        margin: 0 0 1rem 1rem !important;
+      }
     }
   }
 }

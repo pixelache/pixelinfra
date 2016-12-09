@@ -33,19 +33,33 @@
         ga('send', 'pageview');
     %header
       .hide-for-large{:'data-sticky-container' => ''}
-        .title-bar{ :'data-hide-for' => 'medium', :"data-responsive-toggle" => 'empathy_menu'}
+        .title-bar{ :'data-hide-for' => 'medium', :'data-responsive-toggle' => 'mobile_menu'}
           .title-bar-right
             .languages_mobile
               = link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
               %span.divider= " | "
               = link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
-          
+
 
           .title-bar-title
             = link_to image_tag(theme_image_path('logo_basic.png')), '/'
           %button.menu-icon{"data-toggle" => "", :type => "button"}
-                
-      #empathy_menu{:'data-sticky-container' => ''}              
+          .title-bar-left                  
+            .menu_wrapper
+              %ul.menu.menu_bar#mobile_menu{:"data-drilldown" => ''}
+                %li
+                  = link_to t(:info), '#'
+                  %ul#info.menu
+                    %li= link_to t("empathy.about"), festival_page_festival_path('festival-2016', 'about')
+                    %li= link_to t("empathy.contact"), festival_page_festival_path('festival-2016', 'contact')
+                    %li= link_to t("empathy.media"), festival_page_festival_path('festival-2016', 'media')
+                    %li= link_to t("empathy.locations"), festival_page_festival_path('festival-2016', 'locations')
+                %li
+                  = link_to t("empathy.programme"), '/programme'
+                  %ul.menu
+                    %li= link_to t("empathy.schedule"),  festival_page_festival_path('festival-2016', 'schedule')
+                %li= link_to t("empathy.news"), festival_posts_path('festival-2016')    
+      #empathy_menu.hide-for-small-only{:'data-sticky-container' => ''}              
         .top-bar
           .top-bar-right.show-for-medium.show-for-large
             .languages
@@ -57,7 +71,7 @@
               %li.menu-text= link_to image_tag(theme_image_path('logo_basic.png')), '/'
           .top-bar-left                  
             .menu_wrapper
-              %ul.dropdown.menu.menu_bar{:'data-responsive-menu' => 'drilldown medium-dropdown', :"data-dropdown-menu" => ''}
+              %ul.dropdown.menu.menu_bar{:"data-dropdown-menu" => ''}
                 %li
                   = link_to t(:info), '#'
                   %ul#info.menu
