@@ -97,7 +97,7 @@ nav.livingspaces {
   .top-bar-right {
     ul.menu {
       li {
-        @include breakpoint(small-only) {
+        @include breakpoint(small only) {
           display: block;
         }
         a {

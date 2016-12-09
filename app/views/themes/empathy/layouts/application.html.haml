@@ -61,12 +61,12 @@
                 %li= link_to t("empathy.news"), festival_posts_path('festival-2016')    
       #empathy_menu.hide-for-small-only{:'data-sticky-container' => ''}              
         .top-bar
-          .top-bar-right.show-for-medium.show-for-large
+          .top-bar-right
             .languages
               = link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
               %span.divider= " | "
               = link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
-          .top-bar-left.show-for-medium.show-for-large
+          .top-bar-left
             %ul.title-area.menu
               %li.menu-text= link_to image_tag(theme_image_path('logo_basic.png')), '/'
           .top-bar-left                  
