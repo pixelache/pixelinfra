@@ -47,17 +47,17 @@
                 
       #empathy_menu{:'data-sticky-container' => ''}              
         .top-bar
-          .top-bar-right.show-for-medium
+          .top-bar-right.show-for-medium.show-for-large
             .languages
               = link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
               %span.divider= " | "
               = link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
-          .top-bar-left.show-for-medium
+          .top-bar-left.show-for-medium.show-for-large
             %ul.title-area.menu
               %li.menu-text= link_to image_tag(theme_image_path('logo_basic.png')), '/'
           .top-bar-left                  
             .menu_wrapper
-              %ul.dropdown.menu.menu_bar{:'data-drilldown' => ''}
+              %ul.dropdown.menu.menu_bar{:'data-responsive-menu' => 'drilldown medium-dropdown', :"data-dropdown-menu" => ''}
                 %li
                   = link_to t(:info), '#'
                   %ul#info.menu

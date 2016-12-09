@@ -187,6 +187,13 @@ display: inline-block;
     }
   }
   .menu_wrapper  {
+    .is-drilldown {
+      ul.menu {
+        li {
+          float: left;
+        }
+      }
+    }
     .menu > li.is-dropdown-submenu-parent > a::after {border-color: $pink transparent transparent;}
     .menu > li.is-dropdown-submenu-parent > a {
       padding: 16px;
@@ -206,7 +213,7 @@ display: inline-block;
       }
     }
     float: left;
-    width: calc(100% - 320px);
+    width: 100%;
     padding-top: 1.5rem;
     .languages {
       float: right;
