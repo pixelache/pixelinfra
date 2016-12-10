@@ -20,7 +20,7 @@ module Pixelinfra
     config.cache_store = :redis_store, "redis://localhost:6379/0/cache", { expires_in: 8.hours }
     config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
     config.session_store :cookie_store, :key => '_pixelache_session', :domain => :all
-    config.assets.paths << Rails.root.join("app", "assets",  "fonts")
+
 
     # don't generate RSpec tests for views and helpers
     config.generators do |g|
