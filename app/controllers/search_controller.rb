@@ -14,7 +14,7 @@ class SearchController < ApplicationController
     @hits.flatten!
     @hits.uniq!
     @hits = @hits.group_by{|x| x.class.to_s }
-    set_meta_tags title: t(:search_results_for, result: @term)
+    set_meta_tags title: t(:search_results_for, results: @term)
   end
   
 end

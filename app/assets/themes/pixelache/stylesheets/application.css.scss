@@ -175,6 +175,9 @@ nav#top_nav {
         list-style-type: none;
 
         input[type=text]{
+          background: url(/assets/pixelache/images/searchi.png) no-repeat right center;
+          background-color: white;
+          color: #333;
           margin: 4px 0 0 0;
           max-height: 32px;
         }
@@ -188,7 +191,9 @@ nav#top_nav {
     #searchli {
   //    float: right;
       display: none;
+    
       &.open {
+        
         display: block;
       }
     }

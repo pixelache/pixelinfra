@@ -23,9 +23,9 @@
 
 
 .post_single
-  .row
+  .row.expanded
     .columns.small-centered.small-10{:class => figure_width(@post, "medium-8")}
-      .internal.row
+      .internal.row.expanded
         .small-12.columns{:style => 'padding: 0px'}
           .categories= @post.category
         
@@ -62,25 +62,25 @@
                   = link_to @post.event.name, @post.event
           .body=raw @post.body
           // #Nokogiri::HTML.parse(@post.body.gsub(/(<(?!\/)[^>]+>)+(<\/[^>]+>)+/, '')).inner_html
-      .row
+      .row.expanded
         .small-12.columns.share_this= render :partial => 'shared/share_this_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@post)}"), title: CGI::escape(@post.title)}
 
   - unless @post.related_content.empty?
     .related_container.post
-      .row
+      .row.expanded
         .columns.small-centered.small-10{:class => figure_width(@post, "medium-8")}
-          .row
+          .row.expanded
             .small-12.columns.related_title
               %h1= t(:related_content)
-      .row
+      .row.expanded
         .columns.small-centered.small-10{:class => figure_width(@post, "medium-8")}
           - @post.related_content[0..5].each do |related|
-            .row{class: related == @post.related_content[5] ? :last : false}
+            .row.expanded{class: related == @post.related_content[5] ? :last : false}
               = render :partial => 'shared/related', locals: {item: @post, related: related }
 
     / - unless @post.related_content.empty?
     /   .related_container
-    /     .row.related_title
+    /     .row.expanded.related_title
     /       %h1= t(:related_content)
     /     - @post.related_content.each do |related|
     /       = render :partial => 'shared/related', locals: {related: related}

@@ -90,7 +90,8 @@
         %li.has-form#searchli{class: (@term.nil? ? false : :open)}
           = form_tag '/search' do 
             = text_field :search, :term, value:  (@term.nil? ? t(:search) : @term), class: :clearfield        
-        %li.search_icon= link_to image_tag(theme_image_path('search.png')), '#', onclick: "$('#searchli').toggle('slide');$('li.search_icon').css('display', 'none');return false;"
+        - if @term.nil?
+          %li.search_icon= link_to image_tag(theme_image_path('search.png')), '#', onclick: "$('#searchli').toggle('slide');$('li.search_icon').css('display', 'none');return false;"
                                 
     .top-bar-right
       - if current_user

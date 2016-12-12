@@ -1,14 +1,26 @@
 @import 'variables';
-
+.no-js {
+  .archive_nav {
+    width: 100%;
+  }
+  
+}
 .search_results_container {
+  
+  h2 {
+    color: #333;
+  }
   background-color: none;
   
-  .magellan-scrollnav [data-magellan-expedition] dd {
+  .magellan-scrollnav [data-magellan] li {
     border-bottom: 1px solid #333;
+    a {
+      color: #333;
+    }
   }
   
   .sub-nav {
-    dd.active {
+    li.active {
 
       background-color: $newblue;
       a {
@@ -20,9 +32,36 @@
       }
     }
     
-    dd {
+    li {
       a {
         color: #333;
+      }
+    }
+  }
+  
+  #posts {
+    a.hit {
+      margin-bottom: 1.5rem;
+      .post {
+        float: left;
+        width: 100%;
+        .search_results_post_info {
+          .title {
+            color: #333;
+            font-family: $quicksand;
+          }
+          .date {
+            color: #555;
+            font-size: 0.775rem;
+            font-family: $opensans;
+             margin-bottom: 1rem;
+          }
+        }
+      }
+      &:hover {
+        .post {
+          background-color: #ddd;
+        }
       }
     }
   }
@@ -70,7 +109,7 @@
   .archive_image_box {
     .blue {
       .date {
-        margin: 31px 15px;
+        margin: 25px 15px;
 
       }
     }

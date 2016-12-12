@@ -95,7 +95,7 @@ namespace :deploy do
   
 
   before :starting,     :check_revision
-  before :compile_assets,    :fonts
+  before :compile_assets,  :fonts
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart

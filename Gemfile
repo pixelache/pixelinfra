@@ -70,7 +70,7 @@ gem 'omniauth-facebook' #, '1.4.0'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 gem 'paper_trail' #, '~> 3.0.6'
-gem 'puma'
+gem 'puma', group: :production
 gem 'rack-utf8_sanitizer'
 gem 'rails-jquery-autocomplete'
 # gem 'rails3-jquery-autocomplete', github: 'crowdint/rails3-jquery-autocomplete'
@@ -104,5 +104,5 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-
+  gem 'thin'
 end
