@@ -207,15 +207,7 @@
                         .search_results_post_info
                           .title= p.title
                           .date= p.published_at.strftime('%d %b %Y')
-                /
-                / .row.expanded
-                /   - @posts.each do |p|
-                /     .columns.image_thumbnail
-                /       = link_to p, target: :blank do
-                /         .archive_image_box{style: p.image? ? "background-image: url(#{p.image.url(:thumb).gsub(/development/, 'production')});" : "background-image: url('/assets/pixelache/images/arch_sq_grey.png')" , onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
-                /           .blue
-                /             .date= p.published_at.strftime('%d %b')
-                            
+
 
         - unless @photos.empty?
           %section.photos#photos{:"data-magellan-target" => :photos }
