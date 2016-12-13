@@ -7,7 +7,11 @@ class Admin::ProjectsController < Admin::BaseController
     @project = Project.friendly.find(params[:id])
     
   end
-
+  
+  def new
+    @project = Project.new
+  end
+  
   def index
     @projects = Project.all
   end
