@@ -1,19 +1,19 @@
-.row
+.row.expanded
   .small-12.columns
     %h2= t(:documents)
     
-.row
+.row.expanded
   .small-12.columns
     %p This is for uploading documents and publications that are NOT attached to a specific project, festival, event or other activity (for example: annual reports, portfolios for Pixelache as a whole, etc.).
     
     %p If you are trying to attach a file that is related to a specific activity, please do so through that activity's (festival, project, event, etc.) CMS page.
     
 = semantic_form_for [:admin, @document], html: {multipart: true, :'data-abide' => ''} do |f|
-  .row
+  .row.expanded
     .small-12.columns= f.input :subsite, input_html: {required: ''}
-  .row
+  .row.expanded
     .small-12.columns
-      %ul.tabs#languages{"data-tab" => ""}
+      %ul.tabs#languages{"data-tabs" => ""}
         - I18n.available_locales.each_with_index do |locale, i|
           %li.tabs-title{:class => (i == 0 ? 'is-active' : false)}
             = link_to t(:locale_name, :locale => locale), "##{locale}"
@@ -21,17 +21,17 @@
         - I18n.available_locales.each_with_index do |locale, i|
           .tabs-panel{:class => (i == 0 ? 'is-active' : false), :id => "#{locale}"}
             = f.globalize_fields_for locale do |en|
-              .row
+              .row.expanded
                 .small-12.columns
                   %b= "Name/title of document in #{t :locale_name, :locale => locale}"
                   = en.text_field :title  
-              .row
+              .row.expanded
                 .small-12.columns
                   %b= "Short document description in #{t :locale_name, :locale => locale}"
                   = en.cktext_area :description
-  .row
+  .row.expanded
     .small-12.columns= f.input :date_of_release, as: :string, input_html:  { class: "datetime_picker", required: ''}
-  .row
+  .row.expanded
     = f.fields_for :attachment, @document.attachment do |ff|
 
       .small-12.columns
@@ -46,6 +46,6 @@
         = ff.input :public, as: :boolean
         / = ff.link_to_remove 'Remove this attachment', class: [:button, :round, :alert, :tiny]
   / = f.link_to_add 'Add an attachment', :attachments, class: [:button, :round, :tiny]
-  .row
+  .row.expanded
     .small-12.columns= f.submit t(:save), class: [:button, :small, :round]
     
