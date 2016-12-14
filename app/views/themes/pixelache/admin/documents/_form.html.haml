@@ -13,7 +13,7 @@
     .small-12.columns= f.input :subsite, input_html: {required: ''}
   .row
     .small-12.columns
-      %ul.tabs{"data-tab" => ""}
+      %ul.tabs#languages{"data-tab" => ""}
         - I18n.available_locales.each_with_index do |locale, i|
           %li.tabs-title{:class => (i == 0 ? 'is-active' : false)}
             = link_to t(:locale_name, :locale => locale), "##{locale}"
