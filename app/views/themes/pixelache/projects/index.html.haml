@@ -3,27 +3,47 @@
   %span.leaf
     %strong= link_to t(:projects), projects_path
 
-.project_index
-  .dividing_strip.top
-    .row  
-      .small-12.columns.text-center= t :active_projects     
-  - @active_projects.shuffle.each do |project|
-    = render :partial => 'project_strip', locals: {project: project, active_projects: @active_projects, arrow: false }
-  .dividing_strip
-    .row  
-      .small-12.columns.text-center= t :past_projects
-  - @inactive_projects.sort_by(&:name).each do |project|
-    = render :partial => 'project_strip', locals: {project: project, active_projects: @active_projects, arrow: false }
+.new_project_index
+  %div{:'data-sticky-container' => ''}
+    .dividing_strip.top{:"data-sticky" => '', style: "width:100%;", :'data-sticky-on' => 'small', :'data-margin-top' => '2.75', :'data-anchor' => 'active'}
+      .row.expanded
+        .small-12.columns.text-center= t :active_projects       
+
+  .row.expanded.small-up-1.medium-up-2.large-up-3#active
+    - @active_projects.shuffle.each do |project|
+      - if project.parent
+        - if @active_projects.include?(project.parent)
+          - next
+      .column= render partial: 'new_project_cube', locals: {project: project}
+
+  %div{:'data-sticky-container' => ''}
+    .dividing_strip{:"data-sticky" => '', style: "width:100%;", :'data-sticky-on' => 'small', :'data-margin-top' => '2.75', :'data-anchor' => 'past'}
+      .row.expanded
+        .small-12.columns.text-center= t :past_projects
+    
+  .past.row.expanded.small-up-1.medium-up-3.large-up-4#past
+    - @inactive_projects.sort_by(&:name).each do |project|
+      .column= render partial: 'past_project_cube', locals: {project: project}
+/ .project_index
+/   .dividing_strip.top
+/     .row
+/       .small-12.columns.text-center= t :active_projects
+/   - @active_projects.shuffle.each do |project|
+/     = render :partial => 'project_strip', locals: {project: project, active_projects: @active_projects, arrow: false }
+/   .dividing_strip
+/     .row
+/       .small-12.columns.text-center= t :past_projects
+/   - @inactive_projects.sort_by(&:name).each do |project|
+/     = render :partial => 'project_strip', locals: {project: project, active_projects: @active_projects, arrow: false }
     
 = content_for :jquery do
   :plain
-
-    $('.strip').hover(function() {
-      $('.image_overlay').css('opacity', 0.2);
-      $('.occluded').css('display', 'none');
-      $(this).find('.image_overlay').css('opacity', '0.9');
-      $(this).find('.image_overlay').children('.occluded').css('display', 'block');
-      
-    }, function() {
-
+    var $grid = $('#past').masonry({
+      // options...
+      itemSelector: '.column',
+      columnWidth: '.column a.project_index_box',
+      percentPosition: true
+    });
+    $grid.imagesLoaded().progress( function() {
+      $grid.masonry('layout');
     });

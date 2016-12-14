@@ -5,7 +5,7 @@
 
   - unless project.events.empty?
     %ul.events
-      - project.events.sort_by(&:start_at).each do |event|
+      - project.events.sort_by(&:start_at).reverse.each do |event|
         %li
           %span{:style => 'font-size: 11px;font-weight: 300;color: #666;'}= link_to event.event_with_date, event
 

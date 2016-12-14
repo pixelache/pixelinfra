@@ -1,0 +1,35 @@
+.total_box{style: project.background_image_css}[project]
+  = link_to project, class: [:project_index_box] do
+    .project_image
+    .text
+      .overlay{style: project.background_css}
+        .title= project.name
+        .subtitle= project.short_description
+        - unless project.self_and_descendants.map{|x| x.events.published}.flatten.empty? && project.self_and_descendants.map{|x| x.posts.published}.flatten.empty?
+          .latest
+            .heading= t :latest
+            %ul.latest_stuff
+              - project.all_activities.reverse.take(3).each do |ll|
+                %li
+                  = ll.name
+                  %span.metadata= " (" + l(ll.feed_time.to_date, format: :long) + ")"                
+      
+      .bottom{style: "color: ##{project.project_text_colour}"}
+        .years
+          -if project.all_activities.empty?
+            = t :new_project
+          - else
+            = project.all_activities.first.feed_time.year
+            = raw "&mdash;"
+            - if project.active?
+              = t :present
+            - else
+              =project.all_activities.last.feed_time.year
+        - unless project.children.active.empty?
+          = pluralize(project.children.active.size, 'active subproject') + ':'
+        
+
+  - unless project.children.active.empty?
+    .drawer.float-center{style: project.background_css}
+      - project.children.active.each do |subproject|
+        .subproject= link_to subproject.name, subproject, style: "color: ##{project.project_link_colour};"

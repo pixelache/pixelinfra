@@ -6,6 +6,7 @@ class Project < ActiveRecord::Base
   has_many :pages
   has_many :posts
   has_many :videos
+  has_many :residencies
   has_many :attachments, as: :item
   translates :description, :short_description
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['description'].blank? && x['short_description'].blank? }
@@ -35,6 +36,10 @@ class Project < ActiveRecord::Base
     return a + [' -- inactive/old projects -- '] + i
   end 
     
+  def all_activities
+    [self_and_descendants.map{|x| x.events.published}.flatten, self_and_descendants.map{|x| x.posts.published}.flatten, self_and_descendants.map{|x| x.residencies}.flatten].flatten.sort_by(&:feed_time)
+  end
+  
   def subscribe_path
     '/admin/projects/' + self.slug + '/subscribe'
   end
@@ -55,10 +60,11 @@ class Project < ActiveRecord::Base
     if background.url.nil?
       ""
     else
-      "background: url(#{background.url.gsub(/development/, 'production')}) no-repeat right top; background-size: cover; background-color:  ##{project_bg_colour}"
+      "background: url(#{background.url.gsub(/development/, 'production')}) no-repeat center center; background-size: cover; background-color:  ##{project_bg_colour}"
     end
   end
-  
+
+    
   def colour_offset
     "#{project_bg_colour.match(/(..)(..)(..)/).to_a[1..3].map{|x| [[0, x.hex + ( x.hex * -0.15)].max, 255].min }.map{|x| x.to_i.to_s }.join(', ')}"
   end
@@ -71,4 +77,7 @@ class Project < ActiveRecord::Base
     description
   end
   
+  def visible?
+    !hidden
+  end
 end

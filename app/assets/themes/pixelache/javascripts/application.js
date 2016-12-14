@@ -1,6 +1,8 @@
 //= require pixelache/javascripts/jstree.min
 //= require pixelache/javascripts/jquery.clearfield
 //= require chosen-jquery
+//= require pixelache/javascripts/masonry.pkgd.min
+//= require pixelache/javascripts/imagesloaded.pkgd.min
 
 function up_pixelache_menu() {
   var mainfinish = 0;

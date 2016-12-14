@@ -36,11 +36,11 @@
                     %li.event= link_to t(:event) + ": " + event.name, subproject
                     - counter += 1
           - if counter < 7
-            - project.events.published.take(6).each do |event|
+            - project.events.published.sort_by(&:start_at).reverse.take(6).each do |event|
               %li.event= link_to t(:event) + ": " + event.name, project
               - counter += 1
           - if counter < 7
-            - project.posts.published.take(4).each do |post|
+            - project.posts.published.sort_by(&:published_at).take(4).each do |post|
               - if counter < 7
                 %li.post= link_to post.name, post
                 - counter += 1

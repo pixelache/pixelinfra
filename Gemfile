@@ -95,7 +95,7 @@ gem 'yt'
 
 group :development do
   gem 'better_errors' #, github: 'workingnotworking/better_errors'
-  # gem 'binding_of_caller'
+  gem 'binding_of_caller'
   gem 'letter_opener'
   gem 'listen', '~> 3.0.5'
   gem 'ruby_parser', '>= 3.0.1'

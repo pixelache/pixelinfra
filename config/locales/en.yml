@@ -301,6 +301,7 @@ en:
   join: 'Join'
   last_events: 'Recent events'
   last_modified:  "Last edited on %{when}"
+  latest: 'Latest: '
   latest_news: 'Latest news'
   led_to_new_project: 'Did this proposal lead to the creation of a project?'
   long_description: 'Longer project description. Go crazy here.'
@@ -316,6 +317,7 @@ en:
   network: 'Network'
   new_membership: 'New membership'
   new_post: 'New post'
+  new_project: 'New project!'
   new_project_proposal: 'New project proposal'
   new_residency: 'New residency'
   new_user_account: 'New user account'
@@ -352,6 +354,7 @@ en:
   posted_by: "Posted by %{poster} on %{when}"
   posts: 'Posts'
   posts: 'Posts'
+  present: 'present'
   press: 'Press'
   programme: 'Programme'
   production_residencies: 'Production Residencies'
@@ -436,6 +439,7 @@ en:
   captcha_error: 'You did not enter the correct CAPTCHA. Please try again.'
   member_activity: 'Member activity'
   ago: ' ago'
+  subproject_of: 'Subproject of: '
   twitter_follow: "Follow %{twitter_name}"
   error: 'There was an error with this site.'
   reply: 'Reply'

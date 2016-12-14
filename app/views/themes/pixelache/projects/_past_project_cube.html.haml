@@ -1,0 +1,55 @@
+.total_box{style: project.background_image_css}[project]
+  = link_to project, class: [:project_index_box] do
+    .text
+      .backed{style: project.background_css}
+        .title
+          = project.name
+          .years
+            -if project.all_activities.empty?
+              = t :new_project
+            - else
+              - if project.all_activities.first.feed_time.year == project.all_activities.last.feed_time.year
+                = project.all_activities.first.feed_time.year
+              - else
+                = project.all_activities.first.feed_time.year
+                = raw "&mdash;"
+                = project.all_activities.last.feed_time.year
+      .overlay{style: project.background_css}
+
+        .subtitle= project.short_description
+        - unless project.all_activities.empty?
+          .latest
+            = t :latest
+            %ul.latest_stuff
+              - project.all_activities.reverse.take(1).each do |ll|
+                %li
+                  = ll.name
+                  %span.metadata= " (" + l(ll.feed_time.to_date, format: :long) + ")"                
+    
+
+
+        
+
+  - if project.parent
+    .drawer{style: project.background_css}
+      .parents
+        = t :subproject_of
+        - project.self_and_ancestors.reverse.each_with_index do |p, i|
+          - if p != project
+            = link_to p.name, '#', onclick: 'javascript:scroll_To("#project_' + p.id.to_s + '");return false;', style: "color: ##{project.project_link_colour};"
+            - unless project.self_and_ancestors.reverse[i+1] == project
+              = " : "
+        
+  .drawer{style: project.background_css}
+    .text-center
+      - unless project.events.published.empty?
+        %span.item= pluralize(project.events.published.size, t(:event)).downcase
+      - unless project.posts.published.empty?
+        %span.item= pluralize(project.posts.published.size, 'news item').downcase
+      - unless project.children.empty?
+        %span.item.last= pluralize(project.children.size, 'subproject').downcase
+  - if project.evolvedto
+    .drawer{style: project.background_css}
+      .evolved= link_to_if project.evolvedto.visible?, t(:evolved_into, project: project.evolvedto.name, year: project.evolvedto.evolution_year), '#', onclick: 'javascript:scroll_To("#project_' + project.evolvedto.id.to_s + '");return false;', style: "color: ##{project.project_link_colour};"
+    / - project.children.each do |subproject|
+    /   .subproject= link_to subproject.name, '#', style: "color: ##{project.project_link_colour};", onclick: 'javascript:scroll_To("#' + subproject.slug + '");return false;'

@@ -40,7 +40,7 @@ $(function(){
 function scroll_To(target) { 
 
   $('html, body').stop().animate({
-      'scrollTop': $(target).offset().top - 40
+      'scrollTop': $(target).offset().top - 150
   }, 900, 'swing', function () {
       //window.location.hash = target;
   });
