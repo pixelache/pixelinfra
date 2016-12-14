@@ -2,17 +2,44 @@ class Admin::FestivalsController < Admin::BaseController
   # autocomplete :place, :name
   handles_sortable_columns
   
+  def edit
+    @festival = Festival.friendly.find(params[:id])
+    
+  end
+  
+  def new
+    @festival = Festival.new
+  end
+  
+
   
   def create
-    create! { admin_festivals_path }
+    @festival = Festival.new(festival_params)
+    if @festival.save
+      flash[:notice] = 'Festival created.'
+      redirect_to admin_projects_path
+    else
+      flash[:error] = 'Error saving project.'
+    end
   end
   
   def update
-    update! { admin_festivals_path }
+    @festival = Festival.friendly.find(params[:id])
+    if @festival.update_attributes(festival_params)
+      flash[:notice] = 'Festival updated.'
+      redirect_to admin_projects_path
+    else
+      flash[:error] = 'Error updating project.'
+    end
+ 
   end
   
   def destroy
-    destroy! { admin_festivals_path }
+    @project = Festival.friendly.find(params[:id])
+    if @project.destroy
+      flash[:notice] = 'Festival deleted.'
+    end
+    redirect_to admin_projects_path
   end
   
   
@@ -68,12 +95,12 @@ class Admin::FestivalsController < Admin::BaseController
   end  
   protected
   
-  def permitted_params
-    params.permit(:festival => [:name, :website, :slug, :start_at, :has_listserv, :subsite_id, :redirect_to, :listservname,
+  def festival_params
+    params.require(:festival).permit(:name, :website, :slug, :start_at, :has_listserv, :subsite_id, :redirect_to, :listservname,
        :festival_location, :tertiary_colour, :remove_festivalbackdrop,  :node_id, :remove_image, :festival_id, :end_at, 
        :background_colour, :primary_colour, :image, :published, :subtitle, :slug, :festivalbackdrop,
         translations_attributes: [:id, :locale, :overview_text], 
-         attachments_attributes: [:id, :year_of_publication, :attachedfile, :title, :description, :public, :item_type, :item_id, :documenttype_id,  :_destroy], videos_attributes: [:id, :in_url, :_destroy]] )
+         attachments_attributes: [:id, :year_of_publication, :attachedfile, :title, :description, :public, :item_type, :item_id, :documenttype_id,  :_destroy], videos_attributes: [:id, :in_url, :_destroy] )
   end
     
 end 
