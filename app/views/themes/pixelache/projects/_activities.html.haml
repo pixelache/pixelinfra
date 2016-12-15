@@ -1,3 +1,2 @@
 - @activities.each do |activity|
-  .row
-    .small-12.columns= render :partial => 'shared/related', locals: {related: activity}
+  = render :partial => 'shared/related', locals: {related: activity}

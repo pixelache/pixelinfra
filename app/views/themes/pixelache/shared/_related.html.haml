@@ -38,7 +38,7 @@
             
 - elsif related.class == Page
   .related.related_page.column
-    .related_title= link_to  t(:page) + ": " + related.title, related
+    .related_title= link_to  related.title, related
     .row
       .small-12.columns.related_excerpt= raw truncate_html(strip_tags(related.body), :length => 600)
     .read_more= link_to t(:read_more), related

@@ -39,7 +39,7 @@ class PostsController < ApplicationController
       end
       set_meta_tags title: t(:news),
         canonical: posts_url,
-        og: {image:'http://pixelache.ac/assets/pixelache/images/PA_logo.png', 
+        og: {image:'https://pixelache.ac/assets/pixelache/images/PA_logo.png', 
               title: t(:news), type: 'website', url: posts_path
             }, 
         twitter: {card: 'summary', site: '@pixelache'},
@@ -63,7 +63,7 @@ class PostsController < ApplicationController
             end
           end
         elsif @post.subsite != @site
-          redirect_to "http://#{@post.subsite.subdomain}/posts/#{params[:id]}" unless request.xhr?
+          redirect_to "https://#{@post.subsite.subdomain}/posts/#{params[:id]}" unless request.xhr?
         end
       end
     end
@@ -83,7 +83,7 @@ class PostsController < ApplicationController
       
       set_meta_tags :title => @post.title, 
                     canonical: url_for(@post),
-                    og: {image: (@post.image? ?  [ @post.image.url(:box).gsub(/^https/, 'http'), { secure_url: @post.image.url(:box) } ] : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
+                    og: {image: (@post.image? ?  [ @post.image.url(:box), { secure_url: @post.image.url(:box) } ] : 'https://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
                           title: @post.title, type: 'website', url: url_for(@post),
                           description: ActionView::Base.full_sanitizer.sanitize(@post.description[0..500]) + "..."
                         }, 

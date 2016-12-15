@@ -46,7 +46,7 @@
   .row
     .related.related_page
       .related_metadata
-      .title= link_to  t(:page) + ": " + related.title, related
+      .title= link_to  related.title, related
       .row
         .small-12.columns.body= raw truncate_html(strip_tags(related.body), :length => 350)
       .row

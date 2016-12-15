@@ -180,7 +180,13 @@ table.etherpads {
   .last.row .related {
     border-bottom: none;
   }
+  .last {
+    .related {
+      border-bottom: none;
+    }
+  }
   .related {
+
     &:hover {
       background-color: #efefef;
     }
@@ -201,6 +207,7 @@ table.etherpads {
       font-family: $quicksand;
       font-size: 1.3rem;
       color: #333;
+      margin-bottom: 1rem;
       line-height : 1.8rem;
       a {
         color: #333;
@@ -221,7 +228,7 @@ table.etherpads {
       line-height: 1.4rem;
     }
     .read_more {
-      margin: 0.8rem 0;
+      margin: 0.8rem;
       text-transform: lowercase;
       a {
         font-family: $quicksand;

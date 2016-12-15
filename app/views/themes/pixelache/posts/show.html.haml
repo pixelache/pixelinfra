@@ -74,9 +74,9 @@
               %h1= t(:related_content)
       .row.expanded
         .columns.small-centered.small-10{:class => figure_width(@post, "medium-8")}
-          - @post.related_content[0..5].each do |related|
+          - @post.related_content[0..5].each_with_index do |related, index|
             .row.expanded{class: related == @post.related_content[5] ? :last : false}
-              = render :partial => 'shared/related', locals: {item: @post, related: related }
+              %div{class: related == @post.related_content[0..5].last ? :last : false}= render :partial => 'shared/related', locals: {item: @post, related: related }
 
     / - unless @post.related_content.empty?
     /   .related_container

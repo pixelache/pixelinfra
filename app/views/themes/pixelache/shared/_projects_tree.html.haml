@@ -1,50 +1,52 @@
 .left_collapse
-  %ul.project_trees.dropdown.menu{:'data-dropdown-menu' => ''}
+  %ul.project_trees.dropdown.menu{:'data-dropdown-menu' => '', style: @project.background_css}
     - unless @project.children.visible.empty?
       %li
-        = link_to  t(:subprojects), '#'
+        = link_to  t(:subprojects), '#', style: "color: ##{@project.project_link_colour}"
         %ul#subprojects.menu
           - @project.children.visible.each do |child|
             %li= link_to child.name, child
     -  unless @project.pages.empty?
       - if @project.pages.roots.empty?
         - collection = @project.pages.first.children.published
-      - else
+      - elsif @project.pages.roots.first.children.published.empty?
+        - collection = @project.pages.roots
+      -else
         - collection = @project.pages.roots.first.children.published
       - collection.each do |child|
         - if child.children.published.empty?
           - if child.project
-            %li= link_to child.name, child.project
+            %li= link_to child.name, child.project, style: "color: ##{@project.project_link_colour}"
           - else
-            %li= link_to child.name, project_page_path(@project, child)
+            %li= link_to child.name, project_page_path(@project, child), style: "color: ##{@project.project_link_colour}"
         - else
           %li
-            = link_to child.name, project_page_path(@project, child)
+            = link_to child.name, project_page_path(@project, child), style: "color: ##{@project.project_link_colour}"
             %ul.menu
-              %li= link_to t(:overview), project_page_path(@project, child)
+              %li= link_to t(:overview), project_page_path(@project, child), style: "color: ##{@project.project_link_colour}"
               - child.children.published.each do |subchild|
                 - if subchild.project
-                  %li= link_to subchild.name, subchild.project
+                  %li= link_to subchild.name, subchild.project, style: "color: ##{@project.project_link_colour}"
                 - else
-                  %li= link_to subchild.name, project_page_path(@project, subchild)
+                  %li= link_to subchild.name, project_page_path(@project, subchild), style: "color: ##{@project.project_link_colour}"
     - unless @project.self_and_descendants.visible.map{|x| x.events.published }.flatten.empty?
       %li
-        = link_to  t(:events), '#'
+        = link_to  t(:events), '#', style: "color: ##{@project.project_link_colour}"
         %ul#events.menu
           - @project.self_and_descendants.visible.map{|x| x.events.published }.flatten.sort_by(&:start_at).reverse.take(5).each do |event|
-            %li= link_to event.event_with_date, event
+            %li= link_to event.event_with_date, event, style: "color: ##{@project.project_link_colour}"
           - if @project.self_and_descendants.visible.map{|x| x.events.published }.flatten.size > 5
-            %li= link_to t(:all_events), project_events_path(project_id: @project.slug)
+            %li= link_to t(:all_events), project_events_path(project_id: @project.slug), style: "color: ##{@project.project_link_colour}"
           
     - unless @project.self_and_descendants.visible.map{|x| x.posts.published }.flatten.empty?
       %li
-        = link_to  t(:news), '#'
+        = link_to  t(:news), '#', style: "color: ##{@project.project_link_colour}"
         %ul#posts.menu
           - @project.self_and_descendants.visible.map{|x| x.posts.by_site(@site).published }.flatten.sort_by(&:published_at).reverse.take(5).each do |p|
-            %li= link_to p.title, p
+            %li= link_to p.title, p, style: "color: ##{@project.project_link_colour}"
           - if @project.self_and_descendants.visible.map{|x| x.posts.by_site(@site).published }.flatten.size > 5
-            %li= link_to t(:all_posts), project_posts_path(@project)
+            %li= link_to t(:all_posts), project_posts_path(@project), style: "color: ##{@project.project_link_colour}"
 
     - unless @project.attachments.public_files.empty?
       %li
-        = link_to t(:documents), project_publications_path(@project)
+        = link_to t(:documents), project_publications_path(@project), style: "color: ##{@project.project_link_colour}"

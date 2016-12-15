@@ -52,14 +52,12 @@
                 
         - unless @activities.empty?
           .activities_wrapper.row.expanded
-            .small-12.columns
-              .row.expanded
-                .small-12.columns.wrapper_title= t :recent_activity
-              #activities.related_container= render :partial => 'activities'
+            .wrapper_title= t :recent_activity
+            #activities.related_container= render :partial => 'activities'
 
-          .row.expanded.news_link
-            .small-3.columns.right.end.text-right
-              .read_more= link_to t(:all_news), project_posts_path(@project)
+
+
+          .row.expanded.news_link= link_to t(:all_news), project_posts_path(@project)
 
 
                       
