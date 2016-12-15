@@ -321,7 +321,10 @@ td .date {
 }
 
 #sticky_page {
-  height: 30px !important;
+  height: 8px !important;
+  &.override {
+    height: 30px !important;
+  }
 }
 
 .page_tree {
