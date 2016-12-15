@@ -3,14 +3,26 @@ class Admin::OpencallsController < Admin::BaseController
   handles_sortable_columns
 
   def create
-    create! { admin_opencalls_path }
+    @opencall = Opencall.new(page_params)
+    if @opencall.save
+      flash[:notice] = 'Open call saved.'
+      redirect_to admin_pages_path
+    end
   end
   
-
+  
+  def destroy
+    @opencall = Subsite.find(params[:subsite_id]).pages.find(params[:id])
+    @opencall.destroy!
+    redirect_to admin_pages_path
+  end
+  
+  def new
+    @opencall = Opencall.new
+  end
     
   def edit
     @opencall = Opencall.friendly.find(params[:id])
-
   end
 
   def index
@@ -28,11 +40,14 @@ class Admin::OpencallsController < Admin::BaseController
   end
 
   def update
-    update! { admin_opencalls_path }
-  end
-  
-  def destroy
-    destroy! { admin_opencalls_path }
+    @opencall = Opencall.friendly.find(params[:id])
+    if @opencall.update_attributes(event_params)
+      flash[:notice] = 'Open call updated.'
+      redirect_to admin_opencalls_path
+    else
+      flash[:error] = 'Error updating open call: ' + @opencall.errors.inspect
+    end
+ 
   end
   
 

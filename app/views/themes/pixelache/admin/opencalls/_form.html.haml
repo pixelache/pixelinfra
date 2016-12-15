@@ -1,27 +1,27 @@
 = semantic_nested_form_for [:admin, @opencall], :html => {:class => "custom", :multipart => false} do |f|
-  .row
+  .row.expanded
     .small-12.columns
       = f.input :subsite
       = f.input :name, label: 'Name of this open call?'
-  .row
+  .row.expanded
     .small-12.columns      
       = f.input :published
-  .row
+  .row.expanded
     .small-12.columns
       = f.input :is_open
-  .row
+  .row.expanded
     .small-12.columns
       %h3 Questions
       = f.fields_for :opencallquestions do |ff|
-        .row
+        .row.expanded
           .small-6.columns
-            %dl.tabs{"data-tab" => ""}
+            %ul.tabs{"data-tabs" => "", id: "languages_#{ff.options[:child_index]}"}
               - I18n.available_locales.each_with_index do |locale, i|
-                %dd{:class => (i == 0 ? :active : false)}
+                %li.tabs-title{:class => (i == 0 ? 'is-active' : false)}
                   = link_to t(:locale_name, :locale => locale), "##{locale}"
-            .tabs-content
+            .tabs-content{:"data-tabs-content" => "languages_#{ff.options[:child_index]}"}
               - I18n.available_locales.each_with_index do |locale, i|
-                .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+                .tabs-panel{:class => (i == 0 ? 'is-active' : false), :id => "#{locale}"}
                   = ff.globalize_fields_for locale do |en|
                     Enter the question:
                     = en.text_field :question_text, :required => (locale == :en ? '' : false)
@@ -30,8 +30,15 @@
             = ff.input :character_limit, hint: 'Leave blank for unlimited'
             = ff.link_to_remove "Remove this question"
       = f.link_to_add 'Add a question....', :opencallquestions, :class => [:button, :round, :tiny]
-  .row
+  .row.expanded
     .small-12.columns
       = f.input :submitted_text, label: 'Thank you/followup text to display after person submits an application'
   
   = f.submit 'Save', class: [:button, :round, :small]
+  
+= content_for :jquery do
+  :plain
+    $('form').on('nested:fieldAdded', function(event) {
+      //$(event.target).find(':input').enableClientSideValidations();
+      $(event.target).foundation();
+    });

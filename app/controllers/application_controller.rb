@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :get_locale
   # before_action :populate_nav
-  
+  before_action :set_paper_trail_whodunnit
   # rescue_from StandardError, :with => :render_500 unless Rails.env.development?
   
   def render_500(exception)

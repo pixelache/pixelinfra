@@ -13,6 +13,9 @@ class Admin::PagesController < Admin::BaseController
   autocomplete :festival, :name, :extra_data => [:name], :display_value => :name
   autocomplete :page, :name, :extra_data => [:name], :display_value => :name
   
+  skip_load_and_authorize_resource
+  load_and_authorize_resource
+  
   def create
     @page = Page.new(page_params)
     if @page.save
@@ -29,6 +32,7 @@ class Admin::PagesController < Admin::BaseController
   end
   
   def edit
+     
     @page = Subsite.find(params[:subsite_id]).pages.find(params[:id])
   end
   
@@ -81,8 +85,14 @@ class Admin::PagesController < Admin::BaseController
   end
   
   def update
-    @page = Page.find(params[:id])
-    update! { admin_pages_path }
+    @page = Subsite.find(params[:subsite_id]).pages.find(params[:id])
+    if @page.update_attributes(page_params)
+      flash[:notice] = 'Page updated.'
+      redirect_to admin_pages_path
+    else
+      flash[:error] = 'Error updating page: ' + @page.errors.inspect
+    end
+ 
   end
   
   protected
