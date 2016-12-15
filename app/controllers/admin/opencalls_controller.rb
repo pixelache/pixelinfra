@@ -3,7 +3,7 @@ class Admin::OpencallsController < Admin::BaseController
   handles_sortable_columns
 
   def create
-    @opencall = Opencall.new(page_params)
+    @opencall = Opencall.new(opencall_params)
     if @opencall.save
       flash[:notice] = 'Open call saved.'
       redirect_to admin_pages_path
@@ -41,7 +41,7 @@ class Admin::OpencallsController < Admin::BaseController
 
   def update
     @opencall = Opencall.friendly.find(params[:id])
-    if @opencall.update_attributes(event_params)
+    if @opencall.update_attributes(opencall_params)
       flash[:notice] = 'Open call updated.'
       redirect_to admin_opencalls_path
     else
