@@ -76,6 +76,7 @@ button.slick-next, button.slick-prev {
               line-height: 2.1rem;
               word-break: break-word;
               .years {
+          
                 font-size: 0.875rem;
               }
             }
@@ -114,7 +115,17 @@ button.slick-next, button.slick-prev {
       width: 100%;
       overflow: hidden;
       position: relative;
-      
+      .backed {
+        opacity: 1;
+        padding: 0.6rem; 
+        .title {
+          font-family: $quicksand;
+          font-size: 2.4rem;
+          line-height: 3.1rem;
+          margin: 0 0 0.3rem 0;
+        }
+
+      }
       .bottom {
         position: absolute;
         top: 87%;
@@ -125,14 +136,8 @@ button.slick-next, button.slick-prev {
       }
       
       .overlay {
-        opacity: 0.92;
+        opacity: 0;
         padding: 1rem 1rem 100% 1rem;
-        .title {
-          font-family: $quicksand;
-          font-size: 2.4rem;
-          line-height: 3.1rem;
-          margin: 0 0 1.5rem 0;
-        }
         .latest {
           margin: 1.5rem 0;
           ul.latest_stuff {
@@ -165,12 +170,16 @@ button.slick-next, button.slick-prev {
     margin-bottom: 2rem;
     &:hover { 
      .drawer, .overlay {
-       opacity: 0.98; 
+       opacity: 0.9; 
      }
     }
     .drawer {
       opacity: 0.92;
-
+      width: 100%;
+      font-family: $quicksand;
+      .years {
+        padding: 0.8rem 0;
+      }
       .item {
         padding-right: 6px;
         margin-right: 6px;       

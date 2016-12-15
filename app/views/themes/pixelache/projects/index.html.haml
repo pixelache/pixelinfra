@@ -47,3 +47,12 @@
     $grid.imagesLoaded().progress( function() {
       $grid.masonry('layout');
     });
+    var $grid2 = $('#active').masonry({
+      // options...
+      itemSelector: '.column',
+      columnWidth: '.column a.project_index_box',
+      percentPosition: true
+    });
+    $grid2.imagesLoaded().progress( function() {
+      $grid2.masonry('layout');
+    });    
