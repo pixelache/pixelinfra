@@ -22,7 +22,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
   
   version :standard do
-    process :resize_to_fit => [800, 600]
+    process :resize_to_fit => [960, 720]
   end
   
   version :logo do

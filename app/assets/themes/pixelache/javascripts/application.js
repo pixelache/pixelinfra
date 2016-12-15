@@ -92,7 +92,9 @@ function down_festival_menu() {
   // $('#main').css('top', $('header').height());
 }
 
-function load_to_top(href) {
+function load_to_top(href, div) {
+  $('.post_slider').slick('unslick');
+  $('.post_slider .post').css('display', 'block');
   var freezeheight = $('.multipost_selected').css('height');
   $('.multipost_selected').css('height', freezeheight);
   $('.multipost_selected .top_post').fadeOut();
@@ -100,7 +102,29 @@ function load_to_top(href) {
     $('.multipost_selected').css('height', '');
     maps = initialize();
   });
-  
+
+  $('.post_slider ' + div).css('display', 'none');
+  $('.post_slider').slick({infinite: true,
+      slidesToShow: 3,
+      responsive: [
+          {
+
+            breakpoint: 800,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: 'unslick'
+          }
+          ],
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 2400,
+      slidesToScroll: 1
+    });
 }
 
   

@@ -2,6 +2,7 @@ class Admin::OpencallsController < Admin::BaseController
   has_scope :page, :default => 1
   handles_sortable_columns
 
+  
   def create
     @opencall = Opencall.new(opencall_params)
     if @opencall.save

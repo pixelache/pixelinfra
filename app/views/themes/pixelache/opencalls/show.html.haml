@@ -33,6 +33,7 @@
             %label= ff.object.opencallquestion.question_text
           = ff.input :opencallquestion_id, as: :hidden
         .small-7.end.columns{class: [ "ocqtype_" + ff.object.opencallquestion.question_type.to_s, ff.object.opencallquestion.question_type == 1 ? "medium-7" : "medium-4"] }
+          
           - if ff.object.opencallquestion.question_type == 3
             %label.file
               = ff.input :attachment, label: false, input_html: { required: ff.object.opencallquestion.is_required == true ? '' : false }
@@ -48,7 +49,8 @@
              
              
           - else
-            = ff.input :answer, label: false,  as: :string
+           
+            = ff.input :answer, label: false,  as: :string, input_html: { required: ff.object.opencallquestion.is_required == true ? '' : false }
         
         
     .row

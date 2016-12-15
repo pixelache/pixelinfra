@@ -6,13 +6,43 @@ class Admin::FrontitemsController < Admin::BaseController
   autocomplete :festival, :name, :extra_data => [:name], :display_value => :name
   autocomplete :residency, :name, :extra_data => [:name], :display_value => :name
   has_scope :by_site, default: 1
+  skip_load_and_authorize_resource
+  load_and_authorize_resource
   
   def create
-    create! { admin_frontitems_path }
+    @frontitem = Frontitem.new(frontitem_params)
+    if @frontitem.save
+      flash[:notice] = 'Open call saved.'
+      redirect_to admin_frontitems_path
+    end
   end
   
+  
+  def destroy
+    @frontitem = Frontitem.find(params[:id])
+    @frontitem.destroy!
+    redirect_to admin_frontitems_path
+  end
+  
+  
+  def update
+    @frontitem = Frontitem.find(params[:id])
+    if @frontitem.update_attributes(frontitem_params)
+      flash[:notice] = 'Open call updated.'
+      redirect_to admin_frontitems_path
+    else
+      flash[:error] = 'Error updating front item: ' + @frontitem.errors.inspect
+    end
+
+  end
+  
+  def new
+    @frontitem = Frontitem.new
+  end
+    
+
   def edit
-    @frontitems = Frontitem.find(params[:id])
+    @frontitem = Frontitem.find(params[:id])
   end
   
   def index
@@ -28,16 +58,13 @@ class Admin::FrontitemsController < Admin::BaseController
     end
     render nothing: true
   end
-  
-  def update
-    update! { admin_frontitems_path }
-  end
+
   
   protected 
   
-  def permitted_params
-    params.permit(:frontitem => [:item_type, :subsite_id, :seconditem_type, :dont_scale, :no_text, :external_url, :seconditem_id, :custom_title, :item_id, :frontmodule_id, :position, :custom_follow_text, :external_url, :remove_bigimage, :background_colour, :bigimage, :background_on_title, :background_on_text, 
-      :text_colour, :active, translations_attributes: [:id, :locale, :custom_title, :custom_follow_text]])
+  def frontitem_params
+    params.require(:frontitem).permit(:item_type, :subsite_id, :seconditem_type, :dont_scale, :no_text, :external_url, :seconditem_id, :custom_title, :item_id, :frontmodule_id, :position, :custom_follow_text, :external_url, :remove_bigimage, :background_colour, :bigimage, :background_on_title, :background_on_text, 
+      :text_colour, :active, translations_attributes: [:id, :locale, :custom_title, :custom_follow_text])
     
   end
 end

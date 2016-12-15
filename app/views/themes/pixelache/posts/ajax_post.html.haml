@@ -1,7 +1,14 @@
-.row
+.row.expanded
   .small-12.medium-8.columns.medium-offset-2
     .top_post
       .category= @post.category
+      .post_image
+        - if @post.image?
+          =  image_tag @post.image.url(:standard)
+        - elsif @post.class == Event
+          - if @post.project
+            - if @post.project.background?
+              = image_tag @post.project.background.url
       .title= link_to @post.title, @post
       .metadata
         = "#{date_range(@post.stream_date, @post.endstream_date)}, #{@post.creator.name}"

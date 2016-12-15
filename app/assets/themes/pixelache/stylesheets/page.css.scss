@@ -19,7 +19,10 @@
         font-size: 0.9rem;
         padding-left: 0;
         margin-left: 0;
-    
+        line-height: 1.3rem;
+        &.label {
+          white-space: initial;
+        }
       }
       textarea {
         height: 100px;
@@ -42,6 +45,10 @@
   }
   // background-color: #f9ec31;
   .magellan-scrollnav {
+    
+    nav.has-banner {
+      margin-top: 37em !important;
+    }
     [data-magellan-expedition-clone] {
       ul.sub-nav {
         display: none;

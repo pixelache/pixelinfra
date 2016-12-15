@@ -18,7 +18,7 @@
     - unless @page.headings.empty?
       .medium-4.small-12.columns.float-right.page_nav
         .magellan-scrollnav{:"data-sticky-container" => ''}
-          %nav.sticky{:'data-sticky' => '', :'data-sticky-on' => 'medium', :'data-margin-top' => '7'}
+          %nav.sticky{:'data-sticky' => '', :'data-sticky-on' => 'medium', :'data-margin-top' => '7', class: @page.photos.empty? ? false : 'has-banner' }
             %ul.vertical.menu.sub-nav{:"data-magellan" => '', :'data-bar-offset' => '100'}
               - @page.headings.each do |heading|
                 - next if heading.first == 'top'
@@ -87,7 +87,7 @@
              
              
                         - else
-                          = ff.input :answer, label: false,  as: :string
+                          = ff.input :answer, label: false,  as: :string, input_html: { required: ff.object.opencallquestion.is_required == true ? '' : false }
         
         
                   .row
