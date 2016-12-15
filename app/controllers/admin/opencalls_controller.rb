@@ -6,7 +6,7 @@ class Admin::OpencallsController < Admin::BaseController
     @opencall = Opencall.new(opencall_params)
     if @opencall.save
       flash[:notice] = 'Open call saved.'
-      redirect_to admin_pages_path
+      redirect_to admin_opencalls_path
     end
   end
   
@@ -14,7 +14,7 @@ class Admin::OpencallsController < Admin::BaseController
   def destroy
     @opencall = Subsite.find(params[:subsite_id]).pages.find(params[:id])
     @opencall.destroy!
-    redirect_to admin_pages_path
+    redirect_to admin_opencalls_path
   end
   
   def new
