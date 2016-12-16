@@ -63,7 +63,7 @@ class PagesController < ApplicationController
                             title: @page.title, type: 'website', url: url_for(@page),
                             description: ActionView::Base.full_sanitizer.sanitize(@page.body[0..500]) + "..."
                           }, 
-                      twitter: {card: 'summary', site: '@pixelache'},
+                      twitter: {card: 'summary', site: '@pixelache'}
   end
   
 end
