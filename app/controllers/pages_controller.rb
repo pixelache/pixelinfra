@@ -57,7 +57,13 @@ class PagesController < ApplicationController
       end
     end
     redirect_to action: action_name, id: @page.friendly_id, status: 301 unless @page.friendly_id == params[:id]
-    set_meta_tags :title => @page.name
+    set_meta_tags :title => @page.name,
+                      canonical: url_for(@page),
+                      og: {image: (!@page.photos.empty? ?  [ @page.photos.first.filename.url(:box), { secure_url: @page.photos.first.filename.url(:box) } ] : 'https://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
+                            title: @page.title, type: 'website', url: url_for(@page),
+                            description: ActionView::Base.full_sanitizer.sanitize(@page.body[0..500]) + "..."
+                          }, 
+                      twitter: {card: 'summary', site: '@pixelache'},
   end
   
 end
