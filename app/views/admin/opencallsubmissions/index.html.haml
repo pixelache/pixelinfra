@@ -26,9 +26,12 @@
               = sub.email + ' / ' + sub.phone
             %td= l sub.created_at, format: :long
             %td
-              = sub.comments.size.to_s
-              - unless sub.comments.empty?
-                %p.metadata= t(:posted_by, :poster => sub.comments.order(:created_at).last.user.name, :when => l( sub.comments.order(:created_at).last.created_at, format: :short))
+              
+              - if sub.comments.compact.empty?
+                no comments
+              - else
+                = pluralize(sub.comments.compact.size, 'comment')
+                %p.metadata= t(:posted_by, :poster => sub.comments.order(:created_at).compact.last.user.name, :when => l( sub.comments.order(:created_at).compact.last.created_at, format: :short))
             %td
               = link_to 'View', admin_opencall_opencallsubmission_path(@opencall.slug, sub), class: [:button, :tiny,  :round]
               - if can? :destroy, sub
