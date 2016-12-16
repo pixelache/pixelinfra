@@ -92,8 +92,7 @@
 
       .documentation#documentation
         .row.expanded.related_title
-          .small-12.columns.small-centered
-            %h1= t(:documentation)
+          %h1= t(:documentation)
         - unless @event.all_documentation["images"].empty?
           .image_carousel
             - @event.all_documentation["images"].each do |i|
@@ -115,18 +114,19 @@
               .video_container
                 - @event.project.videos.each do |v|
                   .video.row{:style => v.thumbnail? ? "background: url(#{v.thumbnail.url}) no-repeat center center" : false }
-                    .large-6.columns.flex-video= raw figure_video_type(v, v.video_width.blank? ? 580 : v.video_width, v.video_height.blank? ? 390 : v.video_height)
-                    .large-6.columns
+                    .flex-video= raw figure_video_type(v, v.video_width.blank? ? 580 : v.video_width, v.video_height.blank? ? 390 : v.video_height)
+                  .row
+                    .large-12.columns
                       .video_title= v.title
                       .video_description= raw v.description
         - else
           .video_container
             - @event.all_documentation["videos"].each do |v|
               .video.row.expanded
-                .large-7.columns= raw figure_video_type(v, 400, 300)
-                .large-5.columns
-                  .video_title= v.title
-                  .video_description= raw v.description
+                = raw figure_video_type(v, 400, 300)
+                %br/
+                .video_title= v.title
+                .video_description= raw v.description
 
   
 - unless @event.related_content.empty?
