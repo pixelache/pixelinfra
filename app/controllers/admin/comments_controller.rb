@@ -7,7 +7,9 @@ class Admin::CommentsController < Admin::BaseController
     if params[:opencallsubmission_id]
       @master = Opencallsubmission.find(params[:opencallsubmission_id])
     end
-    @master.comments << Comment.new(permitted_params[:comment])
+    comment = Comment.new(comment_params)
+    comment.user = current_user
+    @master.comments << comment
     if @master.save!
       flash[:notice] = t(:your_comment_was_added)
     else
@@ -18,8 +20,8 @@ class Admin::CommentsController < Admin::BaseController
   
   protected
   
-  def permitted_params
-    params.permit(:projectproposal_id, :comment => [:item_type, :item_id, :user_id, :content, :attachment, :image])
+  def comment_params
+    params.require(:comment).permit(:item_type, :item_id, :user_id, :content, :attachment, :image)
   end
   
 end
