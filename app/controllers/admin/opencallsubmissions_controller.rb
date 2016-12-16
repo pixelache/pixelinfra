@@ -1,6 +1,8 @@
 class Admin::OpencallsubmissionsController < Admin::BaseController
   has_scope :page, :default => 1
   handles_sortable_columns
+  skip_load_and_authorize_resource
+  load_and_authorize_resource
   
   def index
     order = sortable_column_order do |column, direction|

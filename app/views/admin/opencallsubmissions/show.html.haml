@@ -35,7 +35,7 @@
       - else
         = raw simple_format(answer.answer)
 
-- unless @submission.comments.empty?
+- unless @submission.comments.compact.empty?
   .row#comments_list
     .small-12.columns
       %a{:name => :comments}
