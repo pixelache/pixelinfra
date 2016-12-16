@@ -18,14 +18,14 @@
     - unless @page.headings.empty?
       .medium-4.small-12.columns.float-right.page_nav
         .magellan-scrollnav{:"data-sticky-container" => ''}
-          %nav.sticky{:'data-sticky' => '', :'data-sticky-on' => 'medium', :'data-margin-top' => '7', class: @page.photos.empty? ? false : 'has-banner' }
+          %nav.sticky{:'data-sticky' => '', :'data-top-anchor' => 'page_content:top', :'data-btm-anchor' => 'page_content:bottom',:'data-sticky-on' => 'medium', :'data-margin-top' => '7', class: @page.photos.empty? ? false : 'has-banner' }
             %ul.vertical.menu.sub-nav{:"data-magellan" => '', :'data-bar-offset' => '100'}
               - @page.headings.each do |heading|
                 - next if heading.first == 'top'
                 %li= link_to heading.last, "##{heading.first}"
 
         
-    .small-12.medium-7.medium-offset-1.columns
+    .small-12.medium-7.medium-offset-1.columns#page_content
       .row
         .small-12.columns.title
           = raw @page.name
