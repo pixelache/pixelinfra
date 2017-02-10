@@ -38,7 +38,7 @@
           
           - if @page.opencall
             .opencall_page_container
-              - if @page.opencall.is_open?
+              - if @page.opencall.is_open? && (!@page.opencall.closing_date.blank? && Time.now.utc < @page.opencall.closing_date)
                 = semantic_form_for [@opencall, @opencallsubmission], html: {multipart: true, :"data-abide" => ''} do |f|
                   = f.input :opencall_id, as: :hidden
                   .row

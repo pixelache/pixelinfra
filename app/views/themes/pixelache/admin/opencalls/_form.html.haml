@@ -10,6 +10,9 @@
     .small-12.columns
       = f.input :is_open
   .row.expanded
+    .small-10.medium-3.columns
+      = f.input :closing_date, :as => :string, :input_html => {:class => "datetime_picker", value: f.object.new_record? ? '' : (f.object.closing_date.nil? ? '' : f.object.closing_date.strftime('%Y-%m-%d %H:%M'))}
+  .row.expanded
     .small-12.columns
       %h3 Questions
       = f.fields_for :opencallquestions do |ff|

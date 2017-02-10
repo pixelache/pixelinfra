@@ -17,7 +17,16 @@
                 %br/
                 = pluralize(opencall.opencallsubmissions.size, 'submission')
                 = link_to 'See submissions', admin_opencall_opencallsubmissions_path(opencall), class: [:button, :secondary, :tiny, :round]
-            %td= opencall.is_open == true ? "yes" : "no"
+            %td
+              - if opencall.closing_date.blank?
+                = opencall.is_open == true ? "yes" : "no"
+              - else
+                = Time.now.utc > opencall.closing_date ? "no" : "yes"
+                %br/
+                %small
+                  Closing date:
+                  = l opencall.closing_date.to_date, format: :short
+
             %td.actions
               = link_to t(:view), opencall, :class => [:button, :round, :tiny], :target => :_blank
               - if can? :edit, opencall

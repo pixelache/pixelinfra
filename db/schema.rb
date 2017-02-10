@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919090621) do
+ActiveRecord::Schema.define(version: 20170210100514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,10 +21,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "caption",          limit: 255
+    t.index ["archivalimage_id"], name: "index_archivalimage_translations_on_archivalimage_id", using: :btree
+    t.index ["locale"], name: "index_archivalimage_translations_on_locale", using: :btree
   end
-
-  add_index "archivalimage_translations", ["archivalimage_id"], name: "index_archivalimage_translations_on_archivalimage_id", using: :btree
-  add_index "archivalimage_translations", ["locale"], name: "index_archivalimage_translations_on_locale", using: :btree
 
   create_table "archivalimages", force: :cascade do |t|
     t.integer  "subsite_id"
@@ -44,17 +42,16 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "updated_at"
     t.date     "image_date"
     t.boolean  "cover_right",                    default: false, null: false
+    t.index ["event_id"], name: "index_archivalimages_on_event_id", using: :btree
+    t.index ["festival_id"], name: "index_archivalimages_on_festival_id", using: :btree
+    t.index ["page_id"], name: "index_archivalimages_on_page_id", using: :btree
+    t.index ["project_id"], name: "index_archivalimages_on_project_id", using: :btree
   end
-
-  add_index "archivalimages", ["event_id"], name: "index_archivalimages_on_event_id", using: :btree
-  add_index "archivalimages", ["festival_id"], name: "index_archivalimages_on_festival_id", using: :btree
-  add_index "archivalimages", ["page_id"], name: "index_archivalimages_on_page_id", using: :btree
-  add_index "archivalimages", ["project_id"], name: "index_archivalimages_on_project_id", using: :btree
 
   create_table "attachments", force: :cascade do |t|
     t.string   "attachedfile",              limit: 255
     t.string   "attachedfile_content_type", limit: 255
-    t.integer  "attachedfile_size",         limit: 8
+    t.bigint   "attachedfile_size"
     t.string   "item_type",                 limit: 255
     t.integer  "item_id"
     t.string   "title",                     limit: 255
@@ -64,10 +61,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "updated_at"
     t.integer  "documenttype_id"
     t.integer  "year_of_publication"
+    t.index ["documenttype_id"], name: "index_attachments_on_documenttype_id", using: :btree
+    t.index ["item_type", "item_id"], name: "index_attachments_on_item_type_and_item_id", using: :btree
   end
-
-  add_index "attachments", ["documenttype_id"], name: "index_attachments_on_documenttype_id", using: :btree
-  add_index "attachments", ["item_type", "item_id"], name: "index_attachments_on_item_type_and_item_id", using: :btree
 
   create_table "attendees", force: :cascade do |t|
     t.integer  "user_id"
@@ -103,11 +99,10 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.integer  "item_id"
     t.string   "item_type",            limit: 255
     t.boolean  "waiting_list"
+    t.index ["event_id"], name: "index_attendees_on_event_id", using: :btree
+    t.index ["festival_id"], name: "index_attendees_on_festival_id", using: :btree
+    t.index ["user_id"], name: "index_attendees_on_user_id", using: :btree
   end
-
-  add_index "attendees", ["event_id"], name: "index_attendees_on_event_id", using: :btree
-  add_index "attendees", ["festival_id"], name: "index_attendees_on_festival_id", using: :btree
-  add_index "attendees", ["user_id"], name: "index_attendees_on_user_id", using: :btree
 
   create_table "authentications", force: :cascade do |t|
     t.integer  "user_id"
@@ -116,10 +111,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username",   limit: 255
+    t.index ["user_id", "provider", "uid"], name: "index_authentications_on_user_id_and_provider_and_uid", unique: true, using: :btree
+    t.index ["user_id"], name: "index_authentications_on_user_id", using: :btree
   end
-
-  add_index "authentications", ["user_id", "provider", "uid"], name: "index_authentications_on_user_id_and_provider_and_uid", unique: true, using: :btree
-  add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",    limit: 255,                 null: false
@@ -134,10 +128,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "updated_at"
     t.string   "wordpress_url"
     t.boolean  "missing",                       default: false, null: false
+    t.index ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+    t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
   end
-
-  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
-  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.integer  "item_id"
@@ -154,10 +147,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "attachment_content_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["item_id", "item_type"], name: "index_comments_on_item_id_and_item_type", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
-
-  add_index "comments", ["item_id", "item_type"], name: "index_comments_on_item_id_and_item_type", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "document_translations", force: :cascade do |t|
     t.integer  "document_id", null: false
@@ -166,10 +158,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "updated_at",  null: false
     t.string   "title"
     t.text     "description"
+    t.index ["document_id"], name: "index_document_translations_on_document_id", using: :btree
+    t.index ["locale"], name: "index_document_translations_on_locale", using: :btree
   end
-
-  add_index "document_translations", ["document_id"], name: "index_document_translations_on_document_id", using: :btree
-  add_index "document_translations", ["locale"], name: "index_document_translations_on_locale", using: :btree
 
   create_table "documents", force: :cascade do |t|
     t.date     "date_of_release"
@@ -182,10 +173,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.integer "ancestor_id",   null: false
     t.integer "descendant_id", null: false
     t.integer "generations",   null: false
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "documenttype_anc_desc_udx", unique: true, using: :btree
+    t.index ["descendant_id"], name: "documenttype_desc_idx", using: :btree
   end
-
-  add_index "documenttype_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "documenttype_anc_desc_udx", unique: true, using: :btree
-  add_index "documenttype_hierarchies", ["descendant_id"], name: "documenttype_desc_idx", using: :btree
 
   create_table "documenttypes", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -202,9 +192,8 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.text     "subcultures"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["subsite_id"], name: "index_dynamictaglines_on_subsite_id", using: :btree
   end
-
-  add_index "dynamictaglines", ["subsite_id"], name: "index_dynamictaglines_on_subsite_id", using: :btree
 
   create_table "etherpads", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -220,18 +209,16 @@ ActiveRecord::Schema.define(version: 20160919090621) do
   create_table "etherpads_events", id: false, force: :cascade do |t|
     t.integer "etherpad_id", null: false
     t.integer "event_id",    null: false
+    t.index ["etherpad_id"], name: "index_etherpads_events_on_etherpad_id", using: :btree
+    t.index ["event_id"], name: "index_etherpads_events_on_event_id", using: :btree
   end
-
-  add_index "etherpads_events", ["etherpad_id"], name: "index_etherpads_events_on_etherpad_id", using: :btree
-  add_index "etherpads_events", ["event_id"], name: "index_etherpads_events_on_event_id", using: :btree
 
   create_table "etherpads_festivals", id: false, force: :cascade do |t|
     t.integer "etherpad_id", null: false
     t.integer "festival_id", null: false
+    t.index ["etherpad_id"], name: "index_etherpads_festivals_on_etherpad_id", using: :btree
+    t.index ["festival_id"], name: "index_etherpads_festivals_on_festival_id", using: :btree
   end
-
-  add_index "etherpads_festivals", ["etherpad_id"], name: "index_etherpads_festivals_on_etherpad_id", using: :btree
-  add_index "etherpads_festivals", ["festival_id"], name: "index_etherpads_festivals_on_festival_id", using: :btree
 
   create_table "etherpads_meetings", id: false, force: :cascade do |t|
     t.integer "meeting_id"
@@ -256,10 +243,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "name",        limit: 255
     t.text     "description"
     t.text     "notes"
+    t.index ["event_id"], name: "index_event_translations_on_event_id", using: :btree
+    t.index ["locale"], name: "index_event_translations_on_locale", using: :btree
   end
-
-  add_index "event_translations", ["event_id"], name: "index_event_translations_on_event_id", using: :btree
-  add_index "event_translations", ["locale"], name: "index_event_translations_on_locale", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.integer  "subsite_id"
@@ -271,7 +257,7 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.integer  "image_width"
     t.integer  "image_height"
     t.string   "image_content_type",           limit: 255
-    t.integer  "image_size",                   limit: 8
+    t.bigint   "image_size"
     t.text     "facebook_link"
     t.float    "cost"
     t.float    "cost_alternate"
@@ -302,10 +288,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.boolean  "hide_registrants"
     t.boolean  "show_guests_to_public"
     t.boolean  "location_tbd"
+    t.index ["place_id"], name: "index_events_on_place_id", using: :btree
+    t.index ["subsite_id"], name: "index_events_on_subsite_id", using: :btree
   end
-
-  add_index "events", ["place_id"], name: "index_events_on_place_id", using: :btree
-  add_index "events", ["subsite_id"], name: "index_events_on_subsite_id", using: :btree
 
   create_table "experiences", force: :cascade do |t|
     t.integer  "festivaltheme_id"
@@ -327,10 +312,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "title"
     t.float    "latitude"
     t.float    "longitude"
+    t.index ["festivaltheme_id"], name: "index_experiences_on_festivaltheme_id", using: :btree
+    t.index ["place_id"], name: "index_experiences_on_place_id", using: :btree
   end
-
-  add_index "experiences", ["festivaltheme_id"], name: "index_experiences_on_festivaltheme_id", using: :btree
-  add_index "experiences", ["place_id"], name: "index_experiences_on_place_id", using: :btree
 
   create_table "feedcaches", force: :cascade do |t|
     t.string   "source"
@@ -345,10 +329,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.boolean  "hashtag",    default: false, null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.index ["sourceid", "source"], name: "index_feedcaches_on_sourceid_and_source", unique: true, using: :btree
+    t.index ["user_id"], name: "index_feedcaches_on_user_id", using: :btree
   end
-
-  add_index "feedcaches", ["sourceid", "source"], name: "index_feedcaches_on_sourceid_and_source", unique: true, using: :btree
-  add_index "feedcaches", ["user_id"], name: "index_feedcaches_on_user_id", using: :btree
 
   create_table "feeds", force: :cascade do |t|
     t.string   "item_type",  limit: 255
@@ -359,11 +342,10 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["item_id"], name: "index_feeds_on_item_id", using: :btree
+    t.index ["subsite_id"], name: "index_feeds_on_subsite_id", using: :btree
+    t.index ["user_id"], name: "index_feeds_on_user_id", using: :btree
   end
-
-  add_index "feeds", ["item_id"], name: "index_feeds_on_item_id", using: :btree
-  add_index "feeds", ["subsite_id"], name: "index_feeds_on_subsite_id", using: :btree
-  add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
 
   create_table "festival_translations", force: :cascade do |t|
     t.integer  "festival_id",               null: false
@@ -371,10 +353,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "overview_text"
+    t.index ["festival_id"], name: "index_festival_translations_on_festival_id", using: :btree
+    t.index ["locale"], name: "index_festival_translations_on_locale", using: :btree
   end
-
-  add_index "festival_translations", ["festival_id"], name: "index_festival_translations_on_festival_id", using: :btree
-  add_index "festival_translations", ["locale"], name: "index_festival_translations_on_locale", using: :btree
 
   create_table "festivals", force: :cascade do |t|
     t.string   "name",               limit: 255
@@ -402,18 +383,16 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "listservname"
     t.integer  "subsite_id"
     t.string   "redirect_to"
+    t.index ["subsite_id"], name: "index_festivals_on_subsite_id", using: :btree
   end
-
-  add_index "festivals", ["subsite_id"], name: "index_festivals_on_subsite_id", using: :btree
 
   create_table "festivaltheme_relations", force: :cascade do |t|
     t.integer "relation_id"
     t.string  "relation_type",    limit: 255
     t.integer "festivaltheme_id"
+    t.index ["festivaltheme_id"], name: "index_festivaltheme_relations_on_festivaltheme_id", using: :btree
+    t.index ["relation_id", "relation_type"], name: "index_festivaltheme_relations_on_relation_id_and_relation_type", using: :btree
   end
-
-  add_index "festivaltheme_relations", ["festivaltheme_id"], name: "index_festivaltheme_relations_on_festivaltheme_id", using: :btree
-  add_index "festivaltheme_relations", ["relation_id", "relation_type"], name: "index_festivaltheme_relations_on_relation_id_and_relation_type", using: :btree
 
   create_table "festivaltheme_translations", force: :cascade do |t|
     t.integer  "festivaltheme_id",              null: false
@@ -423,10 +402,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "name",              limit: 255
     t.text     "description"
     t.text     "short_description"
+    t.index ["festivaltheme_id"], name: "index_festivaltheme_translations_on_festivaltheme_id", using: :btree
+    t.index ["locale"], name: "index_festivaltheme_translations_on_locale", using: :btree
   end
-
-  add_index "festivaltheme_translations", ["festivaltheme_id"], name: "index_festivaltheme_translations_on_festivaltheme_id", using: :btree
-  add_index "festivaltheme_translations", ["locale"], name: "index_festivaltheme_translations_on_locale", using: :btree
 
   create_table "festivalthemes", force: :cascade do |t|
     t.integer  "festival_id"
@@ -434,16 +412,15 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "updated_at"
     t.string   "slug",               limit: 255
     t.string   "image"
-    t.integer  "image_file_size",    limit: 8
+    t.bigint   "image_file_size"
     t.string   "image_content_type"
     t.integer  "image_height"
     t.integer  "image_width"
+    t.index ["festival_id"], name: "index_festivalthemes_on_festival_id", using: :btree
   end
 
-  add_index "festivalthemes", ["festival_id"], name: "index_festivalthemes_on_festival_id", using: :btree
-
   create_table "flickrsets", force: :cascade do |t|
-    t.integer  "flickr_id",          limit: 8
+    t.bigint   "flickr_id"
     t.string   "title",              limit: 255
     t.text     "description"
     t.date     "start_upload_date"
@@ -455,13 +432,12 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "flickr_user",        limit: 255, default: "91330886@N08", null: false
+    t.index ["event_id"], name: "index_flickrsets_on_event_id", using: :btree
+    t.index ["festival_id"], name: "index_flickrsets_on_festival_id", using: :btree
+    t.index ["flickr_id"], name: "index_flickrsets_on_flickr_id", unique: true, using: :btree
+    t.index ["project_id"], name: "index_flickrsets_on_project_id", using: :btree
+    t.index ["subsite_id"], name: "index_flickrsets_on_subsite_id", using: :btree
   end
-
-  add_index "flickrsets", ["event_id"], name: "index_flickrsets_on_event_id", using: :btree
-  add_index "flickrsets", ["festival_id"], name: "index_flickrsets_on_festival_id", using: :btree
-  add_index "flickrsets", ["flickr_id"], name: "index_flickrsets_on_flickr_id", unique: true, using: :btree
-  add_index "flickrsets", ["project_id"], name: "index_flickrsets_on_project_id", using: :btree
-  add_index "flickrsets", ["subsite_id"], name: "index_flickrsets_on_subsite_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false
@@ -469,12 +445,11 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "sluggable_type", limit: 50
     t.string   "scope",          limit: 255
     t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
-
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "frontitem_translations", force: :cascade do |t|
     t.integer  "frontitem_id",       null: false
@@ -483,10 +458,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "updated_at",         null: false
     t.string   "custom_title"
     t.string   "custom_follow_text"
+    t.index ["frontitem_id"], name: "index_frontitem_translations_on_frontitem_id", using: :btree
+    t.index ["locale"], name: "index_frontitem_translations_on_locale", using: :btree
   end
-
-  add_index "frontitem_translations", ["frontitem_id"], name: "index_frontitem_translations_on_frontitem_id", using: :btree
-  add_index "frontitem_translations", ["locale"], name: "index_frontitem_translations_on_locale", using: :btree
 
   create_table "frontitems", force: :cascade do |t|
     t.string   "item_type",             limit: 255
@@ -511,10 +485,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.boolean  "background_on_text",                default: false,    null: false
     t.boolean  "dont_scale"
     t.boolean  "no_text"
+    t.index ["item_id", "item_type"], name: "index_frontitems_on_item_id_and_item_type", using: :btree
+    t.index ["seconditem_id", "seconditem_type"], name: "index_frontitems_on_seconditem_id_and_seconditem_type", using: :btree
   end
-
-  add_index "frontitems", ["item_id", "item_type"], name: "index_frontitems_on_item_id_and_item_type", using: :btree
-  add_index "frontitems", ["seconditem_id", "seconditem_type"], name: "index_frontitems_on_seconditem_id_and_seconditem_type", using: :btree
 
   create_table "frontmodules", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -530,10 +503,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "name"
+    t.index ["locale"], name: "index_meeting_translations_on_locale", using: :btree
+    t.index ["meeting_id"], name: "index_meeting_translations_on_meeting_id", using: :btree
   end
-
-  add_index "meeting_translations", ["locale"], name: "index_meeting_translations_on_locale", using: :btree
-  add_index "meeting_translations", ["meeting_id"], name: "index_meeting_translations_on_meeting_id", using: :btree
 
   create_table "meetings", force: :cascade do |t|
     t.datetime "start_at"
@@ -541,9 +513,8 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.integer  "meetingtype_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["meetingtype_id"], name: "index_meetings_on_meetingtype_id", using: :btree
   end
-
-  add_index "meetings", ["meetingtype_id"], name: "index_meetings_on_meetingtype_id", using: :btree
 
   create_table "meetingtype_translations", force: :cascade do |t|
     t.integer  "meetingtype_id", null: false
@@ -551,10 +522,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "name"
+    t.index ["locale"], name: "index_meetingtype_translations_on_locale", using: :btree
+    t.index ["meetingtype_id"], name: "index_meetingtype_translations_on_meetingtype_id", using: :btree
   end
-
-  add_index "meetingtype_translations", ["locale"], name: "index_meetingtype_translations_on_locale", using: :btree
-  add_index "meetingtype_translations", ["meetingtype_id"], name: "index_meetingtype_translations_on_meetingtype_id", using: :btree
 
   create_table "meetingtypes", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -570,10 +540,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "notes",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["user_id", "year"], name: "index_memberships_on_user_id_and_year", unique: true, using: :btree
+    t.index ["user_id"], name: "index_memberships_on_user_id", using: :btree
   end
-
-  add_index "memberships", ["user_id", "year"], name: "index_memberships_on_user_id_and_year", unique: true, using: :btree
-  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
 
   create_table "node_translations", force: :cascade do |t|
     t.integer  "node_id",                 null: false
@@ -581,10 +550,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.index ["locale"], name: "index_node_translations_on_locale", using: :btree
+    t.index ["node_id"], name: "index_node_translations_on_node_id", using: :btree
   end
-
-  add_index "node_translations", ["locale"], name: "index_node_translations_on_locale", using: :btree
-  add_index "node_translations", ["node_id"], name: "index_node_translations_on_node_id", using: :btree
 
   create_table "nodes", force: :cascade do |t|
     t.string   "name",              limit: 255
@@ -596,7 +564,7 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "logo_content_type", limit: 255
     t.integer  "logo_height"
     t.integer  "logo_width"
-    t.integer  "logo_size",         limit: 8
+    t.bigint   "logo_size"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -616,11 +584,10 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.string   "attachment"
+    t.index ["opencallquestion_id"], name: "index_opencallanswers_on_opencallquestion_id", using: :btree
+    t.index ["opencallsubmission_id", "opencallquestion_id"], name: "ocqs_index", unique: true, using: :btree
+    t.index ["opencallsubmission_id"], name: "index_opencallanswers_on_opencallsubmission_id", using: :btree
   end
-
-  add_index "opencallanswers", ["opencallquestion_id"], name: "index_opencallanswers_on_opencallquestion_id", using: :btree
-  add_index "opencallanswers", ["opencallsubmission_id", "opencallquestion_id"], name: "ocqs_index", unique: true, using: :btree
-  add_index "opencallanswers", ["opencallsubmission_id"], name: "index_opencallanswers_on_opencallsubmission_id", using: :btree
 
   create_table "opencallquestion_translations", force: :cascade do |t|
     t.integer  "opencallquestion_id", null: false
@@ -628,10 +595,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.string   "question_text"
+    t.index ["locale"], name: "index_opencallquestion_translations_on_locale", using: :btree
+    t.index ["opencallquestion_id"], name: "index_opencallquestion_translations_on_opencallquestion_id", using: :btree
   end
-
-  add_index "opencallquestion_translations", ["locale"], name: "index_opencallquestion_translations_on_locale", using: :btree
-  add_index "opencallquestion_translations", ["opencallquestion_id"], name: "index_opencallquestion_translations_on_opencallquestion_id", using: :btree
 
   create_table "opencallquestions", force: :cascade do |t|
     t.integer  "opencall_id"
@@ -641,9 +607,8 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.boolean  "is_required",     default: false, null: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.index ["opencall_id"], name: "index_opencallquestions_on_opencall_id", using: :btree
   end
-
-  add_index "opencallquestions", ["opencall_id"], name: "index_opencallquestions_on_opencall_id", using: :btree
 
   create_table "opencalls", force: :cascade do |t|
     t.integer  "subsite_id"
@@ -655,10 +620,10 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "slug"
+    t.datetime "closing_date"
+    t.index ["page_id"], name: "index_opencalls_on_page_id", using: :btree
+    t.index ["subsite_id"], name: "index_opencalls_on_subsite_id", using: :btree
   end
-
-  add_index "opencalls", ["page_id"], name: "index_opencalls_on_page_id", using: :btree
-  add_index "opencalls", ["subsite_id"], name: "index_opencalls_on_subsite_id", using: :btree
 
   create_table "opencallsubmissions", force: :cascade do |t|
     t.integer  "opencall_id"
@@ -673,18 +638,16 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "comment_count", default: 0
+    t.index ["opencall_id"], name: "index_opencallsubmissions_on_opencall_id", using: :btree
   end
-
-  add_index "opencallsubmissions", ["opencall_id"], name: "index_opencallsubmissions_on_opencall_id", using: :btree
 
   create_table "page_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id",   null: false
     t.integer "descendant_id", null: false
     t.integer "generations",   null: false
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "page_anc_desc_udx", unique: true, using: :btree
+    t.index ["descendant_id"], name: "page_desc_idx", using: :btree
   end
-
-  add_index "page_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "page_anc_desc_udx", unique: true, using: :btree
-  add_index "page_hierarchies", ["descendant_id"], name: "page_desc_idx", using: :btree
 
   create_table "page_translations", force: :cascade do |t|
     t.integer  "page_id",                null: false
@@ -693,10 +656,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "updated_at"
     t.string   "name",       limit: 255
     t.text     "body"
+    t.index ["locale"], name: "index_page_translations_on_locale", using: :btree
+    t.index ["page_id"], name: "index_page_translations_on_page_id", using: :btree
   end
-
-  add_index "page_translations", ["locale"], name: "index_page_translations_on_locale", using: :btree
-  add_index "page_translations", ["page_id"], name: "index_page_translations_on_page_id", using: :btree
 
   create_table "pages", force: :cascade do |t|
     t.text     "slug"
@@ -714,17 +676,16 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.integer  "festivaltheme_id"
     t.datetime "child_updated_at"
     t.integer  "opencall_id"
+    t.index ["festival_id"], name: "index_pages_on_festival_id", using: :btree
+    t.index ["project_id"], name: "index_pages_on_project_id", using: :btree
   end
-
-  add_index "pages", ["festival_id"], name: "index_pages_on_festival_id", using: :btree
-  add_index "pages", ["project_id"], name: "index_pages_on_project_id", using: :btree
 
   create_table "photos", force: :cascade do |t|
     t.string   "filename",              limit: 255
     t.integer  "filename_width"
     t.integer  "filename_height"
     t.string   "filename_content_type", limit: 255
-    t.integer  "filename_size",         limit: 8
+    t.bigint   "filename_size"
     t.integer  "wordpress_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -734,9 +695,8 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "title",                 limit: 255
     t.string   "credit",                limit: 255
     t.date     "image_date"
+    t.index ["item_type", "item_id"], name: "index_photos_on_item_type_and_item_id", using: :btree
   end
-
-  add_index "photos", ["item_type", "item_id"], name: "index_photos_on_item_type_and_item_id", using: :btree
 
   create_table "place_translations", force: :cascade do |t|
     t.integer  "place_id",               null: false
@@ -744,10 +704,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name",       limit: 255
+    t.index ["locale"], name: "index_place_translations_on_locale", using: :btree
+    t.index ["place_id"], name: "index_place_translations_on_place_id", using: :btree
   end
-
-  add_index "place_translations", ["locale"], name: "index_place_translations_on_locale", using: :btree
-  add_index "place_translations", ["place_id"], name: "index_place_translations_on_place_id", using: :btree
 
   create_table "places", force: :cascade do |t|
     t.string   "address1",   limit: 255
@@ -778,10 +737,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "title",      limit: 255
     t.text     "body"
     t.text     "excerpt"
+    t.index ["locale"], name: "index_post_translations_on_locale", using: :btree
+    t.index ["post_id"], name: "index_post_translations_on_post_id", using: :btree
   end
-
-  add_index "post_translations", ["locale"], name: "index_post_translations_on_locale", using: :btree
-  add_index "post_translations", ["post_id"], name: "index_post_translations_on_post_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "slug",                   limit: 255
@@ -795,7 +753,7 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.integer  "image_width"
     t.integer  "image_height"
     t.string   "image_content_type",     limit: 255
-    t.integer  "image_size",             limit: 8
+    t.bigint   "image_size"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "wordpress_author",       limit: 255
@@ -813,9 +771,8 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "question_motivation"
     t.string   "email_template"
     t.integer  "max_attendees"
+    t.index ["subsite_id"], name: "index_posts_on_subsite_id", using: :btree
   end
-
-  add_index "posts", ["subsite_id"], name: "index_posts_on_subsite_id", using: :btree
 
   create_table "posts_post_categories", id: false, force: :cascade do |t|
     t.integer "post_id"
@@ -826,10 +783,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.integer "ancestor_id",   null: false
     t.integer "descendant_id", null: false
     t.integer "generations",   null: false
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "project_anc_desc_udx", unique: true, using: :btree
+    t.index ["descendant_id"], name: "project_desc_idx", using: :btree
   end
-
-  add_index "project_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "project_anc_desc_udx", unique: true, using: :btree
-  add_index "project_hierarchies", ["descendant_id"], name: "project_desc_idx", using: :btree
 
   create_table "project_translations", force: :cascade do |t|
     t.integer  "project_id",                    null: false
@@ -838,10 +794,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "updated_at"
     t.text     "description"
     t.string   "short_description"
+    t.index ["locale"], name: "index_project_translations_on_locale", using: :btree
+    t.index ["project_id"], name: "index_project_translations_on_project_id", using: :btree
   end
-
-  add_index "project_translations", ["locale"], name: "index_project_translations_on_locale", using: :btree
-  add_index "project_translations", ["project_id"], name: "index_project_translations_on_project_id", using: :btree
 
   create_table "projectproposals", force: :cascade do |t|
     t.string   "name",                  limit: 255
@@ -874,9 +829,8 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.boolean  "archived",                          default: false, null: false
     t.integer  "festival_id"
     t.integer  "event_id"
+    t.index ["project_id"], name: "index_projectproposals_on_project_id", using: :btree
   end
-
-  add_index "projectproposals", ["project_id"], name: "index_projectproposals_on_project_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",                    limit: 255
@@ -892,7 +846,7 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "project_link_colour",     limit: 255, default: "008cba", null: false
     t.boolean  "active",                              default: false,    null: false
     t.string   "background"
-    t.integer  "background_file_size",    limit: 8
+    t.bigint   "background_file_size"
     t.string   "background_content_type"
     t.integer  "background_height"
     t.integer  "background_width"
@@ -919,10 +873,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "country_override",   limit: 255
+    t.index ["project_id"], name: "index_residencies_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_residencies_on_user_id", using: :btree
   end
-
-  add_index "residencies", ["project_id"], name: "index_residencies_on_project_id", using: :btree
-  add_index "residencies", ["user_id"], name: "index_residencies_on_user_id", using: :btree
 
   create_table "residency_translations", force: :cascade do |t|
     t.integer  "residency_id",             null: false
@@ -930,10 +883,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.index ["locale"], name: "index_residency_translations_on_locale", using: :btree
+    t.index ["residency_id"], name: "index_residency_translations_on_residency_id", using: :btree
   end
-
-  add_index "residency_translations", ["locale"], name: "index_residency_translations_on_locale", using: :btree
-  add_index "residency_translations", ["residency_id"], name: "index_residency_translations_on_residency_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255
@@ -941,10 +893,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "resource_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+    t.index ["name"], name: "index_roles_on_name", using: :btree
   end
-
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
-  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "step_translations", force: :cascade do |t|
     t.integer  "step_id",                 null: false
@@ -952,10 +903,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.index ["locale"], name: "index_step_translations_on_locale", using: :btree
+    t.index ["step_id"], name: "index_step_translations_on_step_id", using: :btree
   end
-
-  add_index "step_translations", ["locale"], name: "index_step_translations_on_locale", using: :btree
-  add_index "step_translations", ["step_id"], name: "index_step_translations_on_step_id", using: :btree
 
   create_table "steps", force: :cascade do |t|
     t.integer  "subsite_id"
@@ -970,12 +920,11 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.index ["event_id"], name: "index_steps_on_event_id", using: :btree
+    t.index ["festival_id"], name: "index_steps_on_festival_id", using: :btree
+    t.index ["node_id"], name: "index_steps_on_node_id", using: :btree
+    t.index ["subsite_id"], name: "index_steps_on_subsite_id", using: :btree
   end
-
-  add_index "steps", ["event_id"], name: "index_steps_on_event_id", using: :btree
-  add_index "steps", ["festival_id"], name: "index_steps_on_festival_id", using: :btree
-  add_index "steps", ["node_id"], name: "index_steps_on_node_id", using: :btree
-  add_index "steps", ["subsite_id"], name: "index_steps_on_subsite_id", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
@@ -984,10 +933,9 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["item_type", "item_id"], name: "index_subscriptions_on_item_type_and_item_id", using: :btree
+    t.index ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
   end
-
-  add_index "subscriptions", ["item_type", "item_id"], name: "index_subscriptions_on_item_type_and_item_id", using: :btree
-  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "subsites", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -1005,17 +953,15 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "tagger_type",   limit: 255
     t.string   "context",       limit: 128
     t.datetime "created_at"
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
   end
-
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string  "name",           limit: 255
     t.integer "taggings_count",             default: 0
+    t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
-
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   limit: 255
@@ -1040,17 +986,15 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.text     "bio"
     t.string   "twitter_name"
     t.text     "feed_urls"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
   end
-
-  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   create_table "versions", force: :cascade do |t|
     t.string   "item_type",  limit: 255, null: false
@@ -1059,9 +1003,8 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "whodunnit",  limit: 255
     t.text     "object"
     t.datetime "created_at"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   end
-
-  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
   create_table "videohosts", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -1075,7 +1018,7 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.string   "url",                    limit: 255
     t.string   "hostid",                 limit: 255
     t.string   "thumbnail",              limit: 255
-    t.integer  "thumbnail_size",         limit: 8
+    t.bigint   "thumbnail_size"
     t.integer  "thumbnail_width"
     t.integer  "thumbnail_height"
     t.string   "thumbnail_content_type", limit: 255
@@ -1089,11 +1032,10 @@ ActiveRecord::Schema.define(version: 20160919090621) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "videohost_id",                       null: false
+    t.index ["event_id"], name: "index_videos_on_event_id", using: :btree
+    t.index ["festival_id"], name: "index_videos_on_festival_id", using: :btree
+    t.index ["project_id"], name: "index_videos_on_project_id", using: :btree
   end
-
-  add_index "videos", ["event_id"], name: "index_videos_on_event_id", using: :btree
-  add_index "videos", ["festival_id"], name: "index_videos_on_festival_id", using: :btree
-  add_index "videos", ["project_id"], name: "index_videos_on_project_id", using: :btree
 
   add_foreign_key "experiences", "festivalthemes"
   add_foreign_key "experiences", "places"
