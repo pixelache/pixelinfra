@@ -30,7 +30,10 @@
   .row
     .large-6.small-12.columns
       %label.label= t :primary_initiator
-      = current_user.name
+      - if @projectproposal.new_record?
+        = current_user.name
+      - else
+        = @projectproposal.primary_initiator.name
       = f.input :primary_initiator_id, as: :hidden, :value => current_user.id
   .row
     .large-6.small-12.columns= f.input :cosupporters, input_html: {:required => ''}
