@@ -4,6 +4,7 @@ class Admin::ProjectproposalsController < Admin::BaseController
   
   def create
     @projectproposal = Projectproposal.new(projectproposal_params)
+    @projectproposal.primary_initiator = current_user
     if @projectproposal.save
       flash[:notice] = 'Project proposal saved.'
       redirect_to admin_projectproposals_path
@@ -55,6 +56,7 @@ class Admin::ProjectproposalsController < Admin::BaseController
   
   def new
     @projectproposal = Projectproposal.new
+    @projectproposal.primary_initiator = current_user
     set_meta_tags :title => t(:new_project_proposal)
     
   end
