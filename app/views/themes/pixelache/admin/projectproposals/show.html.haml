@@ -164,7 +164,7 @@
             = t :why_do_you_want_to_do_this
           .small-9.columns= simple_format(@projectproposal.why)
 
-- unless @projectproposal.comments.empty?
+- unless @projectproposal.comments.empty? 
   .row#comments_list
     .small-12.columns
       %a{:name => :comments}

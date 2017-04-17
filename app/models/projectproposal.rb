@@ -3,7 +3,7 @@ class Projectproposal < ActiveRecord::Base
   belongs_to :festival
   belongs_to :event
   belongs_to :primary_initiator, :class_name => 'User'
-  has_many :comments, as: :item, counter_cache: true, :dependent => :destroy
+  has_many :comments, as: :item, :dependent => :destroy
   has_paper_trail
   mount_uploader :budget, AttachmentUploader
   extend FriendlyId
