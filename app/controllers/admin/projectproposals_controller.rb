@@ -14,7 +14,7 @@ class Admin::ProjectproposalsController < Admin::BaseController
   end
   
   def show
-    @projectproposal = Projectproposal.find(params[:id])
+    @projectproposal = Projectproposal.friendly.find(params[:id])
     set_meta_tags :title => @projectproposal.name
   end
   
