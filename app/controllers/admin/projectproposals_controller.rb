@@ -7,6 +7,8 @@ class Admin::ProjectproposalsController < Admin::BaseController
     if @projectproposal.save
       flash[:notice] = 'Project proposal saved.'
       redirect_to admin_projectproposals_path
+    else
+      flash[:error] = 'Error saving proposal: ' + @projectproposal.errors.inspect
     end
   end
   
@@ -26,7 +28,7 @@ class Admin::ProjectproposalsController < Admin::BaseController
       flash[:notice] = 'Proposal updated.'
       redirect_to admin_projectproposals_path
     else
-      flash[:error] = 'Error updating page: ' + @page.errors.inspect
+      flash[:error] = 'Error updating page: ' + @projectproposal.errors.inspect
     end
   end
   
