@@ -26,6 +26,7 @@ class Ability
       can :manage, Opencallsubmission
       can :manage, Opencall
       can :manage, Opencallquestion
+      can :manage, Document
     elsif user.has_role? :advisor
       can :read, Opencallsubmission
       can :manage, Comment
@@ -48,6 +49,11 @@ class Ability
       can :create, Post
       can :update, Post, creator_id: user.id
       can :destroy, Post, creator_id: user.id
+      cannot :manage, Document
+    else
+     cannot :manage, Document
+     cannot :manage, Post
+     cannot :manage, Page 
     end
     
     

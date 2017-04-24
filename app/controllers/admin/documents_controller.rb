@@ -12,6 +12,14 @@ class Admin::DocumentsController < Admin::BaseController
     
   end
   
+  def destroy
+    @document = Document.find(params[:id])
+    if can? :destroy, @document
+      @document.destroy
+    end
+    redirect_to admin_documents_path
+  end
+  
   def edit
     @document = Document.find(params[:id])
     unless @document.attachment
