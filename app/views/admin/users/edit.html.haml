@@ -1,25 +1,33 @@
+.row.expanded
+  .small-12.columns
+    Edit user details
 = semantic_nested_form_for [:admin, @user], :html => {:multipart => true} do |f|
-  .row
+  .row.expanded
     .small-6.columns= f.input :name
-  .row
+  .row.expanded
     .small-6.columns= f.input :username
-  .row
+  .row.expanded
     .small-6.columns= f.input :email
-  .row
+  .row.expanded
     .small-6.columns= f.input :website  
+    
+  .row.expanded
+    .small-6.columns
+      %p Choose role:
+      = f.select :role_ids,  Role.all.map{|x| [x.name, x.id]}, {}, {:multiple => true}
   = f.fields_for :authentications do |ff|
 
-    .small-4.columns
-      .row
+    .small-12.columns
+      .row.expanded
         .small-10.columns= ff.input :provider, :as => :select, :collection => [ ['Facebook', 'facebook'], ['Google', 'google_oauth2'], ['Twitter', 'twitter']]
-      .row
+      .row.expanded
         .small-10.columns= ff.input :username
-  .row
+  .row.expanded
     .small-10.columns= f.link_to_add 'Add another authentication method', :authentications, class: [:button, :tiny, :round, :secondary]
-  .row
+  .row.expanded
     .small-8.columns
       = image_tag f.object.avatar.url(:thumb)
       %p= f.input :avatar
-  
-  .row
+
+  .row.expanded
     .small-8.columns= f.submit "Save", :class => [:button, :round, :small]

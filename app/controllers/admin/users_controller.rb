@@ -25,7 +25,7 @@ class Admin::UsersController < Admin::BaseController
         "last_sign_in_at DESC NULLS LAST"
       end
     end
-    @users = apply_scopes(User).includes(:roles).order(order).page(params[:page]).per(30)
+    @users = apply_scopes(User).includes(:roles).order(order).page(params[:page]).per(80)
     set_meta_tags :title => 'Users'
   end
   
