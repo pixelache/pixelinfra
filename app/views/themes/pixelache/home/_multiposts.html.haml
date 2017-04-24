@@ -5,7 +5,7 @@
         .category= @stream.first.item.category
         .post_image
           - if @stream.first.item.image?
-            = image_tag @stream.first.item.image.url(:logo)
+            = image_tag @stream.first.item.image.url(:standard)
           - elsif @stream.first.item.class == Event
             - if @stream.first.item.project
               - if @stream.first.item.project.background?
@@ -19,7 +19,7 @@
             - unless @stream.first.item.place.latitude.blank?
               %p.map_link= link_to t(:map), '#', onclick: "$('#mapcontainer_#{@stream.first.item.id}').slideToggle(function() { google.maps.event.trigger(maps.map_#{@stream.first.item.id}, 'resize'); maps.map_#{@stream.first.item.id}.setCenter(new google.maps.LatLng(#{@stream.first.item.place.latitude }, #{@stream.first.item.place.longitude})); }); return false;"
               .google_map{id: "mapcontainer_#{@stream.first.item.id}"}= render partial: 'shared/small_map'
-        .body= truncate_html(@stream.first.item.body, :length => 290)
+        .body= truncate_html(sanitize(@stream.first.item.body, tags: %w{a bold italic b i em br p}, attr: %w{href}), :length => 290)
         -# = raw image_tag(@stream.first.item.image.url(:box)).gsub('production', 'development')
         .read_more= link_to t(:read_more), @stream.first.item
 

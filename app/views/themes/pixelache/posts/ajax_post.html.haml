@@ -12,5 +12,5 @@
       .title= link_to @post.title, @post
       .metadata
         = "#{date_range(@post.stream_date, @post.endstream_date)}, #{@post.creator.name}"
-      .body= truncate_html(@post.body, :length => 200)
+      .body= truncate_html(sanitize(@post.body, tags: %w{a bold italic b i em br p}, attr: %w{href}), :length => 200)
       .read_more= link_to t(:read_more), @post
