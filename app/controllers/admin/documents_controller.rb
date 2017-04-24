@@ -1,5 +1,6 @@
 class Admin::DocumentsController < Admin::BaseController
-
+  skip_load_and_authorize_resource
+  
   def create
     @document = Document.create(document_params)
     if @document.save
@@ -13,6 +14,9 @@ class Admin::DocumentsController < Admin::BaseController
   
   def edit
     @document = Document.find(params[:id])
+    unless @document.attachment
+      @document.build_attachment
+    end
   end
   
   def new

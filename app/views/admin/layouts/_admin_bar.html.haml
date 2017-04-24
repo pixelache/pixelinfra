@@ -55,6 +55,7 @@
   %li
     %a{:href => '#'} Archival
     %ul.menu
+      %li= link_to 'Documents', admin_documents_path
       - if can? :manage, Archivalimage
         %li= link_to 'Archival images', admin_archivalimages_path
       - if can? :manage, Etherpad

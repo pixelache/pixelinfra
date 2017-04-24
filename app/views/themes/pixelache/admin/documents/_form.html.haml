@@ -10,7 +10,7 @@
     
 = semantic_form_for [:admin, @document], html: {multipart: true, :'data-abide' => ''} do |f|
   .row.expanded
-    .small-12.columns= f.input :subsite, input_html: {required: ''}
+    .small-4.columns= f.input :subsite, input_html: {required: ''}
   .row.expanded
     .small-12.columns
       %ul.tabs#languages{"data-tabs" => ""}
@@ -40,12 +40,13 @@
           = link_to 'Download', ff.object.attachedfile.url, :class => [:button, :round, :tiny]
         = ff.input :attachedfile
         = ff.input :documenttype
-        = ff.input :title
-        = ff.input :description
-        = ff.input :year_of_publication, :hint => 'For project publications. Leave blank to show up on all years the project is active, or enter a specific year'
+        = ff.input :title, label: 'Internal name of document (optional)'
+        = ff.input :description, label: 'Internal description of document (optional)'
+        = ff.input :year_of_publication, :hint => 'For project publications. Will show up on annual archive pages (if public). Leave blank to show up on all years the project is active, or enter a specific year'
         = ff.input :public, as: :boolean
         / = ff.link_to_remove 'Remove this attachment', class: [:button, :round, :alert, :tiny]
-  / = f.link_to_add 'Add an attachment', :attachments, class: [:button, :round, :tiny]
+  / - unless f.object.attachment
+  /   = f.link_to_add 'Add an attachment', :attachment, class: [:button, :round, :tiny]
   .row.expanded
     .small-12.columns= f.submit t(:save), class: [:button, :small, :round]
     
