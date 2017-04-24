@@ -30,7 +30,7 @@
             %td= user.roles.map{|x| x.name.titleize}.join(', ') unless user.roles.empty?
 
             %td
-              %a.button.round.tiny{"data-toggle" => "modal", "data-reveal-id" => "role-options-#{user.id}", :type => "button"} Change role
+              %a.button.round.tiny{:"data-open" => "role-options-#{user.id}", :type => "button"} Change role
               = render user
             %td
               - if can? :edit, user

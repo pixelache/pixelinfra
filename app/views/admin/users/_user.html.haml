@@ -1,4 +1,4 @@
-.reveal-modal{:id => "role-options-#{user.id}", "data-reveal" => ""}
+.reveal{:id => "role-options-#{user.id}", "data-reveal" => ""}
   = form_for [:admin, user], :url => admin_user_path(user), :html => {:method => :put, :class => 'form-horizontal' } do |f|
     .modal-header
       %h3 Authentications

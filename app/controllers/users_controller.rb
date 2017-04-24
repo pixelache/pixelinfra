@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     if @user != current_user
       unless can? :manage, @user
         flash[:error] = 'You cannot edit another user.'

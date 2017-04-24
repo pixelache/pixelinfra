@@ -3,11 +3,19 @@ class Admin::UsersController < Admin::BaseController
   has_scope
   
   def create
-    create! { admin_users_path }
+    @user = User.new(user_params)
+    if @user.save
+      flash[:notice] = 'The user info has been updated'
+    end
+    redirect_to admin_users_path
   end
   
   def update
-    update! { admin_users_path }
+    @user = User.friendly.find(params[:id])
+    if @user.update_attributes(user_params) 
+      flash[:notice] = 'The user info has been updated'
+    end
+    redirect_to admin_users_path
   end
   
   def index
@@ -31,7 +39,7 @@ class Admin::UsersController < Admin::BaseController
   
   protected
   
-  def permitted_params
-    params.permit(:user => [:avatar, :name, :username, :email, :bio, :feed_urls, :twitter_name,  :website, role_ids: [], authentications_attributes: [:id, :user_id, :provider, :uid, :username]  ])
+  def user_params
+    params.require(:user).permit(:avatar, :name, :username, :email, :bio, :feed_urls, :twitter_name,  :website, role_ids: [], authentications_attributes: [:id, :user_id, :provider, :uid, :username] )
   end
 end
