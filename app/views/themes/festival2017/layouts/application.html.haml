@@ -5,7 +5,7 @@
     = display_meta_tags :site => 'Pixelache Festival 2017' 
     
     %meta{:content => content_for?(:description) ? yield(:description) : "Pixelache Festival 2017", :name => "description"}
-
+    %link{:href => "https://fonts.googleapis.com/css?family=Roboto+Condensed", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/feed", :rel => "alternate", :title => "RSS", :type => "application/rss+xml"}/
     
     = render partial: 'layouts/favicons'

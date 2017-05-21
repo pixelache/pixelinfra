@@ -7,17 +7,15 @@
     
   .row.post_row.small-up-1.medium-up-3.large-up-5.xlarge-up-5{:"data-equalizer" => ''}
     - Post.all.limit(8).each_with_index do |news, index|
-      
-      .post.column{class: @posts[index+1].nil? ? "end" : false,  :"data-equalizer-watch" => ''}
-        .news_image
-          -#{style: news.image? ? "background: url(#{news.image.url(:box).gsub('development', 'production')}) no-repeat center center" : false }
-          - if news.image?
-            = image_tag news.image.url(:box)
-          = link_to news do
-            .overlay &nbsp;
-        .text_box
-          .title= link_to news.title, news
-          .date= news.published_at.strftime('%d %B %Y')
-          .body
-            = raw truncate_html(sanitize(news.body, tags: %w{em b bold strong i italic u underline br a }), length: 250)
-            = link_to ' >>>', news    
+      = link_to news do
+        .post.column{class: @posts[index+1].nil? ? "end" : false,  :"data-equalizer-watch" => ''}
+          .news_image
+            -#{style: news.image? ? "background: url(#{news.image.url(:box).gsub('development', 'production')}) no-repeat center center" : false }
+            - if news.image?
+              = image_tag news.image.url(:box)
+          .text_box
+            .title= link_to news.title, news
+            .date= news.published_at.strftime('%d %B %Y')
+            .body
+              = raw truncate_html(sanitize(news.body, tags: %w{em  i italic u underline br a }), length: 250)
+              = link_to ' ...', news    

@@ -335,4 +335,162 @@ footer {
 .news_front {
   padding: 3.9rem 0;
   background-color: $salmon;
+  
+  .post {
+    margin-bottom: 2rem;
+  
+    .news_image {
+      width: 100%;
+      overflow: hidden;
+      border: 8px solid transparent;
+      &:hover {
+        border: 8px solid $green;
+        cursor: pointer;
+      }
+
+      margin-bottom: 1.5rem;
+    }
+    .text_box {
+      .title {
+        text-transform: uppercase;
+        font-family: $built;
+        font-weight: bold;
+        font-size: 2.25rem;
+        line-height: 2.4rem;
+        a { 
+          color: $green;
+        }
+        padding-bottom: 0.6rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px dotted $green;
+      }
+      .date {
+        font-weight: bold;
+        font-size: 1rem;
+        color: $green;
+
+        font-family: $roboto;
+      }
+      .body {
+        font-weight: 200;
+        font-size: 1rem;
+        color: $green;
+        font-family: $roboto;
+        a { 
+          color: $green;
+          &:hover {
+            color: $light-green;
+          }
+        }
+      }
+    }
+  }
+  
 }
+
+.page {
+
+  &.schedule {
+    h2 {
+      font-family: $built;
+      color: $green;
+      text-transform: uppercase;
+      font-size: 1.7rem;
+    }
+    ul {
+      margin: 1.5rem 0;
+      li {
+        list-style-type: none;
+        clear: both;
+        margin-bottom: 1.3rem;
+        line-height: 1.5rem;
+        small {
+          font-size: 75%;
+          font-weight: 400;
+        }
+        ul {
+          margin-left: 3rem;
+          li {
+            color: #666;
+            kbd {
+              font-weight: 300;
+              height: 5rem;
+              color: $green;
+              font-family: $built;
+            }
+          }
+        }
+        kbd {
+          background: none;
+          font-weight: 400;
+          font-family: $arial;
+          color: #000;
+          border: none;
+          width: 160px;
+          display: block;
+          float: left;
+          padding-right: 25px;
+          text-align: right;
+          height: 3rem;
+          color: $green;
+          font-family:  $built;
+        }
+      }
+    }
+  }
+
+
+  color: $green;
+  &.locations, &.contact {
+    .page_text {
+      color: $light-green;
+      p {
+        color: $light-green;
+      }
+    }
+  }
+  .page_text {
+//    background-color: $light-green;
+    padding: 2rem 1rem 2rem 3rem;
+
+    font-size: 0.8rem;
+    line-height: 1rem;
+    overflow: auto;
+    color: $blue;
+    font-family: $arial;
+    h1 {
+      color: $green;
+    }
+    h3 {
+      font-family: $built;
+      font-weight: bold;
+      color: $green;
+      text-transform: uppercase;
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.festival2017_container {
+
+
+  &.page {
+
+    background-image: url('/assets/festival2017/images/page_background_left.png'), url('/assets/festival2017/images/page_background_right.png');
+    background-repeat: repeat-y;
+    background-position: left top, right top;
+    background-color: $light-green;
+
+
+    article {
+      padding-bottom: 6rem;
+    }
+    &.locations {
+      article {
+        padding-bottom: 40px;
+      }
+    }
+  }
+  
+}
+
