@@ -1,6 +1,6 @@
 = semantic_nested_form_for [:admin, @festival], :html => {:"data-abide" => '', :class => "custom", :multipart => true} do |f|
   .row
-    .small-6.columns= f.input :node, :include_blank => false, :input_html => {:required => ''}
+    .small-6.columns= f.input :node, :input_html => {:required => ''}
   .row
     .small-6.columns= f.input :name, :input_html => {:required => ''}
   .row

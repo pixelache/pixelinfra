@@ -29,7 +29,7 @@ class HomeController < ApplicationController
 
       # @frontitems = Frontitem.by_site(@site.id).order(:position)
       @archive = Archivalimage.random(1).first
-    elsif @site.name == 'livingspaces' || @site.name == 'empathy'
+    elsif @site.name == 'livingspaces' || @site.name == 'empathy' || !@site.festival.nil?
       @festival = @site.festival
       @posts = Post.by_festival(@site.festival).published.order(published_at: :desc).limit(8)
     elsif @site.name == 'olsof' 

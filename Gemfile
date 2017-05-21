@@ -85,6 +85,7 @@ gem 'slick_rails'
 
 gem 'textacular'# , '~> 4.0'
 gem 'themes_for_rails', github: 'cenotaph/themes_for_rails', branch: 'master'
+
 gem 'truncate_html'
 gem 'twitter'
 
@@ -94,7 +95,7 @@ gem 'yt'
 # gem 'youtube_it'
 
 group :development do
-  gem 'better_errors' #, github: 'workingnotworking/better_errors'
+  gem 'better_errors', github: 'workingnotworking/better_errors'
   gem 'binding_of_caller'
   gem 'letter_opener'
   gem 'listen', '~> 3.0.5'

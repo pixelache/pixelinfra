@@ -1,6 +1,7 @@
 class Admin::FestivalsController < Admin::BaseController
   # autocomplete :place, :name
   handles_sortable_columns
+  skip_load_and_authorize_resource
   
   def edit
     @festival = Festival.friendly.find(params[:id])
@@ -17,9 +18,9 @@ class Admin::FestivalsController < Admin::BaseController
     @festival = Festival.new(festival_params)
     if @festival.save
       flash[:notice] = 'Festival created.'
-      redirect_to admin_projects_path
+      redirect_to admin_festivals_path
     else
-      flash[:error] = 'Error saving project.'
+      flash[:error] = 'Error saving festival.'
     end
   end
   
@@ -27,19 +28,19 @@ class Admin::FestivalsController < Admin::BaseController
     @festival = Festival.friendly.find(params[:id])
     if @festival.update_attributes(festival_params)
       flash[:notice] = 'Festival updated.'
-      redirect_to admin_projects_path
+      redirect_to admin_festivals_path
     else
-      flash[:error] = 'Error updating project.'
+      flash[:error] = 'Error updating festival.'
     end
  
   end
   
   def destroy
-    @project = Festival.friendly.find(params[:id])
-    if @project.destroy
+    @festival = Festival.friendly.find(params[:id])
+    if @festival.destroy
       flash[:notice] = 'Festival deleted.'
     end
-    redirect_to admin_projects_path
+    redirect_to admin_festivals_path
   end
   
   
