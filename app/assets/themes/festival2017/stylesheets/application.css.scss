@@ -1,0 +1,24 @@
+/* 
+
+ *= require festival2017/stylesheets/foundation_overrides
+ *= require festival2017/stylesheets/_settings
+ *= require festival2017/stylesheets/main
+ *= require slick
+
+ */
+
+@import 'settings';
+
+@font-face {
+  font-family: 'Built Titling';
+  font-style: italic;
+  font-weight: 600;
+  src: url('/assets/BuiltTitling-BoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Built Titling';
+  font-style: italic;
+  font-weight: 400;
+  src: url('/assets/BuiltTitling-Italic.ttf') format('truetype');
+}

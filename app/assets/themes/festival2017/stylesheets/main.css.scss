@@ -1,0 +1,338 @@
+@import 'variables';
+@import '_settings';
+
+body {
+  background-color: $light-green;
+  min-height:100%;
+  position:relative;
+
+}
+a {
+  color: $green;
+  &:hover {
+    color: $salmon;
+  }
+}
+
+.mobile_holder {
+  background-color: $light-green;
+  &.locations, &.contact {
+    background-color: $blue;
+  }
+}
+
+.top-bar, .title-bar {
+  text-align:center;
+  ul {
+    background: none !important;
+  }
+  .toggle-topbar.menu-icon a{
+    color: $green;
+    padding: 0 1.625rem 0 2.5rem;
+    span::after {
+      box-shadow: 0 0 0 1px $green, 0 7px 0 1px $green, 0 14px 0 1px $green;
+      right: 0;    
+    }
+  }
+}
+section.top-bar-section {
+display: inline-block;
+}
+
+.main_nav_select {
+  background-color: $light-green;
+  color: $green;
+  border: 1px dotted $green;
+  &:focus {
+    outline-color: $blue;
+  }
+  &.locations, &.contact {
+    background-color: $blue;
+    color: $light-green;
+    border: 1px dotted $light-green;
+  }
+  option {
+    color: $green;
+    font-family: $arial;
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+}
+
+.top-bar.expanded {
+  .menu_wrapper {
+    max-width: initial;
+  }
+}
+
+.title-bar {
+  @include breakpoint(small only) {
+    padding: 1rem;
+  }
+  .title-bar-title  {
+    max-width: 80%;
+    margin: 0 1rem 0 0;
+    li {
+      list-style-type: none;
+    }
+  }
+}
+
+
+.top-bar, .title-bar {
+  line-height: 1.8rem;
+  background-color: $light-green;
+  padding: 30px 30px 0 30px;
+
+  .title-area {
+
+    width: 100%;
+    li {
+      list-style-type: none;
+    }
+    .name {
+      height: initial;
+      float: left;
+      margin-right: 3rem;
+    }
+  }
+  &.locations, &.contact {
+    background-color: $blue;
+
+
+    a {
+      color: $green;
+    }
+  }
+  .languages {
+    float: right;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: $blue;
+    font-weight: bold;
+    font-style: italic;
+    font-family: $built;
+    a {
+      color: $blue;
+      font-weight: normal;
+      
+    }
+  }
+  .menu_wrapper  {
+
+    .menu > li.is-dropdown-submenu-parent > a::after {border-color: $green transparent transparent;}
+    .menu > li.is-dropdown-submenu-parent > a {
+      padding: 16px;
+    }
+    .menu > li.is-drilldown-submenu-parent > a::after {border-color: transparent transparent transparent $green;   right: 0;}
+    .menu > li.is-drilldown-submenu-parent > a {
+      padding: 16px;
+    }
+    ul.submenu {
+      border: none;
+      padding: 0 0 1rem 0;
+      background-color: $light-green;
+      li {
+        background-color: $light-green;
+        padding: 1rem 0;
+        margin: 0;
+      }
+    }
+    float: left;
+    width: 100%;
+    padding-top: 1.5rem;
+
+    .menu_bar {
+      clear:left;
+      float:left;
+      list-style:none;
+      margin:0;
+      padding:0;
+      position:relative;
+
+      height: initial !important;
+      text-align:center;
+
+      .f-dropdown {
+        background-color: $light-green;
+        border: none;
+        outline: none;
+
+      
+        &:after, &:before {
+          border-style: none;
+        }
+        &.f-open-dropdown {
+
+          &:after {
+            border-style: none;
+          }
+        }
+        li  a {
+          line-height: 1.8rem;
+          text-align: left;
+          clear: left;
+          margin: 0.5rem ;
+        }
+      }
+      
+      a, ul li a {
+        font-family: $built;
+        font-weight: bold;
+        font-size: 1.25rem;
+        text-transform: uppercase !important;
+        letter-spacing: 0.22rem;
+        color: $green;
+        border-bottom: 2px solid $light-green;
+        &:hover {
+          border-bottom: 2px solid $green;
+        }
+   
+      }
+      a {
+        display:block;
+        text-align: left;
+        float:left;
+        padding:0;
+        position:relative;
+        margin: 0 2.5rem;
+   
+        display:inline-block;
+      }
+
+    }
+  }
+  ul.social {
+    li {
+      float: left;
+      padding-right: 0.4rem;
+    }
+  }
+}
+
+.title-bar {
+  li[role=menuitem] {
+    a {  
+      @include breakpoint(small only) {
+        padding: 0 1rem 0 0 !important;
+        margin: 0 0 1rem 1rem !important;
+      }
+    }
+  }
+}
+
+.top-bar {
+  @include breakpoint(small only) {
+    padding: 0 !important;
+  }
+  li[role=menuitem]  {
+    @include breakpoint(small only) {
+      margin: 0 0 0 1.2rem !important;
+    }
+    a {  
+      @include breakpoint(small only) {
+        padding: 0 1rem 0 0 !important;
+        margin: 0 0 1rem 1rem !important;
+      }
+    }
+  }
+  .is-drilldown {
+     @include breakpoint(small only) {
+       overflow: initial;
+     }
+  }
+}
+
+
+
+// footer
+
+footer {
+  position:fixed; 
+  left:0px; 
+  bottom:0px; 
+  min-height: 20px;
+  max-height: 45px; 
+  width:100%;
+  padding: 1vH 0;
+  background-color: $green;
+  color: $light-green;
+  z-index: 99;
+  &.posts {
+    position: relative;
+    bottom: initial;
+    padding: 6px 0;
+    height: 75px;
+      width:100%;
+  }
+  .logo {
+    float: left;
+    padding: 0 25px;
+    @include breakpoint(small-only) {
+      max-width: 40%;
+    }
+  }
+  .dates {
+    color: $light-green;
+    float: left;
+    font-family:  $built;
+    font-weight: bold;
+    padding-top: 0.475rem;
+  }
+  .social {
+    float: right;
+     padding: 0 2rem;
+    @include breakpoint(small-only) {
+      max-width: 60%;
+      padding: 0;
+    }
+    a {
+      img {
+        max-height: 25px;
+        width: auto;
+      }
+      @include breakpoint(small-only) {
+        padding: 0.0.25rem !important;
+      }
+      padding: 0 1rem;
+    }
+   
+  }
+
+  .text {
+    float: left;
+    padding: 0.25rem 1rem;
+    font-family: $built;
+    font-weight: 600;
+    a {
+      color: $light-green;
+    }
+    font-size: 1rem;
+    text-transform: lowercase;
+  }
+}
+
+.top_banner {
+  padding: 2.25rem 0 5.5rem 0;
+}
+
+
+.centered_title {
+  padding: 0 0 2rem 0;
+  position: relative;
+  margin-right: auto;
+  text-align: center;
+  font-weight: bold;
+  font-family: $built;
+  color: $green;
+  font-size: 5rem;
+  img {
+    max-height: 15vH;
+  }
+}
+
+.news_front {
+  padding: 3.9rem 0;
+  background-color: $salmon;
+}

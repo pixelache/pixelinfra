@@ -1,0 +1,126 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+    = display_meta_tags :site => 'Pixelache Festival 2017' 
+    
+    %meta{:content => content_for?(:description) ? yield(:description) : "Pixelache Festival 2017", :name => "description"}
+
+    %link{:href => "/feed", :rel => "alternate", :title => "RSS", :type => "application/rss+xml"}/
+    
+    = render partial: 'layouts/favicons'
+    -#= stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag 'festival2017/stylesheets/application', :media => :screen
+    = stylesheet_link_tag 'print', media: :print
+    = javascript_include_tag "festival2017/javascripts/application"
+
+
+
+    - if controller.controller_name == 'events' || (controller.action_name == 'page' || params[:id] == 'locations') || (controller.controller_name == 'experiences')
+      %script{:src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}", :type => "text/javascript"}
+    = csrf_meta_tags
+    = yield(:head)
+  %body{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
+    - unless current_user
+      :javascript
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-40681531-3', 'auto');
+        ga('send', 'pageview');
+    %header
+      .hide-for-large{:'data-sticky-container' => ''}
+        .title-bar{ :'data-hide-for' => 'medium', :'data-responsive-toggle' => 'mobile_menu'}
+          .title-bar-right
+            .languages_mobile
+              = link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
+              %span.divider= " | "
+              = link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
+
+
+          .title-bar-title
+            = link_to image_tag(theme_image_path('Pix_logo_2017.png')), '/'
+          %button.menu-icon{"data-toggle" => "", :type => "button"}
+          .title-bar-left                  
+            .menu_wrapper
+              %ul.menu.menu_bar#mobile_menu{:"data-drilldown" => ''}
+                %li
+                  = link_to t(:info), '#'
+                  %ul#info.menu
+                    %li= link_to t("festival2017.about"), festival_page_festival_path('festival-2017', 'about')
+                    %li= link_to t("festival2017.contact"), festival_page_festival_path('festival-2017', 'contact')
+                    %li= link_to t("festival2017.media"), festival_page_festival_path('festival-2017', 'media')
+                    %li= link_to t("festival2017.locations"), festival_page_festival_path('festival-2017', 'locations')
+                %li
+                  = link_to t("festival2017.programme"), '/programme'
+                  %ul.menu
+                    %li= link_to t("festival2017.schedule"),  festival_page_festival_path('festival-2017', 'schedule')
+                %li= link_to t("festival2017.news"), festival_posts_path('festival-2017')    
+      #festival2017_menu.hide-for-small-only{:'data-sticky-container' => ''}              
+        .top-bar
+          .top-bar-right
+            .languages
+              = link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}) 
+              %span.divider= " | "
+              = link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'} )
+          .top-bar-left
+            %ul.title-area.menu
+              %li.menu-text= link_to image_tag(theme_image_path('Pix_logo_2017.png'), width: 237), '/'
+          .top-bar-left                  
+            .menu_wrapper
+              %ul.dropdown.menu.menu_bar{:"data-dropdown-menu" => ''}
+                %li
+                  = link_to t(:info), '#'
+                  %ul#info.menu
+                    %li= link_to t("festival2017.about"), festival_page_festival_path('festival-2017', 'about')
+                    %li= link_to t("festival2017.contact"), festival_page_festival_path('festival-2017', 'contact')
+                    %li= link_to t("festival2017.media"), festival_page_festival_path('festival-2017', 'media')
+                    %li= link_to t("festival2017.locations"), festival_page_festival_path('festival-2017', 'locations')
+                %li
+                  = link_to t("festival2017.programme"), '/programme'
+                  %ul.menu
+                    %li= link_to t("festival2017.schedule"),  festival_page_festival_path('festival-2017', 'schedule')
+                %li= link_to t("festival2017.news"), festival_posts_path('festival-2017')
+
+
+                
+
+
+    - if flash
+      - flash.each do |key, value|
+        .alert.text-center{ :class => "alert-#{key}" }
+          %strong= value
+            
+    %section.festival2017_container{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
+      %article= yield
+
+    %footer{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
+      .logo= link_to image_tag(theme_image_path('footer/PA_logo.png'), :alt => "Pixelache"), 'http://pixelache.ac'
+      .dates.hide-for-small-only= date_range(@festival.start_at, @festival.end_at, format: :long) + ", Helsinki"
+      -#.text.hide-for-small-only= link_to 'www.pixelache.ac', 'http://pixelache.ac'
+      .social
+        = link_to image_tag(theme_image_path('footer/facebook.png'), width: 25), 'https://www.facebook.com/events/1019391098151871'
+        = link_to image_tag(theme_image_path('footer/some_flickr.png'), width: 25), 'https://www.flickr.com/photos/pixelache/'        
+        = link_to image_tag(theme_image_path('footer/twitter.png'), width: 25), 'https://twitter.com/pixelache'
+        = link_to image_tag(theme_image_path('footer/vimeo.png'), width: 25), 'https://vimeo.com/pixelache'
+        = link_to image_tag(theme_image_path('footer/some_insta.png'), width: 25), 'https://www.instagram.com/pixelache/'        
+        = link_to image_tag(theme_image_path('footer/bamboozer.png'), width: 25), 'http://bambuser.com/channel/pixelversity'
+
+
+
+      
+    :javascript
+      $(document).ready(function() {
+        $('[data-follow-click]').on('click', function() {
+          location.href = this.href;
+        });
+        $('select.main_nav_select').change(function() {
+          window.location = $(this).find("option:selected").val();
+        });
+
+          
+        #{yield :jquery}
+        
+      });    
