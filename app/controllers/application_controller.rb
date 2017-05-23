@@ -160,8 +160,10 @@ class ApplicationController < ActionController::Base
         @site = Subsite.find_by(:name => 'livingspaces')  
       elsif request.host =~ /^documenting/ 
         @site = Subsite.find_by(name: 'documenting')
-      elsif request.host =~ /^empathy/ || request.host =~ /^festival/
+      elsif request.host =~ /^empathy/ 
         @site = Subsite.find_by(name: 'empathy') 
+      elsif   request.host =~ /^festival2017/    || request.host =~ /^festival/
+         @site = Subsite.find_by(name: 'festival2017') 
       else
         @site = Subsite.find_by(:name => (request.host =~ /opensourcingfestivals/ || request.host =~ /^olsof\./ ? 'olsof' : 'pixelache'))
       end
