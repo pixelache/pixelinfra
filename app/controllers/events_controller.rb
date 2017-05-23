@@ -5,7 +5,7 @@ class EventsController < ApplicationController
     if params[:festival_id]
       @festival = Festival.friendly.find(params[:festival_id])
       @events = @festival.events.published.order('start_at ASC')
-
+      # @events = Event.published.order('start_at ASC')
       set_meta_tags title: @festival.name + " " + t(:events)
       
     elsif params[:project_id]
@@ -26,6 +26,7 @@ class EventsController < ApplicationController
       set_meta_tags title: t(:events) + " #{@year}"
       
     else
+      
       @events = Event.by_site(@site).published.order('start_at DESC').page(params[:page]).per(12)
       set_meta_tags title: t(:events)
     end

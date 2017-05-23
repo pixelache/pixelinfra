@@ -1,0 +1,24 @@
+.event_index
+  .centered_title= t(:programme)
+  
+  - if @events.empty?
+    .centered_title
+      %h2 The programme will be announced soon.
+  - else
+    .row
+      .small-12.columns.filters
+        %ul
+          %li.all.active= link_to t("empathy.all_events").upcase, '#', onclick: "javascript:$('.event_link').fadeIn();$('li').not('.all').removeClass('active');$('li.all').addClass('active');return false;"
+          - (@festival.start_at..@festival.end_at).map{|x| l(x, format: "%a") }.uniq.each do |date|
+            %li{class: date}= link_to date, '#', onclick: "javascript:toggleEvent('.#{date}');return false;"
+    .row
+      - @events.each do |event|
+        = link_to event, class: [:event_link, event.happens_on_festival_dates.delete_if{|x|  !(@festival.start_at..@festival.end_at).to_a.include?(x) }.map{|x|l(x, format: "%a")  }.join(' ')] do
+          .large-4.medium-6.small-12.columns.event{class: event == @events.last ? :end : false}
+            .row
+              .small-6.columns.event_image
+                = image_tag event.image.url(:box)
+                .overlay &nbsp;
+              .small-6.columns.event_info
+                .title= event.title
+                .date= date_range(event.start_at.to_date, event.end_at.to_date) rescue nil

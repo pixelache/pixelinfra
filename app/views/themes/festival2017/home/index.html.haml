@@ -1,21 +1,24 @@
 .top_banner
-  .text-center= image_tag theme_image_path('placeholder_banner.jpg')
+  .text-center= image_tag theme_image_path('banner.gif')
 
 .news_front
   .centered_title
     = t(:news)
-    
-  .row.post_row.small-up-1.medium-up-3.large-up-5.xlarge-up-5{:"data-equalizer" => ''}
-    - Post.all.limit(8).each_with_index do |news, index|
-      = link_to news do
-        .post.column{class: @posts[index+1].nil? ? "end" : false,  :"data-equalizer-watch" => ''}
-          .news_image
-            -#{style: news.image? ? "background: url(#{news.image.url(:box).gsub('development', 'production')}) no-repeat center center" : false }
-            - if news.image?
-              = image_tag news.image.url(:box)
-          .text_box
-            .title= link_to news.title, news
-            .date= news.published_at.strftime('%d %B %Y')
-            .body
-              = raw truncate_html(sanitize(news.body, tags: %w{em  i italic u underline br a }), length: 250)
-              = link_to ' ...', news    
+  - if @posts.empty?
+    .centered_title
+      %h2 More information coming soon!
+  - else
+    .row.post_row.small-up-1.medium-up-3.large-up-5.xlarge-up-5{:"data-equalizer" => ''}
+      - @posts.limit(8).each_with_index do |news, index|
+        = link_to news do
+          .post.column{class: @posts[index+1].nil? ? "end" : false,  :"data-equalizer-watch" => ''}
+            .news_image
+              -#{style: news.image? ? "background: url(#{news.image.url(:box).gsub('development', 'production')}) no-repeat center center" : false }
+              - if news.image?
+                = image_tag news.image.url(:box)
+            .text_box
+              .title= link_to news.title, news
+              .date= news.published_at.strftime('%d %B %Y')
+              .body
+                = raw truncate_html(sanitize(news.body, tags: %w{em  i italic u underline br a }), length: 250)
+                = link_to ' ...', news    

@@ -1,0 +1,11 @@
+
+- @posts.each do |news|
+  .column.post
+    = link_to news do
+      .news_image{style: news.image? ? "background-image: url(#{news.image.url(:box).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".overlay").css("display", "block");$(this).css("background-image", "none");', onmouseout: '$(this).find(".overlay").css("display", "none");$(this).css("background-image", "url(' + news.image.url(:box) + ')");'}
+
+        .overlay
+          = truncate_html(strip_tags(news.body), length: 200)
+      .text_box{:"data-equalizer-watch" => ''}
+        .title= link_to news.title, news
+        .date= news.published_at.strftime('%d %B %Y')

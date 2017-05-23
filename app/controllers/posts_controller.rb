@@ -5,6 +5,7 @@ class PostsController < ApplicationController
     if params[:festival_id]
       @festival = Festival.friendly.find(params[:festival_id])
       @posts = Post.by_festival(@festival).published.order('published_at DESC').page(params[:page]).per(12)
+      
       set_meta_tags title: @festival.name + " " + t(:posts)
       
     elsif params[:archive_id]
@@ -48,7 +49,7 @@ class PostsController < ApplicationController
   end
   
   def show
-
+    
     begin
       @post = @site.posts.friendly.find(params[:id])
     rescue ActiveRecord::RecordNotFound

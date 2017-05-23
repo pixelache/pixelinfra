@@ -1,0 +1,31 @@
+.news_index
+  .centered_title
+    = t(:news)
+  
+  - if @posts.empty?
+    .centered_title
+      %h2 More information coming soon!
+  - else
+    #all_posts{:"data-equalizer" => ''}
+      .row.post_row.small-up-1.medium-up-3.large-up-4{:"data-equalizer" => ''}= render partial: 'posts', :object => @posts
+
+          
+      = paginate @posts                
+
+
+= content_for :jquery do
+  :plain
+    $('#all_posts').infinitePages({
+     debug: true,
+     buffer: 200,
+     loading() {
+        // jQuery callback on the nav element
+        return $(this).text("Loading...");
+      },
+      success() {},
+        // called after successful ajax call
+      error() {
+        // called after failed ajax call
+        return $(this).text("Trouble! Please drink some coconut water and click again");
+      }
+     });

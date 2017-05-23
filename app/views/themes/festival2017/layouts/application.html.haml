@@ -47,16 +47,16 @@
             .menu_wrapper
               %ul.menu.menu_bar#mobile_menu{:"data-drilldown" => ''}
                 %li
-                  = link_to t(:info), '#'
-                  %ul#info.menu
-                    %li= link_to t("festival2017.about"), festival_page_festival_path('festival-2017', 'about')
-                    %li= link_to t("festival2017.contact"), festival_page_festival_path('festival-2017', 'contact')
-                    %li= link_to t("festival2017.media"), festival_page_festival_path('festival-2017', 'media')
-                    %li= link_to t("festival2017.locations"), festival_page_festival_path('festival-2017', 'locations')
+                  = link_to t(:info), festival_page_festival_path('festival-2017', 'about')
+                  -# %ul#info.menu
+                  -#  %li= link_to t("festival2017.about"), festival_page_festival_path('festival-2017', 'about')
+                    / %li= link_to t("festival2017.contact"), festival_page_festival_path('festival-2017', 'contact')
+                    / %li= link_to t("festival2017.media"), festival_page_festival_path('festival-2017', 'media')
+                    / %li= link_to t("festival2017.locations"), festival_page_festival_path('festival-2017', 'locations')
                 %li
-                  = link_to t("festival2017.programme"), '/programme'
-                  %ul.menu
-                    %li= link_to t("festival2017.schedule"),  festival_page_festival_path('festival-2017', 'schedule')
+                  = link_to t("festival2017.programme"), '/programme/2017'
+                  / %ul.menu
+                  /                     %li= link_to t("festival2017.schedule"),  festival_page_festival_path('festival-2017', 'schedule')
                 %li= link_to t("festival2017.news"), festival_posts_path('festival-2017')    
       #festival2017_menu.hide-for-small-only{:'data-sticky-container' => ''}              
         .top-bar
@@ -72,16 +72,16 @@
             .menu_wrapper
               %ul.dropdown.menu.menu_bar{:"data-dropdown-menu" => ''}
                 %li
-                  = link_to t(:info), '#'
-                  %ul#info.menu
-                    %li= link_to t("festival2017.about"), festival_page_festival_path('festival-2017', 'about')
-                    %li= link_to t("festival2017.contact"), festival_page_festival_path('festival-2017', 'contact')
-                    %li= link_to t("festival2017.media"), festival_page_festival_path('festival-2017', 'media')
-                    %li= link_to t("festival2017.locations"), festival_page_festival_path('festival-2017', 'locations')
+                  = link_to t(:info), festival_page_festival_path('festival-2017', 'about')
+                  -# %ul#info.menu
+                  -#  %li= link_to t("festival2017.about"), festival_page_festival_path('festival-2017', 'about')
+                    / %li= link_to t("festival2017.contact"), festival_page_festival_path('festival-2017', 'contact')
+                    / %li= link_to t("festival2017.media"), festival_page_festival_path('festival-2017', 'media')
+                    / %li= link_to t("festival2017.locations"), festival_page_festival_path('festival-2017', 'locations')
                 %li
-                  = link_to t("festival2017.programme"), '/programme'
-                  %ul.menu
-                    %li= link_to t("festival2017.schedule"),  festival_page_festival_path('festival-2017', 'schedule')
+                  = link_to t("festival2017.programme"), '/programme/2017'
+                  -# %ul.menu
+                  -#  %li= link_to t("festival2017.schedule"),  festival_page_festival_path('festival-2017', 'schedule')
                 %li= link_to t("festival2017.news"), festival_posts_path('festival-2017')
 
 
@@ -101,12 +101,12 @@
       .dates.hide-for-small-only= date_range(@festival.start_at, @festival.end_at, format: :long) + ", Helsinki"
       -#.text.hide-for-small-only= link_to 'www.pixelache.ac', 'http://pixelache.ac'
       .social
-        = link_to image_tag(theme_image_path('footer/facebook.png'), width: 25), 'https://www.facebook.com/events/1019391098151871'
+        = link_to image_tag(theme_image_path('footer/some_fb.png'), width: 25), 'https://www.facebook.com/events/1019391098151871'
         = link_to image_tag(theme_image_path('footer/some_flickr.png'), width: 25), 'https://www.flickr.com/photos/pixelache/'        
-        = link_to image_tag(theme_image_path('footer/twitter.png'), width: 25), 'https://twitter.com/pixelache'
-        = link_to image_tag(theme_image_path('footer/vimeo.png'), width: 25), 'https://vimeo.com/pixelache'
+        = link_to image_tag(theme_image_path('footer/some_twitter.png'), width: 25), 'https://twitter.com/pixelache'
+        = link_to image_tag(theme_image_path('footer/some_v.png'), width: 25), 'https://vimeo.com/pixelache'
         = link_to image_tag(theme_image_path('footer/some_insta.png'), width: 25), 'https://www.instagram.com/pixelache/'        
-        = link_to image_tag(theme_image_path('footer/bamboozer.png'), width: 25), 'http://bambuser.com/channel/pixelversity'
+        = link_to image_tag(theme_image_path('footer/some_b.png'), width: 25), 'http://bambuser.com/channel/pixelversity'
 
 
 

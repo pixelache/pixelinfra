@@ -6,7 +6,7 @@ class Page < ActiveRecord::Base
   belongs_to :festival
   belongs_to :project
   extend FriendlyId
-  friendly_id :name_en, :use => [ :slugged, :finders, :scoped], :scope => :subsite
+  friendly_id :name_en, :use => [ :slugged, :finders, :scoped], :scope => [:subsite, :festival]
   has_paper_trail
   resourcify
   has_many :frontitems, as: :item, :dependent => :destroy

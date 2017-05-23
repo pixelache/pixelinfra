@@ -314,7 +314,7 @@ footer {
 }
 
 .top_banner {
-  padding: 2.25rem 0 5.5rem 0;
+  padding: 2.25rem 0 0 0;
 }
 
 
@@ -326,7 +326,11 @@ footer {
   font-weight: bold;
   font-family: $built;
   color: $green;
+  letter-spacing: 0.7rem;
   font-size: 5rem;
+  @include breakpoint(small only) {
+    font-size: 3rem;
+  }
   img {
     max-height: 15vH;
   }
@@ -335,59 +339,135 @@ footer {
 .news_front {
   padding: 3.9rem 0;
   background-color: $salmon;
-  
-  .post {
-    margin-bottom: 2rem;
-  
-    .news_image {
-      width: 100%;
-      overflow: hidden;
-      border: 8px solid transparent;
-      &:hover {
-        border: 8px solid $green;
-        cursor: pointer;
-      }
+}
 
-      margin-bottom: 1.5rem;
+.post {
+  margin-bottom: 2rem;
+
+  .news_image {
+    width: 100%;
+    overflow: hidden;
+    border: 8px solid transparent;
+    &:hover {
+      border: 8px solid $green;
+      cursor: pointer;
     }
-    .text_box {
-      .title {
-        text-transform: uppercase;
-        font-family: $built;
-        font-weight: bold;
-        font-size: 2.25rem;
-        line-height: 2.4rem;
-        a { 
-          color: $green;
-        }
-        padding-bottom: 0.6rem;
-        margin-bottom: 1rem;
-        border-bottom: 1px dotted $green;
-      }
-      .date {
-        font-weight: bold;
-        font-size: 1rem;
-        color: $green;
 
-        font-family: $roboto;
-      }
-      .body {
-        font-weight: 200;
-        font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .text_box {
+    .title {
+      text-transform: uppercase;
+      font-family: $built;
+      font-weight: bold;
+      font-size: 2.25rem;
+      line-height: 2.4rem;
+      a { 
         color: $green;
-        font-family: $roboto;
-        a { 
-          color: $green;
-          &:hover {
-            color: $light-green;
-          }
+      }
+      padding-bottom: 0.6rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px dotted $green;
+    }
+    .date {
+      font-weight: bold;
+      font-size: 1rem;
+      color: $green;
+
+      font-family: $roboto;
+    }
+    .body {
+      font-weight: 200;
+      font-size: 1rem;
+      color: $green;
+      font-family: $roboto;
+      a { 
+        color: $green;
+        &:hover {
+          color: $light-green;
         }
       }
     }
   }
-  
 }
+  
 
+.news_index, .news_post {
+  padding: 3rem 0;
+  
+  .title {
+    text-transform: uppercase;
+    font-family: $built;
+    font-weight: bold;
+    color: $green;
+    font-size: 2.25rem;
+    line-height: 2.4rem;
+    a { 
+      color: $green;
+    }
+    padding-bottom: 0.6rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px dotted $green;
+  }
+  .date {
+    font-weight: bold;
+    font-size: 1rem;
+    color: $green;
+    margin-bottom: 1rem;
+
+    font-family: $roboto;
+  }
+ 
+  .news_body {
+    margin: 1.5rem 0;
+    font-weight: 200;
+    font-size: 1rem;
+    color: $green;
+    font-family: $roboto;
+    a { 
+      color: $green;
+      &:hover {
+        color: $light-green;
+      }
+    }
+  }
+
+  .post {
+    
+    .news_image {
+      background-size: cover;
+      padding-bottom: 100%;
+      height: 0;
+      overflow: hidden;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      border: none;
+      &:hover {
+        border: none;
+      }
+      .overlay {
+        opacity: 1;
+        padding-bottom: 100%;
+        height: 0;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 30px;
+        padding: 10px 10px 100% 10px;
+        background-image: none;
+        font-family: $arial;
+        font-size: 1rem;
+        color: $green;
+        display: none;
+      }
+    }
+    .text_box {
+      .date {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
 .page {
 
   &.schedule {
@@ -492,5 +572,242 @@ footer {
     }
   }
   
+}
+
+.event_index {
+  padding: 2rem 0;
+  .filters {
+    margin-bottom: 3rem;
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        float: left;
+        margin-right: 2rem;
+        color: $green;
+        font-family: $built;
+        font-size: 1.75rem;
+        list-style-type: none;
+        padding-bottom: 0rem;
+        &.active {
+          border-bottom: 5px solid $green;
+        
+        }
+        a { 
+          &:hover {
+            color: $blue;
+            padding-bottom: 0.35rem;
+            border-bottom: 5px solid $blue;
+          }
+          color: $green;
+        }
+      }
+    }
+  }
+  .event {
+    color: $green;
+    .event_image {
+      height: 285px;
+      &:hover {
+        background: none;
+        cursor: pointer;
+        .overlay {
+          display: block;
+        }
+      }
+      .overlay {
+        background: rgba(238, 30, 70, 0.62);
+        width: 103%;
+        display: none;
+        padding-bottom: 124%;
+        margin-top: 0;
+        position: relative;
+        z-index: 2;
+
+      }
+      img {
+        max-width: 300px;
+        clip: rect(0px, 175px, 235px, 0px);
+        position: absolute;
+        height: auto;
+        width: auto;
+      }
+
+    }
+    .title {
+      font-family: $built;
+      font-weight: bold;
+      color: $green;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 3px dotted $green;
+    }
+    .date {
+      color: $green;
+      font-family: $roboto;
+      padding: 1rem 0;
+    }
+  }
+}
+
+#registration_form {
+  background-color: $green;
+  color: $light-green;
+  padding: 3.125rem 0;
+  h2 {
+    text-transform: uppercase;
+    color: $light-green;
+    font-family: $built;
+  }
+  form {
+    .error input {
+      border: 3px solid black;
+    }
+    li {
+      padding-top: 1.5rem;
+      list-style-type: none;
+    }
+    label.label {
+      background-color: $green;
+      color: $light-green;
+      font-family: $arial;
+      font-size: 1.15rem;
+      padding-bottom: 0.3rem;
+      padding: 0; margin: 0;
+    }
+    abbr[title=required] {
+      display: none;
+    }
+    input[type=text], input[type=email], input[type=tel], textarea {
+      background-color: $light-green;
+    }
+    input[type=submit] {
+      float: right;
+      background-color: $green;
+      color: $light-green;
+      font-size: 1.7rem;
+      text-transform: uppercase;
+      font-family: $built;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      &:hover {
+        color: $blue;
+      }
+    }
+  }
+}
+
+
+.related_content {
+  padding: 4rem 0;
+  h2 {
+    text-transform: uppercase;
+    color: $green;
+    font-family: $built;
+    margin-bottom: 2.5rem;
+  }
+  .related {
+    .related_image_box {
+      .overlay {
+        background: rgba(238, 30, 70, 0.62);
+
+        padding-bottom: 100%;
+        position: relative;
+        z-index: 2;
+        &:hover {
+          background: none;
+          cursor: pointer;
+        }
+      }
+
+    }
+    h3 {
+      text-transform: uppercase;
+      color: $green;
+      font-family: $built;
+      border-bottom: 3px  dotted $green;
+      padding: 1.25rem 0 0.5rem 0;
+    }
+    .blurb {
+      font-family: $arial;
+      font-size: 1rem;
+      text-align: left;
+      color: $green;
+      padding: 0.5rem 0 2.5rem 0;
+    }
+  }
+}
+
+.event_single {
+
+
+  .event {
+    .google_map {
+      display: none;
+    }
+    #mapcontainer {
+      height: 200px;
+    }
+    .event_image {
+      text-align: center;
+    }
+    .top_container {
+      .title {
+        font-family: $built;
+        color: $green;
+        text-transform: uppercase;
+        font-size: 2.25rem;
+        line-height: 2.9rem;
+        padding: 2rem 0;
+        border-bottom: 3px dotted $green;
+      }
+    }
+    .metadata_container {
+      text-align: center;
+      color: $green;
+      font-family: $built;
+      border-bottom: 3px dotted $green;
+      padding-bottom: 2rem;
+      .dates {
+        font-size: 1.5rem;
+        padding: 2rem 0;
+      }
+      .place {
+        font-size: 1.5rem;
+        p {
+          font-size: 1.5rem;
+        }
+        p.place_address {
+          font-size: 1.313rem;
+          padding: 0;
+          margin: 0;
+        }
+        p.map_link a  {
+          font-size: 1rem;
+          color: $green;
+          text-decoration: underline;
+        }
+      }
+      .cost {
+        font-size: 1.313rem;
+      }
+    }
+    .body_container {
+      padding: 2rem 0;
+      font-family: $arial;
+      font-size: 1rem;
+      text-align: left;
+      color: $green;
+      p {
+        font-family: $arial;
+        font-size: 1rem;
+        color: $green;
+        text-align: left;
+      }
+    }
+
+  }
 }
 
