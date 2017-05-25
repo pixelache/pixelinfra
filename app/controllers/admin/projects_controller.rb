@@ -1,7 +1,9 @@
 class Admin::ProjectsController < Admin::BaseController
 
 
-
+  def show
+    @project = Project.friendly.find(params[:id])
+  end
     
   def edit
     @project = Project.friendly.find(params[:id])
