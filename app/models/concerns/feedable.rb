@@ -2,7 +2,11 @@ module Feedable
   extend ActiveSupport::Concern
   
   def add_to_feed(action = 'created')
-    Feed.create(:action => action, :subsite_id => self.subsite_id, :user_id => self.user_id, :item_id => self.id, :item_type => self.class.to_s, :fed_at => self.feed_time)
+    if self.respond_to?(:published)
+      if self.published == true
+        Feed.create(:action => action, :subsite_id => self.subsite_id, :user_id => self.user_id, :item_id => self.id, :item_type => self.class.to_s, :fed_at => self.feed_time)
+      end
+    end
   end
   
   def delete_feeds
