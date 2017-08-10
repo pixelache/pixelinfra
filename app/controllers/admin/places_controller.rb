@@ -2,7 +2,7 @@ class Admin::PlacesController < Admin::BaseController
   handles_sortable_columns
   
   def create
-    @place = Place.new(permitted_params)
+    @place = Place.new(place_params)
     if @place.save
       flash[:notice] = 'Place created.'
       redirect_to admin_places_path
@@ -28,7 +28,7 @@ class Admin::PlacesController < Admin::BaseController
   
   def update
     @place = Place.friendly.find(params[:id])
-    if @place.update_attributes(permitted_params)
+    if @place.update_attributes(place_params)
       redirect_to  admin_places_path 
     end
   end
@@ -55,8 +55,8 @@ class Admin::PlacesController < Admin::BaseController
   
   protected
   
-  def permitted_params
-    params.permit(:place => [:address1, :address2, :city, :country, :postcode, :latitude, :longitude, translations_attributes: [:name, :id, :locale]])
+  def place_params
+    params.require(:place).permit(:address1, :address2, :city, :country, :postcode, :latitude, :longitude, translations_attributes: [:name, :id, :locale])
   end
 
 end
