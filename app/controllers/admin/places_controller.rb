@@ -2,11 +2,35 @@ class Admin::PlacesController < Admin::BaseController
   handles_sortable_columns
   
   def create
-    create! { admin_places_path }
+    @place = Place.new(permitted_params)
+    if @place.save
+      flash[:notice] = 'Place created.'
+      redirect_to admin_places_path
+    else
+      flash[:error] = 'Error saving place.'
+    end
+  end
+  
+
+  
+  def destroy
+    @place = Place.friendly.find(params[:id])
+    if @place.destroy
+      redirect_to  admin_places_path
+    end
+  end
+  
+  def edit
+    @place = Place.friendly.find(params[:id])
+
+    set_meta_tags :title => t(:edit_place)
   end
   
   def update
-    update! { admin_places_path }
+    @place = Place.friendly.find(params[:id])
+    if @place.update_attributes(permitted_params)
+      redirect_to  admin_places_path 
+    end
   end
   
   def index
