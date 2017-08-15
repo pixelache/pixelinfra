@@ -89,9 +89,9 @@
     .row
       .small-10.medium-10.large-8.small-centered.columns
         %h2= t "empathy.also_see"
-        .row
+        .row.small-up-1.medium-up-2.xxlarge-up-3{:"data-equalizer" => '', :"data-equalize-by-row" => "true"}            
           - unless @event.posts.published.empty?
-            .related_event
+            .related_event.column
               .small-12.medium-6.related{class: cycle('odd', 'even')}
                 - @event.posts.published.sort_by(&:published_at).reverse.each do |post|
                   = link_to post do
@@ -102,7 +102,7 @@
       
           - unless @event.festivalthemes.empty?
 
-            .related_event
+            .related_event.column
               - @event.festivalthemes.each do |ft|
                 .small-12.medium-6.related{class: cycle('odd', 'even')}
                   = link_to "/festivals/festival-2015/theme/#{ft.slug}" do
@@ -131,7 +131,7 @@
           - if @event.find_related_tags.blank?
             -# nothing related in db so just pull random shit
             - @event.festival.events.published.shuffle.delete_if{|x| x== @event}.take(2).each_with_index do |event, i|
-              .small-10.medium-6.columns.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
+              .columns.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
                 = link_to event do
                   .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
                     .overlay &nbsp;
@@ -140,7 +140,7 @@
           
           - else
             - @event.find_related_tags.each_with_index do |event, i|
-              .small-10.medium-6.columns.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
+              .columns.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
                 = link_to event do
                   .related_image_box{style: "background: url(#{event.image.url(:standard).gsub(/development/, 'production')}) no-repeat center center;"}
                     .overlay &nbsp;
