@@ -2,7 +2,7 @@ class AttendeesController < ApplicationController
   
   def create
     if params[:event_id]
-      @item = Event.find(params[:event_id])
+      @item = Event.friendly.find(params[:event_id])
       @attendee = Attendee.new(permitted_params)
       if @item.is_full?
         @attendee.waiting_list = true
