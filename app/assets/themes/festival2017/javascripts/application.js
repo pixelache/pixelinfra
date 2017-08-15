@@ -3,7 +3,7 @@
 //= require jquery-ui/core
 //= require foundation
 //= require jquery.infinite-pages
-
+//= require slick
 
  $( function() {
 

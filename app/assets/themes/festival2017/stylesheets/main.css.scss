@@ -709,17 +709,24 @@ footer {
     margin-bottom: 2.5rem;
   }
   .related {
+    &:hover {
+      .related_image_box {
+        .overlay {
+          display: block;
+        }
+      }
+    }
     .related_image_box {
+      padding-bottom: 100%;
+      position: relative;
       .overlay {
         background: rgba(238, 30, 70, 0.62);
+        display: none;
+        padding-bottom: 94%;
 
-        padding-bottom: 100%;
-        position: relative;
-        z-index: 2;
-        &:hover {
-          background: none;
-          cursor: pointer;
-        }
+            position: absolute;
+            z-index: 2;
+            width: 100%;
       }
 
     }
@@ -805,6 +812,9 @@ footer {
         font-size: 1rem;
         color: $green;
         text-align: left;
+        a {
+          color: $salmon;
+        }
       }
     }
 
@@ -815,4 +825,5 @@ footer {
 .dropdown.menu > li.opens-right > .is-dropdown-submenu {
   left:10%;
   top: 85%;
+  background-color: $light-green !important;
 }

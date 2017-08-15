@@ -2,7 +2,13 @@
   
   .small-10.medium-10.large-8.small-centered.columns.event
     .top_container
-      .event_image= image_tag @event.image.url
+      - if @event.photos.empty?
+        .event_image= image_tag @event.image.url
+      - else
+        .event_image.image_carousel
+          .img= image_tag @event.image.url
+          - @event.photos.each do |photo|
+            .img= image_tag photo.filename.url
       .title.text-center= @event.title
     .metadata_container 
       .dates= date_range(@event.start_at, @event.end_at)
@@ -136,12 +142,30 @@
             - @event.find_related_tags.each_with_index do |event, i|
               .small-10.medium-6.columns.related{class: cycle('odd', 'even') + (@event.find_related_tags[i+1].nil? ? ' end' : '')}
                 = link_to event do
-                  .related_image_box{style: "background: url(#{event.image.url(:standard)}) no-repeat center center;"}
+                  .related_image_box{style: "background: url(#{event.image.url(:standard).gsub(/development/, 'production')}) no-repeat center center;"}
                     .overlay &nbsp;
                   %h3= event.name
                   .blurb= raw truncate_html(strip_tags(event.description), length: 200)
       
 = content_for :jquery do
+
+  - unless @event.photos.empty?
+    = content_for :jquery do
+      :plain
+        $('.image_carousel').slick({infinite: true,
+          slidesToShow: 1,
+
+          dots: false,
+
+      
+          arrows: false,
+          slide: '.img',
+          variableWidth: false,
+          autoplay: true,
+          autoplaySpeed: 4400,
+          slidesToScroll: 1,
+        });
+        
   - unless @event.place.latitude.blank?
     :plain
 

@@ -4,7 +4,7 @@
 //= require foundation
 //= require jquery.infinite-pages
 //= require empathy/javascripts/jquery.mCustomScrollbar.concat.min
-
+//= require slick
  $( function() {
 
    $(document).foundation();
