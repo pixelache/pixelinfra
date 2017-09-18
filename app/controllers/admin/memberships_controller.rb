@@ -1,11 +1,27 @@
 class Admin::MembershipsController < Admin::BaseController
+  skip_load_and_authorize_resource
+  load_and_authorize_resource
   
   def create
-    create! { admin_memberships_path }
+    @membership = Membership.new(membership_params)
+    if @membership.save
+      flash[:notice] = 'Membership updated.'
+      redirect_to admin_memberships_path
+    end      
   end
   
   def update
-    update! { admin_memberships_path }
+    @membership = Membership.find(params[:id])
+    if @membership.update_attribute(membership_params)
+      flash[:notice] = 'Membership updated.'
+      redirect_to admin_memberships_path
+    end
+  end
+  
+  def destroy
+    @membership = Membership.find(params[:id])
+    @membership.destroy
+    redirect_to admin_memberships_path
   end
   
   def edit
@@ -18,10 +34,14 @@ class Admin::MembershipsController < Admin::BaseController
     set_meta_tags :title => t(:new_membership)
   end
   
+  def index
+    @memberships = Membership.all.order(year: :desc)
+  end
+  
   protected
   
-  def permitted_params
-    params.permit(:membership => [:user_id, :year, :hallitus, :paid, :hallitus_alternate, :notes])
+  def membership_params
+    params.require(:membership).permit(:user_id, :year, :hallitus, :paid, :hallitus_alternate, :notes)
   end
   
 end

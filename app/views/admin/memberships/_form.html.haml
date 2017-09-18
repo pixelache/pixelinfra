@@ -5,7 +5,7 @@
       = f.input :user, :collection => User.order("lower(name)"), input_html: {:required => ''}
   .row
     .small-6.columns
-      = f.input :year, :as => :select, :collection => Time.now.to_date.year.to_i.downto(2003).to_a, :include_blank => false, input_html: {:required => ''}
+      = f.input :year, :as => :select, :collection => Time.now.to_date.year.to_i.downto(2003).to_a, input_html: {:required => ''}
   .row
     .small-6.columns
       = f.input :paid
