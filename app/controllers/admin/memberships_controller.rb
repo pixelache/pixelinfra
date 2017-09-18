@@ -12,7 +12,7 @@ class Admin::MembershipsController < Admin::BaseController
   
   def update
     @membership = Membership.find(params[:id])
-    if @membership.update_attribute(membership_params)
+    if @membership.update_attributes(membership_params)
       flash[:notice] = 'Membership updated.'
       redirect_to admin_memberships_path
     end
