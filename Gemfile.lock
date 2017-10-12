@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/cenotaph/handles_sortable_columns.git
-  revision: b49466c91705637db8f960f98fc4f9ed44b2f91d
+  revision: 09558b76fceb22a30620ab68a6d08ff622d19c9b
   specs:
     handles_sortable_columns (0.1.4)
 
