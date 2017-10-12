@@ -30,7 +30,7 @@
 
         .row.expanded
           .logo_image.text-center.medium-9.large-12.large-offset-0.columns.small-centered
-            = image_tag current_theme_image_path('hybrid.png'), :class => :navbg
+            = image_tag theme_image_path('hybrid.png'), :class => :navbg
 
           = yield :sidebar
 
@@ -43,14 +43,14 @@
           .small-12.columns
             .language
               .default
-                .active= image_tag(current_theme_image_path('black_circle.png'))
+                .active= image_tag(theme_image_path('black_circle.png'))
                 .current= I18n.locale.to_s
               .choices
                 - [:en, :fi, :fr]. each do |lang|
                   - next if lang == I18n.locale
                   .choice
                     = link_to(:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => lang.to_s) do
-                      .choice_circle= image_tag(current_theme_image_path('black_circle.png'))
+                      .choice_circle= image_tag(theme_image_path('black_circle.png'))
                       .choice_text= lang.to_s
           
         .row.expanded
