@@ -2,10 +2,11 @@ class Festivaltheme < ActiveRecord::Base
   belongs_to :festival
   translates :name, :description, :short_description, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, reject_if: proc {|x| x['name'].blank? }
+  has_many :festivaltheme_relations
   has_many :events, through: :festivaltheme_relations, source_type: 'Event', source: :relation, foreign_key: :relation_id
   has_many :pages, through: :festivaltheme_relations, source_type: 'Page', source: :relation  
   has_many :posts, through: :festivaltheme_relations, source_type: 'Post', source: :relation, foreign_key: :relation_id
-  has_many :festivaltheme_relations
+  
   mount_uploader :image, ImageUploader
   before_save :update_image_attributes
   validates_presence_of :festival_id
