@@ -6,7 +6,7 @@ GIT
 
 GIT
   remote: git://github.com/cenotaph/themes_for_rails.git
-  revision: 71544d932752f6bc46ffcfc8c270a3a3f746667f
+  revision: 6df25af7d8aad283ed0f5b4c6d97ce00a5b8e3d0
   branch: master
   specs:
     themes_for_rails (0.5.1)
