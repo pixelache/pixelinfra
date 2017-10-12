@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
-gem 'rails', '5.0.5'
+ruby '2.4.1'
+gem 'rails', '5.1.4'
 
 gem 'pg'
 
@@ -43,9 +43,9 @@ gem 'event-calendar', :require => 'event_calendar'
 gem 'figaro'
 gem 'flickraw'
 gem 'flickr_fu'
-gem 'font-awesome-rails', '4.6.3.0'
+gem 'font-awesome-rails'
 gem 'formtastic'#, '~> 2.3.0.rc2'
-gem 'foundation-rails'#, '5.5.2.1'#, '5.3.0'
+gem 'foundation-rails', '6.2.4.0'
 gem 'friendly_id', '~> 5.1.0'
 gem 'friendly_id-globalize'
 gem 'geocoder'
@@ -91,6 +91,7 @@ gem 'twitter'
 
 gem 'unf' 
 gem 'vimeo'
+gem 'xmlrpc'
 gem 'yt'
 # gem 'youtube_it'
 

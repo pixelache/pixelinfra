@@ -1,13 +1,13 @@
 class Admin::BaseController < ApplicationController
   layout 'admin'
-  before_filter :force_english
-  before_filter :fix_subdomain unless Rails.env.development?
-  before_filter :authenticate_user!
+  before_action :force_english
+  before_action :fix_subdomain unless Rails.env.development?
+  before_action :authenticate_user!
   #load_and_authorize_resource
   # check_authorization
   load_and_authorize_resource  :find_by => :slug
-#  skip_before_filter :require_no_authentication
-  before_filter :set_meta_tagz
+#  skip_before_action :require_no_authentication
+  before_action :set_meta_tagz
   
   def fix_subdomain
     if Rails.env.production?

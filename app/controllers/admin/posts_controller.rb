@@ -2,7 +2,7 @@ class Admin::PostsController < ApplicationController
 
   layout 'admin'
   authorize_resource
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   
   has_scope :page, :default => 1
