@@ -21,11 +21,7 @@
         - if can? :edit, @page
           = link_to t(:edit), edit_admin_post_path(@page), class: [:button, :tiny, :round]
 
-  / .row
-  /   .small-12.columns.large-10.large-offset-1
-  /     .metadata
-  /       %p= l @page.published_at, :format => :long
-  /       %p= "posted by #{@page.creator.name}"
+
 
 
   .row
