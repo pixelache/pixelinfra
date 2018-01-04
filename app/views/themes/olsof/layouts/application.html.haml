@@ -45,7 +45,7 @@
                   });
         
           .nav_lines.medium-6.columns.medium-offset-1.hide-for-small-only.large-10.large-offset-3
-            = image_tag current_theme_image_path('nav_lines.png'), :class => :navbg
+            = image_tag theme_image_path('nav_lines.png'), :class => :navbg
             .item.publications= link_to t(:publications), publications_path
             .item.about= link_to t(:about), page_path('about')
             .item.partners= link_to t(:partners), nodes_path
@@ -57,7 +57,7 @@
             .calendar.show-for-large-up.medium-4.large-10.columns.large-offset-2
             
               .heading
-                = image_tag current_theme_image_path('littlesquare.jpg')
+                = image_tag theme_image_path('littlesquare.jpg')
                 = t(:calendar)
               %ul.calendar_events
                 - @calendar.sort_by(&:start_at).each do |cal|
@@ -70,7 +70,7 @@
                 - @calendar.sort_by(&:start_at).each do |cal|
                   %option{value: url_for(cal)}= " -- #{cal.name} (#{cal.start_at.strftime("%d %B")})"
           .search.medium-4.medium-offset-1.large-10.columns.large-offset-2.small-offset-2.float-right
-            .square= image_tag current_theme_image_path('littlesquare.jpg')
+            .square= image_tag theme_image_path('littlesquare.jpg')
             = form_tag '/search/' do
               = text_field :search, :term
               = submit_tag 'Search'
@@ -83,14 +83,14 @@
           .small-12.columns
             .language
               .default
-                .active= image_tag(current_theme_image_path('black_circle.png'))
+                .active= image_tag(theme_image_path('black_circle.png'))
                 .current= I18n.locale.to_s
               .choices
                 - [:en, :fi, :fr]. each do |lang|
                   - next if lang == I18n.locale
                   .choice
                     = link_to(:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => lang.to_s) do
-                      .choice_circle= image_tag(current_theme_image_path('black_circle.png'))
+                      .choice_circle= image_tag(theme_image_path('black_circle.png'))
                       .choice_text= lang.to_s
             .bar_menu
               #menutext
