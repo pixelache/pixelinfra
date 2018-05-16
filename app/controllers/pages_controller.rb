@@ -11,7 +11,7 @@ class PagesController < ApplicationController
       @project = Project.friendly.find(params[:project_id])
       @page = Page.friendly.find(params[:id])
       @page = Page.friendly.find(params[:page]) if params[:page]
-       set_meta_tags :title => @project.name + " - " + @page.name
+      set_meta_tags :title => @project.name + " - " + @page.name
       render :template => 'projects/page'
     else
       if params[:id] =~ /^\d*$/
@@ -56,7 +56,7 @@ class PagesController < ApplicationController
         @opencallsubmission.opencallanswers.build(opencallquestion: qs)
       end
     end
-    redirect_to action: action_name, id: @page.friendly_id, status: 301 unless @page.friendly_id == params[:id]
+    # redirect_to action: action_name, id: @page.friendly_id, status: 301 unless @page.friendly_id == params[:id]
     set_meta_tags :title => @page.name,
                       canonical: url_for(@page),
                       og: {image: (!@page.photos.empty? ?  [ @page.photos.first.filename.url(:box), { secure_url: @page.photos.first.filename.url(:box) } ] : 'https://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
