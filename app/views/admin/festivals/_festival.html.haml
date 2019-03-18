@@ -12,7 +12,7 @@
             = link_to t(:manage_proposals), admin_festival_festivaltheme_experiences_path(festival, ft)
             |
           - if can? :manage, ft
-            = link_to t(:edit),  edit_admin_festivaltheme_path(ft)
+            = link_to t(:edit),  edit_admin_festival_festivaltheme_path(festival, ft)
             |
             = link_to t(:delete) , [:admin, ft], :method => :delete, data: {confirm: t(:are_you_sure)}
     %p.metadata= link_to t(:add_festival_theme), new_admin_festival_festivaltheme_path(festival)

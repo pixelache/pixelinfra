@@ -57,6 +57,10 @@ class Admin::FestivalsController < Admin::BaseController
     end
     @festivals = apply_scopes(Festival).includes(:node).order(order).page(params[:page]).per(20)
   end
+
+  def show
+    @festival = Festival.friendly.find(params[:id])
+  end
   
   def subscribe
     @festival = Festival.find(params[:id])

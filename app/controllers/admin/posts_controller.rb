@@ -40,14 +40,13 @@ class Admin::PostsController < ApplicationController
       flash[:error] = 'Error saving post.'
     end
   end
-  
 
-  
   def destroy
     @post = Subsite.find(params[:subsite_id]).posts.find(params[:id])
-    destroy! { admin_posts_path }
+    @post.destroy
+    redirect_to admin_posts_path
   end
-  
+
   def edit
     @post = Subsite.find(params[:subsite_id]).posts.find(params[:id])
     unless @post.feeds.empty?

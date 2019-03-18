@@ -61,7 +61,7 @@ class PagesController < ApplicationController
                       canonical: url_for(@page),
                       og: {image: (!@page.photos.empty? ?  [ @page.photos.first.filename.url(:box), { secure_url: @page.photos.first.filename.url(:box) } ] : 'https://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
                             title: @page.title, type: 'website', url: url_for(@page),
-                            description: ActionView::Base.full_sanitizer.sanitize(@page.body[0..500]) + "..."
+                            description: ActionView::Base.full_sanitizer.sanitize(@page.body.nil? ? @page.title : @page.body[0..500]) 
                           }, 
                       twitter: {card: 'summary', site: '@pixelache'}
   end
