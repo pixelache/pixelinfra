@@ -80,6 +80,7 @@ gem 'redis-rails', '~> 5.0.1'
 gem 'redis'
 gem 'rest-client'
 gem 'rolify'
+gem 'rollbar'
 gem 'shog'
 gem 'slick_rails'
 

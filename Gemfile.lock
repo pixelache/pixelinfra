@@ -418,6 +418,8 @@ GEM
       netrc (~> 0.8)
     rinku (1.7.3)
     rolify (5.1.0)
+    rollbar (2.19.2)
+      multi_json
     ruby_parser (3.10.1)
       sexp_processor (~> 4.9)
     sass (3.4.25)
@@ -580,6 +582,7 @@ DEPENDENCIES
   redis-rails (~> 5.0.1)
   rest-client
   rolify
+  rollbar
   ruby_parser (>= 3.0.1)
   sass
   sass-rails (~> 5.0)
