@@ -60,7 +60,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_options = {from: 'no-reply@pixelache.ac'}
   
-  config.action_mailer.default_url_options = { :host => 'new.pixelache.ac' }
+  config.action_mailer.default_url_options = { :host => 'pixelache.ac' }
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
 
