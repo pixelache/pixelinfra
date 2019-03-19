@@ -39,7 +39,9 @@ class FestivalsController < ApplicationController
     potential = p =~ /^\d+$/ ? Page.where(:id => p) : Page.where(:slug => p)
     
     @page = @festival.pages.map(&:self_and_descendants).flatten.delete_if{|x| !potential.include?(x) }.first
-    
+    if @page.nil?
+      raise ActiveRecord::RecordNotFound
+    end
     redirect_to action: action_name, id: @festival.friendly_id, page: @page.friendly_id, status: 301 unless @page.friendly_id == params[:page]
     if @festival.subsite
       if !request.host.split(/\./).include?(@festival.subsite.subdomain)

@@ -33,6 +33,9 @@ class PagesController < ApplicationController
         else
           @page = pages.first
         end
+        if @page.nil?
+          raise ActiveRecord::RecordNotFound
+        end
         if @page.has_project?
           redirect_to project_page_path(:project_id => @page.parent_project)
         else

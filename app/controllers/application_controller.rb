@@ -8,7 +8,12 @@ class ApplicationController < ActionController::Base
   before_action :set_paper_trail_whodunnit
   # rescue_from StandardError, :with => :render_500 unless Rails.env.development?
 
-  
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404# unless Rails.env.development?
+
+  def render_404(exception)
+    render :file => "#{Rails.root}/public/404.html",  :status => 404
+  end
+
   def render_500(exception)
     @exception = exception
     logger.debug 'exception is ' + @exception.inspect
@@ -17,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
   
   
-  def add_to_mailchimp   # change when we get API key
+  def add_to_mailchimp  # change when we get API key
     h = Hominid::Base.new({:api_key => ENV['mailchimp_api_key']})
     list = h.find_list_id_by_name("Pixelache Helsinki Newsletter")
     begin
