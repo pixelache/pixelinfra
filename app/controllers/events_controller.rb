@@ -1,12 +1,17 @@
 class EventsController < ApplicationController
 
-  
   def index
     if params[:festival_id]
       @festival = Festival.friendly.find(params[:festival_id])
       @events = @festival.events.published.order('start_at ASC')
       # @events = Event.published.order('start_at ASC')
-      set_meta_tags title: @festival.name + " " + t(:events)
+      if @festival.subsite
+        if !request.host.split(/\./).include?(@festival.subsite.subdomain)
+          redirect_to subdomain: @festival.subsite.subdomain unless request.xhr?
+        end
+      else
+        set_meta_tags title: @festival.name + " " + t(:events)
+      end
       
     elsif params[:project_id]
       @project = Project.friendly.find(params[:project_id])
