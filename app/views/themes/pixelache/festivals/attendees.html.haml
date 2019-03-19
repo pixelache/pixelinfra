@@ -24,7 +24,7 @@
             %span.name
               = link_to_unless (att.url.blank?), att.name, att.url, target: :_blank
               - unless att.country.blank?
-                %span.country= " (#{Country[att.country.strip].nil? ? att.country : Country[att.country.strip].name})"
+                %span.country= " (#{Country[att.country.strip].nil? ? att.country : Country[att.country.strip].name})" rescue att.country.strip
             - unless att.description.blank?
               = link_to t(:show_bio), '#', onclick: "$('#attendee_#{att.id} .description').slideToggle(); return false;", class: [:button, :tiny, :secondary]
               .description= raw att.description.gsub(/\\\"/, '"')
