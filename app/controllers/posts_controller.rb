@@ -61,6 +61,14 @@ class PostsController < ApplicationController
           redirect_to posts_path
         end
       end
+      if @post.festival
+        @festival = @post.festival
+        if @festival.subsite && @post.published
+          if !request.host.split(/\./).include?(@festival.subsite.subdomain)
+            redirect_to subdomain: @festival.subsite.subdomain and return
+          end
+        end
+      end
     rescue ActiveRecord::RecordNotFound
       @post = Post.friendly.find(params[:id])
       if @post
@@ -98,14 +106,6 @@ class PostsController < ApplicationController
                         }, 
                     twitter: {card: 'summary', site: '@pixelache'},
                     alternate: a
-      if @post.festival
-        @festival = @post.festival
-        if @festival.subsite && @post.published
-          if !request.host.split(/\./).include?(@festival.subsite.subdomain)
-            redirect_to subdomain: @festival.subsite.subdomain
-          end
-        end
-      end
     end
   end
   
