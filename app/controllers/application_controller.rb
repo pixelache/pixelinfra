@@ -8,10 +8,10 @@ class ApplicationController < ActionController::Base
   before_action :set_paper_trail_whodunnit
   # rescue_from StandardError, :with => :render_500 unless Rails.env.development?
 
-  rescue_from ActiveRecord::RecordNotFound, with: :render_404# unless Rails.env.development?
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404 #unless Rails.env.development?
 
   def render_404(exception)
-    render :file => "#{Rails.root}/public/404.html",  :status => 404
+    render file: "#{Rails.root}/public/404.html", status: 404
   end
 
   def render_500(exception)
@@ -104,7 +104,7 @@ class ApplicationController < ActionController::Base
       @project = Project.find(params[:unmatched_route])
       redirect_to @project, :status => :moved_permanently and return
     rescue ActiveRecord::RecordNotFound
-      begin
+      # begin
         @page = Page.find(params[:unmatched_route])
         if @page.has_project?
           redirect_to project_page_path(:project_id => @page.parent_project.id, id: @page.id), :status => :moved_permanently
@@ -112,29 +112,28 @@ class ApplicationController < ActionController::Base
 
           redirect_to @page, :status => :moved_permanently
         end
-      rescue ActiveRecord::RecordNotFound
-        
-        if !first.nil?
-          # see if it's a festival 
-          begin
-
-            @festival = Festival.find(first)
-            if !@festival.pages.find(params[:unmatched_route]).empty?
-              redirect_to festival_page_path(@festival, @festival.pages.find(params[:unmatched_route]).first), :status => :moved_permanently
-            else
-              redirect_to @festival, :status => :moved_permanently
-            end
-          rescue ActiveRecord::RecordNotFound
-            if @festival
-               redirect_to @festival, :status => :moved_permanently
-            else
-              render '404'
-            end
-          end
-        else
-          render '404'
-        end
-      end
+      # rescue ActiveRecord::RecordNotFound
+      
+      #   if !first.nil?
+      #     # see if it's a festival 
+      #     begin
+      #       @festival = Festival.find(first)
+      #       if !@festival.pages.find(params[:unmatched_route]).empty?
+      #         redirect_to festival_page_path(@festival, @festival.pages.find(params[:unmatched_route]).first), :status => :moved_permanently
+      #       else
+      #         redirect_to @festival, :status => :moved_permanently
+      #       end
+      #     rescue ActiveRecord::RecordNotFound
+      #       if @festival
+      #          redirect_to @festival, :status => :moved_permanently
+      #       else
+      #         render file: "#{Rails.root}/public/404.html", status: 404
+      #       end
+      #     end
+      #   else
+      #     render file: "#{Rails.root}/public/404.html", status: 404
+      #   end
+      # end
     end
   end
   

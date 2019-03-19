@@ -49,11 +49,19 @@ class PostsController < ApplicationController
   end
   
   def show
-    
     begin
       @post = @site.posts.friendly.find(params[:id])
+      unless @post.published
+        flash[:notice] = 'This post is not published.'
+        if current_user
+          if !can? :read, @post
+            redirect_to posts_path
+          end
+        else
+          redirect_to posts_path
+        end
+      end
     rescue ActiveRecord::RecordNotFound
-
       @post = Post.friendly.find(params[:id])
       if @post
         if @post.festival
@@ -90,25 +98,12 @@ class PostsController < ApplicationController
                         }, 
                     twitter: {card: 'summary', site: '@pixelache'},
                     alternate: a
-        
       if @post.festival
         @festival = @post.festival
- 
-        if @festival.subsite
+        if @festival.subsite && @post.published
           if !request.host.split(/\./).include?(@festival.subsite.subdomain)
             redirect_to subdomain: @festival.subsite.subdomain
           end
-
-        end
-      end
-      if !@post.published
-        flash[:notice] = 'This post is not published.'
-        if current_user
-          if !can? :read, @post
-            redirect_to posts_path
-          end
-        else
-          redirect_to posts_path
         end
       end
     end
