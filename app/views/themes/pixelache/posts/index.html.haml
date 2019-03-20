@@ -53,7 +53,8 @@
 
             .post_image{style: post.image? ? "background-image: url(#{post.image.url(:box).gsub(/development/, 'production')});" : false, onmouseover: '$(this).find(".gray").css("display", "block");', onmouseout: '$(this).find(".gray").css("display", "none");'}
               .gray
-                .excerpt= raw(truncate_html(strip_tags(post.body.gsub(/&nbsp;/, ' ')), :length => 260))
+                - unless post.body.blank?
+                  .excerpt= raw(truncate_html(strip_tags(post.body.gsub(/&nbsp;/, ' ')), :length => 260))
    
 
                 - if post.event || post.festival || post.project
