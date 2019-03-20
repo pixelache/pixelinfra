@@ -42,7 +42,6 @@ class FestivalsController < ApplicationController
     end
     unless @page.friendly_id == params[:page]
       redirect_me = true 
-
     end
     if @festival.subsite
       if !request.host.split(/\./).include?(@festival.subsite.subdomain)
@@ -57,7 +56,7 @@ class FestivalsController < ApplicationController
     else
       a = {}
     end
-    if redirect_me == true
+    if redirect_me == true && @festival.subsite
       # redirect_to action: action_name, id: @festival.friendly_id, page: @page.friendly_id, status: 301
       redirect_to festival_page_festival_url(@festival.slug, @page.friendly_id, subdomain: @festival.subsite.subdomain) and return
     else
