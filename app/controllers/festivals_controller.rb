@@ -29,23 +29,24 @@ class FestivalsController < ApplicationController
   
   def page
     @festival = Festival.friendly.find(params[:id])
-
-    
+   
     if params[:page] =~ /\//
       p = params[:page].split(/\//).last
     else
       p = params[:page]
     end
     potential = p =~ /^\d+$/ ? Page.where(:id => p) : Page.where(:slug => p)
-    
     @page = @festival.pages.map(&:self_and_descendants).flatten.delete_if{|x| !potential.include?(x) }.first
     if @page.nil?
       raise ActiveRecord::RecordNotFound
     end
-    redirect_to action: action_name, id: @festival.friendly_id, page: @page.friendly_id, status: 301 unless @page.friendly_id == params[:page]
+    unless @page.friendly_id == params[:page]
+      redirect_me = true 
+
+    end
     if @festival.subsite
       if !request.host.split(/\./).include?(@festival.subsite.subdomain)
-        redirect_to festival_page_festival_url(@festival.slug, @page.friendly_id, subdomain: @festival.subsite.subdomain)
+        redirect_me = true        
       end
     end
     # build translation alternates in URL
@@ -56,14 +57,18 @@ class FestivalsController < ApplicationController
     else
       a = {}
     end
-    set_meta_tags title: (@festival.subsite ? @page.name : [@festival.name, @page.name].join(" - ") ),
-    canonical: url_for(@page),
-      og: {image: (@page.photos.empty? ? 'http://pixelache.ac/assets/pixelache/images/PA_logo.png' :[@page.photos.map{|x| x.filename.url(:box).gsub(/^https/, 'http')}, {secure_url: @page.photos.map{|x| x.filename.url(:box)} } ]), 
-            title: @page.name, type: 'website', url: url_for(@page)
-          }, 
-      twitter: {card: 'summary', site: '@pixelache'},
-      alternate: a
-    
+    if redirect_me == true
+      # redirect_to action: action_name, id: @festival.friendly_id, page: @page.friendly_id, status: 301
+      redirect_to festival_page_festival_url(@festival.slug, @page.friendly_id, subdomain: @festival.subsite.subdomain) and return
+    else
+      set_meta_tags title: (@festival.subsite ? @page.name : [@festival.name, @page.name].join(" - ") ),
+      canonical: url_for(@page),
+        og: {image: (@page.photos.empty? ? 'http://pixelache.ac/assets/pixelache/images/PA_logo.png' :[@page.photos.map{|x| x.filename.url(:box).gsub(/^https/, 'http')}, {secure_url: @page.photos.map{|x| x.filename.url(:box)} } ]), 
+              title: @page.name, type: 'website', url: url_for(@page)
+            }, 
+        twitter: {card: 'summary', site: '@pixelache'},
+        alternate: a
+    end
   end
   
   def show
