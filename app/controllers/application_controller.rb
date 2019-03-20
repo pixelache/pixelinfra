@@ -185,9 +185,9 @@ class ApplicationController < ActionController::Base
   
   def get_locale 
     if params[:locale]
-      session[:locale] = params[:locale]
+      session[:locale] = params[:locale] if ['en', 'fi', 'fr'].include?(params[:locale])
     end
-    
+
     if session[:locale].blank?
       available  = %w{en fi fr}
       I18n.locale = http_accept_language.compatible_language_from(available)
