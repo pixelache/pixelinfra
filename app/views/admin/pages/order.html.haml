@@ -5,14 +5,15 @@
       = @page.name
 .row
   .small-6.columns
-    %p Drag and drop to re-order how they appear in menus
+    %p Drag and drop to sort the order of how they appear in menus
     
 .row
   .small-8.columns#sortable
-    - @page.children.sort_by(&:sort_order).each do |child|
+    - @page.children.sort_by(&:sort_order).each_with_index do |child, index|
       .row.child[child]
         .small-12.columns
           %h6
+            = (index + 1).to_s + ". "
             = child.name
           - if child.published != true 
             %span.small

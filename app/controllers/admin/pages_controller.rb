@@ -81,7 +81,7 @@ class Admin::PagesController < Admin::BaseController
       fi.sort_order = params['page'].index(fi.id.to_s) + 1
       fi.save
     end
-    render nothing: true      
+    head :ok, content_type: "text/html"
   end
   
   def update

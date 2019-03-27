@@ -25,8 +25,9 @@ class User < ActiveRecord::Base
 
     elsif omniauth['provider'] == 'facebook'
       self.email = omniauth['info']['email'] if email.blank?
-      self.username = omniauth['info']['nickname']
-      self.name = omniauth['info']['first_name'] + ' ' + omniauth['info']['last_name']
+      self.username = omniauth['info']['name'].parameterize
+      logger.warn omniauth.inspect
+      self.name = omniauth['info']['name']
       self.name.strip!
       identifier = self.username
       # self.location = omniauth['extra']['user_hash']['location']['name'] if location.blank?

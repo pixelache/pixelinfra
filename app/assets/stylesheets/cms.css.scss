@@ -409,3 +409,12 @@ table.project_proposals {
 .datetimepicker thead tr:first-child th {
   color: black;
 }
+
+#sortable {
+  .child {
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    cursor: pointer;
+    border: 1px dotted #666;
+  }
+}
