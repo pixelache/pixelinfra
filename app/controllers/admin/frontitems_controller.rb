@@ -56,7 +56,7 @@ class Admin::FrontitemsController < Admin::BaseController
       fi.position = params['frontitem'].index(fi.id.to_s) + 1
       fi.save
     end
-    render nothing: true
+    head :ok, content_type: "text/html"
   end
 
   
