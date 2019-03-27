@@ -23,10 +23,10 @@ class ApplicationController < ActionController::Base
   
   
   def add_to_mailchimp  # change when we get API key
-    h = Hominid::Base.new({:api_key => ENV['mailchimp_api_key']})
-    list = h.find_list_id_by_name("Pixelache Helsinki Newsletter")
+    h = Gibbon::Request.new({:api_key => ENV['mailchimp_api_key']})
+    # list =
     begin
-      h.subscribe(list, params[:email])
+      h.lists(ENV['mailchimp_list_id']).members.create(body: {email_address: params[:email].strip, status: "subscribed" })
       @signup_success = t(:thanks_signup)
       @signup_error = nil
     rescue

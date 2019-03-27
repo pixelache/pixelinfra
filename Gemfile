@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.4.2'
+ruby '2.6.2'
 gem 'rails', '5.1.4'
 
 gem 'pg'
@@ -49,12 +49,13 @@ gem 'foundation-rails', '6.2.4.0'
 gem 'friendly_id', '~> 5.1.0'
 gem 'friendly_id-globalize'
 gem 'geocoder'
+gem 'gibbon'
 gem 'globalize', github: 'globalize/globalize', branch: 'master'
 # gem "globalize", github: "ncri/globalize"
 gem 'haml-rails'
 gem 'handles_sortable_columns', github: 'cenotaph/handles_sortable_columns'
 gem 'has_scope'
-gem 'hominid'
+# gem 'hominid'
 gem 'http_accept_language'
 #gem 'inherited_resources' #, github: 'josevalim/inherited_resources'
 # gem "jquery-slick-rails"
