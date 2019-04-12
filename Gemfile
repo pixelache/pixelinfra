@@ -1,12 +1,11 @@
 source 'https://rubygems.org'
 
 ruby '2.6.2'
-gem 'rails', '5.1.4'
+gem 'rails', '5.1.7'
 
-gem 'pg'
+gem 'pg', '~> 1.1.4'
 
 # gem 'mysql2' # for data migration
-
 
 gem 'sass'
 gem 'sass-rails', '~> 5.0'
@@ -18,10 +17,9 @@ gem 'jquery-ui-themes'
 gem 'jquery-infinite-pages'
 gem 'jbuilder', '~> 2.5'
 
-
 gem 'acts-as-taggable-on' #, '~> 3.4'
 gem 'auto_html'
-
+gem 'bulma-rails', ref: '30249b7'
 gem 'capistrano'
 gem 'capistrano-rails'#, '1.1.3'
 gem 'capistrano-rvm'
@@ -33,7 +31,7 @@ gem 'carrierwave'
 gem 'carrierwave-aws'
 gem 'chosen-rails'
 gem 'closure_tree'
-gem 'ckeditor' #, github: 'galetahub/ckeditor', branch: 'master'
+gem 'ckeditor' , '4.3.0' #, github: 'galetahub/ckeditor', branch: 'master'
 #gem 'compass-rails'#, '~> 2.0.alpha.0'
 gem 'countries'
 gem 'country_select'

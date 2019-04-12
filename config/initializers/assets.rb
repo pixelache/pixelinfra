@@ -4,3 +4,4 @@ Rails.application.config.assets.precompile += %w( pixelache/stylesheets/mobile.c
 Rails.application.config.assets.precompile += %w( ckeditor/* )
 Rails.application.config.assets.precompile += Ckeditor.assets
 Rails.application.config.assets.paths << Rails.root.join("app", "assets",  "fonts")
+Rails.application.config.assets.paths << Rails.root.join("app", "assets",  "themes", "breakingthe5thwall", "fonts")

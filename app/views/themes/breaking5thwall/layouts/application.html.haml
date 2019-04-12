@@ -1,0 +1,95 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+    = display_meta_tags :site => 'Pixelache Festival 2019' 
+    
+    %meta{:content => content_for?(:description) ? yield(:description) : "Pixelache Festival 2019", :name => "description"}
+    -# %link{:href => "https://fonts.googleapis.com/css?family=Coustard+Condensed", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "/feed", :rel => "alternate", :title => "RSS", :type => "application/rss+xml"}/
+    
+    = render partial: 'layouts/favicons'
+    -#= stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag 'breaking5thwall/stylesheets/application', :media => :screen
+    = stylesheet_link_tag 'print', media: :print
+    = javascript_include_tag "breaking5thwall/javascripts/application"
+
+    - if controller.controller_name == 'events' || (controller.action_name == 'page' || params[:id] == 'locations') || (controller.controller_name == 'experiences')
+      %script{:src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}", :type => "text/javascript"}
+    = csrf_meta_tags
+    = yield(:head)
+
+  %body{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
+    - unless current_user
+      :javascript
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-40681531-3', 'auto');
+        ga('send', 'pageview');
+    %header
+      %nav.navbar{role: :navigation, 'aria-label': 'main navigation'}
+        .navbar-brand
+          %a.navbar-item{href: 'https://breaking5thwall.pixelache.ac'}
+            = image_tag(theme_image_path('Pixelache-logo.png'))
+          %a.navbar-burger.burger{role: :button, 'aria-label': :menu, 'aria-expanded': 'false', 'data-target': 'breaking5thmain'}
+            %span{'aria-hidden': 'true'}
+            %span{'aria-hidden': 'true'}
+            %span{'aria-hidden': 'true'}
+        #breaking5thmain.navbar-menu
+          .navbar-start
+            - @festival.pages.first.children.each do |page|
+              - if page.children.published.empty?
+                = link_to page.title, festival_page_festival_path(@festival.slug, page.slug), class: 'navbar-item'
+              - else
+                .navbar-item.has-dropdown.is-hoverable
+                  = link_to page.title, festival_page_festival_path(@festival.slug, page.slug), class: 'navbar-link'
+                  .navbar-dropdown
+                    - page.children.published.each do |subpage|
+                      = link_to subpage.title, festival_page_festival_path(@festival.slug, subpage.slug), class: 'navbar-item'
+            -# .navbar-item.has-dropdown
+            -#   = link_to t(:info), festival_page_festival_path('breaking5thwall', 'about'), class: 'navbar-link'
+            -#   .navbar-dropdown
+            -#     = link_to t(:about), festival_page_festival_path('breaking5thwall', 'about'), class: 'navbar-item'
+            -# .navbar-item.has-dropdown
+            -#   = link_to t("breaking5thwall.programme"), '/programme/2019', class: 'navbar-link'
+            -#   .navbar-dropdown
+            -#     = link_to t(:schedule), festival_page_festival_path('breaking5thwall', 'schedule'), class: 'navbar-item'
+            -# = link_to t("breaking5thwall.news"), festival_posts_path('breaking5thwall'), class: 'navbar-item'
+          .navbar-end
+            = link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}, class: 'navbar-item')
+            %hr.navbar-divider
+            = link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'}, class: 'navbar-item')
+    - if flash
+      - flash.each do |key, value|
+        .alert.text-center{ :class => "alert-#{key}" }
+          %strong= value
+            
+    %section.festival2019_container{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
+      %article= yield
+
+    -# %footer{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
+    -#   .logo= link_to image_tag(theme_image_path('footer/PA_logo.png'), :alt => "Pixelache"), 'http://pixelache.ac'
+    -#   .dates.hide-for-small-only= date_range(@festival.start_at, @festival.end_at, format: :long) + ", Helsinki"
+    -#   -#.text.hide-for-small-only= link_to 'www.pixelache.ac', 'http://pixelache.ac'
+    -#   .social
+    -#     = link_to image_tag(theme_image_path('footer/some_fb.png'), width: 25), 'https://www.facebook.com/events/1019391098151871'
+    -#     = link_to image_tag(theme_image_path('footer/some_flickr.png'), width: 25), 'https://www.flickr.com/photos/pixelache/'        
+    -#     = link_to image_tag(theme_image_path('footer/some_twitter.png'), width: 25), 'https://twitter.com/pixelache'
+    -#     = link_to image_tag(theme_image_path('footer/some_v.png'), width: 25), 'https://vimeo.com/pixelache'
+    -#     = link_to image_tag(theme_image_path('footer/some_insta.png'), width: 25), 'https://www.instagram.com/pixelache/'        
+    -#     = link_to image_tag(theme_image_path('footer/some_b.png'), width: 25), 'http://bambuser.com/channel/pixelversity'
+
+      
+    :javascript
+      $(document).ready(function() {
+        $('[data-follow-click]').on('click', function() {
+          location.href = this.href;
+        });
+        $('select.main_nav_select').change(function() {
+          window.location = $(this).find("option:selected").val();
+        });
+        #{yield :jquery}
+      });    

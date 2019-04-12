@@ -71,6 +71,7 @@
         = image_tag f.object.image.url(:thumb)
       = f.input :image, :hint => 'An image/icon to represent this event.'
     .small-6.columns= f.input :facebook_link, :hint => 'URL to the Facebook Event page', :as => :string
+    .small-6.columns= f.input :external_registration, :hint => 'URL for external registration (Eventbrite, for example)', :as => :string
   .row.expanded
     .small-8.columns
       %fieldset
@@ -146,6 +147,8 @@
         = f.input :resources_needed
         = f.input :protocol
         = f.input :technology_list, :label => 'Technologies (tags)', :hint => 'separate by commas'
+  }
+  }
   .row.expanded
     .small-2.columns= f.input :cost
   .row.expanded

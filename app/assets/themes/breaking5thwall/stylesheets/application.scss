@@ -1,0 +1,180 @@
+@import 'bulma';
+@import 'variables';
+
+@font-face {
+    font-family: 'nobileregular';
+    src: url('../fonts/nobile-bold-webfont.woff2') format('woff2'),
+         url('../fonts/nobile-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'nobilebold_italic';
+    src: url('../fonts/nobile-bolditalic-webfont.woff2') format('woff2'),
+         url('../fonts/nobile-bolditalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'nobileitalic';
+    src: url('../fonts/nobile-italic-webfont.woff2') format('woff2'),
+         url('../fonts/nobile-italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'nobilemedium';
+    src: url('../fonts/nobile-medium-webfont.woff2') format('woff2'),
+         url('../fonts/nobile-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'nobilemedium_italic';
+    src: url('../fonts/nobile-mediumitalic-webfont.woff2') format('woff2'),
+         url('../fonts/nobile-mediumitalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'nobileregular';
+    src: url('../fonts/nobile-regular-webfont.woff2') format('woff2'),
+         url('../fonts/nobile-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  src:  local('Open Sans Regular'),
+        local('OpenSans-Regular'),
+        url('../fonts/Open_Sans.woff2') format('woff2'),
+        url('../fonts/Open_Sans.woff') format('woff'),
+        url('../fonts/Open_Sans.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Open_Sans.svg#OpenSans') format('svg'),
+        url('../fonts/Open_Sans.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Coustard';
+  font-style: normal;
+  font-weight: normal;
+  src:  local('Coustard Regular'),
+        local('Coustard-Regular'),
+        url('../fonts/Coustard.woff2') format('woff2'),
+        url('../fonts/Coustard.woff') format('woff'),
+        url('../fonts/Coustard.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Coustard.svg#Coustard') format('svg'),
+        url('../fonts/Coustard.ttf') format('truetype');
+}
+
+body {
+  font-family: 'nobileregular';
+  background-color: $lightpink;
+  min-height: 100vH;
+
+}
+
+a {
+  color: $pink;
+  &:hover {
+    color: $yellow;
+  }
+}
+
+h1, h2 {
+  &.title {
+    text-align: center;
+    font-family: 'Coustard';
+    color: $pink;
+    text-transform: uppercase;
+  }
+}
+
+.title {
+  color: $pink;
+  font-family: 'Coustard';
+  &:hover {
+    color: #666;
+  }
+}
+
+nav.navbar {
+  background-color: $blue;
+  .navbar-dropdown {
+    background-color: $blue;
+  }
+  .navbar-item, .navbar-link {
+    color: #333;
+    font-family: 'Coustard';
+    &:not(.is-arrowless)::after {
+      border-color: $yellow;
+    }
+    &.has-dropdown:hover {
+      .navbar-link {
+        background-color: $blue;
+      }
+    }
+    &:hover {
+      background-color: $blue;
+      color: $pink;
+      .navbar-link {
+        background-color: $blue;
+      }
+    }
+  }
+}
+
+.event_link {
+  &:hover {
+    .event_image {
+      img {
+        filter: grayscale(100%);
+      }
+    }
+    .event_info {
+      .title {
+        color: $pink;
+      }
+      .date {
+        color: $pink;
+      }
+    }
+  }
+  .event_info {
+    .title {
+      font-size: 1.25rem;
+      color: #666
+
+    }
+    .date {
+      color: #666;
+    }
+  }
+}

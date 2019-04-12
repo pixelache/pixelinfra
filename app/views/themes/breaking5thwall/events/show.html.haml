@@ -1,0 +1,20 @@
+%section.hero
+  .hero-body
+    .container.has-text-centered
+      .event_image= image_tag @event.image.url
+      %h1.title= @event.title
+      %h2.subtitle=  date_range(@event.start_at, @event.end_at)
+      %h2.subtitle
+        - if @event.location_tbd
+          %p= t :location_to_be_announced
+        - else
+          = @event.place.try(:name)
+          - unless @event.place.blank?
+            %p.place_address
+              = @event.place.address_no_country
+        - unless @event.place.latitude.blank?
+          - unless @event.place.slug =~ /^various-locations/
+            .small-12.columns.text-center.map_container.small-centered
+              %p.map_link
+                = link_to t(:map), '#', onclick: "javascript:$('.google_map').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));            $('p.map_link a').text($('.google_map').is(':visible') ? '#{t(:hide_map)}' : '#{t(:map)}');});return false;"
+        .row.google_map#mapcontainer= render partial: 'shared/small_map'              

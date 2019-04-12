@@ -87,11 +87,12 @@ class Admin::PostsController < ApplicationController
   end
   
   def update
-    begin
-      @post = Subsite.find(params[:post][:subsite_id]).posts.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      @post = Post.find(params[:id])
-    end
+    @post = Post.friendly.find(params[:id])
+    # begin
+    #   @post = Subsite.find(params[:post][:subsite_id]).posts.find(params[:id])
+    # rescue ActiveRecord::RecordNotFound
+    #   @post = Post.find(params[:id])
+    # end
     if @post.update_attributes(post_params)
       redirect_to  admin_posts_path 
     end

@@ -1,0 +1,18 @@
+= content_for :description do
+  = truncate(strip_tags(@page.body), length: 200)
+
+%section.hero
+  .hero-body
+    .container.page{class:  @page.slug}
+      %h1.title= @page.title
+      - unless @page.photos.blank?
+        .centered_title= image_tag @page.photos.first.filename.url
+
+        
+
+%section.section
+  .container
+    .columns
+      = raw @page.body
+
+    
