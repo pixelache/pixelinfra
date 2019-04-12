@@ -18,3 +18,9 @@
               %p.map_link
                 = link_to t(:map), '#', onclick: "javascript:$('.google_map').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));            $('p.map_link a').text($('.google_map').is(':visible') ? '#{t(:hide_map)}' : '#{t(:map)}');});return false;"
         .row.google_map#mapcontainer= render partial: 'shared/small_map'              
+
+%section.section
+  .container
+    .columns
+      .column.is-one-third-desktop.is-half-tablet.is-full-mobile
+        = raw @event.description
