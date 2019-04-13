@@ -1,0 +1,9 @@
+- if page.children.published.empty?
+  = link_to page.title, festival_page_festival_path(@festival.slug, page.slug), class: 'navbar-item'
+- else
+  .navbar-item.has-dropdown.is-hoverable
+    = link_to page.title, festival_page_festival_path(@festival.slug, page.slug), class: 'navbar-link'
+    .navbar-dropdown
+      - page.children.published.sort_by{|x| x.sort_order.to_f }.each do |subpage|
+        = render partial: 'shared/recursive_menu', locals: {page: subpage}
+        -# = link_to subpage.title, festival_page_festival_path(@festival.slug, subpage.slug), class: 'navbar-item'

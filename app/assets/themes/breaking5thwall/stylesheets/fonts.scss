@@ -1,0 +1,92 @@
+@font-face {
+    font-family: 'nobileregular';
+    src: url('../fonts/nobile-bold-webfont.woff2') format('woff2'),
+         url('../fonts/nobile-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'nobilebold_italic';
+    src: url('../fonts/nobile-bolditalic-webfont.woff2') format('woff2'),
+         url('../fonts/nobile-bolditalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'nobileitalic';
+    src: url('../fonts/nobile-italic-webfont.woff2') format('woff2'),
+         url('../fonts/nobile-italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'nobilemedium';
+    src: url('../fonts/nobile-medium-webfont.woff2') format('woff2'),
+         url('../fonts/nobile-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'nobilemedium_italic';
+    src: url('../fonts/nobile-mediumitalic-webfont.woff2') format('woff2'),
+         url('../fonts/nobile-mediumitalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'nobileregular';
+    src: url('../fonts/nobile-regular-webfont.woff2') format('woff2'),
+         url('../fonts/nobile-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  src:  local('Open Sans Regular'),
+        local('OpenSans-Regular'),
+        url('../fonts/Open_Sans.woff2') format('woff2'),
+        url('../fonts/Open_Sans.woff') format('woff'),
+        url('../fonts/Open_Sans.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Open_Sans.svg#OpenSans') format('svg'),
+        url('../fonts/Open_Sans.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Coustard';
+  font-style: normal;
+  font-weight: normal;
+  src:  local('Coustard Regular'),
+        local('Coustard-Regular'),
+        url('../fonts/Coustard.woff2') format('woff2'),
+        url('../fonts/Coustard.woff') format('woff'),
+        url('../fonts/Coustard.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Coustard.svg#Coustard') format('svg'),
+        url('../fonts/Coustard.ttf') format('truetype');
+}

@@ -1,0 +1,53 @@
+@import 'variables';
+
+.navbar-dropdown .has-dropdown .navbar-dropdown {
+  left: 100%;
+  top: 0;
+}
+
+.has-dropdown .has-dropdown .navbar-link:not(.is-arrowless)::after {
+    border: 3px solid $yellow;
+    border-radius: 2px;
+    border-right: 0;
+    border-top: 0;
+    content: " ";
+    display: block;
+    height: 0.625em;
+    margin-top: -0.4375em;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: rotate(-135deg);
+    transform-origin: center;
+    width: 0.625em;
+}
+
+nav.navbar .navbar-item .navbar-link  {
+  padding-left: 0;
+}
+
+.navbar-item.is-hoverable:hover .navbar-dropdown  .navbar-item.is-hoverable  {
+  .navbar-dropdown {
+    display: none;
+    .navbar-item.is-hoverable {
+      .navbar-dropdown {
+        display: none;
+      }
+    }
+  }
+  &:hover {
+    .navbar-dropdown {
+      display: block;
+      .navbar-item.is-hoverable {
+        .navbar-dropdown {
+          display: none;
+        }
+        &:hover {
+          .navbar-dropdown {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}

@@ -40,15 +40,11 @@
             %span{'aria-hidden': 'true'}
         #breaking5thmain.navbar-menu
           .navbar-start
-            - @festival.pages.first.children.each do |page|
-              - if page.children.published.empty?
-                = link_to page.title, festival_page_festival_path(@festival.slug, page.slug), class: 'navbar-item'
-              - else
-                .navbar-item.has-dropdown.is-hoverable
-                  = link_to page.title, festival_page_festival_path(@festival.slug, page.slug), class: 'navbar-link'
-                  .navbar-dropdown
-                    - page.children.published.each do |subpage|
-                      = link_to subpage.title, festival_page_festival_path(@festival.slug, subpage.slug), class: 'navbar-item'
+            - @festival.pages.first.children.published.sort_by{|x| x.sort_order.to_f }.each_with_index do |page, index|
+
+              = render partial: 'shared/recursive_menu', locals: {page: page}
+              - if index == 1
+                = link_to t(:news), festival_posts_path('breaking5thwall'), class: 'navbar-item'                      
             -# .navbar-item.has-dropdown
             -#   = link_to t(:info), festival_page_festival_path('breaking5thwall', 'about'), class: 'navbar-link'
             -#   .navbar-dropdown
