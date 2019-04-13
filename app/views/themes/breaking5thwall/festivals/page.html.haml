@@ -10,9 +10,10 @@
 
         
 
-%section.section
+%section.section.page
   .container
-    .columns
-      = raw @page.body
+    .columns.is-centered
+      .column.is-two-thirds-desktop.is-half-tablet.is-full-mobile
+        = raw @page.body
 
     

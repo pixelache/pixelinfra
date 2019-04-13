@@ -17,6 +17,14 @@ a {
   }
 }
 
+h1.title {
+  font-size: 3rem;
+}
+
+h2.title {
+  font-size: 2.5rem;
+}
+
 h1, h2 {
   &.title {
     text-align: center;
@@ -29,6 +37,8 @@ h1, h2 {
 .title {
   color: $pink;
   font-family: 'Coustard';
+}
+a.title {
   &:hover {
     color: #666;
   }
@@ -70,20 +80,37 @@ nav.navbar {
     .event_info {
       .title {
         color: $pink;
+      
       }
       .date {
         color: $pink;
       }
+
     }
   }
   .event_info {
     .title {
       font-size: 1.25rem;
-      color: #666
-
+      color: #666;
+      margin-bottom: 0.4rem;
     }
     .date {
       color: #666;
     }
+    .excerpt {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+section.page {
+  h3 {
+    margin-bottom: 1rem;
+  }
+  p {
+    margin-bottom: 1rem;
   }
 }

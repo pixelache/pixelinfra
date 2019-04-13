@@ -22,7 +22,6 @@
 
             .event_image
               = image_tag event.image.url(:box)
-              .overlay &nbsp;
             .event_info
               .title= event.title
               .date= date_range(event.start_at.to_date, event.end_at.to_date) rescue nil

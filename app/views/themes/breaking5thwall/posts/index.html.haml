@@ -1,16 +1,21 @@
-.news_index
-  .centered_title
-    = t(:news)
+%section.hero
+  .hero-body
+    .container
+      %h1.title= t(:news)
   
-  - if @posts.empty?
-    .centered_title
-      %h2 More information coming soon!
-  - else
-    #all_posts{:"data-equalizer" => ''}
-      .row.post_row.small-up-1.medium-up-3.large-up-4{:"data-equalizer" => ''}= render partial: 'posts', :object => @posts
+%section.section
+  .container
+    .columns.is-multiline  
+      - @posts.each do |post|
+        = link_to post, class: [:column, 'is-one-quarter-widescreen', 'is-one-third-desktop', 'is-half-tablet', 'is-full-mobile', :event_link] do
 
-          
-      = paginate @posts                
+          .event_image
+            = image_tag post.image.url(:box)
+            -# .overlay &nbsp;
+          .event_info
+            .title= post.title
+            .date= l post.published_at, format: :short
+            .excerpt= raw(truncate_html(strip_tags(post.body.gsub(/&nbsp;/, ' ')), :length => 260))
 
 
 = content_for :jquery do

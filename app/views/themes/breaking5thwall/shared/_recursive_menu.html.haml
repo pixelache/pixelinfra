@@ -2,7 +2,10 @@
   = link_to page.title, festival_page_festival_path(@festival.slug, page.slug), class: 'navbar-item'
 - else
   .navbar-item.has-dropdown.is-hoverable
-    = link_to page.title, festival_page_festival_path(@festival.slug, page.slug), class: 'navbar-link'
+    - if page.slug == 'programme'
+      = link_to page.title, '/programme/2019', class: 'navbar-link'
+    - else
+      = link_to page.title, page.body? ? festival_page_festival_path(@festival.slug, page.slug) : '#', class: 'navbar-link'
     .navbar-dropdown
       - page.children.published.sort_by{|x| x.sort_order.to_f }.each do |subpage|
         = render partial: 'shared/recursive_menu', locals: {page: subpage}

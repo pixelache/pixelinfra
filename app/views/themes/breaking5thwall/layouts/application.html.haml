@@ -55,9 +55,9 @@
             -#     = link_to t(:schedule), festival_page_festival_path('breaking5thwall', 'schedule'), class: 'navbar-item'
             -# = link_to t("breaking5thwall.news"), festival_posts_path('breaking5thwall'), class: 'navbar-item'
           .navbar-end
-            = link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'}, class: 'navbar-item')
-            %hr.navbar-divider
-            = link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'}, class: 'navbar-item')
+            .navbar-item= link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'})
+
+            .navbar-item= link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'})
     - if flash
       - flash.each do |key, value|
         .alert.text-center{ :class => "alert-#{key}" }
