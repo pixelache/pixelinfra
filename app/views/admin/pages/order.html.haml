@@ -9,7 +9,7 @@
     
 .row
   .small-8.columns#sortable
-    - @page.children.sort_by(&:sort_order).each_with_index do |child, index|
+    - @page.children.sort_by{|x| x.sort_order.to_f }.each_with_index do |child, index|
       .row.child[child]
         .small-12.columns
           %h6
