@@ -1,0 +1,12 @@
+%section.hero
+  .hero-body
+    .container.has-text-centered
+      .event_image= image_tag @post.image.url
+      %h1.title= @post.title
+      %h2.subtitle= t(:posted_by, poster: @post.creator.name, when: l(@post.published_at, format: :short))
+
+%section.section.page
+  .container
+    .columns.is-centered
+      .column.is-two-thirds-desktop.is-half-tablet.is-full-mobile
+        = raw @post.body

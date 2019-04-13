@@ -24,27 +24,31 @@
 
 nav.navbar .navbar-item .navbar-link  {
   padding-left: 0;
+  background-color: $blue;
 }
 
-.navbar-item.is-hoverable:hover .navbar-dropdown  .navbar-item.is-hoverable  {
-  .navbar-dropdown {
-    display: none;
-    .navbar-item.is-hoverable {
-      .navbar-dropdown {
-        display: none;
-      }
-    }
-  }
-  &:hover {
+@include from($tablet) {
+
+  .navbar-item.is-hoverable:hover .navbar-dropdown  .navbar-item.is-hoverable  {
     .navbar-dropdown {
-      display: block;
+      display: none;
       .navbar-item.is-hoverable {
         .navbar-dropdown {
           display: none;
         }
-        &:hover {
+      }
+    }
+    &:hover {
+      .navbar-dropdown {
+        display: block;
+        .navbar-item.is-hoverable {
           .navbar-dropdown {
-            display: block;
+            display: none;
+          }
+          &:hover {
+            .navbar-dropdown {
+              display: block;
+            }
           }
         }
       }
