@@ -31,20 +31,24 @@ class PostsController < ApplicationController
       @posts = Post.by_site(@site).by_user(@user.id).published.order('published_at DESC').page(params[:page]).per(12)
       set_meta_tags title: t(:all_posts_by, member: @user.name)
     else
-      @posts = Post.by_site(@site).published.order('published_at DESC').page(params[:page]).per(12)
+      if @site && @site.name != 'pixelache'
+        redirect_to subdomain: '' and return
+      else
+        @posts = Post.by_site(@site).published.order('published_at DESC').page(params[:page]).per(12)
 
-      if @posts.empty?
-        if @site.festival
-          @posts = Post.by_festival(@site.festival).published.order(published_at: :desc).page(params[:page]).per(12)
+        if @posts.empty?
+          if @site.festival
+            @posts = Post.by_festival(@site.festival).published.order(published_at: :desc).page(params[:page]).per(12)
+          end
         end
+        set_meta_tags title: t(:news),
+          canonical: posts_url,
+          og: {image:'https://pixelache.ac/assets/pixelache/images/PA_logo.png', 
+                title: t(:news), type: 'website', url: posts_path
+              }, 
+          twitter: {card: 'summary', site: '@pixelache'},
+          alternate: {"en" => posts_url(locale: :en), "fi" => posts_url(locale: :fi)}
       end
-      set_meta_tags title: t(:news),
-        canonical: posts_url,
-        og: {image:'https://pixelache.ac/assets/pixelache/images/PA_logo.png', 
-              title: t(:news), type: 'website', url: posts_path
-            }, 
-        twitter: {card: 'summary', site: '@pixelache'},
-        alternate: {"en" => posts_url(locale: :en), "fi" => posts_url(locale: :fi)}
     end
   end
   
