@@ -26,10 +26,13 @@ class EventsController < ApplicationController
       set_meta_tags title: @residency.name + " " + t(:events) 
 
     elsif params[:archive_id]
-      @year = params[:archive_id]
-      @events = Event.by_site(@site).by_year(@year).published.order('start_at DESC').page(params[:page]).per(12)
-      set_meta_tags title: t(:events) + " #{@year}"
-      
+      if @site.name !=' pixelache'
+        redirect_to subdomain: '' and return
+      else
+        @year = params[:archive_id]
+        @events = Event.by_site(@site).by_year(@year).published.order('start_at DESC').page(params[:page]).per(12)
+        set_meta_tags title: t(:events) + " #{@year}"
+      end
     else
       if @site && @site.festival
         redirect_to '/programme/' + @site.festival.start_at.year.to_s and return
