@@ -4,20 +4,48 @@
       .event_image= image_tag @event.image.url
       %h1.title= @event.title
       %h2.subtitle=  date_range(@event.start_at, @event.end_at)
-      %h2.subtitle
-        - if @event.location_tbd
-          %p= t :location_to_be_announced
-        - else
-          = @event.place.try(:name)
-          - unless @event.place.blank?
-            %p.place_address
-              = @event.place.address_no_country
+             
+
+%section.event-metadata
+  .container
+    .columns.is-centered
+      .column.is-one-third-desktop.is-half-tablet.is-full-mobile
+        %h2.subtitle
+          - if @event.location_tbd
+            %p= t :location_to_be_announced
+          - else
+            = t(:location) + ":" 
+            = @event.place.try(:name)
+            - unless @event.place.blank?
+              %p.place_address
+                = @event.place.address_no_country
         - unless @event.place.latitude.blank?
           - unless @event.place.slug =~ /^various-locations/
-            .column.has-text-centered.map_container
+            .map_container
               %p.map_link
-                = link_to t(:map), '#', onclick: "javascript:$('.google_map').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));            $('p.map_link a').text($('.google_map').is(':visible') ? '#{t(:hide_map)}' : '#{t(:map)}');});return false;"
-        .row.google_map#mapcontainer= render partial: 'shared/small_map'              
+                = link_to t(:map), '#', onclick: "javascript:$('.google_map').slideToggle(function()  { google.maps.event.trigger(map, 'resize'); map.setCenter(new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude}));            $('p.map_link a').text($('.google_map').is(':visible') ? '#{t(:hide_map)}' : '#{t(:map)}');});return false;", class: [:button]
+      .column.is-one-third-desktop.is-half-tablet.is-full-mobile.has-text-right
+        - unless @event.facilitator_name.blank? && @event.facilitator_organisation.blank?
+          %p
+            = t(:facilitated_by)
+            - unless @event.facilitator_name.blank?
+              = link_to_unless @event.facilitator_url.blank?, @event.facilitator_name, @event.facilitator_url
+            - unless @event.facilitator_organisation.blank?
+              = link_to_unless @event.facilitator_organisation_url.blank?, @event.facilitator_organisation, @event.facilitator_url              
+        - if @event.cost.to_f > 0
+          = t(:cost) + ": "
+          = number_to_currency(@event.cost, format: "%n%u", unit: raw("&euro"))
+        - else
+          = t(:free_entrance)
+        %br/
+        - unless @event.external_registration.blank?
+          = link_to t(:register_to_participate), @event.external_registration, target: :_blank, class: :button
+        %br/
+        - unless @event.facebook_link.blank?
+          = link_to t(:view_on_facebook), @event.facebook_link, target: :_blankq
+    .columns.is-centered
+      .column.is-two-thirds-desktop.is-half-tablet.is-full-mobile
+        .google_map#mapcontainer= render partial: 'shared/small_map'  
 
 %section.section
   .container
@@ -31,7 +59,7 @@
 
       function initialize() {
         var myLatlng = new google.maps.LatLng(#{@event.place.latitude}, #{@event.place.longitude});
-        var myOptions = { zoom: 14, 
+        var myOptions = { zoom: 15, 
               center: myLatlng,
               mapTypeId: google.maps.MapTypeId.ROADMAP,
               styles: [{ 

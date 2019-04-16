@@ -70,7 +70,11 @@ nav.navbar {
   }
 }
 
-.event {
+.event-metadata {
+  .place_address {
+    font-size: 1rem;
+    font-style: italic;
+  }
   .google_map {
     display: none;
   }

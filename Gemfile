@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.6.1'
 gem 'rails', '5.1.6'
 
-gem 'pg'
+gem 'pg', '1.1.3'
 
 # gem 'mysql2' # for data migration
 
