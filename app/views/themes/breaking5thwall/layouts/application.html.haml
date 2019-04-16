@@ -55,6 +55,8 @@
             -#     = link_to t(:schedule), festival_page_festival_path('breaking5thwall', 'schedule'), class: 'navbar-item'
             -# = link_to t("breaking5thwall.news"), festival_posts_path('breaking5thwall'), class: 'navbar-item'
           .navbar-end
+            .navbar-item
+              = date_range('2019-05-20'.to_date, '2019-05-26'.to_date)
             .navbar-item= link_to_unless(session[:locale].to_s == 'en', 'ENG', {:controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'en'})
 
             .navbar-item= link_to_unless(session[:locale].to_s == 'fi', 'FIN', { :controller => controller.controller_name, :action => controller.action_name, :id => params[:id], :locale => 'fi'})
