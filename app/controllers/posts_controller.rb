@@ -27,9 +27,13 @@ class PostsController < ApplicationController
       set_meta_tags title: @residency.name + " " + t(:posts) 
       
     elsif params[:user_id]
-      @user = User.friendly.find(params[:user_id])
-      @posts = Post.by_site(@site).by_user(@user.id).published.order('published_at DESC').page(params[:page]).per(12)
-      set_meta_tags title: t(:all_posts_by, member: @user.name)
+      if @site && @site.id != 1
+        redirect_to host: 'pixelache.ac'
+      else
+        @user = User.friendly.find(params[:user_id])
+        @posts = Post.by_site(@site).by_user(@user.id).published.order('published_at DESC').page(params[:page]).per(12)
+        set_meta_tags title: t(:all_posts_by, member: @user.name)
+      end
     else
       if @site && @site.name != 'pixelache'
         redirect_to subdomain: '' and return
