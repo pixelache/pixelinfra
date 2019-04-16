@@ -70,6 +70,16 @@ nav.navbar {
   }
 }
 
+.event {
+  .google_map {
+    display: none;
+  }
+  #mapcontainer {
+    height: 200px;
+  }
+}
+
+
 .event_link {
   &:hover {
     .event_image {
