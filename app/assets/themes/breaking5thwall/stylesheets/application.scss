@@ -139,3 +139,39 @@ section.page {
     margin-bottom: 1rem;
   }
 }
+
+.event_index {
+  .filters {
+    margin-bottom: 3rem;
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        float: left;
+        margin-right: 2rem;
+        color: $pink;
+        font-family: $coustard;
+        font-size: 1.25rem;
+        list-style-type: none;
+        padding-bottom: 0rem;
+        font-style: italic;
+        &.all {
+          font-style: normal;
+          font-size: 1.75rem;
+        }
+        &.active {
+          border-bottom: 5px solid $pink;
+        
+        }
+        a { 
+          &:hover {
+            color: #666;
+            padding-bottom: 0.35rem;
+            border-bottom: 5px solid #666;
+          }
+          color: $pink;
+        }
+      }
+    }
+  }
+}

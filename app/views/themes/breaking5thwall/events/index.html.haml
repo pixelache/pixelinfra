@@ -4,18 +4,17 @@
       %h1.title= t(:programme)
   
 %section.section
-  .container
-    .columns.is-multiline  
+  .container.event_index
+    .columns.is-multiline
       - if @events.empty?
         .column.centered_title
           %h2 The programme will be announced soon.
       - else
-        -# .row
-        -#   .small-12.columns.filters
-        -#     %ul
-        -#       %li.all.active= link_to t("empathy.all_events").upcase, '#', onclick: "javascript:$('.event_link').fadeIn();$('li').not('.all').removeClass('active');$('li.all').addClass('active');return false;"
-        -#       - (@festival.start_at..@festival.end_at).map{|x| l(x, format: "%a") }.uniq.each do |date|
-        -#         %li{class: date}= link_to date, '#', onclick: "javascript:toggleEvent('.#{date}');return false;"
+        .column.is-full.filters
+          %ul
+            %li.all.active= link_to t("empathy.all_events").upcase, '#', onclick: "javascript:$('.event_link').fadeIn();$('li').not('.all').removeClass('active');$('li.all').addClass('active');return false;"
+            - (@festival.start_at..@festival.end_at).map{|x| l(x, format: "%a") }.uniq.each do |date|
+              %li{class: date}= link_to date, '#', onclick: "javascript:toggleEvent('.#{date}');return false;"
 
         - @events.compact.sort{|x, y| [x.start_at.to_date == x.end_at.to_date ? 0 : 1, x.start_at] <=> [y.start_at.to_date == y.end_at.to_date ? 0 : 1, y.start_at] }.each do |event|
           = link_to event, class: [:column, 'is-one-quarter-widescreen', 'is-one-third-desktop', 'is-half-tablet', 'is-full-mobile', :event_link, event.happens_on_festival_dates.delete_if{|x|  !(@festival.start_at..@festival.end_at).to_a.include?(x) }.map{|x|l(x, format: "%a")  }.join(' ')] do
