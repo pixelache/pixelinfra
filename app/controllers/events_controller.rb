@@ -26,8 +26,8 @@ class EventsController < ApplicationController
       set_meta_tags title: @residency.name + " " + t(:events) 
 
     elsif params[:archive_id]
-      if @site.name !=' pixelache'
-        redirect_to subdomain: '' and return
+      if @site && @site.id != 1
+        redirect_to host: 'pixelache.ac' 
       else
         @year = params[:archive_id]
         @events = Event.by_site(@site).by_year(@year).published.order('start_at DESC').page(params[:page]).per(12)
