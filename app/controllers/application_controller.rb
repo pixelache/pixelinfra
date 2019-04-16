@@ -188,11 +188,11 @@ class ApplicationController < ActionController::Base
   
   def get_locale 
     if params[:locale]
-      session[:locale] = params[:locale] if ['en', 'fi', 'fr'].include?(params[:locale])
+      session[:locale] = params[:locale] if ['en', 'fi'].include?(params[:locale])
     end
 
     if session[:locale].blank?
-      available  = %w{en fi fr}
+      available  = %w{en fi}
       I18n.locale = http_accept_language.compatible_language_from(available)
       session[:locale] = I18n.locale
     else
@@ -201,7 +201,10 @@ class ApplicationController < ActionController::Base
     if @site.name == 'olsof' 
       I18n.locale = 'en'
     end
-    
+    if !['en', 'fi'].include?(I18n.locale)
+      session[:locale] = 'en'
+      I18n.locale = 'en'
+    end
   end
 
   def twitter_client

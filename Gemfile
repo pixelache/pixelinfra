@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.6.1'
-gem 'rails', '5.1.6'
+ruby '2.6.2'
+gem 'rails', '5.1.7'
 
-gem 'pg', '1.1.3'
+gem 'pg', '1.1.4'
 
 # gem 'mysql2' # for data migration
 
