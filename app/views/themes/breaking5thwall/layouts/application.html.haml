@@ -34,6 +34,9 @@
         .navbar-brand
           %a.navbar-item{href: 'https://breaking5thwall.pixelache.ac'}
             = image_tag(theme_image_path('Pixelache-logo.png'))
+          .navbar-item.is-hidden-desktop
+            = date_range('2019-05-20'.to_date, '2019-05-26'.to_date)
+
           %a.navbar-burger.burger{role: :button, 'aria-label': :menu, 'aria-expanded': 'false', 'data-target': 'breaking5thmain'}
             %span{'aria-hidden': 'true'}
             %span{'aria-hidden': 'true'}
