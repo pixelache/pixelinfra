@@ -31,9 +31,14 @@ class EventsController < ApplicationController
       set_meta_tags title: t(:events) + " #{@year}"
       
     else
-      
-      @events = Event.by_site(@site).published.order('start_at DESC').page(params[:page]).per(12)
-      set_meta_tags title: t(:events)
+      if @site && @site.festival
+        redirect_to '/programme/' + @site.festival.start_at.year.to_s and return
+      elsif @site.name != 'pixelache'
+        redirect_to subdomain: '' and return
+      else
+        @events = Event.by_site(@site).published.order('start_at DESC').page(params[:page]).per(12)
+        set_meta_tags title: t(:events)
+      end
     end
   end
   
@@ -45,28 +50,54 @@ class EventsController < ApplicationController
         if !request.host.split(/\./).include?(@festival.subsite.subdomain)
           redirect_to subdomain: @festival.subsite.subdomain unless request.xhr?
         end
+      else
+        if @event.subsite != @site
+          if @event.subsite.subdomain =~ /\.\w*$/
+            redirect_to host: @event.subsite.subdomain and return
+          else
+            redirect_to subdomain: @event.subsite.subdomain and return
+          end
+        else
+          if @event.description(:en) != @event.description(:fi)
+            a = Hash.new
+            a["en"] = url_for(@event) + "?locale=en"
+            a["fi"] = url_for(@event) + "?locale=fi"
+          else
+            a = {}
+          end
+          set_meta_tags :title => @event.name, 
+                    canonical: url_for(@event),
+                    og: {image: (@event.image? ? [@event.image.url(:box).gsub(/^https/, 'http'), {secure_url: @event.image.url(:box) }] : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
+                          title: @event.name, type: 'website', url: url_for(@event)
+                        }, 
+                    twitter: {card: 'summary', site: '@pixelache'},
+                    alternate: a
+        end
       end
-    end
-    if request.xhr?
-      render :template => 'events/ajax_event', layout: false
-    end
-    if @event.description(:en) != @event.description(:fi)
-      a = Hash.new
-      a["en"] = url_for(@event) + "?locale=en"
-      a["fi"] = url_for(@event) + "?locale=fi"
     else
-      a = {}
-    end
+      if @site && @event.subsite != @site
+        redirect_to subdomain: @site.subdomain and return
+      else
+        if request.xhr?
+          render :template => 'events/ajax_event', layout: false
+        end
+        if @event.description(:en) != @event.description(:fi)
+          a = Hash.new
+          a["en"] = url_for(@event) + "?locale=en"
+          a["fi"] = url_for(@event) + "?locale=fi"
+        else
+          a = {}
+        end
 
     
-    set_meta_tags :title => @event.name, 
+        set_meta_tags :title => @event.name, 
                   canonical: url_for(@event),
                   og: {image: (@event.image? ? [@event.image.url(:box).gsub(/^https/, 'http'), {secure_url: @event.image.url(:box) }] : 'http://pixelache.ac/assets/pixelache/images/PA_logo.png'), 
                         title: @event.name, type: 'website', url: url_for(@event)
                       }, 
                   twitter: {card: 'summary', site: '@pixelache'},
                   alternate: a
-
+      end
+    end
   end
-  
 end
