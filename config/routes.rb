@@ -171,6 +171,8 @@ Pixelinfra::Application.routes.draw do
   
   resources :feeds
   resources :steps
+  get '/programme/2015', to: 'pages#show', festival_id: 'festival-2015', id: 'programme'
+  get '/programme/2016', to: 'events#index', festival_id: 'festival-2016'
   get '/programme/2017', to: 'events#index', festival_id: 'festival-2017'
   get '/programme/2019', to: 'events#index', festival_id: 'breaking5thwall'
   get '/programme', to: 'events#index', festival_id: 'festival-2019'# , constraints: { subdomain: 'festival'}
