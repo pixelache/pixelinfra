@@ -1,0 +1,10 @@
+.logo= link_to image_tag(theme_image_path('footer/PA_logo.png'), :alt => "Pixelache"), 'http://pixelache.ac'
+.dates.is-hidden-touch= date_range('2019-05-16'.to_date, '2019-05-19'.to_date, format: :long) + ", Seinäjoki"
+.dates.is-hidden-touch= raw "&sdot;"
+.dates.is-hidden-touch= date_range(@festival.start_at, @festival.end_at, format: :long) + ", Helsinki"
+-#.text.hide-for-small-only= link_to 'www.pixelache.ac', 'http://pixelache.ac'
+.social
+  = link_to image_tag(theme_image_path('footer/some_fb.png'), width: 25), 'https://www.facebook.com/events/1019391098151871'
+  = link_to image_tag(theme_image_path('footer/some_flickr.png'), width: 25), 'https://www.flickr.com/photos/pixelache/'        
+  = link_to image_tag(theme_image_path('footer/some_twitter.png'), width: 25), 'https://twitter.com/pixelache'
+  = link_to image_tag(theme_image_path('footer/some_insta.png'), width: 25), 'https://www.instagram.com/pixelache/'        

@@ -70,7 +70,7 @@
             
     %section.festival2019_container{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
       %article= yield
-
+    %footer{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}= render partial: 'shared/footer'
     -# %footer{class: [controller.controller_name, controller.action_name, @page.nil? ? false : @page.slug]}
     -#   .logo= link_to image_tag(theme_image_path('footer/PA_logo.png'), :alt => "Pixelache"), 'http://pixelache.ac'
     -#   .dates.hide-for-small-only= date_range(@festival.start_at, @festival.end_at, format: :long) + ", Helsinki"
