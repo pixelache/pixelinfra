@@ -12,7 +12,7 @@ class EventsController < ApplicationController
       else
         set_meta_tags title: @festival.name + " " + t(:events)
       end
-    elsif @site && @site.festival
+    elsif @site && @site.festival && [params[:project_id], params[:archive_id], params[:residency_id]].compact.empty?
       redirect_to '/programme/' + @site.festival.start_at.year.to_s and return
     elsif @site && @site.id != 1
       redirect_to host: 'pixelache.ac' and return
