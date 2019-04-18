@@ -199,12 +199,14 @@ class ApplicationController < ActionController::Base
       I18n.locale = session[:locale]
     end
     if @site.name == 'olsof' 
-      I18n.locale = 'en'
+      I18n.locale = :en
     end
-    if !['en', 'fi'].include?(I18n.locale)
+
+    unless !['en', 'fi'].include?(I18n.locale)
       session[:locale] = 'en'
-      I18n.locale = 'en'
+      I18n.locale = :en
     end
+
   end
 
   def twitter_client
