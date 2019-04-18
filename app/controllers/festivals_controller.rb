@@ -29,7 +29,6 @@ class FestivalsController < ApplicationController
   
   def page
     @festival = Festival.friendly.find(params[:id])
-   
     if params[:page] =~ /\//
       p = params[:page].split(/\//).last
     else
