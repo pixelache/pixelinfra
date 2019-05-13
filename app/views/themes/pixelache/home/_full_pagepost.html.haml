@@ -1,4 +1,4 @@
-- if front.no_text == true
+- if front.no_text == true && front.dont_scale != true
   - style = "background-color: ##{front.background_colour};"
 - elsif front.bigimage? && front.dont_scale != true
   - style = "background: url(#{front.bigimage.url(:full)})  no-repeat center center; background-size: cover;"
