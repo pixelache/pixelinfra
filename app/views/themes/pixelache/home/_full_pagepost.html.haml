@@ -1,7 +1,7 @@
 - if front.no_text == true && front.dont_scale != true
   - style = "background-color: ##{front.background_colour};"
 - elsif front.bigimage? && front.dont_scale != true
-  - style = "background: url(#{front.bigimage.url(:full)})  no-repeat center center; background-size: cover;"
+  - style = "background: url(#{front.bigimage.url})  no-repeat center center; background-size: cover;"
 - elsif front.bigimage? && front.dont_scale == true
   - style = "background: url(#{front.bigimage.url.gsub('development', 'production')})  no-repeat top center; height: #{front.bigimage_height}px; "
 - else
