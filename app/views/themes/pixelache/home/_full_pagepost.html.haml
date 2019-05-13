@@ -10,9 +10,9 @@
 /   - style += "padding-top: " + (front.custom_title ? "70px" : "30%;")
 = link_to front.external_url.blank? ? front.item : front.external_url do
   .full_page_or_post.fullscreen.text-center{:style => style }
-    - if front.no_text == true && front.dont_scale != true
+    - if front.no_text == true
       - if front.bigimage?
-        = image_tag front.bigimage.url(:full)
+        = image_tag front.bigimage.url
     - else
       - if front.custom_title
         .row
