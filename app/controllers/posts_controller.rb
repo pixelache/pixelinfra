@@ -77,6 +77,8 @@ class PostsController < ApplicationController
             if !request.host.split(/\./).include?(@festival.subsite.subdomain)
               redirect_to subdomain: @festival.subsite.subdomain unless request.xhr?
             end
+          else
+            render template: 'posts/show'
           end
         elsif @post.subsite != @site
           redirect_to "https://#{@post.subsite.subdomain}/posts/#{params[:id]}" unless request.xhr?
