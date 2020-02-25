@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.9.1
-lock '3.11.0'
+lock '3.11.2'
 
 set :application, 'pixelinfra'
 set :repo_url, 'git://github.com/pixelache/pixelinfra.git'
