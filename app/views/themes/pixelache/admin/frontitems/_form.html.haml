@@ -51,7 +51,10 @@
                     = en.text_field :custom_title
                 .row
                   .small-8.columns
-                    = en.text_field :custom_follow_text, :hint => "'Read more' text"        
+                    = en.text_field :custom_follow_text, :hint => "'Read more' text"
+  #rawhtml{:style => !f.object.new_record? ? "display: block" : false}
+    .row
+      .small-12.columns= f.input :rawhtml, label: 'Raw HTML code:'              
   .row
     .small-6.columns= f.submit "Save" , :class => [:button, :round]
     
@@ -88,6 +91,11 @@
                 scrollTop: $("#hidden").offset().top},
                 'slow');
         
+      } else if ($(this).val() == 9) {
+        $('#rawhtml').fadeIn();
+        $('html,body').animate({
+                scrollTop: $("#rawhtml").offset().top},
+                'slow');
       }
     });
     

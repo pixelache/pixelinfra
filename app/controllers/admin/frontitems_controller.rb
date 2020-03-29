@@ -12,7 +12,7 @@ class Admin::FrontitemsController < Admin::BaseController
   def create
     @frontitem = Frontitem.new(frontitem_params)
     if @frontitem.save
-      flash[:notice] = 'Open call saved.'
+      flash[:notice] = 'New frontpage item saved.'
       redirect_to admin_frontitems_path
     end
   end
@@ -63,7 +63,7 @@ class Admin::FrontitemsController < Admin::BaseController
   protected 
   
   def frontitem_params
-    params.require(:frontitem).permit(:item_type, :subsite_id, :seconditem_type, :dont_scale, :no_text, :external_url, :seconditem_id, :custom_title, :item_id, :frontmodule_id, :position, :custom_follow_text, :external_url, :remove_bigimage, :background_colour, :bigimage, :background_on_title, :background_on_text, 
+    params.require(:frontitem).permit(:item_type, :rawhtml, :subsite_id, :seconditem_type, :dont_scale, :no_text, :external_url, :seconditem_id, :custom_title, :item_id, :frontmodule_id, :position, :custom_follow_text, :external_url, :remove_bigimage, :background_colour, :bigimage, :background_on_title, :background_on_text, 
       :text_colour, :active, translations_attributes: [:id, :locale, :custom_title, :custom_follow_text])
     
   end

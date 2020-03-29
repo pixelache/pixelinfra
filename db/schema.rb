@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190412134547) do
+ActiveRecord::Schema.define(version: 20200329105457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -486,6 +486,7 @@ ActiveRecord::Schema.define(version: 20190412134547) do
     t.boolean "background_on_text", default: false, null: false
     t.boolean "dont_scale"
     t.boolean "no_text"
+    t.text "rawhtml"
     t.index ["item_id", "item_type"], name: "index_frontitems_on_item_id_and_item_type"
     t.index ["seconditem_id", "seconditem_type"], name: "index_frontitems_on_seconditem_id_and_seconditem_type"
   end

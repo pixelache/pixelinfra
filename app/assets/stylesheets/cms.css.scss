@@ -211,7 +211,7 @@ table {
 }
 
 form.frontitem {
-  #hidden {
+  #hidden, #rawhtml {
     display: none;
   }
   #frontitem_item_name_input, #frontitem_seconditem_name_input {
