@@ -71,6 +71,10 @@ class PagesController < ApplicationController
                             description: ActionView::Base.full_sanitizer.sanitize(@page.body.nil? ? @page.title : @page.body[0..500]) 
                           }, 
                       twitter: {card: 'summary', site: '@pixelache'}
+    respond_to do |format|
+      format.html
+      format.json { render json: PageSerializer.new(@page).serialized_json, status: 200 }
+    end
   end
   
 end

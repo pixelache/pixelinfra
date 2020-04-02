@@ -66,6 +66,10 @@ class FestivalsController < ApplicationController
             }, 
         twitter: {card: 'summary', site: '@pixelache'},
         alternate: a
+      respond_to do |format|
+        format.html
+        format.json { render json: PageSerializer.new(@page).serialized_json, status: 200 }
+      end
     end
   end
   
@@ -77,6 +81,10 @@ class FestivalsController < ApplicationController
       redirect_to "http://#{@festival.subsite.subdomain}.pixelache.ac"
     end
     set_meta_tags :title => @festival.name
+    respond_to do |format|
+      format.html
+      format.json { render json: FestivalSerializer.new(@festival).serialized_json, status: 200 }
+    end
   end
   
   def theme

@@ -1,7 +1,10 @@
 .row
   .small-10.columns
     %h2 Festivals
-    
+.row
+  .small-10.columns= paginate @festivals
+.row
+  .small-10.columns    
     %table.table.table-condensed
       %thead
         %tr
@@ -13,3 +16,5 @@
         - @festivals.each do |festival|
           = render :partial => 'festival', :locals => {:festival => festival}
     %p= link_to 'Enter new festival', new_admin_festival_path
+.row
+  .small-10.columns= paginate @festivals

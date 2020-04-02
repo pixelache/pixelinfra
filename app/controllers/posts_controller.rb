@@ -1,11 +1,17 @@
 class PostsController < ApplicationController
-  
+
   def index
     if params[:festival_id]
       @festival = Festival.friendly.find(params[:festival_id])
       @posts = Post.by_festival(@festival).published.order('published_at DESC').page(params[:page]).per(12)
       
       set_meta_tags title: @festival.name + " " + t(:posts)
+      respond_to do |format|
+        format.html
+        format.json { 
+          render json: PostSerializer.new(@posts).serialized_json, status: 200 
+        }
+     end
     elsif @site && @site.id != 1
       redirect_to host: 'pixelache.ac'
     else
@@ -111,6 +117,10 @@ class PostsController < ApplicationController
                         }, 
                     twitter: {card: 'summary', site: '@pixelache'},
                     alternate: a
+      respond_to do |format|
+        format.html
+        format.json { render json: PostSerializer.new(@post).serialized_json, status: 200 }
+      end
     end
   end
   
