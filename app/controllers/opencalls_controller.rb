@@ -10,6 +10,10 @@ class OpencallsController < ApplicationController
         @opencallsubmission.opencallanswers.build(opencallquestion: qs)
       end
     end
+    respond_to do |format|
+      format.html
+      format.json { render json: OpencallSerializer.new(@opencall).serialized_json, status: 200 }
+    end
   end
   
 end

@@ -13,6 +13,18 @@
     .small-10.medium-3.columns
       = f.input :closing_date, :as => :string, :input_html => {:class => "datetime_picker", value: f.object.new_record? ? '' : (f.object.closing_date.nil? ? '' : f.object.closing_date.strftime('%Y-%m-%d %H:%M'))}
   .row.expanded
+    %ul.tabs#languages{"data-tabs" => ""}
+      - I18n.available_locales.each_with_index do |locale, i|
+        %li.tabs-title{:class => (i == 0 ? 'is-active' : false)}
+          = link_to t(:locale_name, :locale => locale), "##{locale}"
+    .tabs-content{:'data-tabs-content' => 'languages'}
+      - I18n.available_locales.each_with_index do |locale, i|
+        .tabs-panel{:class => (i == 0 ? 'is-active' : false), :id => "#{locale}"}
+          = f.globalize_fields_for locale do |en|
+            .small-12.columns
+              %b= "Open call description in #{t :locale_name, :locale => locale}"
+              = en.cktext_area :description      
+  .row.expanded
     .small-12.columns
       %h3 Questions
       = f.fields_for :opencallquestions do |ff|

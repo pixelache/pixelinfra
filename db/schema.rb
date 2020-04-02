@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200329105457) do
+ActiveRecord::Schema.define(version: 20200402124728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -574,6 +574,16 @@ ActiveRecord::Schema.define(version: 20200329105457) do
   create_table "nodes_subsites", id: false, force: :cascade do |t|
     t.integer "node_id"
     t.integer "subsite_id"
+  end
+
+  create_table "opencall_translations", force: :cascade do |t|
+    t.integer "opencall_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description"
+    t.index ["locale"], name: "index_opencall_translations_on_locale"
+    t.index ["opencall_id"], name: "index_opencall_translations_on_opencall_id"
   end
 
   create_table "opencallanswers", id: :serial, force: :cascade do |t|
