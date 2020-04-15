@@ -14,7 +14,7 @@
       %br/
       = @submission.address
       %br
-      = @submission.postcode + " " + @submission.city
+      = @submission.postcode + " " + @submission.city rescue ''
       %br
       = Country[@submission.country].name rescue @submission.country.to_s
       %br/
