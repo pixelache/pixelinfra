@@ -28,8 +28,8 @@
     .small-12.columns
       %h3 Questions
       = f.fields_for :opencallquestions do |ff|
-        .row.expanded
-          .small-6.columns
+        .row
+          .small-12.columns
             %ul.tabs{"data-tabs" => "", id: "languages_#{ff.options[:child_index]}"}
               - I18n.available_locales.each_with_index do |locale, i|
                 %li.tabs-title{:class => (i == 0 ? 'is-active' : false)}

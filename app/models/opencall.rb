@@ -4,7 +4,7 @@ class Opencall < ActiveRecord::Base
   validates_presence_of :name, :subsite_id
   has_many :opencallquestions, dependent: :destroy
   has_many :opencallsubmissions, dependent: :destroy
-  accepts_nested_attributes_for :opencallquestions
+  accepts_nested_attributes_for :opencallquestions, allow_destroy: true
   extend FriendlyId
   friendly_id :name , :use => [ :slugged, :finders ] # :history]
   translates :description, fallbacks_for_empty_translations: true
