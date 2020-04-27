@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
   
   def update
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     if current_user == @user || current_user.has_role?(:goddess)
       if @user.update_attributes(permitted_params)
         flash[:notice] = 'Profile updated'
