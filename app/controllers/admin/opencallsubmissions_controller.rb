@@ -4,6 +4,21 @@ class Admin::OpencallsubmissionsController < Admin::BaseController
   skip_load_and_authorize_resource
   load_and_authorize_resource
   
+  def destroy
+    @submission = Opencallsubmission.find(params[:id])
+    opencall = @submission.opencall_id
+    if can? :destroy, @submission
+      if @submission.destroy
+        flash[:notice] = 'The submission has been deleted.'
+      else
+        flash[:error] = 'There was an error deleting this: ' + @submission.errors.inspect
+      end
+    else
+      flash[:error] = "You do not have permission for this"
+    end
+    redirect_to admin_opencall_opencallsubmissions_path(opencall_id: opencall)
+  end
+
   def index
     order = sortable_column_order do |column, direction|
       case column
