@@ -11,9 +11,13 @@ class Admin::FrontitemsController < Admin::BaseController
   
   def create
     @frontitem = Frontitem.new(frontitem_params)
+    @frontitem.subsite_id = 1
     if @frontitem.save
       flash[:notice] = 'New frontpage item saved.'
       redirect_to admin_frontitems_path
+    else
+      flash[:error] = @frontitem.errors.inspect
+      render template: 'admin/frontitems/new'
     end
   end
   
@@ -37,7 +41,8 @@ class Admin::FrontitemsController < Admin::BaseController
   end
   
   def new
-    @frontitem = Frontitem.new
+    @frontitem = Frontitem.new(subsite_id: 1)
+
   end
     
 
@@ -46,7 +51,9 @@ class Admin::FrontitemsController < Admin::BaseController
   end
   
   def index
-    @frontitems = apply_scopes(Frontitem).all
+    # @frontitems = apply_scopes(Frontitem).all
+    @frontitems = Frontitem.by_site(1)
+    @by_site = 1
   end
   
   def sort
@@ -63,7 +70,7 @@ class Admin::FrontitemsController < Admin::BaseController
   protected 
   
   def frontitem_params
-    params.require(:frontitem).permit(:item_type, :rawhtml, :subsite_id, :seconditem_type, :dont_scale, :no_text, :external_url, :seconditem_id, :custom_title, :item_id, :frontmodule_id, :position, :custom_follow_text, :external_url, :remove_bigimage, :background_colour, :bigimage, :background_on_title, :background_on_text, 
+    params.require(:frontitem).permit(:item_type, :item_name, :seconditem_name, :rawhtml, :subsite_id, :seconditem_type, :dont_scale, :no_text, :external_url, :seconditem_id, :custom_title, :item_id, :frontmodule_id, :position, :custom_follow_text, :external_url, :remove_bigimage, :background_colour, :bigimage, :background_on_title, :background_on_text, 
       :text_colour, :active, translations_attributes: [:id, :locale, :custom_title, :custom_follow_text])
     
   end

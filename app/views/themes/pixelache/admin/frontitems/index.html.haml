@@ -9,9 +9,9 @@
   .small-6.columns
     %h4
       Current frontpage:
-    %select#by_site
+    %select#by_site{disabled: :disabled}
       - Subsite.all.each do |site|
-        %option{:value => site.id, :selected => (params[:by_site] == site.id.to_s ? :selected : false)}= site.name
+        %option{:value => site.id, :selected => (@by_site == site.id ? :selected : false)}= site.name
     :javascript
       $('select#by_site').change(function() {
         var parts = "#{request.url}".split(/\?/, 2);

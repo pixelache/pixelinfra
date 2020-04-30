@@ -1,6 +1,6 @@
 = semantic_form_for([:admin, @frontitem], :html => {:multipart => true}) do |f|
   .row
-    .small-3.columns= f.input :subsite, :label => "Which site?", :include_blank => false
+    .small-3.columns= f.input :subsite, :label => "Which site?", :include_blank => false, input_html: { disabled: :disabled }
   .row
     .small-12.columns= f.input :frontmodule, :label => "What do you want to add to the frontpage?", :as => :radio, :member_label => Proc.new { |fm| fm.exampleimage? ? image_tag(fm.exampleimage.url(:logo)) + raw("<p>" + fm.name + "</p>") : fm.name } 
         
@@ -36,22 +36,27 @@
         .small-4.columns= f.input :dont_scale, label: 'Don\'t scale image'
         .small-4.columns= f.input :no_text, label: 'Don\'t put any text over image'
       .row
-        %dl.tabs{"data-tab" => ""}
+        %ul#languages.tabs{:"data-tabs" => ''}
           - I18n.available_locales.each_with_index do |locale, i|
-            %dd{:class => (i == 0 ? :active : false)}
+            %li.tabs-title{:class => (i == 0 ? 'is-active' : false)}
               = link_to t(:locale_name, :locale => locale), "##{locale}"
-        .tabs-content
+        .tabs-content{:'data-tabs-content' => 'languages'}
           - I18n.available_locales.each_with_index do |locale, i|
-            .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+            .tabs-panel{:class => (i == 0 ? 'is-active' : false), :id => "#{locale}"}
               = f.globalize_fields_for locale do |en|
                 .row
                   .small-8.columns
-                    %b Custom title
+                    %b
+                      Custom title in 
+                      = I18n.t(:locale_name, locale: locale.to_sym)
                     %p.hint Optional. Will replace title of post on thin strip, or appear at top of full-size module. Basic HTML tags are OK here.
                     = en.text_field :custom_title
                 .row
                   .small-8.columns
-                    = en.text_field :custom_follow_text, :hint => "'Read more' text"
+                    %b
+                      Custom 'read more' text in
+                      = I18n.t(:locale_name, locale: locale.to_sym)
+                    = en.text_field :custom_follow_text, label: "'Read more' text"
   #rawhtml{:style => !f.object.new_record? ? "display: block" : false}
     .row
       .small-12.columns= f.input :rawhtml, label: 'Raw HTML code:'              
@@ -97,6 +102,7 @@
                 scrollTop: $("#rawhtml").offset().top},
                 'slow');
       }
+      $(document).foundation()
     });
     
     $('#frontitem_item_type').change(function() {
