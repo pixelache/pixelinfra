@@ -11,5 +11,9 @@
     next if a.opencallquestion.question_type == 3
     answers << a.answer
   end %>
+<% if sub.address.blank? %>
+<%= CSV.generate_line([sub.id.to_s, sub.name, sub.email, sub.phone, ' ', sub.website, answers.flatten].flatten).strip.html_safe %>  
+<% else %>
 <%= CSV.generate_line([sub.id.to_s, sub.name, sub.email, sub.phone, [sub.address, sub.postcode + ' ' + sub.city, sub.country].join(', '), sub.website, answers.flatten].flatten).strip.html_safe %>
+<% end %>
 <% end %>
