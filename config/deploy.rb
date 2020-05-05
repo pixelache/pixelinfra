@@ -1,9 +1,9 @@
 # config valid only for Capistrano 3.9.1
-lock '3.11.2'
+lock '3.13.0'
 
 set :application, 'pixelinfra'
 set :repo_url, 'git://github.com/pixelache/pixelinfra.git'
-set :rvm_ruby_version, '2.6.2'
+set :rvm_ruby_version, '2.7.1'
 set :keep_releases, 3
 set :linked_files, %w{config/database.yml config/application.yml config/flickr.yml }
 set :linked_dirs, %w{public/system tmp public/uploads public/images public/assets log}
