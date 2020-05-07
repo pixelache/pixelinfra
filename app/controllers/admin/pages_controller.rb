@@ -44,7 +44,7 @@ class Admin::PagesController < Admin::BaseController
       when "created"
         "created_at #{direction}"
       when "updated"
-        "updated_at #{direction}"
+        "pages.updated_at #{direction}"
       when "published"
         "published #{direction}, updated_at #{direction}"
       when "site"

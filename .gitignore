@@ -86,3 +86,4 @@ app/assets/fonts/*
 /config/application.yml
 bin/spring
 /config/flickr.yml
+config/initializers/better_errors.rb
