@@ -29,6 +29,8 @@ namespace :pixelache do
         end
         
       end
+    rescue Twitter::Error::ServiceUnavailable
+      # do nothing here
     rescue Twitter::Error::NotFound
       # do nothing if twitter isn't connecting
     end  
