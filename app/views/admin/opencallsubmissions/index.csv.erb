@@ -1,5 +1,5 @@
 <% headers = ['ID', 'Name', 'Email', 'Phone', 'Address', 'Website'] %>
-<% @opencall.opencallquestions.each do |q| 
+<% @opencall.opencallquestions.sort_by(&:id).each do |q| 
     next if q.question_type == 3
     headers << q.question_text
    end %>
@@ -7,7 +7,7 @@
 
 <% @opencall.opencallsubmissions.each do |sub| 
   answers = []
-  sub.opencallanswers.each do |a|
+  sub.opencallanswers.sort_by{|x| x.opencallquestion.id}.each do |a|
     next if a.opencallquestion.question_type == 3
     answers << a.answer
   end %>
