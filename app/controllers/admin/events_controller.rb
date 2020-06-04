@@ -7,6 +7,7 @@ class Admin::EventsController < Admin::BaseController
   has_scope :by_festival
   has_scope :by_year
   has_scope :by_name
+  skip_load_and_authorize_resource  only: [:index]
   
   def attendees
     @event = Event.friendly.find(params[:id])

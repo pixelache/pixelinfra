@@ -3,6 +3,13 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
+    can :read, Opencall
+    can :manage, Opencall do |oc|
+      User.with_all_roles(name: 'reader', resource: oc).include?(user)
+    end
+    can :manage, Opencallsubmission do |ocs|
+      User.with_all_roles(name: 'reader', resource: ocs.opencall).include?(user)
+    end
     if user.has_role? :goddess
       can :manage, :all
       
@@ -27,6 +34,9 @@ class Ability
       can :manage, Opencall
       can :manage, Opencallquestion
       can :manage, Document
+    elsif user.has_role? :reader
+      can :read, Event
+
     elsif user.has_role? :advisor
       can :read, Opencallsubmission
       can :manage, Comment
