@@ -14,6 +14,13 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   has_many :feedcaches
   after_create :send_new_user_email_to_nathalie_and_john
+  before_create :check_uid
+
+  def check_uid
+    if self.provider == 'email' && self.uid.blank?
+      self.uid = self.email
+    end
+  end
   
   def apply_omniauth(omniauth)
     if omniauth['provider'] == 'twitter'

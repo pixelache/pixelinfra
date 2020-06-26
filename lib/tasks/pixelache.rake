@@ -1,4 +1,24 @@
 namespace :pixelache do
+
+  desc 'move attachments'
+  task move_attachments: :environment do
+    require 'fileutils'
+    Opencallanswer.all.each do |oca|
+      opencall = oca.opencallquestion.opencall
+      submission = oca.opencallsubmission
+
+      if oca.attachment?
+        next unless File.directory?("/Users/fail/Desktop/burn_attachments/#{oca.id.to_s}")
+        puts 'Found directory ' + "/Users/fail/Desktop/burn_attachments/#{oca.id.to_s}"
+        system 'mkdir', '-p', "/Users/fail/Desktop/burns/#{submission.id}-#{submission.name.parameterize}"
+        Dir.foreach("/Users/fail/Desktop/burn_attachments/#{oca.id.to_s}") do |filename|
+          next if filename == '.' or filename == '..'
+          system 'cp', "/Users/fail/Desktop/burn_attachments/#{oca.id.to_s}/#{filename}", "/Users/fail/Desktop/burns/#{submission.id}-#{submission.name.parameterize}/"
+        end
+      end
+    end
+  end
+
   desc 'Get member feeds'
   task get_member_feeds: :environment do
     now = Time.now.to_i

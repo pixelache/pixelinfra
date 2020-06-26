@@ -18,7 +18,7 @@ class Admin::EtherpadsController < Admin::BaseController
   def destroy
     @etherpad = Etherpad.find(params[:id])
     unless @etherpad.nil?
-      ether = EtherpadLite.connect('http://pad.pixelache.ac', ENV['ETHERPAD_API_KEY'], '1.2.1')
+      ether = EtherpadLite.connect('https://pad.pixelache.ac', ENV['ETHERPAD_API_KEY'], '1.2.1')
       pad = ether.pad(@etherpad.name)
       pad.delete
     end
