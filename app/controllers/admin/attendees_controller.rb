@@ -3,6 +3,7 @@ class Admin::AttendeesController < Admin::BaseController
   has_scope :by_festival
   has_scope :by_event
   has_scope :by_post 
+  skip_load_and_authorize_resource
   
   def edit
     @attendee = Attendee.find(params[:id])
@@ -16,7 +17,6 @@ class Admin::AttendeesController < Admin::BaseController
   
   def destroy
     @attendee = Attendee.find(params[:id])
-
 
     if @attendee.item.is_full? # && !waiting_list != true
       n = Attendee.where(:waiting_list => true, :item => @attendee.item).order(:created_at).first
