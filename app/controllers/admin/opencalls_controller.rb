@@ -1,7 +1,7 @@
 class Admin::OpencallsController < Admin::BaseController
   has_scope :page, :default => 1
   handles_sortable_columns
-
+  skip_load_and_authorize_resource
   
   def create
     @opencall = Opencall.new(opencall_params)
