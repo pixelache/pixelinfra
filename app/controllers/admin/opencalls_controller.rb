@@ -56,7 +56,7 @@ class Admin::OpencallsController < Admin::BaseController
   protected
   
   def opencall_params
-    params.require(:opencall).permit([:published, :name, :subsite_id, :is_open, :closing_date, :page_id, :submitted_text,
+    params.require(:opencall).permit([:published, :name, :subsite_id, :is_open, :slug,  :closing_date, :page_id, :submitted_text,
     translations_attributes: [:id, :locale, :description],
       opencallquestions_attributes: [ :id, :character_limit, :question_type, :is_required, :_destroy,
         translations_attributes: [:question_text, :id, :locale, :_destroy]

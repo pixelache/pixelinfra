@@ -48,7 +48,9 @@
   .row.expanded
     .small-12.columns
       = f.input :submitted_text, label: 'Thank you/followup text to display after person submits an application'
-  
+  .row
+    .small-6.columns
+      = f.input :slug, :label => 'Override slug'
   = f.submit 'Save', class: [:button, :round, :small]
   
 = content_for :jquery do
