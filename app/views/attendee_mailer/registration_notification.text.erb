@@ -13,7 +13,7 @@ Phone: <%= @attendee.phone %>
 <% end %>
 
 <% unless @attendee.project_creators.blank? %>
- <%= @event.question_project %>: <%= @attendee.project_creators %> 
+ <%= @event.question_creators %>: <%= @attendee.project_creators %> 
 <% end %>
 
 <% unless @attendee.project_description.blank? %>
