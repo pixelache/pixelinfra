@@ -1,8 +1,8 @@
-lock '3.15.0'
+lock '3.16.0'
 
 set :application, 'pixelinfra'
 set :repo_url, 'git://github.com/pixelache/pixelinfra.git'
-set :rvm_ruby_version, '2.7.1'
+set :rvm_ruby_version, '2.7.3'
 set :keep_releases, 3
 set :linked_files, %w{config/database.yml config/application.yml config/flickr.yml }
 set :linked_dirs, %w{public/system tmp public/uploads public/images public/assets log}
@@ -72,17 +72,17 @@ namespace :deploy do
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
-      before 'deploy:restart', 'puma:start'
+      # before 'deploy:restart', 'puma:start'
       invoke 'deploy'
     end
   end
   
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
-    end
-  end
+  # desc 'Restart application'
+  # task :restart do
+  #   on roles(:app), in: :sequence, wait: 5 do
+  #     invoke 'puma:restart'
+  #   end
+  # end
 
   desc 'copy protected fonts'
   task :fonts do

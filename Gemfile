@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.7.3'
-gem 'rails', '5.2.5'
+gem 'rails', '5.2.6'
 
 gem 'pg', '1.1.4'
 
@@ -70,7 +70,7 @@ gem 'omniauth-facebook' #, '1.4.0'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 gem 'paper_trail' #, '~> 3.0.6'
-gem 'puma', group: :production
+gem 'puma', '5.2.2', group: :production
 gem 'rack-utf8_sanitizer'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails-jquery-autocomplete'
