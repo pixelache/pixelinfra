@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     end
   end
   
+  def user_and_email
+    "#{name} <#{email}>"
+  end
+  
   def apply_omniauth(omniauth)
     if omniauth['provider'] == 'twitter'
       logger.warn(omniauth['info'].inspect)

@@ -19,6 +19,11 @@ class Festivaltheme < ActiveRecord::Base
     [name, festival.name].join(' / ')
   end
   
+
+  def as_json(options = {})
+    { id: self.id, name: self.name, festival_id: self.festival_id, name_and_festival: self.name_and_festival }    
+  end
+  
   def name_en
     self.name(:en)
   end

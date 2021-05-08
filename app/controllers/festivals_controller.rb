@@ -27,6 +27,11 @@ class FestivalsController < ApplicationController
     set_meta_tags :title => t(:festivals)
   end
   
+  def themes_by_id
+    ids = params[:festival_ids].split(/,/)
+    @festivalthemes = Festivaltheme.where(["festival_id in (?)",ids])
+    render json: @festivalthemes.as_json
+  end
   def page
     @festival = Festival.friendly.find(params[:id])
     if params[:page] =~ /\//

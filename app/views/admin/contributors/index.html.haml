@@ -1,0 +1,61 @@
+.row
+  .small-10.columns
+    %h2 Contributors
+-# .filter_box.row
+-#   .large-8.columns
+-#     .filter_title Filter by activity:
+-#     %select#by_activity
+-#       %option{:value => ""} &nbsp;
+-#       - @filters.each do |filter|
+-#         %option{:value => "by_#{filter.class.to_s.downcase}=#{filter.id}", :selected => (params["by_#{filter.class.to_s.downcase}"] == filter.id.to_s ? :selected : false)}= "#{filter.name} (#{l filter.feed_time, format: :long})"
+
+-#   - if params[:by_event]
+-#     .event_info.small-12.columns
+-#       - event = Event.find(params[:by_event])
+-#       - if event.max_contributors
+-#         %p= pluralize(event.contributors.size, 'registration')
+-#         %p= pluralize(event.max_contributors, 'total place')
+-#       %p= link_to 'See all', contributors_admin_event_path(event), class: [:button, :tiny, :round ]
+-#       %p= link_to 'Download as .csv', contributors_admin_event_path(event, format: :csv), class: [:button, :tiny, :secondary]
+      
+-#   - if params[:by_post]
+-#     .event_info.small-12.columns
+-#       - post = Post.find(params[:by_post])
+-#       - if post.max_contributors
+-#         %p= pluralize(post.contributors.size, 'registration')
+-#         %p= pluralize(post.max_contributors, 'total place')
+-#       %p= link_to 'See all', contributors_admin_post_path(post), class: [:button, :tiny, :round ]
+-#       %p= link_to 'Download as .csv', contributors_admin_post_path(post, format: :csv), class: [:button, :tiny, :secondary]
+            
+-#   :javascript
+-#     $('.filter_box select').change(function() {
+-#       var parts = "#{request.url}".split(/\?/, 2);
+-#         window.location.href=parts[0] + "?" + $(this).val();
+-#     });
+.row
+  .small-6.columns= paginate @contributors
+.row
+  .small-10.columns 
+    %p= link_to 'Enter new contributor', new_admin_contributor_path, class: [:button]
+    %table
+      %thead
+        %th id
+        %th Name
+        %th Activities
+        %th Actions
+      %tbody
+        - @contributors.each do |att|
+          %tr
+            %td= att.id.to_s
+            %td
+              = att.name
+             
+            %td= att.activities_list.join(', ')
+            %td
+              - if can? :edit, att
+                = link_to 'Edit', edit_admin_contributor_path(att),  :class => [:button, :round, :tiny]
+              - if can? :destroy, att
+                = link_to 'Delete', [:admin, att], :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => [:button, :round, :alert, :tiny]
+.row
+  .small-6.columns= paginate @contributors            
+          

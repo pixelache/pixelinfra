@@ -5,7 +5,7 @@
       - if can? :manage, Subsite
         %li= link_to 'Site/sub-sites', admin_subsites_path
       - if can? :manage, User
-        %li= link_to 'Users', admin_users_path
+        %li= link_to 'CMS Users', admin_users_path
       - if can? :manage, Membership
         %li= link_to 'Memberships', admin_memberships_path
       - if can? :manage, Node
@@ -21,8 +21,10 @@
 
 
   %li
-    %a{:href => '#'} Events / activities
+    %a{:href => '#'} Content
     %ul.menu
+      - if can? :manage, Contributor
+        %li= link_to 'Contributors', admin_contributors_path
       - if can? :manage, Event
         %li= link_to 'Events', admin_events_path
       - if can? :manage, Project

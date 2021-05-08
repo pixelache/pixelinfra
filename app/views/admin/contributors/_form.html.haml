@@ -1,0 +1,84 @@
+= semantic_nested_form_for [:admin, @contributor], :html => {:"data-abide" => '', :class => "custom", :multipart => true} do |f|
+  .row
+    .small-6.columns= f.input :name, :input_html => {:required => ''}
+  .row
+    .small-6.columns= f.input :alphabetical_name, :input_html => {:required => ''}
+
+  .row
+    .small-6.columns= f.input :website, :input_html => {:required => ''}    
+  .row
+    .small-12.columns
+      %b Biography
+      = f.cktext_area :bio
+  .row
+    .small-6.columns
+      - if f.object.image?
+        = image_tag f.object.image.url
+      = f.input :image
+  -# = f.semantic_fields_for :festivals do |ff|
+  .row
+    .small-6.columns
+      %h5 Participated in any festivals?
+      = f.input :festivals, :label => 'Enter festivals this person or organisation was part of',  :hint => 'Make sure you select the correct festivals!'
+  .row
+    .small-6.columns
+      %h5 Which festival themes?
+      = f.input :festivalthemes, member_label: :name_and_festival, :label => 'If you are tagging a contributor to specific festival themes, do so here.', collection: f.object.festival_ids.empty? ? [] : Festivaltheme.where(["festival_id in (?)", f.object.festival_ids])
+
+  .row
+    .small-6.columns
+      %h5 Participated in projects?
+      = f.input :projects, :label => 'Enter projects this person or organisation was part of',  :hint => 'Make sure you select the correct projects!' 
+
+  .row
+    .small-6.columns
+      %h5 Participated in events?
+      = f.input :events, :label => 'Enter events this person or organisation was part of',  :hint => 'Make sure you select the correct events!'
+
+  .row
+    .small-6.columns
+      %h5 Participated in residencies?
+      = f.input :residencies, :label => 'Enter residencies this person or organisation was part of',  :hint => 'Make sure you select the correct residencies!'                 
+    -# .small-6.columns= f.input :festival_ids, :as => :hidden
+  -# = f.link_to_add 'Add festival/s', :festivals
+  .row
+    .small-6.columns= f.input :parent, label: 'Is this contributor part of/a member of another contributor?'
+  .row
+    .small-6.columns= f.input :is_member, label: 'Is this contributor a member of Pixelache?'
+  .row
+    .small-6.columns= f.input :user, label: 'Does this contributor have a user account on the Pixelache CMS?', collection: User.all.order("lower(name)"), member_label: :user_and_email
+  .row
+    .small-2.columns= f.submit 'Save', :class => [:button, :round]
+= content_for :jquery do
+  :plain
+
+    $('select#contributor_residency_ids').chosen();     
+    $('select#contributor_project_ids').chosen();     
+    $('select#contributor_event_ids').chosen();           
+    $('select#contributor_festivaltheme_ids').chosen();       
+    $('select#contributor_festival_ids').chosen().change(function(e) {
+      var selectedFestivalIds = []
+      $("select#contributor_festival_ids option:selected").each(function () {
+        var $this = $(this);
+        if ($this.length) {
+          selectedFestivalIds.push($this.val());
+        }
+      });
+      var selectedIds = selectedFestivalIds.join(',')
+      $.getJSON("/festivals/themes_by_id.json?festival_ids="+selectedIds, function(data) {
+        var saveFirst = []
+        $("select#contributor_festivaltheme_ids option:selected").each(function () {
+          var $this = $(this);
+          if ($this.length) {
+            saveFirst.push(parseInt($this.val()));
+          }
+        });
+        $("select#contributor_festivaltheme_ids option").remove();
+        console.log(saveFirst);
+        for (loop=0; loop < data.length; loop++) {
+          $("select#contributor_festivaltheme_ids").append('<option value="'+ data[loop].id +'"' + (saveFirst.includes(data[loop].id) ? ' selected' : '') + '>'+ data[loop].name_and_festival +'</option>')
+        }
+        $('#contributor_festivaltheme_ids').trigger("chosen:updated");    
+      })
+      
+    })
