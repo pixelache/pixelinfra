@@ -148,10 +148,8 @@ GEM
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sassc-rails (>= 2.1.2)
-    ckeditor (4.3.0)
+    ckeditor (5.1.0)
       orm_adapter (~> 0.5.0)
-      terrapin
-    climate_control (0.2.0)
     closure_tree (7.2.0)
       activerecord (>= 4.2.10)
       with_advisory_lock (>= 4.0.0)
@@ -511,8 +509,6 @@ GEM
     ssrf_filter (1.0.7)
     tag_helper (0.5.0)
     temple (0.8.2)
-    terrapin (0.6.0)
-      climate_control (>= 0.0.3, < 1.0)
     textacular (5.4.0)
       activerecord (>= 5.0, < 6.2)
     thor (1.1.0)
@@ -584,7 +580,7 @@ DEPENDENCIES
   carrierwave
   carrierwave-aws
   chosen-rails
-  ckeditor (= 4.3.0)
+  ckeditor
   closure_tree
   coffee-rails
   countries

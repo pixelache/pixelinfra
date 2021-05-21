@@ -1,6 +1,18 @@
+
+
+
+
 CKEDITOR.editorConfig = function( config ) {
+    // config.language = 'en';
     config.language = 'en';
+    config.language_list = [ 'en:English'];
     config.uiColor = '#AADC6E';
+    // config.setLang = ('dialog', 'en');
+    // config.setLang = ('lineutils', 'en');
+    // config.setLang = ('widget', 'en');
+    // config.setLang = ('codesnippet', 'en');
+    // config.extraPlugins = 'image2';
+    // config.filebrowserUploadMethod = 'form';
     config.filebrowserBrowseUrl = "/ckeditor/attachment_files";
 
     // The location of an external file browser, that should be launched when "Browse Server" button is pressed in the Flash dialog.
@@ -16,11 +28,13 @@ CKEDITOR.editorConfig = function( config ) {
     config.filebrowserImageBrowseUrl = "/ckeditor/pictures";
 
     // The location of a script that handles file uploads in the Image dialog.
-    config.filebrowserImageUploadUrl = "/ckeditor/pictures";
+    config.filebrowserImageUploadUrl = "/ckeditor/pictures?command=QuickUpload&type=Images";
 
     // The location of a script that handles file uploads.
     config.filebrowserUploadUrl = "/ckeditor/attachment_files";
-
+    config.stylesSet = [
+      { name: 'Video embed', element: 'div',  attributes: {'class': 'video-embed'}}
+    ];
     // Rails CSRF token
     config.filebrowserParams = function(){
       var csrf_token, csrf_param, meta,
@@ -48,7 +62,7 @@ CKEDITOR.editorConfig = function( config ) {
 
       return params;
     };
-    
+
     config.allowedContent = {
         $1: {
             // Use the ability to specify elements as an object.
@@ -58,5 +72,7 @@ CKEDITOR.editorConfig = function( config ) {
             classes: true
         }
     };
+    // config.stylesSet = 'my_styles';
     config.disallowedContent = 'script; span; *[on*]; font; *{*}';
 };
+

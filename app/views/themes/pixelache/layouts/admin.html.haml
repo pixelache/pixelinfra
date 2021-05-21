@@ -4,10 +4,12 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
     = display_meta_tags site: "Pixelache CMS"
     %meta{:content => content_for?(:description) ? yield(:description) : "Pixelinfra", :name => "description"}
+    = javascript_include_tag Ckeditor.cdn_url
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
     = javascript_include_tag "pixelache/javascripts/application"
     = javascript_include_tag "pixelache/javascripts/cms"
+
     = stylesheet_link_tag "cms", :media => "all"
     = stylesheet_link_tag "print", media: :print
     = csrf_meta_tags

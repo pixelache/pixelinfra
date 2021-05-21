@@ -17,7 +17,6 @@
 //= require jquery-ui/widgets/sortable
 //= require jquery_nested_form
 //= require foundation
-//= require ckeditor/init
 //= require slick
 //= require lazybox
 //= require_tree .
