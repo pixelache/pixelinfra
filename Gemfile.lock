@@ -108,6 +108,7 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     bcrypt (3.1.16)
+    bcrypt_pbkdf (1.1.0)
     bindex (0.8.1)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
@@ -180,6 +181,7 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    ed25519 (1.2.4)
     equalizer (0.0.11)
     erubi (1.10.0)
     erubis (2.7.0)
@@ -568,6 +570,7 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on
   auto_html
+  bcrypt_pbkdf
   better_errors!
   binding_of_caller
   bulma-rails
@@ -586,6 +589,7 @@ DEPENDENCIES
   countries
   country_select
   devise
+  ed25519
   etherpad-lite
   event-calendar
   fast_jsonapi
