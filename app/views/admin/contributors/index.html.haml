@@ -47,10 +47,27 @@
         - @contributors.each do |att|
           %tr
             %td= att.id.to_s
+            %td= att.name
             %td
-              = att.name
-             
-            %td= att.activities_list.join(', ')
+              - unless att.festivals.empty?
+                %b Festivals:
+                = att.festivals.map(&:name).join(', ')
+                %br/
+              - unless att.festivalthemes.empty?
+                %b Festival themes:
+                = att.festivalthemes.map(&:name_and_festival).join(', ')
+                %br/
+              - unless att.projects.empty?
+                %b Projects
+                = att.projects.map(&:name).join(', ')                
+                %br/
+              - unless att.events.empty?
+                %b Events
+                = att.events.map(&:name).join(', ')
+                %br/
+              - unless att.residencies.empty?
+                %b Residencies
+                = att.residences.map(&:name).join(', ')                  
             %td
               - if can? :edit, att
                 = link_to 'Edit', edit_admin_contributor_path(att),  :class => [:button, :round, :tiny]
