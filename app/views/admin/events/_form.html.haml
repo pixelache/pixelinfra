@@ -160,7 +160,8 @@
     .small-12.columns= f.input :add_to_newsfeed, :as => :boolean, :label => "Add to newsfeed on Pixelache frontpage?"
   .row.expanded
     .small-12.columns= f.input :published, :hint => 'Tick this box to publish this on the site, or else the public will never see it'
-    
+  .row.expanded
+    .small-2.columns= f.input :stream_url, label: 'URL to online stream:', hint: 'If this is a streaming event, enter the URL to the Twitch (or whatever) stream here'
     
   .row.expanded
     .small-7.columns= f.submit "Save", :class => [:button, :small, :round]
