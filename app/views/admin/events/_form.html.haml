@@ -5,7 +5,7 @@
 
   .row.expanded
     .small-3.columns
-      = f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false, :label => ' Which website should this appear on?'
+      = f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability).order(:id),  :include_blank => false, :label => ' Which website should this appear on?'
   .row.expanded
     .small-4.columns
       = f.input :festival, :label => 'Part of a festival?', collection: Festival.all.order(start_at: :desc)

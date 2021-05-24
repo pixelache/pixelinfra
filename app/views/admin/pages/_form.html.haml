@@ -1,7 +1,7 @@
 
 .row.expanded
   %label Which site:
-  .small-6.columns= f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability),  :include_blank => false
+  .small-6.columns= f.input :subsite,  :as => :select, :collection => Subsite.accessible_by(current_ability).order(:id),  :include_blank => false
 .row.expanded
   %ul.tabs#languages{"data-tabs" => ""}
     - I18n.available_locales.each_with_index do |locale, i|
