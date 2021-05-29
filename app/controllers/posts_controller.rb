@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   def index
     if params[:festival_id]
       @festival = Festival.friendly.find(params[:festival_id])
-      @posts = Post.by_festival(@festival).published.order('published_at DESC').page(params[:page]).per(12)
+      @posts = Post.by_festival(@festival).published.order('published_at DESC').page(params[:page]).per(4)
       
       set_meta_tags title: @festival.name + " " + t(:posts)
       respond_to do |format|

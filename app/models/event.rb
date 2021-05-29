@@ -10,8 +10,10 @@ class Event < ActiveRecord::Base
   has_many :posts
   has_many :flickrsets
   #belongs_to :festivaltheme
-  has_many :festivaltheme_relations, as: :relation, foreign_key: :relation_id
+  has_many :festivaltheme_relations, as: :relation, foreign_key: :relation_id, dependent: :destroy
   has_many :festivalthemes,  through: :festivaltheme_relations
+   has_many :contributor_relations, as: :relation, foreign_key: :relation_id, dependent: :destroy
+  has_many :contributors,  through: :contributor_relations
   
   has_many :frontitems, as: :item, :dependent => :destroy
   belongs_to :residency
