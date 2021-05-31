@@ -9,9 +9,12 @@
     %link{:href => "https://fonts.googleapis.com/css?family=Open+Sans:400,300,700", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/feed", :rel => "alternate", :title => "RSS", :type => "application/rss+xml"}/
     -#= stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag Ckeditor.cdn_url
+
     = stylesheet_link_tag 'pixelache/stylesheets/application', :media => :screen
     -#= stylesheet_link_tag 'pixelache/stylesheets/mobile', :media => :screen
     = javascript_include_tag "application"    
+ 
     = javascript_include_tag "pixelache/javascripts/application"
 
     - if controller.controller_name == 'events' || controller.controller_name == 'home'
