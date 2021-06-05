@@ -71,6 +71,15 @@ dl.tabs {
 }
 
 form {
+  &.contributor {
+    .fields {
+      border-bottom: none;
+      .attachment {
+        border: 1px dotted #333;
+        padding: 2rem;
+      }
+    }
+  }
 
   .fields {
     float: left;

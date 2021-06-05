@@ -67,7 +67,9 @@
                 %br/
               - unless att.residencies.empty?
                 %b Residencies
-                = att.residences.map(&:name).join(', ')                  
+                = att.residences.map(&:name).join(', ')       
+              - unless att.attachments.empty?
+                %em= pluralize(att.attachments.count, 'attachment')           
             %td
               - if can? :edit, att
                 = link_to 'Edit', edit_admin_contributor_path(att),  :class => [:button, :round, :tiny]

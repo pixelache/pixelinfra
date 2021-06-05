@@ -25,6 +25,7 @@ class Admin::ContributorsController < Admin::BaseController
       redirect_to admin_contributors_path
     else
       flash[:error] = 'Error saving contributor.'
+      render template: 'admin/contributors/new'
     end
   end
   
@@ -35,6 +36,7 @@ class Admin::ContributorsController < Admin::BaseController
       redirect_to admin_contributors_path
     else
       flash[:error] = 'Error updating contributor.'
+      render template: 'admin/contributors/edit'
     end
  
   end
@@ -60,7 +62,7 @@ class Admin::ContributorsController < Admin::BaseController
   protected
   
   def contributor_params
-    params.require(:contributor).permit(:name, :slug, :parent_id, :image, :alphabetical_name, :bio, :website, :is_member, :user_id, project_ids: [], event_ids: [], festival_ids: [], festivaltheme_ids: [], residency_ids: [])
+    params.require(:contributor).permit(:name, :slug, :parent_id, :image, :alphabetical_name, :bio, :website, :is_member, :user_id, attachments_attributes: [:id, :attachedfile, :event_id, :_destroy],project_ids: [], event_ids: [], festival_ids: [], festivaltheme_ids: [], residency_ids: [])
   end
     
 end 

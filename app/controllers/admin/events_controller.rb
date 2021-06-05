@@ -74,7 +74,7 @@ class Admin::EventsController < Admin::BaseController
   
   def event_params
     params.require(:event).permit(:subsite_id, :place_id, :start_at, :end_at, :step_id, :published, :image, :image_width, :place_name, :image_height, :image_content_type, :image_size, :residency_id, :facebook_link, :cost, :cost_alternate, :cost_alternate_reason, :project_id, :festival_id, :facilitator_name, :facilitator_url, :facilitator_organisation, :user_id, :add_to_newsfeed, :user_id, :resources_needed, :protocol, :stream_url,
-      :facilitator_organisation_url, :tag_list, :technology_list, :location_tbd, :tag_list,
+      :facilitator_organisation_url, :tag_list, :technology_list, :location_tbd, :tag_list, :archive_by_contributor,
       :registration_required, :email_registrations_to, :question_description, :external_registration,
       :question_creators, :question_motivation, :require_approval, 
       :hide_registrants, :show_guests_to_public, :max_attendees,

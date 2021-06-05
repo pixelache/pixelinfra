@@ -6,6 +6,7 @@ class Contributor < ActiveRecord::Base
   friendly_id :name, :use => [ :slugged, :finders ] # :history]
 
   belongs_to :user, optional: true
+  has_many :attachments, as: :item, dependent: :destroy
   has_many :festivaltheme_relations, as: :relation, foreign_key: :relation_id, dependent: :destroy
   has_many :festivalthemes,  through: :festivaltheme_relations
   has_many :contributor_relations, dependent: :destroy
@@ -18,6 +19,7 @@ class Contributor < ActiveRecord::Base
   accepts_nested_attributes_for :residencies,  allow_destroy: true
   accepts_nested_attributes_for :events,  allow_destroy: true
   accepts_nested_attributes_for :festivalthemes,  allow_destroy: true
+  accepts_nested_attributes_for :attachments, :reject_if => proc {|x| x['attachedfile'].blank? }, :allow_destroy => true
 
   validates :name, presence: true, uniqueness: true
   validates :alphabetical_name, presence: true
