@@ -46,6 +46,10 @@ class EventsController < ApplicationController
         if !request.host.split(/\./).include?(@festival.subsite.subdomain)
           redirect_to subdomain: @festival.subsite.subdomain unless request.xhr?
         end
+      elsif @festival.redirect_to
+        if @festival.redirect_to =~ /\$$/
+          redirect_to @festival.redirect_to.gsub(/\$$/,'') + "/events/#{@event.slug}"
+        end
       else
         if @event.subsite != @site
           if @event.subsite.subdomain =~ /\.\w*$/
