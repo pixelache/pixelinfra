@@ -81,7 +81,7 @@ class FestivalsController < ApplicationController
   def show
     @festival = Festival.friendly.find(params[:id])
     if !@festival.redirect_to.blank?
-      redirect_to "http://#{@festival.redirect_to.gsub(/\$$/, '')}"
+      redirect_to "http://#{@festival.redirect_to.gsub(/\$$/, '').gsub(/^https\:\/\//, '')}"
     elsif @festival.subsite
       redirect_to "http://#{@festival.subsite.subdomain}.pixelache.ac"
     end
