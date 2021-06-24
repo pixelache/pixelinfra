@@ -21,11 +21,11 @@ class Video < ActiveRecord::Base
       self.hostid = in_url.match(/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/)[7] || 'error'
       self.videohost_id = 2
       # v = client.video_by(hostid)
-      v = Yt::Video.new id: hostid
-      self.title = v.title
-      self.description = v.description
-      self.remote_thumbnail_url = v.thumbnail_url rescue nil
-      self.duration = v.duration
+      # v = Yt::Video.new id: hostid
+      # self.title = v.title
+      # self.description = v.description
+      # self.remote_thumbnail_url = v.thumbnail_url rescue nil
+      # self.duration = v.duration
 
     elsif in_url =~ /vimeo/
       self.hostid = in_url.match(/^\D*\/(\d*).*/)[1] || 'error'

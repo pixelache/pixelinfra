@@ -104,9 +104,12 @@
             .small-8.columns
               - if !ff.object.new_record?
                 - unless ff.object.new_record?
-                  - unless ff.object.thumbnail.blank?
+                  - if ff.object.thumbnail.blank?
+                    %p= ff.object.hostid
+                  - else
                     %p= image_tag ff.object.thumbnail.url(:thumb)
                     %p= ff.object.title
+                    
                     = ff.input :in_url, label: t(:url_to_video), input_html: { value: ff.object.url }
               - else
                 = ff.input :in_url, label: t(:url_to_video)
@@ -163,9 +166,37 @@
   .row.expanded
     .small-2.columns= f.input :stream_url, label: 'URL to online stream:', hint: 'If this is a streaming event, enter the URL to the Twitch (or whatever) stream here'
   .row.expanded
-    .small-2.columns= f.input :archive_by_contributor, label: 'Archive by contributor?', hint: 'If ticked, archive material/attachments can be subdivided by contributor and uploaded not here, but through the contributor page.'
+    .small-6.columns= f.input :archive_by_contributor, label: 'Archive by contributor?', hint: 'If ticked, archive material/attachments can be subdivided by contributor and uploaded not below, but through the contributor page.'
   .row.expanded
-    .small-7.columns= f.submit "Save", :class => [:button, :small, :round]
+    .small-12.columns
+      %strong Attachments
+      %p (If 'archive by contributor' is ticked above, do not upload attachments here for the event but on the specific contributor CMS form)
+      = f.fields_for :attachments do |ff|
+        
+        .row.expanded.attachment
+          .small-8.columns
+            - if !ff.object.new_record?
+              - unless ff.object.attachedfile.blank? 
+                - if ff.object.attachedfile_content_type =~ /^image/
+                  = image_tag ff.object.attachedfile.url
+                - elsif ff.object.attachedfile_content_type =~ /^audio/
+                  %audio{controls: ''}
+                    %source{src: ff.object.attachedfile.url, type: ff.object.attachedfile_content_type}
+                - else
+                  = ff.object.attachedfile
+
+                = ff.input :attachedfile, :label => t(:replace_file)
+            - else
+
+              = ff.input :attachedfile, :label => t(:choose_file)
+            = ff.link_to_remove t(:remove_attachment), :class => [:button, :round, :alert, :tiny]
+    .row.expanded
+      .small-6.columns= f.link_to_add 'Add an attachment or archival item...', :attachments, :class => [:button, :round]    
+  .row.expanded
+    
+    .small-7.columns
+      %hr
+      = f.submit "Save", :class => [:button, :large, :round]
 :javascript
   $('select#event_festivaltheme_ids').chosen();
  

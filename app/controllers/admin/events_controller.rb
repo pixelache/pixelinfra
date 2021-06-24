@@ -80,6 +80,7 @@ class Admin::EventsController < Admin::BaseController
       :hide_registrants, :show_guests_to_public, :max_attendees,
       photos_attributes: [:id, :filename, :filename_content_type, :title, :credit, :_destroy],
       videos_attributes: [:id, :in_url, :_destroy],
+      attachments_attributes: [:id, :attachedfile, :event_id, :_destroy],
       festivaltheme_ids: [], 
       translations_attributes: [:name, :description, :notes, :id, :locale, :_destroy])
   end
