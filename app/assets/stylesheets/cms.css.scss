@@ -51,6 +51,12 @@ header {
   
 }
 
+section.event_form_section {
+  padding: 3rem 0;
+  &.even {
+    background-color: #DEEEEF;
+  }
+}
 dl.tabs {
   
   dd {
@@ -87,7 +93,11 @@ form {
     img { 
       float: left;
     }
+
     border-bottom: 1px solid $secondary-color;
+    &:last-of-type  {
+      border-bottom: none;
+    }
   }
 
   li {
@@ -278,7 +288,13 @@ td.stats {
 td .date {
   font-size: 0.75rem;
 }
-
+.chosen-container {
+  font-size: 20px !important;
+  margin-bottom: 1.5rem;
+}
+.chosen-container-multi .chosen-choices {
+  min-height: 40px !important;
+}
 .chosen-choices {
   li.search-field {
     input[type=text] {
@@ -307,6 +323,11 @@ table.project_proposals {
   }
 }
 
+.tabs-panel {
+  .fields {
+    width: 100%;
+  }
+}
 .project_proposal {
   color: #333;
   font-size: 0.9rem;
