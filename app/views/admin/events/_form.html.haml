@@ -163,7 +163,11 @@
                 - if !ff.object.new_record?
                   - unless ff.object.new_record?
                     - if ff.object.thumbnail.blank?
-                      %p= ff.object.hostid
+
+                      %p
+                        = ff.object.videohost_id == 2 ? "YouTube" : (ff.object.videohost_id == 1 ? "Vimeo" : 'unknown video host')
+                        = " : "
+                        = ff.object.hostid
                     - else
                       %p= image_tag ff.object.thumbnail.url(:thumb)
                       %p= ff.object.title
@@ -173,7 +177,7 @@
                   = ff.input :in_url, label: t(:url_to_video)
               = ff.link_to_remove t(:remove_video), class: [:button, :round, :alert, :tiny]
             = f.link_to_add 'Add a video....', :videos, class: [:button, :round, :tiny]
-          .tabs-panel#videos
+          .tabs-panel#attachments
             %h4 Attachments
             = f.input :archive_by_contributor, label: 'Archive by contributor?', hint: 'If ticked, archive material/attachments can be subdivided by contributor and uploaded not below, but through the contributor page.'
             %p (If 'archive by contributor' is ticked above, do not upload attachments here for the event but on the specific contributor CMS form)
