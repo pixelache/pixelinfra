@@ -243,7 +243,7 @@
                 - @videos.each do |v|
                   .row.expanded
                     .small-3.columns
-                      = link_to v, target: :_blank do
+                      = link_to v.url, target: :_blank do
                         .archive_image_box{style: "background-image: url(#{v.thumbnail.url(:thumb).gsub(/development/, 'production')});", onmouseover: '$(this).find(".blue").css("display", "block");', onmouseout: '$(this).find(".blue").css("display", "none");'}
                           .blue
                             - unless v.video_date.nil?
