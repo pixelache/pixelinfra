@@ -18,7 +18,7 @@ class ExperiencesController < ApplicationController
   end
   
   def index
-    @festival = Festival.find(params[:id])
+    @festival = Festival.friendly.find(params[:id])
     @festivaltheme = @festival.festivalthemes.find(params[:theme_id])
     @experiences = @festivaltheme.experiences.approved.order(created_at: :desc)
   end
