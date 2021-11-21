@@ -13,6 +13,8 @@ class Etherpad < ActiveRecord::Base
   scope :by_meeting, -> meeting { joins(:meetings).where(["meetings.id = ?", meeting]) }  
   scope :by_documenttype, -> documenttype { where(documenttype_id: documenttype) }
   scope :not_private, -> { where("private_pad is not true")}
+  scope :archived, ->(val) { where(archived: val) }
+  
   
   attr_accessor :event_tokens
   

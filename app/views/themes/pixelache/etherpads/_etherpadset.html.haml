@@ -1,0 +1,12 @@
+= paginate etherpads, param_name: page_param
+%table.table.table-condensed.etherpads
+  %thead
+    %tr
+      %th= sortable_column "Name", :column => "name"
+      %th Related activities
+      %th= sortable_column "Last edited", :column => "last_edited"
+      - if user_signed_in?
+        %th.actions
+  %tbody
+    - etherpads.each do |pad|
+      = render :partial => 'etherpad', :locals => {:etherpad => pad}

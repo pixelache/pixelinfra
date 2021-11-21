@@ -18,7 +18,8 @@ class EtherpadsController < ApplicationController
         "last_edited DESC"
       end
     end
-    @etherpads = apply_scopes(Etherpad).not_private.order(order).page(params[:page]).per(100) #"etherpads.last_edited desc, lower(etherpads.name)")
+    @archived = apply_scopes(Etherpad).not_private.archived(true).order(order).page(params[:archive_page]).per(100) 
+    @etherpads = apply_scopes(Etherpad).not_private.archived(false).order(order).page(params[:page]).per(100) #"etherpads.last_edited desc, lower(etherpads.name)")
     @etherpad_events = @etherpads.map(&:events).flatten.compact
   end
 end
