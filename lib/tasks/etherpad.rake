@@ -3,7 +3,7 @@ require 'etherpad-lite'
 def survey_all_pads(server, api_key, archive = nil)
   existing_in_database = Etherpad.all.map(&:read_only_id)
   begin
-    ether = EtherpadLite.connect(server, api_key)
+    ether = EtherpadLite.connect(server, api_key, '1.2.15')
     ether.pads.each do |pad|
       # TODO: this is very inefficient, refactor later
       if existing_in_database.include?(pad.read_only_id)
