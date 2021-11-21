@@ -1,6 +1,6 @@
 %tr
   %td
-    = link_to etherpad.name, 'http://pad.pixelache.ac/p/' + etherpad.name, :target => :_blank
+    = link_to etherpad.name, etherpad.public_url, :target => :_blank
   
     - unless etherpad.subsites.empty?
       %div

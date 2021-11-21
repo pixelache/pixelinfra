@@ -23,5 +23,9 @@ class Etherpad < ActiveRecord::Base
   def event_tokens=(ids)
     self.event_ids = ids.split(",")
   end
+
+  def public_url
+    "https://pad#{archived ? '.archive' : ''}.pixelache.ac/p/#{name}"
+  end
   
 end

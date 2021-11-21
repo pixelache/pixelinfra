@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200402124728) do
+ActiveRecord::Schema.define(version: 2021_11_21_091610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20200402124728) do
     t.datetime "updated_at"
     t.integer "documenttype_id"
     t.integer "year_of_publication"
+    t.integer "event_id"
     t.index ["documenttype_id"], name: "index_attachments_on_documenttype_id"
     t.index ["item_type", "item_id"], name: "index_attachments_on_item_type_and_item_id"
   end
@@ -151,6 +152,43 @@ ActiveRecord::Schema.define(version: 20200402124728) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "contributor_hierarchies", id: false, force: :cascade do |t|
+    t.integer "ancestor_id", null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations", null: false
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "contributor_anc_desc_idx", unique: true
+    t.index ["descendant_id"], name: "contributor_desc_idx"
+  end
+
+  create_table "contributor_relations", force: :cascade do |t|
+    t.bigint "contributor_id", null: false
+    t.string "relation_type", null: false
+    t.bigint "relation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contributor_id"], name: "index_contributor_relations_on_contributor_id"
+    t.index ["relation_type", "relation_id"], name: "index_contributor_relations_on_relation"
+  end
+
+  create_table "contributors", force: :cascade do |t|
+    t.string "name"
+    t.string "alphabetical_name"
+    t.string "website"
+    t.text "bio"
+    t.string "image"
+    t.string "image_content_type"
+    t.bigint "image_file_size"
+    t.integer "image_width"
+    t.integer "image_height"
+    t.bigint "user_id"
+    t.integer "parent_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_member", default: false, null: false
+    t.index ["user_id"], name: "index_contributors_on_user_id"
+  end
+
   create_table "document_translations", id: :serial, force: :cascade do |t|
     t.integer "document_id", null: false
     t.string "locale", null: false
@@ -204,6 +242,7 @@ ActiveRecord::Schema.define(version: 20200402124728) do
     t.datetime "updated_at"
     t.boolean "private_pad"
     t.integer "documenttype_id"
+    t.boolean "archived", default: false, null: false
   end
 
   create_table "etherpads_events", id: false, force: :cascade do |t|
@@ -289,6 +328,8 @@ ActiveRecord::Schema.define(version: 20200402124728) do
     t.boolean "show_guests_to_public"
     t.boolean "location_tbd"
     t.string "external_registration"
+    t.string "stream_url"
+    t.boolean "archive_by_contributor", default: false, null: false
     t.index ["place_id"], name: "index_events_on_place_id"
     t.index ["subsite_id"], name: "index_events_on_subsite_id"
   end
@@ -560,7 +601,7 @@ ActiveRecord::Schema.define(version: 20200402124728) do
     t.string "name", limit: 255
     t.string "website", limit: 255
     t.string "city", limit: 255
-    t.string "country", limit: 255
+    t.string "country", limit: 2
     t.string "slug", limit: 255
     t.string "logo", limit: 255
     t.string "logo_content_type", limit: 255
@@ -724,7 +765,7 @@ ActiveRecord::Schema.define(version: 20200402124728) do
     t.string "address1", limit: 255
     t.string "address2", limit: 255
     t.string "city", limit: 255
-    t.string "country", limit: 255
+    t.string "country", limit: 2
     t.string "postcode", limit: 255
     t.decimal "latitude", precision: 10, scale: 6
     t.decimal "longitude", precision: 10, scale: 6
@@ -870,7 +911,7 @@ ActiveRecord::Schema.define(version: 20200402124728) do
 
   create_table "residencies", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
-    t.string "country", limit: 255
+    t.string "country", limit: 2
     t.date "start_at"
     t.date "end_at"
     t.boolean "is_micro"
@@ -985,8 +1026,6 @@ ActiveRecord::Schema.define(version: 20200402124728) do
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
     t.string "email", limit: 255, default: "", null: false
-    t.string "provider", limit: 255
-    t.string "uid", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "encrypted_password", limit: 255, default: "", null: false
@@ -1005,8 +1044,17 @@ ActiveRecord::Schema.define(version: 20200402124728) do
     t.text "bio"
     t.string "twitter_name"
     t.text "feed_urls"
+    t.string "provider", default: "email", null: false
+    t.string "uid", default: "", null: false
+    t.text "tokens"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -1056,6 +1104,8 @@ ActiveRecord::Schema.define(version: 20200402124728) do
     t.index ["project_id"], name: "index_videos_on_project_id"
   end
 
+  add_foreign_key "contributor_relations", "contributors"
+  add_foreign_key "contributors", "users"
   add_foreign_key "experiences", "festivalthemes"
   add_foreign_key "experiences", "places"
   add_foreign_key "feedcaches", "users"
