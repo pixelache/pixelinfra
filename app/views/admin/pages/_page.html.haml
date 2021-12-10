@@ -18,6 +18,7 @@
   %td= l (page.child_updated_at.blank? ? page.updated_at : page.child_updated_at).to_date, :format => :long
   %td= page.published == true ? 'yes' : 'no'
   %td= page.subsite.name
+  %td= page.slug
   %td.actions
     = link_to t(:view), page_path(page.id), :target => :_blank, :class => [:button, :tiny, :round]
     - if can? :edit, page

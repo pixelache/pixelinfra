@@ -22,9 +22,12 @@
       %option{:value => "projects", :selected => (params[:projects] == "true" ? :selected : false) } Project pages
       %option{:value => "unlinked", :selected => (params[:unlinked] == "true" ? :selected : false) } Stand alone pages
   .large-6.columns
-    .filter_title Find by text:
+    .filter_title Find by name:
     = form_tag '/admin/pages', :method => :get do
       = autocomplete_field_tag 'by_name', params[:by_name], autocomplete_page_name_admin_pages_path
+    .filter_title Find by slug:
+    = form_tag '/admin/pages', :method => :get do
+      = autocomplete_field_tag 'by_slug', params[:by_slug], autocomplete_page_slug_admin_pages_path
 
 
   :javascript
@@ -61,6 +64,7 @@
           %th= sortable_column "Updated"
           %th= sortable_column "Published"
           %th= sortable_column "Site"
+          %th= sortable_column "Slug"
           %th{:colspan => 2}
       %tbody
         - @pages.each do |page|

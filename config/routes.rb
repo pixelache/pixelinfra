@@ -46,6 +46,7 @@ Pixelinfra::Application.routes.draw do
       post :sort, :on => :collection
       get :autocomplete_post_title, :on => :collection
       get :autocomplete_page_name, :on => :collection
+   
       get :autocomplete_event_name, on: :collection
       get :autocomplete_project_name, on: :collection
       get :autocomplete_festival_name, on: :collection
@@ -69,7 +70,8 @@ Pixelinfra::Application.routes.draw do
       get :autocomplete_event_name, :on => :collection
       get :autocomplete_festival_name, :on => :collection
       get :autocomplete_project_name, :on => :collection
-      get :autocomplete_page_name, :on => :collection      
+      get :autocomplete_page_name, :on => :collection
+      get :autocomplete_page_slug, :on => :collection
       post :sort, :on => :collection
       member do
         get :order

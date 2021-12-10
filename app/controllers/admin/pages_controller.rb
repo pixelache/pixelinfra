@@ -8,10 +8,12 @@ class Admin::PagesController < Admin::BaseController
   has_scope :published
   has_scope :unlinked, type: :boolean
   has_scope :by_name
+  has_scope :by_slug
 
   autocomplete :project, :name, :extra_data => [:name], :display_value => :name
   autocomplete :festival, :name, :extra_data => [:name], :display_value => :name
   autocomplete :page, :name, :extra_data => [:name], :display_value => :name
+  autocomplete :page, :slug, :extra_data => [:slug], :display_value => :slug
   
   skip_load_and_authorize_resource
   load_and_authorize_resource
@@ -49,11 +51,13 @@ class Admin::PagesController < Admin::BaseController
         "published #{direction}, updated_at #{direction}"
       when "site"
         "subsites.name #{direction}"
+      when "slug"
+        "slug #{direction}"
       else
         "child_updated_at DESC"
       end
     end
-    if params[:by_name]
+    if params[:by_name] || params[:by_slug]
       @pages = apply_scopes(Page).includes(:subsite).order(order).page(params[:page]).per(20)
     else
       @pages = apply_scopes(Page).order(order).roots.includes(:subsite).page(params[:page]).per(20)
