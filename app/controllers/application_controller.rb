@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
           end
         end
       end
-    
+      die
       if url_parts.size > 1
         case item.class.to_s
         when "Festival"
