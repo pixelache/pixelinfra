@@ -1,0 +1,5 @@
+.row.expanded
+  .columns.small-12
+    %h1
+      = "Update '#{@wikipage.title.gsub('_', ' ')}'"
+    = render :partial => 'admin/wikirevisions/new'

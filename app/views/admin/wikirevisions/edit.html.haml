@@ -1,0 +1,8 @@
+%h1.heading
+  = "Editing wikirevision %s" % @wikirevision.id
+  
+= semantic_nested_form_for(@wikirevision, :html => {:multipart => true}) do |form|
+  = render 'form', :form => form
+  = form.actions do
+    = form.submit 'Update'
+    

@@ -1,0 +1,48 @@
+#wiki_container
+  .wiki.row.expanded
+    .wiki_header.columns
+      = link_to 'Pixelache wiki:', '/admin'
+      %span.wiki_page_title=  @wikipage.title.gsub('_', ' ')
+    .wiki_content.columns{:class => @wikipage.wikirevisions.last.wikifiles.empty? ? :thirteen : :nine}
+      %p= raw Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(@wikipage.wikirevisions.last.contents_linked)
+
+  - unless @wikipage.wikirevisions.last.wikifiles.empty?
+    .files.four.columns.omega
+      %fieldset
+        %legend files attached to this wiki page
+        %ul.wikifiles
+          - @wikipage.wikirevisions.last.wikifiles.each do |wikifile|
+            %li.file
+              - if ["image/jpeg", "image/gif", "image/png", "image/jpg", "image/pjpeg"].include?(wikifile.attachment_content_type)
+                = image_tag wikifile.attachment.url
+              .column.description= wikifile.description
+              .column.metadata
+                = "(" + wikifile.attachment_file_size.to_s + " bytes)"
+              %p= link_to wikifile.attachment.identifier, wikifile.attachment.url
+              .timestamp
+                = raw "uploaded #{wikifile.created_at.strftime("%d %B %H:%M")}<br /> (#{time_ago_in_words(wikifile.created_at)} ago)"
+   
+  
+  .wikimetadata.row.expanded
+    .columns.large-1= image_tag @wikipage.wikirevisions.last.user.avatar.url(:thumb), class: :wikieditor
+    .columns.large-11
+      last edited by
+      = link_to @wikipage.wikirevisions.last.user.name, "/member/#{@wikipage.wikirevisions.last.user.slug}", target: :_blank
+      on
+      = l @wikipage.wikirevisions.last.created_at, :format => :short 
+      %span.ago= "(#{time_ago_in_words(@wikipage.wikirevisions.last.created_at)} ago)"
+
+
+  .row.expanded
+    .actions.columns
+      = link_to 'Edit',  {:controller => 'admin/wikipages', :action => 'edit', :id => @wikipage.id}
+      |
+      = link_to 'Front page', '/admin/wiki'
+      |
+      = link_to 'List all pages', admin_wikipages_path
+      |
+      = link_to('Create new wiki page', '/admin/wikipages/new')
+:javascript
+  $(document).ready(function() {
+    jQuery(".best_in_place").best_in_place();
+  })

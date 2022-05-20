@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_21_091610) do
+ActiveRecord::Schema.define(version: 2022_04_14_090705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string "trackable_type"
+    t.bigint "trackable_id"
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.string "key"
+    t.text "parameters"
+    t.string "recipient_type"
+    t.bigint "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
+    t.index ["owner_type", "owner_id"], name: "index_activities_on_owner_type_and_owner_id"
+    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
+    t.index ["recipient_type", "recipient_id"], name: "index_activities_on_recipient_type_and_recipient_id"
+    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+    t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
+  end
 
   create_table "archivalimage_translations", id: :serial, force: :cascade do |t|
     t.integer "archivalimage_id", null: false
@@ -1104,6 +1123,33 @@ ActiveRecord::Schema.define(version: 2021_11_21_091610) do
     t.index ["project_id"], name: "index_videos_on_project_id"
   end
 
+  create_table "wikifiles", force: :cascade do |t|
+    t.bigint "wikirevision_id"
+    t.string "attachment"
+    t.string "attachment_content_type"
+    t.integer "attachment_file_size"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wikirevision_id"], name: "index_wikifiles_on_wikirevision_id"
+  end
+
+  create_table "wikipages", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "wikirevisions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "contents"
+    t.bigint "wikipage_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wikirevisions_on_user_id"
+    t.index ["wikipage_id"], name: "index_wikirevisions_on_wikipage_id"
+  end
+
   add_foreign_key "contributor_relations", "contributors"
   add_foreign_key "contributors", "users"
   add_foreign_key "experiences", "festivalthemes"
@@ -1117,4 +1163,7 @@ ActiveRecord::Schema.define(version: 2021_11_21_091610) do
   add_foreign_key "opencalls", "subsites"
   add_foreign_key "opencallsubmissions", "opencalls"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "wikifiles", "wikirevisions"
+  add_foreign_key "wikirevisions", "users"
+  add_foreign_key "wikirevisions", "wikipages"
 end

@@ -1,0 +1,18 @@
+%h1.heading
+  = "Wikirevisions"
+  
+%p.actions
+  = link_to 'New Wikirevision', new_wikirevision_path
+  
+%table
+  %thead.header
+    %tr
+      %th.user= 'User'
+      %th.contents= 'Contents'
+      %th.page= 'Page'
+      %th.actions= 'Actions'
+  %tbody.items.wikirevisions
+    - @wikirevisions.each do |wikirevision|
+      = render 'item', :wikirevision => wikirevision
+      
+= will_paginate(@wikirevisions)

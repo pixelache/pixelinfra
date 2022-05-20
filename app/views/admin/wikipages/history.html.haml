@@ -1,0 +1,23 @@
+#wiki_container
+  .wiki.row.expanded
+    .wiki_header.columns
+      Pixelache wiki:
+      %h2=  @wikipage.title.gsub('_', ' ')
+      %h3 Edit history:
+
+    %table.table
+      %thead.header
+        %tr
+          %th.title When
+          %th.revisions Who?
+          %th.actions Actions
+      %tbody
+        - @wikipage.wikirevisions.sort_by(&:updated_at).reverse.each do |wr|
+          %tr
+            %td
+              = l wr.updated_at, :format => :short 
+              %span.ago= "(#{time_ago_in_words(wr.updated_at)} ago)"
+            %td
+              = image_tag wr.user.avatar.url(:thumb), class: :wikieditor
+              = link_to wr.user.name, "/member/#{wr.user.slug}", target: :_blank
+            %td= link_to 'See this version', admin_wikirevision_path(wr), class: :button

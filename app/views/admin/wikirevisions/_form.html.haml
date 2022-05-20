@@ -1,0 +1,19 @@
+= form.inputs do
+  = form.input :user_id,  :as => :hidden, :input_html => { :value => current_user.id }
+  = form.input :contents, :label => 'Contents'
+  = form.input :wikipage_id, :as => :hidden, :input_html => { :value => @wikipage.id }
+  / /- @wikipage.wikifiles.build if @wikipage.wikifiles.empty?
+  / = form.semantic_fields_for :wikifiles do |ff|
+  /   - unless ff.object.new_record?
+  /     - unless ff.object.attachment_file_name.blank?
+  /       %p= ff.object.attachment_file_name
+  /   = ff.input :attachment, :label => (ff.object.new_record? ? 'Attach file' : 'Change attachment')
+  /   = ff.input :description, :as => :string, :label => "Description of this attachment, ex. 'the invoice'"
+  /   = ff.link_to_remove "Remove this attachment"
+  / = form.link_to_add 'Add an attachment (PDF or other file for invoice, receipt)', :wikifiles
+    
+  #wikifiles
+    -# - @wikirevision.wikifiles.build if @wikirevision.wikifiles.empty?
+    = form.fields_for :wikifiles do |ff|
+      .wiki_attachment= render :partial => 'admin/wikirevisions/wikifile_fields', :locals => { :ff => ff }
+  .add_link= form.link_to_add "+ Add attachment", :wikifiles

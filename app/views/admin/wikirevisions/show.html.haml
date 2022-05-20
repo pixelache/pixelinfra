@@ -1,0 +1,60 @@
+#wiki_container
+  .wiki.row.expanded
+    .wiki_header.columns
+      = link_to 'Pixelache wiki:', '/admin'
+      %h3=  @wikirevision.wikipage.title.gsub('_', ' ')
+      %em
+        Revision made on
+        = l @wikirevision.updated_at, :format => :short 
+        by
+        = @wikirevision.user.name
+      - if @wikirevision != @wikirevision.wikipage.wikirevisions.sort_by(&:updated_at).last
+        %p
+          %strong
+            There are
+            = pluralize(@wikirevision.wikipage.wikirevisions.where(["updated_at > ?", @wikirevision.updated_at]).count, 'newer revision')
+            to this page.
+          = link_to 'See latest version', admin_wikipage_path(:title => @wikirevision.wikipage.title, :id => @wikirevision.wikipage.id), class: [:button, :small]
+    .wiki_content.columns{:class => @wikirevision.wikifiles.empty? ? :thirteen : :nine}
+      %p= raw Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(@wikirevision.contents_linked)
+
+  - unless @wikirevision.wikifiles.empty?
+    .files.four.columns.omega
+      %fieldset
+        %legend files attached to this wiki page
+        %ul.wikifiles
+          - @wikirevision.wikifiles.each do |wikifile|
+            %li.file
+              - if ["image/jpeg", "image/gif", "image/png", "image/jpg", "image/pjpeg"].include?(wikifile.attachment_content_type)
+                = image_tag wikifile.attachment.url
+              .column.description= wikifile.description
+              .column.metadata
+                = "(" + wikifile.attachment_file_size.to_s + " bytes)"
+              %p= link_to wikifile.attachment.identifier, wikifile.attachment.url
+              .timestamp
+                = raw "uploaded #{wikifile.created_at.strftime("%d %B %H:%M")}<br /> (#{time_ago_in_words(wikifile.created_at)} ago)"
+   
+  
+  .wikimetadata.row.expanded
+    .columns.large-1= image_tag @wikirevision.user.avatar.url(:thumb), class: :wikieditor
+    .columns.large-11
+      this edit was made by
+      = link_to @wikirevision.user.name, "/member/#{@wikirevision.user.slug}", target: :_blank
+      on
+      = l @wikirevision.created_at, :format => :short 
+      %span.ago= "(#{time_ago_in_words(@wikirevision.created_at)} ago)"
+
+
+  .row.expanded
+    .actions.columns
+      = link_to 'Edit',  {:controller => 'admin/wikipages', :action => 'edit', :id => @wikirevision.wikipage.wikirevisions.last.id}
+      |
+      = link_to 'Front page', '/admin/wiki'
+      |
+      = link_to 'List all pages', admin_wikipages_path
+      |
+      = link_to('Create new wiki page', '/admin/wikipages/new')
+:javascript
+  $(document).ready(function() {
+    jQuery(".best_in_place").best_in_place();
+  })

@@ -68,10 +68,12 @@ gem 'mini_magick'
 gem 'nested_form'
 gem "non-stupid-digest-assets"
 gem 'oauth-client'
-gem 'omniauth-facebook' #, '1.4.0'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-twitter'
+# gem 'omniauth-facebook' #, '1.4.0'
+# gem 'omniauth-google-oauth2'
+# gem 'omniauth-twitter'
 gem 'paper_trail' #, '~> 3.0.6'
+gem 'public_activity'
+
 gem 'puma', '5.2.2', group: :production
 gem 'rack-utf8_sanitizer'
 gem 'rack-cors', require: 'rack/cors'
@@ -79,6 +81,7 @@ gem 'rails-jquery-autocomplete'
 # gem 'rails3-jquery-autocomplete', github: 'crowdint/rails3-jquery-autocomplete'
 gem 'randumb'
 gem "recaptcha", '3.0', require: "recaptcha/rails"
+gem 'redcarpet'
 gem 'redis-rails', '~> 5.0.1'
 gem 'redis'
 gem 'rest-client'
@@ -100,7 +103,7 @@ gem 'yt'
 # gem 'youtube_it'
 
 group :development do
-  gem 'better_errors', github: 'workingnotworking/better_errors'
+  gem 'better_errors'#, github: 'workingnotworking/better_errors'
   gem 'binding_of_caller'
   gem 'letter_opener'
   gem 'listen', '~> 3.0.5'

@@ -44,7 +44,7 @@
     .row.expanded
       = f.semantic_fields_for :photos do |ff|
 
-        .small-3.columns
+        .small-12.large-6.columns
           - if ff.object.filename?
             = image_tag ff.object.filename.url(:logo)
           = ff.input :filename

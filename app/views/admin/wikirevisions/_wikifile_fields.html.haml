@@ -1,0 +1,11 @@
+.new_wikifile
+  Add one or more attachments:
+  %div
+    - unless ff.object.new_record? || !ff.object.attachment?
+      - if ["image/jpeg", "image/gif", "image/png", "image/jpg", "image/pjpeg"].include?(ff.object.attachment_content_type)
+        = image_tag ff.object.attachment.url
+      = link_to ff.object.attachment.identifier + " (#{ff.object.attachment_file_size} bytes)", ff.object.attachment.url
+      = ff.input '_destroy', :as => :boolean, :label => 'delete this attachment'
+    = ff.input :description, :label => "Name/description", :as => :string
+    = ff.input :attachment, :label => (ff.object.new_record? ? 'Upload attachment:' : 'Change attachment:')
+

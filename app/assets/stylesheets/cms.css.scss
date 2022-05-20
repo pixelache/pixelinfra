@@ -14,6 +14,7 @@
  *= require jPicker-1.1.6.min
  *= require jquery-ui/smoothness
  *= require chosen
+ *= require wiki
 */
 
 @import "font-awesome";
@@ -24,6 +25,9 @@ header {
 }
 
 .top-bar {
+  h3 a {
+    color: black;
+  }
   ul.title-area {
     li.name {
       padding: 0px 5px;

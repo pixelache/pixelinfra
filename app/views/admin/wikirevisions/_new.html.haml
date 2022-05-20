@@ -1,0 +1,20 @@
+%h1.heading
+  - if @wikirevision.new_record?
+    %h4= 'This page did not previously exist'
+  
+%p 
+  You can edit this page using the Markdown formatting language (or plain text).
+  = link_to 'Markdown reference', 'https://commonmark.org/help/', :target => :_blank
+%p
+  To create a link to another wiki page, put two square brackets around the text you want to be a link [[like this]]. It's OK if that pages doesn't exist yet - you can create it later by clicking the link you made.
+
+%p
+  You can attach a file to the page, such as an image or PDF. This feature is experimental!
+  
+= semantic_nested_form_for([:admin, @wikirevision], :html => {:multipart => true}) do |form|
+  = render 'admin/wikirevisions/form', :form => form
+  = form.actions do
+    = form.submit 'Save'
+    
+%p.actions
+  = link_to 'Cancel', admin_wikirevisions_path

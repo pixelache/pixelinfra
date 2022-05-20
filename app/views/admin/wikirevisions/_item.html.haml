@@ -1,0 +1,10 @@
+%tr[wikirevision]{class: cycle('odd', 'even')}
+  %td.user= h wikirevision.try(:user).login
+  %td.contents= h wikirevision.try(:contents)
+  %td.page= h wikirevision.try(:wikipage).title
+  %td.actions
+    = link_to 'Show', wikirevision_path(wikirevision)
+    |
+    = link_to 'Edit', edit_wikirevision_path(wikirevision)
+    |
+    = link_to 'Destroy', wikirevision, :confirm => 'Are you sure?', :method => :delete

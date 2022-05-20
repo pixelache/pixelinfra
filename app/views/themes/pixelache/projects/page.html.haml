@@ -27,11 +27,35 @@
   = render :partial => 'shared/projects_tree'
                 
 .page
-  .row.title_wrapper
+  .row.title_wrapper.expanded
     .small-12.medium-8.medium-offset-2.small-centered.title
       = @page.name
+
+  - unless @page.photos.empty?
+    .row.expanded
+      .columns.small-centered.small-10{:class => 'medium-12' }
+        .internal.row.expanded
+          .small-12.medium-8.medium-offset-2.columns{:style => 'padding: 0px'}
+            .page_image{class: @page.photos.count > 1 ? 'image_carousel'  : false}
+              - @page.photos.each do |h|
+                .slide
+                  = image_tag h.filename.url(:standard)
+                  .thumb= image_tag h.filename.url(:thumb)
 
       - if can? :edit, @page
         %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id), class: [:button, :tiny, :secondary]
   .row
     .small-12.medium-8.medium-offset-2.small-centered.body= raw simple_format(@page.body)
+- if [@page.photos].flatten.compact.size > 1
+  = content_for :jquery do
+    :plain
+      $('.image_carousel').slick({fade: true, 
+        arrows: true, 
+        autoplay: true, 
+        dots: false,
+        slide: '.slide',
+        variableWidth: false,
+
+        prevArrow: '<a data-role="none" class="slick-prev slick-arrow" aria-label="Previous" role="button" style="display: block;"><</a>',
+        nextArrow: '<a data-role="none" class="slick-next slick-arrow" aria-label="Next" role="button" style="display: block;">></a>',
+        autoplaySpeed: 2900});

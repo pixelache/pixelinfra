@@ -1,0 +1,10 @@
+%h1.heading
+  = 'New Wikipage'
+  
+= semantic_nested_form_for([:admin,@wikipage], :html => {:multipart => true}) do |form|
+  = render 'form', :form => form
+  = form.actions do
+    = form.submit 'Save'
+    
+%p.actions
+  = link_to 'Cancel', admin_wikipages_path
