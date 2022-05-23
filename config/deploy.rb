@@ -1,7 +1,7 @@
 lock '3.16.0'
 
 set :application, 'pixelinfra'
-set :repo_url, 'git://github.com/pixelache/pixelinfra.git'
+set :repo_url, 'https://github.com/pixelache/pixelinfra.git'
 set :rvm_ruby_version, '2.7.3'
 set :keep_releases, 3
 set :linked_files, %w{config/database.yml config/puma.rb config/application.yml config/flickr.yml }

@@ -8,7 +8,7 @@
       %h1= raw @page.title
         
   .row
-    .small-8.small-offset-2.columns= raw simple_format(@page.body)
+    .small-8.small-offset-2.columns= raw pixelache_format(@page.body)
 
 
   - if user_signed_in?

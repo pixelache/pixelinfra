@@ -49,7 +49,7 @@
         .row
           .small-2.columns
             .text-right= t :description
-          .small-10.columns.end= simple_format(@projectproposal.description.html_safe)
+          .small-10.columns.end= pixelache_format(@projectproposal.description.html_safe)
     .row
       .small-12.columns
         .row
@@ -162,7 +162,7 @@
         .row
           .small-3.columns.text-right
             = t :why_do_you_want_to_do_this
-          .small-9.columns= simple_format(@projectproposal.why)
+          .small-9.columns= pixelache_format(@projectproposal.why)
 
 - unless @projectproposal.comments.empty? 
   .row#comments_list
@@ -176,7 +176,7 @@
         %p
           %strong= t(:user_says, :user => comment.user.name)
       .small-9.columns
-        .comment= simple_format(comment.content)
+        .comment= pixelache_format(comment.content)
         - if comment.image?
           = image_tag comment.image.url
         - if comment.attachment?

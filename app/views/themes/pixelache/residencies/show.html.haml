@@ -48,7 +48,7 @@
         .small-12.columns.body
           - if @residency.photo?
             = image_tag @residency.photo.url
-          %p= raw simple_format(@residency.description)
+          %p= raw pixelache_format(@residency.description)
           - if can? :edit, @residency
             %small.hide-for-small-only= link_to t(:edit), edit_admin_residency_path(@residency), class: [:button, :secondary, :tiny]
       - unless @residency.related_content.empty?

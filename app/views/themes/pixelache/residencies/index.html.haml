@@ -48,7 +48,7 @@
 
       .row.expanded{:"data-magellan-destination" => :top2 }
         .small-11.small-centered.medium-12.medium-left.columns.body
-          = raw simple_format(@page.body)
+          = raw pixelache_format(@page.body)
 
       - if can? :edit, @page
         .row.expanded

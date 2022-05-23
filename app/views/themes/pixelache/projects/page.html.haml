@@ -45,7 +45,7 @@
       - if can? :edit, @page
         %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id), class: [:button, :tiny, :secondary]
   .row
-    .small-12.medium-8.medium-offset-2.small-centered.body= raw simple_format(@page.body)
+    .small-12.medium-8.medium-offset-2.small-centered.body= raw pixelache_format(@page.body)
 - if [@page.photos].flatten.compact.size > 1
   = content_for :jquery do
     :plain
