@@ -49,4 +49,4 @@ function scroll_To(target) {
 
 
 
-$(function(){ $(document).foundation(); });
+

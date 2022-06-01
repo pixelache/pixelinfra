@@ -30,7 +30,8 @@
   .row.title_wrapper.expanded
     .small-12.medium-8.medium-offset-2.small-centered.title
       = @page.name
-
+      - if can? :edit, @page
+        %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id), class: [:button, :tiny, :secondary]
   - unless @page.photos.empty?
     .row.expanded
       .columns.small-centered.small-10{:class => 'medium-12' }
@@ -42,9 +43,8 @@
                   = image_tag h.filename.url(:standard)
                   .thumb= image_tag h.filename.url(:thumb)
 
-      - if can? :edit, @page
-        %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id), class: [:button, :tiny, :secondary]
-  .row
+      
+  .row.expanded
     .small-12.medium-8.medium-offset-2.small-centered.body= raw pixelache_format(@page.body)
 - if [@page.photos].flatten.compact.size > 1
   = content_for :jquery do

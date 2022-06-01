@@ -36,24 +36,24 @@
 /   - @inactive_projects.sort_by(&:name).each do |project|
 /     = render :partial => 'project_strip', locals: {project: project, active_projects: @active_projects, arrow: false }
     
-= content_for :jquery do
-  :plain
-    var $grid = $('#past').masonry({
-      // options...
-      itemSelector: '.column',
-      columnWidth: '.column a.project_index_box',
-      percentPosition: true
-    });
-    $grid.imagesLoaded().progress( function() {
-      $grid.masonry('layout');
-    });
-    var $grid2 = $('#active').masonry({
-      // options...
-      itemSelector: '.column',
-      columnWidth: '.column a.project_index_box',
-      percentPosition: true
-    });
-    $grid2.imagesLoaded().progress( function() {
-      $grid2.masonry('layout');
-    });    
-    $('#sticky_page').addClass("override");
+-# = content_for :jquery do
+-#   :plain
+-#     var $grid = $('#past').masonry({
+-#       // options...
+-#       itemSelector: '.column',
+-#       columnWidth: '.column .total_box',
+-#       percentPosition: false
+-#     });
+-#     $grid.imagesLoaded().progress( function() {
+-#       $grid.masonry('layout');
+-#     });
+-#     var $grid2 = $('#active').masonry({
+-#       // options...
+-#       itemSelector: '.column',
+-#       columnWidth: '.column a.project_index_box',
+-#       percentPosition: true
+-#     });
+-#     $grid2.imagesLoaded().progress( function() {
+-#       $grid2.masonry('layout');
+-#     });    
+-#     $('#sticky_page').addClass("override");
