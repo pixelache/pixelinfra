@@ -26,7 +26,7 @@ button.slick-next, button.slick-prev {
   padding-bottom: 7rem;
   
   #active {
-    padding-top: 4rem;
+    padding-top: 6rem;
   }
   #past {
     padding-top: 6rem;
@@ -36,7 +36,7 @@ button.slick-next, button.slick-prev {
     width: 100%;
     margin-bottom: 2rem;
     &.top {
-      margin-top: 25px;
+      margin-top: 25px !important;
       background-color: #49a2fc;
     }
     color: #FFF;
