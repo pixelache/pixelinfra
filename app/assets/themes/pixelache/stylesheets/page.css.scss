@@ -157,7 +157,7 @@
   
   padding-top: 2rem;
   .title_wrapper {
-    padding: 1.5rem 0rem 3rem 0rem;
+    padding: 1.5rem 0rem 2rem 0rem;
   }
   .title {
     line-height: 3.6rem;
@@ -166,7 +166,7 @@
     color: #333;
     font-family: "Quicksand", sans-serif;
 
-    padding: 1rem 0px;
+    padding: 0.667rem 0px;
     border-bottom: 1px solid #333;
     margin-bottom: 1rem;
   }
@@ -179,7 +179,9 @@
     font-size: 1rem;
     line-height: 1.65rem;
     margin-bottom: 1rem;
-    
+    h1 {
+      font-size: 2.6rem;
+    }
     padding: 1.5rem 0px 11rem 0;
     h2, a.section_heading {
       font-family: $quicksand;

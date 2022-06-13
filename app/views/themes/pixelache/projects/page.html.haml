@@ -20,7 +20,7 @@
         %strong= p.name
       - else
         %span.leaf
-          = link_to p.name, p
+          = link_to p.name, project_page_path(p.project, p)
           = " : "
           
 = content_for :project_tree do
