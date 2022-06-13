@@ -14,13 +14,16 @@
             = " : "
 
     - @page.self_and_ancestors.reverse.each do |p|
-      - if @page.has_project?
+      - if @page.has_project? || @project
         - next if @page.self_and_ancestors.map(&:project).compact.map(&:name).include?(p.name)
       - if p == @page
         %strong= p.name
       - else
         %span.leaf
-          = link_to p.name, project_page_path(p.project, p)
+          - if @project
+            = link_to p.name, project_page_path(@project, p)
+          - else
+            = link_to p.name, project_page_path(p.project, p)
           = " : "
           
 = content_for :project_tree do
