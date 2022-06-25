@@ -38,7 +38,7 @@
         %small= link_to t(:edit), edit_admin_subsite_page_path(@page.subsite, @page.id), class: [:button, :tiny, :secondary]
   - unless @page.photos.empty?
     .row.expanded
-      .columns.small-centered.small-10{:class => 'medium-12' }
+      .columns.small-centered.small-12
         .internal.row.expanded
           .small-12.medium-8.medium-offset-2.columns{:style => 'padding: 0px'}
             .page_image{class: @page.photos.count > 1 ? 'image_carousel'  : false}
