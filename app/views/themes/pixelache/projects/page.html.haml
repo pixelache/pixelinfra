@@ -11,20 +11,21 @@
         - else
           %span.leaf
             = link_to p.name, p
-            = " : "
+            %span.show-for-medium= " : "
 
-    - @page.self_and_ancestors.reverse.each do |p|
-      - if @page.has_project? || @project
-        - next if @page.self_and_ancestors.map(&:project).compact.map(&:name).include?(p.name)
-      - if p == @page
-        %strong= p.name
-      - else
-        %span.leaf
-          - if @project
-            = link_to p.name, project_page_path(@project, p)
-          - else
-            = link_to p.name, project_page_path(p.project, p)
-          = " : "
+    %span.show-for-medium
+      - @page.self_and_ancestors.reverse.each do |p|
+        - if @page.has_project? || @project
+          - next if @page.self_and_ancestors.map(&:project).compact.map(&:name).include?(p.name)
+        - if p == @page
+          %strong= p.name
+        - else
+          %span.leaf
+            - if @project
+              = link_to p.name, project_page_path(@project, p)
+            - else
+              = link_to p.name, project_page_path(p.project, p)
+            = " : "
           
 = content_for :project_tree do
   = render :partial => 'shared/projects_tree'
@@ -43,7 +44,7 @@
             .page_image{class: @page.photos.count > 1 ? 'image_carousel'  : false}
               - @page.photos.each do |h|
                 .slide
-                  = image_tag h.filename.url(:standard)
+                  = image_tag h.filename.url(:standard).gsub(/development/, 'production')
                   .thumb= image_tag h.filename.url(:thumb)
 
       

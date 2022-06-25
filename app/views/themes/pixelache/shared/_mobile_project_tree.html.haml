@@ -1,0 +1,48 @@
+%select.hide-for-medium#mobile_page_select
+  %option= t(:choose)
+  - unless @project.children.visible.empty?
+    %optgroup{label: t(:subprojects)}
+      - @project.children.visible.each do |child|
+        %option{value: project_url(child)}= child.name
+  -  unless @project.pages.empty?
+    - if @project.pages.roots.empty?
+      - collection = @project.pages.first.children.published
+    - elsif @project.pages.roots.first.children.published.empty?
+      - collection = @project.pages.roots
+    -else
+      - collection = @project.pages.roots.first.children.published
+    - collection.each do |child|
+      - if child.children.published.empty?
+        - if child.project
+          %option{value: project_url(child.project)}= child.name
+        - else
+          %option{value: project_page_path(@project, child), selected: @page && @page == child}= child.name
+      - else
+        %optgroup{label: child.name }
+          %option{value: project_page_path(@project, child)}= t(:overview)
+          - child.children.published.each do |subchild|
+            - if subchild.project
+              %option{value: project_url(subchild.project)}= subchild.name
+            - else
+              %option{value: project_page_path(@project, subchild), selected: @page && @page == subchild}= subchild.name 
+  - unless @project.self_and_descendants.visible.map{|x| x.events.published }.flatten.empty?
+    %optgroup{label: t(:events)}
+      - @project.self_and_descendants.visible.map{|x| x.events.published }.flatten.sort_by(&:start_at).reverse.take(5).each do |event|
+        %option{value: event_url(event)}= event.event_with_date
+      - if @project.self_and_descendants.visible.map{|x| x.events.published }.flatten.size > 5
+        %option{value: project_events_path(project_id: @project.slug)}= t(:all_events)
+        
+  - unless @project.self_and_descendants.visible.map{|x| x.posts.published }.flatten.empty?
+    %optgroup{label: t(:news)}
+      - @project.self_and_descendants.visible.map{|x| x.posts.by_site(@site).published }.flatten.sort_by(&:published_at).reverse.take(5).each do |p|
+        %option{value: post_path(p)}= link_to p.title
+      - if @project.self_and_descendants.visible.map{|x| x.posts.by_site(@site).published }.flatten.size > 5
+        %option{value:  project_posts_path(@project)}= t(:all_posts)
+
+  - unless @project.attachments.public_files.empty?
+    %option{value: project_publications_path(@project)}= t(:documents)
+
+  :javascript
+    $('#mobile_page_select').on('change', function() {
+      window.location.href = $('#mobile_page_select').val()
+    })

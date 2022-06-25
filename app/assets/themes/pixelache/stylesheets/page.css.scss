@@ -196,6 +196,21 @@
       color: #333;
       font-weight: normal;
     }
+    .iframe-container {
+      overflow: hidden;
+      /* 16:9 aspect ratio */
+      padding-top: 56.25%;
+      position: relative;
+    }
+
+    iframe {
+      border: 0;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
     
     p {
       font-family: $opensans;
@@ -203,6 +218,21 @@
       font-size: 1rem;
       line-height: 1.65rem;
       margin-bottom: 1rem;
+
+      .iframe-container {
+          overflow: hidden;
+          /* 16:9 aspect ratio */
+          padding-top: 56.25%;
+          position: relative;
+      }
+      iframe {
+        border: 0;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
     }
   }
   h2 , h3, h4 , h5 {

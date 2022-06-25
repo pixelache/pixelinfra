@@ -1,4 +1,6 @@
 .left_collapse
+  = render partial: 'shared/mobile_project_tree'
+
   %ul.project_trees.dropdown.menu{:'data-dropdown-menu' => '', style: @project.background_css}
     - unless @project.children.visible.empty?
       %li
