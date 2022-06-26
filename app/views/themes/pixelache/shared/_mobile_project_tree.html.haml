@@ -5,6 +5,8 @@
       - @project.children.visible.each do |child|
         %option{value: project_url(child)}= child.name
   -  unless @project.pages.empty?
+    - if @project.pages.roots.count == 1
+      %option{value: project_page_path(@project, @project.pages.roots.first)}= t(:overview)
     - if @project.pages.roots.empty?
       - collection = @project.pages.first.children.published
     - elsif @project.pages.roots.first.children.published.empty?
