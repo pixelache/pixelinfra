@@ -201,6 +201,9 @@
       /* 16:9 aspect ratio */
       padding-top: 56.25%;
       position: relative;
+      &.creatures {
+        padding-top: 34% !important;;
+      }
     }
 
     iframe {
@@ -210,6 +213,9 @@
       position: absolute;
       top: 0;
       width: 100%;
+      &.creatures {
+        height: 300px !important;
+      }
     }
     
     p {
