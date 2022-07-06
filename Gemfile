@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.7.3'
-gem 'rails', '5.2.6'
+gem 'rails', '5.2.8'
 
 gem 'pg', '1.1.4'
 
@@ -74,7 +74,7 @@ gem 'oauth-client'
 gem 'paper_trail' #, '~> 3.0.6'
 gem 'public_activity'
 
-gem 'puma', '5.2.2', group: :production
+gem 'puma', '~> 5.6.4', group: :production
 gem 'rack-utf8_sanitizer'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails-jquery-autocomplete'
