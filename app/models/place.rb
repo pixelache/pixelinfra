@@ -1,7 +1,8 @@
-class Place < ActiveRecord::Base
-  translates :name, :fallbacks_for_empty_translations => true
+class Place < ApplicationRecord
+  include FallbackTranslations
   extend FriendlyId
-  friendly_id :name_en, :use => [:finders, :history]
+  friendly_id :name_en #, use: :history
+  translates :name, :fallbacks_for_empty_translations => true
   geocoded_by :address
   after_validation :geocode, :on => :create
   accepts_nested_attributes_for :translations, :reject_if => proc {|x| x['name'].blank? }

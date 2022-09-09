@@ -12,9 +12,9 @@
               mapTypeId: google.maps.MapTypeId.ROADMAP
            }
       = "   var marker_#{event.id} = new google.maps.Marker({  position: myLatlng_#{event.id}, map: map_#{event.id}, "
-      = "   title: '#{escape_javascript(event.name)}'}); "
+      = "   title: \"#{escape_javascript(event.name)}\"}); ".html_safe
 
-      = "map_#{event.id} = new google.maps.Map(document.getElementById('mapcontainer_#{event.id}'), myOptions_#{event.id});"
+      = "map_#{event.id} = new google.maps.Map(document.getElementById('mapcontainer_#{event.id}'), myOptions_#{event.id});".html_safe
       = "  marker_#{event.id}.setMap(map_#{event.id});"
       = " return map_#{event.id};"
       = "} "

@@ -73,7 +73,32 @@
         }
       }
     }
+    .body {
+      h1 {
+        font-size: 1.75rem;
+      }
     
+      h2 {
+        font-size: 1.6rem;
+      }
+    
+      h3 {
+        font-size: 1.4rem;
+      }
+    
+      h4 {
+        font-size: 1.25rem;
+      }
+    
+      h5 {
+        font-size: 1.1rem;
+      }
+    
+      h6 {
+        font-size: 1rem;
+      }
+        
+    }
     .metadata {
       font-family: $quicksand;
       font-size: 1.1em;
@@ -202,6 +227,24 @@
       padding: 0.4rem;
       line-height: 1.563rem;
       margin: 30px 0px;
+      h1 {
+        font-size: 1.75rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      h3 {
+        font-size: 1.4rem;
+      }
+      h4 {
+        font-size: 1.25rem;
+      }
+      h5 {
+        font-size: 1.1rem;
+      }
+      h6 {
+        font-size: 1rem;
+      }
     }
     .read_more {
       font-family: $quicksand;

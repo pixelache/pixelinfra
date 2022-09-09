@@ -21,5 +21,5 @@
       -# = raw image_tag(@event.image.url(:box)).gsub('production', 'development')
       .read_more= link_to 'Read More', @event
 
-= render :partial => "home/google_maps_scraps", locals: {places: [@event] }
+= render :partial => "home/google_maps_scraps", locals: {places: [@event] } if @event.place.longitude && @event.place.latitude
     

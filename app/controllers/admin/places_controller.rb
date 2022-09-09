@@ -45,7 +45,7 @@ class Admin::PlacesController < Admin::BaseController
         "LOWER(place_translations.name)"
       end
     end
-    @places = Place.joins(:translations).order(order).page(params[:page]).per(50)
+    @places = Place.with_fallback_translations.order(order).page(params[:page]).per(50)
     set_meta_tags :title => t(:places)
   end
   

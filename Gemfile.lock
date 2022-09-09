@@ -25,54 +25,71 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (5.2.8)
-      actionpack (= 5.2.8)
+    actioncable (6.1.6.1)
+      actionpack (= 6.1.6.1)
+      activesupport (= 6.1.6.1)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionmailer (5.2.8)
-      actionpack (= 5.2.8)
-      actionview (= 5.2.8)
-      activejob (= 5.2.8)
+    actionmailbox (6.1.6.1)
+      actionpack (= 6.1.6.1)
+      activejob (= 6.1.6.1)
+      activerecord (= 6.1.6.1)
+      activestorage (= 6.1.6.1)
+      activesupport (= 6.1.6.1)
+      mail (>= 2.7.1)
+    actionmailer (6.1.6.1)
+      actionpack (= 6.1.6.1)
+      actionview (= 6.1.6.1)
+      activejob (= 6.1.6.1)
+      activesupport (= 6.1.6.1)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (5.2.8)
-      actionview (= 5.2.8)
-      activesupport (= 5.2.8)
-      rack (~> 2.0, >= 2.0.8)
+    actionpack (6.1.6.1)
+      actionview (= 6.1.6.1)
+      activesupport (= 6.1.6.1)
+      rack (~> 2.0, >= 2.0.9)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
-      rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (5.2.8)
-      activesupport (= 5.2.8)
+      rails-html-sanitizer (~> 1.0, >= 1.2.0)
+    actiontext (6.1.6.1)
+      actionpack (= 6.1.6.1)
+      activerecord (= 6.1.6.1)
+      activestorage (= 6.1.6.1)
+      activesupport (= 6.1.6.1)
+      nokogiri (>= 1.8.5)
+    actionview (6.1.6.1)
+      activesupport (= 6.1.6.1)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
-      rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    activejob (5.2.8)
-      activesupport (= 5.2.8)
+      rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    activejob (6.1.6.1)
+      activesupport (= 6.1.6.1)
       globalid (>= 0.3.6)
-    activemodel (5.2.8)
-      activesupport (= 5.2.8)
-    activerecord (5.2.8)
-      activemodel (= 5.2.8)
-      activesupport (= 5.2.8)
-      arel (>= 9.0)
-    activestorage (5.2.8)
-      actionpack (= 5.2.8)
-      activerecord (= 5.2.8)
-      marcel (~> 1.0.0)
-    activesupport (5.2.8)
+    activemodel (6.1.6.1)
+      activesupport (= 6.1.6.1)
+    activerecord (6.1.6.1)
+      activemodel (= 6.1.6.1)
+      activesupport (= 6.1.6.1)
+    activestorage (6.1.6.1)
+      actionpack (= 6.1.6.1)
+      activejob (= 6.1.6.1)
+      activerecord (= 6.1.6.1)
+      activesupport (= 6.1.6.1)
+      marcel (~> 1.0)
+      mini_mime (>= 1.1.0)
+    activesupport (6.1.6.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-      i18n (>= 0.7, < 2)
-      minitest (~> 5.1)
-      tzinfo (~> 1.1)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+      zeitwerk (~> 2.3)
     acts-as-taggable-on (7.0.0)
       activerecord (>= 5.0, < 6.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
-    arel (9.0.0)
     auto_html (2.0.0)
       gemoji (~> 2.1)
       redcarpet (~> 3.3)
@@ -174,11 +191,12 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    digest (3.1.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     ed25519 (1.2.4)
     equalizer (0.0.11)
-    erubi (1.10.0)
+    erubi (1.11.0)
     erubis (2.7.0)
     etherpad-lite (0.3.0)
       rest-client (>= 1.6)
@@ -208,10 +226,10 @@ GEM
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
       sprockets-es6 (>= 0.9.0)
-    friendly_id (5.1.0)
+    friendly_id (5.4.2)
       activerecord (>= 4.0.0)
-    friendly_id-globalize (1.0.0.alpha2)
-      friendly_id (~> 5.1.0, < 6.0)
+    friendly_id-globalize (1.0.0.alpha3)
+      friendly_id (>= 5.2.0, < 6.0)
     gemoji (2.1.0)
     geocoder (1.6.7)
     gibbon (3.4.4)
@@ -253,7 +271,7 @@ GEM
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
     httpclient (2.8.3)
-    i18n (1.10.0)
+    i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     i18n_data (0.11.0)
     image_processing (1.12.2)
@@ -316,18 +334,24 @@ GEM
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
-    minitest (5.16.2)
+    minitest (5.16.3)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.2.3)
     naught (1.1.0)
     nested_form (0.3.2)
+    net-protocol (0.1.3)
+      timeout
     net-scp (3.0.0)
       net-ssh (>= 2.6.5, < 7.0.0)
+    net-smtp (0.3.1)
+      digest
+      net-protocol
+      timeout
     net-ssh (6.1.0)
     netrc (0.11.0)
     nio4r (2.5.8)
-    nokogiri (1.13.6)
+    nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     non-stupid-digest-assets (1.0.9)
@@ -357,18 +381,20 @@ GEM
       rack (>= 1.3)
     rack-utf8_sanitizer (1.7.0)
       rack (>= 1.0, < 3.0)
-    rails (5.2.8)
-      actioncable (= 5.2.8)
-      actionmailer (= 5.2.8)
-      actionpack (= 5.2.8)
-      actionview (= 5.2.8)
-      activejob (= 5.2.8)
-      activemodel (= 5.2.8)
-      activerecord (= 5.2.8)
-      activestorage (= 5.2.8)
-      activesupport (= 5.2.8)
-      bundler (>= 1.3.0)
-      railties (= 5.2.8)
+    rails (6.1.6.1)
+      actioncable (= 6.1.6.1)
+      actionmailbox (= 6.1.6.1)
+      actionmailer (= 6.1.6.1)
+      actionpack (= 6.1.6.1)
+      actiontext (= 6.1.6.1)
+      actionview (= 6.1.6.1)
+      activejob (= 6.1.6.1)
+      activemodel (= 6.1.6.1)
+      activerecord (= 6.1.6.1)
+      activestorage (= 6.1.6.1)
+      activesupport (= 6.1.6.1)
+      bundler (>= 1.15.0)
+      railties (= 6.1.6.1)
       sprockets-rails (>= 2.0.0)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
@@ -377,12 +403,12 @@ GEM
       loofah (~> 2.3)
     rails-jquery-autocomplete (1.0.5)
       rails (>= 3.2)
-    railties (5.2.8)
-      actionpack (= 5.2.8)
-      activesupport (= 5.2.8)
+    railties (6.1.6.1)
+      actionpack (= 6.1.6.1)
+      activesupport (= 6.1.6.1)
       method_source
-      rake (>= 0.8.7)
-      thor (>= 0.19.0, < 2.0)
+      rake (>= 12.2)
+      thor (~> 1.0)
     raindrops (0.19.1)
     rake (13.0.6)
     randumb (0.6.0)
@@ -422,6 +448,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rexml (3.2.5)
     rinku (1.7.3)
     rolify (6.0.0)
     rollbar (3.1.2)
@@ -481,6 +508,7 @@ GEM
     thor (1.2.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    timeout (0.3.0)
     truncate_html (0.9.3)
     twitter (7.0.0)
       addressable (~> 2.3)
@@ -493,8 +521,8 @@ GEM
       multipart-post (~> 2.0)
       naught (~> 1.0)
       simple_oauth (~> 0.3.0)
-    tzinfo (1.2.9)
-      thread_safe (~> 0.1)
+    tzinfo (2.0.5)
+      concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
@@ -517,17 +545,15 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webrick (1.7.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     with_advisory_lock (4.6.0)
       activerecord (>= 4.2)
     xml-magic (0.1.1)
-    xmlrpc (0.3.2)
-      webrick
     yt (0.33.4)
       activesupport
+    zeitwerk (2.6.0)
 
 PLATFORMS
   ruby
@@ -564,7 +590,7 @@ DEPENDENCIES
   font-awesome-rails
   formtastic
   foundation-rails (= 6.2.4.0)
-  friendly_id (~> 5.1.0)
+  friendly_id (~> 5.4.0)
   friendly_id-globalize
   geocoder
   gibbon
@@ -586,6 +612,7 @@ DEPENDENCIES
   meta-tags
   mini_magick
   nested_form
+  net-smtp
   non-stupid-digest-assets
   oauth-client
   paper_trail
@@ -594,7 +621,7 @@ DEPENDENCIES
   puma (~> 5.6.4)
   rack-cors
   rack-utf8_sanitizer
-  rails (= 5.2.8)
+  rails (= 6.1.6.1)
   rails-jquery-autocomplete
   randumb
   recaptcha (= 3.0)
@@ -602,6 +629,7 @@ DEPENDENCIES
   redis
   redis-rails (~> 5.0.1)
   rest-client
+  rexml (~> 3.2.5)
   rolify
   rollbar
   ruby_parser (>= 3.0.1)
@@ -620,11 +648,10 @@ DEPENDENCIES
   unicorn
   vimeo
   web-console
-  xmlrpc
   yt
 
 RUBY VERSION
-   ruby 2.7.3p183
+   ruby 3.1.2p20
 
 BUNDLED WITH
-   2.1.4
+   2.3.22

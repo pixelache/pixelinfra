@@ -52,7 +52,7 @@ class Admin::FestivalsController < Admin::BaseController
       when "dates"
         "start_at #{direction}"
       else
-        "start_at"
+        "start_at DESC"
       end
     end
     @festivals = apply_scopes(Festival).includes(:node).order(order).page(params[:page]).per(20)
