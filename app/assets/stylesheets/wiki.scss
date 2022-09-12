@@ -14,13 +14,14 @@
   }
   a {
     color: #268bd2;
+    text-decoration: underline !important;
   
     &:hover {
       color: #d33682;
     }
   
     &:visited {
-      color: #6c71c4;
+      color: #26abe2 !important;
     }
   }
 
