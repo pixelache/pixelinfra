@@ -66,6 +66,8 @@ gem 'mail_form'
 gem 'meta-tags', require: 'meta_tags'
 gem 'mini_magick'
 gem 'nested_form'
+gem 'net-pop'
+gem 'net-imap'
 gem 'net-smtp'
 gem 'net-ssh', '7.0.0.beta1'
 gem "non-stupid-digest-assets"
