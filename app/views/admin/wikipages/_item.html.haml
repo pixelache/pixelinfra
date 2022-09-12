@@ -1,7 +1,9 @@
 %tr[wikipage]{class: cycle('odd', 'even')}
   %td.title= h link_to wikipage.try(:title), admin_wikipage_path(:title => wikipage.title, :id => wikipage.id)
   %td.revisions= wikipage.wikirevisions.count
-  %td.last_edited= l wikipage.wikirevisions.last.created_at, :format => :short
+  %td.last_edited
+    - unless wikipage.wikirevisions.empty?
+      = l wikipage.wikirevisions.last.created_at, :format => :short
   %td.actions
     = link_to 'History', admin_wikipage_history_path(:title => wikipage.title)
     |  

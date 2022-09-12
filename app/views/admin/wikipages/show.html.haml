@@ -31,7 +31,8 @@
       on
       = l @wikipage.wikirevisions.last.created_at, :format => :short 
       %span.ago= "(#{time_ago_in_words(@wikipage.wikirevisions.last.created_at)} ago)"
-
+      %br/
+      = link_to 'See history', admin_wikipage_history_path(:title => @wikipage.title)
 
   .row.expanded
     .actions.columns
