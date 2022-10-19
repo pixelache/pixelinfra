@@ -5,7 +5,7 @@
     %strong= @year
     
 
-- cache ['archive', @year] do 
+- cache ['archive', @year, I18n.locale] do 
       
   .yearly_archive
     

@@ -1,82 +1,82 @@
-
-= content_for :page_tree do
-  .left-collapse
-    %span.leaf
-      = link_to t(:projects), projects_path
-      = ' : '
-    - @project.self_and_ancestors.reverse.each do |p|
-      - if p == @project
-        %strong= p.name
-      - else
-        %span.leaf
-          = link_to p.name, p
-          = " : "
-- unless @project.posts.published.empty? && @project.descendants.visible.empty? && @project.self_and_descendants.visible.map{|x| x.events.published }.flatten.empty? && @project.attachments.public_files.empty?
-  = content_for :project_tree do
-    = render :partial => 'shared/projects_tree'
-  
-.outer.project_detail.row.expanded
-  .small-12.medium-8.medium-offset-2.small-centered
-    .row.expanded
-      .small-12.columns
-        .title_wrapper  
-          .project_title= @project.name
-    - unless @project.photos.empty?
-      .row.expanded
-        .small-12.columns.image_carousel
-          - @project.photos.each do |photo|
-            .slide= image_tag photo.filename.url
-    .row.expanded
-      .small-12.columns.description= raw @project.description
-    .row.expanded
-      .small-12.columns
-        .share_this= render :partial => 'shared/share_this_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@project)}"), title: CGI::escape(@project.name) }
-
-        
-    .row.expanded
-      .small-12.columns
-        - if @project.self_and_descendants.map{|x| x.events.published }.flatten.size > 2
-          .events_wrapper
-            .row.expanded
-              .small-12.columns.text-left
-                .wrapper_title= t :last_events
-          
-                .events_carousel.row.expanded
-                  - @project.self_and_descendants.map{|x| x.events.published }.flatten.sort_by{|x| x.start_at }.reverse[0..8].each do |e| 
-                    - if e.image?
-                      = render :partial => 'events/event_cube', locals: {event: e }
-
-            .row.expanded
-              .small-3.columns.right.end.text-right
-                .read_more= link_to t(:all_events), project_events_path(@project)
-                
-        - unless @activities.empty?
-          .activities_wrapper.row.expanded
-            .wrapper_title= t :recent_activity
-            #activities.related_container= render :partial => 'activities'
-
-
-
-          .row.expanded.news_link= link_to t(:all_news), project_posts_path(@project)
-
-
-                      
-
+- cache ['project', @project.slug, I18n.locale] do
+  = content_for :page_tree do
+    .left-collapse
+      %span.leaf
+        = link_to t(:projects), projects_path
+        = ' : '
+      - @project.self_and_ancestors.reverse.each do |p|
+        - if p == @project
+          %strong= p.name
+        - else
+          %span.leaf
+            = link_to p.name, p
+            = " : "
+  - unless @project.posts.published.empty? && @project.descendants.visible.empty? && @project.self_and_descendants.visible.map{|x| x.events.published }.flatten.empty? && @project.attachments.public_files.empty?
+    = content_for :project_tree do
+      = render :partial => 'shared/projects_tree'
     
-                  
+  .outer.project_detail.row.expanded
+    .small-12.medium-8.medium-offset-2.small-centered
       .row.expanded
-        .small-12.columns#paginator=  paginate @activities, :remote => true
+        .small-12.columns
+          .title_wrapper  
+            .project_title= @project.name
+      - unless @project.photos.empty?
+        .row.expanded
+          .small-12.columns.image_carousel
+            - @project.photos.each do |photo|
+              .slide= image_tag photo.filename.url
+      .row.expanded
+        .small-12.columns.description= raw @project.description
+      .row.expanded
+        .small-12.columns
+          .share_this= render :partial => 'shared/share_this_buttons', locals: {url:  CGI::escape("http://#{request.host}#{request.port != 80 ? ":" + request.port.to_s : ''}#{url_for(@project)}"), title: CGI::escape(@project.name) }
 
-= content_for :jquery do
-  :plain
-    $('.events_carousel').slick({infinite: true,
-      slidesToShow: 3,
-      adaptiveHeight: true,
-      arrows: false,
-      autoplay: true,
-      autoplaySpeed: 2400,
-      slidesToScroll: 1
-    });
-  - if @project.photos.size > 1
+          
+      .row.expanded
+        .small-12.columns
+          - if @project.self_and_descendants.map{|x| x.events.published }.flatten.size > 2
+            .events_wrapper
+              .row.expanded
+                .small-12.columns.text-left
+                  .wrapper_title= t :last_events
+            
+                  .events_carousel.row.expanded
+                    - @project.self_and_descendants.map{|x| x.events.published }.flatten.sort_by{|x| x.start_at }.reverse[0..8].each do |e| 
+                      - if e.image?
+                        = render :partial => 'events/event_cube', locals: {event: e }
+
+              .row.expanded
+                .small-3.columns.right.end.text-right
+                  .read_more= link_to t(:all_events), project_events_path(@project)
+                  
+          - unless @activities.empty?
+            .activities_wrapper.row.expanded
+              .wrapper_title= t :recent_activity
+              #activities.related_container= render :partial => 'activities'
+
+
+
+            .row.expanded.news_link= link_to t(:all_news), project_posts_path(@project)
+
+
+                        
+
+      
+                    
+        .row.expanded
+          .small-12.columns#paginator=  paginate @activities, :remote => true
+
+  = content_for :jquery do
     :plain
-      $('.image_carousel').slick({fade: true, arrows: false, autoplay: true, autoplaySpeed: 2900});
+      $('.events_carousel').slick({infinite: true,
+        slidesToShow: 3,
+        adaptiveHeight: true,
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 2400,
+        slidesToScroll: 1
+      });
+    - if @project.photos.size > 1
+      :plain
+        $('.image_carousel').slick({fade: true, arrows: false, autoplay: true, autoplaySpeed: 2900});

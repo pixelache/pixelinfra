@@ -30,7 +30,9 @@ module Pixelinfra
     config.time_zone = 'Helsinki'
      # config.active_record.default_timezone = :local
     config.active_record.time_zone_aware_types = [:datetime, :time]
-    config.cache_store = :redis_store, "redis://localhost:6379/0/cache", { expires_in: 8.hours }
+    # config.cache_store = :redis_store, "redis://localhost:6379/0/cache", { expires_in: 8.hours }
+    #  trying file caching
+    config.cache_store = :file_store, "#{Rails.root.to_s}/tmp/cache/"
     config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
     config.session_store :cookie_store, :key => '_pixelache_session', :domain => :all
 

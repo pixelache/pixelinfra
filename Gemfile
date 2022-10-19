@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '3.1.2'
-gem 'rails', '6.1.6.1'
+gem 'rails', '6.1.7'
 
 gem 'pg', '1.1.4'
 
@@ -25,7 +25,7 @@ gem 'capistrano'
 gem 'capistrano-rails'#, '1.1.3'
 gem 'capistrano-rvm'
 gem 'capistrano-bundler'#, '1.1.4'
-gem 'capistrano3-puma'
+gem 'capistrano3-puma', github: "seuros/capistrano-puma"
 
 gem 'cancancan'
 gem 'carrierwave'
@@ -51,8 +51,9 @@ gem 'friendly_id', '~> 5.4.0'
 gem 'friendly_id-globalize'
 gem 'geocoder'
 gem 'gibbon'
-gem 'globalize', github: 'globalize/globalize', branch: 'master'
+gem 'globalize', '~> 6.2.1' # github: 'globalize/globalize', branch: 'master'
 # gem "globalize", github: "ncri/globalize"
+gem 'hashie', '~> 3.0'
 gem 'haml-rails'
 gem 'handles_sortable_columns', github: 'cenotaph/handles_sortable_columns'
 gem 'has_scope'
