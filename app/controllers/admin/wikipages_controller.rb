@@ -10,7 +10,7 @@ module Admin
     load_and_authorize_resource
 
     def create
-      @wikipage = Wikipage.new(params[:wikipage])
+      @wikipage = Wikipage.new(wikipage_params)
 
       respond_to do |format|
         if @wikipage.save
@@ -102,6 +102,10 @@ module Admin
     end
 
     protected
+
+    def wikipage_params
+      params.require(:wikipage).permit(:title)
+    end
 
     def collection
       paginate_options ||= {}
