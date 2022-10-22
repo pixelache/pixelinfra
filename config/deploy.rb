@@ -1,4 +1,4 @@
-lock '3.16.0'
+lock '3.17.1'
 
 set :application, 'pixelinfra'
 set :repo_url, 'https://github.com/pixelache/pixelinfra.git'
@@ -19,7 +19,8 @@ set :puma_error_log,  "#{release_path}/log/puma.access.log"
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, false
-
+set :puma_systemctl_user, :system
+set :puma_service_unit_name, "puma_#{fetch(:application)}_#{fetch(:stage)}"
 
 set :rails_env, 'production'
 set :migrate_env, 'production'

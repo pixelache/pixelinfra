@@ -30,7 +30,7 @@ module Admin
     end
 
     def destroy
-      @wikipage = Wikipage.find(params[:id])
+      @wikipage = Wikipage.find(params[:id].downcase)
       respond_to do |format|
         if @wikipage.destroy
           flash[:notice] = 'Wikipage was successfully destroyed.'
@@ -48,8 +48,8 @@ module Admin
       end
     end
 
-    def edit
-      @wikipage = Wikipage.find(params[:id])
+    def edit    
+      @wikipage = Wikipage.find(params[:id].downcase)
       @wikirevision = @wikipage.wikirevisions.last || Wikirevision.new
     end
 
@@ -117,9 +117,9 @@ module Admin
 
     def resource
       @resource = @wikipage ||= if params[:title]
-                                  Wikipage.find_or_create_by(title: params[:title].gsub('_', ' '))
+                                  Wikipage.find_or_create_by(title: params[:title].gsub('_', ' ').downcase)
                                 else
-                                  Wikipage.find(params[:id])
+                                  Wikipage.find(params[:id].downcase)
                                 end
       redirect_to edit_admin_wikipage_path(id: @wikipage.id) if @wikipage.wikirevisions.empty?
     end

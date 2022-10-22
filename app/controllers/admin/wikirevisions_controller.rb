@@ -132,7 +132,7 @@ module Admin
     alias load_and_paginate_resources collection
 
     def resource
-      @resource = @wikirevision ||= Wikirevision.find(params[:id])
+      @resource = @wikirevision ||= Wikirevision.find(params[:id].downcase)
     end
     alias load_resource resource
   end
