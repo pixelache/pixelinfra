@@ -12,11 +12,15 @@ class Flickrset < ActiveRecord::Base
   scope :by_festival, -> festival { where(festival_id: festival) }
     
   def get_last_mod_date
-    if last_modified_date.blank?
-      FlickRaw.api_key= ENV['FLICKR_API_KEY']
-      FlickRaw.shared_secret= ENV['FLICKR_API_SECRET']
-      set = flickr.photosets.getInfo(:photoset_id => flickr_id)
-      self.last_modified_date = Time.at(set.date_update.to_i).to_date
+    begin
+      if last_modified_date.blank?
+        FlickRaw.api_key= ENV['FLICKR_API_KEY']
+        FlickRaw.shared_secret= ENV['FLICKR_API_SECRET']
+        set = flickr.photosets.getInfo(:photoset_id => flickr_id)
+        self.last_modified_date = Time.at(set.date_update.to_i).to_date
+      end
+    rescue FlickRaw::FailedResponse 
+      self.last_modified_date = Time.current.utc
     end
   end
   
