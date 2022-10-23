@@ -52,7 +52,7 @@ class Admin::EventsController < Admin::BaseController
 
   def update
     @event = Event.friendly.find(params[:id])
-    if @event.update_attributes(event_params)
+    if @event.update(event_params)
       flash[:notice] = 'Event updated.'
       redirect_to admin_events_path
     else

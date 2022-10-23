@@ -90,7 +90,7 @@ class Admin::PagesController < Admin::BaseController
   
   def update
     @page = Subsite.find(params[:subsite_id]).pages.find(params[:id])
-    if @page.update_attributes(page_params)
+    if @page.update(page_params)
       flash[:notice] = 'Page updated.'
       redirect_to admin_pages_path
     else

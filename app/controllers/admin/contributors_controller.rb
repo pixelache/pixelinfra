@@ -31,7 +31,7 @@ class Admin::ContributorsController < Admin::BaseController
   
   def update
     @contributor = Contributor.friendly.find(params[:id])
-    if @contributor.update_attributes(contributor_params)
+    if @contributor.update(contributor_params)
       flash[:notice] = 'Contributor updated.'
       redirect_to admin_contributors_path
     else

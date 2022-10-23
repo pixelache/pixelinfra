@@ -33,7 +33,7 @@ class Admin::MeetingtypesController < Admin::BaseController
   
   def update
     @meetingtype = Meetingtype.find(params[:Oid])
-    if @meetingtype.update_attributes(meetingtype_params)
+    if @meetingtype.update(meetingtype_params)
       flash[:notice] = 'Updated meeting type.'
       redirect_to admin_meetingtypes_path
     else

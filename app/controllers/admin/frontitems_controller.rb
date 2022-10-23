@@ -31,7 +31,7 @@ class Admin::FrontitemsController < Admin::BaseController
   
   def update
     @frontitem = Frontitem.find(params[:id])
-    if @frontitem.update_attributes(frontitem_params)
+    if @frontitem.update(frontitem_params)
       flash[:notice] = 'Open call updated.'
       redirect_to admin_frontitems_path
     else

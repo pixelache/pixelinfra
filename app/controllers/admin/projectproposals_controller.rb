@@ -25,7 +25,7 @@ class Admin::ProjectproposalsController < Admin::BaseController
   
   def update
     @projectproposal = Projectproposal.friendly.find(params[:id])
-    if @projectproposal.update_attributes(projectproposal_params)
+    if @projectproposal.update(projectproposal_params)
       flash[:notice] = 'Proposal updated.'
       redirect_to admin_projectproposals_path
     else

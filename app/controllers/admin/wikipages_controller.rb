@@ -85,7 +85,7 @@ module Admin
 
     def update
       respond_to do |format|
-        if @wikipage.update_attributes(params[:wikipage])
+        if @wikipage.update(params[:wikipage])
           flash[:notice] = 'Wikipage was successfully updated.'
           format.html { redirect_to(@wikipage) }
           format.js   # update.js.rjs

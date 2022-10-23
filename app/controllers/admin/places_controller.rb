@@ -28,7 +28,7 @@ class Admin::PlacesController < Admin::BaseController
   
   def update
     @place = Place.friendly.find(params[:id])
-    if @place.update_attributes(place_params)
+    if @place.update(place_params)
       redirect_to  admin_places_path 
     end
   end

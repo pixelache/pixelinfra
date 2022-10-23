@@ -93,7 +93,7 @@ class Admin::PostsController < ApplicationController
     # rescue ActiveRecord::RecordNotFound
     #   @post = Post.find(params[:id])
     # end
-    if @post.update_attributes(post_params)
+    if @post.update(post_params)
       redirect_to  admin_posts_path 
     end
   end

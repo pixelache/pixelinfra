@@ -38,7 +38,7 @@ class Admin::DocumentsController < Admin::BaseController
   
   def update
     @document = Document.find(params[:id])
-    if @document.update_attributes(document_params)
+    if @document.update(document_params)
       flash[:notice] = 'Document updated.'
       redirect_to admin_events_path
     else

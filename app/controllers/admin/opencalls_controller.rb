@@ -42,7 +42,7 @@ class Admin::OpencallsController < Admin::BaseController
 
   def update
     @opencall = Opencall.friendly.find(params[:id])
-    if @opencall.update_attributes(opencall_params)
+    if @opencall.update(opencall_params)
       flash[:notice] = 'Open call updated.'
       redirect_to admin_opencalls_path
     else

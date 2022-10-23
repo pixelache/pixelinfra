@@ -30,7 +30,7 @@ class Admin::FestivalthemesController < Admin::BaseController
   def update
     @festival = Festival.friendly.find(params[:festival_id])
     @festivaltheme = @festival.festivalthemes.find(params[:id])
-    if @festivaltheme.update_attributes(festivaltheme_params)
+    if @festivaltheme.update(festivaltheme_params)
       redirect_to  admin_festivals_path
     end
   end

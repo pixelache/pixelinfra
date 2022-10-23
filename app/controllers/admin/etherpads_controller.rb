@@ -30,7 +30,7 @@ class Admin::EtherpadsController < Admin::BaseController
   
   def update
     @etherpad = Etherpad.find(params[:id])
-    if @etherpad.update_attributes(etherpad_params)
+    if @etherpad.update(etherpad_params)
       flash[:notice] = 'Pad updated.'
       redirect_to admin_etherpads_path
     else

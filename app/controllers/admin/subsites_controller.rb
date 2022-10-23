@@ -21,7 +21,7 @@ class Admin::SubsitesController < Admin::BaseController
   
   def update
     @subsite = Subsite.find(params[:id])
-    if @subsite.update_attributes(subsite_params)
+    if @subsite.update(subsite_params)
       flash[:notice] = 'Subsite updated.'
       redirect_to admin_subsites_path
     else

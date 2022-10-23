@@ -26,7 +26,7 @@ class Admin::FestivalsController < Admin::BaseController
   
   def update
     @festival = Festival.friendly.find(params[:id])
-    if @festival.update_attributes(festival_params)
+    if @festival.update(festival_params)
       flash[:notice] = 'Festival updated.'
       redirect_to admin_festivals_path
     else

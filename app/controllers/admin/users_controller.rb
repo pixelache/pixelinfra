@@ -12,7 +12,7 @@ class Admin::UsersController < Admin::BaseController
   
   def update
     @user = User.friendly.find(params[:id])
-    if @user.update_attributes(user_params) 
+    if @user.update(user_params) 
       flash[:notice] = 'The user info has been updated'
     end
     redirect_to admin_users_path
