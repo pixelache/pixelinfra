@@ -10,13 +10,13 @@
     .small-6.columns= f.input :meetingtype, as: :select, label: 'Type of meeting', input_html: {required: ''}
   .row
     .small-12.columns
-      %dl.tabs{"data-tab" => ""}
+      %ul.tabs#languages{"data-tabs" => ""}
         - I18n.available_locales.each_with_index do |locale, i|
-          %dd{:class => (i == 0 ? :active : false)}
+          %li.tabs-title{:class => (i == 0 ? 'is-active' : false)}
             = link_to t(:locale_name, :locale => locale), "##{locale}"
-      .tabs-content
+      .tabs-content{:'data-tabs-content' => 'languages'}
         - I18n.available_locales.each_with_index do |locale, i|
-          .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+          .tabs-panel{:class => (i == 0 ? 'is-active' : false), :id => "#{locale}"}
             = f.globalize_fields_for locale do |en|
               .row
                 .small-12.columns

@@ -9,13 +9,13 @@
       = f.input :end_at, :as => :string, :input_html => {:class => "date_picker", required: ''}
       %small.error You must enter a end date and time.
   .row
-    %dl.tabs{"data-tab" => ""}
+    %ul.tabs#languages{"data-tabs" => ""}
       - I18n.available_locales.each_with_index do |locale, i|
-        %dd{:class => (i == 0 ? :active : false)}
+        %li.tabs-title{:class => (i == 0 ? :active : false)}
           = link_to t(:locale_name, :locale => locale), "##{locale}"
     .tabs-content
       - I18n.available_locales.each_with_index do |locale, i|
-        .content{:class => (i == 0 ? :active : false), :id => "#{locale}"}
+        .tabs-panel{:class => (i == 0 ? 'is-active' : false), :id => "#{locale}"}
           = f.globalize_fields_for locale do |en|
             .row
               .small-12.columns
@@ -34,6 +34,6 @@
   .row
     .small-6.columns= f.input :project, :collection => Project.active_menu
   .row
-    .small-6.columns= f.input :user, collection: User.all, label: t(:is_also_user)
+    .small-6.columns= f.input :user, collection: User.all.order('lower(name)'), label: t(:is_also_user)
   .row
     .small-6.columns= f.submit t(:save), class: [:button, :round, :small]

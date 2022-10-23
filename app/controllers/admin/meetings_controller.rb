@@ -1,11 +1,24 @@
 class Admin::MeetingsController < Admin::BaseController
-  
+  skip_load_and_authorize_resource
+  load_and_authorize_resource
   def create
-    create! { admin_meetings_path }
+    @meeting = Meeting.new(meeting_params)
+    if @meeting.save
+      flash[:notice] = 'Meeting created.'
+      redirect_to admin_meetings_path
+    else
+      flash[:error] = 'Error updating document type: ' + @meeting.errors.inspect
+    end
   end
   
   def update
-    update! { admin_meetings_path }
+    @meeting = Meeting.find(params[:id])
+    if @meeting.update(meeting_params)
+      flash[:notice] = 'Meeting updated.'
+      redirect_to admin_documenttypes_path
+    else
+      flash[:error] = 'Error updating meeting: ' + @meeting.errors.inspect
+    end
   end
   
   def index
@@ -24,10 +37,10 @@ class Admin::MeetingsController < Admin::BaseController
   
   protected
   
-  def permitted_params
-    params.permit(:meeting => [:start_at, :end_at, :meetingtype_id, translations_attributes: [:id, :locale, :name],
+  def meeting_params
+    params.require(:meeting).permit(:start_at, :end_at, :meetingtype_id, translations_attributes: [:id, :locale, :name],
      attachments_attributes: [:id, :attachedfile, :title, :description, :item_type, :item_id, :documenttype_id,  :_destroy]
-   ])
+   )
   end
   
 end

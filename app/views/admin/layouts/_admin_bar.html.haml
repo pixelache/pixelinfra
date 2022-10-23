@@ -18,6 +18,8 @@
         %li= link_to 'Publications', admin_documents_path
       - if can? :manage, Documenttype
         %li= link_to 'Document types', admin_documenttypes_path
+      - if can? :manage, Meetingtype
+        %li= link_to 'Meeting types', admin_meetingtypes_path
 
 
   %li
