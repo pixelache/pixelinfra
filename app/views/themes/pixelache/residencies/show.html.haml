@@ -39,7 +39,7 @@
       .row.expanded
         .small-12.columns.title
           = raw @residency.name
-          .country= @residency.country_override.blank? ? (@residency.country.size == 2 ?  ISO3166::Country[@residency.country].name : @residency.country ) : @residency.country_override
+          .country= @residency.country_override.blank? ? (@residency.country.size == 2 ?  ISO3166::Country[@residency.country].iso_short_name : @residency.country ) : @residency.country_override
           .date
             = l @residency.start_at, format: "%B %Y"
             - if [@residency.end_at.month, @residency.end_at.year] != [@residency.start_at.month, @residency.start_at.year]

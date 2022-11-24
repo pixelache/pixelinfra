@@ -76,7 +76,7 @@ class Admin::PostsController < ApplicationController
   end
   
   def new
-    @post = Post.new
+    @post = Post.new(subsite_id: 1)
     set_meta_tags :title => t(:new_post)
     
   end
