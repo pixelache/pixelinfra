@@ -1,4 +1,4 @@
-- cache ['events', @festival, @residency, @project, @year, I18n.locale] do
+- cache [cache_key_for_events, @festival, @residency, @project, @year, I18n.locale], skip_digest: true do
   - if @festival
     = content_for :festival_menu do
       = render :partial => 'festivals/festival_menu', :locals => {festival: @festival}
