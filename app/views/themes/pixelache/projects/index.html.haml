@@ -1,4 +1,4 @@
-- cache ['projects',  I18n.locale] do
+- cache [cache_key_for_projects,  I18n.locale], skip_digest: true do
   = content_for :page_tree do
 
     %span.leaf
