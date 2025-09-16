@@ -214,6 +214,8 @@ fi:
   activerecord:
     errors:
       <<: *errors
+  archive_text: 'Saavuit Pixelache Helsingin (Piknik Frequency ry) arkistosivulle. Täältä löydät jälkiä toiminnastamme vuosilta 2002–2025.'
+  archive_link: 'Ole hyvä ja tarkista nykyinen toimintamme uudelta verkkosivultamme: <a href="%{link}">www.pixelache.com</a>.'      
   about: 'Pikseliähkystä'
   about_person: 'Henkilöstä'
   active_member_years: 'Jäsenenä vuosina: '

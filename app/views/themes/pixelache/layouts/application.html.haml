@@ -103,8 +103,11 @@
         = render 'layouts/messages'
 
       #main{:role => "main"}
-
-          
+        .archive_bar.row.expanded
+          .small-12.columns.text-center
+            = t(:archive_text)
+            %br/
+            = t(:archive_link, link: 'https://pixealche.com').html_safe         
         = yield
     %footer
       .hashtag.row

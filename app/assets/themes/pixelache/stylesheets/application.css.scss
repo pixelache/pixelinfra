@@ -47,6 +47,15 @@ html {
 
   background-color: white;
   min-height: 550px;
+
+  .archive_bar {
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    background-color: #EFE;
+    border-top: 2px dotted  black;
+    border-bottom: 2px dotted black;
+  }
 }
 
 span.translation_missing {

@@ -229,7 +229,8 @@ en:
   activerecord:
     errors:
       <<: *errors
-
+  archive_text: 'You landed on an archive webpage of the organisation Pixelache Helsinki (Piknik Frequency ry). Here you will find  our activities from 2002 to 2025.'
+  archive_link: 'Please check our current activity on our new webpage: <a href="%{link}">www.pixelache.com</a>.'
   about: 'About'
   about_person: 'About'
   active_member_years: 'Years as member: '
