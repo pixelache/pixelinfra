@@ -127,6 +127,7 @@ GEM
     builder (3.2.4)
     bulma-rails (0.9.4)
       sassc (~> 2.0)
+    byebug (12.0.0)
     cancancan (3.4.0)
     capistrano (3.17.1)
       airbrussh (>= 1.0.0)
@@ -363,6 +364,12 @@ GEM
       activerecord (>= 5.2)
       request_store (~> 1.1)
     pg (1.1.4)
+    pry (0.15.2)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-byebug (3.11.0)
+      byebug (~> 12.0)
+      pry (>= 0.13, < 0.16)
     public_activity (2.0.2)
       actionpack (>= 5.0.0)
       activerecord (>= 5.0)
@@ -621,7 +628,8 @@ DEPENDENCIES
   non-stupid-digest-assets
   oauth-client
   paper_trail
-  pg (= 1.1.4)
+  pg
+  pry-byebug
   public_activity
   puma (~> 5.6.4)
   rack-cors

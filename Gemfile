@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '3.1.2'
 gem 'rails', '6.1.7'
 
-gem 'pg', '1.1.4'
+gem 'pg'#, '1.1.4'
 
 # gem 'mysql2' # for data migration
 
@@ -114,6 +114,7 @@ group :development do
   gem 'letter_opener'
   gem 'listen', '~> 3.0.5'
   gem 'ruby_parser', '>= 3.0.1'
+  gem 'pry-byebug'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
